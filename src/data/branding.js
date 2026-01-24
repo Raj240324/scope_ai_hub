@@ -3,7 +3,7 @@ export const BRANDING = {
   suffix: "INSTITUTE",
   fullName: "RAJ INSTITUTE",
   tagline: "Technology Excellence",
-  description: "Tamil Nadu's premier software training institute dedicated to bridging the gap between education and industry through practical, project-based learning.",
+  description: "Based in Maraimalai Nagar, we provide high-quality, practical software training to students in Chengalpattu and Kanchipuram districts, helping them start careers in top IT companies.",
   location: "Maraimalai Nagar, Chengalpattu",
   address: "1/92, Kannadasan 2nd St, NH3, Maraimalai Nagar - 603209",
   email: "contact@rajinstitute.in",

@@ -49,18 +49,18 @@ const Header = () => {
 
   const navigation = [
     { name: 'Home', href: '/' },
+    { name: 'About', href: '/about' },
     { name: 'Courses', href: '/courses' },
     { name: 'Batches', href: '/batches' },
-    { name: 'Placement', href: '/placement' },
-    { name: 'Events', href: '/events' },
     { name: 'Gallery', href: '/gallery' },
     { name: 'Contact', href: '/contact' },
+
   ];
 
   return (
     <header className={clsx(
-      "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
-      scrolled ? "bg-white/90 backdrop-blur-md shadow-lg shadow-slate-200/50" : "bg-transparent"
+      "fixed top-0 left-0 right-0 z-50 transition-all duration-500 bg-white/95 backdrop-blur-md shadow-sm lg:shadow-none lg:backdrop-blur-none",
+      scrolled ? "lg:bg-white lg:shadow-lg lg:shadow-slate-200/50" : "lg:bg-transparent"
     )}>
       {/* Top Bar */}
       <div className={clsx(
@@ -251,7 +251,7 @@ const Header = () => {
                 <Search className="h-5 w-5" />
               </button>
               <button
-                className="text-slate-900 p-2 bg-slate-100 rounded-lg"
+                className="text-slate-900 p-2.5 bg-white border border-slate-200 rounded-xl shadow-sm active:scale-95 transition-all"
                 onClick={() => setIsOpen(!isOpen)}
                 aria-label="Toggle menu"
               >

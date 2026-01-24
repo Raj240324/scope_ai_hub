@@ -37,7 +37,7 @@ const BatchCountdown = ({ batch, variant = 'default' }) => {
 
   if (variant === 'compact') {
     return (
-      <div className="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm hover:shadow-lg transition-all group">
+      <div className="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm hover:shadow-lg transition-all group h-full flex flex-col justify-between">
         <div className="flex items-start justify-between mb-4">
           <div>
             <h4 className="font-bold text-slate-900 group-hover:text-primary transition-colors line-clamp-1">
@@ -94,7 +94,7 @@ const BatchCountdown = ({ batch, variant = 'default' }) => {
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      className="bg-white rounded-[2rem] p-8 border border-slate-100 shadow-sm hover:shadow-xl transition-all group relative overflow-hidden"
+      className="bg-white rounded-[2rem] p-8 border border-slate-100 shadow-sm hover:shadow-xl transition-all group relative overflow-hidden h-full flex flex-col"
     >
       {/* Background decoration */}
       <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full -translate-y-1/2 translate-x-1/2" />

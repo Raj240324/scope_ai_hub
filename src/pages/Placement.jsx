@@ -3,6 +3,7 @@ import Layout from '../components/layout/Layout';
 import Hero from '../components/ui/Hero';
 import { CheckCircle2, Briefcase, TrendingUp, Users, Building2, Quote, ArrowRight, Award } from 'lucide-react';
 import { useModal } from '../context/ModalContext';
+import { FadeIn, StaggerContainer, StaggerItem, ScaleOnHover, ScrollCountUp } from '../components/utils/Animations';
 
 const placementStats = [
   { label: 'Placement Rate', value: '100%', icon: <Briefcase className="h-6 w-6 text-primary" /> },
@@ -145,17 +146,21 @@ const Placement = () => {
       {/* Stats Grid */}
       <section className="py-20">
         <div className="container-custom">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+          <StaggerContainer className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             {placementStats.map((stat, index) => (
-              <div key={index} className="p-8 bg-white rounded-3xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow text-center">
-                <div className="h-12 w-12 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                  {stat.icon}
+              <StaggerItem key={index}>
+                <div className="p-8 bg-white rounded-3xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow text-center">
+                  <div className="h-12 w-12 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                    {stat.icon}
+                  </div>
+                  <div className="text-2xl md:text-3xl font-bold text-slate-900 mb-2">
+                    <ScrollCountUp end={stat.value} />
+                  </div>
+                  <div className="text-sm font-semibold text-slate-500 uppercase tracking-wider">{stat.label}</div>
                 </div>
-                <div className="text-2xl md:text-3xl font-bold text-slate-900 mb-2">{stat.value}</div>
-                <div className="text-sm font-semibold text-slate-500 uppercase tracking-wider">{stat.label}</div>
-              </div>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerContainer>
         </div>
       </section>
 
@@ -255,19 +260,21 @@ const Placement = () => {
               We provide end-to-end support to ensure you are fully prepared for the competitive job market.
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {placementProcess.map((step, index) => (
-              <div key={index} className="p-8 bg-white/5 backdrop-blur-sm rounded-3xl border border-white/10 hover:bg-white/10 transition-colors">
-                <div className="h-12 w-12 bg-primary rounded-2xl flex items-center justify-center mb-6">
-                  {step.icon}
+              <StaggerItem key={index}>
+                <div className="p-8 bg-white/5 backdrop-blur-sm rounded-3xl border border-white/10 hover:bg-white/10 transition-colors">
+                  <div className="h-12 w-12 bg-primary rounded-2xl flex items-center justify-center mb-6">
+                    {step.icon}
+                  </div>
+                  <h3 className="text-xl font-bold mb-4">{step.title}</h3>
+                  <p className="text-slate-400 text-sm leading-relaxed">
+                    {step.description}
+                  </p>
                 </div>
-                <h3 className="text-xl font-bold mb-4">{step.title}</h3>
-                <p className="text-slate-400 text-sm leading-relaxed">
-                  {step.description}
-                </p>
-              </div>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerContainer>
         </div>
       </section>
 
@@ -279,9 +286,9 @@ const Placement = () => {
             <p className="text-slate-500">Our students are working in some of the most innovative companies worldwide.</p>
           </div>
           
-          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16">
+          <StaggerContainer className="flex flex-wrap justify-center items-center gap-8 md:gap-16">
             {hiringPartners.map((partner) => (
-              <div key={partner.name} className="h-8 md:h-12 w-24 md:w-32 flex items-center justify-center group">
+              <StaggerItem key={partner.name} className="h-8 md:h-12 w-24 md:w-32 flex items-center justify-center group">
                 {partner.logo ? (
                   <img 
                     src={partner.logo} 
@@ -297,9 +304,9 @@ const Placement = () => {
                     {partner.name}
                   </span>
                 )}
-              </div>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerContainer>
         </div>
       </section>
 
@@ -312,24 +319,26 @@ const Placement = () => {
               Hear directly from our alumni who have successfully transitioned into high-paying tech roles.
             </p>
           </div>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <StaggerContainer className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {testimonials.map((story, index) => (
-              <div key={index} className="bg-white p-10 rounded-3xl shadow-sm border border-slate-100 relative">
-                <Quote className="absolute top-8 right-10 h-12 w-12 text-slate-100" />
-                <div className="flex items-center gap-6 mb-8 relative z-10">
-                  <img src={story.image} alt={story.name} className="h-20 w-20 rounded-2xl object-cover shadow-lg" />
-                  <div>
-                    <h3 className="text-xl font-bold text-slate-900">{story.name}</h3>
-                    <p className="text-primary font-semibold text-sm">{story.role}</p>
-                    <p className="text-slate-400 text-xs font-bold uppercase tracking-widest mt-1">{story.company}</p>
+              <StaggerItem key={index}>
+                <div className="bg-white p-10 rounded-3xl shadow-sm border border-slate-100 relative">
+                  <Quote className="absolute top-8 right-10 h-12 w-12 text-slate-100" />
+                  <div className="flex items-center gap-6 mb-8 relative z-10">
+                    <img src={story.image} alt={story.name} className="h-20 w-20 rounded-2xl object-cover shadow-lg" />
+                    <div>
+                      <h3 className="text-xl font-bold text-slate-900">{story.name}</h3>
+                      <p className="text-primary font-semibold text-sm">{story.role}</p>
+                      <p className="text-slate-400 text-xs font-bold uppercase tracking-widest mt-1">{story.company}</p>
+                    </div>
                   </div>
+                  <p className="text-slate-600 italic leading-relaxed text-lg">
+                    "{story.quote}"
+                  </p>
                 </div>
-                <p className="text-slate-600 italic leading-relaxed text-lg">
-                  "{story.quote}"
-                </p>
-              </div>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerContainer>
           <div className="mt-12 text-center">
             <a href="/reviews" className="inline-flex items-center text-primary font-bold hover:underline">
               Read more student reviews <TrendingUp className="ml-2 h-4 w-4" />

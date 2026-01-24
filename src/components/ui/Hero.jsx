@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { FadeIn, StaggerContainer, StaggerItem } from '../utils/Animations';
 
 const Hero = ({ 
   title, 
@@ -25,47 +26,47 @@ const Hero = ({
 
       <div className="container-custom relative z-10">
         <div className={isHome ? "grid lg:grid-cols-2 gap-12 items-center" : "max-w-4xl"}>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            {badge && (
-              <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider mb-6">
-                {badge}
-              </div>
-            )}
+          <StaggerContainer>
+            <StaggerItem>
+              {badge && (
+                <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider mb-6">
+                  {badge}
+                </div>
+              )}
+            </StaggerItem>
             
-            <h1 className={`${isHome ? 'text-3xl md:text-4xl lg:text-5xl font-black' : 'text-2xl md:text-3xl lg:text-4xl font-extrabold'} tracking-tight text-slate-900 mb-6 leading-[1.1]`}>
-              {title}
-            </h1>
+            <StaggerItem>
+              <h1 className={`${isHome ? 'text-3xl md:text-4xl lg:text-5xl font-black' : 'text-2xl md:text-3xl lg:text-4xl font-extrabold'} tracking-tight text-slate-900 mb-6 leading-[1.1]`}>
+                {title}
+              </h1>
+            </StaggerItem>
             
-            {subtitle && (
-              <p className={`text-base md:text-lg text-slate-600 mb-8 leading-relaxed ${isHome ? 'max-w-xl' : 'max-w-3xl'}`}>
-                {subtitle}
-              </p>
-            )}
+            <StaggerItem>
+              {subtitle && (
+                <p className={`text-base md:text-lg text-slate-600 mb-8 leading-relaxed ${isHome ? 'max-w-xl' : 'max-w-3xl'}`}>
+                  {subtitle}
+                </p>
+              )}
+            </StaggerItem>
 
-            {children && <div className="mt-8">{children}</div>}
-          </motion.div>
+            <StaggerItem>
+              {children && <div className="mt-8">{children}</div>}
+            </StaggerItem>
+          </StaggerContainer>
 
           {isHome && (rightContent || image) && (
             <div className="relative hidden lg:block">
               {rightContent || (
-                <motion.div 
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.8, delay: 0.2 }}
-                >
+                <FadeIn direction="left" delay={0.2}>
                   <div className="relative z-10 rounded-3xl overflow-hidden shadow-2xl border-8 border-white">
                     <img 
                       src={image} 
                       alt="Hero Image" 
-                      className="w-full h-auto"
+                      className="w-full h-full object-cover"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent" />
                   </div>
-                </motion.div>
+                </FadeIn>
               )}
             </div>
           )}

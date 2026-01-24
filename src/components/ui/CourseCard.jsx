@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Clock, Globe, ArrowRight, Star, Users, Zap } from 'lucide-react';
 import { useModal } from '../../context/ModalContext';
 import { motion } from 'framer-motion';
+import { ScaleOnHover } from '../utils/Animations';
 
 const categoryImages = {
   'Development': 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=600',
@@ -90,21 +91,25 @@ const CourseCard = ({ course, index = 0 }) => {
               <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-1">Tuition Fee</span>
               <span className="text-lg font-black text-primary">{course.price}</span>
             </div>
-            <button 
-              onClick={() => openModal(course.title)}
-              className="h-12 px-6 bg-primary text-white text-xs font-black uppercase tracking-widest rounded-xl hover:bg-primary-dark transition-all duration-300 shadow-lg shadow-primary/25 hover:shadow-primary/40 active:scale-95"
-            >
-              Enquire
-            </button>
+            <ScaleOnHover>
+              <button 
+                onClick={() => openModal(course.title)}
+                className="h-12 px-6 bg-primary text-white text-xs font-black uppercase tracking-widest rounded-xl hover:bg-primary-dark transition-all duration-300 shadow-lg shadow-primary/25 hover:shadow-primary/40 active:scale-95"
+              >
+                Enquire
+              </button>
+            </ScaleOnHover>
           </div>
 
-          <Link
-            to={`/courses/${course.slug}`}
-            className="flex items-center justify-center w-full py-4 px-6 bg-slate-900 text-white text-xs font-black uppercase tracking-widest rounded-xl hover:bg-slate-800 transition-all duration-300 group/btn shadow-lg shadow-slate-900/10"
-          >
-            Course Details
-            <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
-          </Link>
+          <ScaleOnHover scale={1.02}>
+            <Link
+              to={`/courses/${course.slug}`}
+              className="flex items-center justify-center w-full py-4 px-6 bg-slate-900 text-white text-xs font-black uppercase tracking-widest rounded-xl hover:bg-slate-800 transition-all duration-300 group/btn shadow-lg shadow-slate-900/10"
+            >
+              Course Details
+              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
+            </Link>
+          </ScaleOnHover>
         </div>
       </div>
     </motion.div>

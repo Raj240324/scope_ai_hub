@@ -16,8 +16,8 @@ export const batches = [
   },
   {
     id: 'batch-python-feb-2026',
-    courseId: 'python-programming',
-    courseName: 'Python Full Stack Development',
+    courseId: 'data-science-ai',
+    courseName: 'Python for Data Science',
     startDate: '2026-02-15T14:00:00',
     duration: '20 Weeks',
     mode: 'Online',
@@ -30,8 +30,8 @@ export const batches = [
   },
   {
     id: 'batch-java-mar-2026',
-    courseId: 'java-programming',
-    courseName: 'Java Full Stack Development',
+    courseId: 'full-stack-web-dev',
+    courseName: 'Java for Full Stack (Special Batch)',
     startDate: '2026-03-01T09:00:00',
     duration: '22 Weeks',
     mode: 'Offline',
@@ -72,7 +72,7 @@ export const batches = [
   },
   {
     id: 'batch-devops-apr-2026',
-    courseId: 'cloud-devops',
+    courseId: 'cloud-computing',
     courseName: 'Cloud Computing & DevOps',
     startDate: '2026-04-01T10:00:00',
     duration: '16 Weeks',

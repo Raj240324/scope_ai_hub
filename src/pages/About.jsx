@@ -4,6 +4,7 @@ import { Target, Eye, Lightbulb, Users, ShieldCheck, Heart, ArrowRight, Award } 
 import { useModal } from '../context/ModalContext';
 
 import Hero from '../components/ui/Hero';
+import { FadeIn, StaggerContainer, StaggerItem, ScaleOnHover, ScrollCountUp } from '../components/utils/Animations';
 
 const About = () => {
   const { openModal } = useModal();
@@ -86,21 +87,23 @@ const About = () => {
       description="Learn about our mission to bridge the skill gap in the software industry. Meet our expert mentors and understand our teaching philosophy."
     >
       <Hero 
-        title={<>Our Story: Building a <span className="text-primary">New Standard</span> for Tech Education.</>}
-        subtitle="Founded in 2025, Raj Software Training Institute was born out of a simple observation: the gap between college education and industry requirements is growing. We're here to bridge that gap."
+        title={<>Our Story: From a Small Classroom to <span className="text-primary">Chengalpattu's Top Institute</span>.</>}
+        subtitle="We started in 2025 with just 10 students in Maraimalai Nagar. Our goal was simple: provide the same quality of training you get in Chennai's biggest institutes, but right here in our neighborhood."
       />
 
       {/* Stats Section */}
       <section className="py-12 bg-white border-y border-slate-100">
         <div className="container-custom">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+          <StaggerContainer className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className="text-2xl md:text-3xl font-bold text-primary mb-1">{stat.value}</div>
+              <StaggerItem key={index} className="text-center">
+                <div className="text-2xl md:text-3xl font-bold text-primary mb-1">
+                  <ScrollCountUp end={stat.value} />
+                </div>
                 <div className="text-sm text-slate-500 font-medium uppercase tracking-wider">{stat.label}</div>
-              </div>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerContainer>
         </div>
       </section>
 
@@ -109,9 +112,9 @@ const About = () => {
         <div className="container-custom">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="space-y-6">
-              <h2 className="heading-md">Our Teaching Philosophy</h2>
+              <h2 className="heading-md">How We Teach</h2>
               <p className="text-slate-600 text-lg leading-relaxed">
-                We believe that software development is a craft that is best learned through apprenticeship and practice. Our startup approach means we are agile, updated with the latest tech, and deeply invested in every student's journey.
+                We don't believe in "reading form slides". Our classes are interactive discussions. We code together, debug together, and build together. We treat you like a junior developer from day one, not just a student.
               </p>
               <div className="space-y-4">
                 <div className="flex items-start space-x-3">
@@ -167,19 +170,21 @@ const About = () => {
               Our team consists of industry veterans who are passionate about sharing their knowledge and helping you succeed.
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+          <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-12">
             {team.map((member, index) => (
-              <div key={index} className="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm hover:shadow-xl transition-all group">
-                <div className="relative mb-8 inline-block">
-                  <div className="absolute inset-0 bg-primary/20 rounded-full blur-2xl group-hover:bg-primary/30 transition-colors"></div>
-                  <img src={member.image} alt={member.name} className="relative h-24 w-24 rounded-full ring-4 ring-white shadow-lg object-cover" />
+              <StaggerItem key={index}>
+                <div className="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm hover:shadow-xl transition-all group">
+                  <div className="relative mb-8 inline-block">
+                    <div className="absolute inset-0 bg-primary/20 rounded-full blur-2xl group-hover:bg-primary/30 transition-colors"></div>
+                    <img src={member.image} alt={member.name} className="relative h-24 w-24 rounded-full ring-4 ring-white shadow-lg object-cover" />
+                  </div>
+                  <h3 className="text-xl font-bold text-slate-900 mb-1">{member.name}</h3>
+                  <p className="text-primary font-semibold text-sm mb-4">{member.role}</p>
+                  <p className="text-slate-600 text-sm leading-relaxed">{member.bio}</p>
                 </div>
-                <h3 className="text-xl font-bold text-slate-900 mb-1">{member.name}</h3>
-                <p className="text-primary font-semibold text-sm mb-4">{member.role}</p>
-                <p className="text-slate-600 text-sm leading-relaxed">{member.bio}</p>
-              </div>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerContainer>
         </div>
       </section>
 
@@ -191,18 +196,18 @@ const About = () => {
               <div className="h-12 w-12 rounded-2xl bg-white/10 flex items-center justify-center">
                 <Eye className="h-6 w-6 text-primary-light" />
               </div>
-              <h2 className="text-2xl md:text-3xl font-bold">Our Vision</h2>
+              <h2 className="text-2xl md:text-3xl font-bold">Our Goal</h2>
               <p className="text-slate-400 text-lg leading-relaxed">
-                To become Tamil Nadu's most trusted startup hub for software training, known for producing world-class developers who are not just coders, but problem solvers.
+                To simplify tech education. We believe anyone can code if they are taught the right way - with patience, practical examples, and in a language they understand.
               </p>
             </div>
             <div className="space-y-6">
               <div className="h-12 w-12 rounded-2xl bg-white/10 flex items-center justify-center">
                 <Target className="h-6 w-6 text-primary-light" />
               </div>
-              <h2 className="text-2xl md:text-3xl font-bold">Our Mission</h2>
+              <h2 className="text-2xl md:text-3xl font-bold">What Drivers Us</h2>
               <p className="text-slate-400 text-lg leading-relaxed">
-                To provide affordable, high-quality, and practical tech education to students and professionals, enabling them to build successful careers in the global IT industry.
+                Seeing a student from a rural background land a high-paying job in a top MNC. That success story is what motivates us every single day.
               </p>
             </div>
           </div>
@@ -219,19 +224,21 @@ const About = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+          <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-12">
             {values.map((value, index) => (
-              <div key={index} className="space-y-4">
-                <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center">
-                  {value.icon}
+              <StaggerItem key={index}>
+                <div className="space-y-4">
+                  <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center">
+                    {value.icon}
+                  </div>
+                  <h3 className="text-xl font-bold text-slate-900">{value.title}</h3>
+                  <p className="text-slate-600 leading-relaxed">
+                    {value.description}
+                  </p>
                 </div>
-                <h3 className="text-xl font-bold text-slate-900">{value.title}</h3>
-                <p className="text-slate-600 leading-relaxed">
-                  {value.description}
-                </p>
-              </div>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerContainer>
         </div>
       </section>
 

@@ -28,7 +28,6 @@ const NotFound = lazy(() => import('./pages/NotFound'));
 // New Pages
 const UpcomingBatches = lazy(() => import('./pages/UpcomingBatches'));
 const Gallery = lazy(() => import('./pages/Gallery'));
-const Events = lazy(() => import('./pages/Events'));
 
 
 // Loading Fallback
@@ -64,7 +63,6 @@ function App() {
                 {/* New Pages */}
                 <Route path="/batches" element={<UpcomingBatches />} />
                 <Route path="/gallery" element={<Gallery />} />
-                <Route path="/events" element={<Events />} />
 
                 {/* 404 Route */}
                 <Route path="*" element={<NotFound />} />

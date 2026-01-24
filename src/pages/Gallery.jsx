@@ -3,9 +3,10 @@ import Layout from '../components/layout/Layout';
 import Hero from '../components/ui/Hero';
 import { motion } from 'framer-motion';
 import { Camera, X, ChevronLeft, ChevronRight, Play } from 'lucide-react';
+import { FadeIn, StaggerContainer, StaggerItem, ScaleOnHover } from '../components/utils/Animations';
 
 // Gallery data
-const galleryCategories = ['All', 'Campus', 'Classrooms', 'Events', 'Placements', 'Workshops'];
+const galleryCategories = ['All', 'Campus', 'Classrooms', 'Placements', 'Workshops'];
 
 const galleryItems = [
   {
@@ -160,34 +161,31 @@ const Gallery = () => {
       {/* Gallery Grid */}
       <section className="py-20 bg-slate-50">
         <div className="container-custom">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {filteredItems.map((item, index) => (
-              <motion.div
-                key={item.id}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: index * 0.05 }}
-                className="group cursor-pointer"
-                onClick={() => openLightbox(item, index)}
-              >
-                <div className="aspect-square rounded-2xl overflow-hidden relative">
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  <div className="absolute bottom-0 left-0 right-0 p-5 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                    <span className="text-[10px] font-black text-primary bg-white px-2 py-1 rounded-full uppercase">
-                      {item.category}
-                    </span>
-                    <h3 className="text-white font-bold mt-2">{item.title}</h3>
+              <StaggerItem key={item.id}>
+                <ScaleOnHover 
+                  className="group cursor-pointer"
+                  onClick={() => openLightbox(item, index)}
+                >
+                  <div className="aspect-square rounded-2xl overflow-hidden relative">
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <div className="absolute bottom-0 left-0 right-0 p-5 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                      <span className="text-[10px] font-black text-primary bg-white px-2 py-1 rounded-full uppercase">
+                        {item.category}
+                      </span>
+                      <h3 className="text-white font-bold mt-2">{item.title}</h3>
+                    </div>
                   </div>
-                </div>
-              </motion.div>
+                </ScaleOnHover>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerContainer>
         </div>
       </section>
 

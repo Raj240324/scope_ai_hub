@@ -6,6 +6,7 @@ import { batches } from '../data/batches';
 import { CalendarCheck, Clock, Users, Zap, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useModal } from '../context/ModalContext';
+import { FadeIn, StaggerContainer, StaggerItem, ScaleOnHover } from '../components/utils/Animations';
 
 const UpcomingBatches = () => {
   const { openModal } = useModal();
@@ -33,22 +34,22 @@ const UpcomingBatches = () => {
       {/* Stats */}
       <section className="py-12 bg-slate-900 text-white">
         <div className="container-custom">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <StaggerContainer className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {[
               { value: sortedBatches.length, label: 'Batches Starting', icon: <CalendarCheck className="h-5 w-5" /> },
               { value: '24/7', label: 'Support Available', icon: <Clock className="h-5 w-5" /> },
               { value: '30', label: 'Max Batch Size', icon: <Users className="h-5 w-5" /> },
               { value: '100%', label: 'Placement Assist', icon: <Zap className="h-5 w-5" /> }
             ].map((stat, index) => (
-              <div key={index} className="text-center">
+              <StaggerItem key={index} className="text-center">
                 <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-white/10 mb-4 text-primary">
                   {stat.icon}
                 </div>
                 <div className="text-2xl md:text-3xl font-black mb-1">{stat.value}</div>
                 <div className="text-sm text-slate-400 font-medium">{stat.label}</div>
-              </div>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerContainer>
         </div>
       </section>
 
@@ -91,11 +92,13 @@ const UpcomingBatches = () => {
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {sortedBatches.map((batch) => (
-              <BatchCountdown key={batch.id} batch={batch} variant="compact" />
+              <StaggerItem key={batch.id}>
+                <BatchCountdown batch={batch} variant="compact" />
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerContainer>
         </div>
       </section>
 

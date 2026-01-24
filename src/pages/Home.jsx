@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { FadeIn, StaggerContainer, StaggerItem, ScaleOnHover, ScrollCountUp } from '../components/utils/Animations';
 import { 
   ArrowRight, 
   BookOpen, 
@@ -108,8 +108,8 @@ const learningPartners = [
   const methodology = [
     {
       step: "01",
-      title: "Conceptual Clarity",
-      desc: "Master complex tech concepts through our unique bilingual (Tamil & English) teaching methodology.",
+      title: "Learn by Doing",
+      desc: "Forget boring lectures. We start coding from day one. You'll learn concepts by building small tools and apps.",
       icon: <BookOpen className="h-6 w-6" />,
       color: "bg-blue-500"
     },
@@ -140,19 +140,19 @@ const learningPartners = [
     {
       name: "Senthil Kumar",
       role: "Full Stack Developer @ Zoho",
-      content: "The hands-on approach at Raj Institute is what sets them apart. I wasn't just learning syntax; I was building real products.",
+      content: "I came from a non-IT background and was really worried. But the trainers here explained everything in simple Tamil and English. The mock interviews really helped me crack the Zoho interview.",
       image: "https://i.pravatar.cc/150?u=senthil"
     },
     {
       name: "Priya Dharshini",
       role: "UI/UX Designer @ Freshworks",
-      content: "As a career switcher, I was nervous. But the mentors here guided me through every step of building my design portfolio.",
+      content: "Best place to learn in Chengalpattu area. They helped me build a proper portfolio, which is exactly what companies asked for. Thank you Raj sir!",
       image: "https://i.pravatar.cc/150?u=priya"
     },
     {
       name: "Arun Rajan",
       role: "DevOps Engineer @ Accenture",
-      content: "The Cloud & DevOps course gave me the practical skills I needed to land my dream job. Highly recommended for professionals.",
+      content: "Practical training is the key. We worked on live AWS servers, not just theory. That experience made all the difference during my placements.",
       image: "https://i.pravatar.cc/150?u=arun"
     }
   ];
@@ -184,15 +184,14 @@ const learningPartners = [
         }
         title={
           <>
-            Master the Most Trending <span className="text-primary">Tech Skills</span> with 100% Placement.
+            Launch Your IT Career in <span className="text-primary">Chennai</span> & Beyond.
           </>
         }
-        subtitle="Upgrade your career with NASSCOM FutureSkills certified programs. Gain hands-on experience, build real-world projects, and get job-ready with India's top-tier learning paths."
+        subtitle="Practical, hands-on software training in Maraimalai Nagar. We don't just teach theory – we help you build real projects and get hired by top companies."
         rightContent={
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+          <FadeIn 
+            direction="left"
+            delay={0.2}
             className="relative"
           >
             <div className="relative z-10 rounded-3xl overflow-hidden shadow-2xl border-8 border-white">
@@ -235,7 +234,7 @@ const learningPartners = [
                 </div>
               </div>
             </div>
-          </motion.div>
+          </FadeIn>
         }
       >
         <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
@@ -278,17 +277,19 @@ const learningPartners = [
       {/* Stats Section */}
       <section className="py-12 bg-slate-900 text-white">
         <div className="container-custom">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <StaggerContainer className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
-              <div key={index} className="text-center">
+              <StaggerItem key={index} className="text-center">
                 <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-white/10 mb-4 text-primary">
                   {stat.icon}
                 </div>
-                <div className="text-2xl md:text-3xl font-black mb-1">{stat.value}</div>
+                <div className="text-2xl md:text-3xl font-black mb-1">
+                  <ScrollCountUp end={stat.value} />
+                </div>
                 <div className="text-sm text-slate-400 font-medium uppercase tracking-wider">{stat.label}</div>
-              </div>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerContainer>
         </div>
       </section>
 
@@ -378,9 +379,9 @@ const learningPartners = [
           <p className="text-sm font-bold text-slate-400 uppercase tracking-[0.2em] mb-10">
             Our Students Work At
           </p>
-          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16">
+          <StaggerContainer className="flex flex-wrap justify-center items-center gap-8 md:gap-16">
             {companies.map((company) => (
-              <div key={company.name} className="h-8 md:h-12 w-24 md:w-32 flex items-center justify-center hover:scale-110 transition-transform duration-300">
+              <StaggerItem key={company.name} className="h-8 md:h-12 w-24 md:w-32 flex items-center justify-center hover:scale-110 transition-transform duration-300">
                 {company.logo ? (
                   <img 
                     src={company.logo} 
@@ -396,9 +397,9 @@ const learningPartners = [
                     {company.name}
                   </span>
                 )}
-              </div>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerContainer>
         </div>
       </section>
 
@@ -436,7 +437,7 @@ const learningPartners = [
                 Empowering <span className="text-primary">Tamil Nadu's</span> Next-Gen Tech Talent.
               </h2>
               <p className="text-lg text-slate-600 mb-8 leading-relaxed">
-                Since our inception in Maraimalai Nagar, we've been dedicated to making high-quality tech education accessible across Tamil Nadu. Our bilingual teaching methodology ensures that every student, regardless of their linguistic background, masters complex programming concepts with ease.
+                Before us, students from Maraimalai Nagar and Chengalpattu had to travel all the way to OMR or Chennai city for quality training. We changed that. We brought top-tier tech education right to your neighborhood, with the same quality you'd expect from big city institutes.
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {[
@@ -480,17 +481,10 @@ const learningPartners = [
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {methodology.map((item, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-              >
-
-                <div className="bg-white/5 border border-white/10 p-8 rounded-[2.5rem] relative z-10 hover:bg-white/10 transition-all duration-500 group-hover:-translate-y-2">
+              <StaggerItem key={index} className="h-full">
+                <div className="bg-white/5 border border-white/10 p-8 rounded-[2.5rem] relative z-10 hover:bg-white/10 transition-all duration-500 group-hover:-translate-y-2 h-full flex flex-col">
                   <div className="flex justify-between items-start mb-8">
                     <div className={`w-14 h-14 rounded-2xl ${item.color} flex items-center justify-center text-white shadow-lg shadow-black/20`}>
                       {item.icon}
@@ -506,9 +500,9 @@ const learningPartners = [
                     {item.desc}
                   </p>
                 </div>
-              </motion.div>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerContainer>
 
           <div className="mt-16 pt-16 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-8">
             <div className="flex items-center space-x-6">
@@ -550,11 +544,13 @@ const learningPartners = [
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {flagshipCourses.map((course, index) => (
-              <CourseCard key={course.id} course={course} index={index} />
+              <StaggerItem key={course.id}>
+                <CourseCard course={course} index={index} />
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerContainer>
           
           <div className="mt-12 text-center md:hidden">
             <Link to="/courses" className="btn-secondary w-full py-4 text-lg">
@@ -574,26 +570,21 @@ const learningPartners = [
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {trustFactors.map((factor, index) => (
-              <motion.div 
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-slate-50 p-8 rounded-3xl border border-slate-100 hover:border-primary/20 hover:shadow-xl transition-all group"
-              >
-                <div className="w-14 h-14 rounded-2xl bg-white shadow-sm flex items-center justify-center mb-6 group-hover:bg-primary group-hover:text-white transition-colors text-primary">
-                  {factor.icon}
+              <StaggerItem key={index} className="h-full">
+                <div className="bg-slate-50 p-8 rounded-3xl border border-slate-100 hover:border-primary/20 hover:shadow-xl transition-all group h-full flex flex-col">
+                  <div className="w-14 h-14 rounded-2xl bg-white shadow-sm flex items-center justify-center mb-6 group-hover:bg-primary group-hover:text-white transition-colors text-primary">
+                    {factor.icon}
+                  </div>
+                  <h3 className="text-xl font-bold text-slate-900 mb-4">{factor.title}</h3>
+                  <p className="text-slate-600 leading-relaxed">
+                    {factor.description}
+                  </p>
                 </div>
-                <h3 className="text-xl font-bold text-slate-900 mb-4">{factor.title}</h3>
-                <p className="text-slate-600 leading-relaxed">
-                  {factor.description}
-                </p>
-              </motion.div>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerContainer>
         </div>
       </section>
 
@@ -605,30 +596,25 @@ const learningPartners = [
             <p className="text-slate-600 text-lg">Hear from our students who are now working at top tech companies.</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {testimonials.map((t, i) => (
-              <motion.div 
-                key={i}
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="bg-white p-8 rounded-3xl shadow-sm border border-slate-100"
-              >
-                <div className="flex items-center space-x-4 mb-6">
-                  <img src={t.image} alt={t.name} className="h-14 w-14 rounded-full border-2 border-primary/20" />
-                  <div>
-                    <h4 className="font-bold text-slate-900">{t.name}</h4>
-                    <p className="text-xs text-primary font-bold uppercase tracking-wider">{t.role}</p>
+              <StaggerItem key={i} className="h-full">
+                <div className="bg-white p-8 rounded-3xl shadow-sm border border-slate-100 h-full flex flex-col">
+                  <div className="flex items-center space-x-4 mb-6">
+                    <img src={t.image} alt={t.name} className="h-14 w-14 rounded-full border-2 border-primary/20" />
+                    <div>
+                      <h4 className="font-bold text-slate-900">{t.name}</h4>
+                      <p className="text-xs text-primary font-bold uppercase tracking-wider">{t.role}</p>
+                    </div>
+                  </div>
+                  <p className="text-slate-600 italic leading-relaxed">"{t.content}"</p>
+                  <div className="flex text-yellow-400 mt-6">
+                    {[1, 2, 3, 4, 5].map((s) => <Star key={s} className="h-4 w-4 fill-current" />)}
                   </div>
                 </div>
-                <p className="text-slate-600 italic leading-relaxed">"{t.content}"</p>
-                <div className="flex text-yellow-400 mt-6">
-                  {[1, 2, 3, 4, 5].map((s) => <Star key={s} className="h-4 w-4 fill-current" />)}
-                </div>
-              </motion.div>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerContainer>
         </div>
       </section>
 
@@ -757,7 +743,7 @@ const learningPartners = [
           <div className="text-center max-w-3xl mx-auto mb-16">
             <h2 className="heading-md mb-6">Global Training & <span className="text-primary">Online Flexibility</span></h2>
             <p className="text-slate-600 text-lg">
-              Distance is no longer a barrier. Join our world-class training from anywhere in the world with our advanced online learning platform.
+              Distance isn't an issue. Can't make it to Maraimalai Nagar? Join our live online classes that feel just like sitting in the classroom.
             </p>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
@@ -799,7 +785,7 @@ const learningPartners = [
               <Cpu size={300} className="absolute -bottom-20 -right-20" />
             </div>
             <div className="relative z-10 max-w-3xl mx-auto">
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-6">Ready to Start Your Career?</h2>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-6">Start Your Journey Today?</h2>
               <p className="text-base md:text-lg opacity-90 mb-10">
                 Join our next batch and learn from industry experts who are passionate about teaching.
               </p>

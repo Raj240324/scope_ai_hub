@@ -56,7 +56,6 @@ const Footer = () => {
               <li><Link to="/about" className="hover:text-primary hover:translate-x-1 transition-all inline-flex items-center">About Us</Link></li>
               <li><Link to="/batches" className="hover:text-primary hover:translate-x-1 transition-all inline-flex items-center">Upcoming Batches</Link></li>
               <li><Link to="/gallery" className="hover:text-primary hover:translate-x-1 transition-all inline-flex items-center">Gallery</Link></li>
-              <li><Link to="/events" className="hover:text-primary hover:translate-x-1 transition-all inline-flex items-center">Events & Workshops</Link></li>
               <li><Link to="/reviews" className="hover:text-primary hover:translate-x-1 transition-all inline-flex items-center">Student Reviews</Link></li>
               <li><Link to="/placement" className="hover:text-primary hover:translate-x-1 transition-all inline-flex items-center">Placement Support</Link></li>
               <li><Link to="/faq" className="hover:text-primary hover:translate-x-1 transition-all inline-flex items-center">FAQs</Link></li>

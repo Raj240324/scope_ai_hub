@@ -11,7 +11,9 @@ const ContactForm = ({ initialCourse = "General Inquiry" }) => {
   const [errorMessage, setErrorMessage] = useState('');
   const [formErrors, setFormErrors] = useState({});
   const [selectedCourse, setSelectedCourse] = useState(initialCourse);
+  const [selectedQualification, setSelectedQualification] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isQualDropdownOpen, setIsQualDropdownOpen] = useState(false);
 
   const courses = [
     { value: "General Inquiry", label: "General Inquiry" },
@@ -20,6 +22,14 @@ const ContactForm = ({ initialCourse = "General Inquiry" }) => {
     { value: "UI/UX Design Strategy", label: "UI/UX Design" },
     { value: "Cyber Security & Ethical Hacking", label: "Cyber Security" },
     { value: "Cloud Computing & DevOps", label: "Cloud Computing" }
+  ];
+
+  const qualifications = [
+    { value: "Student", label: "Student (Arts/Science/Engineering)" },
+    { value: "Job Seeker", label: "Job Seeker / Fresher" },
+    { value: "Working Professional", label: "Working Professional" },
+    { value: "Business Owner", label: "Business Owner / Entrepreneur" },
+    { value: "Other", label: "Other" }
   ];
 
   // Update selected course if initialCourse prop changes
@@ -35,18 +45,20 @@ const ContactForm = ({ initialCourse = "General Inquiry" }) => {
       if (isDropdownOpen && !event.target.closest('.course-dropdown-container')) {
         setIsDropdownOpen(false);
       }
+      if (isQualDropdownOpen && !event.target.closest('.qual-dropdown-container')) {
+        setIsQualDropdownOpen(false);
+      }
     };
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [isDropdownOpen]);
+  }, [isDropdownOpen, isQualDropdownOpen]);
 
   const validateForm = () => {
     const errors = {};
-    const formData = new FormData(form.current);
-    
     const name = formData.get('user_name');
     const email = formData.get('user_email');
     const phone = formData.get('user_phone');
+    const location = formData.get('user_location');
     const message = formData.get('message');
 
     if (!name || name.trim().length < 2) {
@@ -57,8 +69,18 @@ const ContactForm = ({ initialCourse = "General Inquiry" }) => {
       errors.user_email = 'Please enter a valid email address';
     }
 
-    if (!phone || !/^\+?[\d\s-]{10,}$/.test(phone)) {
-      errors.user_phone = 'Please enter a valid phone number (min 10 digits)';
+    // Remove non-digit characters for validation
+    const digitsOnly = phone.replace(/\D/g, '');
+    if (!phone || digitsOnly.length < 10 || digitsOnly.length > 15) {
+      errors.user_phone = 'Please enter a valid phone number (10-15 digits)';
+    }
+
+    if (!location || location.trim().length < 2) {
+      errors.user_location = 'Please enter your City/Area';
+    }
+
+    if (!selectedQualification) {
+      errors.qualification = 'Please select your current status';
     }
 
     if (!message || message.trim().length < 10) {
@@ -134,7 +156,7 @@ const ContactForm = ({ initialCourse = "General Inquiry" }) => {
     <form ref={form} onSubmit={sendEmail} className="space-y-4 md:space-y-5">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
         <div className="space-y-1.5">
-          <label htmlFor="user_name" className="text-xs font-bold text-slate-700 uppercase tracking-wide">Full Name</label>
+          <label htmlFor="user_name" className="text-xs font-bold text-slate-700 uppercase tracking-wide">Full Name <span className="text-red-500">*</span></label>
           <input
             type="text"
             name="user_name"
@@ -147,7 +169,7 @@ const ContactForm = ({ initialCourse = "General Inquiry" }) => {
           {formErrors.user_name && <p className="text-[10px] text-red-500 font-bold">{formErrors.user_name}</p>}
         </div>
         <div className="space-y-1.5">
-          <label htmlFor="user_email" className="text-xs font-bold text-slate-700 uppercase tracking-wide">Email Address</label>
+          <label htmlFor="user_email" className="text-xs font-bold text-slate-700 uppercase tracking-wide">Email Address <span className="text-red-500">*</span></label>
           <input
             type="email"
             name="user_email"
@@ -163,20 +185,91 @@ const ContactForm = ({ initialCourse = "General Inquiry" }) => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
         <div className="space-y-1.5">
-          <label htmlFor="user_phone" className="text-xs font-bold text-slate-700 uppercase tracking-wide">Phone Number</label>
+          <label htmlFor="user_phone" className="text-xs font-bold text-slate-700 uppercase tracking-wide">Phone Number <span className="text-red-500">*</span></label>
           <input
             type="tel"
             name="user_phone"
             id="user_phone"
             placeholder="+91 98765 43210"
+            maxLength={15}
+            onInput={(e) => {
+              e.target.value = e.target.value.replace(/[^0-9+\s]/g, '');
+            }}
             className={`w-full px-4 py-2.5 bg-slate-50 border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm ${
               formErrors.user_phone ? 'border-red-500' : 'border-slate-200'
             }`}
           />
           {formErrors.user_phone && <p className="text-[10px] text-red-500 font-bold">{formErrors.user_phone}</p>}
         </div>
+        <div className="space-y-1.5">
+          <label htmlFor="user_location" className="text-xs font-bold text-slate-700 uppercase tracking-wide">Location (City/Area) <span className="text-red-500">*</span></label>
+          <input
+            type="text"
+            name="user_location"
+            id="user_location"
+            placeholder="e.g. Maraimalai Nagar, Chennai"
+            className={`w-full px-4 py-2.5 bg-slate-50 border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm ${
+              formErrors.user_location ? 'border-red-500' : 'border-slate-200'
+            }`}
+          />
+          {formErrors.user_location && <p className="text-[10px] text-red-500 font-bold">{formErrors.user_location}</p>}
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
+        <div className="space-y-1.5 relative qual-dropdown-container">
+          <label htmlFor="qualification" className="text-xs font-bold text-slate-700 uppercase tracking-wide">Current Status <span className="text-red-500">*</span></label>
+          <input type="hidden" name="qualification" value={selectedQualification} />
+          <button
+            type="button"
+            onClick={() => setIsQualDropdownOpen(!isQualDropdownOpen)}
+            className={`w-full px-4 py-2.5 bg-slate-50 border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm flex items-center justify-between group ${
+              formErrors.qualification ? 'border-red-500' : 'border-slate-200'
+            }`}
+          >
+            <span className={selectedQualification ? "text-slate-900" : "text-slate-400"}>
+              {qualifications.find(q => q.value === selectedQualification)?.label || "Select status"}
+            </span>
+            <ChevronDown className={`h-4 w-4 text-slate-400 transition-transform duration-300 ${isQualDropdownOpen ? 'rotate-180' : ''}`} />
+          </button>
+          
+          {formErrors.qualification && <p className="text-[10px] text-red-500 font-bold">{formErrors.qualification}</p>}
+
+          <AnimatePresence>
+            {isQualDropdownOpen && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.2 }}
+                className="absolute z-[110] left-0 right-0 mt-2 bg-white border border-slate-200 rounded-xl shadow-xl overflow-hidden"
+              >
+                <div className="max-h-[200px] overflow-y-auto no-scrollbar py-1">
+                  {qualifications.map((q) => (
+                    <button
+                      key={q.value}
+                      type="button"
+                      onClick={() => {
+                        setSelectedQualification(q.value);
+                        setIsQualDropdownOpen(false);
+                      }}
+                      className={`w-full px-4 py-2.5 text-left text-sm flex items-center justify-between transition-colors ${
+                        selectedQualification === q.value 
+                          ? 'bg-primary/5 text-primary font-bold' 
+                          : 'text-slate-600 hover:bg-slate-50'
+                      }`}
+                    >
+                      <span>{q.label}</span>
+                      {selectedQualification === q.value && <Check className="h-3.5 w-3.5" />}
+                    </button>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
         <div className="space-y-1.5 relative course-dropdown-container">
-          <label htmlFor="course_interest" className="text-xs font-bold text-slate-700 uppercase tracking-wide">Interested Course</label>
+          <label htmlFor="course_interest" className="text-xs font-bold text-slate-700 uppercase tracking-wide">Interested Course <span className="text-red-500">*</span></label>
           <input type="hidden" name="course_interest" value={selectedCourse} />
           <button
             type="button"
@@ -225,7 +318,7 @@ const ContactForm = ({ initialCourse = "General Inquiry" }) => {
       </div>
 
       <div className="space-y-1.5">
-        <label htmlFor="message" className="text-xs font-bold text-slate-700 uppercase tracking-wide">Your Message</label>
+        <label htmlFor="message" className="text-xs font-bold text-slate-700 uppercase tracking-wide">Your Message <span className="text-red-500">*</span></label>
         <textarea
           name="message"
           id="message"
