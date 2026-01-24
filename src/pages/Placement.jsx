@@ -3,7 +3,7 @@ import Layout from '../components/layout/Layout';
 import Hero from '../components/ui/Hero';
 import { CheckCircle2, Briefcase, TrendingUp, Users, Building2, Quote, ArrowRight, Award } from 'lucide-react';
 import { useModal } from '../context/ModalContext';
-import { FadeIn, StaggerContainer, StaggerItem, ScaleOnHover, ScrollCountUp } from '../components/utils/Animations';
+import { FadeIn, StaggerContainer, StaggerItem, ScaleOnHover, ScrollCountUp, Marquee } from '../components/utils/Animations';
 
 const placementStats = [
   { label: 'Placement Rate', value: '100%', icon: <Briefcase className="h-6 w-6 text-primary" /> },
@@ -285,28 +285,35 @@ const Placement = () => {
             <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-4">Our Hiring Partners</h2>
             <p className="text-slate-500">Our students are working in some of the most innovative companies worldwide.</p>
           </div>
+        </div>
           
-          <StaggerContainer className="flex flex-wrap justify-center items-center gap-8 md:gap-16">
-            {hiringPartners.map((partner) => (
-              <StaggerItem key={partner.name} className="h-8 md:h-12 w-24 md:w-32 flex items-center justify-center group">
-                {partner.logo ? (
-                  <img 
-                    src={partner.logo} 
-                    alt={partner.name} 
-                    className="max-h-full max-w-full object-contain filter drop-shadow-sm group-hover:drop-shadow-md transition-all"
-                    onError={(e) => {
-                      e.target.onerror = null;
-                      e.target.parentElement.innerHTML = `<span style="color: ${partner.color}" class="font-black text-xl md:text-2xl tracking-tight group-hover:scale-110 transition-transform">${partner.name}</span>`;
-                    }}
-                  />
-                ) : (
-                  <span style={{ color: partner.color }} className="font-black text-xl md:text-2xl tracking-tight uppercase group-hover:scale-110 transition-transform">
-                    {partner.name}
-                  </span>
-                )}
-              </StaggerItem>
-            ))}
-          </StaggerContainer>
+        <div className="relative w-full">
+          <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-white to-transparent z-10" />
+          <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-white to-transparent z-10" />
+          
+          <Marquee speed={30} className="py-4">
+            <div className="flex items-center gap-16 px-8">
+              {hiringPartners.map((partner) => (
+                <div key={partner.name} className="h-12 w-32 flex items-center justify-center grayscale hover:grayscale-0 transition-all opacity-60 hover:opacity-100">
+                  {partner.logo ? (
+                    <img 
+                      src={partner.logo} 
+                      alt={partner.name} 
+                      className="max-h-full max-w-full object-contain filter drop-shadow-sm"
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.parentElement.innerHTML = `<span style="color: ${partner.color}" class="font-black text-2xl tracking-tight">${partner.name}</span>`;
+                      }}
+                    />
+                  ) : (
+                    <span style={{ color: partner.color }} className="font-black text-2xl tracking-tight uppercase">
+                      {partner.name}
+                    </span>
+                  )}
+                </div>
+              ))}
+            </div>
+          </Marquee>
         </div>
       </section>
 

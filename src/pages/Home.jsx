@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { FadeIn, StaggerContainer, StaggerItem, ScaleOnHover, ScrollCountUp } from '../components/utils/Animations';
+import { FadeIn, StaggerContainer, StaggerItem, ScaleOnHover, ScrollCountUp, Marquee } from '../components/utils/Animations';
 import { 
   ArrowRight, 
   BookOpen, 
@@ -379,27 +379,35 @@ const learningPartners = [
           <p className="text-sm font-bold text-slate-400 uppercase tracking-[0.2em] mb-10">
             Our Students Work At
           </p>
-          <StaggerContainer className="flex flex-wrap justify-center items-center gap-8 md:gap-16">
-            {companies.map((company) => (
-              <StaggerItem key={company.name} className="h-8 md:h-12 w-24 md:w-32 flex items-center justify-center hover:scale-110 transition-transform duration-300">
-                {company.logo ? (
-                  <img 
-                    src={company.logo} 
-                    alt={company.name} 
-                    className="max-h-full max-w-full object-contain filter drop-shadow-sm group-hover:drop-shadow-md transition-all"
-                    onError={(e) => {
-                      e.target.onerror = null;
-                      e.target.parentElement.innerHTML = `<span style="color: ${company.color}" class="font-black text-xl md:text-2xl tracking-tight group-hover:scale-110 transition-transform">${company.name}</span>`;
-                    }}
-                  />
-                ) : (
-                  <span style={{ color: company.color }} className="font-black text-xl md:text-2xl tracking-tight uppercase group-hover:scale-110 transition-transform">
-                    {company.name}
-                  </span>
-                )}
-              </StaggerItem>
-            ))}
-          </StaggerContainer>
+        </div>
+        
+        <div className="relative w-full">
+          <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-white to-transparent z-10" />
+          <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-white to-transparent z-10" />
+          
+          <Marquee speed={30} className="py-4">
+            <div className="flex items-center gap-16 px-8">
+              {companies.map((company) => (
+                <div key={company.name} className="h-12 w-32 flex items-center justify-center grayscale hover:grayscale-0 transition-all opacity-60 hover:opacity-100">
+                  {company.logo ? (
+                    <img 
+                      src={company.logo} 
+                      alt={company.name} 
+                      className="max-h-full max-w-full object-contain filter drop-shadow-sm"
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.parentElement.innerHTML = `<span style="color: ${company.color}" class="font-black text-2xl tracking-tight">${company.name}</span>`;
+                      }}
+                    />
+                  ) : (
+                    <span style={{ color: company.color }} className="font-black text-2xl tracking-tight uppercase">
+                      {company.name}
+                    </span>
+                  )}
+                </div>
+              ))}
+            </div>
+          </Marquee>
         </div>
       </section>
 

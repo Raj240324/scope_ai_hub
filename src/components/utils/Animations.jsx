@@ -114,20 +114,16 @@ export const CountUp = ({ end, duration = 2, suffix = "", prefix = "" }) => {
       ease: "easeOut"
     });
 
-    // We want this to trigger when in view, so we wrap it or use useInView. 
-    // Simplified strictly for this component:
     return () => controls.stop();
   }, [from, to, duration, suffix, prefix]);
 
   return <span ref={nodeRef} />;
 };
 
-// Actually, utilizing Framer Motion's useInView for scroll triggering
 export const ScrollCountUp = ({ end, duration = 2.5, suffix = "", prefix = "", className="" }) => {
   const ref = React.useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
   
-  // Parse target value logic
   let targetValue = 0;
   let computedSuffix = suffix;
   let computedPrefix = prefix;
@@ -155,7 +151,7 @@ export const ScrollCountUp = ({ end, duration = 2.5, suffix = "", prefix = "", c
         onUpdate: (value) => {
           setDisplayValue(value);
         },
-        ease: [0.25, 0.1, 0.25, 1], // Cubic bezier for premium "settle" effect
+        ease: [0.25, 0.1, 0.25, 1],
       });
       return () => controls.stop();
     }
@@ -170,3 +166,23 @@ export const ScrollCountUp = ({ end, duration = 2.5, suffix = "", prefix = "", c
     </span>
   );
 }
+
+export const Marquee = ({ children, speed = 20, className = "" }) => {
+  return (
+    <div className={`overflow-hidden flex ${className}`}>
+      <motion.div
+        initial={{ x: 0 }}
+        animate={{ x: "-50%" }}
+        transition={{ 
+          duration: speed, 
+          repeat: Infinity, 
+          ease: "linear" 
+        }}
+        className="flex flex-shrink-0"
+      >
+        {children}
+        {children}
+      </motion.div>
+    </div>
+  );
+};
