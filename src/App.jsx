@@ -43,7 +43,7 @@ function App() {
     <ErrorBoundary>
       <HelmetProvider>
         <ModalProvider>
-          {/* <TawkChat /> - Enable this when your Tawk.to account is ready */}
+          <TawkChat />
           <WhatsAppButton />
           <Router>
             <ScrollToTop />
