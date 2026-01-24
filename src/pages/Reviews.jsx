@@ -131,8 +131,11 @@ const Reviews = () => {
           <div className="flex flex-col lg:flex-row gap-6 mb-12 items-center justify-between">
             <div className="relative w-full lg:max-w-md">
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400" />
+              <label htmlFor="review_search" className="sr-only">Search reviews</label>
               <input
                 type="text"
+                id="review_search"
+                name="q"
                 placeholder="Search reviews..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}

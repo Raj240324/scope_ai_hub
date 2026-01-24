@@ -119,8 +119,11 @@ const Footer = () => {
             <p className="text-slate-400 text-sm">Get the latest updates on new batches and scholarship opportunities.</p>
           </div>
           <div className="flex w-full md:w-auto">
+            <label htmlFor="newsletter_email" className="sr-only">Newsletter Email</label>
             <input 
               type="email" 
+              id="newsletter_email"
+              name="newsletter_email"
               placeholder="Your email address" 
               className="bg-slate-800 border-none rounded-l-xl px-6 py-4 text-white text-sm focus:ring-2 focus:ring-primary w-full md:w-64"
             />

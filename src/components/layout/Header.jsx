@@ -357,6 +357,9 @@ const Header = () => {
               <input
                 autoFocus
                 type="text"
+                name="header_search"
+                id="header_search"
+                aria-label="Search courses"
                 placeholder="Search for courses (e.g. MERN, Python, Java...)"
                 className="flex-1 bg-transparent border-none outline-none text-lg font-medium text-slate-900 placeholder:text-slate-400"
                 value={searchQuery}

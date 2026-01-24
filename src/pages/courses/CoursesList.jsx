@@ -47,8 +47,11 @@ const CoursesList = () => {
           <div className="flex flex-col lg:flex-row gap-6">
             <div className="flex-grow relative group">
               <Search className="absolute left-6 top-1/2 -translate-y-1/2 text-slate-500 h-5 w-5 group-focus-within:text-primary transition-colors" />
+              <label htmlFor="course-search-main" className="sr-only">Search for your future career</label>
               <input
                 type="text"
+                id="course-search-main"
+                name="course-search-main"
                 placeholder="Search for your future career..."
                 className="w-full pl-14 pr-6 py-5 bg-slate-950/50 border border-slate-800 text-white rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all placeholder:text-slate-600 font-medium"
                 value={searchTerm}
@@ -58,7 +61,10 @@ const CoursesList = () => {
             
             <div className="flex flex-wrap gap-4">
               <div className="relative group">
+                <label htmlFor="category-filter" className="sr-only">Filter by Category</label>
                 <select
+                  id="category-filter"
+                  name="category"
                   className="appearance-none pl-6 pr-12 py-5 bg-slate-950/50 border border-slate-800 text-white rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all cursor-pointer min-w-[180px] font-medium"
                   value={selectedCategory}
                   onChange={(e) => setSelectedCategory(e.target.value)}
@@ -71,7 +77,10 @@ const CoursesList = () => {
               </div>
 
               <div className="relative group">
+                <label htmlFor="level-filter" className="sr-only">Filter by Level</label>
                 <select
+                  id="level-filter"
+                  name="level"
                   className="appearance-none pl-6 pr-12 py-5 bg-slate-950/50 border border-slate-800 text-white rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all cursor-pointer min-w-[160px] font-medium"
                   value={selectedLevel}
                   onChange={(e) => setSelectedLevel(e.target.value)}

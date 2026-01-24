@@ -222,6 +222,7 @@ const ContactForm = ({ initialCourse = "General Inquiry" }) => {
           <input type="hidden" name="qualification" value={selectedQualification} />
           <button
             type="button"
+            id="qualification"
             onClick={() => setIsQualDropdownOpen(!isQualDropdownOpen)}
             className={`w-full px-4 py-2.5 bg-slate-50 border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm flex items-center justify-between group ${
               formErrors.qualification ? 'border-red-500' : 'border-slate-200'
@@ -273,6 +274,7 @@ const ContactForm = ({ initialCourse = "General Inquiry" }) => {
           <input type="hidden" name="course_interest" value={selectedCourse} />
           <button
             type="button"
+            id="course_interest"
             onClick={() => setIsDropdownOpen(!isDropdownOpen)}
             className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm flex items-center justify-between group"
           >
