@@ -4,6 +4,7 @@ import Hero from '../components/ui/Hero';
 import { CheckCircle2, Briefcase, TrendingUp, Users, Building2, Quote, ArrowRight, Award } from 'lucide-react';
 import { useModal } from '../context/ModalContext';
 import { FadeIn, StaggerContainer, StaggerItem, ScaleOnHover, ScrollCountUp, Marquee } from '../components/utils/Animations';
+import { BRANDING } from '../data/branding';
 
 const placementStats = [
   { label: 'Grooming Success', value: 'Expert', icon: <Briefcase className="h-6 w-6 text-primary" /> },
@@ -41,7 +42,7 @@ const testimonials = [
     company: "Zoho",
     role: "Full Stack Developer",
     image: "https://i.pravatar.cc/150?u=senthil",
-    quote: "The hands-on approach at AITECHHUB is what sets them apart. I wasn't just learning syntax; I was building real products that helped me land a job at Zoho."
+    quote: `The hands-on approach at ${BRANDING.fullName} is what sets them apart. I wasn't just learning syntax; I was building real products that helped me land a job at Zoho.`
   },
   {
     name: "Priya Dharshini",
@@ -61,7 +62,7 @@ const testimonials = [
     name: "Akash Mehra",
     company: "Google",
     role: "Frontend Developer",
-    quote: "The practical training and mock interviews at AITECHHUB were instrumental in helping me land my dream job at Google."
+    quote: `The practical training and mock interviews at ${BRANDING.fullName} were instrumental in helping me land my dream job at Google.`
   }
 ];
 
@@ -80,7 +81,7 @@ const Placement = () => {
   const { openModal } = useModal();
   return (
     <Layout 
-      title="Placements | AITECHHUB Training Institute"
+      title={`Placements | ${BRANDING.fullName} Training Institute`}
       description="Check our placement grooming process, hiring partners, and student success stories. We offer comprehensive placement guidance to all our students."
     >
       <Hero 

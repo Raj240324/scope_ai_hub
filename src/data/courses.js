@@ -1,3 +1,5 @@
+import { BRANDING } from './branding';
+
 export const courses = [
   {
     id: "full-stack-web-dev",
@@ -90,8 +92,8 @@ export const courses = [
       }
     ],
     certification: {
-      title: "Certified Full Stack Developer (Official AITECHHUB Certification)",
-      details: "Upon successful completion of the course and capstone projects, you will receive an official certification from AITECHHUB. This certification validates your proficiency in the MERN stack and makes you a preferred candidate for top-tier tech roles."
+      title: `Certified Full Stack Developer (Official ${BRANDING.fullName} Certification)`,
+      details: `Upon successful completion of the course and capstone projects, you will receive an official certification from ${BRANDING.fullName}. This certification validates your proficiency in the MERN stack and makes you a preferred candidate for top-tier tech roles.`
     },
     instructor: {
       name: "S. Raj",
@@ -211,8 +213,8 @@ export const courses = [
       }
     ],
     certification: {
-      title: "Data Science & AI Professional (Official AITECHHUB Certification)",
-      details: "Earn a professional certification from AITECHHUB that validates your expertise in Machine Learning, Deep Learning, and Big Data Analytics, providing a significant advantage in the global AI job market."
+      title: `Data Science & AI Professional (Official ${BRANDING.fullName} Certification)`,
+      details: `Earn a professional certification from ${BRANDING.fullName} that validates your expertise in Machine Learning, Deep Learning, and Big Data Analytics, providing a significant advantage in the global AI job market.`
     },
     instructor: {
       name: "Dr. Anitha M.",

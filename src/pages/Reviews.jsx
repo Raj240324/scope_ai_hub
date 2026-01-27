@@ -4,6 +4,7 @@ import { Star, Quote, Search, Filter, MessageSquare, ThumbsUp, CheckCircle2 } fr
 import { clsx } from 'clsx';
 import { courses } from '../data/courses';
 import { useModal } from '../context/ModalContext';
+import { BRANDING } from '../data/branding';
 
 const reviews = [
   {
@@ -12,7 +13,7 @@ const reviews = [
     role: "Full Stack Developer",
     course: "Full Stack Web Development",
     rating: 5,
-    content: "The Full Stack course at AITECHHUB was a game-changer for me. I went from zero coding knowledge to building a complete e-commerce site. The mentors are always ready to help even after class hours.",
+    content: `The Full Stack course at ${BRANDING.fullName} was a game-changer for me. I went from zero coding knowledge to building a complete e-commerce site. The mentors are always ready to help even after class hours.`,
     image: "https://i.pravatar.cc/150?u=senthil",
     date: "2 weeks ago",
     verified: true
@@ -101,8 +102,8 @@ const Reviews = () => {
   return (
     <Layout>
       <Hero 
-        title={<>Student <span className="text-primary-light">Success</span> Stories</>}
-        subtitle="Don't just take our word for it. Hear from our alumni who have transformed their careers with AITECHHUB."
+        title={<>Student <span className="text-primary">Success</span> Stories</>}
+        subtitle={`Don't just take our word for it. Hear from our alumni who have transformed their careers with ${BRANDING.fullName}.`}
       />
 
       {/* Stats Section */}

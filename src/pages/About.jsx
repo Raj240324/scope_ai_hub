@@ -2,6 +2,7 @@ import React from 'react';
 import Layout from '../components/layout/Layout';
 import { Target, Eye, Lightbulb, Users, ShieldCheck, Heart, ArrowRight, Award } from 'lucide-react';
 import { useModal } from '../context/ModalContext';
+import { BRANDING } from '../data/branding';
 
 import Hero from '../components/ui/Hero';
 import { FadeIn, StaggerContainer, StaggerItem, ScaleOnHover, ScrollCountUp } from '../components/utils/Animations';
@@ -40,8 +41,8 @@ const About = () => {
   const values = [
     {
       icon: <Award className="h-6 w-6 text-primary" />,
-      title: "Official AITECHHUB Certification",
-      description: "Receive a professional certificate from AITECHHUB that validates your project-based expertise and technical proficiency."
+      title: `Official ${BRANDING.fullName} Certification`,
+      description: `Receive a professional certificate from ${BRANDING.fullName} that validates your project-based expertise and technical proficiency.`
     },
     {
       icon: <ShieldCheck className="h-6 w-6 text-primary" />,
@@ -86,7 +87,7 @@ const About = () => {
 
   return (
     <Layout 
-      title="About Us | AITECHHUB Training Institute"
+      title={`About Us | ${BRANDING.fullName} Training Institute`}
       description="Learn about our mission to bridge the skill gap in the software industry. Meet our expert mentors and understand our teaching philosophy."
     >
       <Hero 

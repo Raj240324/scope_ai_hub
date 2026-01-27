@@ -3,11 +3,12 @@ import { Helmet } from 'react-helmet-async';
 import { motion, AnimatePresence } from 'framer-motion';
 import Header from './Header';
 import Footer from './Footer';
+import { BRANDING } from '../../data/branding';
 
 const Layout = ({ 
   children, 
-  title = "Raj Software Training Institute | Master Tech Skills in Tamil Nadu",
-  description = "Join Raj Institute for industry-aligned software training in Full Stack, Data Science, UI/UX, and more. Honest, skill-driven education in Tamil Nadu.",
+  title = `${BRANDING.fullName} | Master Tech Skills in Tamil Nadu`,
+  description = `Join ${BRANDING.fullName} for industry-aligned software training in Full Stack, Data Science, UI/UX, and more. Honest, skill-driven education in Tamil Nadu.`,
   keywords = "software training, coding institute, tamil nadu, chennai, full stack development, data science, ui ux design, cloud computing, devops, ethical hacking"
 }) => {
   return (

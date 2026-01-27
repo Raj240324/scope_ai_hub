@@ -31,6 +31,7 @@ import Layout from '../components/layout/Layout';
 import CourseCard from '../components/ui/CourseCard';
 import { courses } from '../data/courses';
 import { useModal } from '../context/ModalContext';
+import { BRANDING } from '../data/branding';
 
 const FAQItem = ({ question, answer }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -92,7 +93,7 @@ const learningPartners = [
     {
       icon: <Award className="h-6 w-6" />,
       title: "NASSCOM Certification",
-      description: "Get industry-recognized certificates from NASSCOM & Raj Institute to boost your global career prospects."
+      description: `Get industry-recognized certificates from NASSCOM & ${BRANDING.fullName} to boost your global career prospects.`
     },
     {
       icon: <MessageSquare className="h-6 w-6" />,
@@ -147,7 +148,7 @@ const learningPartners = [
     {
       name: "Priya Dharshini",
       role: "UI/UX Designer @ Freshworks",
-      content: "Best place to learn in Chengalpattu area. They helped me build a proper portfolio, which is exactly what companies asked for. Thank you AITECHHUB sir!",
+      content: `Best place to learn in Chengalpattu area. They helped me build a proper portfolio, which is exactly what companies asked for. Thank you ${BRANDING.fullName} sir!`,
       image: "https://i.pravatar.cc/150?u=priya"
     },
     {
@@ -177,7 +178,7 @@ const learningPartners = [
     },
     {
       q: "Is the certification officially recognized?",
-      a: "Yes, you will receive an official certification from AITECHHUB upon successful completion of your projects. This certificate is recognized by our extensive network of hiring partners as a mark of technical proficiency."
+      a: `Yes, you will receive an official certification from ${BRANDING.fullName} upon successful completion of your projects. This certificate is recognized by our extensive network of hiring partners as a mark of technical proficiency.`
     },
     {
       q: "Is my project data and idea protected?",
@@ -351,7 +352,7 @@ const learningPartners = [
                   Industry Recognized
                 </div>
                 <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-slate-900 mb-6 leading-tight">
-                  Get Your <span className="text-primary">Official AITECHHUB Certificate</span>
+                  Get Your <span className="text-primary">Official {BRANDING.fullName} Certificate</span>
                 </h2>
                 <p className="text-base md:text-lg text-slate-600 mb-8 leading-relaxed">
                   Our certification is more than just a piece of paper. It is a validation of your practical skills and project-ready expertise, recognized by our 500+ hiring partners across the industry.
@@ -385,7 +386,7 @@ const learningPartners = [
                       <Award className="h-12 w-12 text-primary" />
                     </div>
                     <div className="text-2xl font-black text-slate-900 mb-2">Authenticated by</div>
-                    <div className="text-primary font-bold tracking-widest uppercase text-sm">AITECHHUB</div>
+                    <div className="text-primary font-bold tracking-widest uppercase text-sm">{BRANDING.fullName}</div>
                     <div className="mt-8 pt-8 border-t border-slate-100">
                       <p className="text-slate-500 text-sm font-medium">Verified Training Provider</p>
                     </div>
@@ -521,7 +522,7 @@ const learningPartners = [
         <div className="container-custom relative z-10">
           <div className="max-w-3xl mb-16">
             <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-primary/20 text-primary text-xs font-bold uppercase tracking-wider mb-6">
-              The AITECHHUB Advantage
+              The {BRANDING.fullName} Advantage
             </div>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white mb-6 leading-tight">
               Why We’re the <span className="text-primary">Best Choice</span> for Your IT Career.
@@ -622,7 +623,7 @@ const learningPartners = [
                 Our Mentors Come from <span className="text-primary">Global Tech Leaders</span>
               </h2>
               <p className="text-base md:text-lg text-slate-600 leading-relaxed">
-                At AITECHHUB, you aren't taught by academics. You are mentored by engineers who have built the tools you use every day.
+                At {BRANDING.fullName}, you aren't taught by academics. You are mentored by engineers who have built the tools you use every day.
               </p>
             </div>
             <div 
@@ -699,7 +700,7 @@ const learningPartners = [
       <section className="section-padding bg-white relative overflow-hidden">
         <div className="container-custom relative z-10">
           <div className="text-center max-w-3xl mx-auto mb-20">
-            <h2 className="heading-md mb-4">Why Choose AITECHHUB?</h2>
+            <h2 className="heading-md mb-4">Why Choose {BRANDING.fullName}?</h2>
             <p className="text-slate-600 text-base md:text-lg">
               We don't just teach code; we build careers through a comprehensive learning ecosystem.
             </p>

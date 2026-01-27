@@ -2,6 +2,7 @@ import React from 'react';
 import Layout from '../../components/layout/Layout';
 import Hero from '../../components/ui/Hero';
 import { BookOpen, ShieldCheck, Star, Heart, Scale } from 'lucide-react';
+import { BRANDING } from '../../data/branding';
 
 const TrainerCodeOfConduct = () => {
   return (
@@ -19,7 +20,7 @@ const TrainerCodeOfConduct = () => {
               1. Pedagogical Excellence
             </h2>
             <p className="text-slate-600 mb-4">
-              Trainers at AITECHHUB are committed to delivering the highest quality of technical education. This includes staying updated with 2026 industry standards and ensuring that all project-based learning is relevant to current market demands.
+              Trainers at {BRANDING.fullName} are committed to delivering the highest quality of technical education. This includes staying updated with 2026 industry standards and ensuring that all project-based learning is relevant to current market demands.
             </p>
           </section>
 
@@ -39,7 +40,7 @@ const TrainerCodeOfConduct = () => {
               3. Inclusive Learning Environment
             </h2>
             <p className="text-slate-600 mb-4">
-              AITECHHUB maintains a Zero-Tolerance policy towards discrimination. Trainers must foster a supportive, inclusive, and respectful environment for all students, regardless of their background or current technical proficiency.
+              {BRANDING.fullName} maintains a Zero-Tolerance policy towards discrimination. Trainers must foster a supportive, inclusive, and respectful environment for all students, regardless of their background or current technical proficiency.
             </p>
           </section>
 
@@ -56,10 +57,10 @@ const TrainerCodeOfConduct = () => {
           </section>
 
           <section className="p-8 bg-slate-50 border border-slate-100 rounded-3xl">
-            <p className="font-black text-lg text-slate-900 mb-2">AITECHHUB</p>
+            <p className="font-black text-lg text-slate-900 mb-2">{BRANDING.fullName}</p>
             <p className="text-slate-600">Educational Quality Assurance Team</p>
             <div className="flex flex-col space-y-2 text-sm font-medium mt-4">
-              <p className="text-slate-700">Inquiries: <span className="text-primary">mentors@aitechhub.in</span></p>
+              <p className="text-slate-700">Inquiries: <span className="text-primary">{BRANDING.email}</span></p>
             </div>
           </section>
         </div>

@@ -11,6 +11,7 @@ import {
 import { Link } from 'react-router-dom';
 import { useModal } from '../context/ModalContext';
 import Hero from '../components/ui/Hero';
+import { BRANDING } from '../data/branding';
 
 const Admissions = () => {
   const { openModal } = useModal();
@@ -45,8 +46,8 @@ const Admissions = () => {
 
   return (
     <Layout 
-      title="Admissions | Start Your Tech Career"
-      description="Easy 4-step admission process at AITECHHUB Training Institute. Check eligibility, batch timings, and enroll for upcoming batches."
+      title={`Admissions | Start Your Tech Career with ${BRANDING.fullName}`}
+      description={`Easy 4-step admission process at ${BRANDING.fullName} Training Institute. Check eligibility, batch timings, and enroll for upcoming batches.`}
     >
       <Hero 
         title={<>Your Journey to <span className="text-primary">Tech Excellence</span> Starts Here.</>}

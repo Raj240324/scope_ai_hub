@@ -1,7 +1,7 @@
 import React from 'react';
 import Layout from '../../components/layout/Layout';
-
 import Hero from '../../components/ui/Hero';
+import { BRANDING } from '../../data/branding';
 
 const PrivacyPolicy = () => {
   return (
@@ -16,7 +16,7 @@ const PrivacyPolicy = () => {
           <section className="mb-12">
             <h2 className="text-2xl font-bold text-slate-900 mb-4">1. Introduction</h2>
             <p className="text-slate-600 mb-4">
-              Welcome to AITECHHUB. We are committed to protecting your personal data and ensuring transparency in how we handle it. This Privacy Policy details the types of information we collect when you enroll in our career guidance programs, visit our campus in Maraimalai Nagar, or use our digital platforms.
+              Welcome to {BRANDING.fullName}. We are committed to protecting your personal data and ensuring transparency in how we handle it. This Privacy Policy details the types of information we collect when you enroll in our career guidance programs, visit our campus, or use our digital platforms.
             </p>
           </section>
 
@@ -38,7 +38,7 @@ const PrivacyPolicy = () => {
               <li><strong>Academic Administration:</strong> Creating student profiles, tracking progress, and issuing course completion certificates.</li>
               <li><strong>Placement Services:</strong> We share your resume and technical portfolio with our hiring partners (MNCs and Startups) for recruitment purposes.</li>
               <li><strong>Communication:</strong> Sharing class schedules, holiday alerts, and workshop notifications via WhatsApp or Email.</li>
-              <li><strong>Certification:</strong> Submitting necessary internal evaluation data for the issuance of the Official AITECHHUB Certification.</li>
+              <li><strong>Certification:</strong> Submitting necessary internal evaluation data for the issuance of the Official {BRANDING.fullName} Certification.</li>
             </ul>
           </section>
 
@@ -74,13 +74,12 @@ const PrivacyPolicy = () => {
               For any privacy-related queries or to exercise your data rights, please contact our administrative office:
             </p>
             <div className="mt-6 p-8 bg-slate-50 border border-slate-100 rounded-3xl">
-              <p className="font-black text-lg text-slate-900 mb-2">AITECHHUB</p>
-              <p className="text-slate-600 mb-1">No.42, 5th Floor, Global Tech Plaza, OMR Service Road</p>
-              <p className="text-slate-600 mb-4">Sholinganallur, Chennai - 600119</p>
+              <p className="font-black text-lg text-slate-900 mb-2">{BRANDING.fullName}</p>
+              <p className="text-slate-600 mb-4">{BRANDING.address}</p>
               
               <div className="flex flex-col space-y-2 text-sm font-medium">
-                <p className="text-slate-700">Email: <span className="text-primary">contact@aitechhub.in</span></p>
-                <p className="text-slate-700">Phone: <span className="text-primary">+91 63839 80415</span></p>
+                <p className="text-slate-700">Email: <span className="text-primary">{BRANDING.email}</span></p>
+                <p className="text-slate-700">Phone: <span className="text-primary">{BRANDING.phone}</span></p>
               </div>
             </div>
           </section>

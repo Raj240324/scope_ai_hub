@@ -3,6 +3,7 @@ import { useParams, Link, Navigate } from 'react-router-dom';
 import Layout from '../../components/layout/Layout';
 import { courses } from '../../data/courses';
 import { useModal } from '../../context/ModalContext';
+import { BRANDING } from '../../data/branding';
 import { 
   Clock, 
   Globe, 
@@ -67,7 +68,7 @@ const CourseDetail = () => {
 
   return (
     <Layout 
-      title={`${course.title} | Raj Software Training Institute`}
+      title={`${course.title} | ${BRANDING.fullName}`}
       description={course.shortDescription}
     >
       <section className="relative bg-slate-900 pt-10 pb-16 md:pt-12 md:pb-24 overflow-hidden">
@@ -678,7 +679,7 @@ const CourseDetail = () => {
             <span className="text-[10px] font-black text-primary uppercase tracking-[0.2em]">Ready to begin?</span>
           </div>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-slate-900 mb-8 tracking-tight">Start your transformation <span className="text-primary">today</span></h2>
-          <p className="text-slate-600 text-lg mb-12 max-w-2xl mx-auto font-medium leading-relaxed">Join 1,000+ successful graduates who have accelerated their careers with Raj Software Institute.</p>
+          <p className="text-slate-600 text-lg mb-12 max-w-2xl mx-auto font-medium leading-relaxed">Join 1,000+ successful graduates who have accelerated their careers with {BRANDING.fullName}.</p>
           <div className="flex flex-col sm:flex-row justify-center items-center gap-6">
             <Link to="/courses" className="btn-primary px-12 py-5 text-lg shadow-2xl shadow-primary/30 hover:-translate-y-1 transition-transform">
               Browse All Courses

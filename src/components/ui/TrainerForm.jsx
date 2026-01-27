@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import { CheckCircle, Send, Loader2, AlertCircle, ChevronDown, Check, Briefcase, Globe } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useModal } from '../../context/ModalContext';
+import { BRANDING } from '../../data/branding';
 
 const TrainerForm = () => {
   const form = useRef();
@@ -77,7 +78,7 @@ const TrainerForm = () => {
           <CheckCircle className="h-8 w-8 text-primary" />
         </div>
         <h3 className="text-2xl font-bold text-slate-900 mb-2">Application Received!</h3>
-        <p className="text-slate-600 mb-6 font-medium">Thank you for your interest in joining AITECHHUB. Our academic team will review your profile and contact you for a technical discussion.</p>
+        <p className="text-slate-600 mb-6 font-medium">Thank you for your interest in joining {BRANDING.fullName}. Our academic team will review your profile and contact you for a technical discussion.</p>
         <button 
           onClick={closeModal}
           className="px-8 py-3 bg-slate-900 text-white font-bold rounded-xl hover:bg-slate-800 transition-all"

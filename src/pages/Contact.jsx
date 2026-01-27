@@ -31,14 +31,14 @@ const Contact = () => {
     {
       icon: <MapPin className="h-6 w-6 text-primary" />,
       title: "Visit Us",
-      details: "No.42, 5th Floor, Global Tech Plaza",
-      description: "OMR Service Road, Sholinganallur, Chennai - 600119"
+      details: BRANDING.address,
+      description: "Our main campus in Chennai."
     }
   ];
 
   return (
     <Layout 
-      title="Contact Us | Reach AITECHHUB"
+      title={`Contact Us | Reach ${BRANDING.fullName}`}
       description="Get in touch with us for course inquiries, batch details, and career counseling. Located in Chennai."
     >
       <Hero 
@@ -105,7 +105,7 @@ const Contact = () => {
           loading="lazy" 
           referrerPolicy="no-referrer-when-downgrade"
           className="absolute inset-0 w-full h-full"
-          title="AITECHHUB Location"
+          title={`${BRANDING.fullName} Location`}
         ></iframe>
       </section>
     </Layout>

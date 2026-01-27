@@ -2,6 +2,7 @@ import React from 'react';
 import Layout from '../../components/layout/Layout';
 import Hero from '../../components/ui/Hero';
 import { ShieldCheck, Lock, FileText, Users } from 'lucide-react';
+import { BRANDING } from '../../data/branding';
 
 const NDAPolicy = () => {
   return (
@@ -19,7 +20,7 @@ const NDAPolicy = () => {
               1. Institutional Commitment
             </h2>
             <p className="text-slate-600 mb-4">
-              At AITECHHUB, we handle sensitive intellectual property, proprietary curriculum, and student data with the highest level of confidentiality. This Non-Disclosure Agreement (NDA) policy ensures that all parties involved in our educational ecosystem—including trainers, staff, and students—are legally bound to protect confidential information.
+              At {BRANDING.fullName}, we handle sensitive intellectual property, proprietary curriculum, and student data with the highest level of confidentiality. This Non-Disclosure Agreement (NDA) policy ensures that all parties involved in our educational ecosystem—including trainers, staff, and students—are legally bound to protect confidential information.
             </p>
           </section>
 
@@ -29,7 +30,7 @@ const NDAPolicy = () => {
               2. Trainer & Staff Obligations
             </h2>
             <p className="text-slate-600 mb-4">
-              All trainers, mentors, and administrative staff at AITECHHUB are required to sign a comprehensive Non-Disclosure Agreement upon joining. This agreement stipulates that:
+              All trainers, mentors, and administrative staff at {BRANDING.fullName} are required to sign a comprehensive Non-Disclosure Agreement upon joining. This agreement stipulates that:
             </p>
             <ul className="list-disc pl-6 text-slate-600 space-y-2">
               <li>Trainers shall not disclose student progress, personal data, or project ideas to third parties without explicit authorization.</li>
@@ -69,10 +70,10 @@ const NDAPolicy = () => {
           </section>
 
           <section className="p-8 bg-slate-50 border border-slate-100 rounded-3xl">
-            <p className="font-black text-lg text-slate-900 mb-2">AITECHHUB</p>
+            <p className="font-black text-lg text-slate-900 mb-2">{BRANDING.fullName}</p>
             <p className="text-slate-600 mb-4">Legal & Compliance Department</p>
             <div className="flex flex-col space-y-2 text-sm font-medium">
-              <p className="text-slate-700">Inquiries: <span className="text-primary">legal@aitechhub.in</span></p>
+              <p className="text-slate-700">Inquiries: <span className="text-primary">{BRANDING.email}</span></p>
             </div>
           </section>
         </div>

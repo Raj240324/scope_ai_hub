@@ -2,6 +2,7 @@ import React from 'react';
 import Layout from '../../components/layout/Layout';
 import Hero from '../../components/ui/Hero';
 import { RefreshCw, Clock, AlertCircle, FileCheck } from 'lucide-react';
+import { BRANDING } from '../../data/branding';
 
 const RefundPolicy = () => {
   return (
@@ -19,7 +20,7 @@ const RefundPolicy = () => {
               1. General Refund Principles
             </h2>
             <p className="text-slate-600 mb-4">
-              At AITECHHUB, we strive to provide high-quality technical education. Our refund policy is designed to be fair to both the students and the institute, ensuring that administrative costs are covered while providing flexibility where possible.
+              At {BRANDING.fullName}, we strive to provide high-quality technical education. Our refund policy is designed to be fair to both the students and the institute, ensuring that administrative costs are covered while providing flexibility where possible.
             </p>
           </section>
 
@@ -73,7 +74,7 @@ const RefundPolicy = () => {
               4. Refund Request Process
             </h2>
             <p className="text-slate-600 mb-4">
-              To request a refund, students must submit a formal written application via email to <span className="text-primary font-bold">accounts@aitechhub.in</span>. The request must include:
+              To request a refund, students must submit a formal written application via email to <span className="text-primary font-bold">{BRANDING.email}</span>. The request must include:
             </p>
             <ul className="list-disc pl-6 text-slate-600 space-y-2">
               <li>Full Student Name & Enrollment ID</li>
@@ -84,10 +85,10 @@ const RefundPolicy = () => {
           </section>
 
           <section className="p-8 bg-slate-50 border border-slate-100 rounded-3xl">
-            <p className="font-black text-lg text-slate-900 mb-2">AITECHHUB</p>
+            <p className="font-black text-lg text-slate-900 mb-2">{BRANDING.fullName}</p>
             <p className="text-slate-600 mb-4">Accounts & Finance Department</p>
             <div className="flex flex-col space-y-2 text-sm font-medium">
-              <p className="text-slate-700">Email: <span className="text-primary">accounts@aitechhub.in</span></p>
+              <p className="text-slate-700">Email: <span className="text-primary">{BRANDING.email}</span></p>
             </div>
           </section>
         </div>

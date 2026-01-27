@@ -1,7 +1,7 @@
 import React from 'react';
 import Layout from '../../components/layout/Layout';
-
 import Hero from '../../components/ui/Hero';
+import { BRANDING } from '../../data/branding';
 
 const TermsConditions = () => {
   return (
@@ -16,7 +16,7 @@ const TermsConditions = () => {
           <section className="mb-12">
             <h2 className="text-2xl font-bold text-slate-900 mb-4">1. Acceptance of Terms</h2>
             <p className="text-slate-600 mb-4">
-              By enrolling in our career guidance programs at AITECHHUB (online or offline), you agree to abide by these Terms and Conditions. These terms constitute a binding agreement between the student ("You") and the Institute regarding academic and administrative policies.
+              By enrolling in our career guidance programs at {BRANDING.fullName} (online or offline), you agree to abide by these Terms and Conditions. These terms constitute a binding agreement between the student ("You") and the Institute regarding academic and administrative policies.
             </p>
           </section>
 
@@ -35,7 +35,7 @@ const TermsConditions = () => {
             <ul className="list-disc pl-6 text-slate-600 space-y-2">
               <li><strong>Attendance:</strong> A minimum of 85% attendance is mandatory to be eligible for placement assistance and certification.</li>
               <li><strong>Assignments:</strong> Students must submit all project milestones and assignments on time. Late submissions may impact the final grade.</li>
-              <li><strong>Certification:</strong> Official AITECHHUB Certifications will be issued only after the successful submission and defense of the final capstone project.</li>
+              <li><strong>Certification:</strong> Official {BRANDING.fullName} Certifications will be issued only after the successful submission and defense of the final capstone project.</li>
             </ul>
           </section>
 
@@ -68,14 +68,14 @@ const TermsConditions = () => {
           <section className="mb-12">
             <h2 className="text-2xl font-bold text-slate-900 mb-4">6. Intellectual Property</h2>
             <p className="text-slate-600 mb-4">
-              All learning materials, including source code templates, slide decks, and recorded videos provided by AITECHHUB, are our exclusive, proprietary content. They are licensed to you for personal educational use only. You are strictly prohibited from redistributing, reselling, or uploading these materials to public platforms.
+              All learning materials, including source code templates, slide decks, and recorded videos provided by {BRANDING.fullName}, are our exclusive, proprietary content. They are licensed to you for personal educational use only. You are strictly prohibited from redistributing, reselling, or uploading these materials to public platforms.
             </p>
           </section>
 
           <section className="mb-12">
             <h2 className="text-2xl font-bold text-slate-900 mb-4">7. Limitation of Liability</h2>
             <p className="text-slate-600 mb-4">
-              AITECHHUB is an educational provider. We shall not be liable for any indirect, incidental, or consequential damages arising from the use of our training services. Our liability is limited to the total fees paid by the student.
+              {BRANDING.fullName} is an educational provider. We shall not be liable for any indirect, incidental, or consequential damages arising from the use of our training services. Our liability is limited to the total fees paid by the student.
             </p>
           </section>
 
@@ -88,9 +88,9 @@ const TermsConditions = () => {
               For legal inquiries, please reach out to us at:
             </p>
             <div className="mt-6 p-8 bg-slate-50 border border-slate-100 rounded-3xl">
-              <p className="font-black text-lg text-slate-900 mb-2">AITECHHUB</p>
-              <p className="text-slate-600 mb-4">No.42, 5th Floor, Global Tech Plaza, OMR Service Road, Sholinganallur, Chennai - 600119</p>
-              <p className="text-slate-700 font-medium">Email: <span className="text-primary">contact@aitechhub.in</span></p>
+              <p className="font-black text-lg text-slate-900 mb-2">{BRANDING.fullName}</p>
+              <p className="text-slate-600 mb-4">{BRANDING.address}</p>
+              <p className="text-slate-700 font-medium">Email: <span className="text-primary">{BRANDING.email}</span></p>
             </div>
           </section>
         </div>

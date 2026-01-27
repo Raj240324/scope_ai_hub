@@ -136,7 +136,7 @@ const Footer = () => {
 
         {/* Bottom Bar */}
         <div className="pt-10 border-t border-slate-800/50 flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0 text-xs font-medium">
-          <p>© {currentYear} Raj Software Training Institute. All rights reserved.</p>
+          <p>© {currentYear} {BRANDING.fullName}. All rights reserved.</p>
             <div className="flex flex-wrap justify-center md:justify-end items-center gap-x-6 gap-y-2">
               <Link to="/privacy-policy" className="hover:text-primary transition-colors">Privacy</Link>
               <Link to="/terms-conditions" className="hover:text-primary transition-colors">Terms</Link>

@@ -4,6 +4,7 @@ import Hero from '../components/ui/Hero';
 import { motion } from 'framer-motion';
 import { Camera, X, ChevronLeft, ChevronRight, Play } from 'lucide-react';
 import { FadeIn, StaggerContainer, StaggerItem, ScaleOnHover } from '../components/utils/Animations';
+import { BRANDING } from '../data/branding';
 
 // Gallery data
 const galleryCategories = ['All', 'Campus', 'Classrooms', 'Placements', 'Workshops'];
@@ -122,9 +123,9 @@ const Gallery = () => {
   };
 
   return (
-    <Layout
-      title="Gallery | AITECHHUB Training Institute"
-      description="Explore photos from our campus, classrooms, placement drives, and events. See the AITECHHUB experience in pictures."
+    <Layout 
+      title={`Campus Gallery | ${BRANDING.fullName} Training Institute`}
+      description={`Explore photos from our campus, classrooms, placement drives, and events. See the ${BRANDING.fullName} experience in pictures.`}
     >
       <Hero
         badge={
@@ -134,7 +135,7 @@ const Gallery = () => {
           </div>
         }
         title={<>Explore <span className="text-primary">Our World</span></>}
-        subtitle="Take a visual tour of our campus, classrooms, and the vibrant community at AITECHHUB."
+        subtitle={`Take a visual tour of our campus, classrooms, and the vibrant community at ${BRANDING.fullName}.`}
       />
 
       {/* Category Filter */}

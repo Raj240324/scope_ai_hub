@@ -3,6 +3,7 @@ import Layout from '../../components/layout/Layout';
 import CourseCard from '../../components/ui/CourseCard';
 import { courses } from '../../data/courses';
 import { Search, Filter, X } from 'lucide-react';
+import { BRANDING } from '../../data/branding';
 
 import Hero from '../../components/ui/Hero';
 
@@ -33,7 +34,7 @@ const CoursesList = () => {
 
   return (
     <Layout 
-      title="All Courses | AITECHHUB Training Institute"
+      title={`All Courses | ${BRANDING.fullName} Training Institute`}
       description="Browse our comprehensive list of software training courses. From Web Development to Data Science, find the right program for your career."
     >
       <Hero 

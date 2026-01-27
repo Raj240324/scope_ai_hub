@@ -3,6 +3,7 @@ import Layout from '../../components/layout/Layout';
 import Hero from '../../components/ui/Hero';
 import { Briefcase, GraduationCap, Globe, Zap, CheckCircle2, Users } from 'lucide-react';
 import { useModal } from '../../context/ModalContext';
+import { BRANDING } from '../../data/branding';
 
 const JoinAsTrainer = () => {
   const { openModal } = useModal();
@@ -34,14 +35,14 @@ const JoinAsTrainer = () => {
     <Layout>
       <Hero 
         title={<>Empower the Next Generation of <span className="text-primary">Tech Leaders</span></>}
-        subtitle="Join AITECHHUB as a Mentor. Share your expertise, guide students through real-world projects, and help bridge the industry-academia gap."
+        subtitle={`Join ${BRANDING.fullName} as a Mentor. Share your expertise, guide students through real-world projects, and help bridge the industry-academia gap.`}
       />
 
       {/* Why Join Us */}
       <section className="section-padding bg-white">
         <div className="container-custom">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="heading-md mb-4 text-slate-900">Why Teach at AITECHHUB?</h2>
+            <h2 className="heading-md mb-4 text-slate-900">Why Teach at {BRANDING.fullName}?</h2>
             <p className="text-slate-600">We are more than just a training institute; we are an innovation hub where industry veterans shape the future of tech talent.</p>
           </div>
           

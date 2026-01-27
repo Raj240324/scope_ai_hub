@@ -3,13 +3,14 @@ import Layout from '../components/layout/Layout';
 import { Plus, Minus, HelpCircle, MessageCircle } from 'lucide-react';
 import { useModal } from '../context/ModalContext';
 import Hero from '../components/ui/Hero';
+import { BRANDING } from '../data/branding';
 
 const faqData = [
   {
     category: "General",
     questions: [
       {
-        q: "What makes AITECHHUB different from others?",
+        q: `What makes ${BRANDING.fullName} different from others?`,
         a: "We focus on project-based learning and industrial training. Our curriculum is designed by industry experts, and we provide 100% placement assistance. We prioritize practical skills over theoretical knowledge."
       },
       {
@@ -51,7 +52,7 @@ const faqData = [
         a: "The average package for our freshers ranges from 4 LPA to 8 LPA, depending on the course, skill set, and the hiring company."
       },
       {
-        q: "Which companies hire from AITECHHUB?",
+        q: `Which companies hire from ${BRANDING.fullName}?`,
         a: "Our students are placed in top MNCs and startups like Google, Amazon, TCS, Infosys, Wipro, and many others. Check our Placement page for a more comprehensive list."
       }
     ]
@@ -89,7 +90,7 @@ const FAQ = () => {
 
   return (
     <Layout 
-      title="FAQ | Frequently Asked Questions"
+      title={`FAQ | Frequently Asked Questions - ${BRANDING.fullName}`}
       description="Find answers to common questions about our courses, admission process, fees, and placement support."
     >
       <Hero 

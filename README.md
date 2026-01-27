@@ -1,4 +1,4 @@
-# Raj Software Training Institute 🚀
+# AiTechHub 🚀
 
 A modern, high-performance React-based website for a startup software training institute in Tamil Nadu. This project is built with a focus on skill-driven education, transparency, and production-grade architecture.
 
@@ -77,4 +77,4 @@ src/
 This project is licensed under the MIT License.
 
 ---
-Built with ❤️ for Raj Software Training Institute.
+Built with ❤️ for AiTechHub.

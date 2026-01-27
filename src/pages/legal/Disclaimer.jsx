@@ -2,6 +2,7 @@ import React from 'react';
 import Layout from '../../components/layout/Layout';
 import Hero from '../../components/ui/Hero';
 import { Info, HelpCircle, AlertTriangle, Building2 } from 'lucide-react';
+import { BRANDING } from '../../data/branding';
 
 const Disclaimer = () => {
   return (
@@ -19,7 +20,7 @@ const Disclaimer = () => {
               1. General Information
             </h2>
             <p className="text-slate-600 mb-4">
-              The information provided by AITECHHUB on this website is for general educational purposes only. While we endeavor to keep the information up to date and correct, we make no representations or warranties of any kind, express or implied, about the completeness, accuracy, or suitability of the course content for specific individual goals.
+              The information provided by {BRANDING.fullName} on this website is for general educational purposes only. While we endeavor to keep the information up to date and correct, we make no representations or warranties of any kind, express or implied, about the completeness, accuracy, or suitability of the course content for specific individual goals.
             </p>
           </section>
 
@@ -48,7 +49,7 @@ const Disclaimer = () => {
             </p>
             <ul className="list-disc pl-6 text-slate-600 space-y-2">
               <li>These logos are the intellectual property of their respective owners.</li>
-              <li>AITECHHUB does not claim direct partnership, endorsement, or sponsorship by these companies unless explicitly stated otherwise.</li>
+              <li>{BRANDING.fullName} does not claim direct partnership, endorsement, or sponsorship by these companies unless explicitly stated otherwise.</li>
             </ul>
           </section>
 
@@ -63,10 +64,10 @@ const Disclaimer = () => {
           </section>
 
           <section className="p-8 bg-slate-50 border border-slate-100 rounded-3xl">
-            <p className="font-black text-lg text-slate-900 mb-2">AITECHHUB</p>
+            <p className="font-black text-lg text-slate-900 mb-2">{BRANDING.fullName}</p>
             <p className="text-slate-600">Legal Compliance Department</p>
             <div className="flex flex-col space-y-2 text-sm font-medium mt-4">
-              <p className="text-slate-700">Email: <span className="text-primary">legal@aitechhub.in</span></p>
+              <p className="text-slate-700">Email: <span className="text-primary">{BRANDING.email}</span></p>
             </div>
           </section>
         </div>
