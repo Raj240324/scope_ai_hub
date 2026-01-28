@@ -288,7 +288,7 @@ const About = () => {
         <div className="container-custom">
           <div className="bg-primary rounded-[3rem] p-8 md:p-16 text-center text-white relative overflow-hidden shadow-2xl shadow-primary/20">
             <div className="relative z-10 max-w-3xl mx-auto">
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-6">Ready to Build Your Future?</h2>
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold mb-6">Ready to Build Your Future?</h2>
               <p className="text-base md:text-lg text-white/80 mb-10">
                 Join our next batch and start your journey towards becoming a skilled software professional with personalized mentorship.
               </p>

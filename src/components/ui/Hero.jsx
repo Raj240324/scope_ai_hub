@@ -36,7 +36,7 @@ const Hero = ({
             </StaggerItem>
             
             <StaggerItem>
-              <h1 className={`${isHome ? 'text-3xl md:text-4xl lg:text-5xl font-black' : 'text-2xl md:text-3xl lg:text-4xl font-extrabold'} tracking-tight text-slate-900 mb-6 leading-[1.1]`}>
+              <h1 className={`${isHome ? 'text-3xl md:text-4xl lg:text-4xl font-black' : 'text-2xl md:text-3xl lg:text-4xl font-extrabold'} tracking-tight text-slate-900 mb-6 leading-[1.1]`}>
                 {title}
               </h1>
             </StaggerItem>

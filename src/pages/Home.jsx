@@ -488,7 +488,7 @@ const learningPartners = [
               <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider mb-6">
                 Tamil Nadu's Pride
               </div>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-slate-900 mb-8 leading-tight">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-slate-900 mb-8 leading-tight">
                 Empowering <span className="text-primary">Tamil Nadu's</span> Next-Gen Tech Talent.
               </h2>
               <p className="text-lg text-slate-600 mb-8 leading-relaxed">
@@ -547,7 +547,7 @@ const learningPartners = [
             <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-primary/20 text-primary text-xs font-bold uppercase tracking-wider mb-6">
               The {BRANDING.fullName} Advantage
             </div>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white mb-6 leading-tight">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-white mb-6 leading-tight">
               Why We’re the <span className="text-primary">Best Choice</span> for Your IT Career.
             </h2>
             <p className="text-lg text-slate-400 leading-relaxed">
@@ -642,7 +642,7 @@ const learningPartners = [
               <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider mb-6">
                 Learn from the Best
               </div>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-slate-900 mb-6 leading-tight">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-slate-900 mb-6 leading-tight">
                 Our Mentors Come from <span className="text-primary">Global Tech Leaders</span>
               </h2>
               <p className="text-base md:text-lg text-slate-600 leading-relaxed">
@@ -956,7 +956,7 @@ const learningPartners = [
               <div className="absolute bottom-[-50%] right-[-20%] w-[80%] h-[80%] bg-white/5 rounded-full blur-[100px]" />
             </div>
             <div className="relative z-10 max-w-3xl mx-auto">
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-6">Start Your Journey Today?</h2>
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold mb-6">Ready to Build Your Future?</h2>
               <p className="text-base md:text-lg opacity-90 mb-10">
                 Join our next batch and learn from industry experts who are passionate about teaching.
               </p>
