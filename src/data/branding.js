@@ -6,7 +6,7 @@ export const BRANDING = {
   tagline: "Empowering AI Innovation",
   description: "AiTechHub is a premier technology training institute based in Chennai, providing high-quality, practical AI and software training to help students secure careers in global tech leaders.",
   location: "Chennai",
-  address: "No.42, 5th Floor, Global Tech Plaza, OMR Service Road, Sholinganallur, Chennai - 600119",
+  address: "Chennai Technology Hub, OMR, Chennai - 600119",
   email: "contact@aitechhub.in",
   phone: "+91 63839 80415",
   socials: {

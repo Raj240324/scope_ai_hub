@@ -18,18 +18,11 @@ const About = () => {
 
   const locations = [
     { 
-      name: "Chennai (Head Office)", 
-      address: "No.42, 5th Floor, Global Tech Plaza, OMR Service Road, Sholinganallur, Chennai - 600119",
+      name: "Chennai Campus", 
+      address: "Chennai Technology Hub, OMR, Chennai - 600119",
       map: "https://goo.gl/maps/placeholder1",
       phone: "+91 63839 80415",
       type: "Main Campus"
-    },
-    { 
-      name: "Chennai Branch", 
-      address: "G.S.T Road, Near New Bus Stand, Chengalpattu - 603001, Chennai",
-      map: "https://goo.gl/maps/placeholder2",
-      phone: "+91 63839 80415",
-      type: "Satellite Center"
     },
     { 
       name: "Online Training Center", 

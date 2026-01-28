@@ -148,7 +148,7 @@ const learningPartners = [
     {
       name: "Priya Dharshini",
       role: "UI/UX Designer @ Freshworks",
-      content: `Best place to learn in Chengalpattu area. They helped me build a proper portfolio, which is exactly what companies asked for. Thank you ${BRANDING.fullName} sir!`,
+      content: `Best place to learn in Chennai. They helped me build a proper portfolio, which is exactly what companies asked for. Thank you ${BRANDING.fullName} sir!`,
       image: "https://i.pravatar.cc/150?u=priya"
     },
     {
@@ -492,16 +492,16 @@ const learningPartners = [
                 Empowering <span className="text-primary">Tamil Nadu's</span> Next-Gen Tech Talent.
               </h2>
               <p className="text-lg text-slate-600 mb-8 leading-relaxed">
-                Before us, students from Maraimalai Nagar and Chengalpattu had to travel all the way to OMR or Chennai city for quality training. We changed that. We brought top-tier tech education right to your neighborhood, with the same quality you'd expect from big city institutes.
+                We bring top-tier tech education right to the heart of Chennai, with the same quality you'd expect from Silicon Valley. We are a startup focused on quality, personal attention, and real results.
               </p>
               
               <div className="mb-10">
                 <p className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-6 flex items-center">
                   <MapPin className="h-4 w-4 mr-2 text-primary" />
-                  Areas We Serve in Chennai & NT Chengalpattu
+                  Key Areas We Serve in Chennai
                 </p>
                 <div className="flex flex-wrap gap-3">
-                  {["Maraimalai Nagar", "Chengalpattu", "Guduvanchery", "Potheri", "Singaperumal Koil", "Urappakkam", "Vandalur", "Tambaram", "OMR", "Porur", "Anna Nagar"].map((area) => (
+                  {["OMR", "Thiruvanmiyur", "Adyar", "Velachery", "Tambaram", "Guindy", "T. Nagar", "Anna Nagar", "Porur", "Navallur", "Siruseri"].map((area) => (
                     <span key={area} className="px-4 py-2 bg-slate-50 border border-slate-100 rounded-xl text-sm font-bold text-slate-600 hover:bg-primary hover:text-white hover:border-primary transition-all cursor-default">
                       {area}
                     </span>
@@ -511,7 +511,7 @@ const learningPartners = [
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
                 {[
-                  "Located in Maraimalai Nagar, Chengalpattu",
+                  "Centrally Located in Chennai",
                   "Expert Mentors from Top Tech Companies",
                   "100% Practical Project-Based Learning",
                   "10,000+ Alumni placed in Tamil Nadu's IT corridors"

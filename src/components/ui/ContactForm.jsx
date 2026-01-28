@@ -215,7 +215,7 @@ const ContactForm = ({ initialCourse = "General Inquiry" }) => {
             type="text"
             name="user_location"
             id="user_location"
-            placeholder="e.g. Maraimalai Nagar, Chennai"
+            placeholder="e.g. Adyar, Chennai"
             className={`w-full px-4 py-2.5 bg-slate-50 border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm ${
               formErrors.user_location ? 'border-red-500' : 'border-slate-200'
             }`}

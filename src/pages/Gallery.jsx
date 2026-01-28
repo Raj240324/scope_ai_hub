@@ -15,7 +15,7 @@ const galleryItems = [
     category: 'Campus',
     image: 'https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&q=80&w=800',
     title: 'Main Campus Building',
-    description: 'Our state-of-the-art campus in Maraimalai Nagar'
+    description: 'Our state-of-the-art campus in Chennai'
   },
   {
     id: 2,
