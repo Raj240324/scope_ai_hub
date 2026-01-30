@@ -119,7 +119,7 @@ const TrainerForm = () => {
           <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest leading-none">Phone Number (10 Digits Only)</label>
           <input
             name="trainer_phone"
-            placeholder="9876543210"
+            placeholder="6383980415"
             maxLength={10}
             onInput={(e) => {
               e.target.value = e.target.value.replace(/\D/g, '');

@@ -18,7 +18,7 @@ const Header = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      setScrolled(window.scrollY > 20);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -60,16 +60,15 @@ const Header = () => {
 
   return (
     <header className={clsx(
-      "fixed top-6 left-1/2 -translate-x-1/2 z-50 transition-all duration-500",
-      "w-[95%] max-w-7xl rounded-full border border-white/20",
+      "fixed top-0 left-0 w-full z-50 transition-all duration-300",
       scrolled 
-        ? "bg-white/80 backdrop-blur-xl shadow-lg shadow-slate-200/20 py-1" 
-        : "bg-white/60 backdrop-blur-lg shadow-md py-2"
+        ? "bg-white/95 backdrop-blur-md shadow-md py-3" 
+        : "bg-white py-4 shadow-sm"
     )}>
       {/* Search Overlay */}
       {isSearchOpen && (
         <div className="fixed inset-0 z-[100] flex items-start justify-center pt-32 px-4">
-          <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm" onClick={() => setIsSearchOpen(false)} />
+          <div className="absolute inset-0 bg-navy/60 backdrop-blur-sm" onClick={() => setIsSearchOpen(false)} />
           <div className="relative w-full max-w-2xl bg-white rounded-3xl shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200">
             <div className="p-6 border-b border-slate-100 flex items-center">
               <Search className="h-6 w-6 text-primary mr-4" />
@@ -188,19 +187,19 @@ const Header = () => {
       )}
 
       {/* Main Header Content */}
-      <div className="px-6 md:px-8">
+      <div className="container-custom">
         <div className="w-full">
           <nav className="flex items-center justify-between">
             {/* Logo */}
             <Link to="/" className="flex items-center space-x-3 group">
-              <div className="bg-white p-1 rounded-xl shadow-lg shadow-primary/10 group-hover:rotate-6 transition-transform duration-300">
-                <img src={BRANDING.logo} alt={BRANDING.fullName} className="h-10 w-10 object-contain" />
+              <div className="group-hover:rotate-6 transition-transform duration-300">
+                <img src={BRANDING.logo} alt={BRANDING.fullName} className="h-9 w-auto object-contain" />
               </div>
               <div className="flex flex-col">
-                <span className="text-2xl font-black text-slate-900 tracking-tighter leading-none flex items-center">
+                <span className="text-xl md:text-2xl font-black text-slate-900 tracking-tighter leading-none flex items-center">
                   {BRANDING.name} <span className="text-primary ml-1">{BRANDING.suffix}</span>
                 </span>
-                <span className="text-[9px] font-black text-slate-400 tracking-[0.25em] uppercase mt-1">
+                <span className="text-[8px] font-black text-slate-500 tracking-[0.25em] uppercase mt-1">
                   {BRANDING.tagline}
                 </span>
               </div>
@@ -218,9 +217,9 @@ const Header = () => {
                   <Link
                     to={item.href}
                     className={clsx(
-                      'px-4 py-2 text-[13px] font-bold transition-all rounded-lg relative flex items-center',
+                      'px-4 py-2 text-[14px] font-bold transition-all rounded-lg relative flex items-center',
                       location.pathname === item.href 
-                        ? 'text-primary bg-primary/5' 
+                        ? 'text-primary' 
                         : 'text-slate-600 hover:text-primary hover:bg-slate-50'
                     )}
                   >
@@ -230,7 +229,7 @@ const Header = () => {
 
                   {item.name === 'Courses' && showCourses && (
                     <div className="absolute top-full left-1/2 -translate-x-1/2 w-[720px] pt-4 animate-in fade-in slide-in-from-top-4 zoom-in-95 duration-300 z-[60]">
-                      <div className="bg-white rounded-[2rem] shadow-[0_30px_100px_-15px_rgba(0,0,0,0.2)] border border-slate-100 overflow-hidden flex">
+                      <div className="bg-white rounded-[1.5rem] shadow-2xl border border-slate-100 overflow-hidden flex">
                         {/* Left Side: Course Grid */}
                         <div className="flex-1 p-8">
                           <div className="flex items-center justify-between mb-8">
@@ -272,7 +271,7 @@ const Header = () => {
                         </div>
 
                         {/* Right Side: Modern Promo Section */}
-                        <div className="w-64 bg-slate-900 p-8 flex flex-col justify-between relative overflow-hidden">
+                        <div className="w-64 bg-navy p-8 flex flex-col justify-between relative overflow-hidden">
                           {/* Background Decoration */}
                           <div className="absolute top-0 right-0 w-32 h-32 bg-primary/20 rounded-full blur-3xl -mr-16 -mt-16" />
                           <div className="absolute bottom-0 left-0 w-24 h-24 bg-primary/10 rounded-full blur-2xl -ml-12 -mb-12" />
@@ -282,7 +281,7 @@ const Header = () => {
                               Trending
                             </div>
                             <h4 className="text-lg font-black text-white leading-tight mb-3">
-                              Master <span className="text-primary">MERN</span> Stack
+                              Master <span className="text-primary-light">MERN</span> Stack
                             </h4>
                             <p className="text-[11px] text-slate-400 font-medium leading-relaxed mb-6">
                               The most complete full-stack roadmap in Tamil Nadu.
@@ -302,7 +301,7 @@ const Header = () => {
                           
                           <button 
                             onClick={() => openModal()}
-                            className="relative z-10 mt-8 w-full py-3.5 bg-white text-slate-900 rounded-xl text-[10px] font-black tracking-widest uppercase hover:bg-primary hover:text-white transition-all shadow-xl active:scale-95"
+                            className="relative z-10 mt-8 w-full py-3.5 bg-white text-navy rounded-xl text-[10px] font-black tracking-widest uppercase hover:bg-primary hover:text-white transition-all shadow-xl active:scale-95"
                           >
                             Get Syllabus
                           </button>
@@ -325,7 +324,7 @@ const Header = () => {
 
               <button 
                 onClick={() => openModal()}
-                className="bg-primary hover:bg-primary-dark text-white px-7 py-2.5 rounded-xl text-[13px] font-black transition-all shadow-xl shadow-primary/20 hover:shadow-primary/40 hover:-translate-y-0.5 active:translate-y-0"
+                className="btn-primary"
               >
                 ENROLL NOW
               </button>
@@ -353,8 +352,8 @@ const Header = () => {
 
       {/* Mobile Navigation */}
       {isOpen && (
-        <div className="lg:hidden fixed inset-x-0 top-[100%] bg-white border-t border-slate-100 shadow-2xl animate-in fade-in slide-in-from-top-4 duration-300">
-          <div className="container-custom py-10 space-y-6 max-h-[80vh] overflow-y-auto">
+        <div className="lg:hidden fixed inset-x-0 top-[100%] bg-white border-t border-slate-100 shadow-2xl animate-in fade-in slide-in-from-top-4 duration-300 h-[calc(100vh-80px)] overflow-y-auto">
+          <div className="container-custom py-10 space-y-6">
             <div className="flex flex-col space-y-2">
               {navigation.map((item) => (
                 <div key={item.name} className="flex flex-col">
@@ -428,7 +427,7 @@ const Header = () => {
             <div className="pt-6 border-t border-slate-100">
               <button 
                 onClick={() => openModal()}
-                className="w-full py-5 bg-primary text-white rounded-2xl text-lg font-black shadow-2xl shadow-primary/30 active:scale-[0.98] transition-all"
+                className="btn-primary w-full py-5 shadow-2xl shadow-primary/30"
               >
                 ENROLL NOW
               </button>

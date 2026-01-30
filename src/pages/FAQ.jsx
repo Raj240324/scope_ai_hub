@@ -160,8 +160,8 @@ const FAQ = () => {
                   Our team of counselors is available to answer any specific questions you may have about your career path or our training programs.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <a href="tel:+919876543210" className="px-8 py-4 bg-slate-900 text-white font-bold rounded-xl hover:bg-slate-800 transition-all">
-                    Call +91 98765 43210
+                  <a href="tel:+916383980415" className="px-8 py-4 bg-slate-900 text-white font-bold rounded-xl hover:bg-slate-800 transition-all">
+                    Call +91 63839 80415
                   </a>
                   <button 
                     onClick={() => openModal()}

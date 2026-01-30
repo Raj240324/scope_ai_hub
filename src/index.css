@@ -1,12 +1,15 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #1e40af;
-  --color-primary-light: #3b82f6;
-  --color-primary-dark: #1e3a8a;
-  --color-accent-success: #10b981;
-  --color-accent-warning: #f59e0b;
-  --color-accent-danger: #ef4444;
+  --color-primary: #2E5BFF;
+  --color-primary-light: #2FA4FF;
+  --color-primary-dark: #1E2A78;
+  --color-secondary: #7B3FE4;
+  --color-accent: #FF8C1A;
+  --color-navy: #0E1B3F;
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-danger: #ef4444;
   --font-sans: "Inter", "system-ui", "sans-serif";
 }
 
@@ -22,11 +25,16 @@
   }
 
   .btn-primary {
-    @apply inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary hover:bg-primary-dark transition-colors duration-200;
+    @apply inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white transition-all duration-200 shadow-md hover:shadow-lg active:scale-95;
+    background: linear-gradient(135deg, #1E2A78 0%, #2E5BFF 50%, #7B3FE4 100%);
+  }
+
+  .btn-primary:hover {
+    background: linear-gradient(135deg, #1E2A78 10%, #2E5BFF 60%, #7B3FE4 90%);
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center px-6 py-3 border border-slate-300 text-base font-medium rounded-md text-slate-700 bg-white hover:bg-slate-50 transition-colors duration-200;
+    @apply inline-flex items-center justify-center px-6 py-3 border-2 border-primary/20 text-base font-bold rounded-md text-primary bg-white hover:bg-slate-50 hover:border-primary transition-colors duration-200 active:scale-95;
   }
 
   .section-padding {

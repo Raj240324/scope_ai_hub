@@ -10,7 +10,7 @@ const Footer = () => {
   const { openModal } = useModal();
 
   return (
-    <footer className="bg-slate-900 text-slate-400 pt-20 pb-10">
+    <footer className="bg-navy text-slate-300 pt-20 pb-10">
       <div className="container-custom">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           {/* Institute Info */}

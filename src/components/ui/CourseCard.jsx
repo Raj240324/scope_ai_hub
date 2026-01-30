@@ -25,30 +25,30 @@ const CourseCard = ({ course, index = 0 }) => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="group bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-2xl hover:shadow-primary/10 hover:border-primary/20 transition-all duration-500 flex flex-col h-full relative"
+      className="group bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-xl hover:border-primary/30 transition-all duration-300 flex flex-col h-full relative"
     >
-      <div className="absolute top-0 left-0 w-full h-1 bg-primary scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left z-20" />
+      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-secondary to-primary scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left z-20" />
       
       {/* Image Section */}
       <div className="relative h-52 overflow-hidden">
         <img 
           src={imageUrl} 
           alt={course.title}
-          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-500" />
+        <div className="absolute inset-0 bg-gradient-to-t from-navy/80 via-navy/20 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-500" />
         
         {/* Category Badge */}
         <div className="absolute top-4 left-4">
-          <span className="px-4 py-1.5 bg-primary text-white text-[10px] font-black uppercase tracking-widest rounded-lg shadow-lg">
+          <span className="px-3 py-1 bg-white/95 backdrop-blur text-primary text-[10px] font-black uppercase tracking-widest rounded-lg shadow-sm border border-primary/10">
             {course.category}
           </span>
         </div>
 
         {/* Level Badge */}
         <div className="absolute bottom-4 left-4 flex items-center space-x-2">
-          <div className="flex items-center bg-white/95 backdrop-blur-sm text-slate-900 px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-wider shadow-sm">
-            <Zap className="h-3 w-3 mr-1.5 text-primary fill-current" />
+          <div className="flex items-center bg-navy/90 backdrop-blur-sm text-white px-3 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wider shadow-sm border border-white/10">
+            <Zap className="h-3 w-3 mr-1.5 text-accent fill-current" />
             {course.level}
           </div>
         </div>

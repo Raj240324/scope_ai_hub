@@ -304,7 +304,7 @@ const learningPartners = [
       </Hero>
 
       {/* Stats Section */}
-      <section className="py-12 bg-slate-900 text-white">
+      <section className="py-12 bg-navy text-white">
         <div className="container-custom">
           <StaggerContainer className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
@@ -476,7 +476,7 @@ const learningPartners = [
                     </div>
                   </FadeIn>
                   <FadeIn direction="up" delay={0.4}>
-                    <div className="aspect-square bg-slate-900 rounded-3xl p-8 flex flex-col justify-end group hover:bg-primary transition-all duration-500">
+                    <div className="aspect-square bg-navy rounded-3xl p-8 flex flex-col justify-end group hover:bg-primary transition-all duration-500">
                       <MessageSquare className="h-10 w-10 text-primary mb-4 group-hover:text-white" />
                       <p className="font-bold text-lg leading-tight text-white group-hover:text-white">Bilingual <br />Support (தமிழ் & English)</p>
                     </div>
@@ -533,7 +533,7 @@ const learningPartners = [
       </section>
 
       {/* Learning Methodology Section */}
-      <section className="py-24 bg-slate-900 relative overflow-hidden">
+      <section className="py-24 bg-navy relative overflow-hidden">
         {/* Decorative Background */}
         <Parallax offset={20} className="absolute top-0 right-0 w-1/2 h-full z-0">
             <div className="w-full h-full bg-primary/5 -skew-x-12 translate-x-1/2" />
@@ -659,7 +659,7 @@ const learningPartners = [
                     <img src={`https://i.pravatar.cc/150?u=trainer${i}`} alt="Trainer" />
                   </div>
                 ))}
-                <div className="w-12 h-12 rounded-full border-4 border-white bg-slate-900 flex items-center justify-center shadow-lg">
+                <div className="w-12 h-12 rounded-full border-4 border-white bg-navy flex items-center justify-center shadow-lg">
                   <span className="text-xs font-bold text-white">+10</span>
                 </div>
               </div>
