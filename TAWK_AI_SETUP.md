@@ -12,12 +12,12 @@ Here is how you set it up from the [Tawk.to Dashboard](https://dashboard.tawk.to
 
 ## 2. Training the AI (The Most Important Part)
 
-The AI needs to "know" about AiTechHub to answer questions. You teach it by setting up a **Knowledge Base** or **Shortcuts**.
+The AI needs to "know" about ScopeAIHub to answer questions. You teach it by setting up a **Knowledge Base** or **Shortcuts**.
 
 ### Option A: Enable "AI Assist" (Automated)
 
 1.  In the Apollo settings, look for **"Data Sources"** or **"Training"**.
-2.  **Website Crawl**: Enter your website URL (`https://aitechhub.vercel.app` or your domain). The AI will read all your pages (Courses, Placements, FAQs) and learn them.
+2.  **Website Crawl**: Enter your website URL (`https://www.scopeaihub.com` or your domain). The AI will read all your pages (Courses, Placements, FAQs) and learn them.
 3.  **Upload Documents**: If you have a PDF brochure or Syllabus, upload it here. The AI will read it.
 
 ### Option B: Shortcuts (Best for frequent questions)

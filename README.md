@@ -1,4 +1,4 @@
-# AiTechHub 🚀
+# ScopeAIHub 🚀
 
 A modern, high-performance React-based website for a startup software training institute in Tamil Nadu. This project is built with a focus on skill-driven education, transparency, and production-grade architecture.
 
@@ -7,12 +7,12 @@ A modern, high-performance React-based website for a startup software training i
 - **🚀 High Performance**: Built with Vite and React for lightning-fast load times.
 - **📱 Fully Responsive**: Mobile-first design using Tailwind CSS v4.
 - **🔍 SEO Optimized**: Dynamic meta tags and titles for every page using `react-helmet-async`.
-- **🛠 Robust Architecture**: 
+- **🛠 Robust Architecture**:
   - **Lazy Loading**: Code-splitting for optimized bundle sizes.
   - **Error Boundaries**: Graceful error handling to prevent full-page crashes.
   - **Scroll Management**: Automatic scroll-to-top on route changes.
 - **✨ Smooth Animations**: Professional transitions and reveal effects using `framer-motion`.
-- **💎 Premium UI**: 
+- **💎 Premium UI**:
   - Modern, clean aesthetic with a focus on readability.
   - Interactive course filtering and search.
   - Collapsible FAQ sections.
@@ -49,11 +49,13 @@ src/
 ## 🚀 Getting Started
 
 1. **Clone the repository**:
+
    ```bash
    git clone [repository-url]
    ```
 
 2. **Install dependencies**:
+
    ```bash
    npm install
    ```
@@ -63,6 +65,7 @@ src/
    - Replace the placeholders in `src/components/ui/ContactForm.jsx` with your `SERVICE_ID`, `TEMPLATE_ID`, and `PUBLIC_KEY`.
 
 4. **Run development server**:
+
    ```bash
    npm run dev
    ```
@@ -77,4 +80,5 @@ src/
 This project is licensed under the MIT License.
 
 ---
-Built with ❤️ for AiTechHub.
+
+Built with ❤️ for ScopeAIHub.
