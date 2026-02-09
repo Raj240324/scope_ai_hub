@@ -71,181 +71,103 @@ const CourseDetail = () => {
       title={`${course.title} | ${BRANDING.fullName}`}
       description={course.shortDescription}
     >
-      <section className="relative bg-slate-900 pt-10 pb-16 md:pt-12 md:pb-24 overflow-hidden">
-        {/* Background Decorative Elements */}
-        <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-          <div className="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] bg-primary/20 rounded-full blur-[120px] animate-pulse" />
-          <div className="absolute bottom-[-10%] left-[-10%] w-[50%] h-[50%] bg-blue-500/10 rounded-full blur-[120px]" />
-          <div className="absolute top-0 left-0 w-full h-full opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(#fff 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
+      <section className="relative bg-slate-900 pt-20 pb-32 overflow-hidden min-h-[90vh] flex items-center">
+        {/* Background Mesh Gradients */}
+        <div className="absolute inset-0 bg-slate-900">
+          <div className="absolute top-[-20%] left-[-10%] w-[70vw] h-[70vw] bg-primary/20 rounded-full blur-[150px] animate-pulse duration-700" />
+          <div className="absolute bottom-[-20%] right-[-10%] w-[70vw] h-[70vw] bg-blue-600/10 rounded-full blur-[150px] animate-pulse delay-1000 duration-700" />
+          <div className="absolute top-[40%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-[50vw] h-[50vw] bg-indigo-500/10 rounded-full blur-[120px]" />
+          <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 brightness-100 contrast-150 mix-blend-overlay"></div>
         </div>
 
         <div className="container-custom relative z-10">
-          <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-            {/* Left Content */}
-            <div className="lg:col-span-7 pt-4">
-              <nav className="flex items-center space-x-2 mb-6 bg-white/5 w-fit px-4 py-2 rounded-full border border-white/10 backdrop-blur-sm">
-                <Link to="/" className="text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-white transition-colors">Home</Link>
-                <ChevronRight className="h-3 w-3 text-slate-600" />
-                <Link to="/courses" className="text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-white transition-colors">Courses</Link>
-                <ChevronRight className="h-3 w-3 text-slate-600" />
-                <span className="text-[10px] font-black uppercase tracking-widest text-primary-light">{course.title}</span>
-              </nav>
-
-              <h1 className="text-2xl md:text-4xl lg:text-5xl font-black text-white mb-6 tracking-tight leading-[1.1]">
-                {course.title}
-              </h1>
-
-              <p className="text-base md:text-lg text-slate-300 mb-8 leading-relaxed max-w-2xl font-medium">
-                {course.shortDescription}
-              </p>
-
-              <div className="flex flex-wrap gap-4 mb-8">
-                <div className="flex items-center space-x-2 px-4 py-2 bg-primary/10 rounded-xl border border-primary/20">
-                  <span className="text-[11px] font-black uppercase tracking-widest text-primary-light">{course.category}</span>
-                </div>
-                <div className="flex items-center space-x-2 px-4 py-2 bg-slate-800/50 rounded-xl border border-white/5">
-                  <span className="text-[11px] font-black uppercase tracking-widest text-slate-300">{course.level}</span>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-6 mb-10">
-                <div className="flex items-center space-x-3 group">
-                  <div className="h-12 w-12 rounded-2xl bg-white/5 flex items-center justify-center border border-white/10 group-hover:bg-primary/20 group-hover:border-primary/30 transition-all">
-                    <Clock className="h-6 w-6 text-primary-light" />
-                  </div>
-                  <div>
-                    <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-0.5">Duration</p>
-                    <p className="text-white font-bold">{course.duration}</p>
-                  </div>
-                </div>
-                <div className="flex items-center space-x-3 group">
-                  <div className="h-12 w-12 rounded-2xl bg-white/5 flex items-center justify-center border border-white/10 group-hover:bg-primary/20 group-hover:border-primary/30 transition-all">
-                    <Globe className="h-6 w-6 text-primary-light" />
-                  </div>
-                  <div>
-                    <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-0.5">Mode</p>
-                    <p className="text-white font-bold">{course.mode.split('/')[0]}</p>
-                  </div>
-                </div>
-                <div className="flex items-center space-x-3 group col-span-2 sm:col-span-1">
-                  <div className="h-12 w-12 rounded-2xl bg-white/5 flex items-center justify-center border border-white/10 group-hover:bg-primary/20 group-hover:border-primary/30 transition-all">
-                    <Tag className="h-6 w-6 text-primary-light" />
-                  </div>
-                  <div>
-                    <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-0.5">Course Fee</p>
-                    <p className="text-white font-bold text-lg">{course.price}</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex flex-col sm:flex-row gap-4">
-                <button 
-                  onClick={() => openModal(course.title)}
-                  className="group relative px-10 py-4 bg-primary text-white rounded-2xl font-black uppercase tracking-widest text-[13px] hover:bg-primary-dark transition-all shadow-2xl shadow-primary/40 overflow-hidden flex items-center justify-center"
-                >
-                  <span className="relative z-10 flex items-center">
-                    Enroll Now
-                    <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                  </span>
-                  <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
-                </button>
-                <button 
-                  onClick={() => openModal(course.title)}
-                  className="px-10 py-4 bg-slate-800 hover:bg-slate-700 text-white border border-white/10 rounded-2xl font-black uppercase tracking-widest text-[13px] transition-all"
-                >
-                  Download Syllabus
-                </button>
-              </div>
+          <div className="max-w-5xl mx-auto text-center">
+            
+            <div className="inline-flex items-center space-x-2 bg-white/5 backdrop-blur-md border border-white/10 rounded-full px-4 py-1.5 mb-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
+              <span className="flex h-2 w-2 rounded-full bg-green-500 animate-pulse"></span>
+              <span className="text-xs font-bold text-white uppercase tracking-widest">New Batch: Feb 15, 2026</span>
             </div>
 
-            {/* Right Content - Visual Card */}
-            <div className="lg:col-span-5 hidden lg:block">
-              <div className="relative">
-                <div className="absolute -inset-10 bg-primary/20 rounded-[4rem] blur-[80px] opacity-50 animate-pulse" />
-                <div className="relative bg-gradient-to-br from-slate-800/80 to-slate-900/80 backdrop-blur-xl border border-white/10 rounded-[3.5rem] p-12 shadow-2xl overflow-hidden group">
-                  {/* Decorative Elements */}
-                  <div className="absolute top-0 right-0 p-8">
-                    <div className="h-20 w-20 bg-primary/10 rounded-full blur-2xl group-hover:bg-primary/20 transition-all" />
-                  </div>
-                  <Terminal className="absolute -bottom-10 -right-10 h-64 w-64 text-primary/5 -rotate-12 group-hover:rotate-0 transition-transform duration-1000" />
-                  
-                  <div className="relative z-10 text-center">
-                    <div className="h-32 w-32 bg-gradient-to-br from-primary to-primary-dark rounded-[2.5rem] flex items-center justify-center mx-auto mb-10 shadow-2xl shadow-primary/40 group-hover:scale-110 group-hover:rotate-6 transition-all duration-700">
-                      <Terminal className="h-16 w-16 text-white" />
-                    </div>
-                    <h3 className="text-2xl md:text-3xl font-black text-white mb-6 tracking-tight">Industry Ready</h3>
-                    <p className="text-slate-400 text-base leading-relaxed mb-10 font-medium">
-                      Master <span className="text-white">{course.title}</span> through intensive <span className="text-primary-light font-bold">hands-on</span> projects and real-world scenarios.
-                    </p>
-                    <div className="flex items-center justify-center space-x-4">
-                      <div className="flex -space-x-3">
-                        {[1, 2, 3, 4].map(i => (
-                          <div key={i} className="h-10 w-10 rounded-full border-2 border-slate-800 bg-slate-700 flex items-center justify-center overflow-hidden">
-                            <img src={`https://i.pravatar.cc/100?img=${i+10}`} alt="Student" />
-                          </div>
-                        ))}
-                      </div>
-                      <p className="text-sm font-bold text-slate-300">500+ Students Enrolled</p>
-                    </div>
-                  </div>
+            <h1 className="text-5xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-200 to-slate-400 mb-8 tracking-tighter leading-[1.1] animate-in fade-in slide-in-from-bottom-6 duration-700 delay-100">
+              {course.title}
+            </h1>
 
-                  {/* Floating Elements */}
-                  <div className="absolute top-12 right-12 bg-white/10 backdrop-blur-md border border-white/20 p-4 rounded-2xl animate-bounce duration-[4000ms]">
-                    <Award className="h-6 w-6 text-primary-light" />
-                  </div>
-                  <div className="absolute bottom-20 left-12 bg-white/10 backdrop-blur-md border border-white/20 p-4 rounded-2xl animate-pulse">
-                    <Code2 className="h-6 w-6 text-blue-400" />
-                  </div>
-                </div>
-              </div>
+            <p className="text-xl md:text-2xl text-slate-400 mb-12 leading-relaxed max-w-3xl mx-auto font-medium animate-in fade-in slide-in-from-bottom-8 duration-700 delay-200">
+              {course.shortDescription}
+            </p>
+
+            <div className="flex flex-wrap justify-center gap-4 mb-16 animate-in fade-in slide-in-from-bottom-10 duration-700 delay-300">
+               <div className="px-6 py-3 bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl flex flex-col items-center min-w-[120px]">
+                  <span className="text-xs text-slate-400 uppercase tracking-widest font-bold mb-1">Duration</span>
+                  <span className="text-lg font-black text-white">{course.duration}</span>
+               </div>
+               <div className="px-6 py-3 bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl flex flex-col items-center min-w-[120px]">
+                  <span className="text-xs text-slate-400 uppercase tracking-widest font-bold mb-1">Method</span>
+                  <span className="text-lg font-black text-white">{course.mode}</span>
+               </div>
+               <div className="px-6 py-3 bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl flex flex-col items-center min-w-[120px]">
+                  <span className="text-xs text-slate-400 uppercase tracking-widest font-bold mb-1">Level</span>
+                  <span className="text-lg font-black text-white">{course.level}</span>
+               </div>
+            </div>
+
+            <div className="flex flex-col sm:flex-row justify-center gap-6 animate-in fade-in slide-in-from-bottom-12 duration-700 delay-400">
+              <button 
+                onClick={() => openModal(course.title)}
+                className="group relative px-12 py-5 bg-primary text-white rounded-full font-black uppercase tracking-widest text-sm hover:bg-primary-dark transition-all shadow-[0_0_40px_-10px_rgba(37,99,235,0.5)] hover:shadow-[0_0_60px_-15px_rgba(37,99,235,0.6)] hover:scale-105 active:scale-95"
+              >
+                <span className="relative z-10 flex items-center">
+                  Start Learning Now
+                  <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                </span>
+                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-white/0 via-white/20 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+              </button>
+              
+              <button 
+                onClick={() => document.getElementById('curriculum').scrollIntoView({ behavior: 'smooth' })}
+                className="px-12 py-5 bg-transparent hover:bg-white/5 text-white border border-white/20 rounded-full font-black uppercase tracking-widest text-sm transition-all hover:scale-105 active:scale-95"
+              >
+                View Syllabus
+              </button>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Course Navigation (Sticky) */}
-      <div className="sticky top-16 z-40 bg-white/90 backdrop-blur-xl border-b border-slate-200 hidden md:block">
-        <div className="container-custom">
-          <div className="flex items-center justify-between">
-            <div className="flex space-x-10">
-              {['Overview', 'Curriculum', 'Projects', 'Instructor', 'FAQ'].map(tab => (
-                <a 
-                  key={tab} 
-                  href={`#${tab.toLowerCase()}`}
-                  className={`py-5 text-[11px] font-black transition-all border-b-2 relative uppercase tracking-[0.2em] ${
-                    activeTab === tab.toLowerCase() 
-                      ? 'text-primary border-primary' 
-                      : 'text-slate-400 border-transparent hover:text-primary hover:border-primary/30'
-                  }`}
-                >
-                  {tab}
-                </a>
-              ))}
-            </div>
-            <div className="hidden lg:flex items-center space-x-8">
-              <div className="flex flex-col items-end">
-                <span className="text-[9px] font-black text-slate-400 uppercase tracking-[0.2em] mb-0.5">Next Batch</span>
-                <div className="flex items-center text-slate-900 font-bold text-sm">
-                  <Calendar className="h-3.5 w-3.5 text-primary mr-2" />
-                  {course.enrollment?.nextBatch || 'TBA'}
-                </div>
+      {/* Smart Sticky Header */}
+      <div className={`sticky top-0 z-50 transition-all duration-300 ${scrollProgress > 5 ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'}`}>
+        <div className="bg-white/90 backdrop-blur-xl border-b border-slate-200 shadow-lg shadow-slate-200/50">
+          <div className="container-custom py-4">
+            <div className="flex items-center justify-between">
+              <h2 className="text-lg font-black text-slate-900 hidden md:block">{course.title}</h2>
+              <div className="flex items-center space-x-6 overflow-x-auto no-scrollbar mask-linear-fade">
+                {['Overview', 'Curriculum', 'Projects', 'Instructor', 'FAQ'].map(tab => (
+                  <a 
+                    key={tab} 
+                    href={`#${tab.toLowerCase()}`}
+                    className={`text-xs font-black uppercase tracking-widest transition-colors whitespace-nowrap ${
+                      activeTab === tab.toLowerCase() ? 'text-primary' : 'text-slate-500 hover:text-slate-900'
+                    }`}
+                  >
+                    {tab}
+                  </a>
+                ))}
               </div>
               <button 
                 onClick={() => openModal(course.title)}
-                className="group bg-slate-900 text-white px-7 py-3 rounded-xl text-[11px] font-black uppercase tracking-widest hover:bg-primary transition-all shadow-xl shadow-slate-200 flex items-center"
+                className="bg-primary text-white px-6 py-3 rounded-xl text-xs font-black uppercase tracking-widest hover:bg-primary-dark transition-all shadow-lg shadow-primary/30 hover:scale-105 active:scale-95"
               >
-                Inquire Now
-                <ArrowRight className="ml-2 h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
+                Enroll Now
               </button>
             </div>
           </div>
-        </div>
-        {/* Progress Bar */}
-        <div className="absolute bottom-0 left-0 h-[2px] bg-primary/20 w-full">
-          <div 
-            className="h-full bg-primary transition-all duration-150 ease-out"
-            style={{ width: `${scrollProgress}%` }}
-          />
+          {/* Progress Bar */}
+          <div className="absolute bottom-0 left-0 h-[2px] bg-slate-100 w-full">
+            <div 
+              className="h-full bg-gradient-to-r from-primary to-blue-600 transition-all duration-150 ease-out"
+              style={{ width: `${scrollProgress}%` }}
+            />
+          </div>
         </div>
       </div>
 
@@ -254,153 +176,120 @@ const CourseDetail = () => {
           {/* Main Content */}
           <div className="lg:col-span-8 space-y-16 lg:space-y-24">
             
-            {/* Overview */}
+            {/* Overview - Bento Grid Layout */}
             <div id="overview" className="scroll-mt-32">
-              <div className="inline-block px-4 py-1.5 bg-primary/10 rounded-full mb-6">
-                <span className="text-[10px] font-black text-primary uppercase tracking-[0.2em]">Course Overview</span>
-              </div>
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-slate-900 mb-8 tracking-tight leading-[1.2]">
-                Master <span className="text-primary">{course.title}</span> with Expert Guidance
-              </h2>
-              <p className="text-slate-600 text-lg leading-relaxed mb-12 font-medium">
-                {course.longDescription}
-              </p>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div className="bg-white p-10 rounded-[2.5rem] border border-slate-100 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.05)] relative overflow-hidden group">
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-700"></div>
-                  <h3 className="text-xl font-black text-slate-900 mb-8 flex items-center">
-                    <div className="h-10 w-10 rounded-xl bg-primary/10 flex items-center justify-center mr-4">
-                      <Target className="h-5 w-5 text-primary" />
-                    </div>
-                    What you'll learn
-                  </h3>
-                  <ul className="space-y-5">
-                    {course.learningObjectives?.map((item, i) => (
-                      <li key={i} className="flex items-start space-x-4 group/item">
-                        <div className="h-6 w-6 rounded-full bg-emerald-50 flex items-center justify-center shrink-0 mt-0.5 group-hover/item:bg-emerald-500 transition-colors">
-                          <CheckCircle2 className="h-4 w-4 text-emerald-500 group-hover/item:text-white transition-colors" />
-                        </div>
-                        <span className="text-slate-700 text-[15px] font-bold leading-relaxed">{item}</span>
-                      </li>
-                    ))}
-                  </ul>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                {/* Main Value Prop - Span 2 cols */}
+                <div className="md:col-span-2 bg-gradient-to-br from-slate-50 to-white p-8 lg:p-10 rounded-[2.5rem] border border-slate-100 shadow-sm relative overflow-hidden group">
+                  <div className="relative z-10">
+                    <h2 className="text-2xl md:text-3xl font-black text-slate-900 mb-6 tracking-tight">
+                       Why learn <span className="text-primary">{course.title}?</span>
+                    </h2>
+                    <p className="text-slate-600 text-lg leading-relaxed font-medium">
+                      {course.longDescription}
+                    </p>
+                  </div>
+                  <div className="absolute -bottom-10 -right-10 w-64 h-64 bg-primary/5 rounded-full blur-3xl group-hover:bg-primary/10 transition-colors"></div>
                 </div>
 
-                <div className="space-y-8">
-                  <div className="bg-slate-50 p-10 rounded-[2.5rem] border border-slate-100 group">
-                    <h3 className="text-xl font-black text-slate-900 mb-6 flex items-center">
-                      <div className="h-10 w-10 rounded-xl bg-primary/10 flex items-center justify-center mr-4">
-                        <Zap className="h-5 w-5 text-primary" />
+                {/* Salary/Stats Card */}
+                <div className="bg-slate-900 p-8 lg:p-10 rounded-[2.5rem] text-white flex flex-col justify-center relative overflow-hidden group">
+                   <div className="absolute top-0 right-0 w-32 h-32 bg-primary/20 rounded-full blur-2xl group-hover:scale-150 transition-transform"></div>
+                   <div className="relative z-10">
+                      <div className="flex items-center space-x-2 mb-2">
+                        <span className="h-2 w-2 rounded-full bg-green-500 animate-pulse"></span>
+                        <span className="text-xs font-bold text-green-400 uppercase tracking-widest">High Demand</span>
                       </div>
-                      Prerequisites
-                    </h3>
-                    <ul className="space-y-4">
+                      <p className="text-4xl lg:text-5xl font-black mb-2">₹12 LPA</p>
+                      <p className="text-slate-400 font-medium">Avg. Salary Potential</p>
+                   </div>
+                </div>
+
+                {/* Prerequisites Card */}
+                <div className="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm flex flex-col justify-center group hover:border-primary/20 transition-colors">
+                   <div className="h-10 w-10 bg-primary/10 rounded-xl flex items-center justify-center mb-4 text-primary">
+                      <Zap className="h-5 w-5" />
+                   </div>
+                   <h3 className="text-lg font-black text-slate-900 mb-4">Prerequisites</h3>
+                   <ul className="space-y-2">
                       {course.prerequisites?.map((item, i) => (
-                        <li key={i} className="flex items-start space-x-4 text-slate-600">
-                          <div className="h-2 w-2 rounded-full bg-primary shrink-0 mt-2.5 group-hover:scale-150 transition-transform"></div>
-                          <span className="text-[15px] font-bold">{item}</span>
+                        <li key={i} className="flex items-start text-sm font-bold text-slate-600">
+                          <CheckCircle2 className="h-4 w-4 text-green-500 mr-2 shrink-0 mt-0.5" />
+                          {item}
                         </li>
                       ))}
-                    </ul>
-                  </div>
+                   </ul>
+                </div>
 
-                  <div className="bg-white p-10 rounded-[2.5rem] border border-slate-100 shadow-sm group">
-                    <h3 className="text-xl font-black text-slate-900 mb-8 flex items-center">
-                      <div className="h-10 w-10 rounded-xl bg-primary/10 flex items-center justify-center mr-4">
-                        <FileCheck className="h-5 w-5 text-primary" />
-                      </div>
-                      Tools & Stack
-                    </h3>
-                    <div className="flex flex-wrap gap-3">
+                {/* Tools Stack - Span 2 cols */}
+                <div className="md:col-span-2 bg-slate-50 p-8 lg:p-10 rounded-[2.5rem] border border-slate-100 relative overflow-hidden group">
+                   <h3 className="text-xl font-black text-slate-900 mb-6 flex items-center relative z-10">
+                      <FileCheck className="h-5 w-5 text-primary mr-3" />
+                      Tools You Will Master
+                   </h3>
+                   <div className="flex flex-wrap gap-3 relative z-10">
                       {course.tools?.map((tool, i) => (
-                        <span key={i} className="px-4 py-2 bg-slate-50 text-slate-700 rounded-2xl text-xs font-black border border-slate-200 uppercase tracking-wider hover:bg-primary hover:text-white hover:border-primary hover:-translate-y-1 transition-all cursor-default shadow-sm">
+                        <span key={i} className="px-5 py-3 bg-white text-slate-700 rounded-xl text-xs font-black border border-slate-200 uppercase tracking-wider hover:bg-primary hover:text-white hover:border-primary hover:-translate-y-1 transition-all cursor-default shadow-sm">
                           {tool}
                         </span>
                       ))}
-                    </div>
-                  </div>
+                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Curriculum */}
+            {/* Curriculum - Modern Accordion */}
             <div id="curriculum" className="scroll-mt-32">
               <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
                 <div>
-                  <div className="inline-block px-4 py-1.5 bg-primary/10 rounded-full mb-4">
-                    <span className="text-[10px] font-black text-primary uppercase tracking-[0.2em]">Learning Path</span>
-                  </div>
-                  <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-slate-900 tracking-tight leading-tight">Course Curriculum</h2>
+                   <h2 className="text-3xl md:text-4xl font-black text-slate-900 mb-4 tracking-tight">Structured <span className="text-primary">Curriculum</span></h2>
+                   <p className="text-slate-500 font-medium">Designed for absolute beginners to advanced pros.</p>
                 </div>
-                <div className="flex items-center space-x-6">
-                  <div className="text-right">
-                    <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-1">{course.syllabus?.length || 0} Modules</span>
-                    <span className="text-lg font-black text-slate-900">{course.duration} Total</span>
-                  </div>
-                  <div className="h-12 w-px bg-slate-200 hidden md:block"></div>
-                  <div className="hidden md:block">
-                    <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-1">Access</span>
-                    <span className="text-lg font-black text-primary">Lifetime</span>
-                  </div>
+                <div className="flex gap-4">
+                   <div className="px-4 py-2 bg-slate-100 rounded-lg text-xs font-bold text-slate-600">
+                      {course.syllabus?.length || 0} Modules
+                   </div>
+                   <div className="px-4 py-2 bg-slate-100 rounded-lg text-xs font-bold text-slate-600">
+                      {course.duration}
+                   </div>
                 </div>
               </div>
 
-              <div className="space-y-6">
+              <div className="relative border-l-2 border-slate-100 ml-4 md:ml-8 pl-8 md:pl-12 space-y-12">
                 {course.syllabus?.map((item, index) => (
-                  <div 
-                    key={index}
-                    className={`group border rounded-[2.5rem] overflow-hidden transition-all duration-700 ${activeModule === index ? 'border-primary shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] bg-white' : 'border-slate-100 bg-slate-50/50 hover:bg-white hover:border-slate-200 hover:shadow-xl'}`}
-                  >
-                    <button 
+                  <div key={index} className="relative group">
+                    {/* Timeline Dot */}
+                    <div className={`absolute -left-[41px] md:-left-[59px] top-6 h-6 w-6 rounded-full border-4 border-white transition-all duration-500 ${activeModule === index ? 'bg-primary ring-4 ring-primary/20 scale-125' : 'bg-slate-200 group-hover:bg-primary/50'}`}></div>
+                    
+                    <div 
+                      className={`cursor-pointer rounded-[2rem] border transition-all duration-500 overflow-hidden ${activeModule === index ? 'bg-white border-primary/20 shadow-xl shadow-primary/5' : 'bg-white border-slate-100 hover:border-slate-300 hover:shadow-lg'}`}
                       onClick={() => setActiveModule(activeModule === index ? -1 : index)}
-                      className="w-full flex items-center justify-between p-8 lg:p-10 text-left transition-colors"
                     >
-                      <div className="flex items-center space-x-8">
-                        <div className={`h-16 w-16 rounded-3xl flex items-center justify-center font-black text-2xl transition-all duration-700 ${activeModule === index ? 'bg-primary text-white scale-110 rotate-6 shadow-2xl shadow-primary/40' : 'bg-white text-slate-300 border border-slate-100 group-hover:border-primary/30 group-hover:scale-105 group-hover:text-primary/50'}`}>
-                          {index + 1}
-                        </div>
-                        <div>
-                          <div className="flex items-center space-x-3 mb-2">
-                            <span className="text-[10px] font-black text-primary uppercase tracking-widest bg-primary/10 px-3 py-1 rounded-full">{item.duration}</span>
-                            <span className="h-1 w-1 rounded-full bg-slate-300"></span>
-                            <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">{item.topics?.length || 0} Lessons</span>
+                      <div className="p-6 md:p-8 flex items-center justify-between">
+                         <div>
+                            <span className="text-xs font-black text-primary uppercase tracking-widest mb-1 block">Module 0{index + 1}</span>
+                            <h4 className="text-xl font-bold text-slate-900 group-hover:text-primary transition-colors">{item.module}</h4>
+                            <p className="text-sm text-slate-400 font-medium mt-1">{item.duration} • {item.topics?.length} Lessons</p>
+                         </div>
+                         <div className={`h-10 w-10 rounded-full flex items-center justify-center transition-transform duration-500 ${activeModule === index ? 'rotate-180 bg-primary/10 text-primary' : 'bg-slate-50 text-slate-400'}`}>
+                            <ChevronDown className="h-5 w-5" />
+                         </div>
+                      </div>
+                      
+                      {activeModule === index && (
+                          <div className="px-6 pb-8 md:px-8 md:pb-10 animate-in fade-in slide-in-from-top-2 duration-300">
+                             <div className="h-px bg-slate-100 mb-6"></div>
+                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                {item.topics?.map((topic, i) => (
+                                   <div key={i} className="flex items-start">
+                                      <CheckCircle2 className="h-4 w-4 text-green-500 mr-3 mt-1 shrink-0" />
+                                      <span className="text-sm font-medium text-slate-600">{topic}</span>
+                                   </div>
+                                ))}
+                             </div>
                           </div>
-                          <h4 className="text-lg lg:text-xl font-black text-slate-900 tracking-tight group-hover:text-primary transition-colors leading-tight">{item.module}</h4>
-                        </div>
-                      </div>
-                      <div className={`h-12 w-12 rounded-2xl flex items-center justify-center transition-all duration-700 ${activeModule === index ? 'bg-primary/10 rotate-180 shadow-inner' : 'bg-white border border-slate-100 group-hover:border-primary/20'}`}>
-                        <ChevronDown className={`h-6 w-6 transition-colors ${activeModule === index ? 'text-primary' : 'text-slate-400'}`} />
-                      </div>
-                    </button>
-                    {activeModule === index && (
-                      <div className="px-10 pb-10 lg:px-16 lg:pb-16 animate-in fade-in slide-in-from-top-6 duration-700">
-                        <div className="h-px bg-slate-100 mb-10" />
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-8">
-                          {item.topics?.map((topic, i) => (
-                            <div key={i} className="flex items-start text-slate-600 group/topic">
-                              <div className="h-7 w-7 rounded-xl bg-primary/5 flex items-center justify-center mr-5 group-hover/topic:bg-primary group-hover/topic:scale-110 transition-all mt-0.5">
-                                <CheckCircle2 className="h-4 w-4 text-primary group-hover/topic:text-white" />
-                              </div>
-                              <span className="text-[15px] font-bold text-slate-700 group-hover/topic:text-primary transition-colors leading-relaxed">{topic}</span>
-                            </div>
-                          ))}
-                        </div>
-                        
-                        {/* Module Footer/CTA */}
-                        <div className="mt-12 p-6 bg-slate-50 rounded-3xl border border-slate-100 flex items-center justify-between">
-                          <p className="text-sm font-bold text-slate-500 italic">
-                            Want to see detailed syllabus?
-                          </p>
-                          <button 
-                            onClick={() => openModal(course.title)}
-                            className="text-xs font-black text-primary uppercase tracking-widest hover:translate-x-1 transition-transform flex items-center"
-                          >
-                            Download PDF <ArrowRight className="ml-2 h-4 w-4" />
-                          </button>
-                        </div>
-                      </div>
-                    )}
+                      )}
+                    </div>
                   </div>
                 ))}
               </div>
@@ -581,6 +470,7 @@ const CourseDetail = () => {
                     <div className="text-right">
                       <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-1">Course Fee</span>
                       <div className="text-2xl font-black text-primary tracking-tight">{course.price}</div>
+                      <div className="text-[10px] text-slate-400 font-bold mt-1">EMI Options Available</div>
                     </div>
                   </div>
 
