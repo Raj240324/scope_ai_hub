@@ -344,18 +344,18 @@ const CourseDetail = () => {
 
             {/* Instructor */}
             <div id="instructor" className="scroll-mt-32">
-              <div className="inline-block px-4 py-1.5 bg-primary/10 rounded-full mb-6">
-                <span className="text-[10px] font-black text-primary uppercase tracking-[0.2em]">Your Mentor</span>
+              <div className="inline-block px-4 py-1.5 bg-[var(--color-brand-cyan)]/10 rounded-full mb-6">
+                <span className="text-[10px] font-black text-[var(--color-brand-cyan)] uppercase tracking-[0.2em]">Your Mentor</span>
               </div>
               <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-slate-900 mb-10 tracking-tight leading-tight">
                 Learn from the Experts
               </h2>
               <div className="flex flex-col md:flex-row items-center md:items-stretch gap-12 p-10 lg:p-16 bg-slate-900 rounded-[3.5rem] text-white shadow-2xl relative overflow-hidden group">
-                <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-primary/10 rounded-full blur-[120px] -mr-48 -mt-48 group-hover:bg-primary/20 transition-all duration-1000" />
+                <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-[var(--color-brand-cyan)]/10 rounded-full blur-[120px] -mr-48 -mt-48 group-hover:bg-[var(--color-brand-cyan)]/20 transition-all duration-1000" />
                 <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-blue-500/5 rounded-full blur-[100px] -ml-32 -mb-32" />
                 
                 <div className="relative h-64 w-64 shrink-0 mx-auto md:mx-0">
-                  <div className="absolute inset-0 bg-primary rounded-[3rem] rotate-6 group-hover:rotate-12 transition-transform duration-700 opacity-20 blur-xl"></div>
+                  <div className="absolute inset-0 bg-[var(--color-brand-cyan)] rounded-[3rem] rotate-6 group-hover:rotate-12 transition-transform duration-700 opacity-20 blur-xl"></div>
                   <div className="absolute inset-0 bg-white/10 rounded-[3rem] -rotate-3 group-hover:-rotate-6 transition-transform duration-700"></div>
                   <div className="relative h-full w-full rounded-[3rem] overflow-hidden border-2 border-white/20 shadow-2xl">
                     <img 
@@ -364,18 +364,18 @@ const CourseDetail = () => {
                       className="h-full w-full object-cover group-hover:scale-110 transition-transform duration-1000"
                     />
                   </div>
-                  <div className="absolute -bottom-4 -right-4 bg-primary text-white h-14 w-14 rounded-2xl shadow-2xl shadow-primary/40 flex items-center justify-center animate-bounce duration-[3000ms] border-4 border-slate-900">
+                  <div className="absolute -bottom-4 -right-4 bg-[var(--color-brand-cyan)] text-white h-14 w-14 rounded-2xl shadow-2xl shadow-[var(--color-brand-cyan)]/40 flex items-center justify-center animate-bounce duration-[3000ms] border-4 border-slate-900">
                     <BookOpen className="h-6 w-6" />
                   </div>
                 </div>
                 
                 <div className="text-center md:text-left flex flex-col justify-center relative z-10">
-                  <div className="inline-flex items-center space-x-2 text-primary font-black text-sm uppercase tracking-[0.3em] mb-4">
-                    <span className="h-1 w-8 bg-primary rounded-full"></span>
+                  <div className="inline-flex items-center space-x-2 text-[var(--color-brand-cyan)] font-black text-sm uppercase tracking-[0.3em] mb-4">
+                    <span className="h-1 w-8 bg-[var(--color-brand-cyan)] rounded-full"></span>
                     <span>Chief Instructor</span>
                   </div>
                   <h4 className="text-2xl md:text-3xl lg:text-4xl font-black mb-4 tracking-tight">{course.instructor?.name}</h4>
-                  <p className="text-primary-light font-bold text-lg mb-8 leading-relaxed">{course.instructor?.role}</p>
+                  <p className="text-[var(--color-brand-cyan)] font-bold text-lg mb-8 leading-relaxed">{course.instructor?.role}</p>
                   <div className="relative">
                     <span className="absolute -top-6 -left-6 text-6xl text-white/5 font-serif">"</span>
                     <p className="text-slate-300 leading-relaxed text-lg font-medium italic relative z-10">
@@ -401,8 +401,8 @@ const CourseDetail = () => {
 
             {/* FAQ Section */}
             <div id="faq" className="scroll-mt-32">
-              <div className="inline-block px-4 py-1.5 bg-primary/10 rounded-full mb-6">
-                <span className="text-[10px] font-black text-primary uppercase tracking-[0.2em]">Support</span>
+              <div className="inline-block px-4 py-1.5 bg-[var(--color-brand-orange)]/10 rounded-full mb-6">
+                <span className="text-[10px] font-black text-[var(--color-brand-orange)] uppercase tracking-[0.2em]">Support</span>
               </div>
               <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-slate-900 mb-12 tracking-tight leading-tight">
                 Common Questions
@@ -501,7 +501,7 @@ const CourseDetail = () => {
                   <div className="space-y-3">
                     <button 
                       onClick={() => openModal(course.title)}
-                      className="w-full py-5 bg-primary text-white rounded-2xl text-[13px] font-black tracking-widest uppercase hover:bg-primary-dark transition-all shadow-xl shadow-primary/20 hover:shadow-primary/40 active:scale-[0.98] group/btn"
+                      className="w-full py-5 bg-[var(--color-brand-orange)] text-white rounded-2xl text-[13px] font-black tracking-widest uppercase hover:bg-[#EA580C] transition-all shadow-xl shadow-orange-500/20 hover:shadow-orange-500/40 active:scale-[0.98] group/btn"
                     >
                       <span className="flex items-center justify-center">
                         Secure Your Seat
@@ -522,7 +522,7 @@ const CourseDetail = () => {
                   <Award className="absolute -bottom-4 -right-4 h-24 w-24 text-white/5 group-hover:scale-110 transition-transform duration-500" />
                   <div className="relative z-10">
                     <div className="flex items-center space-x-3 mb-4">
-                      <div className="h-8 w-8 bg-primary rounded-xl flex items-center justify-center shadow-lg shadow-primary/20">
+                      <div className="h-8 w-8 bg-[var(--color-brand-cyan)] rounded-xl flex items-center justify-center shadow-lg shadow-cyan-500/20">
                         <Award className="h-4 w-4 text-white" />
                       </div>
                       <h3 className="text-sm font-black text-white uppercase tracking-wider">{course.certification?.title || 'Industry Certified'}</h3>
@@ -532,7 +532,7 @@ const CourseDetail = () => {
                     </p>
                     <div className="flex items-center justify-between pt-4 border-t border-white/10">
                       <span className="text-[9px] font-black uppercase tracking-widest text-slate-500">Recognition</span>
-                      <span className="text-[10px] font-black text-primary uppercase">NASSCOM ALIGNED</span>
+                      <span className="text-[10px] font-black text-[var(--color-brand-cyan)] uppercase">NASSCOM ALIGNED</span>
                     </div>
                   </div>
                 </div>
@@ -561,12 +561,12 @@ const CourseDetail = () => {
       {/* Related Courses CTA */}
       <section className="section-padding bg-slate-50 border-t border-slate-200 relative overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-full -z-10">
-          <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-primary/5 rounded-full blur-[120px]" />
+          <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-[var(--color-brand-cyan)]/5 rounded-full blur-[120px]" />
           <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] bg-blue-500/5 rounded-full blur-[120px]" />
         </div>
         <div className="container-custom text-center">
-          <div className="inline-block px-4 py-1.5 bg-primary/10 rounded-full mb-8">
-            <span className="text-[10px] font-black text-primary uppercase tracking-[0.2em]">Ready to begin?</span>
+          <div className="inline-block px-4 py-1.5 bg-[var(--color-brand-cyan)]/10 rounded-full mb-8">
+            <span className="text-[10px] font-black text-[var(--color-brand-cyan)] uppercase tracking-[0.2em]">Ready to begin?</span>
           </div>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-slate-900 mb-8 tracking-tight">Start your transformation <span className="text-primary">today</span></h2>
           <p className="text-slate-600 text-lg mb-12 max-w-2xl mx-auto font-medium leading-relaxed">Join 1,000+ successful graduates who have accelerated their careers with {BRANDING.fullName}.</p>

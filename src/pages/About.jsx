@@ -204,7 +204,7 @@ const About = () => {
               </div>
               <div className="space-y-4 pt-12">
                 <Parallax offset={20}>
-                  <div className="aspect-square bg-slate-900 rounded-3xl p-8 flex flex-col justify-end text-white shadow-xl shadow-slate-900/20">
+                  <div className="aspect-square bg-navy rounded-3xl p-8 flex flex-col justify-end text-white shadow-xl shadow-slate-900/20">
                     <Target className="h-10 w-10 mb-4 text-primary-light" />
                     <p className="font-bold text-lg leading-tight text-white">Goal-oriented training.</p>
                   </div>
@@ -255,7 +255,7 @@ const About = () => {
       </section>
 
       {/* Vision & Mission */}
-      <section className="section-padding bg-slate-900 text-white">
+      <section className="section-padding bg-navy text-white">
         <div className="container-custom">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
             <div className="space-y-6">

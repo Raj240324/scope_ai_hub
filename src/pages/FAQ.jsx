@@ -188,7 +188,7 @@ const FAQ = () => {
                   ))}
                 </nav>
 
-                <div className="mt-10 p-6 bg-slate-900 rounded-2xl text-white">
+                <div className="mt-10 p-6 bg-navy rounded-2xl text-white">
                   <MessageCircle className="h-8 w-8 text-primary mb-4" />
                   <h4 className="font-bold mb-2">Still have questions?</h4>
                   <p className="text-slate-400 text-xs mb-6">Can't find what you're looking for? Reach out to our team.</p>

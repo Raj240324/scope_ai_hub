@@ -196,7 +196,7 @@ const TrainerProfiles = () => {
                     <h4 className="text-xs font-black uppercase tracking-wider text-slate-400 mb-3">Previous Companies</h4>
                     <div className="flex flex-wrap gap-2">
                       {trainer.companies.map((company, i) => (
-                        <span key={i} className="px-4 py-2 bg-slate-900 text-white text-xs font-bold rounded-lg">
+                        <span key={i} className="px-4 py-2 bg-navy text-white text-xs font-bold rounded-lg">
                           {company}
                         </span>
                       ))}
@@ -234,7 +234,7 @@ const TrainerProfiles = () => {
         </StaggerContainer>
 
         {/* CTA Section */}
-        <div className="mt-20 text-center p-12 bg-gradient-to-br from-slate-900 to-navy rounded-3xl text-white">
+        <div className="mt-20 text-center p-12 bg-gradient-to-br from-navy to-primary-dark rounded-3xl text-white">
           <h2 className="text-3xl md:text-4xl font-black mb-6">Want to Learn from These Experts?</h2>
           <p className="text-lg text-slate-400 mb-10 max-w-2xl mx-auto">
             Join our next batch and get personalized mentorship from industry veterans who are passionate about teaching.

@@ -205,7 +205,7 @@ const Admissions = () => {
         </div>
 
         {/* Fee Structure Note */}
-        <div className="mt-24 p-8 md:p-12 bg-slate-900 text-white rounded-3xl relative overflow-hidden text-center">
+        <div className="mt-24 p-8 md:p-12 bg-navy text-white rounded-3xl relative overflow-hidden text-center">
           <CreditCard className="absolute -top-4 -left-4 h-32 w-32 text-white/5" />
           <h2 className="text-2xl md:text-3xl font-bold mb-6 relative z-10">Transparent Fee Structure</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10 text-left">

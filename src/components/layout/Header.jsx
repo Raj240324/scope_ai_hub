@@ -211,8 +211,8 @@ const Header = () => {
                     className={clsx(
                       'px-4 py-2 text-[14px] font-bold transition-all rounded-lg relative flex items-center',
                       location.pathname === item.href 
-                        ? 'text-primary' 
-                        : 'text-slate-800 hover:text-primary hover:bg-slate-50'
+                        ? 'text-[var(--color-brand-cyan)]' 
+                        : 'text-[var(--color-brand-navy)] hover:text-[var(--color-brand-cyan)] hover:bg-slate-50'
                     )}
                   >
                     {item.name}
@@ -226,10 +226,10 @@ const Header = () => {
                         <div className="flex-1 p-8">
                           <div className="flex items-center justify-between mb-8">
                             <div>
-                              <h3 className="text-xl font-black text-slate-900 tracking-tight">Our Programs</h3>
+                              <h3 className="text-xl font-black text-[var(--color-brand-navy)] tracking-tight">Our Programs</h3>
                               <p className="text-[12px] text-slate-500 font-semibold">Expert-led technical training</p>
                             </div>
-                            <Link to="/courses" className="text-[10px] font-black text-primary hover:text-primary-dark transition-all flex items-center bg-primary/5 px-3 py-1.5 rounded-full">
+                            <Link to="/courses" className="text-[10px] font-black text-[var(--color-brand-cyan)] hover:text-[var(--color-brand-navy)] transition-all flex items-center bg-[var(--color-brand-cyan)]/5 px-3 py-1.5 rounded-full">
                               VIEW ALL
                               <ChevronDown className="ml-1 h-3 w-3 -rotate-90" />
                             </Link>
@@ -238,7 +238,7 @@ const Header = () => {
                           <div className="grid grid-cols-2 gap-x-8 gap-y-6">
                             {Object.entries(courseCategories).map(([category, items]) => (
                               <div key={category} className="space-y-3">
-                                <h4 className="text-[9px] font-black text-primary/40 uppercase tracking-[0.25em] flex items-center">
+                                <h4 className="text-[9px] font-black text-[var(--color-brand-cyan)]/60 uppercase tracking-[0.25em] flex items-center">
                                   {category}
                                 </h4>
                                 <div className="space-y-0.5">
@@ -248,9 +248,9 @@ const Header = () => {
                                       to={`/courses/${course.slug}`}
                                       className="group/item flex items-center py-2 px-3 -mx-3 rounded-xl hover:bg-slate-50 transition-all"
                                     >
-                                      <div className="w-1 h-1 rounded-full bg-slate-300 group-hover/item:bg-primary group-hover/item:scale-150 transition-all mr-3" />
+                                      <div className="w-1 h-1 rounded-full bg-slate-300 group-hover/item:bg-[var(--color-brand-orange)] group-hover/item:scale-150 transition-all mr-3" />
                                       <div>
-                                        <p className="text-[13px] font-bold text-slate-700 group-hover/item:text-primary transition-colors leading-tight">
+                                        <p className="text-[13px] font-bold text-slate-700 group-hover/item:text-[var(--color-brand-navy)] transition-colors leading-tight">
                                           {course.title}
                                         </p>
                                       </div>
@@ -263,27 +263,27 @@ const Header = () => {
                         </div>
 
                         {/* Right Side: Modern Promo Section */}
-                        <div className="w-64 bg-navy p-8 flex flex-col justify-between relative overflow-hidden">
+                        <div className="w-64 bg-[var(--color-brand-navy)] p-8 flex flex-col justify-between relative overflow-hidden">
                           {/* Background Decoration */}
-                          <div className="absolute top-0 right-0 w-32 h-32 bg-primary/20 rounded-full blur-3xl -mr-16 -mt-16" />
-                          <div className="absolute bottom-0 left-0 w-24 h-24 bg-primary/10 rounded-full blur-2xl -ml-12 -mb-12" />
+                          <div className="absolute top-0 right-0 w-32 h-32 bg-[var(--color-brand-cyan)]/20 rounded-full blur-3xl -mr-16 -mt-16" />
+                          <div className="absolute bottom-0 left-0 w-24 h-24 bg-[var(--color-brand-orange)]/10 rounded-full blur-2xl -ml-12 -mb-12" />
                           
                           <div className="relative z-10">
-                            <div className="bg-primary text-white text-[9px] font-black px-2.5 py-1 rounded-lg inline-block mb-4 tracking-widest uppercase shadow-lg shadow-primary/20">
+                            <div className="bg-[var(--color-brand-orange)] text-white text-[9px] font-black px-2.5 py-1 rounded-lg inline-block mb-4 tracking-widest uppercase shadow-lg shadow-orange-500/20">
                               Trending
                             </div>
                             <h4 className="text-lg font-black text-white leading-tight mb-3">
-                              Master <span className="text-primary-light">MERN</span> Stack
+                              Master <span className="text-[var(--color-brand-cyan)]">MERN</span> Stack
                             </h4>
-                            <p className="text-[11px] text-slate-400 font-medium leading-relaxed mb-6">
+                            <p className="text-[11px] text-slate-300 font-medium leading-relaxed mb-6">
                               The most complete full-stack roadmap in Tamil Nadu.
                             </p>
                             
                             <div className="space-y-3">
                               {['Placement Assist', 'Real Projects', 'Live Mentoring'].map((feature) => (
                                 <div key={feature} className="flex items-center text-[10px] font-bold text-slate-300">
-                                  <div className="w-4 h-4 rounded-full bg-primary/20 flex items-center justify-center mr-2">
-                                    <div className="w-1 h-1 rounded-full bg-primary" />
+                                  <div className="w-4 h-4 rounded-full bg-[var(--color-brand-cyan)]/20 flex items-center justify-center mr-2">
+                                    <div className="w-1 h-1 rounded-full bg-[var(--color-brand-cyan)]" />
                                   </div>
                                   {feature}
                                 </div>
@@ -293,7 +293,7 @@ const Header = () => {
                           
                           <button 
                             onClick={() => openModal()}
-                            className="relative z-10 mt-8 w-full py-3.5 bg-white text-navy rounded-xl text-[10px] font-black tracking-widest uppercase hover:bg-primary hover:text-white transition-all shadow-xl active:scale-95"
+                            className="relative z-10 mt-8 w-full py-3.5 bg-white text-[var(--color-brand-navy)] rounded-xl text-[10px] font-black tracking-widest uppercase hover:bg-[var(--color-brand-orange)] hover:text-white transition-all shadow-xl active:scale-95"
                           >
                             Get Syllabus
                           </button>
@@ -304,11 +304,11 @@ const Header = () => {
                 </div>
               ))}
               
-              <div className="h-6 w-[1px] bg-slate-200 mx-4" />
+              <div className="h-6 w-[1px] bg-slate-300 mx-4" />
 
               <button 
                 onClick={() => setIsSearchOpen(true)}
-                className="p-2 text-slate-400 hover:text-primary transition-colors mr-2 group"
+                className="p-2 text-[var(--color-brand-navy)] hover:text-[var(--color-brand-cyan)] transition-colors mr-2 group"
                 title="Search Courses"
               >
                 <Search className="h-5 w-5 group-hover:scale-110 transition-transform" />

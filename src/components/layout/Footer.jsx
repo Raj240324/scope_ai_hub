@@ -15,11 +15,11 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           {/* Institute Info */}
           <div className="space-y-8">
-            <Link to="/" className="inline-block">
+            <Link to="/" className="inline-block bg-white p-3 rounded-2xl">
               <img 
                 src="/logo.webp" 
                 alt="ScopeAIHub" 
-                className="h-16 w-auto object-contain brightness-0 invert" 
+                className="h-12 w-auto object-contain" 
               />
             </Link>
             <p className="text-sm leading-relaxed">
@@ -61,13 +61,13 @@ const Footer = () => {
           <div>
             <h3 className="text-white font-bold text-lg mb-8 relative inline-block">
               Quick Links
-              <span className="absolute -bottom-2 left-0 w-8 h-1 bg-primary rounded-full"></span>
+              <span className="absolute -bottom-2 left-0 w-8 h-1 bg-[var(--color-brand-orange)] rounded-full"></span>
             </h3>
             <ul className="space-y-4 text-sm font-medium">
-              <li><Link to="/about" className="hover:text-primary hover:translate-x-1 transition-all inline-flex items-center">About Us</Link></li>
-              <li><Link to="/careers/join-as-trainer" className="hover:text-primary hover:translate-x-1 transition-all inline-flex items-center">Join as Trainer</Link></li>
-              <li><Link to="/reviews" className="hover:text-primary hover:translate-x-1 transition-all inline-flex items-center">Student Reviews</Link></li>
-              <li><Link to="/faq" className="hover:text-primary hover:translate-x-1 transition-all inline-flex items-center">FAQs</Link></li>
+              <li><Link to="/about" className="hover:text-[var(--color-brand-cyan)] hover:translate-x-1 transition-all inline-flex items-center">About Us</Link></li>
+              <li><Link to="/careers/join-as-trainer" className="hover:text-[var(--color-brand-cyan)] hover:translate-x-1 transition-all inline-flex items-center">Join as Trainer</Link></li>
+              <li><Link to="/reviews" className="hover:text-[var(--color-brand-cyan)] hover:translate-x-1 transition-all inline-flex items-center">Student Reviews</Link></li>
+              <li><Link to="/faq" className="hover:text-[var(--color-brand-cyan)] hover:translate-x-1 transition-all inline-flex items-center">FAQs</Link></li>
             </ul>
           </div>
 
@@ -75,17 +75,17 @@ const Footer = () => {
           <div>
             <h3 className="text-white font-bold text-lg mb-8 relative inline-block">
               Popular Courses
-              <span className="absolute -bottom-2 left-0 w-8 h-1 bg-primary rounded-full"></span>
+              <span className="absolute -bottom-2 left-0 w-8 h-1 bg-[var(--color-brand-orange)] rounded-full"></span>
             </h3>
             <ul className="space-y-4 text-sm font-medium">
-              <li><Link to="/courses" className="hover:text-primary hover:translate-x-1 transition-all">Full Stack Development</Link></li>
-              <li><Link to="/courses" className="hover:text-primary hover:translate-x-1 transition-all">Python Data Science</Link></li>
-              <li><Link to="/courses" className="hover:text-primary hover:translate-x-1 transition-all">Cloud Computing</Link></li>
-              <li><Link to="/courses" className="hover:text-primary hover:translate-x-1 transition-all">UI/UX Design</Link></li>
-              <li><Link to="/courses" className="hover:text-primary hover:translate-x-1 transition-all">Cyber Security</Link></li>
-              <li><Link to="/courses" className="hover:text-primary hover:translate-x-1 transition-all">Mobile App Dev</Link></li>
+              <li><Link to="/courses" className="hover:text-[var(--color-brand-cyan)] hover:translate-x-1 transition-all">Full Stack Development</Link></li>
+              <li><Link to="/courses" className="hover:text-[var(--color-brand-cyan)] hover:translate-x-1 transition-all">Python Data Science</Link></li>
+              <li><Link to="/courses" className="hover:text-[var(--color-brand-cyan)] hover:translate-x-1 transition-all">Cloud Computing</Link></li>
+              <li><Link to="/courses" className="hover:text-[var(--color-brand-cyan)] hover:translate-x-1 transition-all">UI/UX Design</Link></li>
+              <li><Link to="/courses" className="hover:text-[var(--color-brand-cyan)] hover:translate-x-1 transition-all">Cyber Security</Link></li>
+              <li><Link to="/courses" className="hover:text-[var(--color-brand-cyan)] hover:translate-x-1 transition-all">Mobile App Dev</Link></li>
               <li className="pt-2">
-                <Link to="/courses" className="text-primary font-bold flex items-center group">
+                <Link to="/courses" className="text-[var(--color-brand-cyan)] font-bold flex items-center group">
                   View All Courses 
                   <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                 </Link>
@@ -97,23 +97,23 @@ const Footer = () => {
           <div>
             <h3 className="text-white font-bold text-lg mb-8 relative inline-block">
               Get In Touch
-              <span className="absolute -bottom-2 left-0 w-8 h-1 bg-primary rounded-full"></span>
+              <span className="absolute -bottom-2 left-0 w-8 h-1 bg-[var(--color-brand-orange)] rounded-full"></span>
             </h3>
             <ul className="space-y-6 text-sm">
               <li className="flex items-start space-x-4">
-                <div className="bg-white/5 p-3 rounded-xl text-primary">
+                <div className="bg-white/5 p-3 rounded-xl text-[var(--color-brand-orange)]">
                   <MapPin className="h-5 w-5" />
                 </div>
                 <span className="leading-relaxed">{BRANDING.address}</span>
               </li>
               <li className="flex items-center space-x-4">
-                <div className="bg-white/5 p-3 rounded-xl text-primary">
+                <div className="bg-white/5 p-3 rounded-xl text-[var(--color-brand-orange)]">
                   <Phone className="h-5 w-5" />
                 </div>
                 <span className="font-bold">{BRANDING.phone}</span>
               </li>
               <li className="flex items-center space-x-4">
-                <div className="bg-white/5 p-3 rounded-xl text-primary">
+                <div className="bg-white/5 p-3 rounded-xl text-[var(--color-brand-orange)]">
                   <Mail className="h-5 w-5" />
                 </div>
                 <span className="font-bold">{BRANDING.email}</span>
@@ -123,7 +123,7 @@ const Footer = () => {
         </div>
 
         {/* Newsletter / CTA */}
-        <div className="bg-primary/10 rounded-3xl p-8 md:p-10 mb-16 flex flex-col md:flex-row items-center justify-between border border-primary/20">
+        <div className="bg-[var(--color-brand-cyan)]/10 rounded-3xl p-8 md:p-10 mb-16 flex flex-col md:flex-row items-center justify-between border border-[var(--color-brand-cyan)]/20">
           <div className="mb-6 md:mb-0 text-center md:text-left">
             <h4 className="text-white text-xl font-bold mb-2">Subscribe to our newsletter</h4>
             <p className="text-slate-400 text-sm">Get the latest updates on new batches and scholarship opportunities.</p>
@@ -135,9 +135,9 @@ const Footer = () => {
               id="newsletter_email"
               name="newsletter_email"
               placeholder="Your email address" 
-              className="bg-slate-800 border-none rounded-l-xl px-6 py-4 text-white text-sm focus:ring-2 focus:ring-primary w-full md:w-64"
+              className="bg-slate-800 border-none rounded-l-xl px-6 py-4 text-white text-sm focus:ring-2 focus:ring-[var(--color-brand-orange)] w-full md:w-64"
             />
-            <button className="bg-primary hover:bg-primary-dark text-white font-bold px-8 py-4 rounded-r-xl transition-all">
+            <button className="bg-[var(--color-brand-orange)] hover:bg-[#EA580C] text-white font-bold px-8 py-4 rounded-r-xl transition-all">
               Join
             </button>
           </div>

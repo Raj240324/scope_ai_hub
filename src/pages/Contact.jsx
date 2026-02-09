@@ -68,7 +68,7 @@ const Contact = () => {
               </div>
             </div>
 
-            <div className="p-8 bg-slate-900 text-white rounded-3xl relative overflow-hidden">
+            <div className="p-8 bg-navy text-white rounded-3xl relative overflow-hidden">
               <MessageSquare className="absolute -bottom-4 -right-4 h-24 w-24 text-white/5" />
               <h3 className="text-xl font-bold mb-4 relative z-10">Counseling Session</h3>
               <p className="text-slate-400 text-sm mb-6 relative z-10">

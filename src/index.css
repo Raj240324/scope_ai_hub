@@ -1,21 +1,32 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #2E5BFF;
-  --color-primary-light: #2FA4FF;
-  --color-primary-dark: #1E2A78;
-  --color-secondary: #7B3FE4;
-  --color-accent: #FF8C1A;
-  --color-navy: #0E1B3F;
+  /* Brand Palette - Scope AI Hub */
+  --color-brand-navy: #1A237E;
+  --color-brand-orange: #F97316;
+  --color-brand-red: #EF4444;
+  --color-brand-cyan: #0EA5E9;
+  --color-brand-green: #10B981;
+  
+  /* Semantic Mapping */
+  --color-primary: #1A237E;       /* Main Brand Color (Navy) */
+  --color-primary-light: #2E5BFF; /* Legacy/Light variation */
+  --color-primary-dark: #0F172A;  /* Deepest Background */
+  
+  --color-secondary: #0EA5E9;     /* Tech/Innovation (Cyan) */
+  --color-accent: #F97316;        /* High Conversion (Orange) */
+  
+  --color-navy: #1A237E;
   --color-success: #10b981;
   --color-warning: #f59e0b;
   --color-danger: #ef4444;
+  
   --font-sans: "Inter", "system-ui", "sans-serif";
 }
 
 @layer base {
   body {
-    @apply bg-slate-50 text-slate-900 font-sans;
+    @apply bg-slate-50 text-[var(--color-brand-navy)] font-sans;
   }
 }
 
@@ -24,17 +35,20 @@
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
 
+  /* Primary Button - High Conversion Orange Gradient */
   .btn-primary {
-    @apply inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white transition-all duration-200 shadow-md hover:shadow-lg active:scale-95;
-    background: linear-gradient(135deg, #1E2A78 0%, #2E5BFF 50%, #7B3FE4 100%);
+    @apply inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-bold rounded-xl text-white transition-all duration-300 shadow-md hover:shadow-xl hover:-translate-y-0.5 active:scale-95;
+    background: linear-gradient(135deg, #F97316 0%, #EF4444 100%);
   }
 
   .btn-primary:hover {
-    background: linear-gradient(135deg, #1E2A78 10%, #2E5BFF 60%, #7B3FE4 90%);
+    background: linear-gradient(135deg, #FF8C1A 0%, #F87171 100%);
+    @apply shadow-orange-500/30;
   }
 
+  /* Secondary Button - Navy Outline */
   .btn-secondary {
-    @apply inline-flex items-center justify-center px-6 py-3 border-2 border-primary/20 text-base font-bold rounded-md text-primary bg-white hover:bg-slate-50 hover:border-primary transition-colors duration-200 active:scale-95;
+    @apply inline-flex items-center justify-center px-6 py-3 border-2 border-[var(--color-brand-navy)] text-base font-bold rounded-xl text-[var(--color-brand-navy)] bg-white hover:bg-[var(--color-brand-navy)] hover:text-white transition-all duration-300 active:scale-95;
   }
 
   .section-padding {
@@ -42,11 +56,11 @@
   }
 
   .heading-lg {
-    @apply text-3xl md:text-4xl lg:text-4xl font-bold tracking-tight text-slate-900;
+    @apply text-3xl md:text-5xl lg:text-6xl font-black tracking-tight text-[var(--color-brand-navy)];
   }
 
   .heading-md {
-    @apply text-2xl md:text-3xl font-bold tracking-tight text-slate-900;
+    @apply text-2xl md:text-3xl font-black tracking-tight text-[var(--color-brand-navy)];
   }
 
   .no-scrollbar::-webkit-scrollbar {
