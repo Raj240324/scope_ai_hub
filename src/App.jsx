@@ -6,8 +6,6 @@ import { Loader2 } from 'lucide-react';
 // Components
 import ErrorBoundary from './components/layout/ErrorBoundary';
 import ScrollToTop from './components/utils/ScrollToTop';
-import TawkChat from './components/utils/TawkChat';
-import WhatsAppButton from './components/ui/WhatsAppButton';
 import { ModalProvider } from './context/ModalContext';
 import ContactModal from './components/ui/ContactModal';
 
@@ -16,7 +14,6 @@ const Home = lazy(() => import('./pages/Home'));
 const About = lazy(() => import('./pages/About'));
 const Admissions = lazy(() => import('./pages/Admissions'));
 const Reviews = lazy(() => import('./pages/Reviews'));
-const Placement = lazy(() => import('./pages/Placement'));
 const Contact = lazy(() => import('./pages/Contact'));
 const FAQ = lazy(() => import('./pages/FAQ'));
 const CoursesList = lazy(() => import('./pages/courses/CoursesList'));
@@ -28,12 +25,8 @@ const RefundPolicy = lazy(() => import('./pages/legal/RefundPolicy'));
 const Disclaimer = lazy(() => import('./pages/legal/Disclaimer'));
 const TrainerCodeOfConduct = lazy(() => import('./pages/legal/TrainerCodeOfConduct'));
 const JoinAsTrainer = lazy(() => import('./pages/careers/JoinAsTrainer'));
+const TrainerProfiles = lazy(() => import('./pages/careers/TrainerProfiles'));
 const NotFound = lazy(() => import('./pages/NotFound'));
-
-// New Pages
-
-const Gallery = lazy(() => import('./pages/Gallery'));
-
 
 // Loading Fallback
 const PageLoader = () => (
@@ -48,8 +41,6 @@ function App() {
     <ErrorBoundary>
       <HelmetProvider>
         <ModalProvider>
-          <TawkChat />
-          <WhatsAppButton />
           <Router>
             <ScrollToTop />
             <Suspense fallback={<PageLoader />}>
@@ -58,7 +49,6 @@ function App() {
                 <Route path="/about" element={<About />} />
                 <Route path="/admissions" element={<Admissions />} />
                 <Route path="/reviews" element={<Reviews />} />
-                <Route path="/placement" element={<Placement />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/faq" element={<FAQ />} />
                 <Route path="/courses" element={<CoursesList />} />
@@ -70,12 +60,12 @@ function App() {
                 <Route path="/disclaimer" element={<Disclaimer />} />
                 <Route path="/legal/trainer-conduct" element={<TrainerCodeOfConduct />} />
                 <Route path="/careers/join-as-trainer" element={<JoinAsTrainer />} />
-                {/* New Pages */}
-                <Route path="/gallery" element={<Gallery />} />
+                <Route path="/careers/trainers" element={<TrainerProfiles />} />
 
                 {/* 404 Route */}
                 <Route path="*" element={<NotFound />} />
               </Routes>
+
             </Suspense>
             <ContactModal />
           </Router>

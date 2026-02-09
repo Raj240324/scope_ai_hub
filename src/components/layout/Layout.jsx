@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { motion, AnimatePresence } from 'framer-motion';
 import Header from './Header';
 import Footer from './Footer';
+import WhatsAppButton from '../ui/WhatsAppButton';
 import { BRANDING } from '../../data/branding';
 
 const Layout = ({ 
@@ -11,6 +12,26 @@ const Layout = ({
   description = `Join ${BRANDING.fullName} for industry-aligned software training in Full Stack, Data Science, UI/UX, and more. Honest, skill-driven education in Tamil Nadu.`,
   keywords = "software training, coding institute, tamil nadu, chennai, full stack development, data science, ui ux design, cloud computing, devops, ethical hacking"
 }) => {
+  // Tawk.to Live Chat Integration
+  useEffect(() => {
+    // Only load Tawk.to script once
+    if (window.Tawk_API) return;
+
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = 'https://embed.tawk.to/67a9f4e3f66c68b303ae9f8a/1ij9f8e9m';
+    script.charset = 'UTF-8';
+    script.setAttribute('crossorigin', '*');
+    document.body.appendChild(script);
+
+    return () => {
+      // Cleanup if needed
+      if (window.Tawk_API) {
+        window.Tawk_API.hideWidget();
+      }
+    };
+  }, []);
+
   return (
     <div className="flex flex-col min-h-screen">
       <Helmet>
@@ -44,6 +65,7 @@ const Layout = ({
       </AnimatePresence>
 
       <Footer />
+      <WhatsAppButton />
     </div>
   );
 };

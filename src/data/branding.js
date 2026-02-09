@@ -2,12 +2,12 @@ export const BRANDING = {
   name: "Scope",
   suffix: "AIHub",
   fullName: "ScopeAIHub",
-  logo: "/logo.png",
-  tagline: "Empowering AI Innovation",
+  logo: "/logo.webp",
+  tagline: "Master Tech Skills in Tamil & English | Practical Training",
   description:
-    "ScopeAIHub is a premier technology training institute based in Chennai, providing high-quality, practical AI and software training to help students secure careers in global tech leaders.",
+    "Premier AI and Software Training Institute offering industry-relevant courses in Full Stack, Data Science, Cloud Computing, and more.",
   location: "Chennai",
-  address: "Chennai Technology Hub, OMR, Chennai - 600119",
+  address: "Anna Nagar, Chennai, Tamil Nadu, India",
   email: "contact@scopeaihub.com",
   phone: "+91 63839 80415",
   socials: {

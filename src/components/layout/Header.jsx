@@ -51,8 +51,6 @@ const Header = () => {
     { name: 'Home', href: '/' },
     { name: 'About', href: '/about' },
     { name: 'Courses', href: '/courses' },
-    { name: 'Gallery', href: '/gallery' },
-    { name: 'Placement', href: '/placement' },
     { name: 'Join as Trainer', href: '/careers/join-as-trainer' },
     { name: 'Contact', href: '/contact' },
 
@@ -62,8 +60,8 @@ const Header = () => {
     <header className={clsx(
       "fixed top-0 left-0 w-full z-50 transition-all duration-300",
       scrolled 
-        ? "bg-white/95 backdrop-blur-md shadow-md py-3" 
-        : "bg-white py-4 shadow-sm"
+        ? "bg-[#d9d9d9]/95 backdrop-blur-md shadow-md py-3" 
+        : "bg-[#d9d9d9] py-4 shadow-sm"
     )}>
       {/* Search Overlay */}
       {isSearchOpen && (
@@ -191,18 +189,12 @@ const Header = () => {
         <div className="w-full">
           <nav className="flex items-center justify-between">
             {/* Logo */}
-            <Link to="/" className="flex items-center space-x-3 group">
-              <div className="group-hover:rotate-6 transition-transform duration-300">
-                <img src={BRANDING.logo} alt={BRANDING.fullName} className="h-9 w-auto object-contain" />
-              </div>
-              <div className="flex flex-col">
-                <span className="text-xl md:text-2xl font-black text-slate-900 tracking-tighter leading-none flex items-center">
-                  {BRANDING.name} <span className="text-primary ml-1">{BRANDING.suffix}</span>
-                </span>
-                <span className="text-[8px] font-black text-slate-500 tracking-[0.25em] uppercase mt-1">
-                  {BRANDING.tagline}
-                </span>
-              </div>
+            <Link to="/" className="flex items-center group">
+              <img 
+                src="/logo.webp" 
+                alt="ScopeAIHub" 
+                className="h-12 md:h-14 w-auto object-contain transition-transform duration-300 group-hover:scale-105" 
+              />
             </Link>
 
             {/* Desktop Navigation */}
@@ -220,7 +212,7 @@ const Header = () => {
                       'px-4 py-2 text-[14px] font-bold transition-all rounded-lg relative flex items-center',
                       location.pathname === item.href 
                         ? 'text-primary' 
-                        : 'text-slate-600 hover:text-primary hover:bg-slate-50'
+                        : 'text-slate-800 hover:text-primary hover:bg-slate-50'
                     )}
                   >
                     {item.name}

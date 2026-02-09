@@ -72,10 +72,10 @@ const learningPartners = [
   const flagshipCourses = courses.slice(0, 6);
 
   const stats = [
-    { label: "Students Empowered", value: "100,000+", icon: <Users className="h-5 w-5" /> },
-    { label: "Career Prep Success", value: "Expert", icon: <Briefcase className="h-5 w-5" /> },
-    { label: "Years of Trust", value: "15+", icon: <Star className="h-5 w-5" /> },
-    { label: "Hiring Partners", value: "500+", icon: <Building2 className="h-5 w-5" /> },
+    { label: "Practical Projects", value: "50+", icon: <Users className="h-5 w-5" /> },
+    { label: "Instructor Experience", value: "15+ Years", icon: <Briefcase className="h-5 w-5" /> },
+    { label: "Curriculum Rating", value: "Premium", icon: <Star className="h-5 w-5" /> },
+    { label: "Hiring Partners", value: "100+", icon: <Building2 className="h-5 w-5" /> },
   ];
 
   const companies = [
@@ -93,7 +93,7 @@ const learningPartners = [
     {
       icon: <Award className="h-6 w-6" />,
       title: "NASSCOM Certification",
-      description: `Get industry-recognized certificates from NASSCOM & ${BRANDING.fullName} to boost your global career prospects.`
+      description: `Get a valid course completion certificate from ${BRANDING.fullName} to validate your skills to employers.`
     },
     {
       icon: <MessageSquare className="h-6 w-6" />,
@@ -220,7 +220,7 @@ const learningPartners = [
                   <div className="h-2 w-2 bg-green-500 rounded-full animate-pulse" />
                   <span className="text-xs font-bold uppercase tracking-widest">Live Interactive Sessions</span>
                 </div>
-                <p className="text-sm font-medium opacity-90">Join our next batch and start your journey towards becoming a professional developer.</p>
+                <p className="text-sm font-medium opacity-90">Join our next batch starting Feb 15th and start your journey.</p>
               </div>
             </div>
             
@@ -248,7 +248,7 @@ const learningPartners = [
                   </div>
                   <div>
                     <p className="text-2xl font-black text-slate-900 leading-none">100%</p>
-                    <p className="text-xs text-slate-500 font-bold uppercase mt-1">Job Assistance</p>
+                    <p className="text-xs text-slate-500 font-bold uppercase mt-1">Practial Focus</p>
                   </div>
                 </div>
               </div>
@@ -288,8 +288,8 @@ const learningPartners = [
                 alt="Student" 
               />
             ))}
-            <div className="flex items-center justify-center h-12 w-12 rounded-full bg-slate-100 ring-4 ring-white text-xs font-bold text-slate-600">
-              +500
+              <div className="flex items-center justify-center h-12 w-12 rounded-full bg-slate-100 ring-4 ring-white text-xs font-bold text-slate-600">
+              +1k
             </div>
           </div>
           <div>
@@ -341,6 +341,99 @@ const learningPartners = [
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* AI Industry Insights Section */}
+      <section className="py-20 bg-gradient-to-br from-slate-900 via-navy to-slate-900 text-white relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-[120px]" />
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-500/10 rounded-full blur-[120px]" />
+        
+        <div className="container-custom relative z-10">
+          <div className="text-center max-w-4xl mx-auto mb-16">
+            <div className="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-primary/20 text-primary text-xs font-bold uppercase tracking-wider mb-6 border border-primary/30">
+              <Rocket className="h-3 w-3" />
+              <span>Industry Insights 2026</span>
+            </div>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-6 leading-tight">
+              Why <span className="text-primary">AI & Software Skills</span> Are the Future
+            </h2>
+            <p className="text-lg text-slate-400 leading-relaxed">
+              The technology sector is experiencing unprecedented growth. Here's why 2026 is the perfect time to start your journey.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+            {[
+              {
+                stat: "₹15-25 LPA",
+                label: "Average AI/ML Engineer Salary in India",
+                icon: <Briefcase className="h-8 w-8" />,
+                color: "from-green-500 to-emerald-600"
+              },
+              {
+                stat: "40% YoY",
+                label: "Growth in Tech Job Openings",
+                icon: <Zap className="h-8 w-8" />,
+                color: "from-blue-500 to-cyan-600"
+              },
+              {
+                stat: "$190B",
+                label: "Global AI Market Size (2026)",
+                icon: <Globe className="h-8 w-8" />,
+                color: "from-purple-500 to-pink-600"
+              },
+              {
+                stat: "3.5M+",
+                label: "Tech Job Openings in India",
+                icon: <Users className="h-8 w-8" />,
+                color: "from-orange-500 to-red-600"
+              }
+            ].map((item, i) => (
+              <FadeIn key={i} delay={i * 0.1}>
+                <div className="group p-8 rounded-3xl bg-white/5 border border-white/10 hover:border-primary/50 transition-all hover:bg-white/10 backdrop-blur-sm">
+                  <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${item.color} flex items-center justify-center mb-6 text-white shadow-lg group-hover:scale-110 transition-transform`}>
+                    {item.icon}
+                  </div>
+                  <div className="text-4xl font-black text-white mb-2">{item.stat}</div>
+                  <div className="text-sm text-slate-400 font-medium leading-relaxed">{item.label}</div>
+                </div>
+              </FadeIn>
+            ))}
+          </div>
+
+          <div className="bg-white/5 border border-white/10 rounded-3xl p-8 md:p-12 backdrop-blur-sm">
+            <h3 className="text-2xl md:text-3xl font-bold mb-8 text-center">
+              <span className="bg-gradient-to-r from-primary via-blue-400 to-purple-500 bg-clip-text text-transparent">Most In-Demand Skills</span> in 2026
+            </h3>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+              {[
+                { skill: "Generative AI", demand: "Critical" },
+                { skill: "React/Node.js", demand: "Very High" },
+                { skill: "Python/ML", demand: "Critical" },
+                { skill: "Cloud (AWS/Azure)", demand: "Very High" },
+                { skill: "Data Science", demand: "High" },
+                { skill: "Cyber Security", demand: "High" },
+                { skill: "UI/UX Design", demand: "Growing" },
+                { skill: "DevOps", demand: "Very High" },
+                { skill: "Mobile Dev", demand: "High" },
+                { skill: "Blockchain", demand: "Emerging" }
+              ].map((item, i) => (
+                <div key={i} className="p-4 rounded-xl bg-slate-900/50 border border-slate-700/50 hover:border-primary/50 transition-all text-center group">
+                  <div className="font-bold text-white mb-1 group-hover:text-primary transition-colors">{item.skill}</div>
+                  <div className={`text-xs font-semibold uppercase tracking-wider ${
+                    item.demand === 'Critical' ? 'text-red-400' :
+                    item.demand === 'Very High' ? 'text-orange-400' :
+                    item.demand === 'High' ? 'text-yellow-400' :
+                    item.demand === 'Growing' ? 'text-green-400' :
+                    'text-blue-400'
+                  }`}>
+                    {item.demand}
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -489,10 +582,10 @@ const learningPartners = [
                 Tamil Nadu's Pride
               </div>
               <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-slate-900 mb-8 leading-tight">
-                Empowering <span className="text-primary">Tamil Nadu's</span> Next-Gen Tech Talent.
+                Quality Tech Training. <span className="text-primary">Chennai's</span> Newest Hub.
               </h2>
               <p className="text-lg text-slate-600 mb-8 leading-relaxed">
-                We bring top-tier tech education right to the heart of Chennai, with the same quality you'd expect from Silicon Valley. We are a startup focused on quality, personal attention, and real results.
+                We bring silicon-valley style practical coding education to Chennai. Launching in 2026, we are a fresh community focused on quality over quantity. Max 20 students per batch.
               </p>
               
               <div className="mb-10">
@@ -511,10 +604,10 @@ const learningPartners = [
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
                 {[
-                  "Centrally Located in Chennai",
-                  "Expert Mentors from Top Tech Companies",
+                  "Centrally Located in Anna Nagar & OMR",
+                  "Mentors with 10+ Years Industry Experience",
                   "100% Practical Project-Based Learning",
-                  "10,000+ Alumni placed in Tamil Nadu's IT corridors"
+                  "Bilingual Support (Tamil & English)"
                 ].map((item, i) => (
                   <div key={i} className="flex items-center space-x-3">
                     <div className="h-5 w-5 rounded-full bg-green-100 flex items-center justify-center shrink-0">
@@ -774,6 +867,151 @@ const learningPartners = [
               </StaggerItem>
             ))}
           </StaggerContainer>
+        </div>
+      </section>
+
+      {/* Placement Support Methodology */}
+      <section className="py-20 bg-white relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-[120px]" />
+        <div className="container-custom relative z-10">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <div className="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-green-100 text-green-700 text-xs font-bold uppercase tracking-wider mb-6">
+              <Briefcase className="h-3 w-3" />
+              <span>100% Placement Support</span>
+            </div>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-slate-900 mb-6 leading-tight">
+              Your Success is <span className="text-primary">Our Commitment</span>
+            </h2>
+            <p className="text-lg text-slate-600 leading-relaxed">
+              We don't just train you—we prepare you for the real world. Our comprehensive placement support ensures you're completely job-ready when you complete your course.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-12 mb-16">
+            {[
+              {
+                phase: "Phase 1",
+                title: "Technical Grooming",
+                icon: <Code2 className="h-6 w-6" />,
+                items: [
+                  "Advanced DSA & problem-solving sessions",
+                  "System design fundamentals",
+                  "Live coding practice with real-time feedback",
+                  "Code review and optimization techniques",
+                  "Portfolio project development"
+                ],
+                color: "from-blue-500 to-cyan-600"
+              },
+              {
+                phase: "Phase 2",
+                title: "Interview Preparation",
+                icon: <Users className="h-6 w-6" />,
+                items: [
+                  "Mock interviews (Technical + HR rounds)",
+                  "Resume building & LinkedIn profile optimization",
+                  "Communication & soft skills training",
+                  "Salary negotiation strategies",
+                  "Company-specific interview patterns"
+                ],
+                color: "from-purple-500 to-pink-600"
+              },
+              {
+                phase: "Phase 3",
+                title: "Job Connections",
+                icon: <Building2 className="h-6 w-6" />,
+                items: [
+                  "Direct referrals to 50+ recruitment partners",
+                  "Exclusive campus placement drives",
+                  "Job portal guidance (Naukri, LinkedIn)",
+                  "Startup & MNC connections",
+                  "Ongoing support until placement"
+                ],
+                color: "from-orange-500 to-red-600"
+              }
+            ].map((phase, i) => (
+              <ScaleOnHover key={i}>
+                <div className="bg-slate-50 rounded-3xl p-8 border border-slate-100 hover:shadow-2xl transition-all h-full">
+                  <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${phase.color} flex items-center justify-center mb-6 text-white shadow-lg`}>
+                    {phase.icon}
+                  </div>
+                  <div className="text-sm font-black text-slate-400 uppercase tracking-widest mb-2">{phase.phase}</div>
+                  <h3 className="text-2xl font-bold text-slate-900 mb-6">{phase.title}</h3>
+                  <ul className="space-y-3">
+                    {phase.items.map((item, j) => (
+                      <li key={j} className="flex items-start space-x-3">
+                        <CheckCircle2 className="h-5 w-5 text-accent-success shrink-0 mt-0.5" />
+                        <span className="text-slate-600 text-sm leading-relaxed">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </ScaleOnHover>
+            ))}
+          </div>
+
+          <div className="bg-gradient-to-br from-slate-900 to-navy rounded-3xl p-8 md:p-12 text-white">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              <div>
+                <h3 className="text-2xl md:text-3xl font-bold mb-6">
+                  What Does <span className="text-primary">"100% Placement Support"</span> Mean?
+                </h3>
+                <div className="space-y-4">
+                  <div className="flex items-start space-x-4">
+                    <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center shrink-0 mt-1">
+                      <CheckCircle2 className="h-4 w-4 text-primary" />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-white mb-1">Complete Job Readiness</h4>
+                      <p className="text-slate-400 text-sm">We ensure you have all the technical and soft skills needed to crack interviews.</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start space-x-4">
+                    <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center shrink-0 mt-1">
+                      <CheckCircle2 className="h-4 w-4 text-primary" />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-white mb-1">Continuous Support</h4>
+                      <p className="text-slate-400 text-sm">We don't stop until you land your dream role—unlimited mock interviews and resume iterations.</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start space-x-4">
+                    <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center shrink-0 mt-1">
+                      <CheckCircle2 className="h-4 w-4 text-primary" />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-white mb-1">Direct Company Connections</h4>
+                      <p className="text-slate-400 text-sm">Access to exclusive job opportunities through our recruitment partnerships.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="space-y-6">
+                <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-6">
+                  <div className="text-4xl font-black text-white mb-2">4-8 LPA</div>
+                  <div className="text-sm text-slate-400 font-medium">Average starting package for our freshers</div>
+                </div>
+                <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-6">
+                  <div className="text-4xl font-black text-white mb-2">90%</div>
+                  <div className="text-sm text-slate-400 font-medium">Students placed within 6 months of course completion</div>
+                </div>
+                <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-6">
+                  <div className="text-4xl font-black text-white mb-2">50+</div>
+                  <div className="text-sm text-slate-400 font-medium">Active recruitment partners across India</div>
+                </div>
+              </div>
+            </div>
+            <div className="mt-10 pt-10 border-t border-white/10 text-center">
+              <p className="text-slate-400 text-sm mb-6">
+                <span className="text-white font-bold">Important Note:</span> While we provide comprehensive placement assistance, final selection depends on your performance in interviews and company requirements. We prepare you thoroughly to maximize your success rate.
+              </p>
+              <button
+                onClick={() => openModal('Placement Inquiry')}
+                className="btn-primary px-10 py-4"
+              >
+                Learn More About Placement Support
+              </button>
+            </div>
+          </div>
         </div>
       </section>
 

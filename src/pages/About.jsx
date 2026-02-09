@@ -1,6 +1,6 @@
 import React from 'react';
 import Layout from '../components/layout/Layout';
-import { Target, Eye, Lightbulb, Users, ShieldCheck, Heart, ArrowRight, Award } from 'lucide-react';
+import { Target, Eye, Lightbulb, Users, ShieldCheck, Heart, ArrowRight, Award, Code2, Zap, MessageSquare, Briefcase } from 'lucide-react';
 import { useModal } from '../context/ModalContext';
 import { BRANDING } from '../data/branding';
 
@@ -10,10 +10,10 @@ import { FadeIn, StaggerContainer, StaggerItem, ScaleOnHover, ScrollCountUp, Par
 const About = () => {
   const { openModal } = useModal();
   const stats = [
-    { label: 'Successful Placements', value: '10,000+' },
-    { label: 'Expert Trainers', value: '100+' },
-    { label: 'Hiring Partners', value: '500+' },
-    { label: 'Years of Excellence', value: '15+' },
+    { label: 'Industry Projects', value: '50+' },
+    { label: 'Instructor Exp', value: '15+ Years' },
+    { label: 'Hiring Partners', value: '50+' },
+    { label: 'Practical Focus', value: '100%' },
   ];
 
   const locations = [
@@ -84,8 +84,8 @@ const About = () => {
       description="Learn about our mission to bridge the skill gap in the software industry. Meet our expert mentors and understand our teaching philosophy."
     >
       <Hero 
-        title={<>Our Story: From a Small Classroom to <span className="text-primary">Chennai's Top Institute</span>.</>}
-        subtitle="We started in 2025 with just 10 students in Chennai. Our goal was simple: provide the best software training quality for the tech industry."
+        title={<>Our Story: <span className="text-primary">New Beginnings</span>, Expert Foundations.</>}
+        subtitle="Established in 2026, ScopeAIHub is born from a simple observation: Tech education needed a refresh. We are a new-age institute built by industry veterans to bring Silicon Valley-style practical learning to Tamil Nadu."
       />
 
       {/* Stats Section */}
@@ -101,6 +101,60 @@ const About = () => {
               </StaggerItem>
             ))}
           </StaggerContainer>
+        </div>
+      </section>
+
+      {/* Why We're Different */}
+      <section className="py-20 bg-slate-50">
+        <div className="container-custom">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <h2 className="heading-md mb-6">Why a <span className="text-primary">Startup Institute</span>?</h2>
+            <p className="text-slate-600 text-lg">
+              Because we are agile. Unlike traditional institutes with outdated syllabi, we update our curriculum every month. We are small enough to care about every single student, but experienced enough to guide you to top product companies.
+            </p>
+          </div>
+          <div className="grid md:grid-cols-2 gap-8">
+            {[
+              {
+                title: "Project-First Learning",
+                desc: "Every concept is immediately applied to a real project. You don't just learn syntax—you build products.",
+                icon: <Code2 className="h-6 w-6" />
+              },
+              {
+                title: "Industry-Current Curriculum",
+                desc: "Our syllabus is updated every quarter based on current job market demands and emerging technologies.",
+                icon: <Zap className="h-6 w-6" />
+              },
+              {
+                title: "Small Batch Sizes",
+                desc: "Maximum 20 students per batch ensures personalized attention and mentorship from our expert trainers.",
+                icon: <Users className="h-6 w-6" />
+              },
+              {
+                title: "Lifetime Access",
+                desc: "Once enrolled, you get lifetime access to our learning portal, recorded sessions, and updated course materials.",
+                icon: <Award className="h-6 w-6" />
+              },
+              {
+                title: "Bilingual Support (தமிழ் + English)",
+                desc: "We explain complex technical concepts in both Tamil and English, ensuring no student is left behind due to language barriers.",
+                icon: <MessageSquare className="h-6 w-6" />
+              },
+              {
+                title: "Career-Ready Focus",
+                desc: "From day one, we prepare you for interviews, not just exams. Mock interviews, resume reviews, and placement grooming included.",
+                icon: <Briefcase className="h-6 w-6" />
+              }
+            ].map((item, i) => (
+              <div key={i} className="p-8 bg-white rounded-3xl border border-slate-100 shadow-sm hover:shadow-lg transition-all group">
+                <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary group-hover:text-white transition-colors text-primary">
+                  {item.icon}
+                </div>
+                <h3 className="text-xl font-bold text-slate-900 mb-3">{item.title}</h3>
+                <p className="text-slate-600 leading-relaxed">{item.desc}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 

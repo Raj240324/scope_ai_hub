@@ -81,6 +81,25 @@ const Contact = () => {
                 Book Now →
               </button>
             </div>
+
+            <div className="p-8 bg-primary/5 border border-primary/10 rounded-3xl">
+              <Clock className="h-8 w-8 text-primary mb-4" />
+              <h3 className="text-xl font-bold text-slate-900 mb-4">Office Hours</h3>
+              <div className="space-y-3 text-sm">
+                <div className="flex justify-between">
+                  <span className="text-slate-600">Monday - Friday:</span>
+                  <span className="font-bold text-slate-900">9:00 AM - 7:00 PM</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-slate-600">Saturday:</span>
+                  <span className="font-bold text-slate-900">9:00 AM - 5:00 PM</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-slate-600">Sunday:</span>
+                  <span className="font-bold text-accent-error">Closed</span>
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* Contact Form */}
