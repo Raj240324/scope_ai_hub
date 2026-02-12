@@ -25,7 +25,7 @@ const CourseCard = ({ course, index = 0 }) => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="group bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-xl hover:border-primary/30 transition-all duration-300 flex flex-col h-full relative"
+      className="group bg-[var(--bg-card)] rounded-3xl overflow-hidden border border-[var(--border-color)] shadow-sm hover:shadow-xl hover:border-primary/30 transition-all duration-300 flex flex-col h-full relative"
     >
       <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-secondary to-primary scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left z-20" />
       
@@ -59,25 +59,25 @@ const CourseCard = ({ course, index = 0 }) => {
           {[...Array(5)].map((_, i) => (
             <Star key={i} className="h-3.5 w-3.5 fill-amber-400 text-amber-400" />
           ))}
-          <span className="text-[10px] font-black text-slate-400 ml-2 uppercase tracking-widest">Premium Course</span>
+          <span className="text-[10px] font-black text-[var(--text-muted)] ml-2 uppercase tracking-widest">Premium Course</span>
         </div>
 
-        <h3 className="text-xl font-black text-slate-900 mb-3 leading-tight group-hover:text-primary transition-colors duration-300">
+        <h3 className="text-xl font-black text-[var(--text-heading)] mb-3 leading-tight group-hover:text-primary transition-colors duration-300">
           {course.title}
         </h3>
         
-        <p className="text-slate-500 text-sm mb-6 line-clamp-2 leading-relaxed">
+        <p className="text-[var(--text-muted)] text-sm mb-6 line-clamp-2 leading-relaxed">
           {course.shortDescription}
         </p>
 
-        <div className="grid grid-cols-2 gap-4 mb-8 pt-6 border-t border-slate-100">
-          <div className="flex items-center text-sm text-slate-600 font-bold">
+        <div className="grid grid-cols-2 gap-4 mb-8 pt-6 border-t border-[var(--border-color)]">
+          <div className="flex items-center text-sm text-[var(--text-muted)] font-bold">
             <div className="h-9 w-9 rounded-xl bg-primary/5 flex items-center justify-center mr-3 group-hover:bg-primary group-hover:text-white transition-all duration-300">
               <Clock className="h-4 w-4" />
             </div>
             {course.duration}
           </div>
-          <div className="flex items-center text-sm text-slate-600 font-bold">
+          <div className="flex items-center text-sm text-[var(--text-muted)] font-bold">
             <div className="h-9 w-9 rounded-xl bg-primary/5 flex items-center justify-center mr-3 group-hover:bg-primary group-hover:text-white transition-all duration-300">
               <Globe className="h-4 w-4" />
             </div>
@@ -88,7 +88,7 @@ const CourseCard = ({ course, index = 0 }) => {
         <div className="mt-auto space-y-4">
           <div className="flex items-center justify-between mb-2">
             <div>
-              <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-1">Tuition Fee</span>
+              <span className="text-[10px] font-black text-[var(--text-muted)] uppercase tracking-widest block mb-1">Tuition Fee</span>
               <span className="text-lg font-black text-primary">{course.price}</span>
             </div>
             <ScaleOnHover>
@@ -115,7 +115,7 @@ const CourseCard = ({ course, index = 0 }) => {
             <ScaleOnHover scale={1.02}>
               <Link
                 to={`/courses/${course.slug}`}
-                className="flex items-center justify-center w-full py-3 px-4 bg-slate-900 text-white text-[10px] font-black uppercase tracking-widest rounded-xl hover:bg-slate-800 transition-all duration-300 group/btn shadow-lg shadow-slate-900/10"
+                className="flex items-center justify-center w-full py-3 px-4 bg-[var(--bg-body)] text-[var(--text-heading)] border border-[var(--border-color)] text-[10px] font-black uppercase tracking-widest rounded-xl hover:bg-primary hover:text-white hover:border-primary transition-all duration-300 group/btn shadow-lg"
               >
                 Details
                 <ArrowRight className="ml-2 h-3.5 w-3.5 transition-transform group-hover/btn:translate-x-1" />

@@ -130,20 +130,20 @@ const FAQItem = ({ question, answer }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="border-b border-slate-200 last:border-0">
+    <div className="border-b border-[var(--border-color)] last:border-0">
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="w-full py-6 flex items-center justify-between text-left hover:text-primary transition-colors group"
       >
-        <span className="text-lg font-bold text-slate-900 group-hover:text-primary transition-colors pr-8">
+        <span className="text-lg font-bold text-[var(--text-heading)] group-hover:text-primary transition-colors pr-8">
           {question}
         </span>
-        <div className={`flex-shrink-0 h-6 w-6 rounded-full border-2 border-slate-300 flex items-center justify-center transition-all ${isOpen ? 'bg-primary border-primary text-white rotate-180' : 'text-slate-400'}`}>
+        <div className={`flex-shrink-0 h-6 w-6 rounded-full border-2 border-[var(--border-color)] flex items-center justify-center transition-all ${isOpen ? 'bg-primary border-primary text-[var(--text-on-inverted)] rotate-180' : 'text-[var(--text-muted)]'}`}>
           {isOpen ? <Minus className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
         </div>
       </button>
       <div className={`overflow-hidden transition-all duration-300 ${isOpen ? 'max-h-96 pb-6' : 'max-h-0'}`}>
-        <p className="text-slate-600 leading-relaxed">
+        <p className="text-[var(--text-muted)] leading-relaxed">
           {answer}
         </p>
       </div>
@@ -165,13 +165,13 @@ const FAQ = () => {
         subtitle="Find answers to common questions about our courses, admission process, and career support."
       />
 
-      <div className="bg-slate-50 py-20">
+      <div className="bg-[var(--bg-secondary)] py-20">
         <div className="container-custom">
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-12">
             {/* Sidebar Categories */}
             <div className="lg:col-span-1">
-              <div className="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 sticky top-32">
-                <h3 className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-6 px-4">Categories</h3>
+              <div className="bg-[var(--bg-card)] p-6 rounded-3xl shadow-sm border border-[var(--border-color)] sticky top-32">
+                <h3 className="text-sm font-bold text-[var(--text-muted)] uppercase tracking-widest mb-6 px-4">Categories</h3>
                 <nav className="space-y-2">
                   {faqData.map((cat) => (
                     <button
@@ -179,8 +179,8 @@ const FAQ = () => {
                       onClick={() => setActiveCategory(cat.category)}
                       className={`w-full text-left px-4 py-3 rounded-xl font-bold transition-all ${
                         activeCategory === cat.category
-                          ? 'bg-primary text-white shadow-lg shadow-primary/25'
-                          : 'text-slate-600 hover:bg-slate-50'
+                          ? 'bg-primary text-[var(--text-on-inverted)] shadow-lg shadow-primary/25'
+                          : 'text-[var(--text-muted)] hover:bg-[var(--bg-secondary)]'
                       }`}
                     >
                       {cat.category}
@@ -188,13 +188,13 @@ const FAQ = () => {
                   ))}
                 </nav>
 
-                <div className="mt-10 p-6 bg-navy rounded-2xl text-white">
+                <div className="mt-10 p-6 bg-[var(--bg-inverted)] rounded-2xl text-[var(--text-on-inverted)]">
                   <MessageCircle className="h-8 w-8 text-primary mb-4" />
                   <h4 className="font-bold mb-2">Still have questions?</h4>
-                  <p className="text-slate-400 text-xs mb-6">Can't find what you're looking for? Reach out to our team.</p>
+                  <p className="text-[var(--text-on-inverted)]/60 text-xs mb-6">Can't find what you're looking for? Reach out to our team.</p>
                   <button 
                     onClick={() => openModal()}
-                    className="w-full text-center py-3 bg-white text-slate-900 text-sm font-bold rounded-xl hover:bg-primary hover:text-white transition-all"
+                    className="w-full text-center py-3 bg-[var(--bg-body)] text-[var(--text-heading)] text-sm font-bold rounded-xl hover:bg-primary hover:text-[var(--text-on-inverted)] transition-all"
                   >
                     Contact Support
                   </button>
@@ -204,13 +204,13 @@ const FAQ = () => {
 
             {/* FAQ List */}
             <div className="lg:col-span-3">
-              <div className="bg-white rounded-3xl shadow-sm border border-slate-100 overflow-hidden">
+              <div className="bg-[var(--bg-card)] rounded-3xl shadow-sm border border-[var(--border-color)] overflow-hidden">
                 <div className="p-8 md:p-12">
-                  <h2 className="text-2xl font-bold text-slate-900 mb-8 flex items-center gap-3">
+                  <h2 className="text-2xl font-bold text-[var(--text-heading)] mb-8 flex items-center gap-3">
                     <HelpCircle className="h-6 w-6 text-primary" />
                     {activeCategory} Questions
                   </h2>
-                  <div className="divide-y divide-slate-100">
+                  <div className="divide-y divide-[var(--border-color)]">
                     {faqData
                       .find(cat => cat.category === activeCategory)
                       ?.questions.map((faq, index) => (
@@ -221,20 +221,20 @@ const FAQ = () => {
               </div>
 
               {/* Course Comparison Table */}
-              <div className="mt-12 bg-white rounded-3xl border border-slate-100 shadow-sm overflow-hidden">
-                <div className="p-8 bg-primary/5 border-b border-slate-100">
-                  <h3 className="text-2xl font-bold text-slate-900">📊 Quick Course Comparison</h3>
-                  <p className="text-slate-600 mt-2">Compare our top courses to find the perfect fit for your career goals.</p>
+              <div className="mt-12 bg-[var(--bg-card)] rounded-3xl border border-[var(--border-color)] shadow-sm overflow-hidden">
+                <div className="p-8 bg-primary/5 border-b border-[var(--border-color)]">
+                  <h3 className="text-2xl font-bold text-[var(--text-heading)]">📊 Quick Course Comparison</h3>
+                  <p className="text-[var(--text-muted)] mt-2">Compare our top courses to find the perfect fit for your career goals.</p>
                 </div>
                 <div className="overflow-x-auto">
                   <table className="w-full text-sm">
-                    <thead className="bg-slate-50">
+                    <thead className="bg-[var(--bg-secondary)]">
                       <tr>
-                        <th className="text-left p-4 font-bold text-slate-900">Course</th>
-                        <th className="text-left p-4 font-bold text-slate-900">Duration</th>
-                        <th className="text-left p-4 font-bold text-slate-900">Difficulty</th>
-                        <th className="text-left p-4 font-bold text-slate-900">Prerequisites</th>
-                        <th className="text-left p-4 font-bold text-slate-900">Average Salary</th>
+                        <th className="text-left p-4 font-bold text-[var(--text-heading)]">Course</th>
+                        <th className="text-left p-4 font-bold text-[var(--text-heading)]">Duration</th>
+                        <th className="text-left p-4 font-bold text-[var(--text-heading)]">Difficulty</th>
+                        <th className="text-left p-4 font-bold text-[var(--text-heading)]">Prerequisites</th>
+                        <th className="text-left p-4 font-bold text-[var(--text-heading)]">Average Salary</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -247,9 +247,9 @@ const FAQ = () => {
                         { course: "Mobile App Development", duration: "20 Weeks", difficulty: "Beginner-Int", prereq: "Programming Basics", salary: "5-11 LPA" },
                         { course: "Digital Marketing", duration: "8 Weeks", difficulty: "Beginner", prereq: "None", salary: "3-7 LPA" }
                       ].map((item, i) => (
-                        <tr key={i} className="border-b border-slate-100 hover:bg-slate-50/50 transition-colors">
+                        <tr key={i} className="border-b border-[var(--border-color)] hover:bg-[var(--bg-secondary)]/50 transition-colors">
                           <td className="p-4 font-bold text-primary">{item.course}</td>
-                          <td className="p-4 text-slate-600">{item.duration}</td>
+                          <td className="p-4 text-[var(--text-muted)]">{item.duration}</td>
                           <td className="p-4">
                             <span className={`px-3 py-1 rounded-full text-xs font-bold ${
                               item.difficulty === 'Beginner' ? 'bg-green-100 text-green-700' :
@@ -259,8 +259,8 @@ const FAQ = () => {
                               {item.difficulty}
                             </span>
                           </td>
-                          <td className="p-4 text-slate-600">{item.prereq}</td>
-                          <td className="p-4 font-bold text-slate-900">{item.salary}</td>
+                          <td className="p-4 text-[var(--text-muted)]">{item.prereq}</td>
+                          <td className="p-4 font-bold text-[var(--text-heading)]">{item.salary}</td>
                         </tr>
                       ))}
                     </tbody>
@@ -269,18 +269,18 @@ const FAQ = () => {
               </div>
 
               {/* Still Need Help Section */}
-              <div className="mt-12 text-center p-12 bg-white rounded-3xl border border-slate-100 shadow-sm">
-                <h3 className="text-2xl font-bold text-slate-900 mb-4">Didn't find your answer?</h3>
-                <p className="text-slate-500 mb-8 max-w-xl mx-auto">
+              <div className="mt-12 text-center p-12 bg-[var(--bg-card)] rounded-3xl border border-[var(--border-color)] shadow-sm">
+                <h3 className="text-2xl font-bold text-[var(--text-heading)] mb-4">Didn't find your answer?</h3>
+                <p className="text-[var(--text-muted)] mb-8 max-w-xl mx-auto">
                   Our team of counselors is available to answer any specific questions you may have about your career path or our training programs.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <a href="tel:+916383980415" className="px-8 py-4 bg-slate-900 text-white font-bold rounded-xl hover:bg-slate-800 transition-all">
+                  <a href="tel:+916383980415" className="px-8 py-4 bg-[var(--bg-inverted)] text-[var(--text-on-inverted)] font-bold rounded-xl hover:opacity-90 transition-all">
                     Call +91 63839 80415
                   </a>
                   <button 
                     onClick={() => openModal()}
-                    className="px-8 py-4 bg-primary text-white font-bold rounded-xl hover:bg-primary-dark transition-all shadow-lg shadow-primary/25"
+                    className="px-8 py-4 bg-primary text-[var(--text-on-inverted)] font-bold rounded-xl hover:bg-primary-dark transition-all shadow-lg shadow-primary/25"
                   >
                     Send an Inquiry
                   </button>

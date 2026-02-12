@@ -135,8 +135,8 @@ const ContactForm = ({ initialCourse = "General Inquiry" }) => {
         <div className="inline-flex items-center justify-center h-16 w-16 rounded-full bg-accent-success/20 mb-6">
           <CheckCircle className="h-8 w-8 text-accent-success" />
         </div>
-        <h3 className="text-2xl font-bold text-slate-900 mb-2">Message Sent!</h3>
-        <p className="text-slate-600 mb-6">Thank you for reaching out. Our counselor will get back to you within 24 hours.</p>
+        <h3 className="text-2xl font-bold text-[var(--text-heading)] mb-2">Message Sent!</h3>
+        <p className="text-[var(--text-muted)] mb-6">Thank you for reaching out. Our counselor will get back to you within 24 hours.</p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <button 
             onClick={() => setStatus('idle')}
@@ -147,7 +147,7 @@ const ContactForm = ({ initialCourse = "General Inquiry" }) => {
           {closeModal && (
             <button 
               onClick={closeModal}
-              className="px-8 py-4 bg-slate-900 text-white font-bold rounded-xl hover:bg-slate-800 transition-all"
+              className="px-8 py-4 bg-[var(--bg-inverted)] text-[var(--text-on-inverted)] font-bold rounded-xl hover:opacity-90 transition-all"
             >
               Close
             </button>
@@ -161,7 +161,7 @@ const ContactForm = ({ initialCourse = "General Inquiry" }) => {
     <form ref={form} onSubmit={sendEmail} className="space-y-4 md:space-y-5">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
         <div className="space-y-1.5">
-          <label htmlFor="user_name" className="text-xs font-bold text-slate-700 uppercase tracking-wide">Full Name <span className="text-red-500">*</span></label>
+          <label htmlFor="user_name" className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wide">Full Name <span className="text-red-500">*</span></label>
           <input
             type="text"
             name="user_name"
@@ -170,21 +170,21 @@ const ContactForm = ({ initialCourse = "General Inquiry" }) => {
             onInput={(e) => {
               e.target.value = e.target.value.replace(/[^a-zA-Z\s]/g, '');
             }}
-            className={`w-full px-4 py-2.5 bg-slate-50 border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm ${
-              formErrors.user_name ? 'border-red-500' : 'border-slate-200'
+            className={`w-full px-4 py-2.5 bg-[var(--bg-secondary)] border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm text-[var(--text-heading)] ${
+              formErrors.user_name ? 'border-red-500' : 'border-[var(--border-color)]'
             }`}
           />
           {formErrors.user_name && <p className="text-[10px] text-red-500 font-bold">{formErrors.user_name}</p>}
         </div>
         <div className="space-y-1.5">
-          <label htmlFor="user_email" className="text-xs font-bold text-slate-700 uppercase tracking-wide">Email Address <span className="text-red-500">*</span></label>
+          <label htmlFor="user_email" className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wide">Email Address <span className="text-red-500">*</span></label>
           <input
             type="email"
             name="user_email"
             id="user_email"
             placeholder="john@example.com"
-            className={`w-full px-4 py-2.5 bg-slate-50 border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm ${
-              formErrors.user_email ? 'border-red-500' : 'border-slate-200'
+            className={`w-full px-4 py-2.5 bg-[var(--bg-secondary)] border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm text-[var(--text-heading)] ${
+              formErrors.user_email ? 'border-red-500' : 'border-[var(--border-color)]'
             }`}
           />
           {formErrors.user_email && <p className="text-[10px] text-red-500 font-bold">{formErrors.user_email}</p>}
@@ -193,7 +193,7 @@ const ContactForm = ({ initialCourse = "General Inquiry" }) => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
         <div className="space-y-1.5">
-          <label htmlFor="user_phone" className="text-xs font-bold text-slate-700 uppercase tracking-wide">Phone Number <span className="text-red-500">*</span></label>
+          <label htmlFor="user_phone" className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wide">Phone Number <span className="text-red-500">*</span></label>
           <input
             type="tel"
             name="user_phone"
@@ -203,21 +203,21 @@ const ContactForm = ({ initialCourse = "General Inquiry" }) => {
             onInput={(e) => {
               e.target.value = e.target.value.replace(/\D/g, '');
             }}
-            className={`w-full px-4 py-2.5 bg-slate-50 border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm ${
-              formErrors.user_phone ? 'border-red-500' : 'border-slate-200'
+            className={`w-full px-4 py-2.5 bg-[var(--bg-secondary)] border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm text-[var(--text-heading)] ${
+              formErrors.user_phone ? 'border-red-500' : 'border-[var(--border-color)]'
             }`}
           />
           {formErrors.user_phone && <p className="text-[10px] text-red-500 font-bold">{formErrors.user_phone}</p>}
         </div>
         <div className="space-y-1.5">
-          <label htmlFor="user_location" className="text-xs font-bold text-slate-700 uppercase tracking-wide">Location (City/Area) <span className="text-red-500">*</span></label>
+          <label htmlFor="user_location" className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wide">Location (City/Area) <span className="text-red-500">*</span></label>
           <input
             type="text"
             name="user_location"
             id="user_location"
             placeholder="e.g. Adyar, Chennai"
-            className={`w-full px-4 py-2.5 bg-slate-50 border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm ${
-              formErrors.user_location ? 'border-red-500' : 'border-slate-200'
+            className={`w-full px-4 py-2.5 bg-[var(--bg-secondary)] border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm text-[var(--text-heading)] ${
+              formErrors.user_location ? 'border-red-500' : 'border-[var(--border-color)]'
             }`}
           />
           {formErrors.user_location && <p className="text-[10px] text-red-500 font-bold">{formErrors.user_location}</p>}
@@ -226,20 +226,20 @@ const ContactForm = ({ initialCourse = "General Inquiry" }) => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
         <div className="space-y-1.5 relative qual-dropdown-container">
-          <label htmlFor="qualification" className="text-xs font-bold text-slate-700 uppercase tracking-wide">Current Status <span className="text-red-500">*</span></label>
+          <label htmlFor="qualification" className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wide">Current Status <span className="text-red-500">*</span></label>
           <input type="hidden" name="qualification" value={selectedQualification} />
           <button
             type="button"
             id="qualification"
             onClick={() => setIsQualDropdownOpen(!isQualDropdownOpen)}
-            className={`w-full px-4 py-2.5 bg-slate-50 border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm flex items-center justify-between group ${
-              formErrors.qualification ? 'border-red-500' : 'border-slate-200'
+            className={`w-full px-4 py-2.5 bg-[var(--bg-secondary)] border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm flex items-center justify-between group ${
+              formErrors.qualification ? 'border-red-500' : 'border-[var(--border-color)]'
             }`}
           >
-            <span className={selectedQualification ? "text-slate-900" : "text-slate-400"}>
+            <span className={selectedQualification ? "text-[var(--text-heading)]" : "text-[var(--text-muted)]"}>
               {qualifications.find(q => q.value === selectedQualification)?.label || "Select status"}
             </span>
-            <ChevronDown className={`h-4 w-4 text-slate-400 transition-transform duration-300 ${isQualDropdownOpen ? 'rotate-180' : ''}`} />
+            <ChevronDown className={`h-4 w-4 text-[var(--text-muted)] transition-transform duration-300 ${isQualDropdownOpen ? 'rotate-180' : ''}`} />
           </button>
           
           {formErrors.qualification && <p className="text-[10px] text-red-500 font-bold">{formErrors.qualification}</p>}
@@ -251,7 +251,7 @@ const ContactForm = ({ initialCourse = "General Inquiry" }) => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.2 }}
-                className="absolute z-[110] left-0 right-0 mt-2 bg-white border border-slate-200 rounded-xl shadow-xl overflow-hidden"
+                className="absolute z-[110] left-0 right-0 mt-2 bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl shadow-xl overflow-hidden"
               >
                 <div className="max-h-[200px] overflow-y-auto no-scrollbar py-1">
                   {qualifications.map((q) => (
@@ -265,7 +265,7 @@ const ContactForm = ({ initialCourse = "General Inquiry" }) => {
                       className={`w-full px-4 py-2.5 text-left text-sm flex items-center justify-between transition-colors ${
                         selectedQualification === q.value 
                           ? 'bg-primary/5 text-primary font-bold' 
-                          : 'text-slate-600 hover:bg-slate-50'
+                          : 'text-[var(--text-muted)] hover:bg-[var(--bg-secondary)]'
                       }`}
                     >
                       <span>{q.label}</span>
@@ -278,18 +278,18 @@ const ContactForm = ({ initialCourse = "General Inquiry" }) => {
           </AnimatePresence>
         </div>
         <div className="space-y-1.5 relative course-dropdown-container">
-          <label htmlFor="course_interest" className="text-xs font-bold text-slate-700 uppercase tracking-wide">Interested Course <span className="text-red-500">*</span></label>
+          <label htmlFor="course_interest" className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wide">Interested Course <span className="text-red-500">*</span></label>
           <input type="hidden" name="course_interest" value={selectedCourse} />
           <button
             type="button"
             id="course_interest"
             onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-            className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm flex items-center justify-between group"
+            className="w-full px-4 py-2.5 bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm text-[var(--text-heading)] flex items-center justify-between group"
           >
-            <span className={selectedCourse ? "text-slate-900" : "text-slate-400"}>
+            <span className={selectedCourse ? "text-[var(--text-heading)]" : "text-[var(--text-muted)]"}>
               {courses.find(c => c.value === selectedCourse)?.label || "Select a course"}
             </span>
-            <ChevronDown className={`h-4 w-4 text-slate-400 transition-transform duration-300 ${isDropdownOpen ? 'rotate-180' : ''}`} />
+            <ChevronDown className={`h-4 w-4 text-[var(--text-muted)] transition-transform duration-300 ${isDropdownOpen ? 'rotate-180' : ''}`} />
           </button>
 
           <AnimatePresence>
@@ -299,7 +299,7 @@ const ContactForm = ({ initialCourse = "General Inquiry" }) => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.2 }}
-                className="absolute z-[110] left-0 right-0 mt-2 bg-white border border-slate-200 rounded-xl shadow-xl overflow-hidden"
+                className="absolute z-[110] left-0 right-0 mt-2 bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl shadow-xl overflow-hidden"
               >
                 <div className="max-h-[200px] overflow-y-auto no-scrollbar py-1">
                   {courses.map((course) => (
@@ -313,7 +313,7 @@ const ContactForm = ({ initialCourse = "General Inquiry" }) => {
                       className={`w-full px-4 py-2.5 text-left text-sm flex items-center justify-between transition-colors ${
                         selectedCourse === course.value 
                           ? 'bg-primary/5 text-primary font-bold' 
-                          : 'text-slate-600 hover:bg-slate-50'
+                          : 'text-[var(--text-muted)] hover:bg-[var(--bg-secondary)]'
                       }`}
                     >
                       <span>{course.label}</span>
@@ -328,14 +328,14 @@ const ContactForm = ({ initialCourse = "General Inquiry" }) => {
       </div>
 
       <div className="space-y-1.5">
-        <label htmlFor="message" className="text-xs font-bold text-slate-700 uppercase tracking-wide">Your Message <span className="text-red-500">*</span></label>
+        <label htmlFor="message" className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wide">Your Message <span className="text-red-500">*</span></label>
         <textarea
           name="message"
           id="message"
           rows="3"
           placeholder="How can we help you?"
-          className={`w-full px-4 py-2.5 bg-slate-50 border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm resize-none ${
-            formErrors.message ? 'border-red-500' : 'border-slate-200'
+          className={`w-full px-4 py-2.5 bg-[var(--bg-secondary)] border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm text-[var(--text-heading)] resize-none ${
+            formErrors.message ? 'border-red-500' : 'border-[var(--border-color)]'
           }`}
         ></textarea>
         {formErrors.message && <p className="text-[10px] text-red-500 font-bold">{formErrors.message}</p>}
@@ -368,7 +368,7 @@ const ContactForm = ({ initialCourse = "General Inquiry" }) => {
         )}
       </button>
       
-      <p className="text-center text-[10px] text-slate-400 font-medium">
+      <p className="text-center text-[10px] text-[var(--text-muted)] font-medium">
         By submitting, you agree to our <a href="/privacy-policy" className="text-primary hover:underline">Privacy Policy</a>.
       </p>
     </form>

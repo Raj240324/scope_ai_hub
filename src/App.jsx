@@ -7,6 +7,7 @@ import { Loader2 } from 'lucide-react';
 import ErrorBoundary from './components/layout/ErrorBoundary';
 import ScrollToTop from './components/utils/ScrollToTop';
 import { ModalProvider } from './context/ModalContext';
+import { ThemeProvider } from './context/ThemeContext';
 import ContactModal from './components/ui/ContactModal';
 
 // Lazy Load Pages
@@ -41,9 +42,10 @@ function App() {
     <ErrorBoundary>
       <HelmetProvider>
         <ModalProvider>
-          <Router>
-            <ScrollToTop />
-            <Suspense fallback={<PageLoader />}>
+          <ThemeProvider>
+            <Router>
+              <ScrollToTop />
+              <Suspense fallback={<PageLoader />}>
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/about" element={<About />} />
@@ -68,7 +70,8 @@ function App() {
 
             </Suspense>
             <ContactModal />
-          </Router>
+            </Router>
+          </ThemeProvider>
         </ModalProvider>
       </HelmetProvider>
     </ErrorBoundary>

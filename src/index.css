@@ -2,21 +2,22 @@
 
 @theme {
   /* Brand Palette - Scope AI Hub */
-  --color-brand-navy: #1A237E;
+  --color-brand-navy: #1E1B4B;
   --color-brand-orange: #F97316;
   --color-brand-red: #EF4444;
   --color-brand-cyan: #0EA5E9;
   --color-brand-green: #10B981;
+  --color-brand-gold: #C47A2C;
   
-  /* Semantic Mapping */
-  --color-primary: #1A237E;       /* Main Brand Color (Navy) */
-  --color-primary-light: #2E5BFF; /* Legacy/Light variation */
-  --color-primary-dark: #0F172A;  /* Deepest Background */
+  /* Semantic Mapping — vivid indigo-blue for light mode accent */
+  --color-primary: #4338CA;       
+  --color-primary-light: #5B4FE6; 
+  --color-primary-dark: #3730A3;  
   
-  --color-secondary: #0EA5E9;     /* Tech/Innovation (Cyan) */
-  --color-accent: #F97316;        /* High Conversion (Orange) */
+  --color-secondary: #0EA5E9;     
+  --color-accent: #F97316;        
   
-  --color-navy: #1A237E;
+  --color-navy: #1E1B4B;
   --color-success: #10b981;
   --color-warning: #f59e0b;
   --color-danger: #ef4444;
@@ -24,9 +25,91 @@
   --font-sans: "Inter", "system-ui", "sans-serif";
 }
 
+:root {
+  /* ===== LIGHT THEME — Clean White & Blue Accent ===== */
+  /* Page — warm whites with subtle depth */
+  --bg-body: #FFFFFF;
+  --bg-secondary: #F8FAFC;
+  --bg-card: #FFFFFF;
+  --text-body: #334155;
+  --text-heading: #0F172A;
+  --text-muted: #64748B;
+  --border-color: #E2E8F0;
+
+  /* Inverted sections (dark accent blocks) */
+  --bg-inverted: #0F172A;
+  --text-on-inverted: #F1F5F9;
+
+  /* Header */
+  --bg-header: #FFFFFF;
+  --bg-header-scrolled: rgba(255, 255, 255, 0.96);
+  --text-nav: #334155;
+  --text-nav-active: #4338CA;
+  --border-header: #E2E8F0;
+
+  /* Footer */
+  --bg-footer: #0F172A;
+  --text-footer: #E2E8F0;
+  --text-footer-muted: rgba(226, 232, 240, 0.6);
+
+  /* Buttons */
+  --btn-primary-bg: #4338CA;
+  --btn-primary-text: #FFFFFF;
+  --btn-secondary-border: #4338CA;
+  --btn-secondary-text: #4338CA;
+  --btn-secondary-bg: transparent;
+}
+
+.dark {
+  /* ===== DARK THEME — Premium Black & Gold ===== */
+  /* Backgrounds — warm charcoal with subtle gold undertone */
+  --bg-body: #0C0A08;
+  --bg-secondary: #141210;
+  --bg-card: #1C1916;
+  --text-body: #D4CABC;
+  --text-heading: #F5EFE6;
+  --text-muted: #9A8E80;
+  --border-color: rgba(196, 122, 44, 0.12);
+
+  /* Inverted sections — stays dark in dark mode */
+  --bg-inverted: #1C1916;
+  --text-on-inverted: #F5EFE6;
+
+  /* Header */
+  --bg-header: #0C0A08;
+  --bg-header-scrolled: rgba(12, 10, 8, 0.96);
+  --text-nav: #D4CABC;
+  --text-nav-active: #C47A2C;
+  --border-header: rgba(196, 122, 44, 0.10);
+
+  /* Footer */
+  --bg-footer: #080604;
+  --text-footer: #D4CABC;
+  --text-footer-muted: rgba(212, 202, 188, 0.45);
+
+  /* Buttons — golden accent */
+  --btn-primary-bg: #C47A2C;
+  --btn-primary-text: #0C0A08;
+  --btn-secondary-border: #C47A2C;
+  --btn-secondary-text: #C47A2C;
+  --btn-secondary-bg: transparent;
+
+  /* Brand Colors — gold as primary */
+  --color-primary: #C47A2C;
+  --color-primary-light: #D4912E;
+  --color-primary-dark: #A06420;
+  --color-brand-navy: #1C1916;
+  --color-brand-cyan: #D4912E;
+}
+
 @layer base {
   body {
-    @apply bg-slate-50 text-[var(--color-brand-navy)] font-sans;
+    @apply bg-[var(--bg-body)] text-[var(--text-body)] font-sans transition-colors duration-300;
+  }
+  
+  html.dark body {
+    background-color: var(--bg-body);
+    color: var(--text-body);
   }
 }
 
@@ -35,20 +118,28 @@
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
 
-  /* Primary Button - High Conversion Orange Gradient */
+  /* Primary Button */
   .btn-primary {
-    @apply inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-bold rounded-xl text-white transition-all duration-300 shadow-md hover:shadow-xl hover:-translate-y-0.5 active:scale-95;
-    background: linear-gradient(135deg, #F97316 0%, #EF4444 100%);
+    @apply inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-bold rounded-xl transition-all duration-300 shadow-md hover:shadow-xl hover:-translate-y-0.5 active:scale-95;
+    background-color: var(--btn-primary-bg);
+    color: var(--btn-primary-text);
   }
 
   .btn-primary:hover {
-    background: linear-gradient(135deg, #FF8C1A 0%, #F87171 100%);
-    @apply shadow-orange-500/30;
+    filter: brightness(1.1);
   }
 
-  /* Secondary Button - Navy Outline */
+  /* Secondary Button */
   .btn-secondary {
-    @apply inline-flex items-center justify-center px-6 py-3 border-2 border-[var(--color-brand-navy)] text-base font-bold rounded-xl text-[var(--color-brand-navy)] bg-white hover:bg-[var(--color-brand-navy)] hover:text-white transition-all duration-300 active:scale-95;
+    @apply inline-flex items-center justify-center px-6 py-3 text-base font-bold rounded-xl transition-all duration-300 active:scale-95;
+    border: 2px solid var(--btn-secondary-border);
+    color: var(--btn-secondary-text);
+    background: var(--btn-secondary-bg);
+  }
+
+  .btn-secondary:hover {
+    background-color: var(--btn-secondary-border);
+    color: var(--btn-primary-text);
   }
 
   .section-padding {
@@ -56,11 +147,13 @@
   }
 
   .heading-lg {
-    @apply text-3xl md:text-5xl lg:text-6xl font-black tracking-tight text-[var(--color-brand-navy)];
+    @apply text-3xl md:text-5xl lg:text-6xl font-black tracking-tight;
+    color: var(--text-heading);
   }
 
   .heading-md {
-    @apply text-2xl md:text-3xl font-black tracking-tight text-[var(--color-brand-navy)];
+    @apply text-2xl md:text-3xl font-black tracking-tight;
+    color: var(--text-heading);
   }
 
   .no-scrollbar::-webkit-scrollbar {

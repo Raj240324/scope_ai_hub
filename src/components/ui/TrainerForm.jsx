@@ -77,11 +77,11 @@ const TrainerForm = () => {
         <div className="inline-flex items-center justify-center h-16 w-16 rounded-full bg-primary/20 mb-6">
           <CheckCircle className="h-8 w-8 text-primary" />
         </div>
-        <h3 className="text-2xl font-bold text-slate-900 mb-2">Application Received!</h3>
-        <p className="text-slate-600 mb-6 font-medium">Thank you for your interest in joining {BRANDING.fullName}. Our academic team will review your profile and contact you for a technical discussion.</p>
+        <h3 className="text-2xl font-bold text-[var(--text-heading)] mb-2">Application Received!</h3>
+        <p className="text-[var(--text-muted)] mb-6 font-medium">Thank you for your interest in joining {BRANDING.fullName}. Our academic team will review your profile and contact you for a technical discussion.</p>
         <button 
           onClick={closeModal}
-          className="px-8 py-3 bg-slate-900 text-white font-bold rounded-xl hover:bg-slate-800 transition-all"
+          className="px-8 py-3 bg-[var(--bg-inverted)] text-[var(--text-on-inverted)] font-bold rounded-xl hover:opacity-90 transition-all"
         >
           Close
         </button>
@@ -93,30 +93,30 @@ const TrainerForm = () => {
     <form ref={form} onSubmit={handleApply} className="space-y-5">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         <div className="space-y-1.5">
-          <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest leading-none">Full Name (Letters Only)</label>
+          <label className="text-[10px] font-black text-[var(--text-muted)] uppercase tracking-widest leading-none">Full Name (Letters Only)</label>
           <input
             name="trainer_name"
             placeholder="Expert Name"
             onInput={(e) => {
               e.target.value = e.target.value.replace(/[^a-zA-Z\s]/g, '');
             }}
-            className={`w-full px-4 py-3 bg-slate-50 border rounded-xl focus:ring-2 focus:ring-primary/20 outline-none transition-all text-sm ${formErrors.trainer_name ? 'border-red-500' : 'border-slate-200'}`}
+            className={`w-full px-4 py-3 bg-[var(--bg-secondary)] border rounded-xl focus:ring-2 focus:ring-primary/20 outline-none transition-all text-sm text-[var(--text-heading)] ${formErrors.trainer_name ? 'border-red-500' : 'border-[var(--border-color)]'}`}
           />
         </div>
         <div className="space-y-1.5">
-          <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Email Address</label>
+          <label className="text-[10px] font-black text-[var(--text-muted)] uppercase tracking-widest">Email Address</label>
           <input
             name="trainer_email"
             type="email"
             placeholder="expert@example.com"
-            className={`w-full px-4 py-3 bg-slate-50 border rounded-xl focus:ring-2 focus:ring-primary/20 outline-none transition-all text-sm ${formErrors.trainer_email ? 'border-red-500' : 'border-slate-200'}`}
+            className={`w-full px-4 py-3 bg-[var(--bg-secondary)] border rounded-xl focus:ring-2 focus:ring-primary/20 outline-none transition-all text-sm text-[var(--text-heading)] ${formErrors.trainer_email ? 'border-red-500' : 'border-[var(--border-color)]'}`}
           />
         </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         <div className="space-y-1.5">
-          <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest leading-none">Phone Number (10 Digits Only)</label>
+          <label className="text-[10px] font-black text-[var(--text-muted)] uppercase tracking-widest leading-none">Phone Number (10 Digits Only)</label>
           <input
             name="trainer_phone"
             placeholder="6383980415"
@@ -124,11 +124,11 @@ const TrainerForm = () => {
             onInput={(e) => {
               e.target.value = e.target.value.replace(/\D/g, '');
             }}
-            className={`w-full px-4 py-3 bg-slate-50 border rounded-xl focus:ring-2 focus:ring-primary/20 outline-none transition-all text-sm ${formErrors.trainer_phone ? 'border-red-500' : 'border-slate-200'}`}
+            className={`w-full px-4 py-3 bg-[var(--bg-secondary)] border rounded-xl focus:ring-2 focus:ring-primary/20 outline-none transition-all text-sm text-[var(--text-heading)] ${formErrors.trainer_phone ? 'border-red-500' : 'border-[var(--border-color)]'}`}
           />
         </div>
         <div className="space-y-1.5">
-          <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest leading-none">Years of Exp. (Numbers Only)</label>
+          <label className="text-[10px] font-black text-[var(--text-muted)] uppercase tracking-widest leading-none">Years of Exp. (Numbers Only)</label>
           <input
             name="experience"
             type="text"
@@ -137,7 +137,7 @@ const TrainerForm = () => {
             onInput={(e) => {
               e.target.value = e.target.value.replace(/\D/g, '').slice(0, 2);
             }}
-            className={`w-full px-4 py-3 bg-slate-50 border rounded-xl focus:ring-2 focus:ring-primary/20 outline-none transition-all text-sm ${formErrors.experience ? 'border-red-500' : 'border-slate-200'}`}
+            className={`w-full px-4 py-3 bg-[var(--bg-secondary)] border rounded-xl focus:ring-2 focus:ring-primary/20 outline-none transition-all text-sm text-[var(--text-heading)] ${formErrors.experience ? 'border-red-500' : 'border-[var(--border-color)]'}`}
           />
         </div>
       </div>
@@ -147,16 +147,16 @@ const TrainerForm = () => {
         <button
           type="button"
           onClick={() => setIsExpertiseDropdownOpen(!isExpertiseDropdownOpen)}
-          className={`w-full px-4 py-3 bg-slate-50 border rounded-xl flex items-center justify-between text-sm transition-all ${formErrors.expertise ? 'border-red-500' : 'border-slate-200'}`}
+          className={`w-full px-4 py-3 bg-[var(--bg-secondary)] border rounded-xl flex items-center justify-between text-sm transition-all ${formErrors.expertise ? 'border-red-500' : 'border-[var(--border-color)]'}`}
         >
-          <span className={selectedExpertise ? "text-slate-900" : "text-slate-400"}>
+          <span className={selectedExpertise ? "text-[var(--text-heading)]" : "text-[var(--text-muted)]"}>
             {selectedExpertise || "Select Expertise"}
           </span>
-          <ChevronDown className={`h-4 w-4 text-slate-400 transition-transform ${isExpertiseDropdownOpen ? 'rotate-180' : ''}`} />
+          <ChevronDown className={`h-4 w-4 text-[var(--text-muted)] transition-transform ${isExpertiseDropdownOpen ? 'rotate-180' : ''}`} />
         </button>
         <AnimatePresence>
           {isExpertiseDropdownOpen && (
-            <motion.div initial={{ opacity:0, y:-10 }} animate={{ opacity:1, y:0 }} exit={{ opacity:0, y:-10 }} className="absolute z-20 left-0 right-0 mt-2 bg-white border border-slate-200 rounded-xl shadow-xl overflow-hidden max-h-48 overflow-y-auto">
+            <motion.div initial={{ opacity:0, y:-10 }} animate={{ opacity:1, y:0 }} exit={{ opacity:0, y:-10 }} className="absolute z-20 left-0 right-0 mt-2 bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl shadow-xl overflow-hidden max-h-48 overflow-y-auto">
               {expertiseOptions.map(opt => (
                 <button
                   key={opt.value}
@@ -176,11 +176,11 @@ const TrainerForm = () => {
       <div className="space-y-1.5">
         <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest">LinkedIn Profile (Optional)</label>
         <div className="relative">
-          <Globe className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+          <Globe className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-[var(--text-muted)]" />
           <input
             name="linkedin_url"
             placeholder="linkedin.com/in/username"
-            className={`w-full pl-11 pr-4 py-3 bg-slate-50 border rounded-xl focus:ring-2 focus:ring-primary/20 outline-none transition-all text-sm ${formErrors.linkedin_url ? 'border-red-500' : 'border-slate-200'}`}
+            className={`w-full pl-11 pr-4 py-3 bg-[var(--bg-secondary)] border rounded-xl focus:ring-2 focus:ring-primary/20 outline-none transition-all text-sm text-[var(--text-heading)] ${formErrors.linkedin_url ? 'border-red-500' : 'border-[var(--border-color)]'}`}
           />
         </div>
       </div>
@@ -188,13 +188,13 @@ const TrainerForm = () => {
       <button
         type="submit"
         disabled={status === 'sending'}
-        className="w-full bg-slate-900 hover:bg-slate-800 text-white font-black py-4 rounded-xl flex items-center justify-center space-x-2 transition-all shadow-xl active:scale-[0.98]"
+        className="w-full bg-[var(--bg-inverted)] hover:opacity-90 text-[var(--text-on-inverted)] font-black py-4 rounded-xl flex items-center justify-center space-x-2 transition-all shadow-xl active:scale-[0.98]"
       >
         {status === 'sending' ? <Loader2 className="h-5 w-5 animate-spin" /> : <Send className="h-5 w-5" />}
         <span>SUBMIT APPLICATION</span>
       </button>
 
-      <p className="text-center text-[10px] text-slate-400 font-bold uppercase tracking-tighter">
+      <p className="text-center text-[10px] text-[var(--text-muted)] font-bold uppercase tracking-tighter">
         By applying, you agree to our <a href="/legal/trainer-conduct" className="text-primary underline">Trainer Code of Conduct</a>.
       </p>
     </form>

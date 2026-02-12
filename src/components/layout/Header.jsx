@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, GraduationCap, Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin, Search, ChevronDown } from 'lucide-react';
 import { clsx } from 'clsx';
 import { useModal } from '../../context/ModalContext';
+import ThemeToggle from '../ui/ThemeToggle';
 import { courses } from '../../data/courses';
 import { BRANDING } from '../../data/branding';
 
@@ -53,23 +54,22 @@ const Header = () => {
     { name: 'Courses', href: '/courses' },
     { name: 'Join as Trainer', href: '/careers/join-as-trainer' },
     { name: 'Contact', href: '/contact' },
-
   ];
 
   return (
     <header className={clsx(
       "fixed top-0 left-0 w-full z-50 transition-all duration-300",
       scrolled 
-        ? "bg-[#d9d9d9]/95 backdrop-blur-md shadow-md py-3" 
-        : "bg-[#d9d9d9] py-4 shadow-sm"
+        ? "bg-[var(--bg-header-scrolled)] backdrop-blur-md shadow-md py-3 border-b border-[var(--border-header)]" 
+        : "bg-[var(--bg-header)] py-4 border-b border-[var(--border-header)]"
     )}>
       {/* Search Overlay */}
       {isSearchOpen && (
         <div className="fixed inset-0 z-[100] flex items-start justify-center pt-32 px-4">
-          <div className="absolute inset-0 bg-navy/60 backdrop-blur-sm" onClick={() => setIsSearchOpen(false)} />
-          <div className="relative w-full max-w-2xl bg-white rounded-3xl shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200">
-            <div className="p-6 border-b border-slate-100 flex items-center">
-              <Search className="h-6 w-6 text-primary mr-4" />
+          <div className="absolute inset-0 bg-[var(--bg-body)]/80 backdrop-blur-sm" onClick={() => setIsSearchOpen(false)} />
+          <div className="relative w-full max-w-2xl bg-[var(--bg-card)] rounded-3xl shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200 border border-[var(--border-color)]">
+            <div className="p-6 border-b border-[var(--border-color)] flex items-center">
+              <Search className="h-6 w-6 text-[var(--text-heading)] mr-4" />
               <input
                 autoFocus
                 type="text"
@@ -77,36 +77,36 @@ const Header = () => {
                 id="header_search"
                 aria-label="Search courses"
                 placeholder="Search for courses (e.g. MERN, Python, Java...)"
-                className="flex-1 bg-transparent border-none outline-none text-lg font-medium text-slate-900 placeholder:text-slate-400"
+                className="flex-1 bg-transparent border-none outline-none text-lg font-medium text-[var(--text-heading)] placeholder:text-[var(--text-muted)]"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
               {searchQuery && (
                 <button 
                   onClick={() => setSearchQuery('')}
-                  className="p-2 hover:bg-slate-100 rounded-full transition-colors mr-2"
+                  className="p-2 hover:bg-[var(--text-heading)]/10 rounded-full transition-colors mr-2"
                 >
-                  <X className="h-4 w-4 text-slate-400" />
+                  <X className="h-4 w-4 text-[var(--text-muted)]" />
                 </button>
               )}
               <button 
                 onClick={() => setIsSearchOpen(false)}
-                className="p-2 hover:bg-slate-100 rounded-full transition-colors"
+                className="p-2 hover:bg-[var(--text-heading)]/10 rounded-full transition-colors"
               >
-                <ChevronDown className="h-6 w-6 text-slate-400 rotate-90" />
+                <ChevronDown className="h-6 w-6 text-[var(--text-muted)] rotate-90" />
               </button>
             </div>
             
             <div className="max-h-[60vh] overflow-y-auto p-4">
               {!searchQuery.trim() && (
                 <div className="p-4">
-                  <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4">Popular Searches</h4>
+                  <h4 className="text-[10px] font-black text-[var(--text-muted)] uppercase tracking-widest mb-4">Popular Searches</h4>
                   <div className="flex flex-wrap gap-2">
                     {['MERN', 'Python', 'Java', 'Full Stack', 'Web Development'].map(term => (
                       <button
                         key={term}
                         onClick={() => setSearchQuery(term)}
-                        className="px-4 py-2 bg-slate-50 hover:bg-primary/10 hover:text-primary rounded-xl text-sm font-bold text-slate-600 border border-slate-100 transition-all"
+                        className="px-4 py-2 bg-[var(--text-heading)]/5 hover:bg-[var(--text-heading)]/15 rounded-xl text-sm font-bold text-[var(--text-body)] border border-[var(--border-color)] transition-all"
                       >
                         {term}
                       </button>
@@ -126,11 +126,11 @@ const Header = () => {
                     if (filtered.length === 0) {
                       return (
                         <div className="text-center py-12">
-                          <div className="bg-slate-50 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <Search className="h-8 w-8 text-slate-300" />
+                          <div className="bg-[var(--text-heading)]/5 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <Search className="h-8 w-8 text-[var(--text-muted)]" />
                           </div>
-                          <p className="text-slate-500 font-bold">No courses found matching "{searchQuery}"</p>
-                          <p className="text-sm text-slate-400 mt-1">Try searching for MERN, Python, or Java</p>
+                          <p className="text-[var(--text-body)] font-bold">No courses found matching "{searchQuery}"</p>
+                          <p className="text-sm text-[var(--text-muted)] mt-1">Try searching for MERN, Python, or Java</p>
                         </div>
                       );
                     }
@@ -143,19 +143,19 @@ const Header = () => {
                           setIsSearchOpen(false);
                           setSearchQuery('');
                         }}
-                        className="flex items-center p-4 hover:bg-primary/5 rounded-2xl transition-all group border border-transparent hover:border-primary/10"
+                        className="flex items-center p-4 hover:bg-[var(--text-heading)]/5 rounded-2xl transition-all group border border-transparent hover:border-[var(--border-color)]"
                       >
-                        <div className="bg-primary/10 p-3 rounded-xl mr-4 group-hover:bg-primary transition-all duration-300">
-                          <GraduationCap className="h-5 w-5 text-primary group-hover:text-white" />
+                        <div className="bg-[var(--text-heading)]/10 p-3 rounded-xl mr-4 group-hover:bg-[var(--bg-inverted)] transition-all duration-300">
+                          <GraduationCap className="h-5 w-5 text-[var(--text-heading)] group-hover:text-[var(--text-on-inverted)]" />
                         </div>
                         <div className="flex-1">
                           <div className="flex items-center justify-between">
-                            <h4 className="font-bold text-slate-900 group-hover:text-primary transition-colors">{course.title}</h4>
-                            <span className="text-[10px] font-black text-primary bg-primary/10 px-2 py-0.5 rounded-full uppercase tracking-wider">
+                            <h4 className="font-bold text-[var(--text-heading)] group-hover:text-[var(--text-body)] transition-colors">{course.title}</h4>
+                            <span className="text-[10px] font-black text-[var(--text-heading)] bg-[var(--text-heading)]/10 px-2 py-0.5 rounded-full uppercase tracking-wider">
                               {course.category}
                             </span>
                           </div>
-                          <p className="text-xs text-slate-500 mt-1 flex items-center">
+                          <p className="text-xs text-[var(--text-muted)] mt-1 flex items-center">
                             {course.duration} • {course.level}
                           </p>
                         </div>
@@ -165,13 +165,13 @@ const Header = () => {
                 </div>
               ) : (
                 <div className="py-8 text-center">
-                  <p className="text-slate-400 text-sm font-bold uppercase tracking-widest">Popular Searches</p>
+                  <p className="text-[var(--text-muted)] text-sm font-bold uppercase tracking-widest">Popular Searches</p>
                   <div className="flex flex-wrap justify-center gap-2 mt-4">
                     {['MERN Stack', 'Python', 'Java', 'Web Design', 'AWS'].map(tag => (
                       <button
                         key={tag}
                         onClick={() => setSearchQuery(tag)}
-                        className="px-4 py-2 bg-slate-100 hover:bg-primary hover:text-white rounded-full text-sm font-bold text-slate-600 transition-all"
+                        className="px-4 py-2 bg-[var(--text-heading)]/10 hover:bg-[var(--bg-inverted)] hover:text-[var(--text-on-inverted)] rounded-full text-sm font-bold text-[var(--text-body)] transition-all"
                       >
                         {tag}
                       </button>
@@ -191,9 +191,9 @@ const Header = () => {
             {/* Logo */}
             <Link to="/" className="flex items-center group">
               <img 
-                src="/logo.webp" 
+                src="/scope-logo.png" 
                 alt="ScopeAIHub" 
-                className="h-12 md:h-14 w-auto object-contain transition-transform duration-300 group-hover:scale-105" 
+                className="h-28 md:h-36 -my-8 md:-my-10 w-auto object-contain transition-transform duration-300 group-hover:scale-105 rounded-xl" 
               />
             </Link>
 
@@ -211,8 +211,8 @@ const Header = () => {
                     className={clsx(
                       'px-4 py-2 text-[14px] font-bold transition-all rounded-lg relative flex items-center',
                       location.pathname === item.href 
-                        ? 'text-[var(--color-brand-cyan)]' 
-                        : 'text-[var(--color-brand-navy)] hover:text-[var(--color-brand-cyan)] hover:bg-slate-50'
+                        ? 'text-[var(--text-nav-active)] bg-[var(--text-nav)]/10' 
+                        : 'text-[var(--text-nav)] hover:text-[var(--text-nav-active)] hover:bg-[var(--text-nav)]/5'
                     )}
                   >
                     {item.name}
@@ -221,15 +221,15 @@ const Header = () => {
 
                   {item.name === 'Courses' && showCourses && (
                     <div className="absolute top-full left-1/2 -translate-x-1/2 w-[720px] pt-4 animate-in fade-in slide-in-from-top-4 zoom-in-95 duration-300 z-[60]">
-                      <div className="bg-white rounded-[1.5rem] shadow-2xl border border-slate-100 overflow-hidden flex">
+                      <div className="bg-[var(--bg-card)] rounded-[1.5rem] shadow-2xl border border-[var(--border-color)] overflow-hidden flex">
                         {/* Left Side: Course Grid */}
                         <div className="flex-1 p-8">
                           <div className="flex items-center justify-between mb-8">
                             <div>
-                              <h3 className="text-xl font-black text-[var(--color-brand-navy)] tracking-tight">Our Programs</h3>
-                              <p className="text-[12px] text-slate-500 font-semibold">Expert-led technical training</p>
+                              <h3 className="text-xl font-black text-[var(--text-heading)] tracking-tight">Our Programs</h3>
+                              <p className="text-[12px] text-[var(--text-muted)] font-semibold">Expert-led technical training</p>
                             </div>
-                            <Link to="/courses" className="text-[10px] font-black text-[var(--color-brand-cyan)] hover:text-[var(--color-brand-navy)] transition-all flex items-center bg-[var(--color-brand-cyan)]/5 px-3 py-1.5 rounded-full">
+                            <Link to="/courses" className="text-[10px] font-black text-[var(--text-heading)] hover:opacity-80 transition-all flex items-center bg-[var(--text-heading)]/5 px-3 py-1.5 rounded-full">
                               VIEW ALL
                               <ChevronDown className="ml-1 h-3 w-3 -rotate-90" />
                             </Link>
@@ -238,7 +238,7 @@ const Header = () => {
                           <div className="grid grid-cols-2 gap-x-8 gap-y-6">
                             {Object.entries(courseCategories).map(([category, items]) => (
                               <div key={category} className="space-y-3">
-                                <h4 className="text-[9px] font-black text-[var(--color-brand-cyan)]/60 uppercase tracking-[0.25em] flex items-center">
+                                <h4 className="text-[9px] font-black text-[var(--text-muted)] uppercase tracking-[0.25em] flex items-center">
                                   {category}
                                 </h4>
                                 <div className="space-y-0.5">
@@ -246,11 +246,11 @@ const Header = () => {
                                     <Link
                                       key={course.id}
                                       to={`/courses/${course.slug}`}
-                                      className="group/item flex items-center py-2 px-3 -mx-3 rounded-xl hover:bg-slate-50 transition-all"
+                                      className="group/item flex items-center py-2 px-3 -mx-3 rounded-xl hover:bg-[var(--text-heading)]/5 transition-all"
                                     >
-                                      <div className="w-1 h-1 rounded-full bg-slate-300 group-hover/item:bg-[var(--color-brand-orange)] group-hover/item:scale-150 transition-all mr-3" />
+                                      <div className="w-1 h-1 rounded-full bg-[var(--border-color)] group-hover/item:bg-[var(--bg-inverted)] group-hover/item:scale-150 transition-all mr-3" />
                                       <div>
-                                        <p className="text-[13px] font-bold text-slate-700 group-hover/item:text-[var(--color-brand-navy)] transition-colors leading-tight">
+                                        <p className="text-[13px] font-bold text-[var(--text-body)] group-hover/item:text-[var(--text-heading)] transition-colors leading-tight">
                                           {course.title}
                                         </p>
                                       </div>
@@ -263,27 +263,27 @@ const Header = () => {
                         </div>
 
                         {/* Right Side: Modern Promo Section */}
-                        <div className="w-64 bg-[var(--color-brand-navy)] p-8 flex flex-col justify-between relative overflow-hidden">
+                        <div className="w-64 bg-primary p-8 flex flex-col justify-between relative overflow-hidden">
                           {/* Background Decoration */}
-                          <div className="absolute top-0 right-0 w-32 h-32 bg-[var(--color-brand-cyan)]/20 rounded-full blur-3xl -mr-16 -mt-16" />
-                          <div className="absolute bottom-0 left-0 w-24 h-24 bg-[var(--color-brand-orange)]/10 rounded-full blur-2xl -ml-12 -mb-12" />
+                          <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-3xl -mr-16 -mt-16" />
+                          <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/5 rounded-full blur-2xl -ml-12 -mb-12" />
                           
                           <div className="relative z-10">
-                            <div className="bg-[var(--color-brand-orange)] text-white text-[9px] font-black px-2.5 py-1 rounded-lg inline-block mb-4 tracking-widest uppercase shadow-lg shadow-orange-500/20">
+                            <div className="bg-white/20 text-white text-[9px] font-black px-2.5 py-1 rounded-lg inline-block mb-4 tracking-widest uppercase">
                               Trending
                             </div>
                             <h4 className="text-lg font-black text-white leading-tight mb-3">
-                              Master <span className="text-[var(--color-brand-cyan)]">MERN</span> Stack
+                              Master <span className="text-white/80">MERN</span> Stack
                             </h4>
-                            <p className="text-[11px] text-slate-300 font-medium leading-relaxed mb-6">
+                            <p className="text-[11px] text-white/70 font-medium leading-relaxed mb-6">
                               The most complete full-stack roadmap in Tamil Nadu.
                             </p>
                             
                             <div className="space-y-3">
                               {['Placement Assist', 'Real Projects', 'Live Mentoring'].map((feature) => (
-                                <div key={feature} className="flex items-center text-[10px] font-bold text-slate-300">
-                                  <div className="w-4 h-4 rounded-full bg-[var(--color-brand-cyan)]/20 flex items-center justify-center mr-2">
-                                    <div className="w-1 h-1 rounded-full bg-[var(--color-brand-cyan)]" />
+                                <div key={feature} className="flex items-center text-[10px] font-bold text-white/70">
+                                  <div className="w-4 h-4 rounded-full bg-white/20 flex items-center justify-center mr-2">
+                                    <div className="w-1 h-1 rounded-full bg-white" />
                                   </div>
                                   {feature}
                                 </div>
@@ -293,7 +293,7 @@ const Header = () => {
                           
                           <button 
                             onClick={() => openModal()}
-                            className="relative z-10 mt-8 w-full py-3.5 bg-white text-[var(--color-brand-navy)] rounded-xl text-[10px] font-black tracking-widest uppercase hover:bg-[var(--color-brand-orange)] hover:text-white transition-all shadow-xl active:scale-95"
+                            className="relative z-10 mt-8 w-full py-3.5 bg-white text-primary rounded-xl text-[10px] font-black tracking-widest uppercase hover:bg-white/90 transition-all shadow-xl active:scale-95"
                           >
                             Get Syllabus
                           </button>
@@ -304,11 +304,13 @@ const Header = () => {
                 </div>
               ))}
               
-              <div className="h-6 w-[1px] bg-slate-300 mx-4" />
+              <div className="h-6 w-[1px] bg-[var(--border-color)] mx-4" />
+
+              <ThemeToggle className="mr-2 text-[var(--text-nav)] hover:bg-[var(--text-nav)]/10" />
 
               <button 
                 onClick={() => setIsSearchOpen(true)}
-                className="p-2 text-[var(--color-brand-navy)] hover:text-[var(--color-brand-cyan)] transition-colors mr-2 group"
+                className="p-2 text-[var(--text-nav)] hover:text-[var(--text-nav-active)] transition-colors mr-2 group"
                 title="Search Courses"
               >
                 <Search className="h-5 w-5 group-hover:scale-110 transition-transform" />
@@ -323,15 +325,16 @@ const Header = () => {
             </div>
 
             {/* Mobile Menu Button */}
-            <div className="lg:hidden flex items-center space-x-4">
+            <div className="lg:hidden flex items-center space-x-2">
+              <ThemeToggle className="text-[var(--text-nav)] hover:bg-[var(--text-nav)]/10" />
               <button 
                 onClick={() => setIsSearchOpen(true)}
-                className="p-2 text-slate-600 hover:text-primary transition-colors"
+                className="p-2 text-[var(--text-nav)] hover:text-[var(--text-nav-active)] transition-colors"
               >
                 <Search className="h-5 w-5" />
               </button>
               <button
-                className="text-slate-900 p-2.5 bg-white border border-slate-200 rounded-xl shadow-sm active:scale-95 transition-all"
+                className="text-[var(--text-nav)] p-2.5 bg-[var(--text-nav)]/10 border border-[var(--border-color)] rounded-xl shadow-sm active:scale-95 transition-all hover:bg-[var(--text-nav)]/20"
                 onClick={() => setIsOpen(!isOpen)}
                 aria-label="Toggle menu"
               >
@@ -344,7 +347,7 @@ const Header = () => {
 
       {/* Mobile Navigation */}
       {isOpen && (
-        <div className="lg:hidden fixed inset-x-0 top-[100%] bg-white border-t border-slate-100 shadow-2xl animate-in fade-in slide-in-from-top-4 duration-300 h-[calc(100vh-80px)] overflow-y-auto">
+        <div className="lg:hidden fixed inset-x-0 top-[100%] bg-[var(--bg-card)] border-t border-[var(--border-color)] shadow-2xl animate-in fade-in slide-in-from-top-4 duration-300 h-[calc(100vh-80px)] overflow-y-auto">
           <div className="container-custom py-10 space-y-6">
             <div className="flex flex-col space-y-2">
               {navigation.map((item) => (
@@ -356,8 +359,8 @@ const Header = () => {
                         className={clsx(
                           'flex items-center justify-between px-6 py-4 rounded-2xl text-lg font-bold transition-all',
                           location.pathname.startsWith('/courses')
-                            ? 'text-primary bg-primary/5' 
-                            : 'text-slate-600 hover:bg-slate-50'
+                            ? 'text-[var(--text-heading)] bg-[var(--text-heading)]/5' 
+                            : 'text-[var(--text-body)] hover:bg-[var(--text-heading)]/5'
                         )}
                       >
                         {item.name}
@@ -365,10 +368,10 @@ const Header = () => {
                       </button>
                       
                       {showMobileCourses && (
-                        <div className="mx-6 p-4 bg-slate-50 rounded-[2rem] mt-2 space-y-4 animate-in slide-in-from-top-2 duration-300">
+                        <div className="mx-6 p-4 bg-[var(--text-heading)]/5 rounded-[2rem] mt-2 space-y-4 animate-in slide-in-from-top-2 duration-300">
                           {Object.entries(courseCategories).map(([category, items]) => (
                             <div key={category} className="space-y-2">
-                              <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-2">
+                              <h4 className="text-[10px] font-black text-[var(--text-muted)] uppercase tracking-widest pl-2">
                                 {category}
                               </h4>
                               <div className="grid grid-cols-1 gap-1">
@@ -377,12 +380,12 @@ const Header = () => {
                                     key={course.id}
                                     to={`/courses/${course.slug}`}
                                     onClick={() => setIsOpen(false)}
-                                    className="flex items-center p-3 bg-white rounded-xl shadow-sm border border-slate-100"
+                                    className="flex items-center p-3 bg-[var(--bg-card)] rounded-xl shadow-sm border border-[var(--border-color)]"
                                   >
-                                    <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center mr-3">
-                                      <GraduationCap className="h-4 w-4 text-primary" />
+                                    <div className="w-8 h-8 rounded-lg bg-[var(--text-heading)]/10 flex items-center justify-center mr-3">
+                                      <GraduationCap className="h-4 w-4 text-[var(--text-heading)]" />
                                     </div>
-                                    <span className="text-sm font-bold text-slate-700">{course.title}</span>
+                                    <span className="text-sm font-bold text-[var(--text-body)]">{course.title}</span>
                                   </Link>
                                 ))}
                               </div>
@@ -391,7 +394,7 @@ const Header = () => {
                           <Link
                             to="/courses"
                             onClick={() => setIsOpen(false)}
-                            className="block w-full py-4 bg-primary text-white text-center rounded-xl text-xs font-black tracking-widest uppercase"
+                            className="block w-full py-4 btn-primary text-center text-xs font-black tracking-widest uppercase"
                           >
                             Explore All Courses
                           </Link>
@@ -405,8 +408,8 @@ const Header = () => {
                       className={clsx(
                         'flex items-center justify-between px-6 py-4 rounded-2xl text-lg font-bold transition-all',
                         location.pathname === item.href 
-                          ? 'text-primary bg-primary/5' 
-                          : 'text-slate-600 hover:bg-slate-50'
+                          ? 'text-[var(--text-heading)] bg-[var(--text-heading)]/5' 
+                          : 'text-[var(--text-body)] hover:bg-[var(--text-heading)]/5'
                       )}
                     >
                       {item.name}
@@ -416,10 +419,10 @@ const Header = () => {
                 </div>
               ))}
             </div>
-            <div className="pt-6 border-t border-slate-100">
+            <div className="pt-6 border-t border-[var(--border-color)]">
               <button 
                 onClick={() => openModal()}
-                className="btn-primary w-full py-5 shadow-2xl shadow-primary/30"
+                className="btn-primary w-full py-5 shadow-2xl"
               >
                 ENROLL NOW
               </button>

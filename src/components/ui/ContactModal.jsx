@@ -34,7 +34,7 @@ const ContactModal = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={closeModal}
-            className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm"
+            className="fixed inset-0 bg-[var(--text-heading)]/60 backdrop-blur-sm"
           />
 
           {/* Modal Content */}
@@ -43,12 +43,12 @@ const ContactModal = () => {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ type: "spring", duration: 0.5, bounce: 0.3 }}
-            className="relative w-full max-w-2xl bg-white rounded-[2rem] shadow-2xl z-10 flex flex-col max-h-[90vh] overflow-hidden"
+            className="relative w-full max-w-2xl bg-[var(--bg-card)] rounded-[2rem] shadow-2xl z-10 flex flex-col max-h-[90vh] overflow-hidden"
           >
             {/* Close Button */}
             <button 
               onClick={closeModal}
-              className="absolute top-4 right-4 md:top-6 md:right-6 p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-xl transition-all z-20"
+              className="absolute top-4 right-4 md:top-6 md:right-6 p-2 text-[var(--text-muted)] hover:text-[var(--text-heading)] hover:bg-[var(--bg-secondary)] rounded-xl transition-all z-20"
             >
               <X className="h-5 w-5 md:h-6 md:w-6" />
             </button>
@@ -58,7 +58,7 @@ const ContactModal = () => {
                 <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-[10px] font-bold uppercase tracking-widest mb-3 md:mb-4">
                   <span>{modalType === 'trainer' ? 'Join Academic Faculty' : 'Admissions Open 2026-27'}</span>
                 </div>
-                <h2 className="text-2xl md:text-3xl font-black text-slate-900 mb-2 md:mb-3 tracking-tight">
+                <h2 className="text-2xl md:text-3xl font-black text-[var(--text-heading)] mb-2 md:mb-3 tracking-tight">
                   {modalType === 'trainer' ? (
                     <>Expert <span className="text-primary">Mentor Program</span></>
                   ) : modalCourse === 'Download Brochure' ? (
@@ -69,7 +69,7 @@ const ContactModal = () => {
                     <>Start Your <span className="text-primary">Journey</span></>
                   )}
                 </h2>
-                <p className="text-slate-500 text-xs md:text-sm leading-relaxed">
+                <p className="text-[var(--text-muted)] text-xs md:text-sm leading-relaxed">
                   {modalType === 'trainer'
                     ? "Apply to join our expert teaching faculty. Share your industry experience and shape the future of tech talent in Chennai."
                     : modalCourse === 'Download Brochure' 
