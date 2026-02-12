@@ -60,10 +60,10 @@ const FAQItem = ({ question, answer }) => {
 import Hero from '../components/ui/Hero';
 
 const learningPartners = [
-    { name: "NASSCOM", logo: "/partners/nasscom.png" },
-    { name: "ISO Certified", logo: "/partners/iso.png" },
-    { name: "FutureSkills", logo: "/partners/futureskills.png" },
-    { name: "MSME", logo: "/partners/msme.png" }
+    { name: "NASSCOM", logo: "/nasscom-logo.webp" },
+    { name: "ISO Certified", logo: "/ISO.webp" },
+    { name: "FutureSkills", logo: "/future-skills.webp" },
+    { name: "MSME", logo: "/msme-logo.webp" }
   ];
 
   const Home = () => {
@@ -325,23 +325,25 @@ const learningPartners = [
         </div>
       </section>
 
-      {/* Learning Partners Grid */}
-      <section className="py-12 bg-[var(--bg-body)] border-b border-[var(--border-color)]">
+      {/* Certifications & Recognitions */}
+      <section className="py-12 bg-[var(--bg-secondary)] border-b border-[var(--border-color)]">
         <div className="container-custom">
-          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16">
+          <p className="text-center text-xs font-black text-[var(--text-muted)] uppercase tracking-[0.3em] mb-8">Recognized &amp; Certified By</p>
+          <div className="flex flex-wrap justify-center items-center gap-10 md:gap-16">
             {learningPartners.map((partner, index) => (
               <div key={index} className="flex flex-col items-center group">
-                <div className="h-16 w-32 md:h-20 md:w-40 flex items-center justify-center transition-all">
+                <div className="h-20 w-36 md:h-24 md:w-44 flex items-center justify-center transition-all">
                   {partner.logo ? (
                     <img 
                       src={partner.logo} 
                       alt={partner.name} 
-                      className={`max-h-12 md:max-h-16 object-contain ${partner.name === 'MSME' ? 'grayscale-0' : 'grayscale group-hover:grayscale-0'} transition-all duration-500`} 
+                      className="max-h-16 md:max-h-20 object-contain group-hover:scale-110 transition-transform duration-500" 
                     />
                   ) : (
                     <span className="text-xl font-black text-[var(--text-muted)] group-hover:text-[var(--text-heading)] transition-colors">{partner.name}</span>
                   )}
                 </div>
+                <span className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-widest mt-2">{partner.name}</span>
               </div>
             ))}
           </div>

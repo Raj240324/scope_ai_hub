@@ -15,11 +15,11 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           {/* Institute Info */}
           <div className="space-y-8">
-            <Link to="/" className="inline-block p-3 rounded-2xl bg-primary/10 border border-primary/20">
+            <Link to="/" className="inline-block">
               <img 
                 src="/scope-logo.png" 
                 alt="ScopeAIHub" 
-                className="h-16 w-auto object-contain" 
+                className="h-28 md:h-36 -my-4 w-auto object-contain" 
               />
             </Link>
             <p className="text-sm leading-relaxed">
