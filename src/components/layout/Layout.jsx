@@ -26,10 +26,10 @@ const Layout = ({
       <AnimatePresence mode="wait">
         <motion.main 
           className="flex-grow"
-          initial={{ opacity: 0, y: 10 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
-          transition={{ duration: 0.3, ease: "easeOut" }}
+          transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1.0] }}
         >
           {children}
         </motion.main>

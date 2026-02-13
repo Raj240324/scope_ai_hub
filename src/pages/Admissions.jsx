@@ -60,12 +60,12 @@ const Admissions = () => {
           <h2 className="heading-md mb-12 text-center">How to Enroll</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {steps.map((step, index) => (
-              <div key={index} className="relative p-8 bg-[var(--bg-card)] rounded-3xl border border-[var(--border-color)] shadow-sm hover:shadow-md transition-shadow">
-                <div className="h-12 w-12 rounded-2xl bg-primary/10 flex items-center justify-center mb-6">
+              <div key={index} className="relative p-5 sm:p-8 bg-[var(--bg-card)] rounded-2xl sm:rounded-3xl border border-[var(--border-color)] shadow-sm hover:shadow-md transition-shadow">
+                <div className="h-10 w-10 sm:h-12 sm:w-12 rounded-xl sm:rounded-2xl bg-primary/10 flex items-center justify-center mb-5 sm:mb-6">
                   {step.icon}
                 </div>
-                <h3 className="text-xl font-bold text-[var(--text-heading)] mb-3">{step.title}</h3>
-                <p className="text-[var(--text-muted)] text-sm leading-relaxed">{step.description}</p>
+                <h3 className="text-lg sm:text-xl font-bold text-[var(--text-heading)] mb-3">{step.title}</h3>
+                <p className="text-sm sm:text-base text-[var(--text-muted)] leading-relaxed">{step.description}</p>
                 {index < steps.length - 1 && (
                   <div className="hidden lg:block absolute top-1/2 -right-4 -translate-y-1/2 z-10">
                     <ArrowRight className="h-6 w-6 text-[var(--text-muted)]" />
@@ -99,7 +99,7 @@ const Admissions = () => {
           {/* Batch Schedules */}
           <div className="space-y-8">
             <h2 className="heading-md">Batch Schedules</h2>
-            <div className="bg-[var(--bg-card)] rounded-3xl border border-[var(--border-color)] overflow-hidden">
+            <div className="bg-[var(--bg-card)] rounded-2xl sm:rounded-3xl border border-[var(--border-color)] overflow-hidden">
               <div className="overflow-x-auto">
                 <table className="w-full text-left">
                   <thead className="bg-[var(--bg-secondary)] border-b border-[var(--border-color)]">
@@ -159,17 +159,17 @@ const Admissions = () => {
                 color: "from-purple-500 to-pink-600"
               }
             ].map((scheme, i) => (
-              <div key={i} className="bg-[var(--bg-card)] rounded-3xl p-8 border border-[var(--border-color)] shadow-sm hover:shadow-lg transition-all">
-                <div className={`h-16 w-16 rounded-2xl bg-gradient-to-br ${scheme.color} flex items-center justify-center mb-6 text-white text-2xl font-black shadow-lg`}>
+              <div key={i} className="bg-[var(--bg-card)] rounded-2xl sm:rounded-3xl p-5 sm:p-8 border border-[var(--border-color)] shadow-sm hover:shadow-lg transition-all">
+                <div className={`h-12 w-12 sm:h-16 sm:w-16 rounded-xl sm:rounded-2xl bg-gradient-to-br ${scheme.color} flex items-center justify-center mb-5 sm:mb-6 text-white text-xl sm:text-2xl font-black shadow-lg`}>
                   {scheme.discount.includes('%') ? scheme.discount.replace(' Off', '') : '₹'}
                 </div>
-                <h3 className="text-xl font-bold text-[var(--text-heading)] mb-3">{scheme.title}</h3>
+                <h3 className="text-lg sm:text-xl font-bold text-[var(--text-heading)] mb-3">{scheme.title}</h3>
                 <p className="text-sm text-primary font-bold mb-2">{scheme.discount}</p>
                 <p className="text-[var(--text-muted)] leading-relaxed text-sm">{scheme.desc}</p>
               </div>
             ))}
           </div>
-          <div className="mt-12 p-8 bg-[var(--bg-secondary)] rounded-2xl border border-[var(--border-color)]">
+          <div className="mt-8 sm:mt-12 p-5 sm:p-8 bg-[var(--bg-secondary)] rounded-2xl border border-[var(--border-color)]">
             <h3 className="text-lg font-bold text-[var(--text-heading)] mb-4">💳 Flexible Payment Options</h3>
             <div className="grid md:grid-cols-2 gap-6">
               <div className="flex items-start space-x-3">
@@ -205,7 +205,7 @@ const Admissions = () => {
         </div>
 
         {/* Fee Structure Note */}
-        <div className="mt-24 p-8 md:p-12 bg-[var(--bg-inverted)] text-[var(--text-on-inverted)] rounded-3xl relative overflow-hidden text-center">
+        <div className="mt-16 sm:mt-24 p-5 sm:p-8 md:p-12 bg-[var(--bg-inverted)] text-[var(--text-on-inverted)] rounded-2xl sm:rounded-3xl relative overflow-hidden text-center">
           <CreditCard className="absolute -top-4 -left-4 h-32 w-32 text-[var(--text-on-inverted)]/5" />
           <h2 className="text-2xl md:text-3xl font-bold mb-6 relative z-10">Transparent Fee Structure</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10 text-left">

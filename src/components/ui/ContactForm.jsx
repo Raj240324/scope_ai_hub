@@ -55,6 +55,7 @@ const ContactForm = ({ initialCourse = "General Inquiry" }) => {
 
   const validateForm = () => {
     const errors = {};
+    const formData = new FormData(form.current);
     const name = formData.get('user_name');
     const email = formData.get('user_email');
     const phone = formData.get('user_phone');
@@ -75,7 +76,7 @@ const ContactForm = ({ initialCourse = "General Inquiry" }) => {
     }
 
     // Strict Phone Validation: 10 digits exactly for India
-    const digitsOnly = phone.replace(/\D/g, '');
+    const digitsOnly = phone ? phone.replace(/\D/g, '') : '';
     if (!phone || digitsOnly.length !== 10) {
       errors.user_phone = 'Phone number must be exactly 10 digits';
     }
@@ -342,9 +343,9 @@ const ContactForm = ({ initialCourse = "General Inquiry" }) => {
       </div>
 
       {status === 'error' && (
-        <div className="flex items-center space-x-2 text-red-600 bg-red-50 p-3 rounded-xl border border-red-100">
+        <div className="flex items-center space-x-2 text-red-500 bg-red-500/10 p-3 rounded-xl border border-red-500/20">
           <AlertCircle className="h-4 w-4 shrink-0" />
-          <p className="text-[10px] font-bold">{errorMessage}</p>
+          <p className="text-xs font-bold">{errorMessage}</p>
         </div>
       )}
 

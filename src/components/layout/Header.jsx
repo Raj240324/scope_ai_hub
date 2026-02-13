@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, GraduationCap, Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin, Search, ChevronDown } from 'lucide-react';
+import { Menu, X, GraduationCap, Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin, Search, ChevronDown, ArrowRight } from 'lucide-react';
 import { clsx } from 'clsx';
 import { useModal } from '../../context/ModalContext';
 import ThemeToggle from '../ui/ThemeToggle';
+import { useTheme } from '../../context/ThemeContext';
 import { courses } from '../../data/courses';
 import { BRANDING } from '../../data/branding';
 
@@ -16,6 +17,7 @@ const Header = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const location = useLocation();
   const { openModal } = useModal();
+  const { theme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -57,8 +59,9 @@ const Header = () => {
   ];
 
   return (
+    <>
     <header className={clsx(
-      "fixed top-0 left-0 w-full z-50 transition-all duration-300",
+      "fixed top-0 left-0 w-full z-[999] transition-all duration-300",
       scrolled 
         ? "bg-[var(--bg-header-scrolled)] backdrop-blur-md shadow-md py-3 border-b border-[var(--border-header)]" 
         : "bg-[var(--bg-header)] py-4 border-b border-[var(--border-header)]"
@@ -191,8 +194,8 @@ const Header = () => {
             {/* Logo */}
             <Link to="/" className="flex items-center group">
               <img 
-                src="/scope-logo.png" 
-                alt="ScopeAIHub" 
+                src={theme === 'dark' ? BRANDING.logoDark : BRANDING.logoLight} 
+                alt={BRANDING.fullName} 
                 className="h-28 md:h-36 -my-8 md:-my-10 w-auto object-contain transition-transform duration-300 group-hover:scale-105 rounded-xl" 
               />
             </Link>
@@ -344,93 +347,139 @@ const Header = () => {
           </nav>
         </div>
       </div>
+    </header>
 
-      {/* Mobile Navigation */}
+      {/* Mobile Navigation — outside header to fix z-index stacking */}
       {isOpen && (
-        <div className="lg:hidden fixed inset-x-0 top-[100%] bg-[var(--bg-card)] border-t border-[var(--border-color)] shadow-2xl animate-in fade-in slide-in-from-top-4 duration-300 h-[calc(100vh-80px)] overflow-y-auto">
-          <div className="container-custom py-10 space-y-6">
-            <div className="flex flex-col space-y-2">
-              {navigation.map((item) => (
-                <div key={item.name} className="flex flex-col">
-                  {item.name === 'Courses' ? (
-                    <>
-                      <button
-                        onClick={() => setShowMobileCourses(!showMobileCourses)}
+        <div className="lg:hidden fixed inset-0 top-0 z-[9999]">
+          {/* Dark overlay */}
+          <div 
+            className="absolute inset-0 bg-black/60"
+            onClick={() => setIsOpen(false)}
+          />
+          
+          {/* Slide-in Panel */}
+          <div className="absolute right-0 top-0 h-full w-[85%] max-w-[380px] bg-[var(--bg-inverted)] text-[var(--text-on-inverted)] flex flex-col overflow-hidden shadow-[-20px_0_60px_rgba(0,0,0,0.3)]"
+               style={{ animation: 'slideInRight 0.3s ease-out' }}
+          >
+            {/* Panel Header */}
+            <div className="flex items-center justify-between p-6 pb-4 border-b border-[var(--text-on-inverted)]/10">
+              <div>
+                <p className="text-[9px] font-black uppercase tracking-[0.3em] text-primary">{BRANDING.fullName}</p>
+                <p className="text-[10px] text-[var(--text-on-inverted)]/40 font-medium mt-1">Navigation Menu</p>
+              </div>
+              <button
+                onClick={() => setIsOpen(false)}
+                className="w-10 h-10 rounded-xl bg-[var(--text-on-inverted)]/10 flex items-center justify-center hover:bg-primary/20 transition-colors active:scale-95"
+              >
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+
+            {/* Navigation Items */}
+            <div className="flex-1 overflow-y-auto py-6 px-6">
+              <nav className="space-y-1">
+                {navigation.map((item, index) => (
+                  <div key={item.name}>
+                    {item.name === 'Courses' ? (
+                      <>
+                        <button
+                          onClick={() => setShowMobileCourses(!showMobileCourses)}
+                          className={clsx(
+                            'w-full flex items-center py-4 group transition-all relative',
+                            location.pathname.startsWith('/courses') && 'text-primary'
+                          )}
+                        >
+                          {/* Active indicator bar */}
+                          {location.pathname.startsWith('/courses') && (
+                            <div className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-6 bg-primary rounded-full" />
+                          )}
+                          <span className="text-[10px] font-black text-[var(--text-on-inverted)]/20 tracking-widest mr-5 ml-3 tabular-nums">
+                            0{index + 1}
+                          </span>
+                          <span className="text-base font-bold flex-1 text-left group-hover:text-primary transition-colors">{item.name}</span>
+                          <ChevronDown className={clsx(
+                            "h-4 w-4 text-[var(--text-on-inverted)]/30 transition-transform duration-300",
+                            showMobileCourses && "rotate-180 text-primary"
+                          )} />
+                        </button>
+                        
+                        {showMobileCourses && (
+                          <div className="ml-12 mr-2 mb-4 space-y-4">
+                            {Object.entries(courseCategories).map(([category, items]) => (
+                              <div key={category}>
+                                <p className="text-[9px] font-black text-[var(--text-on-inverted)]/25 uppercase tracking-[0.2em] mb-2">
+                                  {category}
+                                </p>
+                                <div className="flex flex-wrap gap-1.5">
+                                  {items.map((course) => (
+                                    <Link
+                                      key={course.id}
+                                      to={`/courses/${course.slug}`}
+                                      onClick={() => setIsOpen(false)}
+                                      className="text-[11px] font-semibold px-3 py-1.5 rounded-lg bg-[var(--text-on-inverted)]/5 text-[var(--text-on-inverted)]/60 hover:bg-primary/20 hover:text-primary transition-all border border-[var(--text-on-inverted)]/5"
+                                    >
+                                      {course.title}
+                                    </Link>
+                                  ))}
+                                </div>
+                              </div>
+                            ))}
+                            <Link
+                              to="/courses"
+                              onClick={() => setIsOpen(false)}
+                              className="inline-flex items-center text-[11px] font-black text-primary uppercase tracking-widest hover:underline mt-1"
+                            >
+                              View All <ArrowRight className="ml-1 h-3 w-3" />
+                            </Link>
+                          </div>
+                        )}
+                      </>
+                    ) : (
+                      <Link
+                        to={item.href}
+                        onClick={() => setIsOpen(false)}
                         className={clsx(
-                          'flex items-center justify-between px-6 py-4 rounded-2xl text-lg font-bold transition-all',
-                          location.pathname.startsWith('/courses')
-                            ? 'text-[var(--text-heading)] bg-[var(--text-heading)]/5' 
-                            : 'text-[var(--text-body)] hover:bg-[var(--text-heading)]/5'
+                          'flex items-center py-4 group transition-all relative',
+                          location.pathname === item.href ? 'text-primary' : 'text-[var(--text-on-inverted)]/80'
                         )}
                       >
-                        {item.name}
-                        <ChevronDown className={clsx("h-5 w-5 transition-transform duration-300", showMobileCourses && "rotate-180")} />
-                      </button>
-                      
-                      {showMobileCourses && (
-                        <div className="mx-6 p-4 bg-[var(--text-heading)]/5 rounded-[2rem] mt-2 space-y-4 animate-in slide-in-from-top-2 duration-300">
-                          {Object.entries(courseCategories).map(([category, items]) => (
-                            <div key={category} className="space-y-2">
-                              <h4 className="text-[10px] font-black text-[var(--text-muted)] uppercase tracking-widest pl-2">
-                                {category}
-                              </h4>
-                              <div className="grid grid-cols-1 gap-1">
-                                {items.map((course) => (
-                                  <Link
-                                    key={course.id}
-                                    to={`/courses/${course.slug}`}
-                                    onClick={() => setIsOpen(false)}
-                                    className="flex items-center p-3 bg-[var(--bg-card)] rounded-xl shadow-sm border border-[var(--border-color)]"
-                                  >
-                                    <div className="w-8 h-8 rounded-lg bg-[var(--text-heading)]/10 flex items-center justify-center mr-3">
-                                      <GraduationCap className="h-4 w-4 text-[var(--text-heading)]" />
-                                    </div>
-                                    <span className="text-sm font-bold text-[var(--text-body)]">{course.title}</span>
-                                  </Link>
-                                ))}
-                              </div>
-                            </div>
-                          ))}
-                          <Link
-                            to="/courses"
-                            onClick={() => setIsOpen(false)}
-                            className="block w-full py-4 btn-primary text-center text-xs font-black tracking-widest uppercase"
-                          >
-                            Explore All Courses
-                          </Link>
-                        </div>
-                      )}
-                    </>
-                  ) : (
-                    <Link
-                      to={item.href}
-                      onClick={() => setIsOpen(false)}
-                      className={clsx(
-                        'flex items-center justify-between px-6 py-4 rounded-2xl text-lg font-bold transition-all',
-                        location.pathname === item.href 
-                          ? 'text-[var(--text-heading)] bg-[var(--text-heading)]/5' 
-                          : 'text-[var(--text-body)] hover:bg-[var(--text-heading)]/5'
-                      )}
-                    >
-                      {item.name}
-                      <ChevronDown className="h-5 w-5 opacity-30" />
-                    </Link>
-                  )}
-                </div>
-              ))}
+                        {location.pathname === item.href && (
+                          <div className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-6 bg-primary rounded-full" />
+                        )}
+                        <span className="text-[10px] font-black text-[var(--text-on-inverted)]/20 tracking-widest mr-5 ml-3 tabular-nums">
+                          0{index + 1}
+                        </span>
+                        <span className="text-base font-bold group-hover:text-primary transition-colors">{item.name}</span>
+                      </Link>
+                    )}
+                  </div>
+                ))}
+              </nav>
             </div>
-            <div className="pt-6 border-t border-[var(--border-color)]">
+
+            {/* Bottom CTA Area */}
+            <div className="p-6 pt-4 border-t border-[var(--text-on-inverted)]/10 space-y-4">
+              {/* Contact strip */}
+              <div className="flex items-center justify-between text-[10px] text-[var(--text-on-inverted)]/40">
+                <a href={`tel:${BRANDING.phone}`} className="flex items-center hover:text-primary transition-colors">
+                  <Phone className="h-3 w-3 mr-1.5" /> {BRANDING.phone}
+                </a>
+                <a href={`mailto:${BRANDING.email}`} className="flex items-center hover:text-primary transition-colors">
+                  <Mail className="h-3 w-3 mr-1.5" /> Email Us
+                </a>
+              </div>
               <button 
-                onClick={() => openModal()}
-                className="btn-primary w-full py-5 shadow-2xl"
+                onClick={() => { openModal(); setIsOpen(false); }}
+                className="w-full py-4 bg-primary text-white font-black text-sm tracking-wider uppercase rounded-2xl shadow-xl shadow-primary/20 hover:opacity-90 transition-all active:scale-[0.98]"
               >
-                ENROLL NOW
+                Enroll Now →
               </button>
             </div>
           </div>
         </div>
       )}
-    </header>
+    </>
   );
 };
 

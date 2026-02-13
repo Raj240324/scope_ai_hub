@@ -3,11 +3,13 @@ import { Link } from 'react-router-dom';
 import { GraduationCap, Mail, Phone, MapPin, Facebook, Twitter, Linkedin, Instagram, ArrowRight } from 'lucide-react';
 import { useModal } from '../../context/ModalContext';
 import { BRANDING } from '../../data/branding';
+import { useTheme } from '../../context/ThemeContext';
 import { MicroExpander } from '../ui/MicroExpander';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   const { openModal } = useModal();
+  const { theme } = useTheme();
 
   return (
     <footer className="bg-[var(--bg-footer)] text-[var(--text-footer-muted)] pt-20 pb-10 border-t border-[var(--border-color)]">
@@ -17,8 +19,8 @@ const Footer = () => {
           <div className="space-y-8">
             <Link to="/" className="inline-block">
               <img 
-                src="/scope-logo.png" 
-                alt="ScopeAIHub" 
+                src={theme === 'dark' ? BRANDING.logoDark : BRANDING.logoLight} 
+                alt={BRANDING.fullName} 
                 className="h-28 md:h-36 -my-4 w-auto object-contain" 
               />
             </Link>

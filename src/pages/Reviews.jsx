@@ -5,6 +5,7 @@ import { clsx } from 'clsx';
 import { courses } from '../data/courses';
 import { useModal } from '../context/ModalContext';
 import { BRANDING } from '../data/branding';
+import Hero from '../components/ui/Hero';
 
 const reviews = [
   {
@@ -75,7 +76,6 @@ const reviews = [
   }
 ];
 
-import Hero from '../components/ui/Hero';
 
 const Reviews = () => {
   const [selectedCourse, setSelectedCourse] = useState('All');
@@ -169,7 +169,7 @@ const Reviews = () => {
           {filteredReviews.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredReviews.map((review) => (
-                <div key={review.id} className="bg-[var(--bg-card)] p-8 rounded-3xl border border-[var(--border-color)] shadow-sm hover:shadow-xl transition-all duration-300 group">
+                <div key={review.id} className="bg-[var(--bg-card)] p-5 sm:p-8 rounded-2xl sm:rounded-3xl border border-[var(--border-color)] shadow-sm hover:shadow-xl transition-all duration-300 group">
                   <div className="flex items-center justify-between mb-6">
                     <div className="flex items-center space-x-4">
                       <img 
@@ -233,7 +233,7 @@ const Reviews = () => {
       <section className="py-20 bg-[var(--bg-inverted)] overflow-hidden relative">
         <div className="absolute top-0 right-0 w-64 h-64 bg-[var(--bg-body)]/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
         <div className="container-custom text-center relative z-10">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[var(--text-on-inverted)] mb-8">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[var(--text-on-inverted)] mb-8">
             Ready to be our next success story?
           </h2>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

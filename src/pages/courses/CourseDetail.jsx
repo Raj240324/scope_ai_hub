@@ -89,11 +89,11 @@ const CourseDetail = () => {
               <span className="text-xs font-bold text-[var(--text-on-inverted)] uppercase tracking-widest">New Batch: Feb 15, 2026</span>
             </div>
 
-            <h1 className="text-5xl md:text-7xl font-black text-[var(--text-on-inverted)] mb-8 tracking-tighter leading-[1.1] animate-in fade-in slide-in-from-bottom-6 duration-700 delay-100">
+            <h1 className="text-3xl sm:text-5xl md:text-7xl font-black text-[var(--text-on-inverted)] mb-8 tracking-tighter leading-[1.1] animate-in fade-in slide-in-from-bottom-6 duration-700 delay-100">
               {course.title}
             </h1>
 
-            <p className="text-xl md:text-2xl text-[var(--text-on-inverted)]/60 mb-12 leading-relaxed max-w-3xl mx-auto font-medium animate-in fade-in slide-in-from-bottom-8 duration-700 delay-200">
+            <p className="text-base sm:text-xl md:text-2xl text-[var(--text-on-inverted)]/60 mb-8 sm:mb-12 leading-relaxed max-w-3xl mx-auto font-medium animate-in fade-in slide-in-from-bottom-8 duration-700 delay-200">
               {course.shortDescription}
             </p>
 
@@ -139,9 +139,9 @@ const CourseDetail = () => {
       <div className={`sticky top-[64px] md:top-[72px] z-40 transition-all duration-300 ${scrollProgress > 5 ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'}`}>
         <div className="bg-[var(--bg-body)]/90 backdrop-blur-xl border-b border-[var(--border-color)] shadow-lg">
           <div className="container-custom py-4">
-            <div className="flex items-center justify-between">
-              <h2 className="text-lg font-black text-[var(--text-heading)] hidden md:block">{course.title}</h2>
-              <div className="flex items-center space-x-6 overflow-x-auto no-scrollbar mask-linear-fade">
+            <div className="flex items-center justify-between gap-4">
+              <h2 className="text-lg font-black text-[var(--text-heading)] hidden md:block truncate">{course.title}</h2>
+              <div className="flex-1 md:flex-none flex items-center space-x-4 md:space-x-6 overflow-x-auto no-scrollbar">
                 {['Overview', 'Curriculum', 'Projects', 'Instructor', 'FAQ'].map(tab => (
                   <a 
                     key={tab} 
@@ -154,9 +154,9 @@ const CourseDetail = () => {
                   </a>
                 ))}
               </div>
-              <button 
+              <button
                 onClick={() => openModal(course.title)}
-                className="bg-[var(--bg-inverted)] text-[var(--text-on-inverted)] px-6 py-3 rounded-xl text-xs font-black uppercase tracking-widest hover:opacity-90 transition-all shadow-lg hover:scale-105 active:scale-95"
+                className="hidden sm:block bg-[var(--bg-inverted)] text-[var(--text-on-inverted)] px-6 py-3 rounded-xl text-xs font-black uppercase tracking-widest hover:opacity-90 transition-all shadow-lg hover:scale-105 active:scale-95"
               >
                 Enroll Now
               </button>
@@ -306,11 +306,11 @@ const CourseDetail = () => {
               </h2>
               <div className="grid grid-cols-1 gap-8">
                 {course.projects?.map((project, i) => (
-                  <div key={i} className="group p-10 lg:p-12 bg-[var(--bg-card)] rounded-[3rem] border border-[var(--border-color)] hover:border-primary/30 hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.08)] transition-all duration-700 relative overflow-hidden flex flex-col md:flex-row items-start md:items-center gap-10">
+                  <div key={i} className="group p-6 md:p-10 lg:p-12 bg-[var(--bg-card)] rounded-2xl md:rounded-[3rem] border border-[var(--border-color)] hover:border-primary/30 hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.08)] transition-all duration-700 relative overflow-hidden flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-10">
                     <div className="absolute top-0 right-0 w-64 h-64 bg-[var(--bg-secondary)] rounded-full -mr-32 -mt-32 group-hover:bg-primary/5 transition-colors duration-700"></div>
                     
-                    <div className="h-24 w-24 shrink-0 bg-[var(--bg-secondary)] rounded-[2rem] flex items-center justify-center group-hover:bg-[var(--bg-inverted)] transition-all duration-700 group-hover:scale-110 group-hover:rotate-12 shadow-inner relative z-10">
-                      <Zap className="h-10 w-10 text-[var(--text-muted)] group-hover:text-[var(--text-on-inverted)] transition-colors" />
+                    <div className="h-16 w-16 md:h-24 md:w-24 shrink-0 bg-[var(--bg-secondary)] rounded-2xl md:rounded-[2rem] flex items-center justify-center group-hover:bg-[var(--bg-inverted)] transition-all duration-700 group-hover:scale-110 group-hover:rotate-12 shadow-inner relative z-10">
+                      <Zap className="h-6 w-6 md:h-10 md:w-10 text-[var(--text-muted)] group-hover:text-[var(--text-on-inverted)] transition-colors" />
                     </div>
                     
                     <div className="flex-1 relative z-10">
@@ -351,11 +351,11 @@ const CourseDetail = () => {
               <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-[var(--text-heading)] mb-10 tracking-tight leading-tight">
                 Learn from the Experts
               </h2>
-              <div className="flex flex-col md:flex-row items-center md:items-stretch gap-12 p-10 lg:p-16 bg-[var(--bg-inverted)] rounded-[3.5rem] text-[var(--text-on-inverted)] shadow-2xl relative overflow-hidden group">
+              <div className="flex flex-col md:flex-row items-center md:items-stretch gap-8 md:gap-12 p-6 md:p-10 lg:p-16 bg-[var(--bg-inverted)] rounded-2xl md:rounded-[3.5rem] text-[var(--text-on-inverted)] shadow-2xl relative overflow-hidden group">
                 <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-primary/10 rounded-full blur-[120px] -mr-48 -mt-48 group-hover:bg-primary/20 transition-all duration-1000" />
                 <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-primary/5 rounded-full blur-[100px] -ml-32 -mb-32" />
                 
-                <div className="relative h-64 w-64 shrink-0 mx-auto md:mx-0">
+                <div className="relative h-48 w-48 md:h-64 md:w-64 shrink-0 mx-auto md:mx-0">
                   <div className="absolute inset-0 bg-primary rounded-[3rem] rotate-6 group-hover:rotate-12 transition-transform duration-700 opacity-20 blur-xl"></div>
                   <div className="absolute inset-0 bg-[var(--bg-body)]/10 rounded-[3rem] -rotate-3 group-hover:-rotate-6 transition-transform duration-700"></div>
                   <div className="relative h-full w-full rounded-[3rem] overflow-hidden border-2 border-[var(--bg-body)]/20 shadow-2xl">
@@ -416,17 +416,17 @@ const CourseDetail = () => {
                   >
                     <button 
                       onClick={() => setActiveFaq(activeFaq === index ? -1 : index)}
-                      className="w-full flex items-center justify-between p-8 lg:p-10 text-left transition-all group/faqbtn"
+                      className="w-full flex items-center justify-between p-5 md:p-8 lg:p-10 text-left transition-all group/faqbtn"
                     >
-                      <span className={`text-xl font-black tracking-tight transition-all duration-500 ${activeFaq === index ? 'text-primary translate-x-2' : 'text-[var(--text-heading)] group-hover/faqbtn:text-primary'}`}>
+                      <span className={`text-base md:text-xl font-black tracking-tight transition-all duration-500 ${activeFaq === index ? 'text-primary md:translate-x-2' : 'text-[var(--text-heading)] group-hover/faqbtn:text-primary'}`}>
                         {faq.question}
                       </span>
-                      <div className={`h-12 w-12 rounded-2xl flex items-center justify-center transition-all duration-700 shrink-0 ${activeFaq === index ? 'bg-primary text-[var(--text-on-inverted)] rotate-180 shadow-2xl shadow-primary/40' : 'bg-[var(--bg-card)] border border-[var(--border-color)] group-hover/faqbtn:border-primary/20 group-hover/faqbtn:scale-110'}`}>
+                      <div className={`h-10 w-10 md:h-12 md:w-12 rounded-xl md:rounded-2xl flex items-center justify-center transition-all duration-700 shrink-0 ${activeFaq === index ? 'bg-primary text-[var(--text-on-inverted)] rotate-180 shadow-2xl shadow-primary/40' : 'bg-[var(--bg-card)] border border-[var(--border-color)] group-hover/faqbtn:border-primary/20 group-hover/faqbtn:scale-110'}`}>
                         <ChevronDown className="h-6 w-6" />
                       </div>
                     </button>
                     {activeFaq === index && (
-                      <div className="px-8 pb-8 lg:px-12 lg:pb-12 animate-in fade-in slide-in-from-top-4 duration-700">
+                      <div className="px-5 pb-5 md:px-8 md:pb-8 lg:px-12 lg:pb-12 animate-in fade-in slide-in-from-top-4 duration-700">
                         <div className="h-px bg-[var(--border-color)] mb-8" />
                         <p className="text-[var(--text-muted)] text-base leading-relaxed font-medium">
                           {faq.answer}
@@ -438,7 +438,7 @@ const CourseDetail = () => {
               </div>
               
               {/* Still have questions? */}
-              <div className="mt-16 p-10 bg-[var(--bg-inverted)] rounded-[3rem] text-[var(--text-on-inverted)] flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden">
+              <div className="mt-12 md:mt-16 p-6 md:p-10 bg-[var(--bg-inverted)] rounded-2xl md:rounded-[3rem] text-[var(--text-on-inverted)] flex flex-col md:flex-row items-center justify-between gap-6 md:gap-8 relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-64 h-64 bg-[var(--bg-body)]/10 rounded-full -mr-32 -mt-32 blur-3xl"></div>
                 <div className="relative z-10 text-center md:text-left">
                   <h3 className="text-2xl font-black mb-2">Still have questions?</h3>

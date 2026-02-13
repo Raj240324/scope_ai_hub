@@ -103,13 +103,41 @@
 }
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
   body {
-    @apply bg-[var(--bg-body)] text-[var(--text-body)] font-sans transition-colors duration-300;
+    @apply bg-[var(--bg-body)] text-[var(--text-body)] font-sans;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
   }
   
   html.dark body {
     background-color: var(--bg-body);
     color: var(--text-body);
+  }
+
+  /* Premium selection color */
+  ::selection {
+    background-color: var(--btn-primary-bg);
+    color: var(--btn-primary-text);
+  }
+
+  /* Smooth focus outlines */
+  *:focus-visible {
+    outline: 2px solid var(--btn-primary-bg);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  /* Smooth image rendering */
+  img {
+    image-rendering: -webkit-optimize-contrast;
   }
 }
 
@@ -162,5 +190,14 @@
   .no-scrollbar {
     -ms-overflow-style: none;
     scrollbar-width: none;
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
   }
 }

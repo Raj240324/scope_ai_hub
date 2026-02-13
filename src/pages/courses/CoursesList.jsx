@@ -47,7 +47,7 @@ const CoursesList = () => {
 
       <div className="container-custom section-padding pt-0">
         {/* Filters & Search - Floating Card */}
-        <div className="bg-[var(--bg-card)] rounded-[3rem] p-8 md:p-12 mb-16 -mt-24 relative z-10 shadow-2xl border border-[var(--border-color)] backdrop-blur-xl overflow-hidden">
+        <div className="bg-[var(--bg-card)] rounded-2xl sm:rounded-[2.5rem] md:rounded-[3rem] p-5 sm:p-8 md:p-12 mb-10 sm:mb-16 -mt-20 sm:-mt-24 relative z-10 shadow-2xl border border-[var(--border-color)] backdrop-blur-xl overflow-hidden">
           {/* Decorative gradients for the card */}
           <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-[100px] -mr-32 -mt-32 pointer-events-none" />
           <div className="absolute bottom-0 left-0 w-64 h-64 bg-primary/5 rounded-full blur-[100px] -ml-32 -mb-32 pointer-events-none" />
@@ -61,19 +61,19 @@ const CoursesList = () => {
                 id="course-search-main"
                 name="course-search-main"
                 placeholder="Search for your future career..."
-                className="w-full pl-14 pr-6 py-5 bg-[var(--bg-secondary)] border border-[var(--border-color)] text-[var(--text-heading)] rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all placeholder:text-[var(--text-muted)] font-medium"
+                className="w-full pl-12 sm:pl-14 pr-4 sm:pr-6 py-3.5 sm:py-5 bg-[var(--bg-secondary)] border border-[var(--border-color)] text-[var(--text-heading)] rounded-xl sm:rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all placeholder:text-[var(--text-muted)] font-medium text-sm sm:text-base"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
             </div>
             
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 w-full lg:w-auto">
               <div className="relative group">
                 <label htmlFor="category-filter" className="sr-only">Filter by Category</label>
                 <select
                   id="category-filter"
                   name="category"
-                  className="appearance-none pl-6 pr-12 py-5 bg-[var(--bg-secondary)] border border-[var(--border-color)] text-[var(--text-heading)] rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all cursor-pointer min-w-[180px] font-medium hover:border-primary/40"
+                  className="appearance-none pl-5 sm:pl-6 pr-10 sm:pr-12 py-3.5 sm:py-5 bg-[var(--bg-secondary)] border border-[var(--border-color)] text-[var(--text-heading)] rounded-xl sm:rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all cursor-pointer w-full sm:min-w-[180px] font-medium hover:border-primary/40 text-sm sm:text-base"
                   value={selectedCategory}
                   onChange={(e) => setSelectedCategory(e.target.value)}
                 >
@@ -89,7 +89,7 @@ const CoursesList = () => {
                 <select
                   id="level-filter"
                   name="level"
-                  className="appearance-none pl-6 pr-12 py-5 bg-[var(--bg-secondary)] border border-[var(--border-color)] text-[var(--text-heading)] rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all cursor-pointer min-w-[160px] font-medium hover:border-primary/40"
+                  className="appearance-none pl-5 sm:pl-6 pr-10 sm:pr-12 py-3.5 sm:py-5 bg-[var(--bg-secondary)] border border-[var(--border-color)] text-[var(--text-heading)] rounded-xl sm:rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all cursor-pointer w-full sm:min-w-[160px] font-medium hover:border-primary/40 text-sm sm:text-base"
                   value={selectedLevel}
                   onChange={(e) => setSelectedLevel(e.target.value)}
                 >
@@ -103,7 +103,7 @@ const CoursesList = () => {
               {(searchTerm || selectedCategory !== 'All' || selectedLevel !== 'All') && (
                 <button
                   onClick={clearFilters}
-                  className="flex items-center space-x-2 px-6 py-5 text-[var(--text-muted)] hover:text-[var(--text-heading)] transition-colors font-black uppercase tracking-widest text-[10px] bg-[var(--bg-secondary)] hover:bg-primary/10 rounded-2xl border border-[var(--border-color)] hover:border-primary/30"
+                  className="flex items-center justify-center space-x-2 px-5 sm:px-6 py-3.5 sm:py-5 text-[var(--text-muted)] hover:text-[var(--text-heading)] transition-colors font-black uppercase tracking-widest text-[10px] bg-[var(--bg-secondary)] hover:bg-primary/10 rounded-xl sm:rounded-2xl border border-[var(--border-color)] hover:border-primary/30 w-full sm:w-auto"
                 >
                   <X className="h-4 w-4" />
                   <span>Reset</span>
@@ -112,7 +112,7 @@ const CoursesList = () => {
             </div>
           </div>
           
-          <div className="mt-8 flex items-center justify-between border-t border-[var(--border-color)] pt-8">
+          <div className="mt-5 sm:mt-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0 border-t border-[var(--border-color)] pt-5 sm:pt-8">
             <p className="text-[var(--text-muted)] text-[11px] font-black uppercase tracking-widest">
               <span className="text-primary mr-2">●</span>
               Showing <span className="text-[var(--text-heading)]">{filteredCourses.length}</span> programs found

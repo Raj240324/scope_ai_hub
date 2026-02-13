@@ -54,7 +54,7 @@ const CourseCard = ({ course, index = 0 }) => {
         </div>
       </div>
 
-      <div className="p-8 flex-grow flex flex-col">
+      <div className="p-5 sm:p-8 flex-grow flex flex-col">
         <div className="flex items-center space-x-1 mb-3">
           {[...Array(5)].map((_, i) => (
             <Star key={i} className="h-3.5 w-3.5 fill-amber-400 text-amber-400" />
@@ -62,7 +62,7 @@ const CourseCard = ({ course, index = 0 }) => {
           <span className="text-[10px] font-black text-[var(--text-muted)] ml-2 uppercase tracking-widest">Premium Course</span>
         </div>
 
-        <h3 className="text-xl font-black text-[var(--text-heading)] mb-3 leading-tight group-hover:text-primary transition-colors duration-300">
+        <h3 className="text-lg sm:text-xl font-black text-[var(--text-heading)] mb-3 leading-tight group-hover:text-primary transition-colors duration-300">
           {course.title}
         </h3>
         
@@ -70,7 +70,7 @@ const CourseCard = ({ course, index = 0 }) => {
           {course.shortDescription}
         </p>
 
-        <div className="grid grid-cols-2 gap-4 mb-8 pt-6 border-t border-[var(--border-color)]">
+        <div className="grid grid-cols-2 gap-3 sm:gap-4 mb-5 sm:mb-8 pt-4 sm:pt-6 border-t border-[var(--border-color)]">
           <div className="flex items-center text-sm text-[var(--text-muted)] font-bold">
             <div className="h-9 w-9 rounded-xl bg-primary/5 flex items-center justify-center mr-3 group-hover:bg-primary group-hover:text-white transition-all duration-300">
               <Clock className="h-4 w-4" />

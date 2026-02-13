@@ -68,9 +68,9 @@ const Contact = () => {
               </div>
             </div>
 
-            <div className="p-8 bg-[var(--bg-inverted)] text-[var(--text-on-inverted)] rounded-3xl relative overflow-hidden">
+            <div className="p-5 sm:p-8 bg-[var(--bg-inverted)] text-[var(--text-on-inverted)] rounded-2xl sm:rounded-3xl relative overflow-hidden">
               <MessageSquare className="absolute -bottom-4 -right-4 h-24 w-24 text-[var(--text-on-inverted)]/5" />
-              <h3 className="text-xl font-bold mb-4 relative z-10">Counseling Session</h3>
+              <h3 className="text-lg sm:text-xl font-bold mb-4 relative z-10">Counseling Session</h3>
               <p className="text-[var(--text-on-inverted)]/60 text-sm mb-6 relative z-10">
                 Not sure which course is right for you? Book a free 15-minute counseling session with our experts.
               </p>
@@ -82,9 +82,9 @@ const Contact = () => {
               </button>
             </div>
 
-            <div className="p-8 bg-primary/5 border border-primary/10 rounded-3xl">
-              <Clock className="h-8 w-8 text-primary mb-4" />
-              <h3 className="text-xl font-bold text-[var(--text-heading)] mb-4">Office Hours</h3>
+            <div className="p-5 sm:p-8 bg-primary/5 border border-primary/10 rounded-2xl sm:rounded-3xl">
+              <Clock className="h-6 w-6 sm:h-8 sm:w-8 text-primary mb-4" />
+              <h3 className="text-lg sm:text-xl font-bold text-[var(--text-heading)] mb-4">Office Hours</h3>
               <div className="space-y-3 text-sm">
                 <div className="flex justify-between">
                   <span className="text-[var(--text-muted)]">Monday - Friday:</span>
@@ -104,7 +104,7 @@ const Contact = () => {
 
           {/* Contact Form */}
           <div className="lg:col-span-2">
-            <div className="bg-[var(--bg-card)] rounded-3xl shadow-xl border border-[var(--border-color)] p-8 md:p-12">
+            <div className="bg-[var(--bg-card)] rounded-2xl sm:rounded-3xl shadow-xl border border-[var(--border-color)] p-5 sm:p-8 md:p-12">
               <h2 className="text-2xl font-bold text-[var(--text-heading)] mb-2">Send us a message</h2>
               <p className="text-[var(--text-muted)] mb-10">Fill out the form below and we'll get back to you shortly.</p>
               <ContactForm initialCourse={initialCourse} />

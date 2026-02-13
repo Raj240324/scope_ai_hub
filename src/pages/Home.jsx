@@ -28,6 +28,7 @@ import {
   MapPin
 } from 'lucide-react';
 import Layout from '../components/layout/Layout';
+import Hero from '../components/ui/Hero';
 import CourseCard from '../components/ui/CourseCard';
 import { courses } from '../data/courses';
 import { useModal } from '../context/ModalContext';
@@ -41,7 +42,7 @@ const FAQItem = ({ question, answer }) => {
         onClick={() => setIsOpen(!isOpen)}
         className="w-full py-5 flex items-center justify-between text-left group"
       >
-        <span className="text-lg font-bold text-[var(--text-heading)] group-hover:text-primary transition-colors">
+        <span className="text-base md:text-lg font-bold text-[var(--text-heading)] group-hover:text-primary transition-colors pr-4">
           {question}
         </span>
         <div className={`flex-shrink-0 h-6 w-6 rounded-full border-2 border-[var(--border-color)] flex items-center justify-center transition-all ${isOpen ? 'bg-[var(--bg-inverted)] border-[var(--text-heading)] text-[var(--text-on-inverted)] rotate-180' : 'text-[var(--text-muted)]'}`}>
@@ -56,8 +57,6 @@ const FAQItem = ({ question, answer }) => {
     </div>
   );
 };
-
-import Hero from '../components/ui/Hero';
 
 const learningPartners = [
     { name: "NASSCOM", logo: "/nasscom-logo.webp" },
@@ -234,7 +233,7 @@ const learningPartners = [
             </div>
             
             {/* Floating Cards — positioned inside the padding zone */}
-            <Parallax offset={-20} className="absolute -top-4 -right-4 z-20">
+            <Parallax offset={-20} className="absolute -top-4 -right-4 z-20 hidden sm:block">
               <div className="bg-[var(--bg-card)] p-3 rounded-2xl shadow-xl border border-[var(--border-color)]">
                 <div className="flex items-center space-x-3">
                   <div className="bg-primary/10 p-2 rounded-lg">
@@ -248,7 +247,7 @@ const learningPartners = [
               </div>
             </Parallax>
             
-            <Parallax offset={30} className="absolute -bottom-4 -left-4 z-20">
+            <Parallax offset={30} className="absolute -bottom-4 -left-4 z-20 hidden sm:block">
               <div className="bg-[var(--bg-card)] p-4 rounded-2xl shadow-xl border border-[var(--border-color)]">
                 <div className="flex items-center space-x-3">
                   <div className="bg-primary/10 p-2.5 rounded-xl">
@@ -370,10 +369,6 @@ const learningPartners = [
             </p>
           </div>
 
-          {[
-            // ... grid content
-          ]}
-          
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
               {[
                 { skill: "Generative AI", demand: "Critical" },
@@ -404,15 +399,6 @@ const learningPartners = [
           </div>
       </section>
 
-      {/* Certification Section */}
-      <section className="py-16 overflow-hidden">
-        {/* ... content ... */}
-      </section>
-
-      {/* ... companies section ... */}
-
-      {/* ... regional excellence ... */}
-
       {/* Learning Methodology Section */}
       <section className="py-24 bg-[var(--bg-body)] relative overflow-hidden border-b border-[var(--border-color)]">
         {/* Decorative Background */}
@@ -439,16 +425,16 @@ const learningPartners = [
           <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {methodology.map((item, index) => (
               <StaggerItem key={index} className="h-full">
-                <div className="bg-[var(--bg-card)] border border-[var(--border-color)] p-8 rounded-[2.5rem] relative z-10 hover:shadow-xl transition-all duration-500 group-hover:-translate-y-2 h-full flex flex-col">
-                  <div className="flex justify-between items-start mb-8">
-                    <div className={`w-14 h-14 rounded-2xl ${item.color} flex items-center justify-center text-white shadow-lg shadow-black/20`}>
+                <div className="bg-[var(--bg-card)] border border-[var(--border-color)] p-5 sm:p-8 rounded-2xl sm:rounded-[2.5rem] relative z-10 hover:shadow-xl transition-all duration-500 group-hover:-translate-y-2 h-full flex flex-col">
+                  <div className="flex justify-between items-start mb-6 sm:mb-8">
+                    <div className={`w-12 h-12 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl ${item.color} flex items-center justify-center text-white shadow-lg shadow-black/20`}>
                       {item.icon}
                     </div>
-                    <span className="text-4xl font-black text-[var(--text-muted)] opacity-20 group-hover:opacity-40 transition-opacity">
+                    <span className="text-2xl sm:text-4xl font-black text-[var(--text-muted)] opacity-20 group-hover:opacity-40 transition-opacity">
                       {item.step}
                     </span>
                   </div>
-                  <h3 className="text-xl font-bold text-[var(--text-heading)] mb-4 group-hover:text-primary transition-colors">
+                  <h3 className="text-lg sm:text-xl font-bold text-[var(--text-heading)] mb-3 sm:mb-4 group-hover:text-primary transition-colors">
                     {item.title}
                   </h3>
                   <p className="text-[var(--text-muted)] text-sm leading-relaxed transition-colors">
@@ -516,7 +502,7 @@ const learningPartners = [
       </section>
 
       {/* Trainer Spotlight Section */}
-      <section className="section-padding bg-[var(--bg-secondary)] relative overflow-hidden border-b border-[var(--border-color)]">
+      <section className="section-padding bg-[var(--bg-body)] relative overflow-hidden border-b border-[var(--border-color)]">
         <div className="container-custom relative z-10">
           <div className="flex flex-col lg:flex-row items-center justify-between mb-16 gap-8 text-center lg:text-left">
             <div className="max-w-2xl">
@@ -575,11 +561,11 @@ const learningPartners = [
               }
             ].map((mentor, index) => (
               <ScaleOnHover key={index}>
-                <div className="bg-[var(--bg-card)] p-8 rounded-[2.5rem] border border-[var(--border-color)] shadow-sm hover:shadow-xl transition-all h-full flex flex-col">
-                  <div className="flex items-center space-x-4 mb-6">
-                    <img src={mentor.image} alt={mentor.name} className="h-16 w-16 rounded-2xl object-cover shadow-md" />
+                <div className="bg-[var(--bg-card)] p-5 sm:p-8 rounded-2xl sm:rounded-[2.5rem] border border-[var(--border-color)] shadow-sm hover:shadow-xl transition-all h-full flex flex-col">
+                  <div className="flex items-center space-x-4 mb-5 sm:mb-6">
+                    <img src={mentor.image} alt={mentor.name} className="h-14 w-14 sm:h-16 sm:w-16 rounded-xl sm:rounded-2xl object-cover shadow-md" />
                     <div>
-                      <h3 className="text-xl font-bold text-[var(--text-heading)] leading-tight">{mentor.name}</h3>
+                      <h3 className="text-lg sm:text-xl font-bold text-[var(--text-heading)] leading-tight">{mentor.name}</h3>
                       <p className="text-primary font-bold text-xs uppercase tracking-wider mt-1">{mentor.role}</p>
                     </div>
                   </div>
@@ -613,12 +599,12 @@ const learningPartners = [
           <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {trustFactors.map((factor, index) => (
               <StaggerItem key={index} className="h-full">
-                <div className="bg-[var(--bg-secondary)] p-8 rounded-3xl border border-[var(--border-color)] hover:border-primary/20 hover:shadow-xl transition-all group h-full flex flex-col">
-                  <div className={`w-14 h-14 rounded-2xl ${factor.iconBg} shadow-sm flex items-center justify-center mb-6 ${factor.iconColor} group-hover:bg-[var(--bg-inverted)] group-hover:text-[var(--text-on-inverted)] transition-colors`}>
+                <div className="bg-[var(--bg-secondary)] p-5 sm:p-8 rounded-2xl sm:rounded-3xl border border-[var(--border-color)] hover:border-primary/20 hover:shadow-xl transition-all group h-full flex flex-col">
+                  <div className={`w-12 h-12 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl ${factor.iconBg} shadow-sm flex items-center justify-center mb-5 sm:mb-6 ${factor.iconColor} group-hover:bg-[var(--bg-inverted)] group-hover:text-[var(--text-on-inverted)] transition-colors`}>
                     {factor.icon}
                   </div>
-                  <h3 className="text-xl font-bold text-[var(--text-heading)] mb-4">{factor.title}</h3>
-                  <p className="text-[var(--text-muted)] leading-relaxed">
+                  <h3 className="text-lg sm:text-xl font-bold text-[var(--text-heading)] mb-3 sm:mb-4">{factor.title}</h3>
+                  <p className="text-[var(--text-muted)] text-sm sm:text-base leading-relaxed">
                     {factor.description}
                   </p>
                 </div>
@@ -639,15 +625,15 @@ const learningPartners = [
           <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {testimonials.map((t, i) => (
               <StaggerItem key={i} className="h-full">
-                <div className="bg-[var(--bg-card)] p-8 rounded-3xl shadow-sm border border-[var(--border-color)] h-full flex flex-col">
-                  <div className="flex items-center space-x-4 mb-6">
-                    <img src={t.image} alt={t.name} className="h-14 w-14 rounded-full border-2 border-primary/20" />
+                <div className="bg-[var(--bg-card)] p-5 sm:p-8 rounded-2xl sm:rounded-3xl shadow-sm border border-[var(--border-color)] h-full flex flex-col">
+                  <div className="flex items-center space-x-3 sm:space-x-4 mb-5 sm:mb-6">
+                    <img src={t.image} alt={t.name} className="h-12 w-12 sm:h-14 sm:w-14 rounded-full border-2 border-primary/20" />
                     <div>
-                      <h4 className="font-bold text-[var(--text-heading)]">{t.name}</h4>
-                      <p className="text-xs text-primary font-bold uppercase tracking-wider">{t.role}</p>
+                      <h4 className="text-sm sm:text-base font-bold text-[var(--text-heading)]">{t.name}</h4>
+                      <p className="text-[10px] sm:text-xs text-primary font-bold uppercase tracking-wider">{t.role}</p>
                     </div>
                   </div>
-                  <p className="text-[var(--text-muted)] italic leading-relaxed">"{t.content}"</p>
+                  <p className="text-sm sm:text-base text-[var(--text-muted)] italic leading-relaxed">"{t.content}"</p>
                   <div className="flex text-yellow-400 mt-6">
                     {[1, 2, 3, 4, 5].map((s) => <Star key={s} className="h-4 w-4 fill-current" />)}
                   </div>
@@ -718,12 +704,12 @@ const learningPartners = [
               }
             ].map((phase, i) => (
               <ScaleOnHover key={i}>
-                <div className="bg-[var(--bg-secondary)] rounded-3xl p-8 border border-[var(--border-color)] hover:shadow-2xl transition-all h-full">
-                  <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${phase.color} flex items-center justify-center mb-6 text-white shadow-lg`}>
+                <div className="bg-[var(--bg-secondary)] rounded-2xl sm:rounded-3xl p-5 sm:p-8 border border-[var(--border-color)] hover:shadow-2xl transition-all h-full">
+                  <div className={`w-12 h-12 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl bg-gradient-to-br ${phase.color} flex items-center justify-center mb-5 sm:mb-6 text-white shadow-lg`}>
                     {phase.icon}
                   </div>
-                  <div className="text-sm font-black text-[var(--text-muted)] uppercase tracking-widest mb-2">{phase.phase}</div>
-                  <h3 className="text-2xl font-bold text-[var(--text-heading)] mb-6">{phase.title}</h3>
+                  <div className="text-xs sm:text-sm font-black text-[var(--text-muted)] uppercase tracking-widest mb-2">{phase.phase}</div>
+                  <h3 className="text-xl sm:text-2xl font-bold text-[var(--text-heading)] mb-4 sm:mb-6">{phase.title}</h3>
                   <ul className="space-y-3">
                     {phase.items.map((item, j) => (
                       <li key={j} className="flex items-start space-x-3">
@@ -737,7 +723,7 @@ const learningPartners = [
             ))}
           </div>
 
-          <div className="bg-[var(--bg-inverted)] rounded-3xl p-8 md:p-12 text-[var(--text-on-inverted)]">
+          <div className="bg-[var(--bg-inverted)] rounded-2xl sm:rounded-3xl p-5 sm:p-8 md:p-12 text-[var(--text-on-inverted)]">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div>
                 <h3 className="text-2xl md:text-3xl font-bold text-[var(--text-on-inverted)] mb-6">
@@ -804,7 +790,7 @@ const learningPartners = [
       </section>
 
       {/* FAQ Summary */}
-      <section className="section-padding bg-[var(--bg-body)] border-b border-[var(--border-color)]">
+      <section className="section-padding bg-[var(--bg-body)]">
         <div className="container-custom">
           <div className="grid lg:grid-cols-2 gap-16">
             <div>
@@ -828,7 +814,7 @@ const learningPartners = [
       {/* Career Counseling CTA */}
       <section className="py-20 bg-[var(--bg-body)] border-b border-[var(--border-color)]">
         <div className="container-custom">
-          <div className="bg-[var(--bg-inverted)] rounded-[3rem] p-10 md:p-16 text-[var(--text-on-inverted)] text-center relative overflow-hidden shadow-2xl">
+          <div className="bg-[var(--bg-inverted)] rounded-2xl md:rounded-[3rem] p-6 sm:p-10 md:p-16 text-[var(--text-on-inverted)] text-center relative overflow-hidden shadow-2xl">
             <div className="absolute top-0 left-0 w-full h-full opacity-10">
               <div className="absolute top-[-50%] left-[-20%] w-[80%] h-[80%] bg-primary/20 rounded-full blur-[100px]" />
               <div className="absolute bottom-[-50%] right-[-20%] w-[80%] h-[80%] bg-primary/10 rounded-full blur-[100px]" />
@@ -837,8 +823,8 @@ const learningPartners = [
               <div className="inline-flex items-center justify-center w-20 h-20 bg-primary/10 rounded-3xl mb-8 backdrop-blur-sm border border-primary/20">
                 <Users className="h-10 w-10 text-primary" />
               </div>
-              <h2 className="text-3xl md:text-5xl font-black mb-6 text-[var(--text-on-inverted)]">Confused About Your <span className="text-primary">Career Path</span>?</h2>
-              <p className="text-xl text-[var(--text-on-inverted)]/80 mb-10 leading-relaxed max-w-2xl mx-auto">
+              <h2 className="text-2xl sm:text-3xl md:text-5xl font-black mb-6 text-[var(--text-on-inverted)]">Confused About Your <span className="text-primary">Career Path</span>?</h2>
+              <p className="text-base sm:text-xl text-[var(--text-on-inverted)]/80 mb-8 sm:mb-10 leading-relaxed max-w-2xl mx-auto">
                 Don't guess your future. Speak to our expert career counselors for a <span className="font-bold text-primary border-b-2 border-primary/40">free 1:1 session</span>. We'll analyze your skills and suggest the perfect roadmap for 2026.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
@@ -940,7 +926,7 @@ const learningPartners = [
           <div className="text-center max-w-3xl mx-auto mb-16">
             <h2 className="heading-md mb-6">Global Training & <span className="text-primary">Online Flexibility</span></h2>
             <p className="text-[var(--text-muted)] text-lg">
-              Distance isn't an issue. Can't make it to Maraimalai Nagar? Join our live online classes that feel just like sitting in the classroom.
+              Distance isn't an issue. Can't make it to our Chennai campus? Join our live online classes that feel just like sitting in the classroom.
             </p>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
@@ -961,12 +947,12 @@ const learningPartners = [
                 icon: <Award className="h-8 w-8" />
               }
             ].map((item, i) => (
-              <div key={i} className="p-10 rounded-[2rem] bg-[var(--bg-card)] border border-[var(--border-color)] hover:shadow-xl transition-all group">
-                <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mb-8 text-primary shadow-sm group-hover:bg-primary group-hover:text-white transition-colors">
+              <div key={i} className="p-5 sm:p-8 rounded-2xl sm:rounded-[2rem] bg-[var(--bg-card)] border border-[var(--border-color)] hover:shadow-xl transition-all group">
+                <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl bg-primary/10 flex items-center justify-center mb-5 sm:mb-8 text-primary shadow-sm group-hover:bg-primary group-hover:text-white transition-colors">
                   {item.icon}
                 </div>
-                <h3 className="text-xl font-bold text-[var(--text-heading)] mb-4">{item.title}</h3>
-                <p className="text-[var(--text-muted)] leading-relaxed">{item.desc}</p>
+                <h3 className="text-lg sm:text-xl font-bold text-[var(--text-heading)] mb-3 sm:mb-4">{item.title}</h3>
+                <p className="text-sm sm:text-base text-[var(--text-muted)] leading-relaxed">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -976,7 +962,7 @@ const learningPartners = [
       {/* CTA Section */}
       <section className="py-20">
         <div className="container-custom">
-          <div className="bg-[var(--bg-inverted)] rounded-[3rem] p-8 md:p-16 text-center text-[var(--text-on-inverted)] relative overflow-hidden shadow-2xl">
+          <div className="bg-[var(--bg-inverted)] rounded-2xl md:rounded-[3rem] p-6 sm:p-8 md:p-16 text-center text-[var(--text-on-inverted)] relative overflow-hidden shadow-2xl">
             <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
               <div className="absolute top-[-50%] left-[-20%] w-[80%] h-[80%] bg-primary/20 rounded-full blur-[100px]" />
               <div className="absolute bottom-[-50%] right-[-20%] w-[80%] h-[80%] bg-primary/10 rounded-full blur-[100px]" />

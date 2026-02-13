@@ -146,12 +146,12 @@ const About = () => {
                 icon: <Briefcase className="h-6 w-6" />
               }
             ].map((item, i) => (
-              <div key={i} className="p-8 bg-[var(--bg-card)] rounded-3xl border border-[var(--border-color)] shadow-sm hover:shadow-lg transition-all group">
-                <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-[var(--bg-inverted)] group-hover:text-[var(--text-on-inverted)] transition-colors text-primary">
+              <div key={i} className="p-5 sm:p-8 bg-[var(--bg-card)] rounded-2xl sm:rounded-3xl border border-[var(--border-color)] shadow-sm hover:shadow-lg transition-all group">
+                <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-primary/10 flex items-center justify-center mb-5 sm:mb-6 group-hover:bg-[var(--bg-inverted)] group-hover:text-[var(--text-on-inverted)] transition-colors text-primary">
                   {item.icon}
                 </div>
-                <h3 className="text-xl font-bold text-[var(--text-heading)] mb-3">{item.title}</h3>
-                <p className="text-[var(--text-muted)] leading-relaxed">{item.desc}</p>
+                <h3 className="text-lg sm:text-xl font-bold text-[var(--text-heading)] mb-3">{item.title}</h3>
+                <p className="text-sm sm:text-base text-[var(--text-muted)] leading-relaxed">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -232,12 +232,12 @@ const About = () => {
           <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-12">
             {team.map((member, index) => (
               <StaggerItem key={index}>
-                <div className="bg-[var(--bg-card)] p-8 rounded-3xl border border-[var(--border-color)] shadow-sm hover:shadow-xl transition-all group">
-                  <div className="relative mb-8 inline-block">
+                <div className="bg-[var(--bg-card)] p-5 sm:p-8 rounded-2xl sm:rounded-3xl border border-[var(--border-color)] shadow-sm hover:shadow-xl transition-all group">
+                  <div className="relative mb-6 sm:mb-8 inline-block">
                     <div className="absolute inset-0 bg-primary/20 rounded-full blur-2xl group-hover:bg-primary/30 transition-colors"></div>
-                    <img src={member.image} alt={member.name} className="relative h-24 w-24 rounded-full ring-4 ring-[var(--bg-body)] shadow-lg object-cover" />
+                    <img src={member.image} alt={member.name} className="relative h-20 w-20 sm:h-24 sm:w-24 rounded-full ring-4 ring-[var(--bg-body)] shadow-lg object-cover" />
                   </div>
-                  <h3 className="text-xl font-bold text-[var(--text-heading)] mb-1">{member.name}</h3>
+                  <h3 className="text-lg sm:text-xl font-bold text-[var(--text-heading)] mb-1">{member.name}</h3>
                   <p className="text-primary font-semibold text-sm mb-4">{member.role}</p>
                   <div className="flex flex-wrap gap-2 mb-4">
                     {member.expertise.map((skill, i) => (
@@ -271,7 +271,7 @@ const About = () => {
               <div className="h-12 w-12 rounded-2xl bg-[var(--bg-body)]/10 flex items-center justify-center">
                 <Target className="h-6 w-6 text-primary-light" />
               </div>
-              <h2 className="text-2xl md:text-3xl font-bold">What Drivers Us</h2>
+              <h2 className="text-2xl md:text-3xl font-bold">What Drives Us</h2>
               <p className="text-[var(--text-on-inverted)]/60 text-lg leading-relaxed">
                 Seeing a student from a rural background land a high-paying job in a top MNC. That success story is what motivates us every single day.
               </p>
@@ -317,14 +317,14 @@ const About = () => {
               We are expanding our reach to provide quality tech education across multiple locations and through our global online platform.
             </p>
           </div>
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 gap-8">
             {locations.map((loc, i) => (
-              <div key={i} className="p-8 bg-[var(--bg-card)] rounded-3xl border border-[var(--border-color)] shadow-sm hover:shadow-lg transition-all group">
-                <div className="h-12 w-12 bg-primary/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-[var(--bg-inverted)] transition-colors">
-                  <Target className="h-6 w-6 text-primary group-hover:text-[var(--text-on-inverted)] transition-colors" />
+              <div key={i} className="p-5 sm:p-8 bg-[var(--bg-card)] rounded-2xl sm:rounded-3xl border border-[var(--border-color)] shadow-sm hover:shadow-lg transition-all group">
+                <div className="h-10 w-10 sm:h-12 sm:w-12 bg-primary/10 rounded-xl sm:rounded-2xl flex items-center justify-center mb-5 sm:mb-6 group-hover:bg-[var(--bg-inverted)] transition-colors">
+                  <Target className="h-5 w-5 sm:h-6 sm:w-6 text-primary group-hover:text-[var(--text-on-inverted)] transition-colors" />
                 </div>
-                <h3 className="text-xl font-bold text-[var(--text-heading)] mb-4">{loc.name}</h3>
-                <p className="text-[var(--text-muted)] text-sm leading-relaxed">{loc.address}</p>
+                <h3 className="text-lg sm:text-xl font-bold text-[var(--text-heading)] mb-3 sm:mb-4">{loc.name}</h3>
+                <p className="text-sm sm:text-base text-[var(--text-muted)] leading-relaxed">{loc.address}</p>
                 <button 
                   onClick={() => loc.map !== "#" ? window.open(loc.map, '_blank') : openModal()}
                   className="mt-6 text-primary font-bold text-sm flex items-center hover:underline"
@@ -340,34 +340,31 @@ const About = () => {
       {/* CTA Section */}
       <section className="section-padding bg-[var(--bg-secondary)]">
         <div className="container-custom">
-          <div className="bg-[var(--bg-inverted)] rounded-[3rem] p-8 md:p-16 text-center text-[var(--text-on-inverted)] relative overflow-hidden shadow-2xl">
+          <div className="bg-[var(--bg-inverted)] rounded-2xl md:rounded-[3rem] p-6 sm:p-8 md:p-16 text-center text-[var(--text-on-inverted)] relative overflow-hidden shadow-2xl">
+            <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+              <div className="absolute top-[-50%] left-[-20%] w-[80%] h-[80%] bg-primary/20 rounded-full blur-[100px]" />
+              <div className="absolute bottom-[-50%] right-[-20%] w-[80%] h-[80%] bg-primary/10 rounded-full blur-[100px]" />
+            </div>
             <div className="relative z-10 max-w-3xl mx-auto">
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold mb-6">Ready to Build Your Future?</h2>
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold mb-6">Ready to Build Your <span className="text-primary">Future</span>?</h2>
               <p className="text-base md:text-lg text-[var(--text-on-inverted)]/80 mb-10">
                 Join our next batch and start your journey towards becoming a skilled software professional with personalized mentorship.
               </p>
               <div className="flex flex-col sm:flex-row justify-center gap-4">
                 <button 
                   onClick={() => openModal()}
-                  className="px-10 py-4 bg-[var(--bg-body)] text-[var(--text-heading)] font-bold rounded-xl hover:opacity-90 transition-all flex items-center justify-center"
+                  className="bg-primary text-white hover:opacity-90 px-10 py-4 rounded-2xl text-lg font-black transition-all shadow-xl shadow-primary/20 flex items-center justify-center"
                 >
                   Apply Now <ArrowRight className="ml-2 h-5 w-5" />
                 </button>
                 <button 
                   onClick={() => openModal()}
-                  className="px-10 py-4 bg-[var(--bg-body)]/10 text-[var(--text-on-inverted)] font-bold rounded-xl hover:bg-[var(--bg-body)]/20 transition-all border border-[var(--bg-body)]/20"
+                  className="bg-primary/10 backdrop-blur-md border border-primary/30 text-[var(--text-on-inverted)] hover:bg-primary/20 px-10 py-4 rounded-2xl text-lg font-black transition-all"
                 >
                   Talk to Counselor
                 </button>
               </div>
             </div>
-            {/* Decorative background elements */}
-            <Parallax offset={-30} className="absolute top-0 left-0 w-64 h-64 z-0">
-                <div className="w-full h-full bg-white/5 rounded-full -translate-x-1/2 -translate-y-1/2 blur-3xl"></div>
-            </Parallax>
-            <Parallax offset={30} className="absolute bottom-0 right-0 w-96 h-96 z-0">
-                <div className="w-full h-full bg-white/5 rounded-full translate-x-1/3 translate-y-1/3 blur-3xl"></div>
-            </Parallax>
           </div>
         </div>
       </section>

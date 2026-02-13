@@ -135,7 +135,7 @@ const FAQItem = ({ question, answer }) => {
         onClick={() => setIsOpen(!isOpen)}
         className="w-full py-6 flex items-center justify-between text-left hover:text-primary transition-colors group"
       >
-        <span className="text-lg font-bold text-[var(--text-heading)] group-hover:text-primary transition-colors pr-8">
+        <span className="text-base sm:text-lg font-bold text-[var(--text-heading)] group-hover:text-primary transition-colors pr-6 sm:pr-8">
           {question}
         </span>
         <div className={`flex-shrink-0 h-6 w-6 rounded-full border-2 border-[var(--border-color)] flex items-center justify-center transition-all ${isOpen ? 'bg-primary border-primary text-[var(--text-on-inverted)] rotate-180' : 'text-[var(--text-muted)]'}`}>
@@ -170,7 +170,7 @@ const FAQ = () => {
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-12">
             {/* Sidebar Categories */}
             <div className="lg:col-span-1">
-              <div className="bg-[var(--bg-card)] p-6 rounded-3xl shadow-sm border border-[var(--border-color)] sticky top-32">
+              <div className="bg-[var(--bg-card)] p-4 sm:p-6 rounded-2xl sm:rounded-3xl shadow-sm border border-[var(--border-color)] sticky top-32">
                 <h3 className="text-sm font-bold text-[var(--text-muted)] uppercase tracking-widest mb-6 px-4">Categories</h3>
                 <nav className="space-y-2">
                   {faqData.map((cat) => (
@@ -204,8 +204,8 @@ const FAQ = () => {
 
             {/* FAQ List */}
             <div className="lg:col-span-3">
-              <div className="bg-[var(--bg-card)] rounded-3xl shadow-sm border border-[var(--border-color)] overflow-hidden">
-                <div className="p-8 md:p-12">
+              <div className="bg-[var(--bg-card)] rounded-2xl sm:rounded-3xl shadow-sm border border-[var(--border-color)] overflow-hidden">
+                <div className="p-5 sm:p-8 md:p-12">
                   <h2 className="text-2xl font-bold text-[var(--text-heading)] mb-8 flex items-center gap-3">
                     <HelpCircle className="h-6 w-6 text-primary" />
                     {activeCategory} Questions
@@ -221,9 +221,9 @@ const FAQ = () => {
               </div>
 
               {/* Course Comparison Table */}
-              <div className="mt-12 bg-[var(--bg-card)] rounded-3xl border border-[var(--border-color)] shadow-sm overflow-hidden">
-                <div className="p-8 bg-primary/5 border-b border-[var(--border-color)]">
-                  <h3 className="text-2xl font-bold text-[var(--text-heading)]">📊 Quick Course Comparison</h3>
+              <div className="mt-8 sm:mt-12 bg-[var(--bg-card)] rounded-2xl sm:rounded-3xl border border-[var(--border-color)] shadow-sm overflow-hidden">
+                <div className="p-5 sm:p-8 bg-primary/5 border-b border-[var(--border-color)]">
+                  <h3 className="text-xl sm:text-2xl font-bold text-[var(--text-heading)]">📊 Quick Course Comparison</h3>
                   <p className="text-[var(--text-muted)] mt-2">Compare our top courses to find the perfect fit for your career goals.</p>
                 </div>
                 <div className="overflow-x-auto">
@@ -269,8 +269,8 @@ const FAQ = () => {
               </div>
 
               {/* Still Need Help Section */}
-              <div className="mt-12 text-center p-12 bg-[var(--bg-card)] rounded-3xl border border-[var(--border-color)] shadow-sm">
-                <h3 className="text-2xl font-bold text-[var(--text-heading)] mb-4">Didn't find your answer?</h3>
+              <div className="mt-8 sm:mt-12 text-center p-6 sm:p-12 bg-[var(--bg-card)] rounded-2xl sm:rounded-3xl border border-[var(--border-color)] shadow-sm">
+                <h3 className="text-xl sm:text-2xl font-bold text-[var(--text-heading)] mb-4">Didn't find your answer?</h3>
                 <p className="text-[var(--text-muted)] mb-8 max-w-xl mx-auto">
                   Our team of counselors is available to answer any specific questions you may have about your career path or our training programs.
                 </p>
