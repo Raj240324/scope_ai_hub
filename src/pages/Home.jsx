@@ -33,6 +33,7 @@ import CourseCard from '../components/ui/CourseCard';
 import { courses } from '../data/courses';
 import { useModal } from '../context/ModalContext';
 import { BRANDING } from '../data/branding';
+import SEO from '../components/utils/SEO';
 
 const FAQItem = ({ question, answer }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -193,6 +194,12 @@ const learningPartners = [
 
   return (
     <Layout immersive={true}>
+      <SEO 
+        title="Best Software Training Institute in Chennai | 100% Placement"
+        description="Master Full Stack Development, Data Science, and AI with expert mentorship. Scope AI Hub offers practical software training in Chennai with 100% placement support."
+        keywords="Software Training Institute Chennai, Full Stack Developer Course, Data Science Training, MERN Stack, Python Course, Placement Support, Scope Global, Best IT Training Center"
+        canonical="/"
+      />
       <Hero
         variant="video"
         videoSrc="/hero-bg.mp4"
@@ -212,7 +219,7 @@ const learningPartners = [
             </span>
           </>
         }
-        subtitle="The most practical software training institute in Chennai. We don't just teach code; we build your career from scratch."
+        subtitle="The most practical software training institute in Chennai. We don't just teach code. We build your career from scratch."
       >
         {/* CTAs — World Class Minimalist Buttons with Brand Colors */}
         <div className="flex flex-col sm:flex-row gap-6 justify-center mb-16">
