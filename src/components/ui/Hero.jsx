@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -12,10 +12,107 @@ const Hero = ({
   variant = 'simple',
   image,
   rightContent,
+  videoSrc,
+  posterSrc,
   className = ""
 }) => {
   const isHome = variant === 'home';
+  const isVideo = variant === 'video';
+  const [videoLoaded, setVideoLoaded] = useState(false);
 
+  // Determine if we should show video (desktop only for performance)
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
+
+  if (isVideo) {
+    return (
+      <section 
+        className={`relative overflow-hidden min-h-[100vh] flex items-center justify-center ${className}`}
+        aria-label="Homepage hero"
+      >
+        {/* Video Background */}
+        <div className="absolute inset-0 z-0">
+          {/* Poster / fallback image — always rendered underneath */}
+          {posterSrc && (
+            <img 
+              src={posterSrc} 
+              alt="" 
+              aria-hidden="true"
+              className="absolute inset-0 w-full h-full object-cover"
+              loading="eager"
+            />
+          )}
+
+          {/* Video — render on all devices */}
+          {videoSrc && (
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="auto"
+              onCanPlay={() => setVideoLoaded(true)}
+              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${videoLoaded ? 'opacity-100' : 'opacity-0'}`}
+            >
+              <source src={videoSrc} type="video/mp4" />
+            </video>
+          )}
+
+          {/* World Class Overlay - Sophisticated & Clean */}
+          {/* 1. Base subtle dark overlay */}
+          <div className="absolute inset-0 bg-black/40 z-[1]" />
+          
+          {/* 2. Advanced Gradient Mesh (Subtle) */}
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-transparent via-black/20 to-black/60 z-[2]" />
+          
+          {/* 3. Bottom cinematic fade - Always dark to match video */}
+          <div className="absolute bottom-0 left-0 w-full h-48 bg-gradient-to-t from-black via-black/60 to-transparent z-[3]" />
+        </div>
+
+        {/* Content Overlay — Elegant, High-End SaaS Style */}
+        <div className="container-custom relative z-10 pt-24 px-6 md:px-0">
+          <div className="max-w-4xl mx-auto text-center">
+            <StaggerContainer>
+              <StaggerItem>
+                {badge && (
+                  <div className="inline-flex items-center space-x-2.5 px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-[0.2em] mb-8 bg-white/5 text-white/90 border border-white/10 backdrop-blur-xl hover:bg-white/10 transition-colors cursor-default shadow-lg shadow-black/10">
+                    {badge}
+                  </div>
+                )}
+              </StaggerItem>
+              
+              <StaggerItem>
+                {/* Elegant Typography - Bold but not Heavy */}
+                <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-white tracking-tight mb-8 leading-[1.1] drop-shadow-2xl">
+                  {title}
+                </h1>
+              </StaggerItem>
+              
+              <StaggerItem>
+                {subtitle && (
+                  <p className="text-lg md:text-xl mb-12 leading-relaxed text-white/80 max-w-2xl mx-auto font-medium drop-shadow-md">
+                    {subtitle}
+                  </p>
+                )}
+              </StaggerItem>
+
+              <StaggerItem>
+                {children && <div>{children}</div>}
+              </StaggerItem>
+            </StaggerContainer>
+          </div>
+        </div>
+
+      </section>
+    );
+  }
+
+  // Original hero variants (home & simple)
   return (
     <section 
       className={`relative overflow-hidden ${isHome ? 'bg-[var(--bg-body)] pt-28 pb-12 md:pt-40 md:pb-24 border-b border-[var(--border-color)]' : 'bg-[var(--bg-body)] pt-32 pb-12 md:pt-40 md:pb-20 border-b border-[var(--border-color)]'} ${className}`}
@@ -84,4 +181,3 @@ const Hero = ({
 };
 
 export default Hero;
-

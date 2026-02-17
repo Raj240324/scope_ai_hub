@@ -10,7 +10,8 @@
   --color-brand-gold: #C47A2C;
   
   /* Semantic Mapping — vivid indigo-blue for light mode accent */
-  --color-primary: #4338CA;       
+  --color-primary: #4338CA;
+  --primary-rgb: 67, 56, 202;
   --color-primary-light: #5B4FE6; 
   --color-primary-dark: #3730A3;  
   
@@ -48,9 +49,9 @@
   --border-header: #E2E8F0;
 
   /* Footer */
-  --bg-footer: #0F172A;
-  --text-footer: #E2E8F0;
-  --text-footer-muted: rgba(226, 232, 240, 0.6);
+  --bg-footer: #FFFFFF;
+  --text-footer: #0F172A;
+  --text-footer-muted: #64748B;
 
   /* Buttons */
   --btn-primary-bg: #4338CA;
@@ -96,6 +97,7 @@
 
   /* Brand Colors — gold as primary */
   --color-primary: #C47A2C;
+  --primary-rgb: 196, 122, 44;
   --color-primary-light: #D4912E;
   --color-primary-dark: #A06420;
   --color-brand-navy: #1C1916;

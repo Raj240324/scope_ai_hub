@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { FadeIn, StaggerContainer, StaggerItem, ScaleOnHover, ScrollCountUp, Marquee, Parallax } from '../components/utils/Animations';
+import { StaggerContainer, StaggerItem, ScaleOnHover, ScrollCountUp, Marquee, Parallax } from '../components/utils/Animations';
 import { 
   ArrowRight, 
   BookOpen, 
@@ -194,111 +194,67 @@ const learningPartners = [
   return (
     <Layout immersive={true}>
       <Hero
-        variant="home"
+        variant="video"
+        videoSrc="/hero-bg.mp4"
         badge={
           <>
-            <ShieldCheck className="h-3 w-3" />
-            <span>No.1 Software Training & Placement Institute in Chennai</span>
+            <ShieldCheck className="h-3.5 w-3.5 text-primary-light" />
+            <span className="text-primary-light">No.1 Rated Institute</span>
           </>
         }
         title={
           <>
-            Best Software Training Institute in <span className="text-primary">Chennai</span> with Expert Career Guidance.
+            Master Tech Skills. <br />
+            <span className="text-white relative inline-block">
+              Launch Your Career.
+              {/* Subtle underline accent */}
+              <svg className="absolute w-full h-3 -bottom-1 left-0 text-primary opacity-60" viewBox="0 0 200 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.00025 6.99997C25.7501 2.49994 132.5 -3.50004 198 6.99997" stroke="currentColor" strokeWidth="3" strokeLinecap="round"/></svg>
+            </span>
           </>
         }
-        subtitle="Practical, hands-on software training in Chennai. We guide you through every step of your placement journey to help you secure your first job in the tech industry."
-        rightContent={
-          <FadeIn 
-            direction="left"
-            delay={0.2}
-            className="relative"
-          >
-            <div className="relative z-10 rounded-3xl overflow-hidden shadow-2xl border border-[var(--border-color)]">
-              <img 
-                src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=800" 
-                alt="Students learning software development at Scope AI Hub institute in Chennai" 
-                className="w-full h-auto"
-                loading="eager"
-                width="800"
-                height="534"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-body)]/60 to-transparent" />
-              <div className="absolute bottom-6 left-6 right-6 text-white">
-                <div className="flex items-center space-x-2 mb-2">
-                  <div className="h-2 w-2 bg-green-500 rounded-full animate-pulse" />
-                  <span className="text-xs font-bold uppercase tracking-widest">Live Interactive Sessions</span>
-                </div>
-                <p className="text-sm font-medium opacity-90">New batches starting every month — join now!</p>
-              </div>
-            </div>
-            
-            {/* Floating Cards — positioned inside the padding zone */}
-            <Parallax offset={-20} className="absolute -top-4 -right-4 z-20 hidden sm:block">
-              <div className="bg-[var(--bg-card)] p-3 rounded-2xl shadow-xl border border-[var(--border-color)]">
-                <div className="flex items-center space-x-3">
-                  <div className="bg-primary/10 p-2 rounded-lg">
-                    <Award className="h-5 w-5 text-primary" />
-                  </div>
-                  <div>
-                    <p className="text-[10px] text-[var(--text-muted)] font-bold uppercase">ISO Certified</p>
-                    <p className="text-sm font-black text-[var(--text-heading)]">Institute</p>
-                  </div>
-                </div>
-              </div>
-            </Parallax>
-            
-            <Parallax offset={30} className="absolute -bottom-4 -left-4 z-20 hidden sm:block">
-              <div className="bg-[var(--bg-card)] p-4 rounded-2xl shadow-xl border border-[var(--border-color)]">
-                <div className="flex items-center space-x-3">
-                  <div className="bg-primary/10 p-2.5 rounded-xl">
-                    <Briefcase className="h-6 w-6 text-primary" />
-                  </div>
-                  <div>
-                    <p className="text-xl font-black text-[var(--text-heading)] leading-none">100%</p>
-                    <p className="text-[10px] text-[var(--text-muted)] font-bold uppercase mt-1">Practical Focus</p>
-                  </div>
-                </div>
-              </div>
-            </Parallax>
-          </FadeIn>
-        }
+        subtitle="The most practical software training institute in Chennai. We don't just teach code; we build your career from scratch."
       >
-        {/* CTA Buttons — 2 primary actions, clean layout */}
-        <div className="flex flex-col sm:flex-row gap-4">
-          <Link to="/courses" className="btn-primary px-8 py-4 flex items-center justify-center font-bold text-base">
-            Explore Courses <ArrowRight className="ml-2 h-5 w-5" />
+        {/* CTAs — World Class Minimalist Buttons with Brand Colors */}
+        <div className="flex flex-col sm:flex-row gap-6 justify-center mb-16">
+          <Link to="/courses" className="group relative px-8 py-4 bg-primary text-white rounded-full flex items-center justify-center font-bold text-base shadow-[0_0_20px_-5px_rgba(var(--primary-rgb),0.3)] hover:shadow-[0_0_25px_-5px_rgba(var(--primary-rgb),0.5)] hover:-translate-y-0.5 transition-all duration-300">
+            <span className="relative z-10 flex items-center">
+              Explore Courses <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+            </span>
+            {/* Subtle gradient overlay on hover */}
+            <div className="absolute inset-0 rounded-full bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity" />
           </Link>
+          
           <button 
             onClick={() => openModal()}
-            className="btn-secondary px-8 py-4 flex items-center justify-center font-bold text-base"
+            className="px-8 py-4 bg-white/5 backdrop-blur-md text-white border border-white/10 hover:border-primary/50 rounded-full flex items-center justify-center font-bold text-base hover:bg-white/10 transition-all duration-300 group"
           >
-            <PlayCircle className="mr-2 h-5 w-5" />
+            <PlayCircle className="mr-2 h-5 w-5 opacity-70 group-hover:opacity-100 text-primary-light transition-all" />
             Book Free Demo
           </button>
         </div>
         
-        {/* Social Proof Strip */}
-        <div className="mt-10 flex flex-col sm:flex-row sm:items-center gap-6">
+        {/* Social Proof — Ultra Clean & Subtle */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-6 opacity-80 hover:opacity-100 transition-opacity duration-500">
           <div className="flex -space-x-3">
             {[1, 2, 3, 4].map((i) => (
               <img 
                 key={i}
-                className="inline-block h-11 w-11 rounded-full ring-4 ring-[var(--bg-body)] object-cover" 
+                className="inline-block h-10 w-10 rounded-full ring-2 ring-black/50 object-cover grayscale opacity-70 hover:grayscale-0 hover:opacity-100 hover:scale-110 transition-all duration-300" 
                 src={`https://i.pravatar.cc/100?u=student${i}`} 
                 alt={`Student ${i} testimonial`}
                 loading="lazy" 
               />
             ))}
-            <div className="flex items-center justify-center h-11 w-11 rounded-full bg-primary/10 ring-4 ring-[var(--bg-body)] text-xs font-bold text-primary">
+            <div className="flex items-center justify-center h-10 w-10 rounded-full bg-primary/20 backdrop-blur-sm ring-2 ring-black/50 text-[10px] font-bold text-white border border-primary/30">
               +1k
             </div>
           </div>
-          <div>
-            <div className="flex items-center text-yellow-400 mb-1">
-              {[1, 2, 3, 4, 5].map((i) => <Star key={i} className="h-4 w-4 fill-current" />)}
+          <div className="text-center sm:text-left">
+            <div className="flex items-center justify-center sm:justify-start text-amber-400 mb-1 space-x-0.5">
+              {[1, 2, 3, 4, 5].map((i) => <Star key={i} className="h-3.5 w-3.5 fill-current" />)}
             </div>
-            <p className="text-sm text-[var(--text-muted)] font-medium">
-              Rated <span className="text-[var(--text-heading)] font-bold">4.9/5</span> by our alumni
+            <p className="text-xs text-white/60 font-medium tracking-wide uppercase">
+              Rated <span className="text-white font-bold">4.9/5</span> by alumni
             </p>
           </div>
         </div>

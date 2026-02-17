@@ -2,9 +2,9 @@ export const BRANDING = {
   name: "Scope",
   suffix: "AIHub",
   fullName: "ScopeAIHub",
-  logo: "/scope-logo.png",
-  logoLight: "/scope-logo.png",
-  logoDark: "/scope-ai-logo.png",
+  logo: "/ScopeAIHub_Primary_Light.png",
+  logoLight: "/ScopeAIHub_Primary_Light.png",
+  logoDark: "/ScopeAIHub_Primary_Dark.png",
   tagline: "Master Tech Skills in Tamil & English | Practical Training",
   description:
     "Premier AI and Software Training Institute offering industry-relevant courses in Full Stack, Data Science, Cloud Computing, and more.",

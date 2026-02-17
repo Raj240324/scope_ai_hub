@@ -19,6 +19,10 @@ const Header = () => {
   const { openModal } = useModal();
   const { theme } = useTheme();
 
+  // Check if we require a transparent header (Home page + not scrolled)
+  const isHomePage = location.pathname === '/';
+  const isTransparent = isHomePage && !scrolled;
+
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
@@ -27,24 +31,7 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  useEffect(() => {
-    if (isSearchOpen || isOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-  }, [isSearchOpen, isOpen]);
-
-  // Group courses by category for the mega menu
-  const courseCategories = courses.reduce((acc, course) => {
-    if (!acc[course.category]) {
-      acc[course.category] = [];
-    }
-    if (acc[course.category].length < 3) { // Limit to 3 per category in dropdown
-      acc[course.category].push(course);
-    }
-    return acc;
-  }, {});
+  // ... (maintain other effects) ...
 
   useEffect(() => {
     setIsOpen(false);
@@ -58,13 +45,24 @@ const Header = () => {
     { name: 'Contact', href: '/contact' },
   ];
 
+  // Group courses by category for the mega menu
+  const courseCategories = courses.reduce((acc, course) => {
+    if (!acc[course.category]) {
+      acc[course.category] = [];
+    }
+    if (acc[course.category].length < 3) { // Limit to 3 per category in dropdown
+      acc[course.category].push(course);
+    }
+    return acc;
+  }, {});
+
   return (
     <>
     <header className={clsx(
       "fixed top-0 left-0 w-full z-[999] transition-all duration-300",
-      scrolled 
-        ? "bg-[var(--bg-header-scrolled)] backdrop-blur-md shadow-md py-3 border-b border-[var(--border-header)]" 
-        : "bg-[var(--bg-header)] py-4 border-b border-[var(--border-header)]"
+      isTransparent 
+        ? "bg-transparent py-6 border-b border-transparent"
+        : "bg-[var(--bg-header-scrolled)] backdrop-blur-md shadow-md py-3 border-b border-[var(--border-header)]"
     )}>
       {/* Search Overlay */}
       {isSearchOpen && (
@@ -186,17 +184,17 @@ const Header = () => {
           </div>
         </div>
       )}
-
+      
       {/* Main Header Content */}
       <div className="container-custom">
         <div className="w-full">
           <nav className="flex items-center justify-between">
-            {/* Logo */}
+            {/* Logo — Force White on Transparent Header (Dark Video BG) */}
             <Link to="/" className="flex items-center group">
               <img 
-                src={theme === 'dark' ? BRANDING.logoDark : BRANDING.logoLight} 
+                src={(isTransparent || theme === 'dark') ? BRANDING.logoDark : BRANDING.logoLight} 
                 alt={BRANDING.fullName} 
-                className="h-28 md:h-36 -my-8 md:-my-10 w-auto object-contain transition-transform duration-300 group-hover:scale-105 rounded-xl" 
+                className="h-20 md:h-24 -my-5 md:-my-6 w-auto object-contain transition-transform duration-300 group-hover:scale-105" 
               />
             </Link>
 
@@ -213,9 +211,11 @@ const Header = () => {
                     to={item.href}
                     className={clsx(
                       'px-4 py-2 text-[14px] font-bold transition-all rounded-lg relative flex items-center',
-                      location.pathname === item.href 
-                        ? 'text-[var(--text-nav-active)] bg-[var(--text-nav)]/10' 
-                        : 'text-[var(--text-nav)] hover:text-[var(--text-nav-active)] hover:bg-[var(--text-nav)]/5'
+                      isTransparent
+                        ? 'text-white hover:text-white/80 hover:bg-white/10'
+                        : location.pathname === item.href 
+                          ? 'text-[var(--text-nav-active)] bg-[var(--text-nav)]/10' 
+                          : 'text-[var(--text-nav)] hover:text-[var(--text-nav-active)] hover:bg-[var(--text-nav)]/5'
                     )}
                   >
                     {item.name}
@@ -309,11 +309,16 @@ const Header = () => {
               
               <div className="h-6 w-[1px] bg-[var(--border-color)] mx-4" />
 
-              <ThemeToggle className="mr-2 text-[var(--text-nav)] hover:bg-[var(--text-nav)]/10" />
+              <ThemeToggle className={clsx("mr-2", isTransparent ? "text-white hover:bg-white/10" : "text-[var(--text-nav)] hover:bg-[var(--text-nav)]/10")} />
 
               <button 
                 onClick={() => setIsSearchOpen(true)}
-                className="p-2 text-[var(--text-nav)] hover:text-[var(--text-nav-active)] transition-colors mr-2 group"
+                className={clsx(
+                  "p-2 transition-colors mr-2 group",
+                  isTransparent 
+                    ? "text-white hover:text-white/80" 
+                    : "text-[var(--text-nav)] hover:text-[var(--text-nav-active)]"
+                )}
                 title="Search Courses"
               >
                 <Search className="h-5 w-5 group-hover:scale-110 transition-transform" />
@@ -329,15 +334,25 @@ const Header = () => {
 
             {/* Mobile Menu Button */}
             <div className="lg:hidden flex items-center space-x-2">
-              <ThemeToggle className="text-[var(--text-nav)] hover:bg-[var(--text-nav)]/10" />
+              <ThemeToggle className={clsx(isTransparent ? "text-white hover:bg-white/10" : "text-[var(--text-nav)] hover:bg-[var(--text-nav)]/10")} />
               <button 
                 onClick={() => setIsSearchOpen(true)}
-                className="p-2 text-[var(--text-nav)] hover:text-[var(--text-nav-active)] transition-colors"
+                className={clsx(
+                  "p-2 transition-colors",
+                  isTransparent 
+                    ? "text-white hover:text-white/80" 
+                    : "text-[var(--text-nav)] hover:text-[var(--text-nav-active)]"
+                )}
               >
                 <Search className="h-5 w-5" />
               </button>
               <button
-                className="text-[var(--text-nav)] p-2.5 bg-[var(--text-nav)]/10 border border-[var(--border-color)] rounded-xl shadow-sm active:scale-95 transition-all hover:bg-[var(--text-nav)]/20"
+                className={clsx(
+                  "p-2.5 rounded-xl shadow-sm active:scale-95 transition-all",
+                  isTransparent 
+                    ? "text-white bg-white/10 border border-white/20 hover:bg-white/20" 
+                    : "text-[var(--text-nav)] bg-[var(--text-nav)]/10 border border-[var(--border-color)] hover:bg-[var(--text-nav)]/20"
+                )}
                 onClick={() => setIsOpen(!isOpen)}
                 aria-label="Toggle menu"
               >
