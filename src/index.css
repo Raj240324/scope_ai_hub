@@ -1,107 +1,112 @@
 @import "tailwindcss";
 
 @theme {
-  /* Brand Palette - Scope AI Hub */
-  --color-brand-navy: #1E1B4B;
-  --color-brand-orange: #F97316;
-  --color-brand-red: #EF4444;
-  --color-brand-cyan: #0EA5E9;
-  --color-brand-green: #10B981;
-  --color-brand-gold: #C47A2C;
+  /* New Brand Palette - Pink/Violet "Ai" Theme */
+  --color-brand-highlight: #D64FD9;
+  --color-brand-mid-high: #C445D4;
+  --color-brand-purple: #A73FD0;
+  --color-brand-mid-low: #7B36CC;
+  --color-brand-deep: #5A2BC6;
+
+  /* Text Colors from User Spec */
+  --color-brand-title-light: #0A2540;
+  --color-brand-tagline-light: #5B6B7A;
+  --color-brand-title-dark: #E6EDF5;
+  --color-brand-tagline-dark: #9BA7B4;
+
+  /* Semantic Mapping — Pink/Violet Gradient Theme */
+  --color-primary: #A73FD0; /* Center Purple as solid primary */
+  --primary-rgb: 167, 63, 208;
+  --color-primary-light: #D64FD9; 
+  --color-primary-dark: #5A2BC6;  
   
-  /* Semantic Mapping — vivid indigo-blue for light mode accent */
-  --color-primary: #4338CA;
-  --primary-rgb: 67, 56, 202;
-  --color-primary-light: #5B4FE6; 
-  --color-primary-dark: #3730A3;  
+  --color-secondary: #5A2BC6;     
+  --color-accent: #D64FD9;        
   
-  --color-secondary: #0EA5E9;     
-  --color-accent: #F97316;        
-  
-  --color-navy: #1E1B4B;
+  --color-navy: #0A2540;
   --color-success: #10b981;
   --color-warning: #f59e0b;
   --color-danger: #ef4444;
-  
+
   --font-sans: "Inter", "system-ui", "sans-serif";
 }
 
 :root {
-  /* ===== LIGHT THEME — Clean White & Blue Accent ===== */
-  /* Page — warm whites with subtle depth */
+  /* ===== LIGHT THEME — Clean White & Navy ===== */
+  /* Page */
   --bg-body: #FFFFFF;
   --bg-secondary: #F8FAFC;
   --bg-card: #FFFFFF;
-  --text-body: #334155;
-  --text-heading: #0F172A;
-  --text-muted: #64748B;
+  --text-body: #5B6B7A; /* User Tagline Color */
+  --text-heading: #0A2540; /* User Title Color */
+  --text-muted: #5B6B7A; /* User Tagline Color */
   --border-color: #E2E8F0;
 
   /* Inverted sections (dark accent blocks) */
-  --bg-inverted: #0F172A;
-  --text-on-inverted: #F1F5F9;
+  --bg-inverted: #0A2540;
+  --text-on-inverted: #E6EDF5;
 
   /* Header */
   --bg-header: #FFFFFF;
   --bg-header-scrolled: rgba(255, 255, 255, 0.96);
-  --text-nav: #334155;
-  --text-nav-active: #4338CA;
+  --text-nav: #5B6B7A;
+  --text-nav-active: #A73FD0;
   --border-header: #E2E8F0;
 
   /* Footer */
   --bg-footer: #FFFFFF;
-  --text-footer: #0F172A;
-  --text-footer-muted: #64748B;
+  --text-footer: #0A2540;
+  --text-footer-muted: #5B6B7A;
 
-  /* Buttons */
-  --btn-primary-bg: #4338CA;
+  /* Buttons — Gradient Pink/Violet */
+  --btn-primary-bg: #A73FD0; /* Fallback */
+  --btn-primary-gradient: linear-gradient(135deg, #D64FD9 0%, #5A2BC6 100%);
   --btn-primary-text: #FFFFFF;
-  --btn-secondary-border: #4338CA;
-  --btn-secondary-text: #4338CA;
+  --btn-secondary-border: #A73FD0;
+  --btn-secondary-text: #A73FD0;
   --btn-secondary-bg: transparent;
 }
 
 .dark {
-  /* ===== DARK THEME — Premium Black & Gold ===== */
-  /* Backgrounds — warm charcoal with subtle gold undertone */
-  --bg-body: #0C0A08;
-  --bg-secondary: #141210;
-  --bg-card: #1C1916;
-  --text-body: #D4CABC;
-  --text-heading: #F5EFE6;
-  --text-muted: #9A8E80;
-  --border-color: rgba(196, 122, 44, 0.12);
+  /* ===== DARK THEME — Premium Deep Violet & Navy ===== */
+  /* Backgrounds — rich dark navy/black */
+  --bg-body: #050a10; /* Deepest Navy/Black */
+  --bg-secondary: #0A121D;
+  --bg-card: #111b2b;
+  --text-body: #9BA7B4; /* User Dark Tagline */
+  --text-heading: #E6EDF5; /* User Dark Title */
+  --text-muted: #9BA7B4; /* User Dark Tagline */
+  --border-color: rgba(167, 63, 208, 0.15); /* Purple tint */
 
-  /* Inverted sections — stays dark in dark mode */
-  --bg-inverted: #1C1916;
-  --text-on-inverted: #F5EFE6;
+  /* Inverted sections */
+  --bg-inverted: #111b2b;
+  --text-on-inverted: #E6EDF5;
 
   /* Header */
-  --bg-header: #0C0A08;
-  --bg-header-scrolled: rgba(12, 10, 8, 0.96);
-  --text-nav: #D4CABC;
-  --text-nav-active: #C47A2C;
-  --border-header: rgba(196, 122, 44, 0.10);
+  --bg-header: #050a10;
+  --bg-header-scrolled: rgba(5, 10, 16, 0.96);
+  --text-nav: #9BA7B4;
+  --text-nav-active: #D64FD9;
+  --border-header: rgba(167, 63, 208, 0.15);
 
   /* Footer */
-  --bg-footer: #080604;
-  --text-footer: #D4CABC;
-  --text-footer-muted: rgba(212, 202, 188, 0.45);
+  --bg-footer: #020406;
+  --text-footer: #E6EDF5;
+  --text-footer-muted: rgba(155, 167, 180, 0.5);
 
-  /* Buttons — golden accent */
-  --btn-primary-bg: #C47A2C;
-  --btn-primary-text: #0C0A08;
-  --btn-secondary-border: #C47A2C;
-  --btn-secondary-text: #C47A2C;
+  /* Buttons */
+  --btn-primary-bg: #A73FD0;
+  --btn-primary-gradient: linear-gradient(135deg, #D64FD9 0%, #5A2BC6 100%);
+  --btn-primary-text: #FFFFFF;
+  --btn-secondary-border: #A73FD0;
+  --btn-secondary-text: #A73FD0;
   --btn-secondary-bg: transparent;
 
-  /* Brand Colors — gold as primary */
-  --color-primary: #C47A2C;
-  --primary-rgb: 196, 122, 44;
-  --color-primary-light: #D4912E;
-  --color-primary-dark: #A06420;
-  --color-brand-navy: #1C1916;
-  --color-brand-cyan: #D4912E;
+  /* Brand Colors */
+  --color-primary: #D64FD9; /* Lighter pink for dark mode contrast */
+  --primary-rgb: 214, 79, 217;
+  --color-primary-light: #E085E3;
+  --color-primary-dark: #A73FD0;
 }
 
 @layer base {
@@ -148,15 +153,16 @@
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
 
-  /* Primary Button */
+  /* Primary Button - Gradient */
   .btn-primary {
     @apply inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-bold rounded-xl transition-all duration-300 shadow-md hover:shadow-xl hover:-translate-y-0.5 active:scale-95;
-    background-color: var(--btn-primary-bg);
+    background: var(--btn-primary-gradient);
     color: var(--btn-primary-text);
   }
 
   .btn-primary:hover {
     filter: brightness(1.1);
+    box-shadow: 0 10px 25px -5px rgba(214, 79, 217, 0.4); /* Glow effect with pink */
   }
 
   /* Secondary Button */

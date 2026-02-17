@@ -53,9 +53,9 @@ const ContactModal = () => {
               <X className="h-5 w-5 md:h-6 md:w-6" />
             </button>
 
-            <div className="p-6 md:p-10 overflow-y-auto no-scrollbar">
-              <div className="mb-6 md:mb-8">
-                <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-[10px] font-bold uppercase tracking-widest mb-3 md:mb-4">
+            <div className="p-6 md:p-8 overflow-y-auto no-scrollbar">
+              <div className="mb-4 md:mb-6">
+                <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-[10px] font-bold uppercase tracking-widest mb-2 md:mb-3">
                   <span>{modalType === 'trainer' ? 'Join Academic Faculty' : 'Admissions Open 2026-27'}</span>
                 </div>
                 <h2 className="text-2xl md:text-3xl font-black text-[var(--text-heading)] mb-2 md:mb-3 tracking-tight">

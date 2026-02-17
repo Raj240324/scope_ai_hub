@@ -72,61 +72,45 @@ const CourseDetail = () => {
       description={course.shortDescription}
       immersive={true}
     >
-      <section className="relative bg-[var(--bg-inverted)] pt-32 md:pt-40 pb-32 overflow-hidden min-h-[90vh] flex items-center">
-        {/* Background Mesh Gradients */}
-        <div className="absolute inset-0 bg-[var(--bg-inverted)]">
-          <div className="absolute top-[-20%] left-[-10%] w-[70vw] h-[70vw] bg-primary/20 rounded-full blur-[150px] animate-pulse duration-700" />
-          <div className="absolute bottom-[-20%] right-[-10%] w-[70vw] h-[70vw] bg-primary/10 rounded-full blur-[150px] animate-pulse delay-1000 duration-700" />
-          <div className="absolute top-[40%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-[50vw] h-[50vw] bg-primary/5 rounded-full blur-[120px]" />
-          <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 brightness-100 contrast-150 mix-blend-overlay"></div>
+      {/* 1. Redesigned Hero Section */}
+      <section className="relative bg-[var(--bg-body)] pt-32 md:pt-40 pb-20 overflow-hidden">
+        {/* Subtle Background Glows (New System) */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-[radial-gradient(circle,var(--color-brand-purple-deep)_0%,transparent_70%)] opacity-10 blur-3xl" />
+          <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[radial-gradient(circle,var(--color-brand-cyan-deep)_0%,transparent_70%)] opacity-10 blur-3xl" />
         </div>
 
         <div className="container-custom relative z-10">
-          <div className="max-w-5xl mx-auto text-center">
-            
-            <div className="inline-flex items-center space-x-2 bg-[var(--bg-body)]/5 backdrop-blur-md border border-[var(--bg-body)]/10 rounded-full px-4 py-1.5 mb-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
-              <span className="flex h-2 w-2 rounded-full bg-green-500 animate-pulse"></span>
-              <span className="text-xs font-bold text-[var(--text-on-inverted)] uppercase tracking-widest">New Batch: Feb 15, 2026</span>
+          <div className="max-w-4xl">
+            {/* Badges */}
+            <div className="flex flex-wrap items-center gap-3 mb-6 animate-in fade-in slide-in-from-bottom-4 duration-700">
+               <span className="px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider border border-primary/20">
+                 {course.category}
+               </span>
+               <div className="flex items-center space-x-2 px-3 py-1 rounded-full bg-green-500/10 text-green-500 border border-green-500/20">
+                 <span className="h-1.5 w-1.5 rounded-full bg-green-500 animate-pulse"></span>
+                 <span className="text-xs font-bold uppercase tracking-wider">New Batch: {course.enrollment?.nextBatch}</span>
+               </div>
             </div>
 
-            <h1 className="text-3xl sm:text-5xl md:text-7xl font-black text-[var(--text-on-inverted)] mb-8 tracking-tighter leading-[1.1] animate-in fade-in slide-in-from-bottom-6 duration-700 delay-100">
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-[var(--text-heading)] mb-6 tracking-tight leading-[1.1] animate-in fade-in slide-in-from-bottom-6 duration-700 delay-100">
               {course.title}
             </h1>
 
-            <p className="text-base sm:text-xl md:text-2xl text-[var(--text-on-inverted)]/60 mb-8 sm:mb-12 leading-relaxed max-w-3xl mx-auto font-medium animate-in fade-in slide-in-from-bottom-8 duration-700 delay-200">
+            <p className="text-lg md:text-xl text-[var(--text-muted)] mb-10 leading-relaxed max-w-2xl font-medium animate-in fade-in slide-in-from-bottom-8 duration-700 delay-200">
               {course.shortDescription}
             </p>
 
-            <div className="flex flex-wrap justify-center gap-4 mb-16 animate-in fade-in slide-in-from-bottom-10 duration-700 delay-300">
-               <div className="px-6 py-3 bg-[var(--bg-body)]/5 backdrop-blur-sm border border-[var(--bg-body)]/10 rounded-2xl flex flex-col items-center min-w-[120px]">
-                  <span className="text-xs text-[var(--text-on-inverted)]/60 uppercase tracking-widest font-bold mb-1">Duration</span>
-                  <span className="text-lg font-black text-[var(--text-on-inverted)]">{course.duration}</span>
-               </div>
-               <div className="px-6 py-3 bg-[var(--bg-body)]/5 backdrop-blur-sm border border-[var(--bg-body)]/10 rounded-2xl flex flex-col items-center min-w-[120px]">
-                  <span className="text-xs text-[var(--text-on-inverted)]/60 uppercase tracking-widest font-bold mb-1">Method</span>
-                  <span className="text-lg font-black text-[var(--text-on-inverted)]">{course.mode}</span>
-               </div>
-               <div className="px-6 py-3 bg-[var(--bg-body)]/5 backdrop-blur-sm border border-[var(--bg-body)]/10 rounded-2xl flex flex-col items-center min-w-[120px]">
-                  <span className="text-xs text-[var(--text-on-inverted)]/60 uppercase tracking-widest font-bold mb-1">Level</span>
-                  <span className="text-lg font-black text-[var(--text-on-inverted)]">{course.level}</span>
-               </div>
-            </div>
-
-            <div className="flex flex-col sm:flex-row justify-center gap-6 animate-in fade-in slide-in-from-bottom-12 duration-700 delay-400">
+            <div className="flex flex-wrap gap-4 animate-in fade-in slide-in-from-bottom-10 duration-700 delay-300">
               <button 
                 onClick={() => openModal(course.title)}
-                className="group relative px-12 py-5 bg-[var(--bg-body)] text-[var(--text-heading)] rounded-full font-black uppercase tracking-widest text-sm hover:opacity-90 transition-all shadow-xl hover:scale-105 active:scale-95"
+                className="btn-primary px-8 py-4 rounded-full text-sm font-bold uppercase tracking-widest shadow-lg shadow-primary/25 hover:shadow-primary/40 hover:-translate-y-1 transition-all"
               >
-                <span className="relative z-10 flex items-center">
-                  Start Learning Now
-                  <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-                </span>
-                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-transparent via-[var(--bg-body)]/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+                Enroll Now
               </button>
-              
               <button 
                 onClick={() => document.getElementById('curriculum').scrollIntoView({ behavior: 'smooth' })}
-                className="px-12 py-5 bg-transparent hover:bg-[var(--bg-body)]/5 text-[var(--text-on-inverted)] border border-[var(--bg-body)]/20 rounded-full font-black uppercase tracking-widest text-sm transition-all hover:scale-105 active:scale-95"
+                className="px-8 py-4 rounded-full bg-[var(--bg-secondary)] text-[var(--text-heading)] border border-[var(--border-color)] text-sm font-bold uppercase tracking-widest hover:bg-[var(--bg-inverted)] hover:text-[var(--text-on-inverted)] transition-all"
               >
                 View Syllabus
               </button>
@@ -135,455 +119,331 @@ const CourseDetail = () => {
         </div>
       </section>
 
-      {/* Smart Sticky Header - Adjusted top for fixed main header */}
-      <div className={`sticky top-[64px] md:top-[72px] z-40 transition-all duration-300 ${scrollProgress > 5 ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'}`}>
-        <div className="bg-[var(--bg-body)]/90 backdrop-blur-xl border-b border-[var(--border-color)] shadow-lg">
-          <div className="container-custom py-4">
-            <div className="flex items-center justify-between gap-4">
-              <h2 className="text-lg font-black text-[var(--text-heading)] hidden md:block truncate">{course.title}</h2>
-              <div className="flex-1 md:flex-none flex items-center space-x-4 md:space-x-6 overflow-x-auto no-scrollbar">
-                {['Overview', 'Curriculum', 'Projects', 'Instructor', 'FAQ'].map(tab => (
-                  <a 
-                    key={tab} 
-                    href={`#${tab.toLowerCase()}`}
-                    className={`text-xs font-black uppercase tracking-widest transition-colors whitespace-nowrap ${
-                      activeTab === tab.toLowerCase() ? 'text-primary' : 'text-[var(--text-muted)] hover:text-[var(--text-heading)]'
-                    }`}
-                  >
-                    {tab}
-                  </a>
-                ))}
+      {/* Sticky Sub-Nav (Restored & Refined) */}
+      <div className={`sticky top-[64px] md:top-[72px] z-40 bg-[var(--bg-body)]/80 backdrop-blur-xl border-y border-[var(--border-color)] transition-all duration-300 ${scrollProgress > 5 ? 'shadow-md translate-y-0' : ''}`}>
+        <div className="container-custom">
+           <div className="flex items-center justify-between h-14 md:h-16">
+              <h2 className={`font-bold text-[var(--text-heading)] transition-opacity duration-300 ${scrollProgress > 10 ? 'opacity-100' : 'opacity-0'} hidden md:block`}>
+                {course.title}
+              </h2>
+              <div className="flex items-center gap-1 md:gap-4 overflow-x-auto no-scrollbar mask-gradient-x w-full md:w-auto">
+                 {['Overview', 'Curriculum', 'Instructor', 'FAQ'].map((item) => {
+                    const id = item.toLowerCase();
+                    const isActive = activeTab === id;
+                    return (
+                      <button
+                        key={id}
+                        onClick={() => {
+                          document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                          setActiveTab(id);
+                        }}
+                        className={`px-4 py-1.5 rounded-full text-xs md:text-sm font-bold transition-all whitespace-nowrap ${isActive ? 'bg-[var(--text-heading)] text-[var(--bg-body)]' : 'text-[var(--text-muted)] hover:text-[var(--text-heading)] hover:bg-[var(--bg-secondary)]'}`}
+                      >
+                        {item}
+                      </button>
+                    )
+                 })}
+                 <button 
+                   onClick={() => openModal(course.title)}
+                   className="ml-2 md:ml-4 px-5 py-2 rounded-full bg-primary text-white text-xs md:text-sm font-bold shadow-lg shadow-primary/20 hover:shadow-primary/40 transition-all whitespace-nowrap md:hidden"
+                 >
+                   Enroll
+                 </button>
               </div>
-              <button
-                onClick={() => openModal(course.title)}
-                className="hidden sm:block bg-[var(--bg-inverted)] text-[var(--text-on-inverted)] px-6 py-3 rounded-xl text-xs font-black uppercase tracking-widest hover:opacity-90 transition-all shadow-lg hover:scale-105 active:scale-95"
-              >
-                Enroll Now
-              </button>
-            </div>
-          </div>
-          {/* Progress Bar */}
-          <div className="absolute bottom-0 left-0 h-[2px] bg-[var(--border-color)] w-full">
-            <div 
-              className="h-full bg-gradient-to-r from-primary to-blue-600 transition-all duration-150 ease-out"
-              style={{ width: `${scrollProgress}%` }}
-            />
-          </div>
+           </div>
         </div>
       </div>
 
-      <div className="container-custom py-12 lg:py-20">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16">
-          {/* Main Content */}
-          <div className="lg:col-span-8 space-y-16 lg:space-y-24">
+      {/* 2. Main Content - 2 Column Layout */}
+      <section className="py-12 md:py-16">
+        <div className="container-custom">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16">
             
-            {/* Overview - Bento Grid Layout */}
-            <div id="overview" className="scroll-mt-32">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-                {/* Main Value Prop - Span 2 cols */}
-                <div className="md:col-span-2 bg-[var(--bg-card)] p-8 lg:p-10 rounded-[2.5rem] border border-[var(--border-color)] shadow-sm relative overflow-hidden group">
-                  <div className="relative z-10">
-                    <h2 className="text-2xl md:text-3xl font-black text-[var(--text-heading)] mb-6 tracking-tight">
-                       Why learn <span className="text-primary">{course.title}?</span>
-                    </h2>
-                    <p className="text-[var(--text-muted)] text-lg leading-relaxed font-medium">
-                      {course.longDescription}
-                    </p>
-                  </div>
-                  <div className="absolute -bottom-10 -right-10 w-64 h-64 bg-primary/5 rounded-full blur-3xl group-hover:bg-primary/10 transition-colors"></div>
-                </div>
-
-                {/* Salary/Stats Card */}
-                <div className="bg-[var(--bg-inverted)] p-8 lg:p-10 rounded-[2.5rem] text-[var(--text-on-inverted)] flex flex-col justify-center relative overflow-hidden group">
-                   <div className="absolute top-0 right-0 w-32 h-32 bg-primary/20 rounded-full blur-2xl group-hover:scale-150 transition-transform"></div>
-                   <div className="relative z-10">
-                      <div className="flex items-center space-x-2 mb-2">
-                        <span className="h-2 w-2 rounded-full bg-green-500 animate-pulse"></span>
-                        <span className="text-xs font-bold text-green-400 uppercase tracking-widest">High Demand</span>
-                      </div>
-                      <p className="text-4xl lg:text-5xl font-black mb-2">₹12 LPA</p>
-                      <p className="text-[var(--text-on-inverted)]/60 font-medium">Avg. Salary Potential</p>
-                   </div>
-                </div>
-
-                {/* Prerequisites Card */}
-                <div className="bg-[var(--bg-card)] p-8 rounded-[2.5rem] border border-[var(--border-color)] shadow-sm flex flex-col justify-center group hover:border-primary/20 transition-colors">
-                   <div className="h-10 w-10 bg-primary/10 rounded-xl flex items-center justify-center mb-4 text-primary">
-                      <Zap className="h-5 w-5" />
-                   </div>
-                   <h3 className="text-lg font-black text-[var(--text-heading)] mb-4">Prerequisites</h3>
-                   <ul className="space-y-2">
-                      {course.prerequisites?.map((item, i) => (
-                        <li key={i} className="flex items-start text-sm font-bold text-[var(--text-muted)]">
-                          <CheckCircle2 className="h-4 w-4 text-green-500 mr-2 shrink-0 mt-0.5" />
-                          {item}
-                        </li>
-                      ))}
-                   </ul>
-                </div>
-
-                {/* Tools Stack - Span 2 cols */}
-                <div className="md:col-span-2 bg-[var(--bg-secondary)] p-8 lg:p-10 rounded-[2.5rem] border border-[var(--border-color)] relative overflow-hidden group">
-                   <h3 className="text-xl font-black text-[var(--text-heading)] mb-6 flex items-center relative z-10">
-                      <FileCheck className="h-5 w-5 text-primary mr-3" />
-                      Tools You Will Master
-                   </h3>
-                   <div className="flex flex-wrap gap-3 relative z-10">
-                      {course.tools?.map((tool, i) => (
-                        <span key={i} className="px-5 py-3 bg-[var(--bg-card)] text-[var(--text-muted)] rounded-xl text-xs font-black border border-[var(--border-color)] uppercase tracking-wider hover:bg-[var(--bg-inverted)] hover:text-[var(--text-on-inverted)] hover:border-[var(--text-heading)] hover:-translate-y-1 transition-all cursor-default shadow-sm">
-                          {tool}
-                        </span>
-                      ))}
-                   </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Curriculum - Modern Accordion */}
-            <div id="curriculum" className="scroll-mt-32">
-              <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+            {/* LEFT COLUMN: Content */}
+            <div className="lg:col-span-2 space-y-16">
+              
+              {/* Overview Section */}
+              <div id="overview" className="space-y-8 scroll-mt-24">
                 <div>
-                   <h2 className="text-3xl md:text-4xl font-black text-[var(--text-heading)] mb-4 tracking-tight">Structured <span className="text-primary">Curriculum</span></h2>
-                   <p className="text-[var(--text-muted)] font-medium">Designed for absolute beginners to advanced pros.</p>
+                  <h2 className="text-2xl font-bold text-[var(--text-heading)] mb-4">About this Course</h2>
+                  <p className="text-[var(--text-muted)] text-lg leading-relaxed">{course.longDescription}</p>
                 </div>
-                <div className="flex gap-4">
-                   <div className="px-4 py-2 bg-[var(--bg-secondary)] rounded-lg text-xs font-bold text-[var(--text-muted)]">
-                      {course.syllabus?.length || 0} Modules
-                   </div>
-                   <div className="px-4 py-2 bg-[var(--bg-secondary)] rounded-lg text-xs font-bold text-[var(--text-muted)]">
+
+                {/* Key Metrics Bar */}
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 py-8 border-y border-[var(--border-color)]">
+                  <div>
+                    <div className="text-xs text-[var(--text-muted)] uppercase tracking-wider font-semibold mb-1">Duration</div>
+                    <div className="text-lg font-bold text-[var(--text-heading)] flex items-center gap-2">
+                      <Clock className="h-4 w-4 text-primary" />
                       {course.duration}
+                    </div>
+                  </div>
+                  <div>
+                    <div className="text-xs text-[var(--text-muted)] uppercase tracking-wider font-semibold mb-1">Level</div>
+                    <div className="text-lg font-bold text-[var(--text-heading)] flex items-center gap-2">
+                       <Target className="h-4 w-4 text-primary" />
+                       {course.level}
+                    </div>
+                  </div>
+                  <div>
+                    <div className="text-xs text-[var(--text-muted)] uppercase tracking-wider font-semibold mb-1">Format</div>
+                    <div className="text-lg font-bold text-[var(--text-heading)] flex items-center gap-2">
+                       <Globe className="h-4 w-4 text-primary" />
+                       {course.mode}
+                    </div>
+                  </div>
+                   <div>
+                    <div className="text-xs text-[var(--text-muted)] uppercase tracking-wider font-semibold mb-1">Certification</div>
+                    <div className="text-lg font-bold text-[var(--text-heading)] flex items-center gap-2">
+                       <Award className="h-4 w-4 text-primary" />
+                       Yes
+                    </div>
+                  </div>
+                </div>
+
+                {/* What you'll learn */}
+                <div className="bg-[var(--bg-secondary)] p-8 rounded-3xl border border-[var(--border-color)]">
+                   <h3 className="text-xl font-bold text-[var(--text-heading)] mb-6 flex items-center gap-2">
+                     <CheckCircle2 className="h-5 w-5 text-primary" />
+                     What you will learn
+                   </h3>
+                   <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
+                     {course.learningObjectives?.map((item, i) => (
+                       <li key={i} className="flex items-start gap-3 list-none">
+                         <div className="mt-1.5 h-1.5 w-1.5 rounded-full bg-primary shrink-0" />
+                         <span className="text-[var(--text-muted)] font-medium text-sm leading-relaxed">{item}</span>
+                       </li>
+                     ))}
                    </div>
+                </div>
+                
+                {/* Tools */}
+                <div>
+                  <h3 className="text-lg font-bold text-[var(--text-heading)] mb-4">Tools & Technologies</h3>
+                  <div className="flex flex-wrap gap-3">
+                     {course.tools?.map((tool, i) => (
+                       <span key={i} className="px-4 py-2 rounded-xl bg-[var(--bg-card)] border border-[var(--border-color)] text-[var(--text-muted)] text-sm font-semibold shadow-sm">
+                         {tool}
+                       </span>
+                     ))}
+                  </div>
                 </div>
               </div>
 
-              <div className="relative border-l-2 border-[var(--border-color)] ml-4 md:ml-8 pl-8 md:pl-12 space-y-12">
-                {course.syllabus?.map((item, index) => (
-                  <div key={index} className="relative group">
-                    {/* Timeline Dot */}
-                    <div className={`absolute -left-[41px] md:-left-[59px] top-6 h-6 w-6 rounded-full border-4 border-[var(--bg-body)] transition-all duration-500 ${activeModule === index ? 'bg-primary ring-4 ring-primary/20 scale-125' : 'bg-[var(--border-color)] group-hover:bg-primary/50'}`}></div>
-                    
-                    <div 
-                      className={`cursor-pointer rounded-[2rem] border transition-all duration-500 overflow-hidden ${activeModule === index ? 'bg-[var(--bg-card)] border-primary/20 shadow-xl' : 'bg-[var(--bg-card)] border-[var(--border-color)] hover:border-[var(--text-muted)]/30 hover:shadow-lg'}`}
-                      onClick={() => setActiveModule(activeModule === index ? -1 : index)}
-                    >
-                      <div className="p-6 md:p-8 flex items-center justify-between">
-                         <div>
-                            <span className="text-xs font-black text-primary uppercase tracking-widest mb-1 block">Module 0{index + 1}</span>
-                            <h4 className="text-xl font-bold text-[var(--text-heading)] group-hover:text-primary transition-colors">{item.module}</h4>
-                            <p className="text-sm text-[var(--text-muted)] font-medium mt-1">{item.duration} • {item.topics?.length} Lessons</p>
-                         </div>
-                         <div className={`h-10 w-10 rounded-full flex items-center justify-center transition-transform duration-500 ${activeModule === index ? 'rotate-180 bg-primary/10 text-primary' : 'bg-[var(--bg-secondary)] text-[var(--text-muted)]'}`}>
-                            <ChevronDown className="h-5 w-5" />
-                         </div>
-                      </div>
-                      
-                      {activeModule === index && (
-                          <div className="px-6 pb-8 md:px-8 md:pb-10 animate-in fade-in slide-in-from-top-2 duration-300">
-                             <div className="h-px bg-[var(--border-color)] mb-6"></div>
-                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                {item.topics?.map((topic, i) => (
-                                   <div key={i} className="flex items-start">
-                                      <CheckCircle2 className="h-4 w-4 text-green-500 mr-3 mt-1 shrink-0" />
-                                      <span className="text-sm font-medium text-[var(--text-muted)]">{topic}</span>
-                                   </div>
-                                ))}
+
+              {/* Curriculum Section */}
+              <div id="curriculum" className="scroll-mt-24">
+                <div className="flex items-end justify-between mb-8">
+                   <h2 className="text-2xl font-bold text-[var(--text-heading)]">Curriculum</h2>
+                   <span className="text-sm font-medium text-[var(--text-muted)]">{course.syllabus?.length} Modules</span>
+                </div>
+                
+                <div className="space-y-4">
+                   {course.syllabus?.map((item, index) => (
+                     <div key={index} className="group border border-[var(--border-color)] rounded-2xl overflow-hidden bg-[var(--bg-card)] hover:border-primary/30 transition-all duration-300">
+                        <button 
+                          onClick={() => setActiveModule(activeModule === index ? -1 : index)}
+                          className="w-full flex items-center justify-between p-6 text-left"
+                        >
+                          <div className="flex gap-4 md:gap-6 items-center">
+                             <span className={`h-10 w-10 shrink-0 rounded-full flex items-center justify-center text-sm font-bold transition-colors ${activeModule === index ? 'bg-primary text-white' : 'bg-[var(--bg-secondary)] text-[var(--text-muted)] group-hover:text-primary'}`}>
+                                {index + 1}
+                             </span>
+                             <div>
+                                <h4 className="text-lg font-bold text-[var(--text-heading)]">{item.module}</h4>
+                                <p className="text-sm text-[var(--text-muted)]">{item.duration} • {item.topics?.length} Topics</p>
                              </div>
                           </div>
-                      )}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Projects */}
-            <div id="projects" className="scroll-mt-32">
-              <div className="inline-block px-4 py-1.5 bg-primary/10 rounded-full mb-6">
-                <span className="text-[10px] font-black text-primary uppercase tracking-[0.2em]">Real World Experience</span>
-              </div>
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-[var(--text-heading)] mb-12 tracking-tight leading-tight">
-                Hands-on Capstone Projects
-              </h2>
-              <div className="grid grid-cols-1 gap-8">
-                {course.projects?.map((project, i) => (
-                  <div key={i} className="group p-6 md:p-10 lg:p-12 bg-[var(--bg-card)] rounded-2xl md:rounded-[3rem] border border-[var(--border-color)] hover:border-primary/30 hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.08)] transition-all duration-700 relative overflow-hidden flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-10">
-                    <div className="absolute top-0 right-0 w-64 h-64 bg-[var(--bg-secondary)] rounded-full -mr-32 -mt-32 group-hover:bg-primary/5 transition-colors duration-700"></div>
-                    
-                    <div className="h-16 w-16 md:h-24 md:w-24 shrink-0 bg-[var(--bg-secondary)] rounded-2xl md:rounded-[2rem] flex items-center justify-center group-hover:bg-[var(--bg-inverted)] transition-all duration-700 group-hover:scale-110 group-hover:rotate-12 shadow-inner relative z-10">
-                      <Zap className="h-6 w-6 md:h-10 md:w-10 text-[var(--text-muted)] group-hover:text-[var(--text-on-inverted)] transition-colors" />
-                    </div>
-                    
-                    <div className="flex-1 relative z-10">
-                      <div className="flex items-center space-x-3 mb-4">
-                        <span className="text-[10px] font-black text-primary uppercase tracking-[0.3em] bg-primary/10 px-3 py-1 rounded-full">Project {i + 1}</span>
-                        <span className="h-1 w-1 rounded-full bg-slate-300"></span>
-                        <span className="text-[10px] font-black text-[var(--text-muted)] uppercase tracking-widest">Industry Standard</span>
-                      </div>
-                      <h4 className="text-xl lg:text-2xl font-black text-[var(--text-heading)] mb-4 tracking-tight group-hover:text-primary transition-colors">{project.title}</h4>
-                      <p className="text-[var(--text-muted)] text-base leading-relaxed font-medium">
-                        {project.description}
-                      </p>
-                      
-                      <div className="mt-8 flex flex-wrap gap-2">
-                        {course.tools?.slice(0, 3).map((tool, idx) => (
-                          <span key={idx} className="text-[10px] font-black text-[var(--text-muted)] uppercase tracking-widest border border-[var(--border-color)] px-3 py-1 rounded-lg">
-                            {tool}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                    
-                    <div className="hidden lg:block">
-                      <div className="h-12 w-12 rounded-2xl bg-[var(--bg-secondary)] flex items-center justify-center group-hover:bg-primary/10 transition-colors">
-                        <ArrowRight className="h-6 w-6 text-[var(--text-muted)] group-hover:text-primary" />
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Instructor */}
-            <div id="instructor" className="scroll-mt-32">
-              <div className="inline-block px-4 py-1.5 bg-primary/10 rounded-full mb-6">
-                <span className="text-[10px] font-black text-primary uppercase tracking-[0.2em]">Your Mentor</span>
-              </div>
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-[var(--text-heading)] mb-10 tracking-tight leading-tight">
-                Learn from the Experts
-              </h2>
-              <div className="flex flex-col md:flex-row items-center md:items-stretch gap-8 md:gap-12 p-6 md:p-10 lg:p-16 bg-[var(--bg-inverted)] rounded-2xl md:rounded-[3.5rem] text-[var(--text-on-inverted)] shadow-2xl relative overflow-hidden group">
-                <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-primary/10 rounded-full blur-[120px] -mr-48 -mt-48 group-hover:bg-primary/20 transition-all duration-1000" />
-                <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-primary/5 rounded-full blur-[100px] -ml-32 -mb-32" />
-                
-                <div className="relative h-48 w-48 md:h-64 md:w-64 shrink-0 mx-auto md:mx-0">
-                  <div className="absolute inset-0 bg-primary rounded-[3rem] rotate-6 group-hover:rotate-12 transition-transform duration-700 opacity-20 blur-xl"></div>
-                  <div className="absolute inset-0 bg-[var(--bg-body)]/10 rounded-[3rem] -rotate-3 group-hover:-rotate-6 transition-transform duration-700"></div>
-                  <div className="relative h-full w-full rounded-[3rem] overflow-hidden border-2 border-[var(--bg-body)]/20 shadow-2xl">
-                    <img 
-                      src={course.instructor?.avatar || 'https://via.placeholder.com/400x400?text=Instructor'} 
-                      alt={course.instructor?.name}
-                      className="h-full w-full object-cover group-hover:scale-110 transition-transform duration-1000"
-                    />
-                  </div>
-                  <div className="absolute -bottom-4 -right-4 bg-primary text-[var(--text-on-inverted)] h-14 w-14 rounded-2xl shadow-2xl shadow-primary/40 flex items-center justify-center animate-bounce duration-[3000ms] border-4 border-[var(--text-heading)]">
-                    <BookOpen className="h-6 w-6" />
-                  </div>
+                          <ChevronDown className={`h-5 w-5 text-[var(--text-muted)] transition-transform duration-300 ${activeModule === index ? 'rotate-180 text-primary' : ''}`} />
+                        </button>
+                        
+                        <div className={`grid transition-all duration-300 ease-in-out ${activeModule === index ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}>
+                           <div className="overflow-hidden">
+                              <div className="p-6 pt-0 pl-16 md:pl-20 border-t border-[var(--border-color)]/50 bg-[var(--bg-secondary)]/30">
+                                 <ul className="space-y-3">
+                                   {item.topics?.map((topic, i) => (
+                                     <li key={i} className="flex items-center gap-3 text-sm text-[var(--text-muted)] font-medium">
+                                       <div className="h-1.5 w-1.5 rounded-full bg-[var(--border-color)]" />
+                                       {topic}
+                                     </li>
+                                   ))}
+                                 </ul>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                   ))}
                 </div>
-                
-                <div className="text-center md:text-left flex flex-col justify-center relative z-10">
-                  <div className="inline-flex items-center space-x-2 text-primary font-black text-sm uppercase tracking-[0.3em] mb-4">
-                    <span className="h-1 w-8 bg-primary rounded-full"></span>
-                    <span>Chief Instructor</span>
-                  </div>
-                  <h4 className="text-2xl md:text-3xl lg:text-4xl font-black mb-4 tracking-tight">{course.instructor?.name}</h4>
-                  <p className="text-primary font-bold text-lg mb-8 leading-relaxed">{course.instructor?.role}</p>
-                  <div className="relative">
-                    <span className="absolute -top-6 -left-6 text-6xl text-[var(--text-on-inverted)]/5 font-serif">"</span>
-                    <p className="text-[var(--text-on-inverted)]/70 leading-relaxed text-lg font-medium italic relative z-10">
-                      {course.instructor?.bio}
-                    </p>
-                    <span className="absolute -bottom-10 -right-6 text-6xl text-[var(--text-on-inverted)]/5 font-serif">"</span>
-                  </div>
-                  
-                  <div className="mt-12 flex items-center justify-center md:justify-start space-x-8">
-                    <div className="text-center md:text-left">
-                      <span className="text-[10px] font-black text-[var(--text-on-inverted)]/40 uppercase tracking-widest block mb-1">Experience</span>
-                      <span className="text-xl font-black text-[var(--text-on-inverted)]">10+ Years</span>
-                    </div>
-                    <div className="h-8 w-px bg-[var(--bg-body)]/10"></div>
-                    <div className="text-center md:text-left">
-                      <span className="text-[10px] font-black text-[var(--text-on-inverted)]/40 uppercase tracking-widest block mb-1">Students</span>
-                      <span className="text-xl font-black text-[var(--text-on-inverted)]">5000+</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* FAQ Section */}
-            <div id="faq" className="scroll-mt-32">
-              <div className="inline-block px-4 py-1.5 bg-primary/10 rounded-full mb-6">
-                <span className="text-[10px] font-black text-primary uppercase tracking-[0.2em]">Support</span>
-              </div>
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-[var(--text-heading)] mb-12 tracking-tight leading-tight">
-                Common Questions
-              </h2>
-              <div className="grid grid-cols-1 gap-6">
-                {course.faqs?.map((faq, index) => (
-                  <div 
-                    key={index}
-                    className={`group border rounded-[2rem] transition-all duration-700 ${activeFaq === index ? 'border-primary shadow-[0_20px_50px_-15px_rgba(0,0,0,0.05)] bg-[var(--bg-card)]' : 'border-[var(--border-color)] bg-[var(--bg-secondary)]/30 hover:bg-[var(--bg-card)] hover:border-[var(--border-color)]'}`}
-                  >
-                    <button 
-                      onClick={() => setActiveFaq(activeFaq === index ? -1 : index)}
-                      className="w-full flex items-center justify-between p-5 md:p-8 lg:p-10 text-left transition-all group/faqbtn"
-                    >
-                      <span className={`text-base md:text-xl font-black tracking-tight transition-all duration-500 ${activeFaq === index ? 'text-primary md:translate-x-2' : 'text-[var(--text-heading)] group-hover/faqbtn:text-primary'}`}>
-                        {faq.question}
-                      </span>
-                      <div className={`h-10 w-10 md:h-12 md:w-12 rounded-xl md:rounded-2xl flex items-center justify-center transition-all duration-700 shrink-0 ${activeFaq === index ? 'bg-primary text-[var(--text-on-inverted)] rotate-180 shadow-2xl shadow-primary/40' : 'bg-[var(--bg-card)] border border-[var(--border-color)] group-hover/faqbtn:border-primary/20 group-hover/faqbtn:scale-110'}`}>
-                        <ChevronDown className="h-6 w-6" />
-                      </div>
-                    </button>
-                    {activeFaq === index && (
-                      <div className="px-5 pb-5 md:px-8 md:pb-8 lg:px-12 lg:pb-12 animate-in fade-in slide-in-from-top-4 duration-700">
-                        <div className="h-px bg-[var(--border-color)] mb-8" />
-                        <p className="text-[var(--text-muted)] text-base leading-relaxed font-medium">
-                          {faq.answer}
-                        </p>
-                      </div>
-                    )}
-                  </div>
-                ))}
               </div>
               
-              {/* Still have questions? */}
-              <div className="mt-12 md:mt-16 p-6 md:p-10 bg-[var(--bg-inverted)] rounded-2xl md:rounded-[3rem] text-[var(--text-on-inverted)] flex flex-col md:flex-row items-center justify-between gap-6 md:gap-8 relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-64 h-64 bg-[var(--bg-body)]/10 rounded-full -mr-32 -mt-32 blur-3xl"></div>
-                <div className="relative z-10 text-center md:text-left">
-                  <h3 className="text-2xl font-black mb-2">Still have questions?</h3>
-                  <p className="text-[var(--text-on-inverted)]/80 font-medium">Can't find the answer you're looking for? Please chat to our friendly team.</p>
-                </div>
-                <button 
-                  onClick={() => openModal(course.title)}
-                  className="bg-[var(--bg-body)] text-[var(--text-heading)] font-black px-8 py-4 rounded-2xl hover:opacity-90 transition-colors relative z-10 shadow-xl whitespace-nowrap"
-                >
-                  Get in Touch
-                </button>
-              </div>
-            </div>
-          </div>
-
-          {/* Sidebar */}
-          <div className="lg:col-span-4 relative">
-            <div className="sticky top-32 space-y-8">
-              {/* Main Pricing/Action Card */}
-              <div className="bg-[var(--bg-card)] rounded-[3rem] shadow-[0_20px_70px_-15px_rgba(0,0,0,0.1)] border border-[var(--border-color)] overflow-hidden">
-                <div className="p-8 lg:p-10">
-                  <div className="flex items-center justify-between mb-8">
+              {/* Instructor Section */}
+              <div id="instructor" className="scroll-mt-24">
+                 <h2 className="text-2xl font-bold text-[var(--text-heading)] mb-8">Your Mentor</h2>
+                 <div className="flex flex-col md:flex-row gap-8 items-start bg-[var(--bg-card)] p-8 rounded-3xl border border-[var(--border-color)]">
+                    <div className="shrink-0 relative">
+                       <img 
+                         src={course.instructor?.avatar} 
+                         alt={course.instructor?.name} 
+                         className="h-32 w-32 rounded-2xl object-cover shadow-lg"
+                       />
+                       <div className="absolute -bottom-3 -right-3 bg-primary text-white p-2 rounded-lg shadow-lg">
+                          <BookOpen className="h-5 w-5" />
+                       </div>
+                    </div>
                     <div>
-                      <span className="text-[10px] font-black text-[var(--text-muted)] uppercase tracking-widest block mb-1">Next Batch</span>
-                      <div className="flex items-center text-[var(--text-heading)] font-black">
-                        <Calendar className="h-4 w-4 text-primary mr-2" />
-                        {course.enrollment?.nextBatch || 'TBA'}
-                      </div>
+                       <h3 className="text-xl font-bold text-[var(--text-heading)]">{course.instructor?.name}</h3>
+                       <p className="text-primary font-medium mb-4">{course.instructor?.role}</p>
+                       <p className="text-[var(--text-muted)] leading-relaxed text-sm mb-6">{course.instructor?.bio}</p>
+                       <div className="flex gap-6 text-sm">
+                          <div>
+                            <span className="block font-bold text-[var(--text-heading)]">10+ Years</span>
+                            <span className="text-[var(--text-muted)] text-xs">Experience</span>
+                          </div>
+                          <div>
+                            <span className="block font-bold text-[var(--text-heading)]">5000+</span>
+                            <span className="text-[var(--text-muted)] text-xs">Students</span>
+                          </div>
+                       </div>
                     </div>
-                    <div className="text-right">
-                      <span className="text-[10px] font-black text-[var(--text-muted)] uppercase tracking-widest block mb-1">Course Fee</span>
-                      <div className="text-2xl font-black text-primary tracking-tight">{course.price}</div>
-                      <div className="text-[10px] text-[var(--text-muted)] font-bold mt-1">EMI Options Available</div>
-                    </div>
-                  </div>
-
-                  <div className="space-y-4 mb-8">
-                    <div className="flex items-center justify-between p-4 bg-[var(--bg-secondary)] rounded-2xl border border-[var(--border-color)]">
-                      <div className="flex items-center">
-                        <Clock className="h-4 w-4 text-primary mr-3" />
-                        <span className="text-sm font-bold text-[var(--text-muted)]">Duration</span>
-                      </div>
-                      <span className="text-sm font-black text-[var(--text-heading)]">{course.duration}</span>
-                    </div>
-                    <div className="flex items-center justify-between p-4 bg-[var(--bg-secondary)] rounded-2xl border border-[var(--border-color)]">
-                      <div className="flex items-center">
-                        <Globe className="h-4 w-4 text-primary mr-3" />
-                        <span className="text-sm font-bold text-[var(--text-muted)]">Format</span>
-                      </div>
-                      <span className="text-sm font-black text-[var(--text-heading)]">{course.mode}</span>
-                    </div>
-                    <div className="flex items-center justify-between p-4 bg-[var(--bg-secondary)] rounded-2xl border border-[var(--border-color)]">
-                      <div className="flex items-center">
-                        <Target className="h-4 w-4 text-primary mr-3" />
-                        <span className="text-sm font-bold text-[var(--text-muted)]">Level</span>
-                      </div>
-                      <span className="text-sm font-black text-[var(--text-heading)]">{course.level}</span>
-                    </div>
-                  </div>
-
-                  <div className="space-y-3">
-                    <button 
-                      onClick={() => openModal(course.title)}
-                      className="w-full py-5 bg-[var(--bg-inverted)] text-[var(--text-on-inverted)] rounded-2xl text-[13px] font-black tracking-widest uppercase hover:opacity-90 transition-all shadow-xl active:scale-[0.98] group/btn"
-                    >
-                      <span className="flex items-center justify-center">
-                        Secure Your Seat
-                        <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                      </span>
-                    </button>
-                    <button 
-                      onClick={() => openModal(course.title)}
-                      className="w-full py-5 bg-[var(--bg-secondary)] text-[var(--text-heading)] rounded-2xl text-[13px] font-black tracking-widest uppercase hover:opacity-80 transition-all active:scale-[0.98] border border-[var(--border-color)]"
-                    >
-                      Request Callback
-                    </button>
-                  </div>
-                </div>
-
-                {/* Integrated Certification Info */}
-                <div className="bg-[var(--bg-inverted)] p-8 lg:p-10 relative overflow-hidden group">
-                  <Award className="absolute -bottom-4 -right-4 h-24 w-24 text-[var(--text-on-inverted)]/5 group-hover:scale-110 transition-transform duration-500" />
-                  <div className="relative z-10">
-                    <div className="flex items-center space-x-3 mb-4">
-                      <div className="h-8 w-8 bg-primary rounded-xl flex items-center justify-center shadow-lg shadow-primary/20">
-                        <Award className="h-4 w-4 text-white" />
-                      </div>
-                      <h3 className="text-sm font-black text-[var(--text-on-inverted)] uppercase tracking-wider">{course.certification?.title || 'Industry Certified'}</h3>
-                    </div>
-                    <p className="text-xs text-[var(--text-on-inverted)]/60 font-medium leading-relaxed mb-6">
-                      {course.certification?.details || 'Get a dual certification aligned with industry standards and NASSCOM FutureSkills.'}
-                    </p>
-                    <div className="flex items-center justify-between pt-4 border-t border-[var(--bg-body)]/10">
-                      <span className="text-[9px] font-black uppercase tracking-widest text-[var(--text-on-inverted)]/40">Recognition</span>
-                      <span className="text-[10px] font-black text-primary uppercase">NASSCOM ALIGNED</span>
-                    </div>
-                  </div>
-                </div>
+                 </div>
               </div>
 
-              {/* Steps Card */}
-              <div className="bg-[var(--bg-secondary)] rounded-[2.5rem] border border-[var(--border-color)] p-8">
-                <h4 className="text-[10px] font-black text-[var(--text-muted)] uppercase tracking-widest mb-6 flex items-center">
-                  <ArrowRight className="h-3 w-3 mr-2 text-primary" />
-                  Enrollment Journey
-                </h4>
-                <ul className="space-y-5">
-                  {course.enrollment?.steps?.map((step, i) => (
-                    <li key={i} className="flex items-start space-x-4">
-                      <span className="h-6 w-6 rounded-lg bg-[var(--bg-card)] border border-[var(--border-color)] flex items-center justify-center shrink-0 text-[10px] font-black text-[var(--text-muted)] shadow-sm">{i + 1}</span>
-                      <span className="text-xs font-bold text-[var(--text-muted)] leading-normal">{step}</span>
-                    </li>
-                  ))}
-                </ul>
+              {/* FAQ Section */}
+              <div id="faq" className="scroll-mt-24">
+                 <h2 className="text-2xl font-bold text-[var(--text-heading)] mb-8">Frequently Asked Questions</h2>
+                 <div className="space-y-4">
+                   {course.faqs?.map((faq, index) => (
+                     <div 
+                       key={index} 
+                       className={`border border-[var(--border-color)] rounded-2xl overflow-hidden transition-all duration-300 ${activeFaq === index ? 'bg-[var(--bg-secondary)] border-primary/30' : 'bg-[var(--bg-card)]'}`}
+                     >
+                       <button
+                         onClick={() => setActiveFaq(activeFaq === index ? -1 : index)}
+                         className="w-full flex items-center justify-between p-6 text-left"
+                       >
+                         <span className={`font-bold text-lg ${activeFaq === index ? 'text-[var(--text-heading)]' : 'text-[var(--text-muted)]'}`}>
+                           {faq.question}
+                         </span>
+                         {activeFaq === index ? (
+                           <ChevronUp className="h-5 w-5 text-primary shrink-0 ml-4" />
+                         ) : (
+                           <ChevronDown className="h-5 w-5 text-[var(--text-muted)] shrink-0 ml-4" />
+                         )}
+                       </button>
+                       <div 
+                         className={`grid transition-all duration-300 ease-in-out ${activeFaq === index ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}
+                       >
+                         <div className="overflow-hidden">
+                           <div className="p-6 pt-0 text-[var(--text-muted)] leading-relaxed">
+                             {faq.answer}
+                           </div>
+                         </div>
+                       </div>
+                     </div>
+                   ))}
+                 </div>
               </div>
+
             </div>
-          </div>
-        </div>
-      </div>
 
-      {/* Related Courses CTA */}
-      <section className="section-padding bg-[var(--bg-secondary)] border-t border-[var(--border-color)] relative overflow-hidden">
-        <div className="absolute top-0 left-0 w-full h-full -z-10">
-          <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-primary/5 rounded-full blur-[120px]" />
-          <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] bg-primary/5 rounded-full blur-[120px]" />
-        </div>
-        <div className="container-custom text-center">
-          <div className="inline-block px-4 py-1.5 bg-primary/10 rounded-full mb-8">
-            <span className="text-[10px] font-black text-primary uppercase tracking-[0.2em]">Ready to begin?</span>
-          </div>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-[var(--text-heading)] mb-8 tracking-tight">Start your transformation <span className="text-primary">today</span></h2>
-          <p className="text-[var(--text-muted)] text-lg mb-12 max-w-2xl mx-auto font-medium leading-relaxed">Join 1,000+ successful graduates who have accelerated their careers with {BRANDING.fullName}.</p>
-          <div className="flex flex-col sm:flex-row justify-center items-center gap-6">
-            <Link to="/courses" className="btn-primary px-12 py-5 text-lg shadow-2xl shadow-primary/30 hover:-translate-y-1 transition-transform">
-              Browse All Courses
-            </Link>
-            <Link to="/reviews" className="group flex items-center text-lg font-black text-[var(--text-heading)] hover:text-primary transition-colors">
-              Read Success Stories 
-              <div className="ml-3 h-10 w-10 rounded-full border border-[var(--border-color)] flex items-center justify-center group-hover:border-primary group-hover:bg-primary group-hover:text-[var(--text-on-inverted)] transition-all">
-                <ArrowRight className="h-5 w-5" />
-              </div>
-            </Link>
+            {/* RIGHT COLUMN: Sticky Sidebar */}
+            <div className="lg:col-span-1">
+               <div className="sticky top-32 space-y-6">
+                  {/* Enrollment Card */}
+                  <div className="bg-[var(--bg-card)] rounded-3xl border border-[var(--border-color)] p-6 shadow-xl shadow-black/5">
+                     <div className="flex justify-between items-start mb-6">
+                        <div>
+                          <p className="text-sm font-medium text-[var(--text-muted)] mb-1">Course Fee</p>
+                          <h3 className="text-2xl font-black text-primary">{course.price}</h3>
+                        </div>
+                        <div className="px-3 py-1 rounded-lg bg-[var(--bg-secondary)] border border-[var(--border-color)] text-xs font-bold text-[var(--text-heading)]">
+                          Next: {course.enrollment?.nextBatch}
+                        </div>
+                     </div>
+                     
+                     <div className="space-y-3 mb-6">
+                        <button 
+                          onClick={() => openModal(course.title)}
+                          className="w-full btn-primary py-4 rounded-xl text-sm font-bold uppercase tracking-wider shadow-lg hover:shadow-primary/30 transition-all"
+                        >
+                          Enroll Now
+                        </button>
+                        <button 
+                          onClick={() => openModal(course.title)}
+                          className="w-full py-4 rounded-xl bg-[var(--bg-secondary)] border border-[var(--border-color)] text-[var(--text-heading)] text-sm font-bold uppercase tracking-wider hover:bg-[var(--bg-body)] transition-all"
+                        >
+                          Talk to Counselor
+                        </button>
+                     </div>
+
+                     <div className="space-y-4 pt-6 border-t border-[var(--border-color)]">
+                        <div className="flex items-center justify-between text-sm">
+                           <span className="text-[var(--text-muted)] flex items-center gap-2">
+                             <User className="h-4 w-4" /> Enrolled
+                           </span>
+                           <span className="font-bold text-[var(--text-heading)]">1,240+ Students</span>
+                        </div>
+                        <div className="flex items-center justify-between text-sm">
+                           <span className="text-[var(--text-muted)] flex items-center gap-2">
+                             <Clock className="h-4 w-4" /> Duration
+                           </span>
+                           <span className="font-bold text-[var(--text-heading)]">{course.duration}</span>
+                        </div>
+                        <div className="flex items-center justify-between text-sm">
+                           <span className="text-[var(--text-muted)] flex items-center gap-2">
+                             <FileCheck className="h-4 w-4" /> Certificate
+                           </span>
+                           <span className="font-bold text-[var(--text-heading)]">Included</span>
+                        </div>
+                     </div>
+                  </div>
+
+                  {/* Help Card */}
+                  <div className="bg-primary/5 rounded-3xl border border-primary/10 p-6">
+                     <h4 className="font-bold text-[var(--text-heading)] mb-2 flex items-center gap-2">
+                        <HelpCircle className="h-5 w-5 text-primary" />
+                        Need Help?
+                     </h4>
+                     <p className="text-sm text-[var(--text-muted)] mb-4 leading-relaxed">
+                       Unsure if this course is right for you? Our career counselors can help you decide.
+                     </p>
+                     <a href="/contact" className="text-sm font-bold text-primary hover:underline">
+                        Get Free Counseling &rarr;
+                     </a>
+                  </div>
+               </div>
+            </div>
+
           </div>
         </div>
       </section>
+
+      {/* 3. Related Courses (Simplified) */}
+      <section className="py-20 bg-[var(--bg-secondary)] border-t border-[var(--border-color)]">
+        <div className="container-custom">
+           <div className="flex justify-between items-end mb-10">
+              <div>
+                <h2 className="text-3xl font-bold text-[var(--text-heading)] mb-2">Explore More</h2>
+                <p className="text-[var(--text-muted)]">Similar courses you might be interested in</p>
+              </div>
+              <Link to="/courses" className="text-primary font-bold hover:underline hidden md:block">View All Courses</Link>
+           </div>
+           
+           {/* Simple Grid of 3 Cards */}
+           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {courses.filter(c => c.id !== course.id).slice(0, 3).map((item) => (
+                 <Link key={item.id} to={`/courses/${item.slug}`} className="group bg-[var(--bg-card)] rounded-2xl border border-[var(--border-color)] overflow-hidden hover:border-primary/40 hover:shadow-xl transition-all duration-300">
+                    <div className="p-6">
+                       <span className="text-xs font-bold text-primary uppercase tracking-wider mb-2 block">{item.category}</span>
+                       <h3 className="text-lg font-bold text-[var(--text-heading)] mb-2 group-hover:text-primary transition-colors">{item.title}</h3>
+                       <p className="text-sm text-[var(--text-muted)] line-clamp-2">{item.shortDescription}</p>
+                    </div>
+                 </Link>
+              ))}
+           </div>
+        </div>
+      </section>
+
     </Layout>
   );
 };

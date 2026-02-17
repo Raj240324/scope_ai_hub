@@ -231,8 +231,8 @@ const About = () => {
           </div>
           <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-12">
             {team.map((member, index) => (
-              <StaggerItem key={index}>
-                <div className="bg-[var(--bg-card)] p-5 sm:p-8 rounded-2xl sm:rounded-3xl border border-[var(--border-color)] shadow-sm hover:shadow-xl transition-all group">
+              <StaggerItem key={index} className="h-full">
+                <div className="bg-[var(--bg-card)] p-5 sm:p-8 rounded-2xl sm:rounded-3xl border border-[var(--border-color)] shadow-sm hover:shadow-xl transition-all group h-full flex flex-col">
                   <div className="relative mb-6 sm:mb-8 inline-block">
                     <div className="absolute inset-0 bg-primary/20 rounded-full blur-2xl group-hover:bg-primary/30 transition-colors"></div>
                     <img src={member.image} alt={member.name} className="relative h-20 w-20 sm:h-24 sm:w-24 rounded-full ring-4 ring-[var(--bg-body)] shadow-lg object-cover" />
@@ -246,7 +246,7 @@ const About = () => {
                       </span>
                     ))}
                   </div>
-                  <p className="text-[var(--text-muted)] text-sm leading-relaxed">{member.bio}</p>
+                  <p className="text-[var(--text-muted)] text-sm leading-relaxed mt-auto">{member.bio}</p>
                 </div>
               </StaggerItem>
             ))}
@@ -290,7 +290,7 @@ const About = () => {
             </p>
           </div>
 
-          <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-12">
+          <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {values.map((value, index) => (
               <StaggerItem key={index}>
                 <div className="space-y-4">

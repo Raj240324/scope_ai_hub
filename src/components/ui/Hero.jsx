@@ -64,14 +64,18 @@ const Hero = ({
           )}
 
           {/* World Class Overlay - Sophisticated & Clean */}
-          {/* 1. Base subtle dark overlay - Reduced to let the video shine through */}
+          {/* 1. Base subtle dark overlay */}
           <div className="absolute inset-0 bg-navy/30 mix-blend-multiply z-[1]" />
           <div className="absolute inset-0 bg-black/30 z-[1]" />
           
-          {/* 2. Advanced Gradient Mesh (Subtle) - Intensified for depth */}
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-transparent via-black/30 to-black/80 z-[2]" />
+          {/* 2. Brand Gradient Mesh - "Purple -> Magenta" & "Cyan -> Blue" fusion */}
+          {/* Top-Right: Cyan/Blue Glow (Tech/Human Shape vibe) */}
+          <div className="absolute top-[-20%] right-[-10%] w-[70%] h-[70%] bg-[radial-gradient(circle,_var(--color-brand-cyan-primary)_0%,_transparent_70%)] opacity-20 z-[2] mix-blend-screen pointer-events-none" />
           
-          {/* 3. Bottom cinematic fade - Always dark to match video */}
+          {/* Bottom-Left: Purple/Magenta Glow (Base vibe) */}
+          <div className="absolute bottom-[-10%] left-[-10%] w-[60%] h-[60%] bg-[radial-gradient(circle,_var(--color-brand-purple-highlight)_0%,_transparent_70%)] opacity-20 z-[2] mix-blend-screen pointer-events-none" />
+          
+          {/* 3. Bottom cinematic fade */}
           <div className="absolute bottom-0 left-0 w-full h-48 bg-gradient-to-t from-black via-black/70 to-transparent z-[3]" />
         </div>
 

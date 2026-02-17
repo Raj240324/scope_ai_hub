@@ -64,20 +64,15 @@ const MicroExpander = React.forwardRef(
     };
 
     return (
-      <motion.button
+      <button
         ref={ref}
         className={cn(
-          'relative flex h-12 items-center overflow-hidden rounded-full',
-          'whitespace-nowrap font-medium text-sm uppercase tracking-wide',
+          'relative flex h-12 items-center rounded-full transition-all duration-300', // Use standard CSS transition for background/border
           'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
           isLoading && 'cursor-not-allowed',
           variantStyles[variant],
           className
         )}
-        initial='initial'
-        animate={isLoading ? 'loading' : isHovered ? 'hover' : 'initial'}
-        variants={containerVariants}
-        transition={{ type: 'spring', stiffness: 150, damping: 20, mass: 0.8 }}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         onFocus={() => setIsHovered(true)}
@@ -113,10 +108,25 @@ const MicroExpander = React.forwardRef(
           </AnimatePresence>
         </div>
 
-        <motion.div variants={textVariants} className='pr-6 pl-1'>
-          {text}
+        <motion.div
+          initial={{ width: 0, opacity: 0 }}
+          animate={{ 
+            width: isHovered && !isLoading ? 'auto' : 0, 
+            opacity: isHovered && !isLoading ? 1 : 0 
+          }}
+          transition={{ 
+            type: "spring", 
+            stiffness: 500, 
+            damping: 30, 
+            mass: 0.5 
+          }}
+          className='overflow-hidden'
+        >
+          <div className='whitespace-nowrap font-medium text-sm uppercase tracking-wide pr-6 pl-0'>
+            {text}
+          </div>
         </motion.div>
-      </motion.button>
+      </button>
     );
   }
 );
