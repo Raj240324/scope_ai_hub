@@ -57,21 +57,22 @@ const Hero = ({
               playsInline
               preload="auto"
               onCanPlay={() => setVideoLoaded(true)}
-              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${videoLoaded ? 'opacity-100' : 'opacity-0'}`}
+              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 saturate-[1.2] contrast-[1.1] brightness-[1.1] ${videoLoaded ? 'opacity-100' : 'opacity-0'}`}
             >
               <source src={videoSrc} type="video/mp4" />
             </video>
           )}
 
           {/* World Class Overlay - Sophisticated & Clean */}
-          {/* 1. Base subtle dark overlay */}
-          <div className="absolute inset-0 bg-black/40 z-[1]" />
+          {/* 1. Base subtle dark overlay - Reduced to let the video shine through */}
+          <div className="absolute inset-0 bg-navy/30 mix-blend-multiply z-[1]" />
+          <div className="absolute inset-0 bg-black/30 z-[1]" />
           
-          {/* 2. Advanced Gradient Mesh (Subtle) */}
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-transparent via-black/20 to-black/60 z-[2]" />
+          {/* 2. Advanced Gradient Mesh (Subtle) - Intensified for depth */}
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-transparent via-black/30 to-black/80 z-[2]" />
           
           {/* 3. Bottom cinematic fade - Always dark to match video */}
-          <div className="absolute bottom-0 left-0 w-full h-48 bg-gradient-to-t from-black via-black/60 to-transparent z-[3]" />
+          <div className="absolute bottom-0 left-0 w-full h-48 bg-gradient-to-t from-black via-black/70 to-transparent z-[3]" />
         </div>
 
         {/* Content Overlay — Elegant, High-End SaaS Style */}
