@@ -155,6 +155,7 @@ const Footer = () => {
               <Link to="/refund-policy" className="hover:text-primary transition-colors">Refunds</Link>
               <Link to="/legal/trainer-conduct" className="hover:text-primary transition-colors">Trainer Conduct</Link>
               <Link to="/disclaimer" className="hover:text-primary transition-colors">Disclaimer</Link>
+              <Link to="/sitemap" className="hover:text-primary transition-colors">Sitemap</Link>
             </div>
             <button 
               onClick={() => openModal()}

@@ -27,6 +27,7 @@ const Disclaimer = lazy(() => import('./pages/legal/Disclaimer'));
 const TrainerCodeOfConduct = lazy(() => import('./pages/legal/TrainerCodeOfConduct'));
 const JoinAsTrainer = lazy(() => import('./pages/careers/JoinAsTrainer'));
 const TrainerProfiles = lazy(() => import('./pages/careers/TrainerProfiles'));
+const Sitemap = lazy(() => import('./pages/Sitemap'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
 // Loading Fallback
@@ -63,6 +64,7 @@ function App() {
                 <Route path="/legal/trainer-conduct" element={<TrainerCodeOfConduct />} />
                 <Route path="/careers/join-as-trainer" element={<JoinAsTrainer />} />
                 <Route path="/careers/trainers" element={<TrainerProfiles />} />
+                <Route path="/sitemap" element={<Sitemap />} />
 
                 {/* 404 Route */}
                 <Route path="*" element={<NotFound />} />
