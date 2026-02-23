@@ -28,7 +28,7 @@ import {
   MapPin
 } from 'lucide-react';
 import Layout from '../components/layout/Layout';
-import Hero from '../components/ui/Hero';
+import HeroScroll from '../components/sections/HeroScroll';
 import CourseCard from '../components/ui/CourseCard';
 import { courses } from '../data/courses';
 import { useModal } from '../context/ModalContext';
@@ -200,9 +200,7 @@ const learningPartners = [
         keywords="Software Training Institute Chennai, Full Stack Developer Course, Data Science Training, MERN Stack, Python Course, Placement Support, Scope Global, Best IT Training Center"
         canonical="/"
       />
-      <Hero
-        variant="video"
-        videoSrc="/hero-bg.mp4"
+      <HeroScroll
         badge={
           <>
             <ShieldCheck className="h-3.5 w-3.5 text-primary-light" />
@@ -221,17 +219,20 @@ const learningPartners = [
         }
         subtitle="The most practical software training institute in Chennai. We don't just teach code. We build your career from scratch."
       >
-        {/* CTAs — World Class Minimalist Buttons with Brand Colors */}
-        <div className="flex flex-col sm:flex-row gap-6 justify-center mb-16">
-          <Link to="/courses" className="group relative px-8 py-4 bg-primary text-white rounded-full flex items-center justify-center font-bold text-base shadow-[0_0_20px_-5px_rgba(var(--primary-rgb),0.3)] hover:shadow-[0_0_25px_-5px_rgba(var(--primary-rgb),0.5)] hover:-translate-y-0.5 transition-all duration-300">
+        {/* CTAs — revealed last as scroll completes */}
+        <div className="flex flex-col sm:flex-row gap-6 justify-center">
+          <Link
+            to="/courses"
+            className="group relative px-8 py-4 bg-primary text-white rounded-full flex items-center justify-center font-bold text-base shadow-[0_0_20px_-5px_rgba(var(--primary-rgb),0.3)] hover:shadow-[0_0_25px_-5px_rgba(var(--primary-rgb),0.5)] hover:-translate-y-0.5 transition-all duration-300"
+          >
             <span className="relative z-10 flex items-center">
               Explore Courses <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
             </span>
             {/* Subtle gradient overlay on hover */}
             <div className="absolute inset-0 rounded-full bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity" />
           </Link>
-          
-          <button 
+
+          <button
             onClick={() => openModal()}
             className="px-8 py-4 bg-white/5 backdrop-blur-md text-white border border-white/10 hover:border-primary/50 rounded-full flex items-center justify-center font-bold text-base hover:bg-white/10 transition-all duration-300 group"
           >
@@ -239,33 +240,7 @@ const learningPartners = [
             Book Free Demo
           </button>
         </div>
-        
-        {/* Social Proof — Ultra Clean & Subtle */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-6 opacity-80 hover:opacity-100 transition-opacity duration-500">
-          <div className="flex -space-x-3">
-            {[1, 2, 3, 4].map((i) => (
-              <img 
-                key={i}
-                className="inline-block h-10 w-10 rounded-full ring-2 ring-black/50 object-cover grayscale opacity-70 hover:grayscale-0 hover:opacity-100 hover:scale-110 transition-all duration-300" 
-                src={`https://i.pravatar.cc/100?u=student${i}`} 
-                alt={`Student ${i} testimonial`}
-                loading="lazy" 
-              />
-            ))}
-            <div className="flex items-center justify-center h-10 w-10 rounded-full bg-primary/20 backdrop-blur-sm ring-2 ring-black/50 text-[10px] font-bold text-white border border-primary/30">
-              +1k
-            </div>
-          </div>
-          <div className="text-center sm:text-left">
-            <div className="flex items-center justify-center sm:justify-start text-amber-400 mb-1 space-x-0.5">
-              {[1, 2, 3, 4, 5].map((i) => <Star key={i} className="h-3.5 w-3.5 fill-current" />)}
-            </div>
-            <p className="text-xs text-white/60 font-medium tracking-wide uppercase">
-              Rated <span className="text-white font-bold">4.9/5</span> by alumni
-            </p>
-          </div>
-        </div>
-      </Hero>
+      </HeroScroll>
 
       {/* Stats Section */}
       <section className="py-12 bg-[var(--bg-body)] border-b border-[var(--border-color)]">

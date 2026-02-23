@@ -25,11 +25,35 @@ const Header = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+      if (!isHomePage) {
+        // Non-home pages: go solid immediately after a tiny scroll
+        setScrolled(window.scrollY > 20);
+        return;
+      }
+      // Home page: stay transparent until the user has scrolled past the
+      // pinned HeroScroll section. We measure the hero <section> directly.
+      // The hero is the first <section> inside <main> (or the first section
+      // in the document body). We query it by its aria-label as a reliable hook.
+      const heroEl = document.querySelector('section[aria-label="Homepage hero"]');
+      if (heroEl) {
+        // ScrollTrigger pins the element and adds a spacer div after it whose
+        // height equals the scroll distance (400 vh). We use the spacer's
+        // bottom (or the hero's own offsetTop + scrolled distance) to know
+        // when the user has exited the hero.
+        // The simplest reliable signal: the hero's NEXT sibling bottom edge.
+        const spacer = heroEl.nextElementSibling;
+        const boundary = spacer
+          ? spacer.getBoundingClientRect().bottom + window.scrollY
+          : heroEl.getBoundingClientRect().bottom + window.scrollY;
+        setScrolled(window.scrollY > boundary - window.innerHeight * 0.1);
+      } else {
+        // Fallback: use a generous threshold so we don't fire on the first pixel
+        setScrolled(window.scrollY > window.innerHeight * 0.9);
+      }
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [isHomePage]);
 
   // ... (maintain other effects) ...
 
