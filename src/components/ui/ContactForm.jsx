@@ -1,5 +1,4 @@
 import React, { useRef, useState } from 'react';
-import emailjs from '@emailjs/browser';
 import { CheckCircle, Send, Loader2, AlertCircle, ChevronDown, Check } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useModal } from '../../context/ModalContext';
@@ -97,37 +96,45 @@ const ContactForm = ({ initialCourse = "General Inquiry" }) => {
     return Object.keys(errors).length === 0;
   };
 
-  const sendEmail = (e) => {
+  const sendEmail = async (e) => {
     e.preventDefault();
     
     if (!validateForm()) return;
 
     setStatus('sending');
 
-    // Note: User needs to replace these with their own EmailJS IDs
-    const serviceId = 'YOUR_SERVICE_ID';
-    const templateId = 'YOUR_TEMPLATE_ID';
-    const publicKey = 'YOUR_PUBLIC_KEY';
+    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
 
-    if (serviceId === 'YOUR_SERVICE_ID') {
-      // Simulate success for demo purposes
-      setTimeout(() => {
-        setStatus('success');
-        form.current.reset();
-        setFormErrors({});
-      }, 1500);
-      return;
-    }
+    try {
+      const formData = new FormData(form.current);
+      const payload = {
+        user_name: formData.get('user_name'),
+        user_email: formData.get('user_email'),
+        user_phone: formData.get('user_phone'),
+        user_location: formData.get('user_location'),
+        qualification: selectedQualification,
+        course_interest: selectedCourse,
+        message: formData.get('message'),
+      };
 
-    emailjs.sendForm(serviceId, templateId, form.current, publicKey)
-      .then((result) => {
-        setStatus('success');
-        form.current.reset();
-        setFormErrors({});
-      }, (error) => {
-        setStatus('error');
-        setErrorMessage('Something went wrong. Please try again later.');
+      const response = await fetch(`${API_URL}/student`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
       });
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.detail || 'Something went wrong. Please try again.');
+      }
+
+      setStatus('success');
+      form.current.reset();
+      setFormErrors({});
+    } catch (error) {
+      setStatus('error');
+      setErrorMessage(error.message || 'Something went wrong. Please try again later.');
+    }
   };
 
   if (status === 'success') {

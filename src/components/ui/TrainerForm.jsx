@@ -60,15 +60,39 @@ const TrainerForm = () => {
     return Object.keys(errors).length === 0;
   };
 
-  const handleApply = (e) => {
+  const handleApply = async (e) => {
     e.preventDefault();
     if (!validateForm()) return;
     setStatus('sending');
-    
-    // Simulate API call
-    setTimeout(() => {
+
+    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+
+    try {
+      const formData = new FormData(form.current);
+      const payload = {
+        trainer_name: formData.get('trainer_name'),
+        trainer_email: formData.get('trainer_email'),
+        trainer_phone: formData.get('trainer_phone'),
+        experience: formData.get('experience'),
+        expertise: selectedExpertise,
+        linkedin_url: formData.get('linkedin_url') || null,
+      };
+
+      const response = await fetch(`${API_URL}/trainer`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.detail || 'Something went wrong. Please try again.');
+      }
+
       setStatus('success');
-    }, 1500);
+    } catch (error) {
+      setStatus('error');
+    }
   };
 
   if (status === 'success') {

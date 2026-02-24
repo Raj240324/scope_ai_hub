@@ -242,23 +242,25 @@ export default function HeroScroll({ children, badge, title, subtitle }) {
       {loaded && (
         <div
           ref={scrollIndicatorRef}
-          className="absolute bottom-8 sm:bottom-10 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center transition-opacity duration-500 pointer-events-none"
+          className="absolute top-[78%] sm:top-auto sm:bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center transition-opacity duration-500 pointer-events-none"
         >
-          {/* Mouse outline with bouncing dot */}
-          <div className="w-7 h-11 rounded-full border-2 border-white/50 flex items-start justify-center p-1.5 mb-3">
-            <div className="w-1.5 h-1.5 rounded-full bg-white animate-bounce" />
+          {/* Mouse outline with bouncing dot — smaller on mobile */}
+          <div className="w-5 h-8 sm:w-7 sm:h-11 rounded-full border-2 border-white/50 flex items-start justify-center p-1 sm:p-1.5 mb-2 sm:mb-3">
+            <div className="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-white animate-bounce" />
           </div>
           {/* Chevron arrows */}
-          <div className="flex flex-col items-center -space-y-1.5 mb-2 animate-bounce" style={{ animationDelay: '0.15s' }}>
-            <ChevronDown className="h-4 w-4 text-white/60" />
-            <ChevronDown className="h-4 w-4 text-white/30" />
+          <div className="flex flex-col items-center -space-y-1.5 mb-1 sm:mb-2 animate-bounce" style={{ animationDelay: '0.15s' }}>
+            <ChevronDown className="h-3 w-3 sm:h-4 sm:w-4 text-white/60" />
+            <ChevronDown className="h-3 w-3 sm:h-4 sm:w-4 text-white/30" />
           </div>
           {/* Text */}
-          <p className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.25em] text-white/50">
+          <p className="text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.25em] text-white/50">
             Scroll to Explore
           </p>
         </div>
       )}
+
+
       {/* Preloader */}
       {!loaded && (
         <div className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-black">

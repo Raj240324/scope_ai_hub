@@ -1,0 +1,9 @@
+# SCOPE AI HUB Backend — Python Dependencies
+fastapi==0.115.0
+uvicorn[standard]==0.30.0
+sqlalchemy==2.0.35
+pydantic[email]==2.9.0
+pydantic-settings==2.5.0
+requests==2.32.3
+python-dotenv==1.0.1
+slowapi==0.1.9
