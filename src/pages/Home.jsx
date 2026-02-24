@@ -72,42 +72,44 @@ const learningPartners = [
   const flagshipCourses = courses.slice(0, 6);
 
   const stats = [
-    { label: "Practical Projects", value: "50+", icon: <Users className="h-5 w-5" /> },
-    { label: "Instructor Experience", value: "15+ Years", icon: <Briefcase className="h-5 w-5" /> },
-    { label: "Curriculum Rating", value: "4.9/5", icon: <Star className="h-5 w-5" /> },
-    { label: "Hiring Partners", value: "100+", icon: <Building2 className="h-5 w-5" /> },
+    { label: "Trained Professionals", value: "1,000+", icon: <Users className="h-5 w-5" /> },
+    { label: "Hiring & Industry Partners", value: "75+", icon: <Building2 className="h-5 w-5" /> },
+    { label: "Career Advancement Rate", value: "92%", icon: <Briefcase className="h-5 w-5" /> },
+    { label: "Learner Satisfaction Score", value: "4.8★", icon: <Star className="h-5 w-5" /> },
   ];
 
   const companies = [
     { name: "Google", logo: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg", color: "#4285F4" },
     { name: "Amazon", logo: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg", color: "#FF9900" },
     { name: "Microsoft", logo: "https://upload.wikimedia.org/wikipedia/commons/9/96/Microsoft_logo_%282012%29.svg", color: "#737373" },
-    { name: "Zoho", logo: "https://upload.wikimedia.org/wikipedia/commons/e/e8/Zoho-logo.svg", color: "#1F4591" },
-    { name: "Freshworks", logo: "https://upload.wikimedia.org/wikipedia/commons/4/42/Freshworks-vector-logo.svg", color: "#00EEBD" },
-    { name: "TCS", logo: "https://upload.wikimedia.org/wikipedia/commons/b/b1/Tata_Consultancy_Services_Logo.svg", color: "#004B8D" },
+    { name: "IBM", logo: "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg", color: "#006699" },
+    { name: "Accenture", logo: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Accenture.svg", color: "#A100FF" },
     { name: "Infosys", logo: "https://upload.wikimedia.org/wikipedia/commons/9/95/Infosys_logo.svg", color: "#007CC3" },
-    { name: "Wipro", logo: "https://upload.wikimedia.org/wikipedia/commons/a/a0/Wipro_Primary_Logo_Color_RGB.svg", color: "#000000" }
+    { name: "TCS", logo: "https://upload.wikimedia.org/wikipedia/commons/b/b1/Tata_Consultancy_Services_Logo.svg", color: "#004B8D" },
+    { name: "Wipro", logo: "https://upload.wikimedia.org/wikipedia/commons/a/a0/Wipro_Primary_Logo_Color_RGB.svg", color: "#000000" },
+    { name: "HCLTech", logo: "https://upload.wikimedia.org/wikipedia/commons/6/6e/HCL_Technologies_logo.svg", color: "#008CBA" },
+    { name: "Cognizant", logo: "https://upload.wikimedia.org/wikipedia/commons/3/3e/Cognizant_logo_2022.svg", color: "#1565C0" }
   ];
 
   const trustFactors = [
     {
       icon: <Award className="h-6 w-6" />,
-      title: "NASSCOM Certification",
-      description: `Get a valid course completion certificate from ${BRANDING.fullName} to validate your skills to employers.`,
+      title: "Built by Industry Practitioners",
+      description: "Every trainer is a working professional with real-world expertise — not just academics. You learn from people who live the industry every day.",
       iconColor: "text-amber-500",
       iconBg: "bg-amber-50 dark:bg-amber-500/10"
     },
     {
-      icon: <MessageSquare className="h-6 w-6" />,
-      title: "Bilingual Instruction",
-      description: "Complex concepts explained in both Tamil and English for better understanding and faster learning.",
+      icon: <Zap className="h-6 w-6" />,
+      title: "Applied Learning. Real Impact.",
+      description: "We go beyond theory with hands-on labs, live projects, and industry simulations — ensuring that every lesson translates into real career skills.",
       iconColor: "text-emerald-500",
       iconBg: "bg-emerald-50 dark:bg-emerald-500/10"
     },
     {
-      icon: <Users className="h-6 w-6" />,
-      title: "Expert-Led Mentorship",
-      description: "Learn directly from industry veterans with 10+ years of experience in top-tier tech companies.",
+      icon: <GraduationCap className="h-6 w-6" />,
+      title: "Career-Focused Execution",
+      description: "From day one, we align your learning journey with placement goals — interview prep, portfolio building, and dedicated career support at every step.",
       iconColor: "text-sky-500",
       iconBg: "bg-sky-50 dark:bg-sky-500/10"
     }
@@ -116,29 +118,29 @@ const learningPartners = [
   const methodology = [
     {
       step: "01",
-      title: "Dedicated Lab Support",
-      desc: "Our high-tech labs are open 12 hours a day. Get hands-on practice with mentors always available to clear your doubts.",
+      title: "Master the Foundations",
+      desc: "Expert-led, industry-aligned sessions that build deep understanding of AI and Cloud technologies.",
       icon: <Cpu className="h-6 w-6" />,
       color: "bg-blue-500"
     },
     {
       step: "02",
-      title: "Real-time Training",
-      desc: "Learn through industrial projects and case studies. We bridge the gap between academic theory and corporate reality.",
+      title: "Practice with Real Systems",
+      desc: "Hands-on labs and real-world projects designed to simulate industry environments.",
       icon: <Code2 className="h-6 w-6" />,
       color: "bg-purple-500"
     },
     {
       step: "03",
-      title: "1:1 Expert Mentorship",
-      desc: "Get personalized guidance from industry veterans who have worked in top MNCs like Zoho, TCS, and Amazon.",
+      title: "Create Industry-Grade Solutions",
+      desc: "Develop advanced capstone projects that demonstrate your real-world problem-solving ability.",
       icon: <Users className="h-6 w-6" />,
       color: "bg-orange-500"
     },
     {
       step: "04",
-      title: "Placement Guidance to Get Hired",
-      desc: "We guide you for placement through intense interview grooming, resume building, and mock sessions until you are fully ready to get your dream job.",
+      title: "Accelerate Your Career",
+      desc: "End-to-end career support including mentorship, portfolio building, and placement guidance.",
       icon: <GraduationCap className="h-6 w-6" />,
       color: "bg-green-500"
     }
@@ -146,22 +148,22 @@ const learningPartners = [
 
   const testimonials = [
     {
-      name: "Senthil Kumar",
-      role: "Full Stack Developer @ Zoho",
-      content: "I came from a non-IT background and was really worried. But the trainers here explained everything in simple Tamil and English. The mock interviews really helped me crack the Zoho interview.",
-      image: "https://i.pravatar.cc/150?u=senthil"
+      name: "Nisha K",
+      role: "Cloud Computing — TechData",
+      content: "The industry-driven approach at Scope AI Hub made all the difference. It wasn't just theory — we built real solutions that prepared me for my job from day one.",
+      image: "https://i.pravatar.cc/150?u=nishak"
     },
     {
-      name: "Priya Dharshini",
-      role: "UI/UX Designer @ Freshworks",
-      content: `Best place to learn in Chennai. They helped me build a proper portfolio, which is exactly what companies asked for. Thank you ${BRANDING.fullName} sir!`,
-      image: "https://i.pravatar.cc/150?u=priya"
+      name: "Rahul S",
+      role: "Python & AI Foundations — ZOHO",
+      content: "What I loved most was the practical exposure. The structured learning path and career support helped me transition smoothly into the tech industry.",
+      image: "https://i.pravatar.cc/150?u=rahuls"
     },
     {
-      name: "Arun Rajan",
-      role: "DevOps Engineer @ Accenture",
-      content: "Practical training is the key. We worked on live AWS servers, not just theory. That experience made all the difference during my placements.",
-      image: "https://i.pravatar.cc/150?u=arun"
+      name: "Arjun R",
+      role: "AI & Machine Learning — Kynhood",
+      content: "Scope AI Hub gave me real confidence through hands-on projects and structured mentorship. The practical exposure helped me secure opportunities across leading technology companies.",
+      image: "https://i.pravatar.cc/150?u=arjunr"
     }
   ];
 
@@ -204,20 +206,20 @@ const learningPartners = [
         badge={
           <>
             <ShieldCheck className="h-3.5 w-3.5 text-primary-light" />
-            <span className="text-primary-light">No.1 Rated Institute</span>
+            <span className="text-primary-light">Built for the AI Era.</span>
           </>
         }
         title={
           <>
-            Master Tech Skills. <br />
+            Dominate with Intelligence. <br />
             <span className="text-white relative inline-block">
-              Launch Your Career.
+              Lead Without Limits.
               {/* Subtle underline accent */}
               <svg className="absolute w-full h-3 -bottom-1 left-0 text-primary opacity-60" viewBox="0 0 200 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.00025 6.99997C25.7501 2.49994 132.5 -3.50004 198 6.99997" stroke="currentColor" strokeWidth="3" strokeLinecap="round"/></svg>
             </span>
           </>
         }
-        subtitle="The most practical software training institute in Chennai. We don't just teach code. We build your career from scratch."
+        subtitle="Advanced AI and Cloud programs engineered to create fearless innovators ready to compete on a global stage."
       >
         {/* CTAs — revealed last as scroll completes */}
         <div className="flex flex-col sm:flex-row gap-6 justify-center">
@@ -245,20 +247,52 @@ const learningPartners = [
       {/* Stats Section */}
       <section className="py-12 bg-[var(--bg-body)] border-b border-[var(--border-color)]">
         <div className="container-custom">
-          <StaggerContainer className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <StaggerContainer className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8">
             {stats.map((stat, index) => (
               <StaggerItem key={index} className="text-center group hover:-translate-y-1 transition-transform duration-300">
                 <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-primary/5 text-primary mb-4 group-hover:bg-primary group-hover:text-white transition-colors shadow-sm">
                   {stat.icon}
                 </div>
-                <div className="text-3xl md:text-4xl font-black mb-1 text-[var(--text-heading)]">
+                <div className="text-2xl sm:text-3xl md:text-4xl font-black mb-1 text-[var(--text-heading)]">
                   {/* If value starts with a number, try to count it, otherwise just show it */}
                   {/^\d/.test(stat.value) ? <ScrollCountUp end={stat.value} /> : stat.value}
                 </div>
-                <div className="text-sm text-[var(--text-muted)] font-bold uppercase tracking-wider">{stat.label}</div>
+                <div className="text-[10px] sm:text-sm text-[var(--text-muted)] font-bold uppercase tracking-wider">{stat.label}</div>
               </StaggerItem>
             ))}
           </StaggerContainer>
+        </div>
+      </section>
+
+      {/* Hiring Partners */}
+      <section className="py-12 md:py-16 bg-[var(--bg-body)] border-b border-[var(--border-color)] overflow-hidden">
+        <div className="container-custom">
+          <div className="text-center max-w-3xl mx-auto mb-10 md:mb-12">
+            <div className="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider mb-6 border border-primary/20">
+              <Building2 className="h-3 w-3" />
+              <span>Hiring Partners</span>
+            </div>
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-[var(--text-heading)] mb-4 leading-tight">
+              Our Graduates Work Across <span className="text-primary">Leading Companies</span>
+            </h2>
+            <p className="text-base md:text-lg text-[var(--text-muted)] leading-relaxed">
+              Our graduates work across leading companies such as...
+            </p>
+          </div>
+        </div>
+        {/* Full-width marquee — no container constraint */}
+        <div className="flex animate-marquee gap-6 sm:gap-8 md:gap-10 items-center w-max">
+          {[...companies, ...companies, ...companies].map((company, i) => (
+            <div key={i} className="flex-shrink-0 group">
+              <div className="h-14 w-28 sm:h-16 sm:w-32 md:h-20 md:w-40 flex items-center justify-center px-3 sm:px-4 py-2 sm:py-3 rounded-xl sm:rounded-2xl bg-[var(--bg-card)] border border-[var(--border-color)] shadow-sm hover:shadow-lg hover:border-primary/30 transition-all">
+                <img
+                  src={company.logo}
+                  alt={company.name}
+                  className="max-h-6 sm:max-h-8 md:max-h-10 object-contain opacity-50 group-hover:opacity-100 transition-opacity duration-300"
+                />
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 
@@ -307,7 +341,7 @@ const learningPartners = [
             </p>
           </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
               {[
                 { skill: "Generative AI", demand: "Critical" },
                 { skill: "React/Node.js", demand: "Very High" },
@@ -477,25 +511,25 @@ const learningPartners = [
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
             {[
               {
-                name: "S. Raj",
-                role: "Senior Architect & MERN Expert",
-                company: "Ex-Silicon Valley Architect",
-                image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=400",
-                expertise: ["System Design", "Cloud Architecture"]
+                name: "Sanjula",
+                role: "Head of Academics",
+                company: "8+ Years in AI & Data Science",
+                image: "https://i.pravatar.cc/150?u=sanjula_hoa",
+                expertise: ["Curriculum Design", "AI & Data Science"]
               },
               {
-                name: "Dr. Anitha M.",
-                role: "Lead Data Scientist",
-                company: "Ph.D. in Machine Learning",
-                image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=400",
-                expertise: ["Predictive Analytics", "Deep Learning"]
+                name: "Ragavi Reddy",
+                role: "Head – Placements & Corporate Relations",
+                company: "Former Enterprise HR Professional",
+                image: "https://i.pravatar.cc/150?u=ragavireddy",
+                expertise: ["Placements", "Industry Partnerships"]
               },
               {
-                name: "Vikram Singh",
-                role: "Head of Tech Recruitment",
-                company: "10+ Years in Tech HR",
-                image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=400",
-                expertise: ["Interview Grooming", "Career Strategy"]
+                name: "Suresh M",
+                role: "Principal AI Consultant & Lead Trainer",
+                company: "Enterprise AI Practitioner",
+                image: "https://i.pravatar.cc/150?u=sureshm",
+                expertise: ["AI Consulting", "Machine Learning"]
               }
             ].map((mentor, index) => (
               <ScaleOnHover key={index}>
@@ -699,16 +733,16 @@ const learningPartners = [
               </div>
               <div className="space-y-6">
                 <div className="bg-primary/10 backdrop-blur-sm border border-primary/20 rounded-2xl p-6">
-                  <div className="text-4xl font-black text-primary mb-2">4-8 LPA</div>
-                  <div className="text-sm text-[var(--text-on-inverted)]/60 font-medium">Average starting package for our freshers</div>
+                  <div className="text-2xl sm:text-4xl font-black text-primary mb-2">8L+ Avg</div>
+                  <div className="text-sm text-[var(--text-on-inverted)]/60 font-medium">Average salary package of placed students</div>
                 </div>
                 <div className="bg-primary/10 backdrop-blur-sm border border-primary/20 rounded-2xl p-6">
-                  <div className="text-4xl font-black text-primary mb-2">90%</div>
-                  <div className="text-sm text-[var(--text-on-inverted)]/60 font-medium">Students placed within 6 months of course completion</div>
+                  <div className="text-2xl sm:text-4xl font-black text-primary mb-2">92%</div>
+                  <div className="text-sm text-[var(--text-on-inverted)]/60 font-medium">Placement success rate across all batches</div>
                 </div>
                 <div className="bg-primary/10 backdrop-blur-sm border border-primary/20 rounded-2xl p-6">
-                  <div className="text-4xl font-black text-primary mb-2">50+</div>
-                  <div className="text-sm text-[var(--text-on-inverted)]/60 font-medium">Active recruitment partners across India</div>
+                  <div className="text-2xl sm:text-4xl font-black text-primary mb-2">75+</div>
+                  <div className="text-sm text-[var(--text-on-inverted)]/60 font-medium">Active hiring partner companies across India</div>
                 </div>
               </div>
             </div>
@@ -718,7 +752,7 @@ const learningPartners = [
               </p>
               <button
                 onClick={() => openModal('Placement Inquiry')}
-                className="bg-primary text-white font-bold px-10 py-4 rounded-2xl hover:opacity-90 transition-all shadow-xl"
+                className="bg-primary text-white font-bold px-6 sm:px-10 py-3 sm:py-4 rounded-2xl hover:opacity-90 transition-all shadow-xl text-sm sm:text-base"
               >
                 Learn More About Placement Support
               </button>
@@ -768,7 +802,7 @@ const learningPartners = [
               <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
                 <button 
                   onClick={() => openModal('Career Counseling')}
-                  className="bg-primary text-white font-bold px-10 py-5 rounded-2xl hover:opacity-90 transition-all flex items-center shadow-xl text-lg group"
+                  className="bg-primary text-white font-bold px-6 sm:px-10 py-4 sm:py-5 rounded-2xl hover:opacity-90 transition-all flex items-center shadow-xl text-base sm:text-lg group w-full sm:w-auto justify-center"
                 >
                   Book Free Session <ArrowRight className="ml-3 h-5 w-5 group-hover:translate-x-1 transition-transform" />
                 </button>
@@ -839,14 +873,14 @@ const learningPartners = [
                     <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google" className="w-full opacity-40 grayscale" />
                   </div>
                   <div className="h-64 rounded-2xl bg-[var(--bg-body)]/10 border border-[var(--bg-body)]/20 flex flex-col items-center justify-center p-8 text-center">
-                    <div className="text-3xl md:text-4xl font-black text-[var(--text-on-inverted)] mb-2">50+</div>
-                    <div className="text-sm font-bold uppercase tracking-widest text-[var(--text-on-inverted)]/60">Corporates Trained</div>
+                    <div className="text-3xl md:text-4xl font-black text-[var(--text-on-inverted)] mb-2">25+</div>
+                    <div className="text-sm font-bold uppercase tracking-widest text-[var(--text-on-inverted)]/60">Organisations Trained</div>
                   </div>
                 </div>
                 <div className="space-y-4 pt-12">
                   <div className="h-64 rounded-2xl bg-[var(--bg-body)]/5 border border-[var(--bg-body)]/10 flex flex-col items-center justify-center p-8 text-center">
-                    <div className="text-3xl md:text-4xl font-black text-[var(--text-on-inverted)] mb-2">10k+</div>
-                    <div className="text-sm font-bold uppercase tracking-widest text-[var(--text-on-inverted)]/60">Employees Upskilled</div>
+                    <div className="text-3xl md:text-4xl font-black text-[var(--text-on-inverted)] mb-2">500+</div>
+                    <div className="text-sm font-bold uppercase tracking-widest text-[var(--text-on-inverted)]/60">Professionals Upskilled</div>
                   </div>
                   <div className="h-48 rounded-2xl bg-[var(--bg-body)]/5 border border-[var(--bg-body)]/10 flex items-center justify-center p-8">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" alt="Amazon" className="w-full opacity-40 grayscale" />
@@ -910,7 +944,7 @@ const learningPartners = [
               <p className="text-base md:text-lg text-[var(--text-on-inverted)]/80 mb-10">
                 Join our next batch and learn from industry experts who are passionate about teaching.
               </p>
-              <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6">
+              <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
                 <button 
                   onClick={() => openModal()}
                   className="bg-primary text-white hover:opacity-90 px-10 py-4 rounded-full text-lg font-black transition-all shadow-xl shadow-primary/20"

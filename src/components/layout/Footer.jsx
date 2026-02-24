@@ -125,7 +125,7 @@ const Footer = () => {
         </div>
 
         {/* Newsletter / CTA */}
-        <div className="bg-primary/5 rounded-3xl p-8 md:p-10 mb-16 flex flex-col md:flex-row items-center justify-between border border-primary/20">
+        <div className="bg-primary/5 rounded-2xl sm:rounded-3xl p-5 sm:p-8 md:p-10 mb-16 flex flex-col md:flex-row items-center justify-between border border-primary/20">
           <div className="mb-6 md:mb-0 text-center md:text-left">
             <h4 className="text-[var(--text-footer)] text-xl font-bold mb-2">Subscribe to our newsletter</h4>
             <p className="text-[var(--text-footer-muted)] text-sm">Get the latest updates on new batches and scholarship opportunities.</p>

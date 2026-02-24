@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ChevronDown } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -59,6 +60,7 @@ export default function HeroScroll({ children, badge, title, subtitle }) {
 
   const [loaded,   setLoaded]   = useState(false);
   const [progress, setProgress] = useState(0);
+  const scrollIndicatorRef = useRef(null);
 
   // ── 1. Preload all frames ──────────────────────────────────────────────────
   useEffect(() => {
@@ -136,6 +138,11 @@ export default function HeroScroll({ children, badge, title, subtitle }) {
 
         // Frame scrubbing
         targetFrameRef.current = p * (TOTAL_FRAMES - 1);
+
+        // Track scroll progress for scroll indicator fade
+        if (scrollIndicatorRef.current) {
+          scrollIndicatorRef.current.style.opacity = Math.max(0, 1 - p * 10);
+        }
 
         // Scale expand: tiny dot at frame 100, grows to full size by last frame
         const scale   = mapRange(p, SCALE_START, SCALE_END,         DOT_SCALE, 1);
@@ -231,6 +238,27 @@ export default function HeroScroll({ children, badge, title, subtitle }) {
         </div>
       </div>
 
+      {/* Scroll Indicator — fades out as user starts scrolling */}
+      {loaded && (
+        <div
+          ref={scrollIndicatorRef}
+          className="absolute bottom-8 sm:bottom-10 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center transition-opacity duration-500 pointer-events-none"
+        >
+          {/* Mouse outline with bouncing dot */}
+          <div className="w-7 h-11 rounded-full border-2 border-white/50 flex items-start justify-center p-1.5 mb-3">
+            <div className="w-1.5 h-1.5 rounded-full bg-white animate-bounce" />
+          </div>
+          {/* Chevron arrows */}
+          <div className="flex flex-col items-center -space-y-1.5 mb-2 animate-bounce" style={{ animationDelay: '0.15s' }}>
+            <ChevronDown className="h-4 w-4 text-white/60" />
+            <ChevronDown className="h-4 w-4 text-white/30" />
+          </div>
+          {/* Text */}
+          <p className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.25em] text-white/50">
+            Scroll to Explore
+          </p>
+        </div>
+      )}
       {/* Preloader */}
       {!loaded && (
         <div className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-black">

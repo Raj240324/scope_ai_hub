@@ -8,112 +8,58 @@ import { FadeIn, StaggerContainer, StaggerItem } from '../../components/utils/An
 const TrainerProfiles = () => {
   const trainers = [
     {
-      name: "Rajesh Kumar",
-      role: "Lead Trainer - Full Stack Development",
-      image: "https://i.pravatar.cc/300?img=12",
-      expertise: ["React.js", "Node.js", "MongoDB", "AWS", "System Design"],
+      name: "Sanjula",
+      role: "Head of Academics",
+      image: "https://i.pravatar.cc/300?u=sanjula_hoa",
+      expertise: ["AI & Data Science", "Curriculum Design", "Academic Leadership", "Machine Learning"],
       experience: "8+ years",
-      companies: ["Amazon", "Flipkart"],
-      bio: "Rajesh is a full-stack engineer with extensive experience in building scalable web applications. He has worked on multiple high-traffic platforms at Amazon and led engineering teams at Flipkart. His teaching style focuses on real-world problem-solving and industry best practices.",
-      education: "B.Tech in Computer Science, IIT Madras",
+      companies: ["Industry", "Academia"],
+      bio: "8+ years of AI & Data Science industry experience, leading curriculum design aligned with global tech standards. Dedicated to building structured, outcome-driven learning pathways that bridge real-world industry demands with learner growth.",
+      education: "AI & Data Science — Industry Specialist",
       achievements: [
-        "Built microservices handling 10M+ daily requests",
-        "Speaker at React Conf India 2023",
-        "Mentored 500+ students to successful placements"
+        "Designed AI & Cloud curriculum aligned with global tech standards",
+        "Led academic programmes producing 1,000+ career-ready graduates",
+        "Spearheaded outcome-driven curriculum reform at SCOPE AI HUB"
       ],
       linkedin: "https://linkedin.com",
       github: "https://github.com",
-      email: "rajesh@scopeaihub.com"
+      email: "academics@scopeaihub.com"
     },
     {
-      name: "Priya Sharma",
-      role: "Senior Trainer - Data Science & AI/ML",
-      image: "https://i.pravatar.cc/300?img=47",
-      expertise: ["Python", "TensorFlow", "PyTorch", "NLP", "Computer Vision"],
-      experience: "10+ years",
-      companies: ["Google", "Microsoft"],
-      bio: "Priya is an AI/ML expert who has worked on cutting-edge machine learning projects at Google and Microsoft. She specializes in Natural Language Processing and has published multiple research papers. Her courses blend theoretical rigor with hands-on implementation.",
-      education: "M.S. in Artificial Intelligence, Stanford University",
+      name: "Ragavi Reddy",
+      role: "Head – Placements & Corporate Relations",
+      image: "https://i.pravatar.cc/300?u=ragavireddy",
+      expertise: ["Corporate Relations", "Placements", "Enterprise HR", "Career Coaching"],
+      experience: "Industry Expert",
+      companies: ["Enterprise Organizations", "Tech Industry"],
+      bio: "Former HR professional with experience in enterprise hiring, building strong industry partnerships for student career acceleration. Strategically connects graduates with top tech companies across India and beyond.",
+      education: "HR & Corporate Relations — Enterprise Specialist",
       achievements: [
-        "Published 12 research papers in AI conferences",
-        "Developed ML models used by 100M+ users",
-        "AWS Certified Machine Learning Specialist"
+        "Built a network of 75+ active hiring partners across India",
+        "Managed placement drives placing 500+ students into tech roles",
+        "Developed structured interview grooming and career readiness programmes"
       ],
       linkedin: "https://linkedin.com",
       github: "https://github.com",
-      email: "priya@scopeaihub.com"
+      email: "placements@scopeaihub.com"
     },
     {
-      name: "Arun Venkatesh",
-      role: "Trainer - Cloud Computing & DevOps",
-      image: "https://i.pravatar.cc/300?img=33",
-      expertise: ["AWS", "Azure", "Docker", "Kubernetes", "Terraform"],
-      experience: "7+ years",
-      companies: ["Infosys", "TCS"],
-      bio: "Arun is a certified cloud architect with hands-on experience in deploying and managing large-scale infrastructure on AWS and Azure. He has helped organizations migrate legacy systems to cloud-native architectures. His training emphasizes cost optimization and security best practices.",
-      education: "B.E in Electronics, Anna University",
+      name: "Suresh M",
+      role: "Principal AI Consultant & Lead Trainer",
+      image: "https://i.pravatar.cc/300?u=sureshm",
+      expertise: ["AI Consulting", "Machine Learning", "Deep Learning", "Applied AI"],
+      experience: "Enterprise AI Practitioner",
+      companies: ["Enterprise Clients", "Tech Industry"],
+      bio: "Enterprise AI practitioner transforming complex technologies into practical, career-ready skillsets. Brings real-world AI consulting experience into every session, ensuring students learn by building — not just watching.",
+      education: "AI & Machine Learning — Enterprise Consultant",
       achievements: [
-        "AWS Certified Solutions Architect Professional",
-        "Managed cloud infrastructure costing $2M+/year",
-        "Trainer of the Year 2024 (Internal Award)"
+        "Delivered AI consulting to enterprise clients across multiple industries",
+        "Designed hands-on AI and ML labs used in live industry-grade projects",
+        "Trained professionals from 25+ organisations in applied AI techniques"
       ],
       linkedin: "https://linkedin.com",
       github: "https://github.com",
-      email: "arun@scopeaihub.com"
-    },
-    {
-      name: "Kavya Reddy",
-      role: "Trainer - UI/UX Design",
-      image: "https://i.pravatar.cc/300?img=44",
-      expertise: ["Figma", "Adobe XD", "Design Systems", "User Research", "Prototyping"],
-      experience: "6+ years",
-      companies: ["Swiggy", "Zomato"],
-      bio: "Kavya is a product designer who has shaped user experiences for millions of users at Swiggy and Zomato. She believes design is not just about aesthetics but solving real user problems. Her courses cover the entire design thinking process from research to final handoff.",
-      education: "B.Des in Interaction Design, NID Ahmadabad",
-      achievements: [
-        "Redesigned Swiggy's checkout flow increasing conversion by 18%",
-        "Mentor at Google UX Design Certificate Program",
-        "Featured in 'Top 50 Designers in India' list"
-      ],
-      linkedin: "https://linkedin.com",
-      github: "https://github.com",
-      email: "kavya@scopeaihub.com"
-    },
-    {
-      name: "Vikram Singh",
-      role: "Trainer - Cyber Security",
-      image: "https://i.pravatar.cc/300?img=51",
-      expertise: ["Ethical Hacking", "Penetration Testing", "Network Security", "SIEM", "Incident Response"],
-      experience: "9+ years",
-      companies: ["Deloitte", "PwC"],
-      bio: "Vikram is a certified ethical hacker (CEH) with extensive experience in vulnerability assessment and penetration testing for Fortune 500 companies. He has identified critical security flaws in major financial institutions. His teaching approach makes complex security concepts accessible to beginners.",
-      education: "M.Tech in Cyber Security, IIT Delhi",
-      achievements: [
-        "CEH, OSCP, CISSP certified",
-        "Discovered vulnerabilities in 50+ enterprise systems",
-        "Guest lecturer at IIT Delhi and NIT Trichy"
-      ],
-      linkedin: "https://linkedin.com",
-      github: "https://github.com",
-      email: "vikram@scopeaihub.com"
-    },
-    {
-      name: "Sneha Patel",
-      role: "Trainer - Mobile App Development",
-      image: "https://i.pravatar.cc/300?img=32",
-      expertise: ["React Native", "Flutter", "iOS (Swift)", "Android (Kotlin)", "Firebase"],
-      experience: "5+ years",
-      companies: ["Paytm", "PhonePe"],
-      bio: "Sneha is a mobile engineer who has built fintech applications used by millions. She specializes in cross-platform development with React Native and Flutter. Her courses emphasize performance optimization, offline-first architecture, and app store deployment strategies.",
-      education: "B.Tech in Information Technology, VIT Vellore",
-      achievements: [
-        "Built mobile apps with 10M+ downloads",
-        "React Native conference speaker",
-        "Published 5 apps on App Store and Play Store"
-      ],
-      linkedin: "https://linkedin.com",
-      github: "https://github.com",
-      email: "sneha@scopeaihub.com"
+      email: "training@scopeaihub.com"
     }
   ];
 
@@ -149,18 +95,18 @@ const TrainerProfiles = () => {
         <StaggerContainer className="space-y-16">
           {trainers.map((trainer, index) => (
             <StaggerItem key={index}>
-              <div className={`bg-[var(--bg-card)] rounded-3xl border border-[var(--border-color)] shadow-sm hover:shadow-xl transition-all overflow-hidden ${index % 2 === 0 ? '' : 'lg:flex-row-reverse'} flex flex-col lg:flex-row`}>
+              <div className={`bg-[var(--bg-card)] rounded-2xl sm:rounded-3xl border border-[var(--border-color)] shadow-sm hover:shadow-xl transition-all overflow-hidden ${index % 2 === 0 ? '' : 'lg:flex-row-reverse'} flex flex-col lg:flex-row`}>
                 {/* Image Section */}
-                <div className="lg:w-1/3 relative bg-gradient-to-br from-primary/10 to-blue-100 p-12 flex flex-col items-center justify-center">
+                <div className="lg:w-1/3 relative bg-gradient-to-br from-primary/10 to-blue-100 p-6 sm:p-12 flex flex-col items-center justify-center">
                   <div className="relative mb-6">
                     <div className="absolute inset-0 bg-primary/20 rounded-full blur-2xl"></div>
                     <img 
                       src={trainer.image} 
                       alt={trainer.name}
-                      className="relative h-48 w-48 rounded-full object-cover ring-8 ring-[var(--bg-card)] shadow-2xl"
+                      className="relative h-32 w-32 sm:h-48 sm:w-48 rounded-full object-cover ring-8 ring-[var(--bg-card)] shadow-2xl"
                     />
                   </div>
-                  <h3 className="text-2xl font-black text-[var(--text-heading)] text-center mb-2">{trainer.name}</h3>
+                  <h3 className="text-xl sm:text-2xl font-black text-[var(--text-heading)] text-center mb-2">{trainer.name}</h3>
                   <p className="text-primary font-bold text-center mb-6">{trainer.role}</p>
                   <div className="flex space-x-4">
                     <a href={trainer.linkedin} target="_blank" rel="noopener noreferrer" className="p-2 bg-[var(--bg-card)] rounded-lg hover:bg-primary hover:text-white transition-colors text-[var(--text-muted)]">
@@ -176,8 +122,8 @@ const TrainerProfiles = () => {
                 </div>
 
                 {/* Content Section */}
-                <div className="lg:w-2/3 p-8 md:p-12">
-                  <div className="flex items-center space-x-4 mb-6">
+                <div className="lg:w-2/3 p-5 sm:p-8 md:p-12">
+                  <div className="flex flex-wrap items-center gap-3 sm:space-x-4 mb-6">
                     <div className="flex items-center space-x-2 text-sm">
                       <Briefcase className="h-4 w-4 text-primary" />
                       <span className="font-bold text-[var(--text-heading)]">{trainer.experience}</span>
@@ -234,12 +180,12 @@ const TrainerProfiles = () => {
         </StaggerContainer>
 
         {/* CTA Section */}
-        <div className="mt-20 text-center p-12 bg-[var(--bg-inverted)] rounded-3xl text-[var(--text-on-inverted)]">
+        <div className="mt-12 sm:mt-20 text-center p-6 sm:p-12 bg-[var(--bg-inverted)] rounded-2xl sm:rounded-3xl text-[var(--text-on-inverted)]">
           <h2 className="text-3xl md:text-4xl font-black mb-6">Want to Learn from These Experts?</h2>
           <p className="text-lg text-[var(--text-on-inverted)]/60 mb-10 max-w-2xl mx-auto">
             Join our next batch and get personalized mentorship from industry veterans who are passionate about teaching.
           </p>
-          <a href="/admissions" className="inline-block px-10 py-4 bg-primary hover:bg-primary-dark text-white font-black rounded-xl transition-all shadow-xl shadow-primary/30">
+          <a href="/admissions" className="inline-block px-6 sm:px-10 py-3 sm:py-4 bg-primary hover:bg-primary-dark text-white font-black rounded-xl transition-all shadow-xl shadow-primary/30">
             Enroll Now
           </a>
         </div>

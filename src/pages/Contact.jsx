@@ -26,7 +26,7 @@ const Contact = () => {
       />
 
       <div className="container-custom section-padding">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24">
           
           {/* Left Column: Information */}
           <div className="space-y-12">
@@ -42,8 +42,8 @@ const Contact = () => {
                          <MapPin className="h-6 w-6 text-primary" />
                       </div>
                       <div>
-                         <h4 className="text-xl font-bold text-[var(--text-heading)] mb-1">Visit Us</h4>
-                         <p className="text-[var(--text-muted)] text-lg leading-relaxed">{BRANDING.address}</p>
+                         <h4 className="text-lg sm:text-xl font-bold text-[var(--text-heading)] mb-1">Visit Us</h4>
+                         <p className="text-[var(--text-muted)] text-base sm:text-lg leading-relaxed">{BRANDING.address}</p>
                       </div>
                    </div>
 
@@ -52,9 +52,9 @@ const Contact = () => {
                          <Phone className="h-6 w-6 text-primary" />
                       </div>
                       <div>
-                         <h4 className="text-xl font-bold text-[var(--text-heading)] mb-1">Call Us</h4>
+                         <h4 className="text-lg sm:text-xl font-bold text-[var(--text-heading)] mb-1">Call Us</h4>
                          <p className="text-[var(--text-heading)] text-lg font-bold">{BRANDING.phone}</p>
-                         <p className="text-[var(--text-muted)] text-sm">Mon-Sat from 9am to 7pm.</p>
+                         <p className="text-[var(--text-muted)] text-sm">Mon–Sun, 9:00 AM – 7:00 PM</p>
                       </div>
                    </div>
 
@@ -63,7 +63,7 @@ const Contact = () => {
                          <Mail className="h-6 w-6 text-primary" />
                       </div>
                       <div>
-                         <h4 className="text-xl font-bold text-[var(--text-heading)] mb-1">Email Us</h4>
+                         <h4 className="text-lg sm:text-xl font-bold text-[var(--text-heading)] mb-1">Email Us</h4>
                          <p className="text-[var(--text-heading)] text-lg font-bold">{BRANDING.email}</p>
                          <p className="text-[var(--text-muted)] text-sm">We'll respond within 24 hours.</p>
                       </div>
@@ -72,7 +72,7 @@ const Contact = () => {
              </div>
 
              {/* Office Hours Box */}
-             <div className="p-8 bg-[var(--bg-secondary)] rounded-3xl border border-[var(--border-color)]">
+             <div className="p-5 sm:p-8 bg-[var(--bg-secondary)] rounded-2xl sm:rounded-3xl border border-[var(--border-color)]">
                 <div className="flex items-center gap-3 mb-6">
                    <Clock className="h-6 w-6 text-primary" />
                    <h3 className="text-xl font-bold text-[var(--text-heading)]">Office Hours</h3>
@@ -80,15 +80,15 @@ const Contact = () => {
                 <div className="space-y-3">
                    <div className="flex justify-between items-center pb-3 border-b border-[var(--border-color)]">
                       <span className="text-[var(--text-muted)] font-medium">Monday - Friday</span>
-                      <span className="font-bold text-[var(--text-heading)]">9:00 AM - 7:00 PM</span>
+                      <span className="font-bold text-[var(--text-heading)]">9:00 AM – 7:00 PM</span>
                    </div>
                    <div className="flex justify-between items-center pb-3 border-b border-[var(--border-color)]">
                       <span className="text-[var(--text-muted)] font-medium">Saturday</span>
-                      <span className="font-bold text-[var(--text-heading)]">9:00 AM - 5:00 PM</span>
+                      <span className="font-bold text-[var(--text-heading)]">9:00 AM – 5:00 PM</span>
                    </div>
                    <div className="flex justify-between items-center">
                       <span className="text-[var(--text-muted)] font-medium">Sunday</span>
-                      <span className="font-bold text-red-500">Closed</span>
+                      <span className="font-bold text-[var(--text-heading)]">9:00 AM – 5:00 PM</span>
                    </div>
                 </div>
              </div>
@@ -122,7 +122,7 @@ const Contact = () => {
 
           {/* Right Column: Contact Form */}
           <div>
-            <div className="bg-[var(--bg-card)] rounded-[2rem] shadow-2xl shadow-primary/5 border border-[var(--border-color)] p-8 md:p-12 relative overflow-hidden">
+            <div className="bg-[var(--bg-card)] rounded-2xl sm:rounded-[2rem] shadow-2xl shadow-primary/5 border border-[var(--border-color)] p-5 sm:p-8 md:p-12 relative overflow-hidden">
               <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-bl-[100px] pointer-events-none" />
               <div className="relative z-10">
                  <h3 className="text-2xl font-bold text-[var(--text-heading)] mb-2">Send us a message</h3>

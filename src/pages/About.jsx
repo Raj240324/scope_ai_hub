@@ -10,83 +10,137 @@ import { FadeIn, StaggerContainer, StaggerItem, ScaleOnHover, ScrollCountUp, Par
 const About = () => {
   const { openModal } = useModal();
   const stats = [
-    { label: 'Industry Projects', value: '50+' },
-    { label: 'Instructor Exp', value: '15+ Years' },
-    { label: 'Hiring Partners', value: '50+' },
-    { label: 'Practical Focus', value: '100%' },
+    { label: 'Real-World Projects', value: '100+' },
+    { label: 'Avg. Industry Experience', value: '3+ Years' },
+    { label: 'Hiring Partners', value: '75+' },
+    { label: 'Curriculum in Practice', value: '70%' },
   ];
 
   const locations = [
     { 
-      name: "Chennai Campus", 
-      address: "Chennai Technology Hub, OMR, Chennai - 600119",
-      map: "https://goo.gl/maps/placeholder1",
-      phone: "+91 63839 80415",
-      type: "Main Campus"
+      name: "Chennai Campuses", 
+      address: "Nungabakam, Velachery, OMR — Full address to be updated",
+      map: "#",
+      phone: BRANDING.phone,
+      type: "Physical Presence"
     },
     { 
-      name: "Online Training Center", 
-      address: "Serving Students Globally (USA, UK, Middle East, Australia)",
-      map: "#"
+      name: "Global Presence", 
+      address: "Offline Presence: Chennai | Coimbatore | Madurai · Pan India Online Programs · International Students Learning from Abroad",
+      map: "#",
+      type: "Online & Offline"
     }
   ];
 
   const values = [
     {
-      icon: <Award className="h-6 w-6 text-primary" />,
-      title: `Official ${BRANDING.fullName} Certification`,
-      description: `Receive a professional certificate from ${BRANDING.fullName} that validates your project-based expertise and technical proficiency.`
-    },
-    {
       icon: <ShieldCheck className="h-6 w-6 text-primary" />,
-      title: "Guidance for Placement",
-      description: "We guide you for placement to get your dream job through intensive technical and HR grooming sessions."
+      title: "Integrity",
+      description: "We commit to transparency, honesty, and delivering measurable outcomes — not empty promises."
     },
     {
       icon: <Target className="h-6 w-6 text-primary" />,
-      title: "Outcome-Driven",
-      description: "We focus on project-based learning. You don't just learn theory; you build production-ready applications."
+      title: "Accountability",
+      description: "We take ownership of learner success and stand by our commitment to real career outcomes."
+    },
+    {
+      icon: <Award className="h-6 w-6 text-primary" />,
+      title: "Leadership",
+      description: "We cultivate confidence, discipline, and the mindset required to lead in the AI era."
     },
     {
       icon: <Users className="h-6 w-6 text-primary" />,
-      title: "Bilingual Instruction",
-      description: "Breaking language barriers by explaining complex tech concepts in both Tamil (தமிழ்) and English."
+      title: "Community",
+      description: "Students first, always. We build a supportive ecosystem where every learner thrives together."
     }
   ];
 
   const team = [
     {
-      name: "S. Raj",
-      role: "Founder & Lead Architect",
-      bio: "15+ years of experience in Full Stack Development and Cloud Architecture. Former Senior Architect at Silicon Valley firms, dedicated to bringing high-end tech education to Chennai.",
-      expertise: ["Architecture", "MERN Stack", "AWS"],
-      image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=400"
+      name: "Sanjula",
+      role: "Head of Academics",
+      bio: "8+ years of AI & Data Science industry experience, leading curriculum design aligned with global tech standards.",
+      expertise: ["Curriculum Design", "AI & Data Science", "Academic Leadership"],
+      image: "https://i.pravatar.cc/150?u=sanjula_hoa"
     },
     {
-      name: "Dr. Anitha M.",
-      role: "Head of Data Science",
-      bio: "Ph.D. in Machine Learning with 10+ years of industrial experience in Big Data Analytics. Expert in simplifying complex algorithmic concepts for students.",
-      expertise: ["Data Science", "AI/ML", "Python"],
-      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=400"
+      name: "Ragavi Reddy",
+      role: "Head – Placements & Corporate Relations",
+      bio: "Former HR professional with experience in enterprise hiring, building strong industry partnerships for student career acceleration.",
+      expertise: ["Placements", "Corporate Relations", "Enterprise HR"],
+      image: "https://i.pravatar.cc/150?u=ragavireddy"
     },
     {
-      name: "Vikram Singh",
-      role: "Head of Placements & HR Training",
-      bio: "Veteran career coach with 10+ years of experience in tech recruitment. Specialized in interview grooming and strategic placement guidance for top MNCs.",
-      expertise: ["HR Grooming", "Placement Strategy", "Soft Skills"],
-      image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=400"
+      name: "Suresh M",
+      role: "Principal AI Consultant & Lead Trainer",
+      bio: "Enterprise AI practitioner transforming complex technologies into practical, career-ready skillsets.",
+      expertise: ["AI Consulting", "Machine Learning", "Applied Training"],
+      image: "https://i.pravatar.cc/150?u=sureshm"
     }
   ];
 
   return (
     <Layout 
-      title={`About Us | ${BRANDING.fullName} Training Institute`}
-      description="Learn about our mission to bridge the skill gap in the software industry. Meet our expert mentors and understand our teaching philosophy."
+      title={`About Us | ${BRANDING.fullName} — Shaping the AI Generation`}
+      description="Learn how SCOPE AI HUB was founded in 2019 to challenge outdated learning models. Meet our expert team and understand our mission to create the next generation of AI innovators."
     >
       <Hero 
-        title={<>Our Story: <span className="text-primary">New Beginnings</span>, Expert Foundations.</>}
-        subtitle="Established in 2026, ScopeAIHub is born from a simple observation: Tech education needed a refresh. We are a new-age institute built by industry veterans to bring Silicon Valley-style practical learning to Tamil Nadu."
+        title={<>Our Story: <span className="text-primary">Built to Challenge</span> the Status Quo.</>}
+        subtitle={`Established in 2019, ${BRANDING.fullName} was born to challenge outdated learning models and redefine how AI education is delivered — training that empowers learners to compete on a global stage.`}
       />
+
+      {/* Founding Story Section */}
+      <section className="py-12 sm:py-20 bg-[var(--bg-body)] border-b border-[var(--border-color)]">
+        <div className="container-custom">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <div>
+              <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider mb-6 border border-primary/20">
+                Our Founding Story
+              </div>
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-[var(--text-heading)] mb-6 leading-tight">
+                Why We Built <span className="text-primary">SCOPE AI HUB</span>
+              </h2>
+              <p className="text-base md:text-lg text-[var(--text-muted)] leading-relaxed mb-6">
+                {BRANDING.fullName} was born to challenge outdated learning models and redefine how AI education is delivered. We eliminated theory-heavy, low-impact training and replaced it with execution-focused, industry-grade skill development.
+              </p>
+              <blockquote className="border-l-4 border-primary pl-6 py-2 my-8">
+                <p className="text-[var(--text-heading)] italic text-lg leading-relaxed mb-4">
+                  "When I started {BRANDING.fullName}, my vision was clear — education must evolve as fast as technology. AI is not the future. It's the present. Yet, many skilled individuals lack access to practical, industry-ready training. {BRANDING.fullName} was built to change that."
+                </p>
+                <footer className="text-sm font-bold text-[var(--text-muted)] uppercase tracking-widest">
+                  — {BRANDING.founder.name}, <span className="text-primary">{BRANDING.founder.title}</span>
+                </footer>
+              </blockquote>
+            </div>
+            <div className="space-y-6">
+              <div className="p-5 sm:p-8 bg-[var(--bg-secondary)] rounded-2xl sm:rounded-3xl border border-[var(--border-color)] shadow-sm">
+                <p className="text-[var(--text-muted)] leading-relaxed text-lg">
+                  "This is more than an institute. It is a movement to build the next generation of AI professionals."
+                </p>
+                <div className="mt-6 flex items-center space-x-4">
+                  <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center">
+                    <Users className="h-6 w-6 text-primary" />
+                  </div>
+                  <div>
+                    <p className="font-bold text-[var(--text-heading)]">{BRANDING.founder.name}</p>
+                    <p className="text-sm text-[var(--text-muted)]">{BRANDING.founder.title}</p>
+                  </div>
+                </div>
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="p-6 bg-[var(--bg-card)] rounded-2xl border border-[var(--border-color)] text-center">
+                  <div className="text-3xl font-black text-primary mb-1">2019</div>
+                  <div className="text-xs font-bold uppercase tracking-widest text-[var(--text-muted)]">Year Founded</div>
+                </div>
+                <div className="p-6 bg-[var(--bg-card)] rounded-2xl border border-[var(--border-color)] text-center">
+                  <div className="text-3xl font-black text-primary mb-1">1,000+</div>
+                  <div className="text-xs font-bold uppercase tracking-widest text-[var(--text-muted)]">Lives Transformed</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Stats Section */}
       <section className="py-12 bg-[var(--bg-card)] border-y border-[var(--border-color)]">
@@ -188,7 +242,7 @@ const About = () => {
                 </div>
               </div>
             </div>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-3 sm:gap-4">
               <div className="space-y-4">
                 <Parallax offset={20}>
                   <div className="aspect-[4/5] bg-[var(--bg-secondary)] rounded-3xl overflow-hidden shadow-inner">
@@ -262,18 +316,18 @@ const About = () => {
               <div className="h-12 w-12 rounded-2xl bg-[var(--bg-body)]/10 flex items-center justify-center">
                 <Eye className="h-6 w-6 text-primary-light" />
               </div>
-              <h2 className="text-2xl md:text-3xl font-bold">Our Goal</h2>
-              <p className="text-[var(--text-on-inverted)]/60 text-lg leading-relaxed">
-                To simplify tech education. We believe anyone can code if they are taught the right way - with patience, practical examples, and in a language they understand.
+              <h2 className="text-2xl md:text-3xl font-bold">Our Vision</h2>
+              <p className="text-[var(--text-on-inverted)]/70 text-lg leading-relaxed">
+                To build a globally recognised AI learning ecosystem that elevates the next generation of intelligent innovators and technology leaders.
               </p>
             </div>
             <div className="space-y-6">
               <div className="h-12 w-12 rounded-2xl bg-[var(--bg-body)]/10 flex items-center justify-center">
                 <Target className="h-6 w-6 text-primary-light" />
               </div>
-              <h2 className="text-2xl md:text-3xl font-bold">What Drives Us</h2>
-              <p className="text-[var(--text-on-inverted)]/60 text-lg leading-relaxed">
-                Seeing a student from a rural background land a high-paying job in a top MNC. That success story is what motivates us every single day.
+              <h2 className="text-2xl md:text-3xl font-bold">Our Mission</h2>
+              <p className="text-[var(--text-on-inverted)]/70 text-lg leading-relaxed">
+                To provide practical, industry-grade AI education that converts ambition into measurable career outcomes.
               </p>
             </div>
           </div>
@@ -314,7 +368,7 @@ const About = () => {
           <div className="text-center max-w-3xl mx-auto mb-16">
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-[var(--text-heading)] mb-6">Our <span className="text-primary">Presence</span></h2>
             <p className="text-base md:text-lg text-[var(--text-muted)]">
-              We are expanding our reach to provide quality tech education across multiple locations and through our global online platform.
+              On-campus excellence. Borderless online learning. A truly global AI ecosystem — from Tamil Nadu to the world.
             </p>
           </div>
           <div className="grid md:grid-cols-2 gap-8">
