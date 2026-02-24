@@ -93,24 +93,24 @@ const CourseDetail = () => {
                </div>
             </div>
 
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-[var(--text-heading)] mb-6 tracking-tight leading-[1.1] animate-in fade-in slide-in-from-bottom-6 duration-700 delay-100">
+            <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold text-[var(--text-heading)] mb-4 sm:mb-6 tracking-tight leading-[1.1] animate-in fade-in slide-in-from-bottom-6 duration-700 delay-100">
               {course.title}
             </h1>
 
-            <p className="text-lg md:text-xl text-[var(--text-muted)] mb-10 leading-relaxed max-w-2xl font-medium animate-in fade-in slide-in-from-bottom-8 duration-700 delay-200">
+            <p className="text-base sm:text-lg md:text-xl text-[var(--text-muted)] mb-6 sm:mb-10 leading-relaxed max-w-2xl font-medium animate-in fade-in slide-in-from-bottom-8 duration-700 delay-200">
               {course.shortDescription}
             </p>
 
             <div className="flex flex-wrap gap-4 animate-in fade-in slide-in-from-bottom-10 duration-700 delay-300">
               <button 
                 onClick={() => openModal(course.title)}
-                className="btn-primary px-8 py-4 rounded-full text-sm font-bold uppercase tracking-widest shadow-lg shadow-primary/25 hover:shadow-primary/40 hover:-translate-y-1 transition-all"
+                className="btn-primary px-6 sm:px-8 py-3 sm:py-4 rounded-full text-xs sm:text-sm font-bold uppercase tracking-widest shadow-lg shadow-primary/25 hover:shadow-primary/40 hover:-translate-y-1 transition-all"
               >
                 Enroll Now
               </button>
               <button 
                 onClick={() => document.getElementById('curriculum').scrollIntoView({ behavior: 'smooth' })}
-                className="px-8 py-4 rounded-full bg-[var(--bg-secondary)] text-[var(--text-heading)] border border-[var(--border-color)] text-sm font-bold uppercase tracking-widest hover:bg-[var(--bg-inverted)] hover:text-[var(--text-on-inverted)] transition-all"
+                className="px-6 sm:px-8 py-3 sm:py-4 rounded-full bg-[var(--bg-secondary)] text-[var(--text-heading)] border border-[var(--border-color)] text-xs sm:text-sm font-bold uppercase tracking-widest hover:bg-[var(--bg-inverted)] hover:text-[var(--text-on-inverted)] transition-all"
               >
                 View Syllabus
               </button>
@@ -122,11 +122,11 @@ const CourseDetail = () => {
       {/* Sticky Sub-Nav (Restored & Refined) */}
       <div className={`sticky top-[64px] md:top-[72px] z-40 bg-[var(--bg-body)]/80 backdrop-blur-xl border-y border-[var(--border-color)] transition-all duration-300 ${scrollProgress > 5 ? 'shadow-md translate-y-0' : ''}`}>
         <div className="container-custom">
-           <div className="flex items-center justify-between h-14 md:h-16">
-              <h2 className={`font-bold text-[var(--text-heading)] transition-opacity duration-300 ${scrollProgress > 10 ? 'opacity-100' : 'opacity-0'} hidden md:block`}>
+           <div className="flex items-center justify-between h-14 md:h-16 overflow-hidden">
+              <h2 className={`font-bold text-[var(--text-heading)] transition-opacity duration-300 ${scrollProgress > 10 ? 'opacity-100' : 'opacity-0'} hidden md:block shrink-0 mr-4`}>
                 {course.title}
               </h2>
-              <div className="flex items-center gap-1 md:gap-4 overflow-x-auto no-scrollbar mask-gradient-x w-full md:w-auto">
+              <div className="flex items-center gap-1 sm:gap-2 md:gap-4 overflow-x-auto no-scrollbar w-full md:w-auto" style={{ WebkitOverflowScrolling: 'touch' }}>
                  {['Overview', 'Curriculum', 'Instructor', 'FAQ'].map((item) => {
                     const id = item.toLowerCase();
                     const isActive = activeTab === id;
@@ -137,7 +137,7 @@ const CourseDetail = () => {
                           document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
                           setActiveTab(id);
                         }}
-                        className={`px-4 py-1.5 rounded-full text-xs md:text-sm font-bold transition-all whitespace-nowrap ${isActive ? 'bg-[var(--text-heading)] text-[var(--bg-body)]' : 'text-[var(--text-muted)] hover:text-[var(--text-heading)] hover:bg-[var(--bg-secondary)]'}`}
+                        className={`px-3 sm:px-4 py-1.5 rounded-full text-xs md:text-sm font-bold transition-all whitespace-nowrap shrink-0 ${isActive ? 'bg-[var(--text-heading)] text-[var(--bg-body)]' : 'text-[var(--text-muted)] hover:text-[var(--text-heading)] hover:bg-[var(--bg-secondary)]'}`}
                       >
                         {item}
                       </button>
@@ -145,7 +145,7 @@ const CourseDetail = () => {
                  })}
                  <button 
                    onClick={() => openModal(course.title)}
-                   className="ml-2 md:ml-4 px-5 py-2 rounded-full bg-primary text-white text-xs md:text-sm font-bold shadow-lg shadow-primary/20 hover:shadow-primary/40 transition-all whitespace-nowrap md:hidden"
+                   className="ml-1 sm:ml-2 md:ml-4 px-4 sm:px-5 py-1.5 sm:py-2 rounded-full bg-primary text-white text-xs md:text-sm font-bold shadow-lg shadow-primary/20 hover:shadow-primary/40 transition-all whitespace-nowrap shrink-0 md:hidden"
                  >
                    Enroll
                  </button>
@@ -165,8 +165,8 @@ const CourseDetail = () => {
               {/* Overview Section */}
               <div id="overview" className="space-y-8 scroll-mt-24">
                 <div>
-                  <h2 className="text-2xl font-bold text-[var(--text-heading)] mb-4">About this Course</h2>
-                  <p className="text-[var(--text-muted)] text-lg leading-relaxed">{course.longDescription}</p>
+                  <h2 className="text-xl sm:text-2xl font-bold text-[var(--text-heading)] mb-3 sm:mb-4">About this Course</h2>
+                  <p className="text-[var(--text-muted)] text-base sm:text-lg leading-relaxed">{course.longDescription}</p>
                 </div>
 
                 {/* Key Metrics Bar */}
@@ -202,7 +202,7 @@ const CourseDetail = () => {
                 </div>
 
                 {/* What you'll learn */}
-                <div className="bg-[var(--bg-secondary)] p-8 rounded-3xl border border-[var(--border-color)]">
+                <div className="bg-[var(--bg-secondary)] p-5 sm:p-8 rounded-2xl sm:rounded-3xl border border-[var(--border-color)]">
                    <h3 className="text-xl font-bold text-[var(--text-heading)] mb-6 flex items-center gap-2">
                      <CheckCircle2 className="h-5 w-5 text-primary" />
                      What you will learn
@@ -234,7 +234,7 @@ const CourseDetail = () => {
               {/* Curriculum Section */}
               <div id="curriculum" className="scroll-mt-24">
                 <div className="flex items-end justify-between mb-8">
-                   <h2 className="text-2xl font-bold text-[var(--text-heading)]">Curriculum</h2>
+                   <h2 className="text-xl sm:text-2xl font-bold text-[var(--text-heading)]">Curriculum</h2>
                    <span className="text-sm font-medium text-[var(--text-muted)]">{course.syllabus?.length} Modules</span>
                 </div>
                 
@@ -243,15 +243,15 @@ const CourseDetail = () => {
                      <div key={index} className="group border border-[var(--border-color)] rounded-2xl overflow-hidden bg-[var(--bg-card)] hover:border-primary/30 transition-all duration-300">
                         <button 
                           onClick={() => setActiveModule(activeModule === index ? -1 : index)}
-                          className="w-full flex items-center justify-between p-6 text-left"
+                          className="w-full flex items-center justify-between p-4 sm:p-6 text-left"
                         >
                           <div className="flex gap-4 md:gap-6 items-center">
                              <span className={`h-10 w-10 shrink-0 rounded-full flex items-center justify-center text-sm font-bold transition-colors ${activeModule === index ? 'bg-primary text-white' : 'bg-[var(--bg-secondary)] text-[var(--text-muted)] group-hover:text-primary'}`}>
                                 {index + 1}
                              </span>
                              <div>
-                                <h4 className="text-lg font-bold text-[var(--text-heading)]">{item.module}</h4>
-                                <p className="text-sm text-[var(--text-muted)]">{item.duration} • {item.topics?.length} Topics</p>
+                                <h4 className="text-base sm:text-lg font-bold text-[var(--text-heading)]">{item.module}</h4>
+                                 <p className="text-xs sm:text-sm text-[var(--text-muted)]">{item.duration} • {item.topics?.length} Topics</p>
                              </div>
                           </div>
                           <ChevronDown className={`h-5 w-5 text-[var(--text-muted)] transition-transform duration-300 ${activeModule === index ? 'rotate-180 text-primary' : ''}`} />
@@ -278,8 +278,8 @@ const CourseDetail = () => {
               
               {/* Instructor Section */}
               <div id="instructor" className="scroll-mt-24">
-                 <h2 className="text-2xl font-bold text-[var(--text-heading)] mb-8">Your Mentor</h2>
-                 <div className="flex flex-col md:flex-row gap-8 items-start bg-[var(--bg-card)] p-8 rounded-3xl border border-[var(--border-color)]">
+                 <h2 className="text-xl sm:text-2xl font-bold text-[var(--text-heading)] mb-6 sm:mb-8">Your Mentor</h2>
+                  <div className="flex flex-col md:flex-row gap-6 sm:gap-8 items-start bg-[var(--bg-card)] p-5 sm:p-8 rounded-2xl sm:rounded-3xl border border-[var(--border-color)]">
                     <div className="shrink-0 relative">
                        <img 
                          src={course.instructor?.avatar} 
@@ -310,7 +310,7 @@ const CourseDetail = () => {
 
               {/* FAQ Section */}
               <div id="faq" className="scroll-mt-24">
-                 <h2 className="text-2xl font-bold text-[var(--text-heading)] mb-8">Frequently Asked Questions</h2>
+                 <h2 className="text-xl sm:text-2xl font-bold text-[var(--text-heading)] mb-6 sm:mb-8">Frequently Asked Questions</h2>
                  <div className="space-y-4">
                    {course.faqs?.map((faq, index) => (
                      <div 
@@ -319,9 +319,9 @@ const CourseDetail = () => {
                      >
                        <button
                          onClick={() => setActiveFaq(activeFaq === index ? -1 : index)}
-                         className="w-full flex items-center justify-between p-6 text-left"
+                          className="w-full flex items-center justify-between p-4 sm:p-6 text-left"
                        >
-                         <span className={`font-bold text-lg ${activeFaq === index ? 'text-[var(--text-heading)]' : 'text-[var(--text-muted)]'}`}>
+                          <span className={`font-bold text-base sm:text-lg ${activeFaq === index ? 'text-[var(--text-heading)]' : 'text-[var(--text-muted)]'}`}>
                            {faq.question}
                          </span>
                          {activeFaq === index ? (
@@ -334,7 +334,7 @@ const CourseDetail = () => {
                          className={`grid transition-all duration-300 ease-in-out ${activeFaq === index ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}
                        >
                          <div className="overflow-hidden">
-                           <div className="p-6 pt-0 text-[var(--text-muted)] leading-relaxed">
+                            <div className="px-4 sm:px-6 pb-4 sm:pb-6 pt-0 text-sm sm:text-base text-[var(--text-muted)] leading-relaxed">
                              {faq.answer}
                            </div>
                          </div>
@@ -350,7 +350,7 @@ const CourseDetail = () => {
             <div className="lg:col-span-1">
                <div className="sticky top-32 space-y-6">
                   {/* Enrollment Card */}
-                  <div className="bg-[var(--bg-card)] rounded-3xl border border-[var(--border-color)] p-6 shadow-xl shadow-black/5">
+                   <div className="bg-[var(--bg-card)] rounded-2xl sm:rounded-3xl border border-[var(--border-color)] p-5 sm:p-6 shadow-xl shadow-black/5">
                      <div className="flex justify-between items-start mb-6">
                         <div>
                           <p className="text-sm font-medium text-[var(--text-muted)] mb-1">Course Fee</p>

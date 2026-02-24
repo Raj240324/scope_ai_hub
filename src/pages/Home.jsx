@@ -211,7 +211,7 @@ const learningPartners = [
         }
         title={
           <>
-            Dominate with Intelligence. <br />
+            <span className="whitespace-nowrap">Dominate with Intelligence.</span> <br className="hidden sm:block" />
             <span className="text-white relative inline-block">
               Lead Without Limits.
               {/* Subtle underline accent */}

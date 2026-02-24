@@ -219,7 +219,7 @@ export default function HeroScroll({ children, badge, title, subtitle }) {
 
           {/* Title */}
           {title && (
-            <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-white tracking-tight mb-8 leading-[1.1] drop-shadow-2xl">
+            <h1 className="text-[1.65rem] sm:text-5xl md:text-7xl font-bold text-white tracking-tight mb-8 leading-[1.1] drop-shadow-2xl">
               {title}
             </h1>
           )}
