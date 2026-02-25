@@ -64,7 +64,7 @@ const About = () => {
       image: "https://i.pravatar.cc/150?u=sanjula_hoa"
     },
     {
-      name: "Ragavi Reddy",
+      name: "Raghavi Reddy",
       role: "Head – Placements & Corporate Relations",
       bio: "Former HR professional with experience in enterprise hiring, building strong industry partnerships for student career acceleration.",
       expertise: ["Placements", "Corporate Relations", "Enterprise HR"],

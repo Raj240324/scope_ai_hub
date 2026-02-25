@@ -519,7 +519,7 @@ const learningPartners = [
                 expertise: ["Curriculum Design", "AI & Data Science"]
               },
               {
-                name: "Ragavi Reddy",
+                name: "Raghavi Reddy",
                 role: "Head – Placements & Corporate Relations",
                 company: "Former Enterprise HR Professional",
                 image: "https://i.pravatar.cc/150?u=ragavireddy",
