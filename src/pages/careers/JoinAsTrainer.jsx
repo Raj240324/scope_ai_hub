@@ -34,8 +34,8 @@ const JoinAsTrainer = () => {
   return (
     <Layout>
       <Hero 
-        title={<>Empower the Next Generation of <span className="text-primary">Tech Leaders</span></>}
-        subtitle={`Join ${BRANDING.fullName} as a Mentor. Share your expertise, guide students through real-world projects, and help bridge the industry-academia gap.`}
+        badge="Flexible Hours · Industry Impact"
+        title={<>Teach What You've <span className="text-primary">Built</span>.</>}
       />
 
       {/* Why Join Us */}

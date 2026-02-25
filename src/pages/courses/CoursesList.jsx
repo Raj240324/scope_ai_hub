@@ -39,8 +39,8 @@ const CoursesList = () => {
       immersive={true}
     >
       <Hero 
-        title={<>Explore Our <span className="text-primary">Courses</span></>}
-        subtitle="Choose from over 10+ industry-aligned courses designed to help you launch or accelerate your career in tech."
+        badge="10+ Industry-Aligned Programs"
+        title={<>Find Your <span className="text-primary">Future Stack</span>.</>}
         variant="simple"
         className="pt-32 pb-32 md:pt-48 md:pb-40"
       />

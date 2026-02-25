@@ -21,8 +21,8 @@ const Contact = () => {
       description="Get in touch with us for course inquiries, batch details, and career counseling. Located in Chennai."
     >
       <Hero 
-        title={<>Get in <span className="text-primary">Touch</span></>}
-        subtitle="Have questions about our courses or the admission process? We're here to help you navigate your tech journey."
+        badge="We Respond Within 24 Hours"
+        title={<>Let's <span className="text-primary">Talk</span>.</>}
       />
 
       <div className="container-custom section-padding">

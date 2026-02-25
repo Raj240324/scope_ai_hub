@@ -10,7 +10,7 @@ const TrainerProfiles = () => {
     {
       name: "Sanjula",
       role: "Head of Academics",
-      image: "https://i.pravatar.cc/300?u=sanjula_hoa",
+      image: "https://randomuser.me/api/portraits/women/75.jpg",
       expertise: ["AI & Data Science", "Curriculum Design", "Academic Leadership", "Machine Learning"],
       experience: "8+ years",
       companies: ["Industry", "Academia"],
@@ -28,7 +28,7 @@ const TrainerProfiles = () => {
     {
       name: "Raghavi",
       role: "Head – Placements & Corporate Relations",
-      image: "https://i.pravatar.cc/300?u=ragavireddy",
+      image: "https://randomuser.me/api/portraits/women/68.jpg",
       expertise: ["Corporate Relations", "Placements", "Enterprise HR", "Career Coaching"],
       experience: "Industry Expert",
       companies: ["Enterprise Organizations", "Tech Industry"],
@@ -46,7 +46,7 @@ const TrainerProfiles = () => {
     {
       name: "Suresh M",
       role: "Principal AI Consultant & Lead Trainer",
-      image: "https://i.pravatar.cc/300?u=sureshm",
+      image: "https://randomuser.me/api/portraits/men/36.jpg",
       expertise: ["AI Consulting", "Machine Learning", "Deep Learning", "Applied AI"],
       experience: "Enterprise AI Practitioner",
       companies: ["Enterprise Clients", "Tech Industry"],
@@ -69,8 +69,8 @@ const TrainerProfiles = () => {
       description="Learn from industry veterans at ScopeAIHub. Our trainers have worked at Google, Amazon, Microsoft, and top Indian startups. Get mentored by the best."
     >
       <Hero 
-        title={<>Learn from <span className="text-primary">Industry Experts</span></>}
-        subtitle="Our trainers aren't just teachers—they're active industry professionals who bring real-world experience to the classroom. Get mentored by engineers, designers, and architects from top tech companies."
+        badge="15+ Expert Mentors · 120+ Years Combined Experience"
+        title={<>The People Behind Your <span className="text-primary">Growth</span>.</>}
       />
 
       <div className="container-custom section-padding">

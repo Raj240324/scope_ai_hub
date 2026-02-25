@@ -15,7 +15,7 @@ const reviews = [
     course: "Full Stack Web Development",
     rating: 5,
     content: `The Full Stack course at ${BRANDING.fullName} was a game-changer for me. I went from zero coding knowledge to building a complete e-commerce site. The mentors are always ready to help even after class hours.`,
-    image: "https://i.pravatar.cc/150?u=senthil",
+    image: "https://randomuser.me/api/portraits/men/32.jpg",
     date: "2 weeks ago",
     verified: true
   },
@@ -26,7 +26,7 @@ const reviews = [
     course: "UI/UX Design with Figma",
     rating: 5,
     content: "I switched from a non-tech background to UI/UX design. The instructors were patient and the hands-on approach really helped me build a professional portfolio. I landed a job within 1 month of completion!",
-    image: "https://i.pravatar.cc/150?u=priya",
+    image: "https://randomuser.me/api/portraits/women/44.jpg",
     date: "1 month ago",
     verified: true
   },
@@ -37,7 +37,7 @@ const reviews = [
     course: "Cloud Computing & DevOps",
     rating: 4,
     content: "The Cloud & DevOps course helped me upskill and land a better position in my current company. The lab sessions were intense and very practical. Highly recommended for working professionals.",
-    image: "https://i.pravatar.cc/150?u=arun",
+    image: "https://randomuser.me/api/portraits/men/45.jpg",
     date: "2 months ago",
     verified: true
   },
@@ -48,7 +48,7 @@ const reviews = [
     course: "Data Science & Machine Learning",
     rating: 5,
     content: "Exceptional teaching! The way they explain complex mathematical concepts in simple terms is amazing. The projects on real-world datasets gave me the confidence I needed for interviews.",
-    image: "https://i.pravatar.cc/150?u=kavitha",
+    image: "https://randomuser.me/api/portraits/women/65.jpg",
     date: "3 months ago",
     verified: true
   },
@@ -59,7 +59,7 @@ const reviews = [
     course: "Full Stack Web Development",
     rating: 5,
     content: "I joined the weekday batch and the progress I made in 3 months is unbelievable. The focus on React and modern CSS frameworks like Tailwind was exactly what I was looking for.",
-    image: "https://i.pravatar.cc/150?u=rahul",
+    image: "https://randomuser.me/api/portraits/men/22.jpg",
     date: "4 months ago",
     verified: true
   },
@@ -70,7 +70,7 @@ const reviews = [
     course: "Cyber Security & Ethical Hacking",
     rating: 5,
     content: "The best place in Tamil Nadu for Cyber Security training. The lab setup is top-notch and the instructor has real-world experience in penetration testing.",
-    image: "https://i.pravatar.cc/150?u=deepika",
+    image: "https://randomuser.me/api/portraits/women/28.jpg",
     date: "5 months ago",
     verified: true
   }
@@ -102,8 +102,8 @@ const Reviews = () => {
   return (
     <Layout>
       <Hero 
-        title={<>Student <span className="text-primary">Success</span> Stories</>}
-        subtitle={`Don't just take our word for it. Hear from our alumni who have transformed their careers with ${BRANDING.fullName}.`}
+        badge="100+ Verified Reviews · 4.9★ Average"
+        title={<>Don't Take Our <span className="text-primary">Word</span> for It.</>}
       />
 
       {/* Stats Section */}

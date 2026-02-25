@@ -50,8 +50,8 @@ const Admissions = () => {
       description={`Easy 4-step admission process at ${BRANDING.fullName} Training Institute. Check eligibility, batch timings, and enroll for upcoming batches.`}
     >
       <Hero 
-        title={<>Your Journey to <span className="text-primary">Tech Excellence</span> Starts Here.</>}
-        subtitle="Our admission process is designed to be simple and transparent. Follow these steps to secure your future in the software industry."
+        badge="Simple · Transparent · Fast"
+        title={<>Your Seat Is <span className="text-primary">Waiting</span>.</>}
       />
 
       <div className="container-custom section-padding">

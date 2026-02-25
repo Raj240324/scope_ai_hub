@@ -86,10 +86,10 @@ const learningPartners = [
     { name: "IBM", logo: "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg", color: "#006699" },
     { name: "Accenture", logo: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Accenture.svg", color: "#A100FF" },
     { name: "Infosys", logo: "https://upload.wikimedia.org/wikipedia/commons/9/95/Infosys_logo.svg", color: "#007CC3" },
-    { name: "TCS", logo: "https://upload.wikimedia.org/wikipedia/commons/b/b1/Tata_Consultancy_Services_Logo.svg", color: "#004B8D" },
+    { name: "TCS", logo: "https://companieslogo.com/img/orig/TCS.NS-7401f1bd.png?t=1720244494", color: "#004B8D" },
     { name: "Wipro", logo: "https://upload.wikimedia.org/wikipedia/commons/a/a0/Wipro_Primary_Logo_Color_RGB.svg", color: "#000000" },
-    { name: "HCLTech", logo: "https://upload.wikimedia.org/wikipedia/commons/6/6e/HCL_Technologies_logo.svg", color: "#008CBA" },
-    { name: "Cognizant", logo: "https://upload.wikimedia.org/wikipedia/commons/3/3e/Cognizant_logo_2022.svg", color: "#1565C0" }
+    { name: "HCLTech", logo: "https://companieslogo.com/img/orig/HCLTECH.NS-15b4b960.png?t=1720244492", color: "#008CBA" },
+    { name: "Cognizant", logo: "https://companieslogo.com/img/orig/CTSH-82cdbb76.png?t=1720244491", color: "#1565C0" }
   ];
 
   const trustFactors = [
@@ -152,19 +152,19 @@ const learningPartners = [
       name: "Nisha K",
       role: "Cloud Computing — TechData",
       content: "The industry-driven approach at Scope AI Hub made all the difference. It wasn't just theory — we built real solutions that prepared me for my job from day one.",
-      image: "https://i.pravatar.cc/150?u=nishak"
+      image: "https://randomuser.me/api/portraits/women/57.jpg"
     },
     {
       name: "Rahul S",
       role: "Python & AI Foundations — ZOHO",
       content: "What I loved most was the practical exposure. The structured learning path and career support helped me transition smoothly into the tech industry.",
-      image: "https://i.pravatar.cc/150?u=rahuls"
+      image: "https://randomuser.me/api/portraits/men/41.jpg"
     },
     {
       name: "Arjun R",
       role: "AI & Machine Learning — Kynhood",
       content: "Scope AI Hub gave me real confidence through hands-on projects and structured mentorship. The practical exposure helped me secure opportunities across leading technology companies.",
-      image: "https://i.pravatar.cc/150?u=arjunr"
+      image: "https://randomuser.me/api/portraits/men/19.jpg"
     }
   ];
 
@@ -423,7 +423,7 @@ const learningPartners = [
               <div className="flex -space-x-4">
                 {[1, 2, 3].map((i) => (
                   <div key={i} className="w-12 h-12 rounded-full border-4 border-[var(--bg-card)] overflow-hidden">
-                    <img src={`https://i.pravatar.cc/100?u=mentor${i}`} alt="Mentor" className="w-full h-full object-cover" />
+                    <img src={`https://randomuser.me/api/portraits/men/${i + 50}.jpg`} alt="Mentor" className="w-full h-full object-cover" />
                   </div>
                 ))}
               </div>
@@ -496,7 +496,7 @@ const learningPartners = [
               <div className="flex -space-x-4 mb-4">
                 {[1, 2, 3, 4].map((i) => (
                   <div key={i} className="w-12 h-12 rounded-full border-4 border-[var(--bg-body)] overflow-hidden shadow-lg">
-                    <img src={`https://i.pravatar.cc/150?u=trainer${i}`} alt="Trainer" />
+                    <img src={`https://randomuser.me/api/portraits/${i % 2 === 0 ? 'men' : 'women'}/${i + 60}.jpg`} alt="Trainer" />
                   </div>
                 ))}
                 <div className="w-12 h-12 rounded-full border-4 border-[var(--bg-body)] bg-[var(--bg-inverted)] flex items-center justify-center shadow-lg">
@@ -515,21 +515,21 @@ const learningPartners = [
                 name: "Sanjula",
                 role: "Head of Academics",
                 company: "8+ Years in AI & Data Science",
-                image: "https://i.pravatar.cc/150?u=sanjula_hoa",
+                image: "https://randomuser.me/api/portraits/women/75.jpg",
                 expertise: ["Curriculum Design", "AI & Data Science"]
               },
               {
                 name: "Raghavi",
                 role: "Head – Placements & Corporate Relations",
                 company: "Former Enterprise HR Professional",
-                image: "https://i.pravatar.cc/150?u=ragavireddy",
+                image: "https://randomuser.me/api/portraits/women/68.jpg",
                 expertise: ["Placements", "Industry Partnerships"]
               },
               {
                 name: "Suresh M",
                 role: "Principal AI Consultant & Lead Trainer",
                 company: "Enterprise AI Practitioner",
-                image: "https://i.pravatar.cc/150?u=sureshm",
+                image: "https://randomuser.me/api/portraits/men/36.jpg",
                 expertise: ["AI Consulting", "Machine Learning"]
               }
             ].map((mentor, index) => (
@@ -1163,7 +1163,7 @@ const learningPartners = [
                   <div className="flex -space-x-3">
                     {[1, 2, 3].map((i) => (
                       <div key={i} className="w-8 h-8 rounded-full border-2 border-[var(--bg-body)]/50 overflow-hidden">
-                        <img src={`https://i.pravatar.cc/100?u=counselor${i}`} alt="Counselor" />
+                        <img src={`https://randomuser.me/api/portraits/${i % 2 === 0 ? 'women' : 'men'}/${i + 70}.jpg`} alt="Counselor" />
                       </div>
                     ))}
                   </div>

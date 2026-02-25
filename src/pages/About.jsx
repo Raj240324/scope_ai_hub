@@ -61,21 +61,21 @@ const About = () => {
       role: "Head of Academics",
       bio: "8+ years of AI & Data Science industry experience, leading curriculum design aligned with global tech standards.",
       expertise: ["Curriculum Design", "AI & Data Science", "Academic Leadership"],
-      image: "https://i.pravatar.cc/150?u=sanjula_hoa"
+      image: "https://randomuser.me/api/portraits/women/75.jpg"
     },
     {
       name: "Raghavi",
       role: "Head – Placements & Corporate Relations",
       bio: "Former HR professional with experience in enterprise hiring, building strong industry partnerships for student career acceleration.",
       expertise: ["Placements", "Corporate Relations", "Enterprise HR"],
-      image: "https://i.pravatar.cc/150?u=ragavireddy"
+      image: "https://randomuser.me/api/portraits/women/68.jpg"
     },
     {
       name: "Suresh M",
       role: "Principal AI Consultant & Lead Trainer",
       bio: "Enterprise AI practitioner transforming complex technologies into practical, career-ready skillsets.",
       expertise: ["AI Consulting", "Machine Learning", "Applied Training"],
-      image: "https://i.pravatar.cc/150?u=sureshm"
+      image: "https://randomuser.me/api/portraits/men/36.jpg"
     }
   ];
 
@@ -85,8 +85,8 @@ const About = () => {
       description="Learn how SCOPE AI HUB was founded in 2019 to challenge outdated learning models. Meet our expert team and understand our mission to create the next generation of AI innovators."
     >
       <Hero 
-        title={<>Our Story: <span className="text-primary">Built to Challenge</span> the Status Quo.</>}
-        subtitle={`Established in 2019, ${BRANDING.fullName} was born to challenge outdated learning models and redefine how AI education is delivered — training that empowers learners to compete on a global stage.`}
+        badge="Est. 2019 · Chennai, India"
+        title={<>Where <span className="text-primary">AI Careers</span> Begin.</>}
       />
 
       {/* Founding Story Section */}

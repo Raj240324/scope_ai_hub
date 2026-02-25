@@ -161,8 +161,8 @@ const FAQ = () => {
       description="Find answers to common questions about our courses, admission process, fees, and placement support."
     >
       <Hero 
-        title={<>Frequently Asked <span className="text-primary">Questions</span></>}
-        subtitle="Find answers to common questions about our courses, admission process, and career support."
+        badge="Everything You Need to Know"
+        title={<>You Asked. We <span className="text-primary">Answered</span>.</>}
       />
 
       <div className="bg-[var(--bg-secondary)] py-20">

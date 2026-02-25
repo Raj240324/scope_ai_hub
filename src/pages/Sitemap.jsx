@@ -108,8 +108,8 @@ const Sitemap = () => {
       description={`Complete sitemap for ${BRANDING.fullName}. Find all pages including courses, admissions, legal documents, and more.`}
     >
       <Hero
-        title={<>Website <span className="text-primary">Sitemap</span></>}
-        subtitle={`A complete directory of all ${totalPages} pages on ${BRANDING.fullName}. Navigate directly to any section quickly.`}
+        badge={`${totalPages} Pages Indexed`}
+        title={<>Every Page. <span className="text-primary">One Place</span>.</>}
       />
 
       <div className="bg-[var(--bg-secondary)] py-20">

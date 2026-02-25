@@ -124,27 +124,6 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Newsletter / CTA */}
-        <div className="bg-primary/5 rounded-2xl sm:rounded-3xl p-5 sm:p-8 md:p-10 mb-16 flex flex-col md:flex-row items-center justify-between border border-primary/20">
-          <div className="mb-6 md:mb-0 text-center md:text-left">
-            <h4 className="text-[var(--text-footer)] text-xl font-bold mb-2">Subscribe to our newsletter</h4>
-            <p className="text-[var(--text-footer-muted)] text-sm">Get the latest updates on new batches and scholarship opportunities.</p>
-          </div>
-          <div className="flex w-full md:w-auto">
-            <label htmlFor="newsletter_email" className="sr-only">Newsletter Email</label>
-            <input 
-              type="email" 
-              id="newsletter_email"
-              name="newsletter_email"
-              placeholder="Your email address" 
-              className="bg-[var(--text-footer)]/5 border border-primary/20 rounded-l-xl px-6 py-4 text-[var(--text-footer)] text-sm focus:ring-2 focus:ring-primary w-full md:w-64 placeholder:text-[var(--text-footer-muted)]"
-            />
-            <button className="bg-primary hover:opacity-90 text-white font-bold px-8 py-4 rounded-r-xl transition-all">
-              Join
-            </button>
-          </div>
-        </div>
-
         {/* Bottom Bar */}
         <div className="pt-10 border-t border-primary/10 flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0 text-xs font-medium">
           <p>© {currentYear} {BRANDING.fullName}. All rights reserved.</p>
