@@ -1185,9 +1185,9 @@ const learningPartners = [
       <section className="py-20 bg-[var(--bg-body)] border-b border-[var(--border-color)]">
         <div className="container-custom">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="heading-md mb-6">Global Training & <span className="text-primary">Online Flexibility</span></h2>
+            <h2 className="heading-md mb-6">Learn From Anywhere. <span className="text-primary">Compete Everywhere.</span></h2>
             <p className="text-[var(--text-muted)] text-lg">
-              Distance isn't an issue. Can't make it to our Chennai campus? Join our live online classes that feel just like sitting in the classroom.
+              Can’t make it to our Chennai campus? Our immersive live online programs bring the classroom experience directly to you — no compromise on quality, interaction, or mentorship.
             </p>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
