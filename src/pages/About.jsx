@@ -5,6 +5,7 @@ import { useModal } from '../context/ModalContext';
 import { BRANDING } from '../data/branding';
 
 import Hero from '../components/ui/Hero';
+import KineticTeamHybrid from '../components/ui/KineticTeamHybrid';
 import { FadeIn, StaggerContainer, StaggerItem, ScaleOnHover, ScrollCountUp, Parallax } from '../components/utils/Animations';
 
 const About = () => {
@@ -52,30 +53,6 @@ const About = () => {
       icon: <Users className="h-6 w-6 text-primary" />,
       title: "Community",
       description: "Students first, always. We build a supportive ecosystem where every learner thrives together."
-    }
-  ];
-
-  const team = [
-    {
-      name: "Sanjula",
-      role: "Head of Academics",
-      bio: "8+ years of AI & Data Science industry experience, leading curriculum design aligned with global tech standards.",
-      expertise: ["Curriculum Design", "AI & Data Science", "Academic Leadership"],
-      image: "https://randomuser.me/api/portraits/women/75.jpg"
-    },
-    {
-      name: "Raghavi",
-      role: "Head – Placements & Corporate Relations",
-      bio: "Former HR professional with experience in enterprise hiring, building strong industry partnerships for student career acceleration.",
-      expertise: ["Placements", "Corporate Relations", "Enterprise HR"],
-      image: "https://randomuser.me/api/portraits/women/68.jpg"
-    },
-    {
-      name: "Suresh M",
-      role: "Principal AI Consultant & Lead Trainer",
-      bio: "Enterprise AI practitioner transforming complex technologies into practical, career-ready skillsets.",
-      expertise: ["AI Consulting", "Machine Learning", "Applied Training"],
-      image: "https://randomuser.me/api/portraits/men/36.jpg"
     }
   ];
 
@@ -318,38 +295,9 @@ const About = () => {
         </div>
       </section>
 
-      {/* Team Section */}
+      {/* Team Section — Interactive Kinetic List */}
       <section className="section-padding bg-[var(--bg-secondary)]">
-        <div className="container-custom">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="heading-md mb-4">Meet Our Mentors</h2>
-            <p className="text-[var(--text-muted)]">
-              Our team consists of industry veterans who are passionate about sharing their knowledge and helping you succeed. All our mentors and staff are bound by strict Non-Disclosure Agreements (NDAs) to protect your project data and institutional IP.
-            </p>
-          </div>
-          <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-12">
-            {team.map((member, index) => (
-              <StaggerItem key={index} className="h-full">
-                <div className="bg-[var(--bg-card)] p-5 sm:p-8 rounded-2xl sm:rounded-3xl border border-[var(--border-color)] shadow-sm hover:shadow-xl transition-all group h-full flex flex-col">
-                  <div className="relative mb-6 sm:mb-8 inline-block">
-                    <div className="absolute inset-0 bg-primary/20 rounded-full blur-2xl group-hover:bg-primary/30 transition-colors"></div>
-                    <img src={member.image} alt={member.name} className="relative h-20 w-20 sm:h-24 sm:w-24 rounded-full ring-4 ring-[var(--bg-body)] shadow-lg object-cover" />
-                  </div>
-                  <h3 className="text-lg sm:text-xl font-bold text-[var(--text-heading)] mb-1">{member.name}</h3>
-                  <p className="text-primary font-semibold text-sm mb-4">{member.role}</p>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {member.expertise.map((skill, i) => (
-                      <span key={i} className="px-2 py-0.5 bg-[var(--bg-secondary)] text-[var(--text-muted)] text-[9px] font-black uppercase tracking-wider rounded-md border border-[var(--border-color)]">
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                  <p className="text-[var(--text-muted)] text-sm leading-relaxed mt-auto">{member.bio}</p>
-                </div>
-              </StaggerItem>
-            ))}
-          </StaggerContainer>
-        </div>
+        <KineticTeamHybrid />
       </section>
 
       {/* Vision & Mission */}

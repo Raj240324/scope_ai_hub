@@ -30,6 +30,7 @@ import {
 import Layout from '../components/layout/Layout';
 import HeroScroll from '../components/sections/HeroScroll';
 import CourseCard from '../components/ui/CourseCard';
+import DesignTestimonial from '../components/ui/DesignTestimonial';
 import { courses } from '../data/courses';
 import { useModal } from '../context/ModalContext';
 import { BRANDING } from '../data/branding';
@@ -147,26 +148,6 @@ const learningPartners = [
     }
   ];
 
-  const testimonials = [
-    {
-      name: "Nisha K",
-      role: "Cloud Computing — TechData",
-      content: "The industry-driven approach at Scope AI Hub made all the difference. It wasn't just theory — we built real solutions that prepared me for my job from day one.",
-      image: "https://randomuser.me/api/portraits/women/57.jpg"
-    },
-    {
-      name: "Rahul S",
-      role: "Python & AI Foundations — ZOHO",
-      content: "What I loved most was the practical exposure. The structured learning path and career support helped me transition smoothly into the tech industry.",
-      image: "https://randomuser.me/api/portraits/men/41.jpg"
-    },
-    {
-      name: "Arjun R",
-      role: "AI & Machine Learning — Kynhood",
-      content: "Scope AI Hub gave me real confidence through hands-on projects and structured mentorship. The practical exposure helped me secure opportunities across leading technology companies.",
-      image: "https://randomuser.me/api/portraits/men/19.jpg"
-    }
-  ];
 
   const faqs = [
     {
@@ -939,33 +920,14 @@ const learningPartners = [
         </div>
       </section>
 
-      {/* Testimonials */}
+      {/* Testimonials — Animated Carousel */}
       <section className="section-padding bg-[var(--bg-secondary)] border-b border-[var(--border-color)]">
         <div className="container-custom">
-          <div className="text-center max-w-3xl mx-auto mb-16">
+          <div className="text-center max-w-3xl mx-auto mb-8">
             <h2 className="heading-md mb-4 text-[var(--text-heading)]">Success Stories</h2>
-            <p className="text-[var(--text-muted)] text-lg">Hear from our students who are now working at top tech companies.</p>
+            <p className="text-[var(--text-muted)] text-base sm:text-lg">Hear from our students who are now working at top tech companies.</p>
           </div>
-
-          <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {testimonials.map((t, i) => (
-              <StaggerItem key={i} className="h-full">
-                <div className="bg-[var(--bg-card)] p-5 sm:p-8 rounded-2xl sm:rounded-3xl shadow-sm border border-[var(--border-color)] h-full flex flex-col">
-                  <div className="flex items-center space-x-3 sm:space-x-4 mb-5 sm:mb-6">
-                    <img src={t.image} alt={t.name} className="h-12 w-12 sm:h-14 sm:w-14 rounded-full border-2 border-primary/20" />
-                    <div>
-                      <h4 className="text-sm sm:text-base font-bold text-[var(--text-heading)]">{t.name}</h4>
-                      <p className="text-[10px] sm:text-xs text-primary font-bold uppercase tracking-wider">{t.role}</p>
-                    </div>
-                  </div>
-                  <p className="text-sm sm:text-base text-[var(--text-muted)] italic leading-relaxed">"{t.content}"</p>
-                  <div className="flex text-yellow-400 mt-6">
-                    {[1, 2, 3, 4, 5].map((s) => <Star key={s} className="h-4 w-4 fill-current" />)}
-                  </div>
-                </div>
-              </StaggerItem>
-            ))}
-          </StaggerContainer>
+          <DesignTestimonial />
         </div>
       </section>
 

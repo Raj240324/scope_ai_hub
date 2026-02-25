@@ -1,162 +1,153 @@
-import React, { useRef, useState } from 'react';
-import { CheckCircle, Send, Loader2, AlertCircle, ChevronDown, Check } from 'lucide-react';
+import React, { useRef, useState, useEffect } from 'react';
+import { CheckCircle, ArrowRight, ArrowLeft, Send, Loader2, AlertCircle, Check } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useModal } from '../../context/ModalContext';
 
-const ContactForm = ({ initialCourse = "General Inquiry" }) => {
-  const form = useRef();
+/* ─── Step Definitions ──────────────────────────────────────────────── */
+
+const STEPS = [
+  { id: 1, label: 'Name', field: 'user_name', placeholder: 'Your full name', type: 'text' },
+  { id: 2, label: 'Email', field: 'user_email', placeholder: 'you@example.com', type: 'email' },
+  { id: 3, label: 'Phone', field: 'user_phone', placeholder: '98765 43210', type: 'tel' },
+  { id: 4, label: 'Location', field: 'user_location', placeholder: 'e.g. Adyar, Chennai', type: 'text' },
+  { id: 5, label: 'Status', field: 'qualification', placeholder: 'Select your current status', type: 'select' },
+  { id: 6, label: 'Course', field: 'course_interest', placeholder: 'Select a course', type: 'select' },
+  { id: 7, label: 'Message', field: 'message', placeholder: 'Tell us how we can help you…', type: 'textarea' },
+];
+
+const COURSES = [
+  { value: 'General Inquiry', label: 'General Inquiry' },
+  { value: 'Full Stack Web Development (MERN Stack)', label: 'Full Stack Development' },
+  { value: 'Data Science & Artificial Intelligence', label: 'Data Science & AI' },
+  { value: 'UI/UX Design Strategy', label: 'UI/UX Design' },
+  { value: 'Cyber Security & Ethical Hacking', label: 'Cyber Security' },
+  { value: 'Cloud Computing & DevOps', label: 'Cloud Computing' },
+];
+
+const QUALIFICATIONS = [
+  { value: 'Student', label: 'Student (Arts / Science / Engineering)' },
+  { value: 'Job Seeker', label: 'Job Seeker / Fresher' },
+  { value: 'Working Professional', label: 'Working Professional' },
+  { value: 'Business Owner', label: 'Business Owner / Entrepreneur' },
+  { value: 'Other', label: 'Other' },
+];
+
+/* ─── Main Component ─────────────────────────────────────────────── */
+
+const ContactForm = ({ initialCourse = 'General Inquiry' }) => {
   const { closeModal } = useModal();
-  const [status, setStatus] = useState('idle'); // idle, sending, success, error
+  const form = useRef();
+  const [currentStep, setCurrentStep] = useState(0);
+  const [formData, setFormData] = useState({ course_interest: initialCourse });
+  const [status, setStatus] = useState('idle');
   const [errorMessage, setErrorMessage] = useState('');
-  const [formErrors, setFormErrors] = useState({});
-  const [selectedCourse, setSelectedCourse] = useState(initialCourse);
-  const [selectedQualification, setSelectedQualification] = useState("");
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [isQualDropdownOpen, setIsQualDropdownOpen] = useState(false);
+  const [fieldError, setFieldError] = useState('');
 
-  const courses = [
-    { value: "General Inquiry", label: "General Inquiry" },
-    { value: "Full Stack Web Development (MERN Stack)", label: "Full Stack Development" },
-    { value: "Data Science & Artificial Intelligence", label: "Data Science & AI" },
-    { value: "UI/UX Design Strategy", label: "UI/UX Design" },
-    { value: "Cyber Security & Ethical Hacking", label: "Cyber Security" },
-    { value: "Cloud Computing & DevOps", label: "Cloud Computing" }
-  ];
 
-  const qualifications = [
-    { value: "Student", label: "Student (Arts/Science/Engineering)" },
-    { value: "Job Seeker", label: "Job Seeker / Fresher" },
-    { value: "Working Professional", label: "Working Professional" },
-    { value: "Business Owner", label: "Business Owner / Entrepreneur" },
-    { value: "Other", label: "Other" }
-  ];
-
-  // Update selected course if initialCourse prop changes
-  React.useEffect(() => {
+  useEffect(() => {
     if (initialCourse) {
-      setSelectedCourse(initialCourse);
+      setFormData((prev) => ({ ...prev, course_interest: initialCourse }));
     }
   }, [initialCourse]);
 
-  // Close dropdown when clicking outside
-  React.useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (isDropdownOpen && !event.target.closest('.course-dropdown-container')) {
-        setIsDropdownOpen(false);
-      }
-      if (isQualDropdownOpen && !event.target.closest('.qual-dropdown-container')) {
-        setIsQualDropdownOpen(false);
-      }
-    };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [isDropdownOpen, isQualDropdownOpen]);
 
-  const validateForm = () => {
-    const errors = {};
-    const formData = new FormData(form.current);
-    const name = formData.get('user_name');
-    const email = formData.get('user_email');
-    const phone = formData.get('user_phone');
-    const location = formData.get('user_location');
-    const message = formData.get('message');
 
-    // Strict Name Validation: Letters and spaces only
-    if (!name || name.trim().length < 2) {
-      errors.user_name = 'Name must be at least 2 characters long';
-    } else if (!/^[a-zA-Z\s]+$/.test(name)) {
-      errors.user_name = 'Name should only contain letters and spaces';
+  const step = STEPS[currentStep];
+  const progress = ((currentStep + 1) / STEPS.length) * 100;
+  const value = formData[step.field] || '';
+
+  /* ── Validation per step ─────────────────────────────────── */
+  const validateCurrent = () => {
+    const v = (formData[step.field] || '').trim();
+
+    if (step.field === 'user_name') {
+      if (v.length < 2) return 'Name must be at least 2 characters';
+      if (!/^[a-zA-Z\s]+$/.test(v)) return 'Name should only contain letters';
     }
-
-    // Strict Email Validation
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    if (!email || !emailRegex.test(email)) {
-      errors.user_email = 'Please enter a valid official email address';
+    if (step.field === 'user_email') {
+      if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(v)) return 'Enter a valid email address';
     }
-
-    // Strict Phone Validation: 10 digits exactly for India
-    const digitsOnly = phone ? phone.replace(/\D/g, '') : '';
-    if (!phone || digitsOnly.length !== 10) {
-      errors.user_phone = 'Phone number must be exactly 10 digits';
+    if (step.field === 'user_phone') {
+      const digits = v.replace(/\D/g, '');
+      if (digits.length !== 10) return 'Phone must be exactly 10 digits';
     }
-
-    if (!location || location.trim().length < 2) {
-      errors.user_location = 'Please enter your City/Area';
+    if (step.field === 'user_location') {
+      if (v.length < 2) return 'Enter your city or area';
     }
-
-    if (!selectedQualification) {
-      errors.qualification = 'Please select your current status';
+    if (step.field === 'qualification') {
+      if (!v) return 'Please select your status';
     }
-
-    if (!message || message.trim().length < 10) {
-      errors.message = 'Message must be at least 10 characters (tell us more about your interest)';
+    if (step.field === 'course_interest') {
+      if (!v) return 'Please select a course';
     }
-
-    setFormErrors(errors);
-    return Object.keys(errors).length === 0;
+    if (step.field === 'message') {
+      if (v.length < 10) return 'Tell us a bit more (at least 10 characters)';
+    }
+    return '';
   };
 
-  const sendEmail = async (e) => {
-    e.preventDefault();
-    
-    if (!validateForm()) return;
+  const handleNext = () => {
+    const err = validateCurrent();
+    if (err) { setFieldError(err); return; }
+    setFieldError('');
+    if (currentStep < STEPS.length - 1) {
+      setCurrentStep(currentStep + 1);
+    } else {
+      handleSubmit();
+    }
+  };
 
+  const handleBack = () => {
+    setFieldError('');
+    if (currentStep > 0) setCurrentStep(currentStep - 1);
+  };
+
+  const handleChange = (field, val) => {
+    setFormData({ ...formData, [field]: val });
+    if (fieldError) setFieldError('');
+  };
+
+  /* ── Submit ──────────────────────────────────────────────── */
+  const handleSubmit = async () => {
     setStatus('sending');
-
     const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
-
     try {
-      const formData = new FormData(form.current);
-      const payload = {
-        user_name: formData.get('user_name'),
-        user_email: formData.get('user_email'),
-        user_phone: formData.get('user_phone'),
-        user_location: formData.get('user_location'),
-        qualification: selectedQualification,
-        course_interest: selectedCourse,
-        message: formData.get('message'),
-      };
-
       const response = await fetch(`${API_URL}/student`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
+        body: JSON.stringify(formData),
       });
-
       if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.detail || 'Something went wrong. Please try again.');
+        const err = await response.json().catch(() => ({}));
+        throw new Error(err.detail || 'Something went wrong.');
       }
-
       setStatus('success');
-      form.current.reset();
-      setFormErrors({});
-    } catch (error) {
+    } catch (e) {
       setStatus('error');
-      setErrorMessage(error.message || 'Something went wrong. Please try again later.');
+      setErrorMessage(e.message || 'Something went wrong. Try again.');
     }
   };
 
+  /* ── Success State ───────────────────────────────────────── */
   if (status === 'success') {
     return (
-      <div className="bg-accent-success/10 border border-accent-success/20 rounded-2xl p-8 text-center">
-        <div className="inline-flex items-center justify-center h-16 w-16 rounded-full bg-accent-success/20 mb-6">
-          <CheckCircle className="h-8 w-8 text-accent-success" />
+      <div className="flex flex-col items-center gap-5 py-8 animate-in fade-in">
+        <div className="flex h-16 w-16 items-center justify-center rounded-full bg-green-500/10 border-2 border-green-500/20">
+          <CheckCircle className="h-8 w-8 text-green-500" />
         </div>
-        <h3 className="text-2xl font-bold text-[var(--text-heading)] mb-2">Message Sent!</h3>
-        <p className="text-[var(--text-muted)] mb-6">Thank you for reaching out. Our counselor will get back to you within 24 hours.</p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <button 
-            onClick={() => setStatus('idle')}
-            className="btn-primary"
+        <div className="text-center space-y-1">
+          <h2 className="text-xl font-bold text-[var(--text-heading)]">You're all set, {formData.user_name}!</h2>
+          <p className="text-sm text-[var(--text-muted)]">Our counselor will reach out within 24 hours.</p>
+        </div>
+        <div className="flex gap-3 mt-2">
+          <button
+            onClick={() => { setStatus('idle'); setCurrentStep(0); setFormData({ course_interest: initialCourse }); }}
+            className="btn-primary text-sm"
           >
-            Send Another Message
+            Send Another
           </button>
           {closeModal && (
-            <button 
-              onClick={closeModal}
-              className="px-8 py-4 bg-[var(--bg-inverted)] text-[var(--text-on-inverted)] font-bold rounded-xl hover:opacity-90 transition-all"
-            >
+            <button onClick={closeModal} className="px-6 py-3 bg-[var(--bg-inverted)] text-[var(--text-on-inverted)] font-bold rounded-xl text-sm hover:opacity-90 transition-all">
               Close
             </button>
           )}
@@ -165,221 +156,194 @@ const ContactForm = ({ initialCourse = "General Inquiry" }) => {
     );
   }
 
+  /* ── Render ──────────────────────────────────────────────── */
   return (
-    <form ref={form} onSubmit={sendEmail} className="space-y-4 md:space-y-5">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
-        <div className="space-y-1.5">
-          <label htmlFor="user_name" className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wide">Full Name <span className="text-red-500">*</span></label>
-          <input
-            type="text"
-            name="user_name"
-            id="user_name"
-            placeholder="John Doe"
-            onInput={(e) => {
-              e.target.value = e.target.value.replace(/[^a-zA-Z\s]/g, '');
-            }}
-            className={`w-full px-4 py-2.5 bg-[var(--bg-secondary)] border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm text-[var(--text-heading)] ${
-              formErrors.user_name ? 'border-red-500' : 'border-[var(--border-color)]'
-            }`}
-          />
-          {formErrors.user_name && <p className="text-[10px] text-red-500 font-bold">{formErrors.user_name}</p>}
-        </div>
-        <div className="space-y-1.5">
-          <label htmlFor="user_email" className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wide">Email Address <span className="text-red-500">*</span></label>
-          <input
-            type="email"
-            name="user_email"
-            id="user_email"
-            placeholder="john@example.com"
-            className={`w-full px-4 py-2.5 bg-[var(--bg-secondary)] border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm text-[var(--text-heading)] ${
-              formErrors.user_email ? 'border-red-500' : 'border-[var(--border-color)]'
-            }`}
-          />
-          {formErrors.user_email && <p className="text-[10px] text-red-500 font-bold">{formErrors.user_email}</p>}
-        </div>
+    <div ref={form}>
+      {/* Step indicators */}
+      <div className="mb-8 flex items-center justify-center gap-2">
+        {STEPS.map((s, i) => (
+          <div key={s.id} className="flex items-center gap-2">
+            <button
+              onClick={() => i < currentStep && (setFieldError(''), setCurrentStep(i))}
+              disabled={i > currentStep}
+              className={`relative flex h-8 w-8 items-center justify-center rounded-full transition-all duration-500 text-xs font-bold
+                ${i < currentStep ? 'bg-primary/15 text-primary' : ''}
+                ${i === currentStep ? 'bg-primary text-white shadow-lg shadow-primary/30' : ''}
+                ${i > currentStep ? 'bg-[var(--bg-secondary)] text-[var(--text-muted)]' : ''}
+                ${i > currentStep ? 'cursor-not-allowed' : 'cursor-pointer'}
+              `}
+            >
+              {i < currentStep ? <Check className="h-3.5 w-3.5" strokeWidth={3} /> : s.id}
+              {i === currentStep && (
+                <span className="absolute inset-0 rounded-full bg-primary/20 blur-md animate-pulse" />
+              )}
+            </button>
+            {i < STEPS.length - 1 && (
+              <div className="relative h-[1.5px] w-4 sm:w-6">
+                <div className="absolute inset-0 bg-[var(--border-color)]" />
+                <div
+                  className="absolute inset-0 bg-primary/40 transition-all duration-700 origin-left"
+                  style={{ transform: `scaleX(${i < currentStep ? 1 : 0})` }}
+                />
+              </div>
+            )}
+          </div>
+        ))}
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
-        <div className="space-y-1.5">
-          <label htmlFor="user_phone" className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wide">Phone Number <span className="text-red-500">*</span></label>
-          <input
-            type="tel"
-            name="user_phone"
-            id="user_phone"
-            placeholder="+91 98765 43210"
-            maxLength={10}
-            onInput={(e) => {
-              e.target.value = e.target.value.replace(/\D/g, '');
-            }}
-            className={`w-full px-4 py-2.5 bg-[var(--bg-secondary)] border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm text-[var(--text-heading)] ${
-              formErrors.user_phone ? 'border-red-500' : 'border-[var(--border-color)]'
-            }`}
-          />
-          {formErrors.user_phone && <p className="text-[10px] text-red-500 font-bold">{formErrors.user_phone}</p>}
-        </div>
-        <div className="space-y-1.5">
-          <label htmlFor="user_location" className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wide">Location (City/Area) <span className="text-red-500">*</span></label>
-          <input
-            type="text"
-            name="user_location"
-            id="user_location"
-            placeholder="e.g. Adyar, Chennai"
-            className={`w-full px-4 py-2.5 bg-[var(--bg-secondary)] border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm text-[var(--text-heading)] ${
-              formErrors.user_location ? 'border-red-500' : 'border-[var(--border-color)]'
-            }`}
-          />
-          {formErrors.user_location && <p className="text-[10px] text-red-500 font-bold">{formErrors.user_location}</p>}
-        </div>
+      {/* Progress bar */}
+      <div className="mb-6 overflow-hidden rounded-full bg-[var(--bg-secondary)] h-[2px]">
+        <div
+          className="h-full bg-gradient-to-r from-primary/60 to-primary transition-all duration-1000 ease-out"
+          style={{ width: `${progress}%` }}
+        />
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
-        <div className="space-y-1.5 relative qual-dropdown-container">
-          <label htmlFor="qualification" className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wide">Current Status <span className="text-red-500">*</span></label>
-          <input type="hidden" name="qualification" value={selectedQualification} />
-          <button
-            type="button"
-            id="qualification"
-            onClick={() => setIsQualDropdownOpen(!isQualDropdownOpen)}
-            className={`w-full px-4 py-2.5 bg-[var(--bg-secondary)] border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm flex items-center justify-between group ${
-              formErrors.qualification ? 'border-red-500' : 'border-[var(--border-color)]'
-            }`}
-          >
-            <span className={selectedQualification ? "text-[var(--text-heading)]" : "text-[var(--text-muted)]"}>
-              {qualifications.find(q => q.value === selectedQualification)?.label || "Select status"}
+      {/* Active step */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={step.id}
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -12 }}
+          transition={{ duration: 0.3 }}
+          className="space-y-3"
+        >
+          {/* Label row */}
+          <div className="flex items-baseline justify-between">
+            <label className="text-base sm:text-lg font-bold text-[var(--text-heading)]">
+              {step.label} <span className="text-red-500 text-xs">*</span>
+            </label>
+            <span className="text-[10px] font-bold text-[var(--text-muted)] tabular-nums uppercase tracking-wider">
+              {currentStep + 1} / {STEPS.length}
             </span>
-            <ChevronDown className={`h-4 w-4 text-[var(--text-muted)] transition-transform duration-300 ${isQualDropdownOpen ? 'rotate-180' : ''}`} />
-          </button>
-          
-          {formErrors.qualification && <p className="text-[10px] text-red-500 font-bold">{formErrors.qualification}</p>}
+          </div>
 
+          {/* Input */}
+          {step.type === 'textarea' ? (
+            <textarea
+              rows={3}
+              placeholder={step.placeholder}
+              value={value}
+              onChange={(e) => handleChange(step.field, e.target.value)}
+              autoFocus
+              className={`w-full px-4 py-3 bg-[var(--bg-secondary)] border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm text-[var(--text-heading)] resize-none ${
+                fieldError ? 'border-red-500' : 'border-[var(--border-color)]'
+              }`}
+            />
+          ) : step.type === 'select' ? (
+            <div className="flex flex-col gap-2">
+              {(step.field === 'qualification' ? QUALIFICATIONS : COURSES).map((opt, i) => {
+                const isSelected = value === opt.value;
+                return (
+                  <motion.button
+                    key={opt.value}
+                    type="button"
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.25, delay: i * 0.04 }}
+                    onClick={() => handleChange(step.field, opt.value)}
+                    className={`group relative w-full px-4 py-3 rounded-xl text-sm font-medium text-left transition-all duration-300 flex items-center justify-between border ${
+                      isSelected
+                        ? 'bg-primary/10 border-primary text-primary shadow-sm shadow-primary/10'
+                        : 'bg-[var(--bg-secondary)] border-[var(--border-color)] text-[var(--text-muted)] hover:border-primary/40 hover:text-[var(--text-heading)]'
+                    }`}
+                  >
+                    <span>{opt.label}</span>
+                    <span className={`flex h-5 w-5 items-center justify-center rounded-full transition-all duration-300 ${
+                      isSelected
+                        ? 'bg-primary text-white scale-100'
+                        : 'border border-[var(--border-color)] scale-90 opacity-0 group-hover:opacity-40'
+                    }`}>
+                      <Check className="h-3 w-3" strokeWidth={3} />
+                    </span>
+                  </motion.button>
+                );
+              })}
+            </div>
+          ) : (
+            <input
+              type={step.type}
+              placeholder={step.placeholder}
+              value={value}
+              onChange={(e) => {
+                let v = e.target.value;
+                if (step.field === 'user_name') v = v.replace(/[^a-zA-Z\s]/g, '');
+                if (step.field === 'user_phone') v = v.replace(/\D/g, '').slice(0, 10);
+                handleChange(step.field, v);
+              }}
+              onKeyDown={(e) => e.key === 'Enter' && handleNext()}
+              autoFocus
+              className={`w-full px-4 py-3.5 bg-[var(--bg-secondary)] border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm text-[var(--text-heading)] ${
+                fieldError ? 'border-red-500' : 'border-[var(--border-color)]'
+              }`}
+            />
+          )}
+
+          {/* Error message */}
           <AnimatePresence>
-            {isQualDropdownOpen && (
-              <motion.div
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.2 }}
-                className="absolute z-[110] left-0 right-0 mt-2 bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl shadow-xl overflow-hidden"
+            {fieldError && (
+              <motion.p
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                className="text-[11px] text-red-500 font-bold flex items-center gap-1"
               >
-                <div className="max-h-[200px] overflow-y-auto no-scrollbar py-1">
-                  {qualifications.map((q) => (
-                    <button
-                      key={q.value}
-                      type="button"
-                      onClick={() => {
-                        setSelectedQualification(q.value);
-                        setIsQualDropdownOpen(false);
-                      }}
-                      className={`w-full px-4 py-2.5 text-left text-sm flex items-center justify-between transition-colors ${
-                        selectedQualification === q.value 
-                          ? 'bg-primary/5 text-primary font-bold' 
-                          : 'text-[var(--text-muted)] hover:bg-[var(--bg-secondary)]'
-                      }`}
-                    >
-                      <span>{q.label}</span>
-                      {selectedQualification === q.value && <Check className="h-3.5 w-3.5" />}
-                    </button>
-                  ))}
-                </div>
-              </motion.div>
+                <AlertCircle className="h-3 w-3 shrink-0" /> {fieldError}
+              </motion.p>
             )}
           </AnimatePresence>
-        </div>
-        <div className="space-y-1.5 relative course-dropdown-container">
-          <label htmlFor="course_interest" className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wide">Interested Course <span className="text-red-500">*</span></label>
-          <input type="hidden" name="course_interest" value={selectedCourse} />
+
+          {/* API error */}
+          {status === 'error' && (
+            <div className="flex items-center space-x-2 text-red-500 bg-red-500/10 p-3 rounded-xl border border-red-500/20">
+              <AlertCircle className="h-4 w-4 shrink-0" />
+              <p className="text-xs font-bold">{errorMessage}</p>
+            </div>
+          )}
+        </motion.div>
+      </AnimatePresence>
+
+      {/* Buttons */}
+      <div className="mt-6 space-y-3">
+        <button
+          onClick={handleNext}
+          disabled={status === 'sending'}
+          className="w-full bg-primary hover:bg-primary-dark text-white font-bold py-3.5 rounded-xl flex items-center justify-center gap-2 transition-all shadow-lg shadow-primary/20 group disabled:opacity-70 disabled:cursor-not-allowed"
+        >
+          {status === 'sending' ? (
+            <>
+              <Loader2 className="h-4 w-4 animate-spin" />
+              <span>Submitting…</span>
+            </>
+          ) : currentStep === STEPS.length - 1 ? (
+            <>
+              <Send className="h-4 w-4" />
+              <span>Submit</span>
+            </>
+          ) : (
+            <>
+              <span>Continue</span>
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+            </>
+          )}
+        </button>
+
+        {currentStep > 0 && (
           <button
-            type="button"
-            id="course_interest"
-            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-            className="w-full px-4 py-2.5 bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm text-[var(--text-heading)] flex items-center justify-between group"
+            onClick={handleBack}
+            className="w-full text-center text-sm text-[var(--text-muted)] hover:text-[var(--text-heading)] transition-colors flex items-center justify-center gap-1"
           >
-            <span className={selectedCourse ? "text-[var(--text-heading)]" : "text-[var(--text-muted)]"}>
-              {courses.find(c => c.value === selectedCourse)?.label || "Select a course"}
-            </span>
-            <ChevronDown className={`h-4 w-4 text-[var(--text-muted)] transition-transform duration-300 ${isDropdownOpen ? 'rotate-180' : ''}`} />
+            <ArrowLeft className="h-3.5 w-3.5" /> Go back
           </button>
-
-          <AnimatePresence>
-            {isDropdownOpen && (
-              <motion.div
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.2 }}
-                className="absolute z-[110] left-0 right-0 mt-2 bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl shadow-xl overflow-hidden"
-              >
-                <div className="max-h-[200px] overflow-y-auto no-scrollbar py-1">
-                  {courses.map((course) => (
-                    <button
-                      key={course.value}
-                      type="button"
-                      onClick={() => {
-                        setSelectedCourse(course.value);
-                        setIsDropdownOpen(false);
-                      }}
-                      className={`w-full px-4 py-2.5 text-left text-sm flex items-center justify-between transition-colors ${
-                        selectedCourse === course.value 
-                          ? 'bg-primary/5 text-primary font-bold' 
-                          : 'text-[var(--text-muted)] hover:bg-[var(--bg-secondary)]'
-                      }`}
-                    >
-                      <span>{course.label}</span>
-                      {selectedCourse === course.value && <Check className="h-3.5 w-3.5" />}
-                    </button>
-                  ))}
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
-      </div>
-
-      <div className="space-y-1.5">
-        <label htmlFor="message" className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wide">Your Message <span className="text-red-500">*</span></label>
-        <textarea
-          name="message"
-          id="message"
-          rows="3"
-          placeholder="How can we help you?"
-          className={`w-full px-4 py-2.5 bg-[var(--bg-secondary)] border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm text-[var(--text-heading)] resize-none ${
-            formErrors.message ? 'border-red-500' : 'border-[var(--border-color)]'
-          }`}
-        ></textarea>
-        {formErrors.message && <p className="text-[10px] text-red-500 font-bold">{formErrors.message}</p>}
-      </div>
-
-      {status === 'error' && (
-        <div className="flex items-center space-x-2 text-red-500 bg-red-500/10 p-3 rounded-xl border border-red-500/20">
-          <AlertCircle className="h-4 w-4 shrink-0" />
-          <p className="text-xs font-bold">{errorMessage}</p>
-        </div>
-      )}
-
-      <button
-        type="submit"
-        disabled={status === 'sending'}
-        className={`w-full bg-primary hover:bg-primary-dark text-white font-bold py-4 rounded-xl flex items-center justify-center space-x-2 transition-all shadow-lg shadow-primary/20 ${
-          status === 'sending' ? 'opacity-70 cursor-not-allowed' : ''
-        }`}
-      >
-        {status === 'sending' ? (
-          <>
-            <Loader2 className="h-5 w-5 animate-spin" />
-            <span>Sending...</span>
-          </>
-        ) : (
-          <>
-            <Send className="h-5 w-5" />
-            <span>Send Message</span>
-          </>
         )}
-      </button>
-      
-      <p className="text-center text-[10px] text-[var(--text-muted)] font-medium">
+      </div>
+
+      {/* Privacy notice */}
+      <p className="text-center text-[10px] text-[var(--text-muted)] font-medium mt-4">
         By submitting, you agree to our <a href="/privacy-policy" className="text-primary hover:underline">Privacy Policy</a>.
       </p>
-    </form>
+    </div>
   );
 };
 

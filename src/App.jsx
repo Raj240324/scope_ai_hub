@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from 'react';
+import React, { lazy, Suspense, useState, useEffect, useRef } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 
@@ -8,6 +8,7 @@ import ScrollToTop from './components/utils/ScrollToTop';
 import { ModalProvider } from './context/ModalContext';
 import { ThemeProvider } from './context/ThemeContext';
 import ContactModal from './components/ui/ContactModal';
+import { CoreSpinLoader } from './components/ui/CoreSpinLoader';
 
 // Lazy Load Pages
 const Home = lazy(() => import('./pages/Home'));
@@ -29,14 +30,46 @@ const TrainerProfiles = lazy(() => import('./pages/careers/TrainerProfiles'));
 const Sitemap = lazy(() => import('./pages/Sitemap'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
-// Minimal fallback — HeroScroll has its own premium preloader for the home page
+// Full-screen preloader — only shows on first load / refresh
+function AppPreloader() {
+  const alreadyShown = useRef(window.__appPreloaderShown === true);
+  const [visible, setVisible] = useState(!alreadyShown.current);
+  const [fadeOut, setFadeOut] = useState(false);
+
+  useEffect(() => {
+    if (alreadyShown.current) return;
+
+    // Show for 4 seconds (full animation cycle), then fade out
+    const timer = setTimeout(() => {
+      setFadeOut(true);
+      window.__appPreloaderShown = true;
+      // Remove from DOM after fade animation
+      setTimeout(() => setVisible(false), 700);
+    }, 4000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (!visible) return null;
+
+  return (
+    <div
+      className={`fixed inset-0 z-[9999] flex items-center justify-center bg-black transition-opacity duration-700 ${fadeOut ? 'opacity-0' : 'opacity-100'}`}
+    >
+      <CoreSpinLoader />
+    </div>
+  );
+}
+
+// Minimal Suspense fallback for route transitions
 const PageLoader = () => (
-  <div className="min-h-screen bg-black" />
+  <div className="min-h-screen bg-[var(--bg-body)]" />
 );
 
 function App() {
   return (
     <ErrorBoundary>
+      <AppPreloader />
       <HelmetProvider>
         <ModalProvider>
           <ThemeProvider>

@@ -260,23 +260,6 @@ export default function HeroScroll({ children, badge, title, subtitle }) {
         </div>
       )}
 
-
-      {/* Preloader */}
-      {!loaded && (
-        <div className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-black">
-          <div className="w-12 h-12 mb-6 border-4 border-white/20 border-t-white rounded-full animate-spin" />
-          <p className="text-white/70 text-sm font-medium tracking-widest uppercase mb-4">
-            Loading experience…
-          </p>
-          <div className="w-64 h-1 bg-white/20 rounded-full overflow-hidden">
-            <div
-              className="h-full bg-white rounded-full transition-all duration-150 ease-out"
-              style={{ width: `${progress}%` }}
-            />
-          </div>
-          <p className="mt-2 text-white/40 text-xs tabular-nums">{progress}%</p>
-        </div>
-      )}
     </section>
   );
 }
