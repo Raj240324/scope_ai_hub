@@ -68,6 +68,7 @@ const learningPartners = [
 
   const Home = () => {
   const { openModal } = useModal();
+
   // Flagship courses for the home page
   const flagshipCourses = courses.slice(0, 6);
 
@@ -181,8 +182,8 @@ const learningPartners = [
       a: "Yes, our syllabus is regularly updated and aligned with current industrial requirements to ensure you learn the most in-demand technologies."
     },
     {
-      q: "Do you offer bilingual support for local students?",
-      a: "Yes, we explain complex technical concepts in both Tamil and English to ensure every student understands the fundamentals clearly."
+      q: "Do you offer multilingual support for local students?",
+      a: "Yes, we explain complex technical concepts in Tamil, Telugu, and English to ensure every student understands the fundamentals clearly."
     },
     {
       q: "Is the certification officially recognized?",
@@ -558,31 +559,383 @@ const learningPartners = [
         </div>
       </section>
 
-      {/* Features/Trust Factors */}
+      {/* Features/Trust Factors — Infographic Hub-and-Spoke Style */}
       <section className="section-padding bg-[var(--bg-body)] relative overflow-hidden border-b border-[var(--border-color)]">
+        {/* Soft radial glow background */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px]" />
+          <div className="absolute top-0 right-0 w-80 h-80 bg-amber-400/5 rounded-full blur-[100px]" />
+          <div className="absolute bottom-0 left-0 w-80 h-80 bg-cyan-400/5 rounded-full blur-[100px]" />
+        </div>
+
         <div className="container-custom relative z-10">
-          <div className="text-center max-w-3xl mx-auto mb-20">
-            <h2 className="heading-md mb-4 text-[var(--text-heading)]">Why Choose {BRANDING.fullName}?</h2>
-            <p className="text-[var(--text-muted)] text-base md:text-lg">
-              We don't just teach code; we build careers through a comprehensive learning ecosystem.
-            </p>
+          {/* Section Header */}
+          <div className="text-center mb-14">
+            <p className="text-xs font-black uppercase tracking-[0.3em] text-[var(--text-muted)] mb-2">Trusted Education Partner</p>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-[var(--text-heading)] leading-tight mb-4">
+              Why Choose <span className="text-primary">{BRANDING.fullName}?</span>
+            </h2>
+            {/* Golden ribbon subtitle — cloned from image */}
+            <div className="inline-flex items-center gap-3 px-6 py-2.5 rounded-full text-sm sm:text-base font-bold text-white shadow-lg"
+              style={{ background: 'linear-gradient(90deg, #B8860B 0%, #DAA520 40%, #FFD700 60%, #DAA520 80%, #B8860B 100%)' }}>
+              <Rocket className="h-4 w-4 shrink-0" />
+              Your Career Launchpad in AI &amp; Cloud
+              <Rocket className="h-4 w-4 shrink-0 scale-x-[-1]" />
+            </div>
           </div>
 
-          <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {trustFactors.map((factor, index) => (
-              <StaggerItem key={index} className="h-full">
-                <div className="bg-[var(--bg-secondary)] p-5 sm:p-8 rounded-2xl sm:rounded-3xl border border-[var(--border-color)] hover:border-primary/20 hover:shadow-xl transition-all group h-full flex flex-col">
-                  <div className={`w-12 h-12 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl ${factor.iconBg} shadow-sm flex items-center justify-center mb-5 sm:mb-6 ${factor.iconColor} group-hover:bg-[var(--bg-inverted)] group-hover:text-[var(--text-on-inverted)] transition-colors`}>
-                    {factor.icon}
+          {/* =====================================================================
+               WHY CHOOSE US — RESPONSIVE INFOGRAPHIC
+               • Mobile  (< md)  : Hub badge   → 2-col card grid
+               • Tablet  (md–xl) : Hub circle  centered, cards left & right
+               • Desktop (xl+)   : Full hub-and-spoke with curved SVG arrows
+          ===================================================================== */}
+
+          {/* ── MOBILE LAYOUT (hidden on md+) ─────────────────────────────── */}
+          <div className="block md:hidden">
+            {/* Hub badge */}
+            <div className="flex justify-center mb-8">
+              <div className="relative">
+                <div className="absolute inset-0 rounded-full bg-primary/20 blur-xl scale-110" />
+                <div
+                  className="relative w-36 h-36 rounded-full flex flex-col items-center justify-center text-center shadow-2xl"
+                  style={{
+                    background: 'conic-gradient(from 180deg at 50% 50%, #1e3a8a 0deg, #1d4ed8 90deg, #0284c7 180deg, #1d4ed8 270deg, #1e3a8a 360deg)',
+                    border: '4px solid #FFD700',
+                  }}
+                >
+                  <div className="absolute inset-3 rounded-full bg-white/10 backdrop-blur-sm" />
+                  <div className="relative z-10 flex flex-col items-center">
+                    <div className="w-9 h-9 rounded-full bg-white/20 flex items-center justify-center mb-1">
+                      <Cpu className="h-5 w-5 text-white" />
+                    </div>
+                    <p className="text-[9px] font-black text-white/80 uppercase tracking-widest leading-none">Ai</p>
+                    <p className="text-sm font-black text-white leading-none mt-0.5 whitespace-nowrap">SCOPE AI HUB</p>
+                    <div className="mt-1 flex gap-0.5">
+                      {[...Array(5)].map((_, i) => <div key={i} className="w-1 h-1 rounded-full bg-white/40" />)}
+                    </div>
                   </div>
-                  <h3 className="text-lg sm:text-xl font-bold text-[var(--text-heading)] mb-3 sm:mb-4">{factor.title}</h3>
-                  <p className="text-[var(--text-muted)] text-sm sm:text-base leading-relaxed">
-                    {factor.description}
-                  </p>
                 </div>
-              </StaggerItem>
-            ))}
-          </StaggerContainer>
+              </div>
+            </div>
+
+            {/* Feature cards — single column for full readability */}
+            <div className="flex flex-col gap-2.5">
+              {[
+                { num: "1", title: "Industry-Focused Curriculum", sub: "Real Corporate Needs", accent: "#1d4ed8" },
+                { num: "2", title: "70% Practical Learning", sub: "Labs + Projects + Case Studies", accent: "#047857" },
+                { num: "3", title: "Mentorship by Industry Experts", sub: "10+ Years Experience", accent: "#7e22ce" },
+                { num: "4", title: "Real-World Industry Projects", sub: "200+ Projects", accent: "#c2410c" },
+                { num: "5", title: "Career Preparation", sub: "Resume + Mock Interviews + Guidance", accent: "#b45309", isPrep: true },
+                { num: "6", title: "Hiring Network", sub: "75+ Hiring Partners", accent: "#0f766e" },
+                { num: "7", title: "Placement Support", sub: "100% Job Assistance", accent: "#15803d" },
+                { num: "8", title: "Future-Ready Curriculum", sub: "ML, DL, Gen AI, Cloud", accent: "#4338ca" },
+              ].map((item, i) => (
+                <div
+                  key={i}
+                  className="flex items-center gap-3 rounded-xl px-3 py-2.5 shadow-sm hover:shadow-md transition-all"
+                  style={{
+                    background: item.isPrep ? 'rgba(245,158,11,0.12)' : 'var(--bg-card)',
+                    borderLeft: `4px solid ${item.accent}`,
+                    border: item.isPrep ? '2px solid #fbbf24' : '1px solid var(--border-color)',
+                    borderLeftWidth: '4px',
+                    borderLeftColor: item.accent,
+                  }}
+                >
+                  <span
+                    className="w-6 h-6 rounded-full text-white text-[10px] font-black flex items-center justify-center shrink-0"
+                    style={{ background: item.accent }}
+                  >{item.num}</span>
+                  <div className="flex-1">
+                    <p className="font-bold text-[13px] leading-snug text-[var(--text-heading)]">{item.title}</p>
+                    <p className="text-[11px] text-[var(--text-muted)] mt-0.5">{item.sub}</p>
+                  </div>
+                </div>
+              ))}
+
+              {/* Career Launch — full-width highlight */}
+              <div
+                className="flex items-center gap-3 rounded-xl px-3 py-3 shadow-md"
+                style={{ background: '#1e293b', border: '2px solid #fbbf24' }}
+              >
+                <span className="w-7 h-7 rounded-full bg-amber-500 text-white text-xs font-black flex items-center justify-center shrink-0">★</span>
+                <div className="flex-1">
+                  <p className="font-bold text-[13px] text-white leading-snug">Career Launch</p>
+                  <p className="text-[11px] text-white/60 mt-0.5">Job-Ready Professional</p>
+                </div>
+                <span className="text-lg shrink-0">🏆</span>
+              </div>
+            </div>
+          </div>
+
+          {/* ── TABLET LAYOUT (md → xl) ────────────────────────────────────── */}
+          <div className="hidden md:flex xl:hidden flex-col items-center gap-6">
+            {/* Top row: left cards | hub circle | right cards */}
+            <div className="flex items-center gap-6 w-full">
+              {/* Left cards */}
+              <div className="flex flex-col gap-3 flex-1">
+                {[
+                  { num: "1", title: "Industry-Focused Curriculum", sub: "Real Corporate Needs", emoji: "💼", accent: "#1d4ed8" },
+                  { num: "2", title: "70% Practical Learning", sub: "Labs + Projects + Case Studies", emoji: "🔬", accent: "#047857" },
+                  { num: "3", title: "Mentorship by Industry Experts", sub: "10+ Years Experience", emoji: "🤝", accent: "#7e22ce" },
+                  { num: "4", title: "Real-World Industry Projects", sub: "200+ Projects", emoji: "🖥️", accent: "#c2410c" },
+                ].map((item, i) => (
+                  <div key={i} className="flex items-center gap-2.5 bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl shadow-sm hover:shadow-md transition-all p-0 overflow-hidden"
+                    style={{ borderRightWidth: '4px', borderRightColor: item.accent }}>
+                    <span className="w-7 text-center text-white text-xs font-black py-4 shrink-0 self-stretch flex items-center justify-center"
+                      style={{ background: item.accent }}>{item.num}</span>
+                    <div className="flex-1 py-2.5 pr-2">
+                      <p className="font-bold text-[13px] text-[var(--text-heading)] leading-snug">{item.title}</p>
+                      <p className="text-[var(--text-muted)] text-xs mt-0.5">({item.sub})</p>
+                    </div>
+                    <span className="text-lg pr-3 shrink-0">{item.emoji}</span>
+                  </div>
+                ))}
+              </div>
+
+              {/* Centre hub circle */}
+              <div className="flex flex-col items-center gap-4 shrink-0">
+                <div className="relative">
+                  <div className="absolute inset-0 rounded-full bg-primary/20 blur-xl scale-110" />
+                  <div className="absolute -inset-3 rounded-full border-2 border-dashed border-primary/20 animate-spin" style={{ animationDuration: '20s' }} />
+                  <div
+                    className="relative w-44 h-44 rounded-full flex flex-col items-center justify-center text-center shadow-2xl"
+                    style={{
+                      background: 'conic-gradient(from 180deg at 50% 50%, #1e3a8a 0deg, #1d4ed8 90deg, #0284c7 180deg, #1d4ed8 270deg, #1e3a8a 360deg)',
+                      border: '4px solid #FFD700',
+                    }}
+                  >
+                    <div className="absolute inset-3 rounded-full bg-white/10 backdrop-blur-sm" />
+                    <div className="relative z-10 flex flex-col items-center">
+                      <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center mb-1">
+                        <Cpu className="h-5 w-5 text-white" />
+                      </div>
+                      <p className="text-[9px] font-black text-white/80 uppercase tracking-widest leading-none">Ai</p>
+                      <p className="text-sm font-black text-white leading-none mt-0.5 whitespace-nowrap">SCOPE AI HUB</p>
+                      <div className="mt-1.5 flex gap-0.5">
+                        {[...Array(5)].map((_, i) => <div key={i} className="w-1 h-1 rounded-full bg-white/40" />)}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Right cards */}
+              <div className="flex flex-col gap-3 flex-1">
+                {/* Career Launch */}
+                <div className="flex items-center gap-2.5 border-2 border-amber-400 rounded-xl shadow-md overflow-hidden" style={{ background: '#1e293b' }}>
+                  <div className="bg-amber-500 text-white py-4 px-2 flex items-center justify-center shrink-0 self-stretch">
+                    <Award className="h-4 w-4" />
+                  </div>
+                  <div className="flex-1 py-2.5">
+                    <p className="font-bold text-[13px] text-white leading-snug">Career Launch</p>
+                    <p className="text-white/60 text-xs mt-0.5">(Job-Ready Professional)</p>
+                  </div>
+                  <span className="text-xl pr-3 shrink-0">🏆</span>
+                </div>
+                {[
+                  { num: "8", title: "Future-Ready Curriculum", sub: "ML, DL, Gen AI, Cloud", emoji: "🧠", accent: "#4338ca" },
+                  { num: "7", title: "Placement Support", sub: "100% Job Assistance", emoji: "💼", accent: "#15803d" },
+                  { num: "6", title: "Hiring Network", sub: "75+ Hiring Partners", emoji: "🤝", accent: "#0f766e" },
+                ].map((item, i) => (
+                  <div key={i} className="flex items-center gap-2.5 bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl shadow-sm hover:shadow-md transition-all overflow-hidden"
+                    style={{ borderRightWidth: '4px', borderRightColor: item.accent }}>
+                    <span className="w-7 text-center text-white text-xs font-black py-4 shrink-0 self-stretch flex items-center justify-center"
+                      style={{ background: item.accent }}>{item.num}</span>
+                    <div className="flex-1 py-2.5 pr-2">
+                      <p className="font-bold text-[13px] text-[var(--text-heading)] leading-snug">{item.title}</p>
+                      <p className="text-[var(--text-muted)] text-xs mt-0.5">({item.sub})</p>
+                    </div>
+                    <span className="text-lg pr-3 shrink-0">{item.emoji}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Career Preparation — bottom card */}
+            <div className="w-full max-w-sm border-2 border-amber-400 rounded-xl shadow-md p-4 text-center" style={{ background: 'rgba(245,158,11,0.12)' }}>
+              <div className="inline-flex items-center gap-2 mb-1">
+                <span className="w-6 h-6 rounded-full bg-amber-500 text-white text-xs font-black flex items-center justify-center shrink-0">5</span>
+                <p className="font-bold text-sm text-[var(--text-heading)]">Career Preparation</p>
+              </div>
+              <p className="text-[var(--text-muted)] text-xs">(Resume + Mock Interviews + Guidance)</p>
+            </div>
+          </div>
+
+          {/* ── DESKTOP LAYOUT (xl+) — full hub-and-spoke with SVG arrows ── */}
+          <div className="hidden xl:flex flex-row items-center justify-center">
+
+            {/* LEFT COLUMN */}
+            <div className="flex flex-col gap-3.5 w-[320px] shrink-0">
+              {[
+                { num: "1", title: "Industry-Focused Curriculum", sub: "Real Corporate Needs", emoji: "💼", borderColor: "#3b82f6", badgeBg: "#1d4ed8" },
+                { num: "2", title: "70% Practical Learning", sub: "Labs + Projects + Case Studies", emoji: "🔬", borderColor: "#10b981", badgeBg: "#047857" },
+                { num: "3", title: "Mentorship by Industry Experts", sub: "10+ Years Experience", emoji: "🤝", borderColor: "#a855f7", badgeBg: "#7e22ce" },
+                { num: "4", title: "Real-World Industry Projects", sub: "200+ Projects", emoji: "🖥️", borderColor: "#f97316", badgeBg: "#c2410c" },
+              ].map((item, i) => (
+                <div key={i} className="relative">
+                  <div className="flex items-center gap-2.5 bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl shadow-sm hover:shadow-md transition-all overflow-hidden"
+                    style={{ borderRightWidth: '4px', borderRightColor: item.borderColor }}>
+                    <span className="text-[11px] font-black text-white px-2 py-4 flex items-center justify-center shrink-0 self-stretch"
+                      style={{ background: item.badgeBg, borderRadius: '10px 0 0 10px' }}>{item.num}</span>
+                    <div className="flex-1 py-3">
+                      <p className="font-bold text-sm text-[var(--text-heading)] leading-snug">{item.title}</p>
+                      <p className="text-[var(--text-muted)] text-xs mt-0.5">({item.sub})</p>
+                    </div>
+                    <span className="text-xl pr-3 shrink-0">{item.emoji}</span>
+                  </div>
+                  {/* Arrow → to hub */}
+                  <div className="absolute top-1/2 -translate-y-1/2 -right-[76px] z-20">
+                    <svg width="76" height="44" viewBox="0 0 80 44" fill="none">
+                      <path d="M2 38 Q20 38 36 22 Q52 6 72 6" stroke="rgba(37,99,235,0.75)" strokeWidth="2.5" strokeLinecap="round" fill="none"/>
+                      <polygon points="72,1 80,6 72,11" fill="rgba(37,99,235,0.85)"/>
+                    </svg>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* CENTER HUB */}
+            <div className="flex-1 flex flex-col items-center justify-between px-8 min-h-[480px]">
+              {/* Circle */}
+              <div className="flex-1 flex items-center justify-center w-full">
+                <div className="relative shrink-0">
+                  <div className="absolute inset-0 rounded-full bg-primary/20 blur-[20px] scale-110" />
+                  <div className="absolute -inset-4 rounded-full border-2 border-dashed border-primary/20 animate-spin" style={{ animationDuration: '20s' }} />
+                  <div
+                    className="relative w-52 h-52 rounded-full flex flex-col items-center justify-center text-center shadow-2xl"
+                    style={{
+                      background: 'conic-gradient(from 180deg at 50% 50%, #1e3a8a 0deg, #1d4ed8 90deg, #0284c7 180deg, #1d4ed8 270deg, #1e3a8a 360deg)',
+                      border: '4px solid #FFD700',
+                    }}
+                  >
+                    <div className="absolute inset-3 rounded-full bg-white/10 backdrop-blur-sm" />
+                    <div className="relative z-10 flex flex-col items-center">
+                      <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center mb-1">
+                        <Cpu className="h-6 w-6 text-white" />
+                      </div>
+                      <p className="text-[10px] font-black text-white/80 uppercase tracking-widest leading-none">Ai</p>
+                      <p className="text-lg font-black text-white leading-none mt-0.5 whitespace-nowrap">SCOPE AI HUB</p>
+                      <div className="mt-1.5 flex gap-0.5">
+                        {[...Array(5)].map((_, i) => <div key={i} className="w-1 h-1 rounded-full bg-white/40" />)}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Bottom center — Item 5 */}
+              <div className="relative w-full max-w-[280px] mt-7">
+                <div className="absolute -top-[76px] left-1/2 -translate-x-1/2 z-20">
+                  <svg width="44" height="76" viewBox="0 0 44 80" fill="none">
+                    <path d="M38 78 Q38 56 22 42 Q8 28 8 8" stroke="#F59E0B" strokeWidth="2.5" strokeLinecap="round" fill="none" strokeOpacity="0.85"/>
+                    <polygon points="3,8 8,0 13,8" fill="#F59E0B" fillOpacity="0.9"/>
+                  </svg>
+                </div>
+                <div className="border-2 border-amber-400 rounded-xl shadow-md p-4 text-center hover:shadow-lg transition-all" style={{ background: 'rgba(245,158,11,0.12)' }}>
+                  <div className="inline-flex items-center gap-2 mb-1">
+                    <span className="w-6 h-6 rounded-full bg-amber-500 text-white text-xs font-black flex items-center justify-center shrink-0">5</span>
+                    <p className="font-bold text-sm text-[var(--text-heading)]">Career Preparation</p>
+                  </div>
+                  <p className="text-[var(--text-muted)] text-xs">(Resume + Mock Interviews + Guidance)</p>
+                </div>
+              </div>
+            </div>
+
+            {/* RIGHT COLUMN */}
+            <div className="flex flex-col gap-3.5 w-[320px] shrink-0">
+              {/* Career Launch */}
+              <div className="relative">
+                <div className="absolute top-1/2 -translate-y-1/2 -left-[76px] z-20">
+                  <svg width="76" height="44" viewBox="0 0 80 44" fill="none">
+                    <path d="M78 38 Q60 38 44 22 Q28 6 8 6" stroke="#F59E0B" strokeWidth="2.5" strokeLinecap="round" fill="none" strokeOpacity="0.85"/>
+                    <polygon points="8,1 0,6 8,11" fill="#F59E0B" fillOpacity="0.9"/>
+                  </svg>
+                </div>
+                <div className="flex items-center gap-2.5 border-2 border-amber-400 rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all" style={{ background: '#1e293b' }}>
+                  <div className="bg-amber-500 text-white py-4 px-2 flex flex-col items-center justify-center shrink-0 self-stretch">
+                    <Award className="h-4 w-4" />
+                  </div>
+                  <div className="flex-1 py-3">
+                    <p className="font-bold text-sm text-white leading-snug">Career Launch</p>
+                    <p className="text-white/60 text-xs mt-0.5">(Job-Ready Professional)</p>
+                  </div>
+                  <span className="text-2xl pr-3 shrink-0">🏆</span>
+                </div>
+              </div>
+
+              {[
+                { num: "8", title: "Future-Ready Curriculum", sub: "ML, DL, Gen AI, Cloud", emoji: "🧠", borderColor: "#6366f1", badgeBg: "#4338ca" },
+                { num: "7", title: "Placement Support", sub: "100% Job Assistance", emoji: "💼", borderColor: "#22c55e", badgeBg: "#15803d" },
+                { num: "6", title: "Hiring Network", sub: "75+ Hiring Partners", emoji: "🤝", borderColor: "#14b8a6", badgeBg: "#0f766e" },
+              ].map((item, i) => (
+                <div key={i} className="relative">
+                  <div className="absolute top-1/2 -translate-y-1/2 -left-[76px] z-20">
+                    <svg width="76" height="44" viewBox="0 0 80 44" fill="none">
+                      <path d="M78 38 Q60 38 44 22 Q28 6 8 6" stroke="rgba(37,99,235,0.75)" strokeWidth="2.5" strokeLinecap="round" fill="none"/>
+                      <polygon points="8,1 0,6 8,11" fill="rgba(37,99,235,0.85)"/>
+                    </svg>
+                  </div>
+                  <div className="flex items-center gap-2.5 bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl shadow-sm hover:shadow-md transition-all overflow-hidden"
+                    style={{ borderRightWidth: '4px', borderRightColor: item.borderColor }}>
+                    <span className="text-[11px] font-black text-white px-2 py-4 flex items-center justify-center shrink-0 self-stretch"
+                      style={{ background: item.badgeBg, borderRadius: '10px 0 0 10px' }}>{item.num}</span>
+                    <div className="flex-1 py-3">
+                      <p className="font-bold text-sm text-[var(--text-heading)] leading-snug">{item.title}</p>
+                      <p className="text-[var(--text-muted)] text-xs mt-0.5">({item.sub})</p>
+                    </div>
+                    <span className="text-xl pr-3 shrink-0">{item.emoji}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+          </div>{/* end desktop layout */}
+
+          {/* ===== BOTTOM STATS BAR ===== */}
+
+          <div className="mt-12 rounded-2xl overflow-hidden shadow-xl"
+            style={{ background: 'linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #0f172a 100%)' }}>
+
+            {/* Mobile: flex-wrap so 5th item can be centered */}
+            <div className="flex flex-wrap sm:hidden">
+              {[
+                { value: "70%",     label: "Practical",         highlight: true  },
+                { value: "200+",    label: "Projects",          highlight: false },
+                { value: "10+ Yrs", label: "Trainers' Exp",     highlight: false },
+                { value: "75+",     label: "Hiring Partners",   highlight: false },
+                { value: "100%",    label: "Placement Support", highlight: true  },
+              ].map((stat, i) => (
+                <div key={i}
+                  className={`flex flex-col items-center justify-center py-5 px-4 text-center gap-1 hover:bg-white/5 transition-colors
+                    ${i < 4 ? 'w-1/2' : 'w-full border-t border-white/10'}
+                    ${i === 0 || i === 2 ? 'border-r border-white/10' : ''}
+                    ${i < 2 ? 'border-b border-white/10' : i < 4 ? '' : ''}
+                  `}
+                >
+                  <span className={`text-2xl font-black ${stat.highlight ? 'text-amber-400' : 'text-white'}`}>{stat.value}</span>
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-white/60">{stat.label}</span>
+                </div>
+              ))}
+            </div>
+
+            {/* Tablet/Desktop: single row with dividers */}
+            <div className="hidden sm:grid sm:grid-cols-5 divide-x divide-white/10">
+              {[
+                { value: "70%",     label: "Practical",         highlight: true  },
+                { value: "200+",    label: "Projects",          highlight: false },
+                { value: "10+ Yrs", label: "Trainers' Exp",     highlight: false },
+                { value: "75+",     label: "Hiring Partners",   highlight: false },
+                { value: "100%",    label: "Placement Support", highlight: true  },
+              ].map((stat, i) => (
+                <div key={i} className="flex flex-col items-center justify-center py-6 px-4 text-center gap-1 hover:bg-white/5 transition-colors">
+                  <span className={`text-3xl font-black ${stat.highlight ? 'text-amber-400' : 'text-white'}`}>{stat.value}</span>
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-white/60">{stat.label}</span>
+                </div>
+              ))}
+            </div>
+
+          </div>
         </div>
       </section>
 

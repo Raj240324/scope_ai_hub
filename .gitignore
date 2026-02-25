@@ -23,3 +23,16 @@ dist-ssr
 *.sln
 *.sw?
 .env
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# Database files
+*.db
+*.db-shm
+*.db-wal
+
+# Agent
+.agent/

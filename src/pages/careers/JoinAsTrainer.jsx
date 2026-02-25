@@ -73,7 +73,7 @@ const JoinAsTrainer = () => {
                   "A passion for mentoring and simplifying complex technical concepts.",
                   "Experience with real-world production-scale projects.",
                   "Ability to commit to at least 4-6 hours per week.",
-                  "Strong communication skills in English (Tamil is a plus for local batches)."
+                  "Strong communication skills in English (Tamil/Telugu is a plus for local batches)."
                 ].map((item, i) => (
                   <div key={i} className="flex items-start space-x-4">
                     <CheckCircle2 className="h-6 w-6 text-primary shrink-0 mt-1" />

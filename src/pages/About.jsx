@@ -190,8 +190,8 @@ const About = () => {
                 icon: <Award className="h-6 w-6" />
               },
               {
-                title: "Bilingual Support (தமிழ் + English)",
-                desc: "We explain complex technical concepts in both Tamil and English, ensuring no student is left behind due to language barriers.",
+                title: "Multilingual Support (தமிழ் + తెలుగు + English)",
+                desc: "We explain complex technical concepts in Tamil, Telugu, and English, ensuring no student is left behind due to language barriers.",
                 icon: <MessageSquare className="h-6 w-6" />
               },
               {
@@ -271,6 +271,50 @@ const About = () => {
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* CEO Leadership Section */}
+      <section className="section-padding bg-[var(--bg-body)]">
+        <div className="container-custom">
+          <div className="text-center max-w-3xl mx-auto mb-12">
+            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-400 text-xs font-bold uppercase tracking-wider mb-4 border border-amber-500/20">
+              Leadership
+            </div>
+            <h2 className="heading-md mb-4">Meet Our <span className="text-primary">CEO</span></h2>
+          </div>
+
+          <FadeIn>
+            <div className="max-w-4xl mx-auto rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl"
+              style={{ background: 'linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #0f172a 100%)' }}>
+              {/* Decorative top stripe */}
+              <div className="h-1.5 w-full" style={{ background: 'linear-gradient(90deg, #f59e0b, #fbbf24, #f59e0b)' }} />
+
+              <div className="flex flex-col md:flex-row items-center gap-8 p-6 sm:p-10 md:p-12">
+                {/* Avatar */}
+                <div className="relative shrink-0">
+                  <div className="absolute inset-0 rounded-full bg-amber-400/20 blur-2xl scale-125" />
+                  <div className="relative w-32 h-32 sm:w-40 sm:h-40 rounded-full bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center shadow-2xl ring-4 ring-amber-400/30">
+                    <span className="text-4xl sm:text-5xl font-black text-white select-none">PR</span>
+                  </div>
+                </div>
+
+                {/* Info */}
+                <div className="flex-1 text-center md:text-left">
+                  <h3 className="text-2xl sm:text-3xl font-black text-white mb-1">{BRANDING.ceo.name}</h3>
+                  <p className="text-amber-400 font-bold text-sm uppercase tracking-widest mb-4">{BRANDING.ceo.title}</p>
+                  <p className="text-white/70 text-sm sm:text-base leading-relaxed mb-6">{BRANDING.ceo.bio}</p>
+                  <div className="flex flex-wrap justify-center md:justify-start gap-2">
+                    {["Strategic Vision", "AI & Tech Leadership", "Academic Excellence", "Industry Alignment"].map((tag, i) => (
+                      <span key={i} className="px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-white/10 text-white/80 border border-white/10">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </FadeIn>
         </div>
       </section>
 

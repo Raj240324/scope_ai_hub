@@ -242,7 +242,7 @@ export default function HeroScroll({ children, badge, title, subtitle }) {
       {loaded && (
         <div
           ref={scrollIndicatorRef}
-          className="absolute top-[78%] sm:top-auto sm:bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center transition-opacity duration-500 pointer-events-none"
+          className="absolute bottom-[max(env(safe-area-inset-bottom,0px)_+_3.5rem,_5rem)] sm:bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center transition-opacity duration-500 pointer-events-none"
         >
           {/* Mouse outline with bouncing dot — smaller on mobile */}
           <div className="w-5 h-8 sm:w-7 sm:h-11 rounded-full border-2 border-white/50 flex items-start justify-center p-1 sm:p-1.5 mb-2 sm:mb-3">
