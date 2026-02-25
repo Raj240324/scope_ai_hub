@@ -35,6 +35,7 @@ import { courses } from '../data/courses';
 import { useModal } from '../context/ModalContext';
 import { BRANDING } from '../data/branding';
 import SEO from '../components/utils/SEO';
+import { StackingCards } from '../components/utils/StackingCards';
 
 const FAQItem = ({ question, answer }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -354,14 +355,16 @@ const learningPartners = [
       </section>
 
       {/* Learning Methodology Section */}
-      <section className="py-24 bg-[var(--bg-body)] relative overflow-hidden border-b border-[var(--border-color)]">
+      <section className="py-24 bg-[var(--bg-body)] relative border-b border-[var(--border-color)]">
         {/* Decorative Background */}
-        <Parallax offset={20} className="absolute top-0 right-0 w-1/2 h-full z-0">
-            <div className="w-full h-full bg-[var(--bg-secondary)]/50 -skew-x-12 translate-x-1/2" />
-        </Parallax>
-        <Parallax offset={-30} className="absolute bottom-0 left-0 w-64 h-64 z-0">
-            <div className="w-full h-full bg-primary/10 rounded-full blur-[120px]" />
-        </Parallax>
+        <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+          <Parallax offset={20} className="absolute top-0 right-0 w-1/2 h-full z-0">
+              <div className="w-full h-full bg-[var(--bg-secondary)]/50 -skew-x-12 translate-x-1/2" />
+          </Parallax>
+          <Parallax offset={-30} className="absolute bottom-0 left-0 w-64 h-64 z-0">
+              <div className="w-full h-full bg-primary/10 rounded-full blur-[120px]" />
+          </Parallax>
+        </div>
 
         <div className="container-custom relative z-10">
           <div className="max-w-3xl mb-16">
@@ -376,10 +379,10 @@ const learningPartners = [
             </p>
           </div>
 
-          <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <StackingCards className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {methodology.map((item, index) => (
               <StaggerItem key={index} className="h-full">
-                <div className="bg-[var(--bg-card)] border border-[var(--border-color)] p-5 sm:p-8 rounded-2xl sm:rounded-[2.5rem] relative z-10 hover:shadow-xl transition-all duration-500 group-hover:-translate-y-2 h-full flex flex-col">
+                <div className="bg-[var(--bg-card)] border border-[var(--border-color)] p-5 sm:p-8 rounded-2xl sm:rounded-[2.5rem] relative z-10 hover:shadow-xl transition-all duration-500 hover:-translate-y-2 h-full flex flex-col group">
                   <div className="flex justify-between items-start mb-6 sm:mb-8">
                     <div className={`w-12 h-12 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl ${item.color} flex items-center justify-center text-white shadow-lg shadow-black/20`}>
                       {item.icon}
@@ -397,7 +400,7 @@ const learningPartners = [
                 </div>
               </StaggerItem>
             ))}
-          </StaggerContainer>
+          </StackingCards>
 
           <div className="mt-16 pt-16 border-t border-[var(--border-color)] flex flex-col md:flex-row items-center justify-between gap-8">
             <div className="flex items-center space-x-6">
