@@ -29,7 +29,7 @@ const Admissions = () => {
     {
       icon: <CheckCircle2 className="h-6 w-6 text-primary" />,
       title: "Enrollment",
-      description: "Complete the registration process and secure your seat. Fees start from ₹25,000 depending on the course."
+      description: "Complete the registration process and secure your seat for the upcoming batch."
     },
     {
       icon: <Calendar className="h-6 w-6 text-primary" />,
@@ -39,9 +39,9 @@ const Admissions = () => {
   ];
 
   const batches = [
-    { name: 'Weekday Batch', time: '10:00 AM - 1:00 PM', days: 'Mon - Fri', status: 'Starts Feb 15th' },
-    { name: 'Evening Batch', time: '6:30 PM - 8:30 PM', days: 'Mon - Fri', status: 'Available' },
-    { name: 'Weekend Batch', time: '10:00 AM - 4:00 PM', days: 'Sat - Sun', status: 'Starts Feb 20th' },
+    { name: 'Weekday Batch', time: '10:00 AM - 1:00 PM', days: 'Mon - Fri', status: 'Admissions Open' },
+    { name: 'Evening Batch', time: '6:30 PM - 8:30 PM', days: 'Mon - Fri', status: 'Filling Fast' },
+    { name: 'Weekend Batch', time: '10:00 AM - 4:00 PM', days: 'Sat - Sun', status: 'Admissions Open' },
   ];
 
   return (
@@ -136,32 +136,35 @@ const Admissions = () => {
         </div>
 
         {/* Scholarships & Financial Aid */}
-        <div className="mb-24">
-          <h2 className="heading-md mb-12  text-center">Scholarships & Financial Aid</h2>
+        <div className="mb-24 mt-12">
+          <h2 className="heading-md mb-12  text-center">Financial Assistance Programs</h2>
           <div className="grid md:grid-cols-3 gap-8">
             {[
               {
-                title: "Early Bird Discount",
-                discount: "Up to 15% Off",
-                desc: "Enroll 2 weeks before batch starts and save significantly on course fees.",
-                color: "from-green-500 to-emerald-600"
+                title: "Early Enrollment",
+                discount: "Fee Benefits",
+                desc: "Secure your seat well in advance of the batch start date to unlock special fee structures.",
+                color: "from-green-500 to-emerald-600",
+                icon: "🌟"
               },
               {
-                title: "Merit-Based Scholarship",
-                discount: "10-20% Off",
-                desc: "Top performers in our entrance assessment qualify for merit scholarships.",
-                color: "from-blue-500 to-cyan-600"
+                title: "Merit-Based Support",
+                discount: "Scholarships",
+                desc: "Deserving students with strong academic or technical backgrounds may qualify for fee assistance.",
+                color: "from-blue-500 to-cyan-600",
+                icon: "🎓"
               },
               {
-                title: "Group Enrollment",
-                discount: "₹2000/student Off",
-                desc: "Bring 3+ friends and everyone gets a special group discount.",
-                color: "from-purple-500 to-pink-600"
+                title: "Group Registrations",
+                discount: "Corporate / Peers",
+                desc: "Enrolling as a group of friends or corporate team? Contact us for specialized group pricing.",
+                color: "from-purple-500 to-pink-600",
+                icon: "👥"
               }
             ].map((scheme, i) => (
               <div key={i} className="bg-[var(--bg-card)] rounded-2xl sm:rounded-3xl p-5 sm:p-8 border border-[var(--border-color)] shadow-sm hover:shadow-lg transition-all">
                 <div className={`h-12 w-12 sm:h-16 sm:w-16 rounded-xl sm:rounded-2xl bg-gradient-to-br ${scheme.color} flex items-center justify-center mb-5 sm:mb-6 text-white text-xl sm:text-2xl font-black shadow-lg`}>
-                  {scheme.discount.includes('%') ? scheme.discount.replace(' Off', '') : '₹'}
+                  {scheme.icon}
                 </div>
                 <h3 className="text-lg sm:text-xl font-bold text-[var(--text-heading)] mb-3">{scheme.title}</h3>
                 <p className="text-sm text-primary font-bold mb-2">{scheme.discount}</p>
@@ -175,29 +178,29 @@ const Admissions = () => {
               <div className="flex items-start space-x-3">
                 <CheckCircle2 className="h-5 w-5 text-accent-success shrink-0 mt-1" />
                 <div>
-                  <h4 className="font-bold text-[var(--text-heading)] mb-1">EMI Available</h4>
-                  <p className="text-sm text-[var(--text-muted)]">Pay in easy installments - 0% interest for 3 months</p>
+                  <h4 className="font-bold text-[var(--text-heading)] mb-1">Installment Plans</h4>
+                  <p className="text-sm text-[var(--text-muted)]">Pay course fees in easy, manageable installments</p>
                 </div>
               </div>
               <div className="flex items-start space-x-3">
                 <CheckCircle2 className="h-5 w-5 text-accent-success shrink-0 mt-1" />
                 <div>
-                  <h4 className="font-bold text-[var(--text-heading)] mb-1">Pay After Placement</h4>
-                  <p className="text-sm text-[var(--text-muted)]">Select courses offer deferred payment options</p>
+                  <h4 className="font-bold text-[var(--text-heading)] mb-1">Educational Loans</h4>
+                  <p className="text-sm text-[var(--text-muted)]">Assistance with securing learning loans for long-term programs</p>
                 </div>
               </div>
               <div className="flex items-start space-x-3">
                 <CheckCircle2 className="h-5 w-5 text-accent-success shrink-0 mt-1" />
                 <div>
-                  <h4 className="font-bold text-[var(--text-heading)] mb-1">UPI & Net Banking</h4>
-                  <p className="text-sm text-[var(--text-muted)]">All major payment methods accepted</p>
+                  <h4 className="font-bold text-[var(--text-heading)] mb-1">Digital Payments</h4>
+                  <p className="text-sm text-[var(--text-muted)]">All major UPI, Cards, and Net Banking methods accepted</p>
                 </div>
               </div>
               <div className="flex items-start space-x-3">
                 <CheckCircle2 className="h-5 w-5 text-accent-success shrink-0 mt-1" />
                 <div>
-                  <h4 className="font-bold text-[var(--text-heading)] mb-1">No Hidden Charges</h4>
-                  <p className="text-sm text-[var(--text-muted)]">What you see is what you pay - completely transparent</p>
+                  <h4 className="font-bold text-[var(--text-heading)] mb-1">Transparent Pricing</h4>
+                  <p className="text-sm text-[var(--text-muted)]">No hidden charges or surprise assessment fees</p>
                 </div>
               </div>
             </div>
@@ -205,33 +208,34 @@ const Admissions = () => {
         </div>
 
         {/* Fee Structure Note */}
+        {/* Course Programs Overview */}
         <div className="mt-16 sm:mt-24 p-5 sm:p-8 md:p-12 bg-[var(--bg-inverted)] text-[var(--text-on-inverted)] rounded-2xl sm:rounded-3xl relative overflow-hidden text-center">
           <CreditCard className="absolute -top-4 -left-4 h-32 w-32 text-[var(--text-on-inverted)]/5" />
-          <h2 className="text-2xl md:text-3xl font-bold mb-6 relative z-10">Transparent Fee Structure</h2>
+          <h2 className="text-2xl md:text-3xl font-bold mb-6 relative z-10">Programs Designed For You</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10 text-left">
              <div className="bg-[var(--bg-body)]/10 p-6 rounded-2xl border border-[var(--bg-body)]/10">
-                <h3 className="font-bold text-lg mb-2 text-primary-light">Short Courses</h3>
-                <p className="text-2xl font-black mb-1">₹15k - ₹25k</p>
-                <p className="text-xs text-[var(--text-on-inverted)]/60">Duration: 1-2 Months</p>
+                <h3 className="font-bold text-lg mb-2 text-primary-light">Upskill Courses</h3>
+                <p className="text-sm text-[var(--text-on-inverted)]/80 mb-2">Targeted training to master specific technologies or tools quickly.</p>
+                <p className="text-xs text-[var(--text-on-inverted)]/60 font-bold uppercase tracking-wider">Duration: 1-2 Months</p>
              </div>
              <div className="bg-[var(--bg-body)]/10 p-6 rounded-2xl border border-[var(--bg-body)]/10">
-                <h3 className="font-bold text-lg mb-2 text-primary-light">Career Programs</h3>
-                <p className="text-2xl font-black mb-1">₹35k - ₹55k</p>
-                <p className="text-xs text-[var(--text-on-inverted)]/60">Duration: 4-6 Months</p>
+                <h3 className="font-bold text-lg mb-2 text-primary-light">Career Tracks</h3>
+                <p className="text-sm text-[var(--text-on-inverted)]/80 mb-2">Comprehensive pathways to transform you into a job-ready professional.</p>
+                <p className="text-xs text-[var(--text-on-inverted)]/60 font-bold uppercase tracking-wider">Duration: 4-6 Months</p>
              </div>
              <div className="bg-[var(--bg-body)]/10 p-6 rounded-2xl border border-[var(--bg-body)]/10">
-                <h3 className="font-bold text-lg mb-2 text-primary-light">Masters Program</h3>
-                <p className="text-2xl font-black mb-1">₹65k - ₹85k</p>
-                <p className="text-xs text-[var(--text-on-inverted)]/60">Duration: 8-12 Months</p>
+                <h3 className="font-bold text-lg mb-2 text-primary-light">Master Programs</h3>
+                <p className="text-sm text-[var(--text-on-inverted)]/80 mb-2">Deep-dive intensive programs with extensive projects and mentorship.</p>
+                <p className="text-xs text-[var(--text-on-inverted)]/60 font-bold uppercase tracking-wider">Duration: 8-12 Months</p>
              </div>
           </div>
-          <p className="text-[var(--text-on-inverted)]/60 max-w-2xl mx-auto mb-10 relative z-10"></p>
+          <p className="text-[var(--text-on-inverted)]/80 max-w-2xl mx-auto mb-10 relative z-10 font-medium">To maintain high training quality, class sizes are strictly limited. Contact our admission desk for detailed fee structures and availability.</p>
           <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6 relative z-10">
             <button 
               onClick={() => openModal()}
               className="btn-primary"
             >
-              Enquire About Fees
+              Enquire About Admissions
             </button>
             <Link to="/courses" className="bg-[var(--bg-body)]/10 hover:bg-[var(--bg-body)]/20 text-[var(--text-on-inverted)] font-bold px-8 py-4 rounded-xl transition-colors border border-[var(--bg-body)]/10">
               Explore Courses

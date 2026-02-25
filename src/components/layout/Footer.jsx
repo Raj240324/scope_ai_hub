@@ -17,11 +17,11 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           {/* Institute Info */}
           <div className="space-y-8">
-            <Link to="/" className="inline-block">
+            <Link to="/" className="inline-block mb-4">
               <img 
                 src={theme === 'dark' ? BRANDING.logoDark : BRANDING.logoLight} 
                 alt={BRANDING.fullName} 
-                className="h-28 md:h-36 -my-4 w-auto object-contain" 
+                className="h-16 md:h-20 w-auto object-contain" 
               />
             </Link>
             <p className="text-sm leading-relaxed">
@@ -68,7 +68,7 @@ const Footer = () => {
             <ul className="space-y-4 text-sm font-medium">
               <li><Link to="/about" className="hover:text-primary hover:translate-x-1 transition-all inline-flex items-center">About Us</Link></li>
               <li><Link to="/careers/join-as-trainer" className="hover:text-primary hover:translate-x-1 transition-all inline-flex items-center">Join as Trainer</Link></li>
-              <li><Link to="/reviews" className="hover:text-primary hover:translate-x-1 transition-all inline-flex items-center">Student Reviews</Link></li>
+              <li><Link to="/admissions" className="hover:text-primary hover:translate-x-1 transition-all inline-flex items-center">Admissions</Link></li>
               <li><Link to="/faq" className="hover:text-primary hover:translate-x-1 transition-all inline-flex items-center">FAQs</Link></li>
             </ul>
           </div>
@@ -134,7 +134,6 @@ const Footer = () => {
               <Link to="/refund-policy" className="hover:text-primary transition-colors">Refunds</Link>
               <Link to="/legal/trainer-conduct" className="hover:text-primary transition-colors">Trainer Conduct</Link>
               <Link to="/disclaimer" className="hover:text-primary transition-colors">Disclaimer</Link>
-              <Link to="/sitemap" className="hover:text-primary transition-colors">Sitemap</Link>
             </div>
             <button 
               onClick={() => openModal()}

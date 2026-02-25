@@ -65,7 +65,7 @@ const Header = () => {
     { name: 'Home', href: '/' },
     { name: 'About', href: '/about' },
     { name: 'Courses', href: '/courses' },
-    { name: 'Join as Trainer', href: '/careers/join-as-trainer' },
+    { name: 'Admissions', href: '/admissions' },
     { name: 'Contact', href: '/contact' },
   ];
 
