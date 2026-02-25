@@ -87,10 +87,10 @@ const learningPartners = [
     { name: "IBM", logo: "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg", color: "#006699" },
     { name: "Accenture", logo: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Accenture.svg", color: "#A100FF" },
     { name: "Infosys", logo: "https://upload.wikimedia.org/wikipedia/commons/9/95/Infosys_logo.svg", color: "#007CC3" },
-    { name: "TCS", logo: "https://companieslogo.com/img/orig/TCS.NS-7401f1bd.png?t=1720244494", color: "#004B8D" },
+    { name: "TCS", logo: "https://upload.wikimedia.org/wikipedia/commons/b/b1/Tata_Consultancy_Services_Logo.svg", color: "#004B8D" },
     { name: "Wipro", logo: "https://upload.wikimedia.org/wikipedia/commons/a/a0/Wipro_Primary_Logo_Color_RGB.svg", color: "#000000" },
-    { name: "HCLTech", logo: "https://companieslogo.com/img/orig/HCLTECH.NS-15b4b960.png?t=1720244492", color: "#008CBA" },
-    { name: "Cognizant", logo: "https://companieslogo.com/img/orig/CTSH-82cdbb76.png?t=1720244491", color: "#1565C0" }
+    { name: "HCLTech", logo: "https://upload.wikimedia.org/wikipedia/commons/a/a3/HCL_Technologies_logo.svg", color: "#008CBA" },
+    { name: "Cognizant", logo: "https://upload.wikimedia.org/wikipedia/commons/1/12/Cognizant%27s_logo.svg", color: "#1565C0" }
   ];
 
   const trustFactors = [
