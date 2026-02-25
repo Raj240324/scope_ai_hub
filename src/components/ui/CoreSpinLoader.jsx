@@ -21,8 +21,8 @@ export function CoreSpinLoader() {
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-[200px] gap-8">
-      <div className="relative w-20 h-20 flex items-center justify-center">
+    <div className="flex flex-col items-center justify-center min-h-[200px] gap-6 md:gap-8">
+      <div className="relative w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 lg:w-36 lg:h-36 flex items-center justify-center transition-all duration-300">
 
         {/* Base Glow */}
         <div className="
@@ -55,7 +55,7 @@ export function CoreSpinLoader() {
 
         {/* Inner Fast Ring */}
         <div className="
-          absolute inset-5 rounded-full border border-transparent
+          absolute inset-4 sm:inset-5 rounded-full border border-transparent
           border-l-[var(--color-primary-light)]/60
           animate-[spin_1s_ease-in-out_infinite]
         " />
@@ -64,7 +64,7 @@ export function CoreSpinLoader() {
         <div className="absolute inset-0 animate-[spin_4s_linear_infinite]">
           <div className="
             absolute top-0 left-1/2 -translate-x-1/2
-            w-1 h-1 rounded-full
+            w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full
             bg-[var(--color-primary)]
             shadow-[0_0_4px_rgba(var(--primary-rgb),0.9)]
           " />
@@ -72,7 +72,7 @@ export function CoreSpinLoader() {
 
         {/* Center Core */}
         <div className="
-          absolute w-2 h-2 rounded-full animate-pulse
+          absolute w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full animate-pulse
           bg-[var(--color-primary)]
           shadow-[0_0_6px_rgba(var(--primary-rgb),0.6)]
         " />
@@ -83,7 +83,7 @@ export function CoreSpinLoader() {
         <span
           key={loadingText}
           className="
-            text-[10px] font-medium tracking-[0.3em] uppercase
+            text-xs sm:text-sm md:text-base font-medium tracking-[0.2em] sm:tracking-[0.3em] uppercase
             text-[var(--color-primary)]
             animate-in fade-in slide-in-from-bottom-2 duration-500
           "

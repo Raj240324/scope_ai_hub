@@ -121,7 +121,7 @@ const Contact = () => {
           </div>
 
           {/* Right Column: Contact Form */}
-          <div>
+          <div className="space-y-8">
             <div className="bg-[var(--bg-card)] rounded-2xl sm:rounded-[2rem] shadow-2xl shadow-primary/5 border border-[var(--border-color)] p-5 sm:p-8 md:p-12 relative overflow-hidden">
               <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-bl-[100px] pointer-events-none" />
               <div className="relative z-10">
@@ -129,6 +129,21 @@ const Contact = () => {
                  <p className="text-[var(--text-muted)] mb-8">Fill out the form below and we'll get back to you shortly.</p>
                  <ContactForm initialCourse={initialCourse} />
               </div>
+            </div>
+
+            {/* Quick FAQs */}
+            <div className="bg-[var(--bg-secondary)] rounded-2xl sm:rounded-[2rem] border border-[var(--border-color)] p-5 sm:p-8">
+               <h3 className="text-xl font-bold text-[var(--text-heading)] mb-4">Quick Answers</h3>
+               <div className="space-y-4">
+                  <div>
+                    <h4 className="font-bold text-[var(--text-heading)] text-sm mb-1">Do you offer weekend batches?</h4>
+                    <p className="text-[var(--text-muted)] text-sm">Yes, we have dedicated weekend batches designed specifically for working professionals.</p>
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-[var(--text-heading)] text-sm mb-1">Is job placement guaranteed?</h4>
+                    <p className="text-[var(--text-muted)] text-sm">We provide extensive placement assistance, portfolio building, and mock interviews to ensure you are job-ready.</p>
+                  </div>
+               </div>
             </div>
           </div>
 
