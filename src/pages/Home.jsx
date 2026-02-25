@@ -600,17 +600,15 @@ const learningPartners = [
               </div>
             </div>
 
-            {/* Feature cards — single column for full readability */}
+            {/* Feature cards — single column */}
             <div className="flex flex-col gap-2.5">
               {[
                 { num: "1", title: "Industry-Focused Curriculum", sub: "Real Corporate Needs", accent: "#1d4ed8" },
                 { num: "2", title: "70% Practical Learning", sub: "Labs + Projects + Case Studies", accent: "#047857" },
-                { num: "3", title: "Mentorship by Industry Experts", sub: "10+ Years Experience", accent: "#7e22ce" },
-                { num: "4", title: "Real-World Industry Projects", sub: "200+ Projects", accent: "#c2410c" },
-                { num: "5", title: "Career Preparation", sub: "Resume + Mock Interviews + Guidance", accent: "#b45309", isPrep: true },
-                { num: "6", title: "Hiring Network", sub: "75+ Hiring Partners", accent: "#0f766e" },
-                { num: "7", title: "Placement Support", sub: "100% Job Assistance", accent: "#15803d" },
-                { num: "8", title: "Future-Ready Curriculum", sub: "ML, DL, Gen AI, Cloud", accent: "#4338ca" },
+                { num: "3", title: "Industry Mentors", sub: "8+ Years Experience", accent: "#7e22ce" },
+                { num: "4", title: "Real-World Projects", sub: "200+ Projects Completed", accent: "#c2410c" },
+                { num: "5", title: "Career Preparation", sub: "Resume + Interviews + Guidance", accent: "#b45309", isPrep: true },
+                { num: "6", title: "Hiring Network", sub: "50+ Partners · Tier 1 & Tier 2 Companies", accent: "#0f766e" },
               ].map((item, i) => (
                 <div
                   key={i}
@@ -639,12 +637,12 @@ const learningPartners = [
                 className="flex items-center gap-3 rounded-xl px-3 py-3 shadow-md"
                 style={{ background: '#1e293b', border: '2px solid #fbbf24' }}
               >
-                <span className="w-7 h-7 rounded-full bg-amber-500 text-white text-xs font-black flex items-center justify-center shrink-0">★</span>
+                <span className="w-7 h-7 rounded-full bg-amber-500 text-white text-xs font-black flex items-center justify-center shrink-0">7</span>
                 <div className="flex-1">
                   <p className="font-bold text-[13px] text-white leading-snug">Career Launch</p>
-                  <p className="text-[11px] text-white/60 mt-0.5">Job-Ready Professional</p>
+                  <p className="text-[11px] text-white/60 mt-0.5">Job-Ready AI Professionals</p>
                 </div>
-                <span className="text-lg shrink-0">🏆</span>
+                <span className="text-lg shrink-0">🚀</span>
               </div>
             </div>
           </div>
@@ -658,8 +656,7 @@ const learningPartners = [
                 {[
                   { num: "1", title: "Industry-Focused Curriculum", sub: "Real Corporate Needs", emoji: "💼", accent: "#1d4ed8" },
                   { num: "2", title: "70% Practical Learning", sub: "Labs + Projects + Case Studies", emoji: "🔬", accent: "#047857" },
-                  { num: "3", title: "Mentorship by Industry Experts", sub: "10+ Years Experience", emoji: "🤝", accent: "#7e22ce" },
-                  { num: "4", title: "Real-World Industry Projects", sub: "200+ Projects", emoji: "🖥️", accent: "#c2410c" },
+                  { num: "3", title: "Industry Mentors", sub: "8+ Years Experience", emoji: "🎓", accent: "#7e22ce" },
                 ].map((item, i) => (
                   <div key={i} className="flex items-center gap-2.5 bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl shadow-sm hover:shadow-md transition-all p-0 overflow-hidden"
                     style={{ borderRightWidth: '4px', borderRightColor: item.accent }}>
@@ -703,21 +700,10 @@ const learningPartners = [
 
               {/* Right cards */}
               <div className="flex flex-col gap-3 flex-1">
-                {/* Career Launch */}
-                <div className="flex items-center gap-2.5 border-2 border-amber-400 rounded-xl shadow-md overflow-hidden" style={{ background: '#1e293b' }}>
-                  <div className="bg-amber-500 text-white py-4 px-2 flex items-center justify-center shrink-0 self-stretch">
-                    <Award className="h-4 w-4" />
-                  </div>
-                  <div className="flex-1 py-2.5">
-                    <p className="font-bold text-[13px] text-white leading-snug">Career Launch</p>
-                    <p className="text-white/60 text-xs mt-0.5">(Job-Ready Professional)</p>
-                  </div>
-                  <span className="text-xl pr-3 shrink-0">🏆</span>
-                </div>
                 {[
-                  { num: "8", title: "Future-Ready Curriculum", sub: "ML, DL, Gen AI, Cloud", emoji: "🧠", accent: "#4338ca" },
-                  { num: "7", title: "Placement Support", sub: "100% Job Assistance", emoji: "💼", accent: "#15803d" },
-                  { num: "6", title: "Hiring Network", sub: "75+ Hiring Partners", emoji: "🤝", accent: "#0f766e" },
+                  { num: "4", title: "Real-World Projects", sub: "200+ Projects Completed", emoji: "🖥️", accent: "#c2410c" },
+                  { num: "5", title: "Career Preparation", sub: "Resume + Interviews + Guidance", emoji: "✍️", accent: "#b45309" },
+                  { num: "6", title: "Hiring Network", sub: "50+ Partners · Tier 1 & Tier 2", emoji: "🤝", accent: "#0f766e" },
                 ].map((item, i) => (
                   <div key={i} className="flex items-center gap-2.5 bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl shadow-sm hover:shadow-md transition-all overflow-hidden"
                     style={{ borderRightWidth: '4px', borderRightColor: item.accent }}>
@@ -733,26 +719,26 @@ const learningPartners = [
               </div>
             </div>
 
-            {/* Career Preparation — bottom card */}
-            <div className="w-full max-w-sm border-2 border-amber-400 rounded-xl shadow-md p-4 text-center" style={{ background: 'rgba(245,158,11,0.12)' }}>
+            {/* Career Launch — bottom card */}
+            <div className="w-full max-w-md border-2 border-amber-400 rounded-xl shadow-md p-4 text-center" style={{ background: '#1e293b' }}>
               <div className="inline-flex items-center gap-2 mb-1">
-                <span className="w-6 h-6 rounded-full bg-amber-500 text-white text-xs font-black flex items-center justify-center shrink-0">5</span>
-                <p className="font-bold text-sm text-[var(--text-heading)]">Career Preparation</p>
+                <span className="w-6 h-6 rounded-full bg-amber-500 text-white text-xs font-black flex items-center justify-center shrink-0">7</span>
+                <p className="font-bold text-sm text-white">Career Launch</p>
+                <span className="text-lg">🚀</span>
               </div>
-              <p className="text-[var(--text-muted)] text-xs">(Resume + Mock Interviews + Guidance)</p>
+              <p className="text-white/60 text-xs">Job-Ready AI Professionals</p>
             </div>
           </div>
 
           {/* ── DESKTOP LAYOUT (xl+) — full hub-and-spoke with SVG arrows ── */}
           <div className="hidden xl:flex flex-row items-center justify-center">
 
-            {/* LEFT COLUMN */}
+            {/* LEFT COLUMN — Items 1, 2, 3 */}
             <div className="flex flex-col gap-3.5 w-[320px] shrink-0">
               {[
                 { num: "1", title: "Industry-Focused Curriculum", sub: "Real Corporate Needs", emoji: "💼", borderColor: "#3b82f6", badgeBg: "#1d4ed8" },
                 { num: "2", title: "70% Practical Learning", sub: "Labs + Projects + Case Studies", emoji: "🔬", borderColor: "#10b981", badgeBg: "#047857" },
-                { num: "3", title: "Mentorship by Industry Experts", sub: "10+ Years Experience", emoji: "🤝", borderColor: "#a855f7", badgeBg: "#7e22ce" },
-                { num: "4", title: "Real-World Industry Projects", sub: "200+ Projects", emoji: "🖥️", borderColor: "#f97316", badgeBg: "#c2410c" },
+                { num: "3", title: "Industry Mentors", sub: "8+ Years Experience", emoji: "🎓", borderColor: "#a855f7", badgeBg: "#7e22ce" },
               ].map((item, i) => (
                 <div key={i} className="relative">
                   <div className="flex items-center gap-2.5 bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl shadow-sm hover:shadow-md transition-all overflow-hidden"
@@ -805,50 +791,35 @@ const learningPartners = [
                 </div>
               </div>
 
-              {/* Bottom center — Item 5 */}
-              <div className="relative w-full max-w-[280px] mt-7">
+              {/* Bottom center — Career Launch (Item 7) */}
+              <div className="relative w-full max-w-[320px] mt-7">
                 <div className="absolute -top-[76px] left-1/2 -translate-x-1/2 z-20">
                   <svg width="44" height="76" viewBox="0 0 44 80" fill="none">
                     <path d="M38 78 Q38 56 22 42 Q8 28 8 8" stroke="#F59E0B" strokeWidth="2.5" strokeLinecap="round" fill="none" strokeOpacity="0.85"/>
                     <polygon points="3,8 8,0 13,8" fill="#F59E0B" fillOpacity="0.9"/>
                   </svg>
                 </div>
-                <div className="border-2 border-amber-400 rounded-xl shadow-md p-4 text-center hover:shadow-lg transition-all" style={{ background: 'rgba(245,158,11,0.12)' }}>
-                  <div className="inline-flex items-center gap-2 mb-1">
-                    <span className="w-6 h-6 rounded-full bg-amber-500 text-white text-xs font-black flex items-center justify-center shrink-0">5</span>
-                    <p className="font-bold text-sm text-[var(--text-heading)]">Career Preparation</p>
+                <div className="border-2 border-amber-400 rounded-xl shadow-md hover:shadow-xl transition-all overflow-hidden" style={{ background: '#1e293b' }}>
+                  <div className="flex items-center gap-3 px-4 py-4">
+                    <div className="bg-amber-500 text-white w-8 h-8 rounded-full flex items-center justify-center shrink-0">
+                      <Award className="h-4 w-4" />
+                    </div>
+                    <div className="flex-1 text-center">
+                      <p className="font-black text-base text-white leading-snug">7. Career Launch</p>
+                      <p className="text-white/60 text-xs mt-0.5">Job-Ready AI Professionals</p>
+                    </div>
+                    <span className="text-2xl shrink-0">🚀</span>
                   </div>
-                  <p className="text-[var(--text-muted)] text-xs">(Resume + Mock Interviews + Guidance)</p>
                 </div>
               </div>
             </div>
 
-            {/* RIGHT COLUMN */}
+            {/* RIGHT COLUMN — Items 4, 5, 6 */}
             <div className="flex flex-col gap-3.5 w-[320px] shrink-0">
-              {/* Career Launch */}
-              <div className="relative">
-                <div className="absolute top-1/2 -translate-y-1/2 -left-[76px] z-20">
-                  <svg width="76" height="44" viewBox="0 0 80 44" fill="none">
-                    <path d="M78 38 Q60 38 44 22 Q28 6 8 6" stroke="#F59E0B" strokeWidth="2.5" strokeLinecap="round" fill="none" strokeOpacity="0.85"/>
-                    <polygon points="8,1 0,6 8,11" fill="#F59E0B" fillOpacity="0.9"/>
-                  </svg>
-                </div>
-                <div className="flex items-center gap-2.5 border-2 border-amber-400 rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all" style={{ background: '#1e293b' }}>
-                  <div className="bg-amber-500 text-white py-4 px-2 flex flex-col items-center justify-center shrink-0 self-stretch">
-                    <Award className="h-4 w-4" />
-                  </div>
-                  <div className="flex-1 py-3">
-                    <p className="font-bold text-sm text-white leading-snug">Career Launch</p>
-                    <p className="text-white/60 text-xs mt-0.5">(Job-Ready Professional)</p>
-                  </div>
-                  <span className="text-2xl pr-3 shrink-0">🏆</span>
-                </div>
-              </div>
-
               {[
-                { num: "8", title: "Future-Ready Curriculum", sub: "ML, DL, Gen AI, Cloud", emoji: "🧠", borderColor: "#6366f1", badgeBg: "#4338ca" },
-                { num: "7", title: "Placement Support", sub: "100% Job Assistance", emoji: "💼", borderColor: "#22c55e", badgeBg: "#15803d" },
-                { num: "6", title: "Hiring Network", sub: "75+ Hiring Partners", emoji: "🤝", borderColor: "#14b8a6", badgeBg: "#0f766e" },
+                { num: "4", title: "Real-World Projects", sub: "200+ Projects Completed", emoji: "🖥️", borderColor: "#f97316", badgeBg: "#c2410c" },
+                { num: "5", title: "Career Preparation", sub: "Resume + Interviews + Guidance", emoji: "✍️", borderColor: "#f59e0b", badgeBg: "#b45309" },
+                { num: "6", title: "Hiring Network", sub: "50+ Partners · Tier 1 & Tier 2", emoji: "🤝", borderColor: "#14b8a6", badgeBg: "#0f766e" },
               ].map((item, i) => (
                 <div key={i} className="relative">
                   <div className="absolute top-1/2 -translate-y-1/2 -left-[76px] z-20">
@@ -878,13 +849,13 @@ const learningPartners = [
           <div className="mt-12 rounded-2xl overflow-hidden shadow-xl"
             style={{ background: 'linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #0f172a 100%)' }}>
 
-            {/* Mobile: flex-wrap so 5th item can be centered */}
+            {/* Mobile: flex-wrap */}
             <div className="flex flex-wrap sm:hidden">
               {[
                 { value: "70%",     label: "Practical",         highlight: true  },
                 { value: "200+",    label: "Projects",          highlight: false },
-                { value: "10+ Yrs", label: "Trainers' Exp",     highlight: false },
-                { value: "75+",     label: "Hiring Partners",   highlight: false },
+                { value: "8+ Yrs",  label: "Mentors' Exp",      highlight: false },
+                { value: "50+",     label: "Hiring Partners",   highlight: false },
                 { value: "100%",    label: "Placement Support", highlight: true  },
               ].map((stat, i) => (
                 <div key={i}
@@ -905,8 +876,8 @@ const learningPartners = [
               {[
                 { value: "70%",     label: "Practical",         highlight: true  },
                 { value: "200+",    label: "Projects",          highlight: false },
-                { value: "10+ Yrs", label: "Trainers' Exp",     highlight: false },
-                { value: "75+",     label: "Hiring Partners",   highlight: false },
+                { value: "8+ Yrs",  label: "Mentors' Exp",      highlight: false },
+                { value: "50+",     label: "Hiring Partners",   highlight: false },
                 { value: "100%",    label: "Placement Support", highlight: true  },
               ].map((stat, i) => (
                 <div key={i} className="flex flex-col items-center justify-center py-6 px-4 text-center gap-1 hover:bg-white/5 transition-colors">
