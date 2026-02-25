@@ -45,7 +45,7 @@ const faqData = [
     questions: [
       {
         q: "Do you guarantee a job after completion?",
-        a: "We provide dedicated placement assistance, which includes resume building, mock interviews, and job referrals to our 50+ hiring partners. While we don't 'guarantee' a job (as it depends on the student's performance), we support you until you get placed."
+        a: "We provide dedicated placement assistance, which includes resume building, mock interviews, and job referrals to our 75+ hiring partners. While we don't 'guarantee' a job (as it depends on the student's performance), we support you until you get placed."
       },
       {
         q: "What is the average salary package for freshers?",

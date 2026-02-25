@@ -75,10 +75,10 @@ const learningPartners = [
   const flagshipCourses = courses.slice(0, 6);
 
   const stats = [
-    { label: "Trained Professionals", value: "1,000+", icon: <Users className="h-5 w-5" /> },
-    { label: "Hiring & Industry Partners", value: "75+", icon: <Building2 className="h-5 w-5" /> },
-    { label: "Career Advancement Rate", value: "92%", icon: <Briefcase className="h-5 w-5" /> },
-    { label: "Learner Satisfaction Score", value: "4.8★", icon: <Star className="h-5 w-5" /> },
+    { label: "Real-World Projects", value: "157+", icon: <Code2 className="h-5 w-5" /> },
+    { label: "Trainer Experience (Yrs)", value: "5+", icon: <Award className="h-5 w-5" /> },
+    { label: "Hiring Partners", value: "75+", icon: <Building2 className="h-5 w-5" /> },
+    { label: "Practical Curriculum", value: "75%", icon: <Zap className="h-5 w-5" /> },
   ];
 
   const companies = [
@@ -153,11 +153,11 @@ const learningPartners = [
   const faqs = [
     {
       q: "Do you provide placement support?",
-      a: "We provide an intensive career-ready ecosystem. This includes technical grooming, resume building, and mock interviews, while connecting you with our 500+ hiring partners to help you secure the right role."
+      a: "We provide an intensive career-ready ecosystem. This includes technical grooming, resume building, and mock interviews, while connecting you with our 75+ hiring partners to help you secure the right role."
     },
     {
       q: "Are your trainers industry experts?",
-      a: "Absolutely! All our mentors are industry veterans with 10+ years of experience in top tech companies like Zoho, Freshworks, and MNCs."
+      a: "Absolutely! All our mentors are industry veterans with 5+ years of experience in top tech companies like Zoho, Freshworks, and MNCs."
     },
     {
       q: "Is the curriculum updated for 2026 standards?",

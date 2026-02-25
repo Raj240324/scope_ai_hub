@@ -27,7 +27,7 @@ const JoinAsTrainer = () => {
     {
       icon: <Briefcase className="h-6 w-6 text-primary" />,
       title: "Industry Networking",
-      description: "Connect with other expert mentors and lead workshops for our 500+ hiring partners."
+      description: "Connect with other expert mentors and lead workshops for our 75+ hiring partners."
     }
   ];
 
