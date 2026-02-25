@@ -26,7 +26,7 @@ const TrainerProfiles = () => {
       email: "academics@scopeaihub.com"
     },
     {
-      name: "Raghavi Reddy",
+      name: "Raghavi",
       role: "Head – Placements & Corporate Relations",
       image: "https://i.pravatar.cc/300?u=ragavireddy",
       expertise: ["Corporate Relations", "Placements", "Enterprise HR", "Career Coaching"],

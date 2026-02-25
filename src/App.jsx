@@ -1,7 +1,6 @@
 import React, { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
-import { Loader2 } from 'lucide-react';
 
 // Components
 import ErrorBoundary from './components/layout/ErrorBoundary';
@@ -30,12 +29,9 @@ const TrainerProfiles = lazy(() => import('./pages/careers/TrainerProfiles'));
 const Sitemap = lazy(() => import('./pages/Sitemap'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
-// Loading Fallback
+// Minimal fallback — HeroScroll has its own premium preloader for the home page
 const PageLoader = () => (
-  <div className="min-h-[60vh] flex flex-col items-center justify-center space-y-4">
-    <Loader2 className="h-10 w-10 text-primary animate-spin" />
-    <p className="text-slate-500 font-medium animate-pulse">Loading amazing content...</p>
-  </div>
+  <div className="min-h-screen bg-black" />
 );
 
 function App() {
