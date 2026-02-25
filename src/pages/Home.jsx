@@ -36,6 +36,7 @@ import { useModal } from '../context/ModalContext';
 import { BRANDING } from '../data/branding';
 import SEO from '../components/utils/SEO';
 import { StackingCards } from '../components/utils/StackingCards';
+import { ServiceGrid } from '../components/ui/ServiceGrid';
 
 const FAQItem = ({ question, answer }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -305,54 +306,25 @@ const learningPartners = [
       </section>
 
       {/* AI Industry Insights Section */}
-      <section className="py-20 bg-[var(--bg-secondary)] relative overflow-hidden border-b border-[var(--border-color)]">
-        {/* Decorative Blobs */}
-        <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-[120px]" />
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-secondary/5 rounded-full blur-[120px]" />
-        
-        <div className="container-custom relative z-10">
-          <div className="text-center max-w-4xl mx-auto mb-16">
-            <div className="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider mb-6">
-              <Rocket className="h-3 w-3" />
-              <span>Industry Insights 2026</span>
-            </div>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-6 leading-tight text-[var(--text-heading)]">
-              Why <span className="text-primary">AI & Software Skills</span> Are the Future
-            </h2>
-            <p className="text-lg text-[var(--text-muted)] leading-relaxed max-w-2xl mx-auto">
-              The technology sector is experiencing unprecedented growth. Here's why 2026 is the perfect time to start your journey.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
-              {[
-                { skill: "Generative AI", demand: "Critical" },
-                { skill: "React/Node.js", demand: "Very High" },
-                { skill: "Python/ML", demand: "Critical" },
-                { skill: "Cloud (AWS/Azure)", demand: "Very High" },
-                { skill: "Data Science", demand: "High" },
-                { skill: "Cyber Security", demand: "High" },
-                { skill: "UI/UX Design", demand: "Growing" },
-                { skill: "DevOps", demand: "Very High" },
-                { skill: "Mobile Dev", demand: "High" },
-                { skill: "Blockchain", demand: "Emerging" }
-              ].map((item, i) => (
-                <div key={i} className="p-5 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-color)] shadow-sm hover:shadow-lg hover:border-primary/30 transition-all text-center group cursor-default">
-                  <div className="font-bold text-[var(--text-heading)] mb-1 group-hover:text-primary transition-colors">{item.skill}</div>
-                  <div className={`text-xs font-black uppercase tracking-wider ${
-                    item.demand === 'Critical' ? 'text-red-500' :
-                    item.demand === 'Very High' ? 'text-orange-500' :
-                    item.demand === 'High' ? 'text-yellow-500' :
-                    item.demand === 'Growing' ? 'text-green-500' :
-                    'text-blue-500'
-                  }`}>
-                    {item.demand}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-      </section>
+      <ServiceGrid 
+        className="bg-[var(--bg-secondary)] border-b border-[var(--border-color)] relative"
+        title={
+          <>Why <span className="text-primary">AI & Software Skills</span> Are the Future</>
+        }
+        subtitle="The technology sector is experiencing unprecedented growth. Here's why 2026 is the perfect time to start your journey."
+        services={[
+          { name: "Generative AI", demand: "Critical", imageUrl: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=300&h=300" },
+          { name: "React/Node.js", demand: "Very High", imageUrl: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?auto=format&fit=crop&q=80&w=300&h=300" },
+          { name: "Python/ML", demand: "Critical", imageUrl: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&q=80&w=300&h=300" },
+          { name: "Cloud (AWS/Azure)", demand: "Very High", imageUrl: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=300&h=300" },
+          { name: "Data Science", demand: "High", imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=300&h=300" },
+          { name: "Cyber Security", demand: "High", imageUrl: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=300&h=300" },
+          { name: "UI/UX Design", demand: "Growing", imageUrl: "https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&q=80&w=300&h=300" },
+          { name: "DevOps", demand: "Very High", imageUrl: "https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?auto=format&fit=crop&q=80&w=300&h=300" },
+          { name: "Mobile Dev", demand: "High", imageUrl: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&q=80&w=300&h=300" },
+          { name: "Blockchain", demand: "Emerging", imageUrl: "https://images.unsplash.com/photo-1621416894569-0f39ed31d247?auto=format&fit=crop&q=80&w=300&h=300" }
+        ]}
+      />
 
       {/* Learning Methodology Section */}
       <section className="py-24 bg-[var(--bg-body)] relative border-b border-[var(--border-color)]">
