@@ -21,8 +21,8 @@ import { generateRequestId, createLogger } from './utils/logger.js';
 const BREVO_API_KEY = process.env.BREVO_API_KEY;
 const RECAPTCHA_SECRET_KEY = process.env.RECAPTCHA_SECRET_KEY;
 
-const OWNER_TEMPLATE_ID = 1;
-const AUTO_REPLY_TEMPLATE_ID = 2;
+const OWNER_TEMPLATE_ID = 2;      // TODO: update after creating owner notification template in Brevo
+const AUTO_REPLY_TEMPLATE_ID = 1;  // Already created and active in Brevo
 const CRM_LIST_ID = 3;
 const OWNER_EMAIL = 'nagarajan.webdev@gmail.com'; // TODO: change back to 'info@scopeaihub.com' for production
 const OWNER_NAME = 'SCOPE AI HUB';
