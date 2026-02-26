@@ -160,13 +160,13 @@ const ContactForm = ({ initialCourse = 'General Inquiry' }) => {
   return (
     <div ref={form}>
       {/* Step indicators */}
-      <div className="mb-6 sm:mb-8 flex items-center justify-between w-full px-1 sm:px-4">
+      <div className="mb-6 sm:mb-8 flex items-center justify-center gap-1 sm:gap-2">
         {STEPS.map((s, i) => (
-          <React.Fragment key={s.id}>
+          <div key={s.id} className="flex items-center gap-1 sm:gap-2">
             <button
               onClick={() => i < currentStep && (setFieldError(''), setCurrentStep(i))}
               disabled={i > currentStep}
-              className={`relative flex shrink-0 h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-full transition-all duration-500 text-[10px] sm:text-xs font-bold
+              className={`relative flex h-7 w-7 sm:h-8 sm:w-8 shrink-0 items-center justify-center rounded-full transition-all duration-500 text-[11px] sm:text-xs font-bold
                 ${i < currentStep ? 'bg-primary/15 text-primary' : ''}
                 ${i === currentStep ? 'bg-primary text-white shadow-lg shadow-primary/30' : ''}
                 ${i > currentStep ? 'bg-[var(--bg-secondary)] text-[var(--text-muted)]' : ''}
@@ -179,7 +179,7 @@ const ContactForm = ({ initialCourse = 'General Inquiry' }) => {
               )}
             </button>
             {i < STEPS.length - 1 && (
-              <div className="relative h-[1.5px] flex-1 mx-1 sm:mx-3 min-w-[4px]">
+              <div className="relative h-[1.5px] w-2 sm:w-6">
                 <div className="absolute inset-0 bg-[var(--border-color)]" />
                 <div
                   className="absolute inset-0 bg-primary/40 transition-all duration-700 origin-left"
@@ -187,7 +187,7 @@ const ContactForm = ({ initialCourse = 'General Inquiry' }) => {
                 />
               </div>
             )}
-          </React.Fragment>
+          </div>
         ))}
       </div>
 
