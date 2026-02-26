@@ -24,7 +24,7 @@ const RECAPTCHA_SECRET_KEY = process.env.RECAPTCHA_SECRET_KEY;
 const OWNER_TEMPLATE_ID = 1;
 const AUTO_REPLY_TEMPLATE_ID = 2;
 const CRM_LIST_ID = 3;
-const OWNER_EMAIL = 'info@scopeaihub.com';
+const OWNER_EMAIL = 'nagarajan.webdev@gmail.com'; // TODO: change back to 'info@scopeaihub.com' for production
 const OWNER_NAME = 'SCOPE AI HUB';
 
 const MAX_BODY_BYTES = 10 * 1024; // 10 KB
