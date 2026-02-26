@@ -33,13 +33,17 @@ const Footer = () => {
                   text="Facebook" 
                   icon={<Facebook className="h-5 w-5" />} 
                   className="bg-primary/5 border-none text-primary hover:bg-[#1877F2] hover:text-white"
-                  onClick={() => window.open(BRANDING.socials.facebook, '_blank')}
+                  href={BRANDING.socials.facebook}
+                  target="_blank"
+                  rel="noopener noreferrer"
                 />
                 <MicroExpander 
                   text="Twitter" 
                   icon={<Twitter className="h-5 w-5" />} 
                   className="bg-primary/5 border-none text-primary hover:bg-[#1DA1F2] hover:text-white"
-                  onClick={() => window.open(BRANDING.socials.twitter, '_blank')}
+                  href={BRANDING.socials.twitter}
+                  target="_blank"
+                  rel="noopener noreferrer"
                 />
               </div>
               <div className="flex gap-3">
@@ -47,13 +51,17 @@ const Footer = () => {
                   text="LinkedIn" 
                   icon={<Linkedin className="h-5 w-5" />} 
                   className="bg-primary/5 border-none text-primary hover:bg-[#0A66C2] hover:text-white"
-                  onClick={() => window.open(BRANDING.socials.linkedin, '_blank')}
+                  href={BRANDING.socials.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
                 />
                 <MicroExpander 
                   text="Instagram" 
                   icon={<Instagram className="h-5 w-5" />} 
                   className="bg-primary/5 border-none text-primary hover:bg-[#E4405F] hover:text-white"
-                  onClick={() => window.open(BRANDING.socials.instagram, '_blank')}
+                  href={BRANDING.socials.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
                 />
               </div>
             </div>
@@ -65,11 +73,15 @@ const Footer = () => {
               Quick Links
               <span className="absolute -bottom-2 left-0 w-8 h-1 bg-primary rounded-full"></span>
             </h3>
-            <ul className="space-y-4 text-sm font-medium">
+            <ul className="grid grid-cols-2 lg:grid-cols-1 gap-4 text-sm font-medium">
               <li><Link to="/about" className="hover:text-primary hover:translate-x-1 transition-all inline-flex items-center">About Us</Link></li>
-              <li><Link to="/careers/join-as-trainer" className="hover:text-primary hover:translate-x-1 transition-all inline-flex items-center">Join as Trainer</Link></li>
+              <li><Link to="/courses" className="hover:text-primary hover:translate-x-1 transition-all inline-flex items-center">All Courses</Link></li>
               <li><Link to="/admissions" className="hover:text-primary hover:translate-x-1 transition-all inline-flex items-center">Admissions</Link></li>
+              <li><Link to="/reviews" className="hover:text-primary hover:translate-x-1 transition-all inline-flex items-center">Student Reviews</Link></li>
+              <li><Link to="/contact" className="hover:text-primary hover:translate-x-1 transition-all inline-flex items-center">Contact Us</Link></li>
               <li><Link to="/faq" className="hover:text-primary hover:translate-x-1 transition-all inline-flex items-center">FAQs</Link></li>
+              <li><Link to="/careers/trainers" className="hover:text-primary hover:translate-x-1 transition-all inline-flex items-center">Our Trainers</Link></li>
+              <li><Link to="/careers/join-as-trainer" className="hover:text-primary hover:translate-x-1 transition-all inline-flex items-center">Join as Trainer</Link></li>
             </ul>
           </div>
 

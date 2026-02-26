@@ -12,7 +12,7 @@ const SEO = ({
   const siteTitle = title ? `${title} | ${BRANDING.fullName}` : `${BRANDING.fullName} | Best Software Training Institute in Chennai`;
   const metaDescription = description || "Master Full Stack Development, Data Science, and AI with expert mentorship. Get 100% placement support at Scope AI Hub, Chennai's top-rated training institute.";
   const metaKeywords = keywords || "Software Training Institute Chennai, Full Stack Developer Course, Data Science Training, MERN Stack, Python Course, Placement Support, Scope Global";
-  const siteUrl = "https://scopeaihub.com"; // Ideally from env or config
+  const siteUrl = "https://scopeaihub.in"; // Ideally from env or config
 
   return (
     <Helmet>

@@ -9,12 +9,12 @@ import {
   Briefcase
 } from 'lucide-react';
 
-const SitemapSection = ({ icon: Icon, title, color, links }) => (
+const SitemapSection = ({ icon: IconComponent, title, color, links }) => (
   <div className="bg-[var(--bg-card)] rounded-2xl border border-[var(--border-color)] shadow-sm overflow-hidden">
     {/* Section header */}
     <div className={`px-6 py-5 border-b border-[var(--border-color)] flex items-center gap-3 bg-gradient-to-r ${color}`}>
       <div className="p-2 bg-white/20 rounded-xl">
-        <Icon className="h-5 w-5 text-white" />
+        <IconComponent className="h-5 w-5 text-white" />
       </div>
       <h2 className="text-white font-black text-base tracking-wide">{title}</h2>
       <span className="ml-auto text-white/60 text-xs font-bold">{links.length} page{links.length !== 1 ? 's' : ''}</span>

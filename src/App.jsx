@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useState, useEffect, useRef } from 'react';
+import React, { lazy, Suspense, useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 
@@ -32,12 +32,11 @@ const NotFound = lazy(() => import('./pages/NotFound'));
 
 // Full-screen preloader — only shows on first load / refresh
 function AppPreloader() {
-  const alreadyShown = useRef(window.__appPreloaderShown === true);
-  const [visible, setVisible] = useState(!alreadyShown.current);
+  const [visible, setVisible] = useState(() => !window.__appPreloaderShown);
   const [fadeOut, setFadeOut] = useState(false);
 
   useEffect(() => {
-    if (alreadyShown.current) return;
+    if (window.__appPreloaderShown) return;
 
     // Show for 4 seconds (full animation cycle), then fade out
     const timer = setTimeout(() => {

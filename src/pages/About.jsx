@@ -223,7 +223,7 @@ const About = () => {
               <div className="space-y-4">
                 <Parallax offset={20}>
                   <div className="aspect-[4/5] bg-[var(--bg-secondary)] rounded-3xl overflow-hidden shadow-inner">
-                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80" alt="Students collaborating" className="h-full w-full object-cover" />
+                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80" alt="Students collaborating" loading="lazy" className="h-full w-full object-cover" />
                   </div>
                 </Parallax>
                 <Parallax offset={-20}>
@@ -242,7 +242,7 @@ const About = () => {
                 </Parallax>
                 <Parallax offset={-20}>
                   <div className="aspect-[4/5] bg-[var(--bg-secondary)] rounded-3xl overflow-hidden shadow-inner">
-                    <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80" alt="Classroom" className="h-full w-full object-cover" />
+                    <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80" alt="Classroom" loading="lazy" className="h-full w-full object-cover" />
                   </div>
                 </Parallax>
               </div>

@@ -55,24 +55,50 @@ const Admissions = () => {
       />
 
       <div className="container-custom section-padding">
-        {/* Admission Steps */}
+        {/* Admission Steps - Connected Visual Pathway */}
         <div className="mb-24">
-          <h2 className="heading-md mb-12 text-center">How to Enroll</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {steps.map((step, index) => (
-              <div key={index} className="relative p-5 sm:p-8 bg-[var(--bg-card)] rounded-2xl sm:rounded-3xl border border-[var(--border-color)] shadow-sm hover:shadow-md transition-shadow">
-                <div className="h-10 w-10 sm:h-12 sm:w-12 rounded-xl sm:rounded-2xl bg-primary/10 flex items-center justify-center mb-5 sm:mb-6">
-                  {step.icon}
-                </div>
-                <h3 className="text-lg sm:text-xl font-bold text-[var(--text-heading)] mb-3">{step.title}</h3>
-                <p className="text-sm sm:text-base text-[var(--text-muted)] leading-relaxed">{step.description}</p>
-                {index < steps.length - 1 && (
-                  <div className="hidden lg:block absolute top-1/2 -right-4 -translate-y-1/2 z-10">
-                    <ArrowRight className="h-6 w-6 text-[var(--text-muted)]" />
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <h2 className="heading-md mb-4">How It Works</h2>
+            <p className="text-[var(--text-muted)] text-lg">
+              Your journey to a thriving tech career is simple and transparent. Follow these 4 easy steps to get started.
+            </p>
+          </div>
+
+          <div className="relative">
+            {/* Desktop Horizontal Line */}
+            <div className="hidden lg:block absolute top-[4.5rem] left-[10%] right-[10%] h-1 bg-[var(--border-color)] z-0 rounded-full" />
+            
+            {/* Mobile Vertical Line */}
+            <div className="lg:hidden absolute top-8 bottom-8 left-[2.25rem] w-1 bg-[var(--border-color)] z-0 rounded-full" />
+
+            <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 lg:gap-4 relative z-10">
+              {steps.map((step, index) => (
+                <div key={index} className="flex flex-row lg:flex-col items-start lg:items-center relative group">
+                  
+                  {/* Step Number Badge */}
+                  <div className="absolute top-0 left-4 lg:left-1/2 lg:-translate-x-1/2 -translate-y-1/2 bg-[var(--bg-body)] px-3 text-[10px] font-black text-primary uppercase tracking-widest border border-[var(--border-color)] rounded-full z-20 shadow-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    Step 0{index + 1}
                   </div>
-                )}
-              </div>
-            ))}
+
+                  {/* Icon Node */}
+                  <div className="shrink-0 h-16 w-16 sm:h-20 sm:w-20 rounded-2xl bg-[var(--bg-card)] border-2 border-[var(--border-color)] group-hover:border-primary shadow-sm group-hover:shadow-xl transition-all duration-300 flex items-center justify-center relative z-10 mb-0 lg:mb-8 ml-4 lg:ml-0 group-hover:-translate-y-2">
+                    <div className="bg-primary/10 h-10 w-10 sm:h-12 sm:w-12 rounded-xl flex items-center justify-center text-primary transition-transform duration-300 group-hover:scale-110">
+                      {step.icon}
+                    </div>
+                  </div>
+
+                  {/* Content */}
+                  <div className="ml-8 lg:ml-0 flex-1 lg:text-center mt-2 lg:mt-0">
+                    <h3 className="text-xl font-bold text-[var(--text-heading)] mb-3 group-hover:text-primary transition-colors">
+                      {step.title}
+                    </h3>
+                    <p className="text-base text-[var(--text-muted)] leading-relaxed lg:max-w-[280px] mx-auto">
+                      {step.description}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 
