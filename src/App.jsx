@@ -1,6 +1,5 @@
 import React, { lazy, Suspense, useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { HelmetProvider } from 'react-helmet-async';
 
 // Components
 import ErrorBoundary from './components/layout/ErrorBoundary';
@@ -69,41 +68,39 @@ function App() {
   return (
     <ErrorBoundary>
       <AppPreloader />
-      <HelmetProvider>
-        <ModalProvider>
-          <ThemeProvider>
-            <Router>
-              <ScrollToTop />
-              <Suspense fallback={<PageLoader />}>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/admissions" element={<Admissions />} />
-                <Route path="/reviews" element={<Reviews />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="/faq" element={<FAQ />} />
-                <Route path="/courses" element={<CoursesList />} />
-                <Route path="/courses/:slug" element={<CourseDetail />} />
-                <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-                <Route path="/terms-conditions" element={<TermsConditions />} />
-                <Route path="/nda-policy" element={<NDAPolicy />} />
-                <Route path="/refund-policy" element={<RefundPolicy />} />
-                <Route path="/disclaimer" element={<Disclaimer />} />
-                <Route path="/legal/trainer-conduct" element={<TrainerCodeOfConduct />} />
-                <Route path="/careers/join-as-trainer" element={<JoinAsTrainer />} />
-                <Route path="/careers/trainers" element={<TrainerProfiles />} />
-                <Route path="/sitemap" element={<Sitemap />} />
+      <ModalProvider>
+        <ThemeProvider>
+          <Router>
+            <ScrollToTop />
+            <Suspense fallback={<PageLoader />}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/admissions" element={<Admissions />} />
+              <Route path="/reviews" element={<Reviews />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/faq" element={<FAQ />} />
+              <Route path="/courses" element={<CoursesList />} />
+              <Route path="/courses/:slug" element={<CourseDetail />} />
+              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+              <Route path="/terms-conditions" element={<TermsConditions />} />
+              <Route path="/nda-policy" element={<NDAPolicy />} />
+              <Route path="/refund-policy" element={<RefundPolicy />} />
+              <Route path="/disclaimer" element={<Disclaimer />} />
+              <Route path="/legal/trainer-conduct" element={<TrainerCodeOfConduct />} />
+              <Route path="/careers/join-as-trainer" element={<JoinAsTrainer />} />
+              <Route path="/careers/trainers" element={<TrainerProfiles />} />
+              <Route path="/sitemap" element={<Sitemap />} />
 
-                {/* 404 Route */}
-                <Route path="*" element={<NotFound />} />
-              </Routes>
+              {/* 404 Route */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
 
-            </Suspense>
-            <ContactModal />
-            </Router>
-          </ThemeProvider>
-        </ModalProvider>
-      </HelmetProvider>
+          </Suspense>
+          <ContactModal />
+          </Router>
+        </ThemeProvider>
+      </ModalProvider>
     </ErrorBoundary>
   );
 }

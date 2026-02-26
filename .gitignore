@@ -24,15 +24,8 @@ dist-ssr
 *.sw?
 .env
 
-# Python
-.venv/
-__pycache__/
-*.pyc
-
-# Database files
-*.db
-*.db-shm
-*.db-wal
+# Archive (legacy backend)
+archive/
 
 # Agent
 .agent/

@@ -2,6 +2,9 @@ import React, { useRef, useState, useEffect } from 'react';
 import { CheckCircle, ArrowRight, ArrowLeft, Send, Loader2, AlertCircle, Check } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useModal } from '../../context/ModalContext';
+import { executeRecaptcha } from '../../utils/recaptcha';
+import { checkRateLimit } from '../../utils/rateLimiter';
+import { submitEnquiry } from '../../services/enquiryService';
 
 /* ─── Step Definitions ──────────────────────────────────────────────── */
 
@@ -39,6 +42,7 @@ const ContactForm = ({ initialCourse = 'General Inquiry' }) => {
   const form = useRef();
   const [currentStep, setCurrentStep] = useState(0);
   const [formData, setFormData] = useState({ course_interest: initialCourse });
+  const [honeypot, setHoneypot] = useState('');
   const [status, setStatus] = useState('idle');
   const [errorMessage, setErrorMessage] = useState('');
   const [fieldError, setFieldError] = useState('');
@@ -107,24 +111,40 @@ const ContactForm = ({ initialCourse = 'General Inquiry' }) => {
     if (fieldError) setFieldError('');
   };
 
-  /* ── Submit ──────────────────────────────────────────────── */
+  /* ── Secure Submit Pipeline ─────────────────────────────── */
   const handleSubmit = async () => {
     setStatus('sending');
-    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+    setErrorMessage('');
+
     try {
-      const response = await fetch(`${API_URL}/student`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      });
-      if (!response.ok) {
-        const err = await response.json().catch(() => ({}));
-        throw new Error(err.detail || 'Something went wrong.');
+      // Step 1: Honeypot — silently "succeed" if bot filled it
+      if (honeypot) {
+        await new Promise((r) => setTimeout(r, 1500)); // fake delay
+        setStatus('success');
+        return;
       }
-      setStatus('success');
+
+      // Step 2: Client-side rate limit
+      checkRateLimit();
+
+      // Step 3: Get reCAPTCHA token
+      const recaptchaToken = await executeRecaptcha('enquiry');
+
+      // Step 4: Submit via secure serverless proxy
+      const result = await submitEnquiry({
+        ...formData,
+        recaptchaToken,
+      });
+
+      if (result.success) {
+        setStatus('success');
+      } else {
+        setStatus('error');
+        setErrorMessage(result.message);
+      }
     } catch (e) {
       setStatus('error');
-      setErrorMessage(e.message || 'Something went wrong. Try again.');
+      setErrorMessage(e.message || 'Something went wrong. Please try again.');
     }
   };
 
@@ -159,6 +179,17 @@ const ContactForm = ({ initialCourse = 'General Inquiry' }) => {
   /* ── Render ──────────────────────────────────────────────── */
   return (
     <div ref={form}>
+      {/* Honeypot — invisible to humans, bots will fill it */}
+      <input
+        type="text"
+        name="website"
+        value={honeypot}
+        onChange={(e) => setHoneypot(e.target.value)}
+        autoComplete="off"
+        tabIndex={-1}
+        aria-hidden="true"
+        style={{ position: 'absolute', left: '-9999px', opacity: 0, height: 0, width: 0, overflow: 'hidden' }}
+      />
       {/* Step indicators */}
       <div className="mb-6 sm:mb-8 flex items-center justify-center gap-1 sm:gap-2">
         {STEPS.map((s, i) => (

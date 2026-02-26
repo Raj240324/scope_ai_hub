@@ -1,32 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { StaggerContainer, StaggerItem, ScaleOnHover, ScrollCountUp, Marquee, Parallax } from '../components/utils/Animations';
-import { 
-  ArrowRight, 
-  BookOpen, 
-  Users, 
-  Award, 
-  CheckCircle2, 
-  PlayCircle,
-  Code2,
-  Cpu,
-  ShieldCheck,
-  Smartphone,
-  Figma,
-  Search,
-  Star,
-  Zap,
-  Briefcase,
-  GraduationCap,
-  Building2,
-  Plus,
-  Minus,
-  MessageSquare,
-  Globe,
-  Download,
-  Rocket,
-  MapPin
+import {
+  ArrowRight, BookOpen, Users, Award, CheckCircle2, PlayCircle,
+  Code2, Cpu, ShieldCheck, Smartphone, Figma, Search, Star, Zap,
+  Briefcase, GraduationCap, Building2, Plus, Minus, MessageSquare,
+  Globe, Download, Rocket, MapPin
 } from 'lucide-react';
+import { StaggerContainer, StaggerItem, ScaleOnHover, ScrollCountUp, Marquee, Parallax } from '../components/utils/Animations';
 import Layout from '../components/layout/Layout';
 import HeroScroll from '../components/sections/HeroScroll';
 import CourseCard from '../components/ui/CourseCard';
@@ -38,149 +18,34 @@ import SEO from '../components/utils/SEO';
 import { StackingCards } from '../components/utils/StackingCards';
 import { ServiceGrid } from '../components/ui/ServiceGrid';
 
-const FAQItem = ({ question, answer }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  return (
-    <div className="border-b border-[var(--border-color)] last:border-0">
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="w-full py-5 flex items-center justify-between text-left group"
-      >
-        <span className="text-base md:text-lg font-bold text-[var(--text-heading)] group-hover:text-primary transition-colors pr-4">
-          {question}
-        </span>
-        <div className={`flex-shrink-0 h-6 w-6 rounded-full border-2 border-[var(--border-color)] flex items-center justify-center transition-all ${isOpen ? 'bg-[var(--bg-inverted)] border-[var(--text-heading)] text-[var(--text-on-inverted)] rotate-180' : 'text-[var(--text-muted)]'}`}>
-          {isOpen ? <Minus className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
-        </div>
-      </button>
-      <div className={`overflow-hidden transition-all duration-300 ${isOpen ? 'max-h-96 pb-5' : 'max-h-0'}`}>
-        <p className="text-[var(--text-muted)] leading-relaxed">
-          {answer}
-        </p>
-      </div>
-    </div>
-  );
-};
+// Section components
+import StatsSection from '../components/home/StatsSection';
+import HiringPartners from '../components/home/HiringPartners';
+import TrustFactors from '../components/home/TrustFactors';
+import MethodologySection from '../components/home/MethodologySection';
+import CoursesSection from '../components/home/CoursesSection';
+import TestimonialsSection from '../components/home/TestimonialsSection';
+import PlacementSection from '../components/home/PlacementSection';
+import FAQSection from '../components/home/FAQSection';
+import CTASection from '../components/home/CTASection';
+import CorporateSection from '../components/home/CorporateSection';
+import GlobalReachSection from '../components/home/GlobalReachSection';
+import TrainerSpotlight from '../components/home/TrainerSpotlight';
 
 const learningPartners = [
-    { name: "NASSCOM", logo: "/nasscom-logo.webp" },
-    { name: "ISO Certified", logo: "/ISO.webp" },
-    { name: "FutureSkills", logo: "/future-skills.webp" },
-    { name: "MSME", logo: "/msme-logo.webp" }
-  ];
+  { name: "NASSCOM", logo: "/nasscom-logo.webp" },
+  { name: "ISO Certified", logo: "/ISO.webp" },
+  { name: "FutureSkills", logo: "/future-skills.webp" },
+  { name: "MSME", logo: "/msme-logo.webp" }
+];
 
-  const Home = () => {
+const Home = () => {
   const { openModal } = useModal();
-
-  // Flagship courses for the home page
   const flagshipCourses = courses.slice(0, 6);
-
-  const stats = [
-    { label: "Real-World Projects", value: "157+", icon: <Code2 className="h-5 w-5" /> },
-    { label: "Trainer Experience (Yrs)", value: "5+", icon: <Award className="h-5 w-5" /> },
-    { label: "Hiring Partners", value: "75+", icon: <Building2 className="h-5 w-5" /> },
-    { label: "Practical Curriculum", value: "75%", icon: <Zap className="h-5 w-5" /> },
-  ];
-
-  const companies = [
-    { name: "Google", logo: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg", color: "#4285F4" },
-    { name: "Amazon", logo: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg", color: "#FF9900" },
-    { name: "Microsoft", logo: "https://upload.wikimedia.org/wikipedia/commons/9/96/Microsoft_logo_%282012%29.svg", color: "#737373" },
-    { name: "IBM", logo: "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg", color: "#006699" },
-    { name: "Accenture", logo: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Accenture.svg", color: "#A100FF" },
-    { name: "Infosys", logo: "https://upload.wikimedia.org/wikipedia/commons/9/95/Infosys_logo.svg", color: "#007CC3" },
-    { name: "TCS", logo: "https://upload.wikimedia.org/wikipedia/commons/b/b1/Tata_Consultancy_Services_Logo.svg", color: "#004B8D" },
-    { name: "Wipro", logo: "https://upload.wikimedia.org/wikipedia/commons/a/a0/Wipro_Primary_Logo_Color_RGB.svg", color: "#000000" },
-    { name: "HCLTech", logo: "https://upload.wikimedia.org/wikipedia/commons/a/a3/HCL_Technologies_logo.svg", color: "#008CBA" },
-    { name: "Cognizant", logo: "https://upload.wikimedia.org/wikipedia/commons/1/12/Cognizant%27s_logo.svg", color: "#1565C0" }
-  ];
-
-  const trustFactors = [
-    {
-      icon: <Award className="h-6 w-6" />,
-      title: "Built by Industry Practitioners",
-      description: "Every trainer is a working professional with real-world expertise — not just academics. You learn from people who live the industry every day.",
-      iconColor: "text-amber-500",
-      iconBg: "bg-amber-50 dark:bg-amber-500/10"
-    },
-    {
-      icon: <Zap className="h-6 w-6" />,
-      title: "Applied Learning. Real Impact.",
-      description: "We go beyond theory with hands-on labs, live projects, and industry simulations — ensuring that every lesson translates into real career skills.",
-      iconColor: "text-emerald-500",
-      iconBg: "bg-emerald-50 dark:bg-emerald-500/10"
-    },
-    {
-      icon: <GraduationCap className="h-6 w-6" />,
-      title: "Career-Focused Execution",
-      description: "From day one, we align your learning journey with placement goals — interview prep, portfolio building, and dedicated career support at every step.",
-      iconColor: "text-sky-500",
-      iconBg: "bg-sky-50 dark:bg-sky-500/10"
-    }
-  ];
-
-  const methodology = [
-    {
-      step: "01",
-      title: "Master the Foundations",
-      desc: "Expert-led, industry-aligned sessions that build deep understanding of AI and Cloud technologies.",
-      icon: <Cpu className="h-6 w-6" />,
-      color: "bg-blue-500"
-    },
-    {
-      step: "02",
-      title: "Practice with Real Systems",
-      desc: "Hands-on labs and real-world projects designed to simulate industry environments.",
-      icon: <Code2 className="h-6 w-6" />,
-      color: "bg-purple-500"
-    },
-    {
-      step: "03",
-      title: "Create Industry-Grade Solutions",
-      desc: "Develop advanced capstone projects that demonstrate your real-world problem-solving ability.",
-      icon: <Users className="h-6 w-6" />,
-      color: "bg-orange-500"
-    },
-    {
-      step: "04",
-      title: "Accelerate Your Career",
-      desc: "End-to-end career support including mentorship, portfolio building, and placement guidance.",
-      icon: <GraduationCap className="h-6 w-6" />,
-      color: "bg-green-500"
-    }
-  ];
-
-
-  const faqs = [
-    {
-      q: "Do you provide placement support?",
-      a: "We provide an intensive career-ready ecosystem. This includes technical grooming, resume building, and mock interviews, while connecting you with our 75+ hiring partners to help you secure the right role."
-    },
-    {
-      q: "Are your trainers industry experts?",
-      a: "Absolutely! All our mentors are industry veterans with 5+ years of experience in top tech companies like Zoho, Freshworks, and MNCs."
-    },
-    {
-      q: "Is the curriculum updated for 2026 standards?",
-      a: "Yes, our syllabus is regularly updated and aligned with current industrial requirements to ensure you learn the most in-demand technologies."
-    },
-    {
-      q: "Do you offer multilingual support for local students?",
-      a: "Yes, we explain complex technical concepts in Tamil, Telugu, and English to ensure every student understands the fundamentals clearly."
-    },
-    {
-      q: "Is the certification officially recognized?",
-      a: `Yes, you will receive an official certification from ${BRANDING.fullName} upon successful completion of your projects. This certificate is recognized by our extensive network of hiring partners as a mark of technical proficiency.`
-    },
-    {
-      q: "Is my project data and idea protected?",
-      a: "Absolutely. We maintain a strict NDA (Non-Disclosure Agreement) policy. All our trainers and staff are legally bound to protect student project data and intellectual property."
-    }
-  ];
 
   return (
     <Layout immersive={true}>
-      <SEO 
+      <SEO
         title="Best Software Training Institute in Chennai | 100% Placement"
         description="Master Full Stack Development, Data Science, and AI with expert mentorship. Scope AI Hub offers practical software training in Chennai with 100% placement support."
         keywords="Software Training Institute Chennai, Full Stack Developer Course, Data Science Training, MERN Stack, Python Course, Placement Support, Scope Global, Best IT Training Center"
@@ -198,14 +63,12 @@ const learningPartners = [
             <span className="whitespace-nowrap">Dominate with Intelligence.</span> <br className="hidden sm:block" />
             <span className="text-white relative inline-block">
               Lead Without Limits.
-              {/* Subtle underline accent */}
               <svg className="absolute w-full h-3 -bottom-1 left-0 text-primary opacity-60" viewBox="0 0 200 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.00025 6.99997C25.7501 2.49994 132.5 -3.50004 198 6.99997" stroke="currentColor" strokeWidth="3" strokeLinecap="round"/></svg>
             </span>
           </>
         }
         subtitle="Advanced AI and Cloud programs engineered to create fearless innovators ready to compete on a global stage."
       >
-        {/* CTAs — revealed last as scroll completes */}
         <div className="flex flex-col sm:flex-row gap-6 justify-center">
           <Link
             to="/courses"
@@ -214,7 +77,6 @@ const learningPartners = [
             <span className="relative z-10 flex items-center">
               Explore Courses <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
             </span>
-            {/* Subtle gradient overlay on hover */}
             <div className="absolute inset-0 rounded-full bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity" />
           </Link>
 
@@ -228,57 +90,8 @@ const learningPartners = [
         </div>
       </HeroScroll>
 
-      {/* Stats Section */}
-      <section className="py-12 bg-[var(--bg-body)] border-b border-[var(--border-color)]">
-        <div className="container-custom">
-          <StaggerContainer className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8">
-            {stats.map((stat, index) => (
-              <StaggerItem key={index} className="text-center group hover:-translate-y-1 transition-transform duration-300">
-                <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-primary/5 text-primary mb-4 group-hover:bg-primary group-hover:text-white transition-colors shadow-sm">
-                  {stat.icon}
-                </div>
-                <div className="text-2xl sm:text-3xl md:text-4xl font-black mb-1 text-[var(--text-heading)]">
-                  {/* If value starts with a number, try to count it, otherwise just show it */}
-                  {/^\d/.test(stat.value) ? <ScrollCountUp end={stat.value} /> : stat.value}
-                </div>
-                <div className="text-[10px] sm:text-sm text-[var(--text-muted)] font-bold uppercase tracking-wider">{stat.label}</div>
-              </StaggerItem>
-            ))}
-          </StaggerContainer>
-        </div>
-      </section>
-
-      {/* Hiring Partners */}
-      <section className="py-12 md:py-16 bg-[var(--bg-body)] border-b border-[var(--border-color)] overflow-hidden">
-        <div className="container-custom">
-          <div className="text-center max-w-3xl mx-auto mb-10 md:mb-12">
-            <div className="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider mb-6 border border-primary/20">
-              <Building2 className="h-3 w-3" />
-              <span>Hiring Partners</span>
-            </div>
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-[var(--text-heading)] mb-4 leading-tight">
-              Our Graduates Work Across <span className="text-primary">Leading Companies</span>
-            </h2>
-            <p className="text-base md:text-lg text-[var(--text-muted)] leading-relaxed">
-              Our graduates work across leading companies such as...
-            </p>
-          </div>
-        </div>
-        {/* Full-width marquee — no container constraint */}
-        <div className="flex animate-marquee gap-6 sm:gap-8 md:gap-10 items-center w-max">
-          {[...companies, ...companies, ...companies].map((company, i) => (
-            <div key={i} className="flex-shrink-0 group">
-              <div className="h-14 w-28 sm:h-16 sm:w-32 md:h-20 md:w-40 flex items-center justify-center px-3 sm:px-4 py-2 sm:py-3 rounded-xl sm:rounded-2xl bg-[var(--bg-card)] border border-[var(--border-color)] shadow-sm hover:shadow-lg hover:border-primary/30 transition-all">
-                <img
-                  src={company.logo}
-                  alt={company.name}
-                  className="max-h-6 sm:max-h-8 md:max-h-10 object-contain opacity-50 group-hover:opacity-100 transition-opacity duration-300"
-                />
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
+      <StatsSection />
+      <HiringPartners />
 
       {/* Certifications & Recognitions */}
       <section className="py-12 bg-[var(--bg-secondary)] border-b border-[var(--border-color)]">
@@ -289,10 +102,13 @@ const learningPartners = [
               <div key={index} className="flex flex-col items-center group">
                 <div className="h-20 w-36 md:h-24 md:w-44 flex items-center justify-center transition-all">
                   {partner.logo ? (
-                    <img 
-                      src={partner.logo} 
-                      alt={partner.name} 
-                      className="max-h-16 md:max-h-20 object-contain group-hover:scale-110 transition-transform duration-500" 
+                    <img
+                      src={partner.logo}
+                      alt={partner.name}
+                      width={176}
+                      height={80}
+                      loading="lazy"
+                      className="max-h-16 md:max-h-20 object-contain group-hover:scale-110 transition-transform duration-500"
                     />
                   ) : (
                     <span className="text-xl font-black text-[var(--text-muted)] group-hover:text-[var(--text-heading)] transition-colors">{partner.name}</span>
@@ -305,12 +121,9 @@ const learningPartners = [
         </div>
       </section>
 
-      {/* AI Industry Insights Section */}
-      <ServiceGrid 
+      <ServiceGrid
         className="bg-[var(--bg-secondary)] border-b border-[var(--border-color)] relative"
-        title={
-          <>Why <span className="text-primary">AI & Software Skills</span> Are the Future</>
-        }
+        title={<>Why <span className="text-primary">AI & Software Skills</span> Are the Future</>}
         subtitle="The technology sector is experiencing unprecedented growth. Here's why 2026 is the perfect time to start your journey."
         services={[
           { name: "Generative AI", demand: "Critical", imageUrl: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=300&h=300" },
@@ -326,873 +139,18 @@ const learningPartners = [
         ]}
       />
 
-      {/* Learning Methodology Section */}
-      <section className="py-24 bg-[var(--bg-body)] relative border-b border-[var(--border-color)]">
-        {/* Decorative Background */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
-          <Parallax offset={20} className="absolute top-0 right-0 w-1/2 h-full z-0">
-              <div className="w-full h-full bg-[var(--bg-secondary)]/50 -skew-x-12 translate-x-1/2" />
-          </Parallax>
-          <Parallax offset={-30} className="absolute bottom-0 left-0 w-64 h-64 z-0">
-              <div className="w-full h-full bg-primary/10 rounded-full blur-[120px]" />
-          </Parallax>
-        </div>
+      <MethodologySection openModal={openModal} />
+      <CoursesSection courses={flagshipCourses} />
+      <TrainerSpotlight openModal={openModal} />
+      <TrustFactors />
+      <TestimonialsSection />
+      <PlacementSection openModal={openModal} />
+      <FAQSection />
+      <CTASection openModal={openModal} />
+      <CorporateSection openModal={openModal} />
+      <GlobalReachSection />
 
-        <div className="container-custom relative z-10">
-          <div className="max-w-3xl mb-16">
-            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider mb-6 border border-primary/20">
-              The {BRANDING.fullName} Advantage
-            </div>
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-[var(--text-heading)] mb-6 leading-tight">
-              Why We’re the <span className="text-primary">Best Choice</span> for Your IT Career.
-            </h2>
-            <p className="text-lg text-[var(--text-muted)] leading-relaxed">
-              Our unique learning ecosystem is designed to provide you with the edge you need. From dedicated lab support to real-time industrial training, we ensure you're ready for the global tech stage.
-            </p>
-          </div>
-
-          <StackingCards className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {methodology.map((item, index) => (
-              <StaggerItem key={index} className="h-full">
-                <div className="bg-[var(--bg-card)] border border-[var(--border-color)] p-5 sm:p-8 rounded-2xl sm:rounded-[2.5rem] relative z-10 hover:shadow-xl transition-all duration-500 hover:-translate-y-2 h-full flex flex-col group">
-                  <div className="flex justify-between items-start mb-6 sm:mb-8">
-                    <div className={`w-12 h-12 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl ${item.color} flex items-center justify-center text-white shadow-lg shadow-black/20`}>
-                      {item.icon}
-                    </div>
-                    <span className="text-2xl sm:text-4xl font-black text-[var(--text-muted)] opacity-20 group-hover:opacity-40 transition-opacity">
-                      {item.step}
-                    </span>
-                  </div>
-                  <h3 className="text-lg sm:text-xl font-bold text-[var(--text-heading)] mb-3 sm:mb-4 group-hover:text-primary transition-colors">
-                    {item.title}
-                  </h3>
-                  <p className="text-[var(--text-muted)] text-sm leading-relaxed transition-colors">
-                    {item.desc}
-                  </p>
-                </div>
-              </StaggerItem>
-            ))}
-          </StackingCards>
-
-          <div className="mt-16 pt-16 border-t border-[var(--border-color)] flex flex-col md:flex-row items-center justify-between gap-8">
-            <div className="flex items-center space-x-6">
-              <div className="flex -space-x-4">
-                {[1, 2, 3].map((i) => (
-                  <div key={i} className="w-12 h-12 rounded-full border-4 border-[var(--bg-card)] overflow-hidden">
-                    <img src={`https://randomuser.me/api/portraits/men/${i + 50}.jpg`} alt="Mentor" className="w-full h-full object-cover" />
-                  </div>
-                ))}
-              </div>
-              <div>
-                <p className="text-[var(--text-heading)] font-bold">1:1 Mentorship Available</p>
-                <p className="text-[var(--text-muted)] text-sm">Personal guidance from industry experts</p>
-              </div>
-            </div>
-            <button 
-              onClick={() => openModal()}
-              className="btn-primary px-10 py-4 shadow-xl shadow-primary/20"
-            >
-              Start Your Transformation
-            </button>
-          </div>
-        </div>
-      </section>
-
-      {/* Flagship Courses */}
-
-      <section id="trending-courses" className="section-padding bg-[var(--bg-secondary)] border-b border-[var(--border-color)]">
-        <div className="container-custom">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-12">
-            <div className="max-w-2xl">
-              <h2 className="heading-md mb-4 text-[var(--text-heading)]">Top Trending Courses</h2>
-              <p className="text-[var(--text-muted)] text-base md:text-lg">
-                Choose from our high-demand courses designed to make you industry-ready.
-              </p>
-            </div>
-            <Link to="/courses" className="hidden md:flex items-center text-primary font-bold hover:underline mt-4 md:mt-0 group">
-              View all courses <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
-          </div>
-
-          <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {flagshipCourses.map((course, index) => (
-              <StaggerItem key={course.id}>
-                <CourseCard course={course} index={index} />
-              </StaggerItem>
-            ))}
-          </StaggerContainer>
-          
-          <div className="mt-12 text-center md:hidden">
-            <Link to="/courses" className="btn-secondary w-full py-4 text-lg">
-              Explore All Courses
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Trainer Spotlight Section */}
-      <section className="section-padding bg-[var(--bg-body)] relative overflow-hidden border-b border-[var(--border-color)]">
-        <div className="container-custom relative z-10">
-          <div className="flex flex-col lg:flex-row items-center justify-between mb-16 gap-8 text-center lg:text-left">
-            <div className="max-w-2xl">
-              <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider mb-6">
-                Learn from the Best
-              </div>
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-[var(--text-heading)] mb-6 leading-tight">
-                Our Mentors Come from <span className="text-primary">Global Tech Leaders</span>
-              </h2>
-              <p className="text-base md:text-lg text-[var(--text-muted)] leading-relaxed">
-                At {BRANDING.fullName}, you aren't taught by academics. You are mentored by engineers who have built the tools you use every day.
-              </p>
-            </div>
-            <div 
-              onClick={() => openModal('Trainer Application', 'trainer')}
-              className="group flex flex-col items-center lg:items-end text-center lg:text-right cursor-pointer"
-            >
-              <div className="flex -space-x-4 mb-4">
-                {[1, 2, 3, 4].map((i) => (
-                  <div key={i} className="w-12 h-12 rounded-full border-4 border-[var(--bg-body)] overflow-hidden shadow-lg">
-                    <img src={`https://randomuser.me/api/portraits/${i % 2 === 0 ? 'men' : 'women'}/${i + 60}.jpg`} alt="Trainer" />
-                  </div>
-                ))}
-                <div className="w-12 h-12 rounded-full border-4 border-[var(--bg-body)] bg-[var(--bg-inverted)] flex items-center justify-center shadow-lg">
-                  <span className="text-xs font-bold text-[var(--text-on-inverted)]">+10</span>
-                </div>
-              </div>
-              <div className="flex items-center text-primary font-black uppercase tracking-widest text-sm hover:underline">
-                Join our teaching faculty <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-              </div>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-            {[
-              {
-                name: "Sanjula",
-                role: "Head of Academics",
-                company: "8+ Years in AI & Data Science",
-                image: "https://randomuser.me/api/portraits/women/75.jpg",
-                expertise: ["Curriculum Design", "AI & Data Science"]
-              },
-              {
-                name: "Raghavi",
-                role: "Head – Placements & Corporate Relations",
-                company: "Former Enterprise HR Professional",
-                image: "https://randomuser.me/api/portraits/women/68.jpg",
-                expertise: ["Placements", "Industry Partnerships"]
-              },
-              {
-                name: "Suresh M",
-                role: "Principal AI Consultant & Lead Trainer",
-                company: "Enterprise AI Practitioner",
-                image: "https://randomuser.me/api/portraits/men/36.jpg",
-                expertise: ["AI Consulting", "Machine Learning"]
-              }
-            ].map((mentor, index) => (
-              <ScaleOnHover key={index}>
-                <div className="bg-[var(--bg-card)] p-5 sm:p-8 rounded-2xl sm:rounded-[2.5rem] border border-[var(--border-color)] shadow-sm hover:shadow-xl transition-all h-full flex flex-col">
-                  <div className="flex items-center space-x-4 mb-5 sm:mb-6">
-                    <img src={mentor.image} alt={mentor.name} className="h-14 w-14 sm:h-16 sm:w-16 rounded-xl sm:rounded-2xl object-cover shadow-md" />
-                    <div>
-                      <h3 className="text-lg sm:text-xl font-bold text-[var(--text-heading)] leading-tight">{mentor.name}</h3>
-                      <p className="text-primary font-bold text-xs uppercase tracking-wider mt-1">{mentor.role}</p>
-                    </div>
-                  </div>
-                  <div className="flex-1">
-                    <p className="text-sm font-bold text-[var(--text-muted)] mb-4">{mentor.company}</p>
-                    <div className="flex flex-wrap gap-2">
-                      {mentor.expertise.map((skill, i) => (
-                        <span key={i} className="px-2 py-1 bg-[var(--bg-secondary)] text-[var(--text-muted)] text-[10px] font-black uppercase tracking-wider rounded-lg border border-[var(--border-color)]">
-                          {skill}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </ScaleOnHover>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Features/Trust Factors — Infographic Hub-and-Spoke Style */}
-      <section className="section-padding bg-[var(--bg-body)] relative overflow-hidden border-b border-[var(--border-color)]">
-        {/* Soft radial glow background */}
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px]" />
-          <div className="absolute top-0 right-0 w-80 h-80 bg-amber-400/5 rounded-full blur-[100px]" />
-          <div className="absolute bottom-0 left-0 w-80 h-80 bg-cyan-400/5 rounded-full blur-[100px]" />
-        </div>
-
-        <div className="container-custom relative z-10">
-          {/* Section Header */}
-          <div className="text-center mb-14">
-            <p className="text-xs font-black uppercase tracking-[0.3em] text-[var(--text-muted)] mb-2">Trusted Education Partner</p>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-[var(--text-heading)] leading-tight mb-4">
-              Why Choose <span className="text-primary">{BRANDING.fullName}?</span>
-            </h2>
-            {/* Golden ribbon subtitle — cloned from image */}
-            <div className="inline-flex items-center gap-3 px-6 py-2.5 rounded-full text-sm sm:text-base font-bold text-white shadow-lg"
-              style={{ background: 'linear-gradient(90deg, #B8860B 0%, #DAA520 40%, #FFD700 60%, #DAA520 80%, #B8860B 100%)' }}>
-              <Rocket className="h-4 w-4 shrink-0" />
-              Your Career Launchpad in AI &amp; Cloud
-              <Rocket className="h-4 w-4 shrink-0 scale-x-[-1]" />
-            </div>
-          </div>
-
-          {/* =====================================================================
-               WHY CHOOSE US — RESPONSIVE INFOGRAPHIC
-               • Mobile  (< md)  : Hub badge   → 2-col card grid
-               • Tablet  (md–xl) : Hub circle  centered, cards left & right
-               • Desktop (xl+)   : Full hub-and-spoke with curved SVG arrows
-          ===================================================================== */}
-
-          {/* ── MOBILE LAYOUT (hidden on md+) ─────────────────────────────── */}
-          <div className="block md:hidden">
-            {/* Hub badge */}
-            <div className="flex justify-center mb-8">
-              <div className="relative">
-                <div className="absolute inset-0 rounded-full bg-primary/20 blur-xl scale-110" />
-                <div
-                  className="relative w-36 h-36 rounded-full flex flex-col items-center justify-center text-center shadow-2xl"
-                  style={{
-                    background: 'conic-gradient(from 180deg at 50% 50%, #1e3a8a 0deg, #1d4ed8 90deg, #0284c7 180deg, #1d4ed8 270deg, #1e3a8a 360deg)',
-                    border: '4px solid #FFD700',
-                  }}
-                >
-                  <div className="absolute inset-3 rounded-full bg-white/10 backdrop-blur-sm" />
-                  <div className="relative z-10 flex flex-col items-center">
-                    <div className="w-9 h-9 rounded-full bg-white/20 flex items-center justify-center mb-1">
-                      <Cpu className="h-5 w-5 text-white" />
-                    </div>
-                    <p className="text-[9px] font-black text-white/80 uppercase tracking-widest leading-none">Ai</p>
-                    <p className="text-sm font-black text-white leading-none mt-0.5 whitespace-nowrap">SCOPE AI HUB</p>
-                    <div className="mt-1 flex gap-0.5">
-                      {[...Array(5)].map((_, i) => <div key={i} className="w-1 h-1 rounded-full bg-white/40" />)}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Feature cards — single column */}
-            <div className="flex flex-col gap-2.5">
-              {[
-                { num: "1", title: "Industry-Focused Curriculum", sub: "Real Corporate Needs", accent: "#1d4ed8" },
-                { num: "2", title: "70% Practical Learning", sub: "Labs + Projects + Case Studies", accent: "#047857" },
-                { num: "3", title: "Industry Mentors", sub: "8+ Years Experience", accent: "#7e22ce" },
-                { num: "4", title: "Real-World Projects", sub: "200+ Projects Completed", accent: "#c2410c" },
-                { num: "5", title: "Career Preparation", sub: "Resume + Interviews + Guidance", accent: "#b45309", isPrep: true },
-                { num: "6", title: "Hiring Network", sub: "50+ Partners · Tier 1 & Tier 2 Companies", accent: "#0f766e" },
-              ].map((item, i) => (
-                <div
-                  key={i}
-                  className="flex items-center gap-3 rounded-xl px-3 py-2.5 shadow-sm hover:shadow-md transition-all"
-                  style={{
-                    background: item.isPrep ? 'rgba(245,158,11,0.12)' : 'var(--bg-card)',
-                    borderLeft: `4px solid ${item.accent}`,
-                    border: item.isPrep ? '2px solid #fbbf24' : '1px solid var(--border-color)',
-                    borderLeftWidth: '4px',
-                    borderLeftColor: item.accent,
-                  }}
-                >
-                  <span
-                    className="w-6 h-6 rounded-full text-white text-[10px] font-black flex items-center justify-center shrink-0"
-                    style={{ background: item.accent }}
-                  >{item.num}</span>
-                  <div className="flex-1">
-                    <p className="font-bold text-[13px] leading-snug text-[var(--text-heading)]">{item.title}</p>
-                    <p className="text-[11px] text-[var(--text-muted)] mt-0.5">{item.sub}</p>
-                  </div>
-                </div>
-              ))}
-
-              {/* Career Launch — full-width highlight */}
-              <div
-                className="flex items-center gap-3 rounded-xl px-3 py-3 shadow-md"
-                style={{ background: '#1e293b', border: '2px solid #fbbf24' }}
-              >
-                <span className="w-7 h-7 rounded-full bg-amber-500 text-white text-xs font-black flex items-center justify-center shrink-0">7</span>
-                <div className="flex-1">
-                  <p className="font-bold text-[13px] text-white leading-snug">Career Launch</p>
-                  <p className="text-[11px] text-white/60 mt-0.5">Job-Ready AI Professionals</p>
-                </div>
-                <span className="text-lg shrink-0">🚀</span>
-              </div>
-            </div>
-          </div>
-
-          {/* ── TABLET LAYOUT (md → xl) ────────────────────────────────────── */}
-          <div className="hidden md:flex xl:hidden flex-col items-center gap-6">
-            {/* Top row: left cards | hub circle | right cards */}
-            <div className="flex items-center gap-6 w-full">
-              {/* Left cards */}
-              <div className="flex flex-col gap-3 flex-1">
-                {[
-                  { num: "1", title: "Industry-Focused Curriculum", sub: "Real Corporate Needs", emoji: "💼", accent: "#1d4ed8" },
-                  { num: "2", title: "70% Practical Learning", sub: "Labs + Projects + Case Studies", emoji: "🔬", accent: "#047857" },
-                  { num: "3", title: "Industry Mentors", sub: "8+ Years Experience", emoji: "🎓", accent: "#7e22ce" },
-                ].map((item, i) => (
-                  <div key={i} className="flex items-center gap-2.5 bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl shadow-sm hover:shadow-md transition-all p-0 overflow-hidden"
-                    style={{ borderRightWidth: '4px', borderRightColor: item.accent }}>
-                    <span className="w-7 text-center text-white text-xs font-black py-4 shrink-0 self-stretch flex items-center justify-center"
-                      style={{ background: item.accent }}>{item.num}</span>
-                    <div className="flex-1 py-2.5 pr-2">
-                      <p className="font-bold text-[13px] text-[var(--text-heading)] leading-snug">{item.title}</p>
-                      <p className="text-[var(--text-muted)] text-xs mt-0.5">({item.sub})</p>
-                    </div>
-                    <span className="text-lg pr-3 shrink-0">{item.emoji}</span>
-                  </div>
-                ))}
-              </div>
-
-              {/* Centre hub circle */}
-              <div className="flex flex-col items-center gap-4 shrink-0">
-                <div className="relative">
-                  <div className="absolute inset-0 rounded-full bg-primary/20 blur-xl scale-110" />
-                  <div className="absolute -inset-3 rounded-full border-2 border-dashed border-primary/20 animate-spin" style={{ animationDuration: '20s' }} />
-                  <div
-                    className="relative w-44 h-44 rounded-full flex flex-col items-center justify-center text-center shadow-2xl"
-                    style={{
-                      background: 'conic-gradient(from 180deg at 50% 50%, #1e3a8a 0deg, #1d4ed8 90deg, #0284c7 180deg, #1d4ed8 270deg, #1e3a8a 360deg)',
-                      border: '4px solid #FFD700',
-                    }}
-                  >
-                    <div className="absolute inset-3 rounded-full bg-white/10 backdrop-blur-sm" />
-                    <div className="relative z-10 flex flex-col items-center">
-                      <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center mb-1">
-                        <Cpu className="h-5 w-5 text-white" />
-                      </div>
-                      <p className="text-[9px] font-black text-white/80 uppercase tracking-widest leading-none">Ai</p>
-                      <p className="text-sm font-black text-white leading-none mt-0.5 whitespace-nowrap">SCOPE AI HUB</p>
-                      <div className="mt-1.5 flex gap-0.5">
-                        {[...Array(5)].map((_, i) => <div key={i} className="w-1 h-1 rounded-full bg-white/40" />)}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Right cards */}
-              <div className="flex flex-col gap-3 flex-1">
-                {[
-                  { num: "4", title: "Real-World Projects", sub: "200+ Projects Completed", emoji: "🖥️", accent: "#c2410c" },
-                  { num: "5", title: "Career Preparation", sub: "Resume + Interviews + Guidance", emoji: "✍️", accent: "#b45309" },
-                  { num: "6", title: "Hiring Network", sub: "50+ Partners · Tier 1 & Tier 2", emoji: "🤝", accent: "#0f766e" },
-                ].map((item, i) => (
-                  <div key={i} className="flex items-center gap-2.5 bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl shadow-sm hover:shadow-md transition-all overflow-hidden"
-                    style={{ borderRightWidth: '4px', borderRightColor: item.accent }}>
-                    <span className="w-7 text-center text-white text-xs font-black py-4 shrink-0 self-stretch flex items-center justify-center"
-                      style={{ background: item.accent }}>{item.num}</span>
-                    <div className="flex-1 py-2.5 pr-2">
-                      <p className="font-bold text-[13px] text-[var(--text-heading)] leading-snug">{item.title}</p>
-                      <p className="text-[var(--text-muted)] text-xs mt-0.5">({item.sub})</p>
-                    </div>
-                    <span className="text-lg pr-3 shrink-0">{item.emoji}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Career Launch — bottom card */}
-            <div className="w-full max-w-md border-2 border-amber-400 rounded-xl shadow-md p-4 text-center" style={{ background: '#1e293b' }}>
-              <div className="inline-flex items-center gap-2 mb-1">
-                <span className="w-6 h-6 rounded-full bg-amber-500 text-white text-xs font-black flex items-center justify-center shrink-0">7</span>
-                <p className="font-bold text-sm text-white">Career Launch</p>
-                <span className="text-lg">🚀</span>
-              </div>
-              <p className="text-white/60 text-xs">Job-Ready AI Professionals</p>
-            </div>
-          </div>
-
-          {/* ── DESKTOP LAYOUT (xl+) — full hub-and-spoke with SVG arrows ── */}
-          <div className="hidden xl:flex flex-row items-center justify-center">
-
-            {/* LEFT COLUMN — Items 1, 2, 3 */}
-            <div className="flex flex-col gap-3.5 w-[320px] shrink-0">
-              {[
-                { num: "1", title: "Industry-Focused Curriculum", sub: "Real Corporate Needs", emoji: "💼", borderColor: "#3b82f6", badgeBg: "#1d4ed8" },
-                { num: "2", title: "70% Practical Learning", sub: "Labs + Projects + Case Studies", emoji: "🔬", borderColor: "#10b981", badgeBg: "#047857" },
-                { num: "3", title: "Industry Mentors", sub: "8+ Years Experience", emoji: "🎓", borderColor: "#a855f7", badgeBg: "#7e22ce" },
-              ].map((item, i) => (
-                <div key={i} className="relative">
-                  <div className="flex items-center gap-2.5 bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl shadow-sm hover:shadow-md transition-all overflow-hidden"
-                    style={{ borderRightWidth: '4px', borderRightColor: item.borderColor }}>
-                    <span className="text-[11px] font-black text-white px-2 py-4 flex items-center justify-center shrink-0 self-stretch"
-                      style={{ background: item.badgeBg, borderRadius: '10px 0 0 10px' }}>{item.num}</span>
-                    <div className="flex-1 py-3">
-                      <p className="font-bold text-sm text-[var(--text-heading)] leading-snug">{item.title}</p>
-                      <p className="text-[var(--text-muted)] text-xs mt-0.5">({item.sub})</p>
-                    </div>
-                    <span className="text-xl pr-3 shrink-0">{item.emoji}</span>
-                  </div>
-                  {/* Arrow → to hub */}
-                  <div className="absolute top-1/2 -translate-y-1/2 -right-[76px] z-20">
-                    <svg width="76" height="44" viewBox="0 0 80 44" fill="none">
-                      <path d="M2 38 Q20 38 36 22 Q52 6 72 6" stroke="rgba(37,99,235,0.75)" strokeWidth="2.5" strokeLinecap="round" fill="none"/>
-                      <polygon points="72,1 80,6 72,11" fill="rgba(37,99,235,0.85)"/>
-                    </svg>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* CENTER HUB */}
-            <div className="flex-1 flex flex-col items-center justify-between px-8 min-h-[480px]">
-              {/* Circle */}
-              <div className="flex-1 flex items-center justify-center w-full">
-                <div className="relative shrink-0">
-                  <div className="absolute inset-0 rounded-full bg-primary/20 blur-[20px] scale-110" />
-                  <div className="absolute -inset-4 rounded-full border-2 border-dashed border-primary/20 animate-spin" style={{ animationDuration: '20s' }} />
-                  <div
-                    className="relative w-52 h-52 rounded-full flex flex-col items-center justify-center text-center shadow-2xl"
-                    style={{
-                      background: 'conic-gradient(from 180deg at 50% 50%, #1e3a8a 0deg, #1d4ed8 90deg, #0284c7 180deg, #1d4ed8 270deg, #1e3a8a 360deg)',
-                      border: '4px solid #FFD700',
-                    }}
-                  >
-                    <div className="absolute inset-3 rounded-full bg-white/10 backdrop-blur-sm" />
-                    <div className="relative z-10 flex flex-col items-center">
-                      <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center mb-1">
-                        <Cpu className="h-6 w-6 text-white" />
-                      </div>
-                      <p className="text-[10px] font-black text-white/80 uppercase tracking-widest leading-none">Ai</p>
-                      <p className="text-lg font-black text-white leading-none mt-0.5 whitespace-nowrap">SCOPE AI HUB</p>
-                      <div className="mt-1.5 flex gap-0.5">
-                        {[...Array(5)].map((_, i) => <div key={i} className="w-1 h-1 rounded-full bg-white/40" />)}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Bottom center — Career Launch (Item 7) */}
-              <div className="relative w-full max-w-[320px] mt-7">
-                <div className="absolute -top-[76px] left-1/2 -translate-x-1/2 z-20">
-                  <svg width="44" height="76" viewBox="0 0 44 80" fill="none">
-                    <path d="M38 78 Q38 56 22 42 Q8 28 8 8" stroke="#F59E0B" strokeWidth="2.5" strokeLinecap="round" fill="none" strokeOpacity="0.85"/>
-                    <polygon points="3,8 8,0 13,8" fill="#F59E0B" fillOpacity="0.9"/>
-                  </svg>
-                </div>
-                <div className="border-2 border-amber-400 rounded-xl shadow-md hover:shadow-xl transition-all overflow-hidden" style={{ background: '#1e293b' }}>
-                  <div className="flex items-center gap-3 px-4 py-4">
-                    <div className="bg-amber-500 text-white w-8 h-8 rounded-full flex items-center justify-center shrink-0">
-                      <Award className="h-4 w-4" />
-                    </div>
-                    <div className="flex-1 text-center">
-                      <p className="font-black text-base text-white leading-snug">7. Career Launch</p>
-                      <p className="text-white/60 text-xs mt-0.5">Job-Ready AI Professionals</p>
-                    </div>
-                    <span className="text-2xl shrink-0">🚀</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* RIGHT COLUMN — Items 4, 5, 6 */}
-            <div className="flex flex-col gap-3.5 w-[320px] shrink-0">
-              {[
-                { num: "4", title: "Real-World Projects", sub: "200+ Projects Completed", emoji: "🖥️", borderColor: "#f97316", badgeBg: "#c2410c" },
-                { num: "5", title: "Career Preparation", sub: "Resume + Interviews + Guidance", emoji: "✍️", borderColor: "#f59e0b", badgeBg: "#b45309" },
-                { num: "6", title: "Hiring Network", sub: "50+ Partners · Tier 1 & Tier 2", emoji: "🤝", borderColor: "#14b8a6", badgeBg: "#0f766e" },
-              ].map((item, i) => (
-                <div key={i} className="relative">
-                  <div className="absolute top-1/2 -translate-y-1/2 -left-[76px] z-20">
-                    <svg width="76" height="44" viewBox="0 0 80 44" fill="none">
-                      <path d="M78 38 Q60 38 44 22 Q28 6 8 6" stroke="rgba(37,99,235,0.75)" strokeWidth="2.5" strokeLinecap="round" fill="none"/>
-                      <polygon points="8,1 0,6 8,11" fill="rgba(37,99,235,0.85)"/>
-                    </svg>
-                  </div>
-                  <div className="flex items-center gap-2.5 bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl shadow-sm hover:shadow-md transition-all overflow-hidden"
-                    style={{ borderRightWidth: '4px', borderRightColor: item.borderColor }}>
-                    <span className="text-[11px] font-black text-white px-2 py-4 flex items-center justify-center shrink-0 self-stretch"
-                      style={{ background: item.badgeBg, borderRadius: '10px 0 0 10px' }}>{item.num}</span>
-                    <div className="flex-1 py-3">
-                      <p className="font-bold text-sm text-[var(--text-heading)] leading-snug">{item.title}</p>
-                      <p className="text-[var(--text-muted)] text-xs mt-0.5">({item.sub})</p>
-                    </div>
-                    <span className="text-xl pr-3 shrink-0">{item.emoji}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-          </div>{/* end desktop layout */}
-
-          {/* ===== BOTTOM STATS BAR ===== */}
-
-          <div className="mt-12 rounded-2xl overflow-hidden shadow-xl"
-            style={{ background: 'linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #0f172a 100%)' }}>
-
-            {/* Mobile: flex-wrap */}
-            <div className="flex flex-wrap sm:hidden">
-              {[
-                { value: "70%",     label: "Practical",         highlight: true  },
-                { value: "200+",    label: "Projects",          highlight: false },
-                { value: "8+ Yrs",  label: "Mentors' Exp",      highlight: false },
-                { value: "50+",     label: "Hiring Partners",   highlight: false },
-                { value: "100%",    label: "Placement Support", highlight: true  },
-              ].map((stat, i) => (
-                <div key={i}
-                  className={`flex flex-col items-center justify-center py-5 px-4 text-center gap-1 hover:bg-white/5 transition-colors
-                    ${i < 4 ? 'w-1/2' : 'w-full border-t border-white/10'}
-                    ${i === 0 || i === 2 ? 'border-r border-white/10' : ''}
-                    ${i < 2 ? 'border-b border-white/10' : i < 4 ? '' : ''}
-                  `}
-                >
-                  <span className={`text-2xl font-black ${stat.highlight ? 'text-amber-400' : 'text-white'}`}>{stat.value}</span>
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-white/60">{stat.label}</span>
-                </div>
-              ))}
-            </div>
-
-            {/* Tablet/Desktop: single row with dividers */}
-            <div className="hidden sm:grid sm:grid-cols-5 divide-x divide-white/10">
-              {[
-                { value: "70%",     label: "Practical",         highlight: true  },
-                { value: "200+",    label: "Projects",          highlight: false },
-                { value: "8+ Yrs",  label: "Mentors' Exp",      highlight: false },
-                { value: "50+",     label: "Hiring Partners",   highlight: false },
-                { value: "100%",    label: "Placement Support", highlight: true  },
-              ].map((stat, i) => (
-                <div key={i} className="flex flex-col items-center justify-center py-6 px-4 text-center gap-1 hover:bg-white/5 transition-colors">
-                  <span className={`text-3xl font-black ${stat.highlight ? 'text-amber-400' : 'text-white'}`}>{stat.value}</span>
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-white/60">{stat.label}</span>
-                </div>
-              ))}
-            </div>
-
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials — Animated Carousel */}
-      <section className="section-padding bg-[var(--bg-secondary)] border-b border-[var(--border-color)]">
-        <div className="container-custom">
-          <div className="text-center max-w-3xl mx-auto mb-8">
-            <h2 className="heading-md mb-4 text-[var(--text-heading)]">Success Stories</h2>
-            <p className="text-[var(--text-muted)] text-base sm:text-lg">Hear from our students who are now working at top tech companies.</p>
-          </div>
-          <DesignTestimonial />
-        </div>
-      </section>
-
-      {/* Placement Support Methodology */}
-      <section className="py-20 bg-[var(--bg-body)] relative overflow-hidden border-b border-[var(--border-color)]">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-[120px]" />
-        <div className="container-custom relative z-10">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <div className="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider mb-6 border border-primary/20">
-              <Briefcase className="h-3 w-3" />
-              <span>100% Placement Support</span>
-            </div>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-[var(--text-heading)] mb-6 leading-tight">
-              Your Success is <span className="text-primary">Our Commitment</span>
-            </h2>
-            <p className="text-lg text-[var(--text-muted)] leading-relaxed">
-              We don't just train you—we prepare you for the real world. Our comprehensive placement support ensures you're completely job-ready when you complete your course.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-12 mb-16">
-            {[
-              {
-                phase: "Phase 1",
-                title: "Technical Grooming",
-                icon: <Code2 className="h-6 w-6" />,
-                items: [
-                  "Advanced DSA & problem-solving sessions",
-                  "System design fundamentals",
-                  "Live coding practice with real-time feedback",
-                  "Code review and optimization techniques",
-                  "Portfolio project development"
-                ],
-                color: "from-blue-500 to-cyan-600"
-              },
-              {
-                phase: "Phase 2",
-                title: "Interview Preparation",
-                icon: <Users className="h-6 w-6" />,
-                items: [
-                  "Mock interviews (Technical + HR rounds)",
-                  "Resume building & LinkedIn profile optimization",
-                  "Communication & soft skills training",
-                  "Salary negotiation strategies",
-                  "Company-specific interview patterns"
-                ],
-                color: "from-purple-500 to-pink-600"
-              },
-              {
-                phase: "Phase 3",
-                title: "Job Connections",
-                icon: <Building2 className="h-6 w-6" />,
-                items: [
-                  "Direct referrals to 50+ recruitment partners",
-                  "Exclusive campus placement drives",
-                  "Job portal guidance (Naukri, LinkedIn)",
-                  "Startup & MNC connections",
-                  "Ongoing support until placement"
-                ],
-                color: "from-orange-500 to-red-600"
-              }
-            ].map((phase, i) => (
-              <ScaleOnHover key={i}>
-                <div className="bg-[var(--bg-secondary)] rounded-2xl sm:rounded-3xl p-5 sm:p-8 border border-[var(--border-color)] hover:shadow-2xl transition-all h-full">
-                  <div className={`w-12 h-12 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl bg-gradient-to-br ${phase.color} flex items-center justify-center mb-5 sm:mb-6 text-white shadow-lg`}>
-                    {phase.icon}
-                  </div>
-                  <div className="text-xs sm:text-sm font-black text-[var(--text-muted)] uppercase tracking-widest mb-2">{phase.phase}</div>
-                  <h3 className="text-xl sm:text-2xl font-bold text-[var(--text-heading)] mb-4 sm:mb-6">{phase.title}</h3>
-                  <ul className="space-y-3">
-                    {phase.items.map((item, j) => (
-                      <li key={j} className="flex items-start space-x-3">
-                        <CheckCircle2 className="h-5 w-5 text-accent-success shrink-0 mt-0.5" />
-                        <span className="text-[var(--text-muted)] text-sm leading-relaxed">{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </ScaleOnHover>
-            ))}
-          </div>
-
-          <div className="bg-[var(--bg-inverted)] rounded-2xl sm:rounded-3xl p-5 sm:p-8 md:p-12 text-[var(--text-on-inverted)]">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
-              <div>
-                <h3 className="text-2xl md:text-3xl font-bold text-[var(--text-on-inverted)] mb-6">
-                  What Does <span className="text-primary">"100% Placement Support"</span> Mean?
-                </h3>
-                <div className="space-y-4">
-                  <div className="flex items-start space-x-4">
-                    <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center shrink-0 mt-1">
-                      <CheckCircle2 className="h-4 w-4 text-primary" />
-                    </div>
-                    <div>
-                      <h4 className="font-bold text-[var(--text-on-inverted)] mb-1">Complete Job Readiness</h4>
-                      <p className="text-[var(--text-on-inverted)]/60 text-sm">We ensure you have all the technical and soft skills needed to crack interviews.</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start space-x-4">
-                    <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center shrink-0 mt-1">
-                      <CheckCircle2 className="h-4 w-4 text-primary" />
-                    </div>
-                    <div>
-                      <h4 className="font-bold text-[var(--text-on-inverted)] mb-1">Continuous Support</h4>
-                      <p className="text-[var(--text-on-inverted)]/60 text-sm">We don't stop until you land your dream role—unlimited mock interviews and resume iterations.</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start space-x-4">
-                    <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center shrink-0 mt-1">
-                      <CheckCircle2 className="h-4 w-4 text-primary" />
-                    </div>
-                    <div>
-                      <h4 className="font-bold text-[var(--text-on-inverted)] mb-1">Direct Company Connections</h4>
-                      <p className="text-[var(--text-on-inverted)]/60 text-sm">Access to exclusive job opportunities through our recruitment partnerships.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="space-y-6">
-                <div className="bg-primary/10 backdrop-blur-sm border border-primary/20 rounded-2xl p-6">
-                  <div className="text-2xl sm:text-4xl font-black text-primary mb-2">8L+ Avg</div>
-                  <div className="text-sm text-[var(--text-on-inverted)]/60 font-medium">Average salary package of placed students</div>
-                </div>
-                <div className="bg-primary/10 backdrop-blur-sm border border-primary/20 rounded-2xl p-6">
-                  <div className="text-2xl sm:text-4xl font-black text-primary mb-2">92%</div>
-                  <div className="text-sm text-[var(--text-on-inverted)]/60 font-medium">Placement success rate across all batches</div>
-                </div>
-                <div className="bg-primary/10 backdrop-blur-sm border border-primary/20 rounded-2xl p-6">
-                  <div className="text-2xl sm:text-4xl font-black text-primary mb-2">75+</div>
-                  <div className="text-sm text-[var(--text-on-inverted)]/60 font-medium">Active hiring partner companies across India</div>
-                </div>
-              </div>
-            </div>
-            <div className="mt-10 pt-10 border-t border-primary/10 text-center">
-              <p className="text-[var(--text-on-inverted)]/60 text-sm mb-6">
-                <span className="text-primary font-bold">Important Note:</span> While we provide comprehensive placement assistance, final selection depends on your performance in interviews and company requirements. We prepare you thoroughly to maximize your success rate.
-              </p>
-              <button
-                onClick={() => openModal('Placement Inquiry')}
-                className="bg-primary text-white font-bold px-6 sm:px-10 py-3 sm:py-4 rounded-2xl hover:opacity-90 transition-all shadow-xl text-sm sm:text-base"
-              >
-                Learn More About Placement Support
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ Summary */}
-      <section className="section-padding bg-[var(--bg-body)]">
-        <div className="container-custom">
-          <div className="grid lg:grid-cols-2 gap-16">
-            <div>
-              <h2 className="heading-md mb-6">Got Questions? <br /> We Have Answers.</h2>
-              <p className="text-[var(--text-muted)] text-lg mb-8 leading-relaxed">
-                If you have any other questions, feel free to reach out to our team. We're happy to help you choose the right path for your career.
-              </p>
-              <Link to="/faq" className="btn-secondary inline-flex items-center">
-                View All FAQs <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </div>
-            <div className="space-y-2">
-              {faqs.map((faq, i) => (
-                <FAQItem key={i} question={faq.q} answer={faq.a} />
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Career Counseling CTA */}
-      <section className="py-20 bg-[var(--bg-body)] border-b border-[var(--border-color)]">
-        <div className="container-custom">
-          <div className="bg-[var(--bg-inverted)] rounded-2xl md:rounded-[3rem] p-6 sm:p-10 md:p-16 text-[var(--text-on-inverted)] text-center relative overflow-hidden shadow-2xl">
-            <div className="absolute top-0 left-0 w-full h-full opacity-10">
-              <div className="absolute top-[-50%] left-[-20%] w-[80%] h-[80%] bg-primary/20 rounded-full blur-[100px]" />
-              <div className="absolute bottom-[-50%] right-[-20%] w-[80%] h-[80%] bg-primary/10 rounded-full blur-[100px]" />
-            </div>
-            <div className="relative z-10 max-w-4xl mx-auto">
-              <div className="inline-flex items-center justify-center w-20 h-20 bg-primary/10 rounded-3xl mb-8 backdrop-blur-sm border border-primary/20">
-                <Users className="h-10 w-10 text-primary" />
-              </div>
-              <h2 className="text-2xl sm:text-3xl md:text-5xl font-black mb-6 text-[var(--text-on-inverted)]">Confused About Your <span className="text-primary">Career Path</span>?</h2>
-              <p className="text-base sm:text-xl text-[var(--text-on-inverted)]/80 mb-8 sm:mb-10 leading-relaxed max-w-2xl mx-auto">
-                Don't guess your future. Speak to our expert career counselors for a <span className="font-bold text-primary border-b-2 border-primary/40">free 1:1 session</span>. We'll analyze your skills and suggest the perfect roadmap for 2026.
-              </p>
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-                <button 
-                  onClick={() => openModal('Career Counseling')}
-                  className="bg-primary text-white font-bold px-6 sm:px-10 py-4 sm:py-5 rounded-2xl hover:opacity-90 transition-all flex items-center shadow-xl text-base sm:text-lg group w-full sm:w-auto justify-center"
-                >
-                  Book Free Session <ArrowRight className="ml-3 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-                </button>
-                <div className="text-left hidden sm:flex items-center space-x-4 bg-primary/10 px-6 py-3 rounded-xl border border-primary/20 backdrop-blur-sm">
-                  <div className="flex -space-x-3">
-                    {[1, 2, 3].map((i) => (
-                      <div key={i} className="w-8 h-8 rounded-full border-2 border-[var(--bg-body)]/50 overflow-hidden">
-                        <img src={`https://randomuser.me/api/portraits/${i % 2 === 0 ? 'women' : 'men'}/${i + 70}.jpg`} alt="Counselor" />
-                      </div>
-                    ))}
-                  </div>
-                  <div>
-                    <p className="text-xs font-bold uppercase tracking-widest text-[var(--text-on-inverted)]/60">Available Now</p>
-                    <p className="text-xs font-bold text-[var(--text-on-inverted)]">3 Counselors Online</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Corporate Training Section */}
-      <section className="py-20 bg-[var(--bg-inverted)] text-[var(--text-on-inverted)] relative overflow-hidden">
-        <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-          <div className="absolute top-[-20%] left-[-10%] w-[600px] h-[600px] bg-primary/20 rounded-full blur-[120px]" />
-          <div className="absolute bottom-[-20%] right-[-10%] w-[500px] h-[500px] bg-primary/10 rounded-full blur-[100px]" />
-        </div>
-        <div className="container-custom relative z-10">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div>
-              <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-[var(--bg-body)]/20 text-[var(--text-on-inverted)] text-xs font-bold uppercase tracking-wider mb-6">
-                For Organizations
-              </div>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-6 leading-tight">
-                Empower Your Workforce with <span className="text-primary">Corporate Training</span>
-              </h2>
-              <p className="text-base md:text-lg text-[var(--text-on-inverted)]/70 mb-10 leading-relaxed">
-                We provide customized training solutions for corporate teams to stay ahead in the rapidly evolving tech landscape. From upskilling in AI/ML to Cloud transformations.
-              </p>
-              <div className="grid sm:grid-cols-2 gap-8 mb-10">
-                {[
-                  { title: "Customized Curriculum", desc: "Tailored to your business needs." },
-                  { title: "Expert Instructors", desc: "Industry veterans with deep expertise." },
-                  { title: "Flexible Delivery", desc: "On-site, remote, or hybrid options." },
-                  { title: "Scalable Solutions", desc: "For teams of 10 to 1000+ employees." }
-                ].map((item, i) => (
-                  <div key={i} className="space-y-2">
-                    <h4 className="font-bold text-[var(--text-on-inverted)] flex items-center">
-                      <CheckCircle2 className="h-4 w-4 text-[var(--text-on-inverted)]/80 mr-2" />
-                      {item.title}
-                    </h4>
-                    <p className="text-sm text-[var(--text-on-inverted)]/60">{item.desc}</p>
-                  </div>
-                ))}
-              </div>
-              <button 
-                onClick={() => openModal('Corporate Training')}
-                className="btn-primary px-10 py-4"
-              >
-                Inquire for Corporate Training
-              </button>
-            </div>
-            <div className="hidden lg:block">
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-4">
-                  <div className="h-48 rounded-2xl bg-[var(--bg-body)]/5 border border-[var(--bg-body)]/10 flex items-center justify-center p-8">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google" className="w-full opacity-40 grayscale" />
-                  </div>
-                  <div className="h-64 rounded-2xl bg-[var(--bg-body)]/10 border border-[var(--bg-body)]/20 flex flex-col items-center justify-center p-8 text-center">
-                    <div className="text-3xl md:text-4xl font-black text-[var(--text-on-inverted)] mb-2">25+</div>
-                    <div className="text-sm font-bold uppercase tracking-widest text-[var(--text-on-inverted)]/60">Organisations Trained</div>
-                  </div>
-                </div>
-                <div className="space-y-4 pt-12">
-                  <div className="h-64 rounded-2xl bg-[var(--bg-body)]/5 border border-[var(--bg-body)]/10 flex flex-col items-center justify-center p-8 text-center">
-                    <div className="text-3xl md:text-4xl font-black text-[var(--text-on-inverted)] mb-2">500+</div>
-                    <div className="text-sm font-bold uppercase tracking-widest text-[var(--text-on-inverted)]/60">Professionals Upskilled</div>
-                  </div>
-                  <div className="h-48 rounded-2xl bg-[var(--bg-body)]/5 border border-[var(--bg-body)]/10 flex items-center justify-center p-8">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" alt="Amazon" className="w-full opacity-40 grayscale" />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Global Reach Section */}
-      <section className="py-20 bg-[var(--bg-body)] border-b border-[var(--border-color)]">
-        <div className="container-custom">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="heading-md mb-6">Learn From Anywhere. <span className="text-primary">Compete Everywhere.</span></h2>
-            <p className="text-[var(--text-muted)] text-lg">
-              Can’t make it to our Chennai campus? Our immersive live online programs bring the classroom experience directly to you — no compromise on quality, interaction, or mentorship.
-            </p>
-          </div>
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              {
-                title: "Live Interactive Classes",
-                desc: "Real-time engagement with instructors and peers, just like a physical classroom.",
-                icon: <PlayCircle className="h-8 w-8" />
-              },
-              {
-                title: "24/7 LMS Access",
-                desc: "Lifetime access to recorded sessions, study materials, and project files through our portal.",
-                icon: <Zap className="h-8 w-8" />
-              },
-              {
-                title: "Global Certification",
-                desc: "Certificates recognized in USA, UK, Canada, Australia, UAE, and beyond.",
-                icon: <Award className="h-8 w-8" />
-              }
-            ].map((item, i) => (
-              <div key={i} className="p-5 sm:p-8 rounded-2xl sm:rounded-[2rem] bg-[var(--bg-card)] border border-[var(--border-color)] hover:shadow-xl transition-all group">
-                <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl bg-primary/10 flex items-center justify-center mb-5 sm:mb-8 text-primary shadow-sm group-hover:bg-primary group-hover:text-white transition-colors">
-                  {item.icon}
-                </div>
-                <h3 className="text-lg sm:text-xl font-bold text-[var(--text-heading)] mb-3 sm:mb-4">{item.title}</h3>
-                <p className="text-sm sm:text-base text-[var(--text-muted)] leading-relaxed">{item.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
+      {/* Final CTA */}
       <section className="py-20">
         <div className="container-custom">
           <div className="bg-[var(--bg-inverted)] rounded-2xl md:rounded-[3rem] p-6 sm:p-8 md:p-16 text-center text-[var(--text-on-inverted)] relative overflow-hidden shadow-2xl">
@@ -1206,14 +164,14 @@ const learningPartners = [
                 Join our next batch and learn from industry experts who are passionate about teaching.
               </p>
               <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
-                <button 
+                <button
                   onClick={() => openModal()}
                   className="bg-primary text-white hover:opacity-90 px-10 py-4 rounded-full text-lg font-black transition-all shadow-xl shadow-primary/20"
                 >
                   Enroll Now
                 </button>
-                <Link 
-                  to="/contact" 
+                <Link
+                  to="/contact"
                   className="bg-primary/10 backdrop-blur-md border border-primary/30 text-[var(--text-on-inverted)] hover:bg-primary/20 px-10 py-4 rounded-full text-lg font-black transition-all"
                 >
                   Contact Admissions
