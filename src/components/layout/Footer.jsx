@@ -19,7 +19,7 @@ const Footer = () => {
           <div className="space-y-8">
             <Link to="/" className="inline-block mb-4">
               <img 
-                src={theme === 'dark' ? BRANDING.logoDark : BRANDING.logoLight} 
+                src={theme === 'dark' ? BRANDING.logoLight : BRANDING.logoDark} 
                 alt={BRANDING.fullName} 
                 className="h-16 md:h-20 w-auto object-contain" 
               />

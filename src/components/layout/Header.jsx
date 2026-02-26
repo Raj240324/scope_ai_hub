@@ -216,7 +216,7 @@ const Header = () => {
             {/* Logo — Force White on Transparent Header (Dark Video BG) */}
             <Link to="/" className="flex items-center group">
               <img 
-                src={(isTransparent || theme === 'dark') ? BRANDING.logoDark : BRANDING.logoLight} 
+                src={(isTransparent || theme === 'dark') ? BRANDING.logoLight : BRANDING.logoDark} 
                 alt={BRANDING.fullName} 
                 className="h-20 md:h-24 -my-5 md:-my-6 w-auto object-contain transition-transform duration-300 group-hover:scale-105" 
               />
