@@ -153,7 +153,7 @@ const About = () => {
               },
               {
                 title: "Industry-Current Curriculum",
-                desc: "Our syllabus is updated every quarter based on current job market demands and emerging technologies.",
+                desc: "Our syllabus is updated every month based on current job market demands and emerging technologies.",
                 icon: <Zap className="h-6 w-6" />
               },
               {
@@ -203,7 +203,7 @@ const About = () => {
                   <div className="h-6 w-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0 mt-1">
                     <div className="h-2 w-2 rounded-full bg-primary"></div>
                   </div>
-                  <p className="text-[var(--text-muted)] font-medium">Curriculum updated every 3 months to match industry trends.</p>
+                  <p className="text-[var(--text-muted)] font-medium">Curriculum updated every month to match industry trends.</p>
                 </div>
                 <div className="flex items-start space-x-3">
                   <div className="h-6 w-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0 mt-1">
