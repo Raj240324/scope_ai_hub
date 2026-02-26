@@ -160,26 +160,26 @@ const ContactForm = ({ initialCourse = 'General Inquiry' }) => {
   return (
     <div ref={form}>
       {/* Step indicators */}
-      <div className="mb-8 flex items-center justify-center gap-2">
+      <div className="mb-6 sm:mb-8 flex items-center justify-between w-full px-1 sm:px-4">
         {STEPS.map((s, i) => (
-          <div key={s.id} className="flex items-center gap-2">
+          <React.Fragment key={s.id}>
             <button
               onClick={() => i < currentStep && (setFieldError(''), setCurrentStep(i))}
               disabled={i > currentStep}
-              className={`relative flex h-8 w-8 items-center justify-center rounded-full transition-all duration-500 text-xs font-bold
+              className={`relative flex shrink-0 h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-full transition-all duration-500 text-[10px] sm:text-xs font-bold
                 ${i < currentStep ? 'bg-primary/15 text-primary' : ''}
                 ${i === currentStep ? 'bg-primary text-white shadow-lg shadow-primary/30' : ''}
                 ${i > currentStep ? 'bg-[var(--bg-secondary)] text-[var(--text-muted)]' : ''}
                 ${i > currentStep ? 'cursor-not-allowed' : 'cursor-pointer'}
               `}
             >
-              {i < currentStep ? <Check className="h-3.5 w-3.5" strokeWidth={3} /> : s.id}
+              {i < currentStep ? <Check className="h-3 w-3 sm:h-3.5 sm:w-3.5" strokeWidth={3} /> : s.id}
               {i === currentStep && (
                 <span className="absolute inset-0 rounded-full bg-primary/20 blur-md animate-pulse" />
               )}
             </button>
             {i < STEPS.length - 1 && (
-              <div className="relative h-[1.5px] w-4 sm:w-6">
+              <div className="relative h-[1.5px] flex-1 mx-1 sm:mx-3 min-w-[4px]">
                 <div className="absolute inset-0 bg-[var(--border-color)]" />
                 <div
                   className="absolute inset-0 bg-primary/40 transition-all duration-700 origin-left"
@@ -187,7 +187,7 @@ const ContactForm = ({ initialCourse = 'General Inquiry' }) => {
                 />
               </div>
             )}
-          </div>
+          </React.Fragment>
         ))}
       </div>
 
@@ -227,7 +227,7 @@ const ContactForm = ({ initialCourse = 'General Inquiry' }) => {
               value={value}
               onChange={(e) => handleChange(step.field, e.target.value)}
               autoFocus
-              className={`w-full px-4 py-3 bg-[var(--bg-secondary)] border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm text-[var(--text-heading)] resize-none ${
+              className={`w-full px-4 py-3 bg-[var(--bg-secondary)] border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-base sm:text-sm text-[var(--text-heading)] resize-none ${
                 fieldError ? 'border-red-500' : 'border-[var(--border-color)]'
               }`}
             />
@@ -274,7 +274,7 @@ const ContactForm = ({ initialCourse = 'General Inquiry' }) => {
               }}
               onKeyDown={(e) => e.key === 'Enter' && handleNext()}
               autoFocus
-              className={`w-full px-4 py-3.5 bg-[var(--bg-secondary)] border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm text-[var(--text-heading)] ${
+              className={`w-full px-4 py-3.5 bg-[var(--bg-secondary)] border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-base sm:text-sm text-[var(--text-heading)] ${
                 fieldError ? 'border-red-500' : 'border-[var(--border-color)]'
               }`}
             />
