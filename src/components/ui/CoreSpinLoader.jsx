@@ -15,7 +15,7 @@ export function CoreSpinLoader() {
     const interval = setInterval(() => {
       i = (i + 1) % states.length;
       setLoadingText(states[i]);
-    }, 1000);
+    }, 400);
 
     return () => clearInterval(interval);
   }, []);

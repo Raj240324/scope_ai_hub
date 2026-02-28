@@ -7,6 +7,7 @@ import ScrollToTop from './components/utils/ScrollToTop';
 import { ModalProvider } from './context/ModalContext';
 import { ThemeProvider } from './context/ThemeContext';
 import ContactModal from './components/ui/ContactModal';
+import NewUserModalTrigger from './components/utils/NewUserModalTrigger';
 import { CoreSpinLoader } from './components/ui/CoreSpinLoader';
 
 // Lazy Load Pages
@@ -30,20 +31,26 @@ const Sitemap = lazy(() => import('./pages/Sitemap'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
 // Full-screen preloader — only shows on first load / refresh
-function AppPreloader() {
+function AppPreloader({ onReady }) {
   const [visible, setVisible] = useState(() => !window.__appPreloaderShown);
   const [fadeOut, setFadeOut] = useState(false);
 
   useEffect(() => {
-    if (window.__appPreloaderShown) return;
+    if (window.__appPreloaderShown) {
+      if (onReady) onReady();
+      return;
+    }
 
-    // Show for 4 seconds (full animation cycle), then fade out
+    // Show for 2 seconds (faster animation cycle), then fade out
     const timer = setTimeout(() => {
       setFadeOut(true);
       window.__appPreloaderShown = true;
       // Remove from DOM after fade animation
-      setTimeout(() => setVisible(false), 700);
-    }, 4000);
+      setTimeout(() => {
+        setVisible(false);
+        if (onReady) onReady();
+      }, 500);
+    }, 2000);
 
     return () => clearTimeout(timer);
   }, []);
@@ -52,7 +59,7 @@ function AppPreloader() {
 
   return (
     <div
-      className={`fixed inset-0 z-[9999] flex items-center justify-center bg-black transition-opacity duration-700 ${fadeOut ? 'opacity-0' : 'opacity-100'}`}
+      className={`fixed inset-0 z-[9999] flex items-center justify-center bg-black transition-opacity duration-500 ${fadeOut ? 'opacity-0' : 'opacity-100'}`}
     >
       <CoreSpinLoader />
     </div>
@@ -65,9 +72,11 @@ const PageLoader = () => (
 );
 
 function App() {
+  const [isAppReady, setIsAppReady] = useState(() => window.__appPreloaderShown || false);
+
   return (
     <ErrorBoundary>
-      <AppPreloader />
+      <AppPreloader onReady={() => setIsAppReady(true)} />
       <ModalProvider>
         <ThemeProvider>
           <Router>
@@ -97,6 +106,7 @@ function App() {
             </Routes>
 
           </Suspense>
+          <NewUserModalTrigger isAppReady={isAppReady} />
           <ContactModal />
           </Router>
         </ThemeProvider>
