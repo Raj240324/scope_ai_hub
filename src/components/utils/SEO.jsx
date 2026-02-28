@@ -21,8 +21,8 @@ const SEO = ({
   courseSchema
 }) => {
   const siteTitle = title ? `${title} | ${BRANDING.fullName}` : `${BRANDING.fullName} | Best Software Training Institute in Chennai`;
-  const metaDescription = description || "Master Full Stack Development, Data Science, and AI with expert mentorship. Get 100% placement support at Scope AI Hub, Chennai's top-rated training institute.";
-  const metaKeywords = keywords || "Software Training Institute Chennai, Full Stack Developer Course, Data Science Training, MERN Stack, Python Course, Placement Support, Scope Global";
+  const metaDescription = description || "Master Generative AI, Machine Learning, NLP, and more with expert mentorship. Get placement support at Scope AI Hub, Chennai's top-rated AI training institute.";
+  const metaKeywords = keywords || "AI Training Institute Chennai, Prompt Engineering Course, Machine Learning Training, NLP Course, Data Analytics, MLOps, Python AI, Placement Support, Scope AI Hub";
   const siteUrl = "https://scopeaihub.in";
 
   // EducationalOrganization JSON-LD (shown on every page)
@@ -52,7 +52,7 @@ const SEO = ({
     "@context": "https://schema.org",
     "@type": "Course",
     "name": courseSchema.title,
-    "description": courseSchema.shortDescription || courseSchema.longDescription,
+    "description": courseSchema.tagline,
     "provider": {
       "@type": "EducationalOrganization",
       "name": BRANDING.fullName,
@@ -60,7 +60,7 @@ const SEO = ({
     },
     "url": `${siteUrl}/courses/${courseSchema.slug}`,
     ...(courseSchema.duration && { "timeRequired": courseSchema.duration }),
-    ...(courseSchema.level && { "educationalLevel": courseSchema.level }),
+    ...(courseSchema.tier && { "educationalLevel": courseSchema.tier }),
   } : null;
 
   return (

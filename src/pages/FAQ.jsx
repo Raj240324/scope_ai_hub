@@ -4,6 +4,7 @@ import { Plus, Minus, HelpCircle, MessageCircle } from 'lucide-react';
 import { useModal } from '../context/ModalContext';
 import Hero from '../components/ui/Hero';
 import { BRANDING } from '../data/branding';
+import { courses, tierMeta } from '../data/courses';
 
 const faqData = [
   {
@@ -15,7 +16,7 @@ const faqData = [
       },
       {
         q: "Do I need any prior coding experience to join?",
-        a: "Not necessarily. We have beginner-friendly courses like Full Stack Web Development and Python that start from the basics. However, for advanced courses like Data Science or Cloud Computing, some prior knowledge is beneficial."
+        a: "Not necessarily. We have beginner-friendly programs like Generative AI & Prompt Engineering and Python for AI & Machine Learning that start from the basics. For advanced programs like MLOps & AI Deployment, prior Python and ML knowledge is required."
       },
       {
         q: "Are the certificates recognized by companies?",
@@ -62,11 +63,11 @@ const faqData = [
     questions: [
       {
         q: "What programming languages do you teach?",
-        a: "We cover Python, JavaScript (React, Node.js), Java, C++, SQL, and more depending on the course. Our Full Stack course focuses on MERN stack (MongoDB, Express, React, Node.js), while Data Science courses emphasize Python libraries like NumPy, Pandas, and TensorFlow."
+        a: "We cover Python, NumPy, Pandas, TensorFlow, PyTorch, Scikit-Learn, OpenCV, Power BI, SQL, and more depending on the program. Our ML & Deep Learning program covers neural networks and model building, while NLP focuses on transformers and chatbot development."
       },
       {
         q: "How long are your courses?",
-        a: "Course duration varies from 8 weeks to 24 weeks depending on the program. For example, Full Stack Web Development is 24 weeks, while UI/UX Design is 12 weeks. We offer both weekday and weekend batches to suit working professionals."
+        a: "Program duration ranges from 5 weeks to 12 weeks depending on the program. For example, AI for Business is 5 weeks, while Machine Learning & Deep Learning is 12 weeks. We offer both weekday and weekend batches to suit working professionals."
       },
       {
         q: "Will I build real projects during the course?",
@@ -74,7 +75,7 @@ const faqData = [
       },
       {
         q: "Do you teach AI and Machine Learning?",
-        a: "Yes! Our 'Data Science with AI & ML' course covers supervised/unsupervised learning, neural networks, deep learning, NLP, computer vision, and Generative AI fundamentals. We use TensorFlow, PyTorch, and OpenAI APIs."
+        a: "Yes! We have dedicated programs for Machine Learning & Deep Learning (Program 04), Natural Language Processing (Program 06), Computer Vision (Program 07), and Generative AI & Prompt Engineering (Program 01). We use TensorFlow, PyTorch, Hugging Face, and OpenAI APIs."
       },
       {
         q: "Can I switch courses after enrollment?",
@@ -112,7 +113,7 @@ const faqData = [
       },
       {
         q: "Do I need a laptop with specific requirements?",
-        a: "For most courses, a laptop with Windows/macOS, 8GB RAM, and stable internet is sufficient. For Data Science and AI courses, 16GB RAM is recommended. If you don't have a laptop, we provide computer lab access at our campus."
+        a: "For most programs, a laptop with Windows/macOS, 8GB RAM, and stable internet is sufficient. For ML/DL and Computer Vision programs, 16GB RAM is recommended. If you don't have a laptop, we provide computer lab access at our campus."
       },
       {
         q: "Will I get 1-on-1 mentorship?",
@@ -238,15 +239,13 @@ const FAQ = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {[
-                        { course: "Full Stack Web Development", duration: "24 Weeks", difficulty: "Beginner", prereq: "None", salary: "5-10 LPA" },
-                        { course: "Data Science & AI/ML", duration: "24 Weeks", difficulty: "Intermediate", prereq: "Basic Programming", salary: "8-15 LPA" },
-                        { course: "UI/UX Design", duration: "12 Weeks", difficulty: "Beginner", prereq: "Design Interest", salary: "4-8 LPA" },
-                        { course: "Cyber Security", duration: "16 Weeks", difficulty: "Intermediate", prereq: "Networking Basics", salary: "6-12 LPA" },
-                        { course: "Cloud Computing (AWS)", duration: "16 Weeks", difficulty: "Intermediate", prereq: "Linux, Networking", salary: "7-14 LPA" },
-                        { course: "Mobile App Development", duration: "20 Weeks", difficulty: "Beginner-Int", prereq: "Programming Basics", salary: "5-11 LPA" },
-                        { course: "Digital Marketing", duration: "8 Weeks", difficulty: "Beginner", prereq: "None", salary: "3-7 LPA" }
-                      ].map((item, i) => (
+                      {courses.map((item, i) => ({
+                        course: item.title,
+                        duration: item.duration,
+                        difficulty: item.tier,
+                        prereq: item.prerequisites[0] || 'None',
+                        salary: item.salaryRange,
+                      })).map((item, i) => (
                         <tr key={i} className="border-b border-[var(--border-color)] hover:bg-[var(--bg-secondary)]/50 transition-colors">
                           <td className="p-4 font-bold text-primary">{item.course}</td>
                           <td className="p-4 text-[var(--text-muted)]">{item.duration}</td>

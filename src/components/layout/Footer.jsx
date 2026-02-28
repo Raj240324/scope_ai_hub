@@ -5,6 +5,7 @@ import { useModal } from '../../context/ModalContext';
 import { BRANDING } from '../../data/branding';
 import { useTheme } from '../../context/ThemeContext';
 import { MicroExpander } from '../ui/MicroExpander';
+import { courses } from '../../data/courses';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -88,19 +89,20 @@ const Footer = () => {
           {/* Top Courses */}
           <div>
             <h3 className="text-[var(--text-footer)] font-bold text-lg mb-8 relative inline-block">
-              Popular Courses
+              Popular Programs
               <span className="absolute -bottom-2 left-0 w-8 h-1 bg-primary rounded-full"></span>
             </h3>
             <ul className="space-y-4 text-sm font-medium">
-              <li><Link to="/courses" className="hover:text-primary hover:translate-x-1 transition-all">Full Stack Development</Link></li>
-              <li><Link to="/courses" className="hover:text-primary hover:translate-x-1 transition-all">Python Data Science</Link></li>
-              <li><Link to="/courses" className="hover:text-primary hover:translate-x-1 transition-all">Cloud Computing</Link></li>
-              <li><Link to="/courses" className="hover:text-primary hover:translate-x-1 transition-all">UI/UX Design</Link></li>
-              <li><Link to="/courses" className="hover:text-primary hover:translate-x-1 transition-all">Cyber Security</Link></li>
-              <li><Link to="/courses" className="hover:text-primary hover:translate-x-1 transition-all">Mobile App Dev</Link></li>
+              {courses.slice(0, 6).map(c => (
+                <li key={c.id}>
+                  <Link to={`/courses/${c.slug}`} className="hover:text-primary hover:translate-x-1 transition-all">
+                    {c.title}
+                  </Link>
+                </li>
+              ))}
               <li className="pt-2">
                 <Link to="/courses" className="text-primary font-bold flex items-center group">
-                  View All Courses 
+                  View All Programs 
                   <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </li>

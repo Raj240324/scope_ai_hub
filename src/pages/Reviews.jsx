@@ -11,10 +11,10 @@ const reviews = [
   {
     id: 1,
     name: "Senthil Kumar",
-    role: "Full Stack Developer",
-    course: "Full Stack Web Development",
+    role: "Prompt Engineer",
+    course: "Generative AI & Prompt Engineering",
     rating: 5,
-    content: `The Full Stack course at ${BRANDING.fullName} was a game-changer for me. I went from zero coding knowledge to building a complete e-commerce site. The mentors are always ready to help even after class hours.`,
+    content: `The Prompt Engineering course at ${BRANDING.fullName} was a game-changer. I learned to work with ChatGPT, Claude, and Midjourney like a professional. The hands-on AI workflow projects were exceptional.`,
     image: "https://randomuser.me/api/portraits/men/32.jpg",
     date: "2 weeks ago",
     verified: true
@@ -22,10 +22,10 @@ const reviews = [
   {
     id: 2,
     name: "Priya Dharshini",
-    role: "UI/UX Designer",
-    course: "UI/UX Design with Figma",
+    role: "Data Analyst",
+    course: "Data Analytics & AI",
     rating: 5,
-    content: "I switched from a non-tech background to UI/UX design. The instructors were patient and the hands-on approach really helped me build a professional portfolio. I landed a job within 1 month of completion!",
+    content: "I switched from a non-tech background to data analytics. The Power BI and AI-driven analytics modules were incredible. Landed a data analyst role within a month of completion!",
     image: "https://randomuser.me/api/portraits/women/44.jpg",
     date: "1 month ago",
     verified: true
@@ -33,10 +33,10 @@ const reviews = [
   {
     id: 3,
     name: "Arun Rajan",
-    role: "DevOps Engineer",
-    course: "Cloud Computing & DevOps",
+    role: "ML Engineer",
+    course: "Machine Learning & Deep Learning",
     rating: 4,
-    content: "The Cloud & DevOps course helped me upskill and land a better position in my current company. The lab sessions were intense and very practical. Highly recommended for working professionals.",
+    content: "The ML & Deep Learning course helped me transition from a Python developer to a full ML engineer. The TensorFlow and PyTorch labs were intense and production-grade.",
     image: "https://randomuser.me/api/portraits/men/45.jpg",
     date: "2 months ago",
     verified: true
@@ -44,10 +44,10 @@ const reviews = [
   {
     id: 4,
     name: "Kavitha Murugan",
-    role: "Data Scientist",
-    course: "Data Science & Machine Learning",
+    role: "NLP Engineer",
+    course: "Natural Language Processing (NLP)",
     rating: 5,
-    content: "Exceptional teaching! The way they explain complex mathematical concepts in simple terms is amazing. The projects on real-world datasets gave me the confidence I needed for interviews.",
+    content: "The NLP program was outstanding! From transformers to building real chatbots with RAG, every module was practical and industry-relevant. The Hugging Face ecosystem training was a highlight.",
     image: "https://randomuser.me/api/portraits/women/65.jpg",
     date: "3 months ago",
     verified: true
@@ -55,10 +55,10 @@ const reviews = [
   {
     id: 5,
     name: "Rahul Bose",
-    role: "Frontend Developer",
-    course: "Full Stack Web Development",
+    role: "Python AI Developer",
+    course: "Python for AI & Machine Learning",
     rating: 5,
-    content: "I joined the weekday batch and the progress I made in 3 months is unbelievable. The focus on React and modern CSS frameworks like Tailwind was exactly what I was looking for.",
+    content: "As a complete beginner, Python for AI was the perfect starting point. I went from zero to building sentiment analyzers and price predictors in 8 weeks. Truly transformative.",
     image: "https://randomuser.me/api/portraits/men/22.jpg",
     date: "4 months ago",
     verified: true
@@ -66,10 +66,10 @@ const reviews = [
   {
     id: 6,
     name: "Deepika Raj",
-    role: "Cyber Security Analyst",
-    course: "Cyber Security & Ethical Hacking",
+    role: "Computer Vision Engineer",
+    course: "Computer Vision & Image AI",
     rating: 5,
-    content: "The best place in Tamil Nadu for Cyber Security training. The lab setup is top-notch and the instructor has real-world experience in penetration testing.",
+    content: "The Computer Vision program is top-notch. From YOLO object detection to medical imaging AI, the modules were incredibly practical. The capstone project gave me a real-world edge.",
     image: "https://randomuser.me/api/portraits/women/28.jpg",
     date: "5 months ago",
     verified: true
@@ -82,7 +82,7 @@ const Reviews = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const { openModal } = useModal();
 
-  const courseNames = ['All', ...courses.map(c => c.title)];
+  const reviewCourseNames = [...new Set(reviews.map(r => r.course))];
 
   const filteredReviews = useMemo(() => {
     return reviews.filter(review => {
@@ -147,18 +147,18 @@ const Reviews = () => {
             <div className="flex items-center space-x-4 w-full lg:w-auto overflow-x-auto pb-2 lg:pb-0 no-scrollbar">
               <Filter className="h-5 w-5 text-[var(--text-muted)] shrink-0 hidden md:block" />
               <div className="flex space-x-2">
-                {['All', 'Full Stack', 'UI/UX', 'Data Science', 'Cloud'].map((category) => (
+                {['All', ...reviewCourseNames].map((courseName) => (
                   <button
-                    key={category}
-                    onClick={() => setSelectedCourse(category === 'All' ? 'All' : courses.find(c => c.title.includes(category))?.title || 'All')}
+                    key={courseName}
+                    onClick={() => setSelectedCourse(courseName)}
                     className={clsx(
                       "px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all",
-                      (selectedCourse.includes(category) || (category === 'All' && selectedCourse === 'All'))
+                      selectedCourse === courseName
                         ? "bg-primary text-[var(--text-on-inverted)] shadow-md shadow-primary/20"
                         : "bg-[var(--bg-card)] text-[var(--text-muted)] hover:bg-[var(--bg-secondary)] border border-[var(--border-color)]"
                     )}
                   >
-                    {category}
+                    {courseName === 'All' ? 'All' : courseName.split(' ').slice(0, 2).join(' ')}
                   </button>
                 ))}
               </div>

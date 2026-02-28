@@ -16,12 +16,14 @@ const STEPS = [
 ];
 
 const EXPERTISE_OPTIONS = [
-  { value: 'Full Stack Development', label: 'Full Stack Development' },
-  { value: 'MERN Stack', label: 'MERN Stack Specialist' },
-  { value: 'Data Science & AI', label: 'Data Science & AI' },
-  { value: 'Cyber Security', label: 'Cyber Security' },
-  { value: 'Cloud & DevOps', label: 'Cloud & DevOps' },
-  { value: 'UI/UX Design', label: 'UI/UX Design' },
+  { value: 'Generative AI & Prompt Engineering', label: 'Generative AI & Prompt Engineering' },
+  { value: 'Python & Machine Learning', label: 'Python & Machine Learning' },
+  { value: 'Data Analytics & AI', label: 'Data Analytics & AI' },
+  { value: 'Deep Learning & Neural Networks', label: 'Deep Learning & Neural Networks' },
+  { value: 'NLP & LLMs', label: 'NLP & Large Language Models' },
+  { value: 'Computer Vision', label: 'Computer Vision & Image AI' },
+  { value: 'MLOps & Cloud AI', label: 'MLOps & Cloud AI' },
+  { value: 'AI Ethics & Governance', label: 'AI Ethics & Governance' },
   { value: 'Other', label: 'Other Technical Domain' },
 ];
 

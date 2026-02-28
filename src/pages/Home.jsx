@@ -46,9 +46,9 @@ const Home = () => {
   return (
     <Layout immersive={true}>
       <SEO
-        title="Best Software Training Institute in Chennai | 100% Placement"
-        description="Master Full Stack Development, Data Science, and AI with expert mentorship. Scope AI Hub offers practical software training in Chennai with 100% placement support."
-        keywords="Software Training Institute Chennai, Full Stack Developer Course, Data Science Training, MERN Stack, Python Course, Placement Support, Scope Global, Best IT Training Center"
+        title="Best AI Training Institute in Chennai | Scope AI Hub"
+        description="Master Generative AI, Machine Learning, NLP, Computer Vision, and more with expert mentorship. Scope AI Hub offers practical AI training in Chennai with placement support."
+        keywords="AI Training Institute Chennai, Prompt Engineering Course, Machine Learning Training, NLP Course, Data Analytics, MLOps, Computer Vision, Python AI, Placement Support"
         canonical="/"
       />
       <HeroScroll
@@ -127,15 +127,15 @@ const Home = () => {
         subtitle="The technology sector is experiencing unprecedented growth. Here's why 2026 is the perfect time to start your journey."
         services={[
           { name: "Generative AI", demand: "Critical", imageUrl: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=300&h=300" },
-          { name: "React/Node.js", demand: "Very High", imageUrl: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?auto=format&fit=crop&q=80&w=300&h=300" },
-          { name: "Python/ML", demand: "Critical", imageUrl: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&q=80&w=300&h=300" },
-          { name: "Cloud (AWS/Azure)", demand: "Very High", imageUrl: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=300&h=300" },
-          { name: "Data Science", demand: "High", imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=300&h=300" },
-          { name: "Cyber Security", demand: "High", imageUrl: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=300&h=300" },
-          { name: "UI/UX Design", demand: "Growing", imageUrl: "https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&q=80&w=300&h=300" },
-          { name: "DevOps", demand: "Very High", imageUrl: "https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?auto=format&fit=crop&q=80&w=300&h=300" },
-          { name: "Mobile Dev", demand: "High", imageUrl: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&q=80&w=300&h=300" },
-          { name: "Blockchain", demand: "Emerging", imageUrl: "https://images.unsplash.com/photo-1621416894569-0f39ed31d247?auto=format&fit=crop&q=80&w=300&h=300" }
+          { name: "Prompt Engineering", demand: "Very High", imageUrl: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?auto=format&fit=crop&q=80&w=300&h=300" },
+          { name: "Python for AI", demand: "Critical", imageUrl: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&q=80&w=300&h=300" },
+          { name: "Machine Learning", demand: "Very High", imageUrl: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=300&h=300" },
+          { name: "Data Analytics", demand: "High", imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=300&h=300" },
+          { name: "NLP & LLMs", demand: "Very High", imageUrl: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=300&h=300" },
+          { name: "Computer Vision", demand: "High", imageUrl: "https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&q=80&w=300&h=300" },
+          { name: "MLOps", demand: "Very High", imageUrl: "https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?auto=format&fit=crop&q=80&w=300&h=300" },
+          { name: "AI Ethics", demand: "Growing", imageUrl: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&q=80&w=300&h=300" },
+          { name: "AI in Marketing", demand: "Emerging", imageUrl: "https://images.unsplash.com/photo-1621416894569-0f39ed31d247?auto=format&fit=crop&q=80&w=300&h=300" }
         ]}
       />
 

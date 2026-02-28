@@ -9,8 +9,8 @@ import { BRANDING } from '../../data/branding';
 const Layout = ({ 
   children, 
   title = `${BRANDING.fullName} | Master Tech Skills in Tamil Nadu`,
-  description = `Join ${BRANDING.fullName} for industry-aligned software training in Full Stack, Data Science, UI/UX, and more. Honest, skill-driven education in Tamil Nadu.`,
-  keywords = "software training, coding institute, tamil nadu, chennai, full stack development, data science, ui ux design, cloud computing, devops, ethical hacking",
+  description = `Join ${BRANDING.fullName} for industry-aligned AI training programs — from Generative AI to MLOps. Practical, skill-driven education in Tamil Nadu.`,
+  keywords = "AI training institute, prompt engineering course, machine learning, NLP training, data analytics, MLOps, computer vision, Python AI course, Chennai, Tamil Nadu",
   immersive = false
 }) => {
   // ... (Tawk.to code)

@@ -34,7 +34,7 @@
 :root {
   /* ===== LIGHT THEME — Clean White & Navy ===== */
   /* Page */
-  --bg-body: #FFFFFF;
+  --bg-body: #F5F7FA;
   --bg-secondary: #F8FAFC;
   --bg-card: #FFFFFF;
   --text-body: #5B6B7A; /* User Tagline Color */
@@ -70,7 +70,7 @@
 .dark {
   /* ===== DARK THEME — Premium Deep Violet & Navy ===== */
   /* Backgrounds — rich dark navy/black */
-  --bg-body: #050a10; /* Deepest Navy/Black */
+  --bg-body: #0B1220; /* Deepest Navy/Black */
   --bg-secondary: #0A121D;
   --bg-card: #111b2b;
   --text-body: #9BA7B4; /* User Dark Tagline */

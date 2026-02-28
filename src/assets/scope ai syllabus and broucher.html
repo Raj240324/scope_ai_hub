@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scope AI Hub – Course Brochure 2025</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #030810;
+  --surface: #0a1120;
+  --card: #0e1928;
+  --beginner: #00e5a0;
+  --beginner-soft: rgba(0,229,160,0.1);
+  --intermediate: #ff9500;
+  --intermediate-soft: rgba(255,149,0,0.1);
+  --advanced: #c084fc;
+  --advanced-soft: rgba(192,132,252,0.1);
+  --text: #e2e8f0;
+  --muted: #64748b;
+  --border: rgba(255,255,255,0.07);
+  --white: #ffffff;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  line-height: 1.6;
+}
+
+/* ─── COVER PAGE ─── */
+.cover {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 60px 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+.cover::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(0,229,160,0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 0% 100%, rgba(192,132,252,0.1) 0%, transparent 50%),
+    radial-gradient(ellipse 50% 50% at 100% 50%, rgba(255,149,0,0.07) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.cover-grid {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size: 50px 50px;
+  pointer-events: none;
+}
+
+.cover-content { position: relative; z-index: 1; max-width: 800px; }
+
+.cover-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(0,229,160,0.12); border: 1px solid rgba(0,229,160,0.3);
+  border-radius: 100px; padding: 8px 22px; font-size: 13px; font-weight: 600;
+  color: var(--beginner); letter-spacing: 0.06em; text-transform: uppercase;
+  margin-bottom: 28px;
+}
+
+.cover h1 {
+  font-family: 'Syne', sans-serif; font-size: clamp(2.8rem, 7vw, 5.5rem);
+  font-weight: 800; line-height: 1.0; letter-spacing: -0.03em; margin-bottom: 8px;
+}
+
+.cover h1 .brand {
+  background: linear-gradient(135deg, var(--beginner), #00b4d8, var(--advanced));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+
+.cover h2 {
+  font-family: 'Syne', sans-serif; font-size: clamp(1.1rem, 3vw, 1.8rem);
+  font-weight: 400; color: var(--muted); letter-spacing: 0.02em; margin-bottom: 30px;
+}
+
+.cover-desc {
+  font-size: 17px; color: #94a3b8; max-width: 580px; margin: 0 auto 48px; line-height: 1.7;
+}
+
+.cover-stats {
+  display: flex; justify-content: center; gap: 48px; flex-wrap: wrap; margin-bottom: 52px;
+}
+
+.stat { text-align: center; }
+.stat-num {
+  font-family: 'Syne', sans-serif; font-size: 2.4rem; font-weight: 800; line-height: 1;
+  background: linear-gradient(135deg, var(--beginner), var(--advanced));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.stat-label { font-size: 12px; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 4px; }
+
+.tier-pills { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+.tier-pill {
+  padding: 10px 24px; border-radius: 100px; font-size: 13px; font-weight: 600;
+  letter-spacing: 0.04em; border: 1px solid;
+}
+.tier-pill.b { background: var(--beginner-soft); color: var(--beginner); border-color: rgba(0,229,160,0.3); }
+.tier-pill.i { background: var(--intermediate-soft); color: var(--intermediate); border-color: rgba(255,149,0,0.3); }
+.tier-pill.a { background: var(--advanced-soft); color: var(--advanced); border-color: rgba(192,132,252,0.3); }
+
+.page-break { page-break-after: always; }
+
+/* ─── SECTION HEADERS ─── */
+.section-header {
+  text-align: center; padding: 80px 24px 50px; max-width: 900px; margin: 0 auto;
+}
+.section-tag {
+  display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 0.15em;
+  text-transform: uppercase; padding: 5px 14px; border-radius: 100px; margin-bottom: 16px;
+}
+.section-tag.green { background: var(--beginner-soft); color: var(--beginner); }
+.section-tag.orange { background: var(--intermediate-soft); color: var(--intermediate); }
+.section-tag.purple { background: var(--advanced-soft); color: var(--advanced); }
+.section-tag.white { background: rgba(255,255,255,0.08); color: var(--text); }
+
+.section-header h2 {
+  font-family: 'Syne', sans-serif; font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 800; letter-spacing: -0.02em; margin-bottom: 12px;
+}
+.section-header p { color: var(--muted); font-size: 16px; max-width: 600px; margin: 0 auto; }
+
+/* ─── COURSE CARDS ─── */
+.courses-container { max-width: 960px; margin: 0 auto; padding: 0 24px 60px; }
+
+.course-card {
+  background: var(--card); border: 1px solid var(--border); border-radius: 24px;
+  margin-bottom: 32px; overflow: hidden; transition: transform 0.3s, box-shadow 0.3s;
+}
+.course-card:hover { transform: translateY(-4px); }
+
+.course-card.beginner:hover { box-shadow: 0 20px 60px rgba(0,229,160,0.1); }
+.course-card.intermediate:hover { box-shadow: 0 20px 60px rgba(255,149,0,0.1); }
+.course-card.advanced:hover { box-shadow: 0 20px 60px rgba(192,132,252,0.1); }
+
+/* Top color bar */
+.course-card.beginner { border-top: 3px solid var(--beginner); }
+.course-card.intermediate { border-top: 3px solid var(--intermediate); }
+.course-card.advanced { border-top: 3px solid var(--advanced); }
+
+.course-header {
+  padding: 32px 36px 28px; display: flex; align-items: flex-start;
+  justify-content: space-between; gap: 20px; flex-wrap: wrap;
+  border-bottom: 1px solid var(--border);
+}
+
+.course-header-left { flex: 1; min-width: 260px; }
+
+.course-number {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase;
+  margin-bottom: 8px; display: flex; align-items: center; gap: 8px;
+}
+.course-card.beginner .course-number { color: var(--beginner); }
+.course-card.intermediate .course-number { color: var(--intermediate); }
+.course-card.advanced .course-number { color: var(--advanced); }
+
+.course-number-dot { width: 6px; height: 6px; border-radius: 50%; }
+.course-card.beginner .course-number-dot { background: var(--beginner); }
+.course-card.intermediate .course-number-dot { background: var(--intermediate); }
+.course-card.advanced .course-number-dot { background: var(--advanced); }
+
+.course-title {
+  font-family: 'Syne', sans-serif; font-size: clamp(1.3rem, 3vw, 1.7rem);
+  font-weight: 800; letter-spacing: -0.02em; margin-bottom: 10px;
+}
+
+.course-tagline { color: var(--muted); font-size: 14px; line-height: 1.5; }
+
+.course-meta {
+  display: flex; flex-direction: column; gap: 8px; align-items: flex-end; flex-shrink: 0;
+}
+
+.meta-badge {
+  padding: 6px 14px; border-radius: 8px; font-size: 12px; font-weight: 600;
+  white-space: nowrap; border: 1px solid;
+}
+.meta-badge.duration { background: rgba(255,255,255,0.05); color: #94a3b8; border-color: var(--border); }
+
+.lpa-badge {
+  padding: 10px 18px; border-radius: 12px; text-align: center; border: 1px solid;
+}
+.course-card.beginner .lpa-badge { background: var(--beginner-soft); border-color: rgba(0,229,160,0.25); }
+.course-card.intermediate .lpa-badge { background: var(--intermediate-soft); border-color: rgba(255,149,0,0.25); }
+.course-card.advanced .lpa-badge { background: var(--advanced-soft); border-color: rgba(192,132,252,0.25); }
+
+.lpa-label { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; }
+.course-card.beginner .lpa-label { color: var(--beginner); }
+.course-card.intermediate .lpa-label { color: var(--intermediate); }
+.course-card.advanced .lpa-label { color: var(--advanced); }
+
+.lpa-value {
+  font-family: 'Syne', sans-serif; font-size: 1.3rem; font-weight: 800;
+  margin-top: 2px; white-space: nowrap;
+}
+
+.course-body { padding: 28px 36px 32px; }
+
+/* Grid layout inside card */
+.course-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-bottom: 28px;
+}
+.course-grid-3 {
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-bottom: 28px;
+}
+
+.info-block {}
+.info-block h4 {
+  font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em;
+  color: var(--muted); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;
+}
+.info-block h4 .dot {
+  width: 4px; height: 16px; border-radius: 2px;
+}
+.course-card.beginner .info-block h4 .dot { background: var(--beginner); }
+.course-card.intermediate .info-block h4 .dot { background: var(--intermediate); }
+.course-card.advanced .info-block h4 .dot { background: var(--advanced); }
+
+/* Syllabus modules */
+.module-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.module-list li {
+  display: flex; align-items: flex-start; gap: 10px; font-size: 13.5px;
+  color: #cbd5e1; line-height: 1.45; padding: 8px 12px;
+  background: rgba(255,255,255,0.025); border-radius: 8px;
+  border-left: 2px solid;
+}
+.course-card.beginner .module-list li { border-left-color: rgba(0,229,160,0.4); }
+.course-card.intermediate .module-list li { border-left-color: rgba(255,149,0,0.4); }
+.course-card.advanced .module-list li { border-left-color: rgba(192,132,252,0.4); }
+
+.mod-num {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.05em; flex-shrink: 0;
+  padding-top: 1px; opacity: 0.6;
+}
+
+/* Audience tags */
+.tag-list { display: flex; flex-wrap: wrap; gap: 7px; }
+.tag-item {
+  font-size: 12px; font-weight: 500; padding: 5px 12px; border-radius: 8px;
+  background: rgba(255,255,255,0.05); color: #94a3b8; border: 1px solid var(--border);
+}
+
+/* Job roles */
+.role-list { display: flex; flex-direction: column; gap: 6px; }
+.role-item {
+  display: flex; align-items: center; gap: 10px; font-size: 13px;
+  color: var(--text); padding: 7px 12px; background: rgba(255,255,255,0.03);
+  border-radius: 8px;
+}
+.role-icon { font-size: 14px; flex-shrink: 0; }
+
+/* Prereq */
+.prereq-list { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+.prereq-list li {
+  font-size: 13px; color: #94a3b8; display: flex; align-items: flex-start; gap: 8px;
+  line-height: 1.4;
+}
+.prereq-list li::before { content: '→'; flex-shrink: 0; opacity: 0.5; font-weight: 700; }
+
+/* Horizontal divider in card */
+.card-divider { height: 1px; background: var(--border); margin: 24px 0; }
+
+/* ─── ADD-ONS SECTION ─── */
+.addons-section {
+  max-width: 960px; margin: 0 auto; padding: 0 24px 80px;
+}
+
+.addons-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+
+.addon-card {
+  background: var(--card); border: 1px solid var(--border); border-radius: 20px;
+  padding: 28px 24px; transition: transform 0.3s, box-shadow 0.3s; position: relative;
+  overflow: hidden;
+}
+.addon-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,0.4); }
+
+.addon-card.free::before {
+  content: 'FREE';
+  position: absolute; top: 18px; right: 18px;
+  background: rgba(0,229,160,0.15); color: var(--beginner);
+  font-size: 10px; font-weight: 800; letter-spacing: 0.12em;
+  padding: 3px 10px; border-radius: 100px; border: 1px solid rgba(0,229,160,0.3);
+}
+
+.addon-icon { font-size: 32px; margin-bottom: 14px; }
+.addon-title {
+  font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700;
+  margin-bottom: 8px; letter-spacing: -0.01em;
+}
+.addon-desc { font-size: 13px; color: var(--muted); line-height: 1.55; }
+
+/* ─── FOOTER ─── */
+.brochure-footer {
+  background: var(--surface); border-top: 1px solid var(--border);
+  padding: 60px 24px; text-align: center;
+}
+.footer-logo {
+  font-family: 'Syne', sans-serif; font-size: 28px; font-weight: 800;
+  background: linear-gradient(135deg, var(--beginner), var(--advanced));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  margin-bottom: 10px;
+}
+.footer-tagline { color: var(--muted); font-size: 14px; margin-bottom: 28px; }
+.footer-contacts {
+  display: flex; justify-content: center; gap: 32px; flex-wrap: wrap;
+  font-size: 14px; color: #475569;
+}
+.footer-contacts span { display: flex; align-items: center; gap: 6px; }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 720px) {
+  .course-grid, .course-grid-3 { grid-template-columns: 1fr; }
+  .course-header { flex-direction: column; }
+  .course-meta { align-items: flex-start; flex-direction: row; }
+  .cover-stats { gap: 28px; }
+  .course-body, .course-header { padding: 20px; }
+}
+
+/* Print styles */
+@media print {
+  .course-card { break-inside: avoid; }
+  .cover { min-height: auto; padding: 40px; }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: #1e3050; border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════ COVER ═══════════════════════════ -->
+<div class="cover">
+  <div class="cover-grid"></div>
+  <div class="cover-content">
+    <div class="cover-badge">⚡ Official Course Brochure 2025</div>
+    <h1><span class="brand">Scope AI Hub</span></h1>
+    <h2>Transform Your Career with AI</h2>
+    <p class="cover-desc">
+      India's most focused AI training institute offering 10 industry-aligned programs 
+      designed for freshers and working professionals. Learn, build, and get placed.
+    </p>
+    <div class="cover-stats">
+      <div class="stat"><div class="stat-num">10</div><div class="stat-label">Programs</div></div>
+      <div class="stat"><div class="stat-num">3</div><div class="stat-label">Tiers</div></div>
+      <div class="stat"><div class="stat-num">12+</div><div class="stat-label">Add-ons</div></div>
+      <div class="stat"><div class="stat-num">3–25</div><div class="stat-label">LPA Range</div></div>
+    </div>
+    <div class="tier-pills">
+      <div class="tier-pill b">🟢 Beginner – 4 Programs</div>
+      <div class="tier-pill i">🟠 Intermediate – 4 Programs</div>
+      <div class="tier-pill a">🟣 Advanced – 2 Programs</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════ BEGINNER TIER ═══════════════════════════════ -->
+<div class="section-header">
+  <span class="section-tag green">Tier 1 – Beginner</span>
+  <h2>Build Your AI Foundation</h2>
+  <p>Perfect starting point for freshers and non-tech professionals looking to enter the world of AI with zero prior experience required.</p>
+</div>
+
+<div class="courses-container">
+
+  <!-- ── COURSE 1 ── -->
+  <div class="course-card beginner">
+    <div class="course-header">
+      <div class="course-header-left">
+        <div class="course-number"><div class="course-number-dot"></div> Program 01 · Beginner</div>
+        <div class="course-title">Generative AI & Prompt Engineering</div>
+        <div class="course-tagline">Master the world's most in-demand AI skill. Learn to work with ChatGPT, Claude, Gemini, and Midjourney like a professional.</div>
+      </div>
+      <div class="course-meta">
+        <div class="meta-badge duration">⏱ 6 Weeks</div>
+        <div class="lpa-badge">
+          <div class="lpa-label">Expected CTC</div>
+          <div class="lpa-value">3 – 7 LPA</div>
+        </div>
+      </div>
+    </div>
+    <div class="course-body">
+      <div class="course-grid">
+        <div class="info-block">
+          <h4><div class="dot"></div>Syllabus Modules</h4>
+          <ul class="module-list">
+            <li><span class="mod-num">M01</span> Introduction to Generative AI & Large Language Models</li>
+            <li><span class="mod-num">M02</span> Prompt Design Principles – Zero-shot, Few-shot, Chain-of-thought</li>
+            <li><span class="mod-num">M03</span> ChatGPT, Claude & Gemini – Advanced Use Cases</li>
+            <li><span class="mod-num">M04</span> AI Image Generation – Midjourney, DALL·E, Stable Diffusion</li>
+            <li><span class="mod-num">M05</span> AI Tools for Productivity – Notion AI, Copilot, Perplexity</li>
+            <li><span class="mod-num">M06</span> Prompt Engineering for Business & Content Creation</li>
+            <li><span class="mod-num">M07</span> Building AI Workflows & Automation with No-Code Tools</li>
+            <li><span class="mod-num">M08</span> Ethics, Limitations & Responsible AI Use</li>
+          </ul>
+        </div>
+        <div>
+          <div class="info-block" style="margin-bottom: 22px;">
+            <h4><div class="dot"></div>Who Can Learn</h4>
+            <div class="tag-list">
+              <span class="tag-item">Fresh Graduates</span><span class="tag-item">Content Creators</span>
+              <span class="tag-item">Business Owners</span><span class="tag-item">HR Professionals</span>
+              <span class="tag-item">Marketing Students</span><span class="tag-item">Teachers & Educators</span>
+              <span class="tag-item">Sales Executives</span><span class="tag-item">Anyone Curious about AI</span>
+            </div>
+          </div>
+          <div class="info-block">
+            <h4><div class="dot"></div>Prerequisites</h4>
+            <ul class="prereq-list">
+              <li>Basic computer & internet knowledge</li>
+              <li>No coding experience required</li>
+              <li>English reading & writing proficiency</li>
+              <li>Curiosity and willingness to experiment</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="card-divider"></div>
+      <div class="info-block">
+        <h4><div class="dot"></div>Job Roles After Completion</h4>
+        <div class="course-grid-3">
+          <div class="role-item"><span class="role-icon">🤖</span> Prompt Engineer</div>
+          <div class="role-item"><span class="role-icon">✍️</span> AI Content Strategist</div>
+          <div class="role-item"><span class="role-icon">🎨</span> AI Creative Designer</div>
+          <div class="role-item"><span class="role-icon">🛠️</span> AI Tools Consultant</div>
+          <div class="role-item"><span class="role-icon">📢</span> Generative AI Trainer</div>
+          <div class="role-item"><span class="role-icon">💼</span> AI Product Assistant</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── COURSE 2 ── -->
+  <div class="course-card beginner">
+    <div class="course-header">
+      <div class="course-header-left">
+        <div class="course-number"><div class="course-number-dot"></div> Program 02 · Beginner</div>
+        <div class="course-title">Python for AI & Machine Learning</div>
+        <div class="course-tagline">The gateway to every AI career. Learn Python from scratch and apply it directly to real AI/ML projects and data tasks.</div>
+      </div>
+      <div class="course-meta">
+        <div class="meta-badge duration">⏱ 8 Weeks</div>
+        <div class="lpa-badge">
+          <div class="lpa-label">Expected CTC</div>
+          <div class="lpa-value">4 – 8 LPA</div>
+        </div>
+      </div>
+    </div>
+    <div class="course-body">
+      <div class="course-grid">
+        <div class="info-block">
+          <h4><div class="dot"></div>Syllabus Modules</h4>
+          <ul class="module-list">
+            <li><span class="mod-num">M01</span> Python Fundamentals – Variables, Loops, Functions, OOP</li>
+            <li><span class="mod-num">M02</span> NumPy & Pandas – Data Manipulation & Analysis</li>
+            <li><span class="mod-num">M03</span> Data Visualization – Matplotlib & Seaborn</li>
+            <li><span class="mod-num">M04</span> Introduction to Machine Learning with Scikit-Learn</li>
+            <li><span class="mod-num">M05</span> Working with APIs – OpenAI, Hugging Face Integration</li>
+            <li><span class="mod-num">M06</span> Data Cleaning & Preprocessing Techniques</li>
+            <li><span class="mod-num">M07</span> Mini Projects – Sentiment Analyzer, Price Predictor</li>
+            <li><span class="mod-num">M08</span> Git, GitHub & Python in the Real Workplace</li>
+          </ul>
+        </div>
+        <div>
+          <div class="info-block" style="margin-bottom: 22px;">
+            <h4><div class="dot"></div>Who Can Learn</h4>
+            <div class="tag-list">
+              <span class="tag-item">Computer Science Students</span><span class="tag-item">Engineering Freshers</span>
+              <span class="tag-item">IT Professionals</span><span class="tag-item">Data Enthusiasts</span>
+              <span class="tag-item">Career Switchers</span><span class="tag-item">BCA / MCA Graduates</span>
+            </div>
+          </div>
+          <div class="info-block">
+            <h4><div class="dot"></div>Prerequisites</h4>
+            <ul class="prereq-list">
+              <li>Basic computer literacy</li>
+              <li>No prior programming knowledge needed</li>
+              <li>High school level mathematics (helpful but not mandatory)</li>
+              <li>Logical thinking & problem-solving interest</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="card-divider"></div>
+      <div class="info-block">
+        <h4><div class="dot"></div>Job Roles After Completion</h4>
+        <div class="course-grid-3">
+          <div class="role-item"><span class="role-icon">🐍</span> Python Developer (AI Focus)</div>
+          <div class="role-item"><span class="role-icon">📊</span> Junior Data Analyst</div>
+          <div class="role-item"><span class="role-icon">🤖</span> ML Intern / Associate</div>
+          <div class="role-item"><span class="role-icon">🔬</span> AI Research Assistant</div>
+          <div class="role-item"><span class="role-icon">📈</span> Business Intelligence Analyst</div>
+          <div class="role-item"><span class="role-icon">🛠️</span> Automation Engineer (Junior)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── COURSE 5 ── -->
+  <div class="course-card beginner">
+    <div class="course-header">
+      <div class="course-header-left">
+        <div class="course-number"><div class="course-number-dot"></div> Program 05 · Beginner</div>
+        <div class="course-title">AI for Business & Non-Tech Professionals</div>
+        <div class="course-tagline">Empower managers, executives, and business teams to integrate AI tools into daily operations without writing a single line of code.</div>
+      </div>
+      <div class="course-meta">
+        <div class="meta-badge duration">⏱ 5 Weeks</div>
+        <div class="lpa-badge">
+          <div class="lpa-label">Expected CTC</div>
+          <div class="lpa-value">4 – 9 LPA</div>
+        </div>
+      </div>
+    </div>
+    <div class="course-body">
+      <div class="course-grid">
+        <div class="info-block">
+          <h4><div class="dot"></div>Syllabus Modules</h4>
+          <ul class="module-list">
+            <li><span class="mod-num">M01</span> AI Landscape – What Every Business Professional Must Know</li>
+            <li><span class="mod-num">M02</span> AI-Powered Productivity: Microsoft Copilot, Notion AI, Zapier</li>
+            <li><span class="mod-num">M03</span> AI in HR – Resume Screening, Onboarding Automation</li>
+            <li><span class="mod-num">M04</span> AI in Finance – Forecasting, Fraud Detection Basics</li>
+            <li><span class="mod-num">M05</span> AI in Operations – Workflow Automation & Process Optimization</li>
+            <li><span class="mod-num">M06</span> AI Strategy & Change Management for Organizations</li>
+            <li><span class="mod-num">M07</span> Building a Business Case for AI Adoption</li>
+            <li><span class="mod-num">M08</span> Capstone: Design an AI Strategy for a Real Business Problem</li>
+          </ul>
+        </div>
+        <div>
+          <div class="info-block" style="margin-bottom: 22px;">
+            <h4><div class="dot"></div>Who Can Learn</h4>
+            <div class="tag-list">
+              <span class="tag-item">MBA Graduates</span><span class="tag-item">HR Managers</span>
+              <span class="tag-item">Operations Executives</span><span class="tag-item">Team Leaders</span>
+              <span class="tag-item">Entrepreneurs</span><span class="tag-item">Finance Professionals</span>
+              <span class="tag-item">Project Managers</span><span class="tag-item">Consultants</span>
+            </div>
+          </div>
+          <div class="info-block">
+            <h4><div class="dot"></div>Prerequisites</h4>
+            <ul class="prereq-list">
+              <li>Basic computer and internet usage</li>
+              <li>No coding or technical background required</li>
+              <li>Understanding of basic business processes</li>
+              <li>Interest in improving workflow efficiency with AI</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="card-divider"></div>
+      <div class="info-block">
+        <h4><div class="dot"></div>Job Roles After Completion</h4>
+        <div class="course-grid-3">
+          <div class="role-item"><span class="role-icon">🏢</span> AI Business Analyst</div>
+          <div class="role-item"><span class="role-icon">🤝</span> AI Transformation Consultant</div>
+          <div class="role-item"><span class="role-icon">📋</span> AI Project Manager</div>
+          <div class="role-item"><span class="role-icon">💡</span> Innovation Manager</div>
+          <div class="role-item"><span class="role-icon">📊</span> Operations AI Specialist</div>
+          <div class="role-item"><span class="role-icon">🔧</span> Process Automation Lead</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── COURSE 8 ── -->
+  <div class="course-card beginner">
+    <div class="course-header">
+      <div class="course-header-left">
+        <div class="course-number"><div class="course-number-dot"></div> Program 08 · Beginner</div>
+        <div class="course-title">AI in Digital Marketing</div>
+        <div class="course-tagline">Supercharge marketing careers using AI tools for SEO, ad campaigns, social media, analytics, and content at scale.</div>
+      </div>
+      <div class="course-meta">
+        <div class="meta-badge duration">⏱ 6 Weeks</div>
+        <div class="lpa-badge">
+          <div class="lpa-label">Expected CTC</div>
+          <div class="lpa-value">3 – 7 LPA</div>
+        </div>
+      </div>
+    </div>
+    <div class="course-body">
+      <div class="course-grid">
+        <div class="info-block">
+          <h4><div class="dot"></div>Syllabus Modules</h4>
+          <ul class="module-list">
+            <li><span class="mod-num">M01</span> Digital Marketing Fundamentals + AI Overview</li>
+            <li><span class="mod-num">M02</span> AI-Powered SEO – Surfer SEO, Semrush AI, Search Intent</li>
+            <li><span class="mod-num">M03</span> AI Content Creation – Blog Writing, Video Scripts, Ad Copy</li>
+            <li><span class="mod-num">M04</span> Social Media Automation – Buffer AI, Hootsuite, Later</li>
+            <li><span class="mod-num">M05</span> AI Ad Targeting – Meta Advantage+, Google Performance Max</li>
+            <li><span class="mod-num">M06</span> AI Analytics – GA4, Hotjar AI, Predictive Analytics</li>
+            <li><span class="mod-num">M07</span> Email Marketing AI – Personalization & Automation</li>
+            <li><span class="mod-num">M08</span> Capstone: Full AI-Driven Campaign Strategy</li>
+          </ul>
+        </div>
+        <div>
+          <div class="info-block" style="margin-bottom: 22px;">
+            <h4><div class="dot"></div>Who Can Learn</h4>
+            <div class="tag-list">
+              <span class="tag-item">Marketing Students</span><span class="tag-item">Social Media Managers</span>
+              <span class="tag-item">Content Creators</span><span class="tag-item">E-commerce Owners</span>
+              <span class="tag-item">SEO Executives</span><span class="tag-item">Brand Managers</span>
+              <span class="tag-item">Freshers in Marketing</span><span class="tag-item">Freelancers</span>
+            </div>
+          </div>
+          <div class="info-block">
+            <h4><div class="dot"></div>Prerequisites</h4>
+            <ul class="prereq-list">
+              <li>Basic knowledge of social media platforms</li>
+              <li>No coding required</li>
+              <li>Familiarity with basic marketing concepts (preferred)</li>
+              <li>Creative thinking & communication skills</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="card-divider"></div>
+      <div class="info-block">
+        <h4><div class="dot"></div>Job Roles After Completion</h4>
+        <div class="course-grid-3">
+          <div class="role-item"><span class="role-icon">📱</span> AI Digital Marketing Specialist</div>
+          <div class="role-item"><span class="role-icon">📝</span> AI Content Marketer</div>
+          <div class="role-item"><span class="role-icon">🔍</span> SEO & AI Strategist</div>
+          <div class="role-item"><span class="role-icon">📣</span> Performance Marketing Analyst</div>
+          <div class="role-item"><span class="role-icon">🛒</span> E-commerce AI Manager</div>
+          <div class="role-item"><span class="role-icon">📈</span> Growth Marketing Associate</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════ INTERMEDIATE TIER ═══════════════════════════════ -->
+<div class="section-header">
+  <span class="section-tag orange">Tier 2 – Intermediate</span>
+  <h2>Go Deeper, Build More</h2>
+  <p>For those with basic programming or data knowledge ready to tackle real AI systems, deep learning models, and specialized applications.</p>
+</div>
+
+<div class="courses-container">
+
+  <!-- ── COURSE 3 ── -->
+  <div class="course-card intermediate">
+    <div class="course-header">
+      <div class="course-header-left">
+        <div class="course-number"><div class="course-number-dot"></div> Program 03 · Intermediate</div>
+        <div class="course-title">Data Analytics & AI</div>
+        <div class="course-tagline">Turn raw data into powerful decisions. Master data analysis, visualization, and AI-augmented analytics using industry tools.</div>
+      </div>
+      <div class="course-meta">
+        <div class="meta-badge duration">⏱ 8 Weeks</div>
+        <div class="lpa-badge">
+          <div class="lpa-label">Expected CTC</div>
+          <div class="lpa-value">5 – 12 LPA</div>
+        </div>
+      </div>
+    </div>
+    <div class="course-body">
+      <div class="course-grid">
+        <div class="info-block">
+          <h4><div class="dot"></div>Syllabus Modules</h4>
+          <ul class="module-list">
+            <li><span class="mod-num">M01</span> Data Analytics Fundamentals & Business Intelligence Overview</li>
+            <li><span class="mod-num">M02</span> Advanced Excel + AI-Powered Excel (Copilot in Excel)</li>
+            <li><span class="mod-num">M03</span> SQL for Data Extraction and Querying</li>
+            <li><span class="mod-num">M04</span> Power BI – Dashboards, DAX, AI Visuals</li>
+            <li><span class="mod-num">M05</span> Python for Data Analysis – Pandas, NumPy, Plotly</li>
+            <li><span class="mod-num">M06</span> Statistical Analysis & Hypothesis Testing</li>
+            <li><span class="mod-num">M07</span> AI-Driven Predictive Analytics & Forecasting Models</li>
+            <li><span class="mod-num">M08</span> Capstone: End-to-End Analytics Project with Real Dataset</li>
+          </ul>
+        </div>
+        <div>
+          <div class="info-block" style="margin-bottom: 22px;">
+            <h4><div class="dot"></div>Who Can Learn</h4>
+            <div class="tag-list">
+              <span class="tag-item">Python Beginners</span><span class="tag-item">Finance Graduates</span>
+              <span class="tag-item">Business Analysts</span><span class="tag-item">Commerce Graduates</span>
+              <span class="tag-item">Working Professionals</span><span class="tag-item">Excel Power Users</span>
+              <span class="tag-item">Product Managers</span><span class="tag-item">Science Graduates</span>
+            </div>
+          </div>
+          <div class="info-block">
+            <h4><div class="dot"></div>Prerequisites</h4>
+            <ul class="prereq-list">
+              <li>Basic Excel or spreadsheet knowledge</li>
+              <li>Python basics (Program 02 recommended)</li>
+              <li>Basic understanding of numbers and statistics</li>
+              <li>Logical reasoning & analytical mindset</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="card-divider"></div>
+      <div class="info-block">
+        <h4><div class="dot"></div>Job Roles After Completion</h4>
+        <div class="course-grid-3">
+          <div class="role-item"><span class="role-icon">📊</span> Data Analyst</div>
+          <div class="role-item"><span class="role-icon">🧮</span> Business Intelligence Analyst</div>
+          <div class="role-item"><span class="role-icon">📉</span> Financial Data Analyst</div>
+          <div class="role-item"><span class="role-icon">🗃️</span> Data Engineer (Junior)</div>
+          <div class="role-item"><span class="role-icon">📋</span> Reporting & Insights Analyst</div>
+          <div class="role-item"><span class="role-icon">🔮</span> Forecasting Analyst</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── COURSE 4 ── -->
+  <div class="course-card intermediate">
+    <div class="course-header">
+      <div class="course-header-left">
+        <div class="course-number"><div class="course-number-dot"></div> Program 04 · Intermediate</div>
+        <div class="course-title">Machine Learning & Deep Learning</div>
+        <div class="course-tagline">The core of every AI career. Build, train, and evaluate powerful ML/DL models that solve real-world problems from scratch.</div>
+      </div>
+      <div class="course-meta">
+        <div class="meta-badge duration">⏱ 12 Weeks</div>
+        <div class="lpa-badge">
+          <div class="lpa-label">Expected CTC</div>
+          <div class="lpa-value">7 – 16 LPA</div>
+        </div>
+      </div>
+    </div>
+    <div class="course-body">
+      <div class="course-grid">
+        <div class="info-block">
+          <h4><div class="dot"></div>Syllabus Modules</h4>
+          <ul class="module-list">
+            <li><span class="mod-num">M01</span> Supervised, Unsupervised & Reinforcement Learning</li>
+            <li><span class="mod-num">M02</span> Regression, Classification & Clustering Algorithms</li>
+            <li><span class="mod-num">M03</span> Model Evaluation – Metrics, Overfitting, Cross-Validation</li>
+            <li><span class="mod-num">M04</span> Neural Networks – Architecture, Activation, Backpropagation</li>
+            <li><span class="mod-num">M05</span> CNNs – Image Classification & Feature Extraction</li>
+            <li><span class="mod-num">M06</span> RNNs, LSTMs & Transformers – Sequential Data</li>
+            <li><span class="mod-num">M07</span> Transfer Learning with Pre-trained Models (BERT, ResNet)</li>
+            <li><span class="mod-num">M08</span> TensorFlow & PyTorch Framework Mastery</li>
+            <li><span class="mod-num">M09</span> Hyperparameter Tuning & Model Optimization</li>
+            <li><span class="mod-num">M10</span> Capstone: Build & Deploy a Full ML Product</li>
+          </ul>
+        </div>
+        <div>
+          <div class="info-block" style="margin-bottom: 22px;">
+            <h4><div class="dot"></div>Who Can Learn</h4>
+            <div class="tag-list">
+              <span class="tag-item">Python Developers</span><span class="tag-item">CS/IT Engineers</span>
+              <span class="tag-item">Data Analysts</span><span class="tag-item">Math/Statistics Graduates</span>
+              <span class="tag-item">Research Students</span><span class="tag-item">Software Developers</span>
+            </div>
+          </div>
+          <div class="info-block">
+            <h4><div class="dot"></div>Prerequisites</h4>
+            <ul class="prereq-list">
+              <li>Proficient in Python (Program 02 mandatory)</li>
+              <li>Linear algebra & basic calculus understanding</li>
+              <li>Statistics fundamentals (mean, variance, distributions)</li>
+              <li>Experience with NumPy & Pandas preferred</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="card-divider"></div>
+      <div class="info-block">
+        <h4><div class="dot"></div>Job Roles After Completion</h4>
+        <div class="course-grid-3">
+          <div class="role-item"><span class="role-icon">🤖</span> ML Engineer</div>
+          <div class="role-item"><span class="role-icon">🔬</span> Data Scientist</div>
+          <div class="role-item"><span class="role-icon">🧠</span> AI/DL Researcher</div>
+          <div class="role-item"><span class="role-icon">🏗️</span> AI Solutions Architect</div>
+          <div class="role-item"><span class="role-icon">📸</span> Computer Vision Engineer</div>
+          <div class="role-item"><span class="role-icon">📈</span> Quantitative Analyst</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── COURSE 6 ── -->
+  <div class="course-card intermediate">
+    <div class="course-header">
+      <div class="course-header-left">
+        <div class="course-number"><div class="course-number-dot"></div> Program 06 · Intermediate</div>
+        <div class="course-title">Natural Language Processing (NLP)</div>
+        <div class="course-tagline">Build intelligent systems that understand human language — from chatbots and sentiment tools to advanced LLM-powered applications.</div>
+      </div>
+      <div class="course-meta">
+        <div class="meta-badge duration">⏱ 10 Weeks</div>
+        <div class="lpa-badge">
+          <div class="lpa-label">Expected CTC</div>
+          <div class="lpa-value">7 – 18 LPA</div>
+        </div>
+      </div>
+    </div>
+    <div class="course-body">
+      <div class="course-grid">
+        <div class="info-block">
+          <h4><div class="dot"></div>Syllabus Modules</h4>
+          <ul class="module-list">
+            <li><span class="mod-num">M01</span> Text Processing – Tokenization, Stemming, Lemmatization</li>
+            <li><span class="mod-num">M02</span> Feature Engineering – TF-IDF, Word Embeddings, Word2Vec</li>
+            <li><span class="mod-num">M03</span> Sentiment Analysis & Opinion Mining</li>
+            <li><span class="mod-num">M04</span> Named Entity Recognition & Text Classification</li>
+            <li><span class="mod-num">M05</span> Sequence Modelling – LSTMs for Text Generation</li>
+            <li><span class="mod-num">M06</span> Transformer Architecture & Attention Mechanism</li>
+            <li><span class="mod-num">M07</span> BERT, GPT Fine-Tuning & Hugging Face Ecosystem</li>
+            <li><span class="mod-num">M08</span> Building Chatbots & Conversational AI Systems</li>
+            <li><span class="mod-num">M09</span> RAG (Retrieval-Augmented Generation) Applications</li>
+            <li><span class="mod-num">M10</span> Capstone: Build a Production-Grade NLP App</li>
+          </ul>
+        </div>
+        <div>
+          <div class="info-block" style="margin-bottom: 22px;">
+            <h4><div class="dot"></div>Who Can Learn</h4>
+            <div class="tag-list">
+              <span class="tag-item">ML Enthusiasts</span><span class="tag-item">Python Developers</span>
+              <span class="tag-item">Linguistics Students</span><span class="tag-item">AI Engineers</span>
+              <span class="tag-item">Product Managers</span><span class="tag-item">Chatbot Developers</span>
+            </div>
+          </div>
+          <div class="info-block">
+            <h4><div class="dot"></div>Prerequisites</h4>
+            <ul class="prereq-list">
+              <li>Strong Python programming skills</li>
+              <li>Completed Program 04 (ML & DL) or equivalent</li>
+              <li>Familiarity with neural networks</li>
+              <li>Basic understanding of probability & statistics</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="card-divider"></div>
+      <div class="info-block">
+        <h4><div class="dot"></div>Job Roles After Completion</h4>
+        <div class="course-grid-3">
+          <div class="role-item"><span class="role-icon">💬</span> NLP Engineer</div>
+          <div class="role-item"><span class="role-icon">🤖</span> Chatbot & Conversational AI Developer</div>
+          <div class="role-item"><span class="role-icon">🔍</span> Search & Recommendation Engineer</div>
+          <div class="role-item"><span class="role-icon">🌐</span> LLM Application Developer</div>
+          <div class="role-item"><span class="role-icon">📰</span> Text Analytics Engineer</div>
+          <div class="role-item"><span class="role-icon">🔬</span> AI Research Scientist</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── COURSE 7 ── -->
+  <div class="course-card intermediate">
+    <div class="course-header">
+      <div class="course-header-left">
+        <div class="course-number"><div class="course-number-dot"></div> Program 07 · Intermediate</div>
+        <div class="course-title">Computer Vision & Image AI</div>
+        <div class="course-tagline">Teach machines to see. Build image classification, object detection, and video intelligence systems for healthcare, retail, and security.</div>
+      </div>
+      <div class="course-meta">
+        <div class="meta-badge duration">⏱ 10 Weeks</div>
+        <div class="lpa-badge">
+          <div class="lpa-label">Expected CTC</div>
+          <div class="lpa-value">8 – 18 LPA</div>
+        </div>
+      </div>
+    </div>
+    <div class="course-body">
+      <div class="course-grid">
+        <div class="info-block">
+          <h4><div class="dot"></div>Syllabus Modules</h4>
+          <ul class="module-list">
+            <li><span class="mod-num">M01</span> Image Processing Fundamentals – OpenCV, Filters, Histograms</li>
+            <li><span class="mod-num">M02</span> Convolutional Neural Networks (CNNs) Deep Dive</li>
+            <li><span class="mod-num">M03</span> Image Classification with Transfer Learning (ResNet, VGG)</li>
+            <li><span class="mod-num">M04</span> Object Detection – YOLO, SSD, Faster R-CNN</li>
+            <li><span class="mod-num">M05</span> Image Segmentation – U-Net, Mask R-CNN</li>
+            <li><span class="mod-num">M06</span> Face Recognition & Biometric Systems</li>
+            <li><span class="mod-num">M07</span> Video Analysis & Action Recognition</li>
+            <li><span class="mod-num">M08</span> Medical Imaging AI – X-ray & MRI Analysis</li>
+            <li><span class="mod-num">M09</span> Generative Vision – GANs, Diffusion Models</li>
+            <li><span class="mod-num">M10</span> Capstone: Build a Real-World Vision System</li>
+          </ul>
+        </div>
+        <div>
+          <div class="info-block" style="margin-bottom: 22px;">
+            <h4><div class="dot"></div>Who Can Learn</h4>
+            <div class="tag-list">
+              <span class="tag-item">ML Engineers</span><span class="tag-item">Python Developers</span>
+              <span class="tag-item">Healthcare Tech Students</span><span class="tag-item">Robotics Engineers</span>
+              <span class="tag-item">Manufacturing Professionals</span><span class="tag-item">Security System Developers</span>
+            </div>
+          </div>
+          <div class="info-block">
+            <h4><div class="dot"></div>Prerequisites</h4>
+            <ul class="prereq-list">
+              <li>Python programming proficiency</li>
+              <li>Deep learning fundamentals (Program 04 required)</li>
+              <li>Linear algebra & matrix operations knowledge</li>
+              <li>Basic understanding of probability</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="card-divider"></div>
+      <div class="info-block">
+        <h4><div class="dot"></div>Job Roles After Completion</h4>
+        <div class="course-grid-3">
+          <div class="role-item"><span class="role-icon">👁️</span> Computer Vision Engineer</div>
+          <div class="role-item"><span class="role-icon">🏥</span> Medical AI Developer</div>
+          <div class="role-item"><span class="role-icon">🤖</span> Robotics Vision Engineer</div>
+          <div class="role-item"><span class="role-icon">🔒</span> Security AI Specialist</div>
+          <div class="role-item"><span class="role-icon">🏭</span> Industrial AI Engineer</div>
+          <div class="role-item"><span class="role-icon">🎯</span> AI Product Engineer</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ════════════════════════════ ADVANCED TIER ══════════════════════════════════ -->
+<div class="section-header">
+  <span class="section-tag purple">Tier 3 – Advanced</span>
+  <h2>Lead. Deploy. Govern.</h2>
+  <p>For experienced AI practitioners ready to scale models into production and ensure AI is built responsibly and sustainably.</p>
+</div>
+
+<div class="courses-container">
+
+  <!-- ── COURSE 9 ── -->
+  <div class="course-card advanced">
+    <div class="course-header">
+      <div class="course-header-left">
+        <div class="course-number"><div class="course-number-dot"></div> Program 09 · Advanced</div>
+        <div class="course-title">MLOps & AI Deployment</div>
+        <div class="course-tagline">Bridge the gap between model building and real-world production. Master the tools and pipelines that take AI from notebook to enterprise at scale.</div>
+      </div>
+      <div class="course-meta">
+        <div class="meta-badge duration">⏱ 10 Weeks</div>
+        <div class="lpa-badge">
+          <div class="lpa-label">Expected CTC</div>
+          <div class="lpa-value">12 – 25 LPA</div>
+        </div>
+      </div>
+    </div>
+    <div class="course-body">
+      <div class="course-grid">
+        <div class="info-block">
+          <h4><div class="dot"></div>Syllabus Modules</h4>
+          <ul class="module-list">
+            <li><span class="mod-num">M01</span> MLOps Fundamentals – CI/CD for ML, ML Lifecycle</li>
+            <li><span class="mod-num">M02</span> Docker & Kubernetes for ML Model Serving</li>
+            <li><span class="mod-num">M03</span> Model Registry & Experiment Tracking – MLflow, W&B</li>
+            <li><span class="mod-num">M04</span> Feature Stores & Data Versioning – DVC, Feast</li>
+            <li><span class="mod-num">M05</span> REST API Deployment – FastAPI, Flask for ML Models</li>
+            <li><span class="mod-num">M06</span> Cloud Deployment – AWS SageMaker, GCP Vertex AI, Azure ML</li>
+            <li><span class="mod-num">M07</span> Model Monitoring – Drift Detection, Performance Tracking</li>
+            <li><span class="mod-num">M08</span> LLMOps – Deploying & Scaling Large Language Models</li>
+            <li><span class="mod-num">M09</span> AutoML & Pipeline Automation</li>
+            <li><span class="mod-num">M10</span> Capstone: Deploy a Full ML System on Cloud</li>
+          </ul>
+        </div>
+        <div>
+          <div class="info-block" style="margin-bottom: 22px;">
+            <h4><div class="dot"></div>Who Can Learn</h4>
+            <div class="tag-list">
+              <span class="tag-item">Data Scientists</span><span class="tag-item">ML Engineers</span>
+              <span class="tag-item">DevOps Professionals</span><span class="tag-item">Backend Developers</span>
+              <span class="tag-item">Cloud Engineers</span><span class="tag-item">Senior AI Practitioners</span>
+            </div>
+          </div>
+          <div class="info-block">
+            <h4><div class="dot"></div>Prerequisites</h4>
+            <ul class="prereq-list">
+              <li>Completed Programs 02 + 04 (Python & ML)</li>
+              <li>Familiarity with Linux command line</li>
+              <li>Basic understanding of cloud computing concepts</li>
+              <li>Experience deploying at least one ML model</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="card-divider"></div>
+      <div class="info-block">
+        <h4><div class="dot"></div>Job Roles After Completion</h4>
+        <div class="course-grid-3">
+          <div class="role-item"><span class="role-icon">⚙️</span> MLOps Engineer</div>
+          <div class="role-item"><span class="role-icon">☁️</span> AI Cloud Architect</div>
+          <div class="role-item"><span class="role-icon">🔧</span> ML Infrastructure Engineer</div>
+          <div class="role-item"><span class="role-icon">🚀</span> AI Platform Engineer</div>
+          <div class="role-item"><span class="role-icon">📡</span> LLMOps Specialist</div>
+          <div class="role-item"><span class="role-icon">🏗️</span> Senior Data Engineer</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── COURSE 10 ── -->
+  <div class="course-card advanced">
+    <div class="course-header">
+      <div class="course-header-left">
+        <div class="course-number"><div class="course-number-dot"></div> Program 10 · Advanced</div>
+        <div class="course-title">AI Ethics, Governance & Prompt Safety</div>
+        <div class="course-tagline">The fastest-growing niche in enterprise AI. Learn to build fair, explainable, safe, and compliant AI systems that organizations and regulators demand.</div>
+      </div>
+      <div class="course-meta">
+        <div class="meta-badge duration">⏱ 8 Weeks</div>
+        <div class="lpa-badge">
+          <div class="lpa-label">Expected CTC</div>
+          <div class="lpa-value">10 – 22 LPA</div>
+        </div>
+      </div>
+    </div>
+    <div class="course-body">
+      <div class="course-grid">
+        <div class="info-block">
+          <h4><div class="dot"></div>Syllabus Modules</h4>
+          <ul class="module-list">
+            <li><span class="mod-num">M01</span> Foundations of AI Ethics – Bias, Fairness, Transparency</li>
+            <li><span class="mod-num">M02</span> AI Regulatory Landscape – EU AI Act, India DPDP Bill, GDPR</li>
+            <li><span class="mod-num">M03</span> Explainable AI (XAI) – LIME, SHAP, Model Interpretability</li>
+            <li><span class="mod-num">M04</span> AI Bias Detection & Mitigation Techniques</li>
+            <li><span class="mod-num">M05</span> Prompt Safety – Jailbreaks, Injections, Red-Teaming</li>
+            <li><span class="mod-num">M06</span> AI Governance Frameworks & Risk Assessment</li>
+            <li><span class="mod-num">M07</span> Responsible AI in Healthcare, Finance & Public Sector</li>
+            <li><span class="mod-num">M08</span> Building an AI Ethics Policy for Organizations</li>
+          </ul>
+        </div>
+        <div>
+          <div class="info-block" style="margin-bottom: 22px;">
+            <h4><div class="dot"></div>Who Can Learn</h4>
+            <div class="tag-list">
+              <span class="tag-item">AI/ML Practitioners</span><span class="tag-item">Legal & Compliance Officers</span>
+              <span class="tag-item">Policy Makers</span><span class="tag-item">Product Managers</span>
+              <span class="tag-item">Senior IT Leaders</span><span class="tag-item">Risk Analysts</span>
+              <span class="tag-item">HR & Diversity Officers</span>
+            </div>
+          </div>
+          <div class="info-block">
+            <h4><div class="dot"></div>Prerequisites</h4>
+            <ul class="prereq-list">
+              <li>Basic understanding of AI/ML concepts</li>
+              <li>Awareness of data privacy principles</li>
+              <li>No heavy coding required for this program</li>
+              <li>Interest in policy, governance, or responsible tech</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="card-divider"></div>
+      <div class="info-block">
+        <h4><div class="dot"></div>Job Roles After Completion</h4>
+        <div class="course-grid-3">
+          <div class="role-item"><span class="role-icon">⚖️</span> AI Ethics Officer</div>
+          <div class="role-item"><span class="role-icon">🛡️</span> AI Risk & Compliance Manager</div>
+          <div class="role-item"><span class="role-icon">📜</span> AI Policy Analyst</div>
+          <div class="role-item"><span class="role-icon">🔍</span> Responsible AI Auditor</div>
+          <div class="role-item"><span class="role-icon">🏢</span> AI Governance Consultant</div>
+          <div class="role-item"><span class="role-icon">🌐</span> AI Trust & Safety Specialist</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════ ADD-ONS SECTION ════════════════════════════════ -->
+<div class="section-header">
+  <span class="section-tag white">🎁 Exclusive Add-ons</span>
+  <h2>Beyond the Curriculum</h2>
+  <p>Every Scope AI Hub student gets access to powerful career-boosting add-ons — most at absolutely no extra cost.</p>
+</div>
+
+<div class="addons-section">
+  <div class="addons-grid">
+
+    <div class="addon-card free">
+      <div class="addon-icon">📄</div>
+      <div class="addon-title">Resume Preparation</div>
+      <div class="addon-desc">Get a professionally crafted, ATS-optimized AI-focused resume. Our career experts tailor it to highlight your projects, skills, and certifications for top employers.</div>
+    </div>
+
+    <div class="addon-card free">
+      <div class="addon-icon">🎤</div>
+      <div class="addon-title">Mock Interviews</div>
+      <div class="addon-desc">Attend 3 rounds of mock technical + HR interviews with real industry experts. Get personalized feedback, improvement tips, and confidence for actual placement drives.</div>
+    </div>
+
+    <div class="addon-card free">
+      <div class="addon-icon">💼</div>
+      <div class="addon-title">LinkedIn Profile Optimization</div>
+      <div class="addon-desc">Get your LinkedIn profile reviewed and optimized by our team — headline, about section, skills, and project showcase — so recruiters find YOU first.</div>
+    </div>
+
+    <div class="addon-card free">
+      <div class="addon-icon">🐙</div>
+      <div class="addon-title">GitHub Portfolio Setup</div>
+      <div class="addon-desc">We help you structure and publish all your course projects on GitHub with proper README files, code documentation, and a professional portfolio page recruiters love.</div>
+    </div>
+
+    <div class="addon-card free">
+      <div class="addon-icon">🏆</div>
+      <div class="addon-title">Industry-Recognized Certificate</div>
+      <div class="addon-desc">Receive a verifiable digital certificate from Scope AI Hub upon program completion. Shareable on LinkedIn with a unique credential ID — recognized by top hiring companies.</div>
+    </div>
+
+    <div class="addon-card free">
+      <div class="addon-icon">🤝</div>
+      <div class="addon-title">Placement Assistance & Job Referrals</div>
+      <div class="addon-desc">Access our exclusive hiring partner network spanning 50+ companies. We actively refer eligible graduates to open AI positions and conduct internal placement drives.</div>
+    </div>
+
+    <div class="addon-card">
+      <div class="addon-icon">🧑‍🏫</div>
+      <div class="addon-title">1-on-1 Mentor Sessions</div>
+      <div class="addon-desc">Book dedicated sessions with industry mentors who have worked at top AI companies. Get career guidance, code reviews, project mentorship, and real-world advice tailored to you.</div>
+    </div>
+
+    <div class="addon-card">
+      <div class="addon-icon">🎙️</div>
+      <div class="addon-title">Live Industry Expert Webinars</div>
+      <div class="addon-desc">Monthly live sessions by AI practitioners from top companies like Google, Amazon, and leading startups. Get insider knowledge on hiring, trends, and real projects — ask questions live.</div>
+    </div>
+
+    <div class="addon-card free">
+      <div class="addon-icon">💬</div>
+      <div class="addon-title">Doubt Clearing & Study Groups</div>
+      <div class="addon-desc">Dedicated doubt-clearing sessions every week with instructors. Access exclusive WhatsApp and Discord communities to collaborate with peers across batches.</div>
+    </div>
+
+    <div class="addon-card free">
+      <div class="addon-icon">📚</div>
+      <div class="addon-title">Study Materials & E-Books</div>
+      <div class="addon-desc">Lifetime access to curated study notes, cheat sheets, recorded sessions, and our exclusive AI E-book library — study at your own pace, anytime, anywhere.</div>
+    </div>
+
+    <div class="addon-card">
+      <div class="addon-icon">🗣️</div>
+      <div class="addon-title">Soft Skills & Communication Workshop</div>
+      <div class="addon-desc">A focused 2-day workshop covering professional communication, presentation skills, and workplace etiquette — skills that matter as much as technical ability in interviews.</div>
+    </div>
+
+    <div class="addon-card free">
+      <div class="addon-icon">🌟</div>
+      <div class="addon-title">Alumni Network Access</div>
+      <div class="addon-desc">Join the Scope AI Hub alumni community with access to job referrals, project collaborations, and networking events. Your batchmates of today become your professional network forever.</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═════════════════════════════ FOOTER ════════════════════════════════════════ -->
+<div class="brochure-footer">
+  <div class="footer-logo">Scope AI Hub</div>
+  <div class="footer-tagline">Empowering the Next Generation of AI Professionals · Freshers & Working Professionals</div>
+  <div style="display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; margin-bottom: 24px;">
+    <span style="font-size: 12px; padding: 4px 14px; border-radius: 100px; border: 1px solid rgba(0,229,160,0.3); color: var(--beginner); background: var(--beginner-soft);">🟢 Online</span>
+    <span style="font-size: 12px; padding: 4px 14px; border-radius: 100px; border: 1px solid rgba(255,149,0,0.3); color: var(--intermediate); background: var(--intermediate-soft);">🟠 Offline</span>
+    <span style="font-size: 12px; padding: 4px 14px; border-radius: 100px; border: 1px solid rgba(192,132,252,0.3); color: var(--advanced); background: var(--advanced-soft);">🟣 Hybrid</span>
+  </div>
+  <div class="footer-contacts">
+    <span>📧 admissions@scopeaihub.com</span>
+    <span>📞 +91 XXXXX XXXXX</span>
+    <span>🌐 www.scopeaihub.com</span>
+    <span>📍 Your City, India</span>
+  </div>
+  <div style="margin-top: 28px; font-size: 12px; color: #334155;">
+    © 2025 Scope AI Hub. All Rights Reserved. · Brochure Valid for 2025 Batches
+  </div>
+</div>
+
+</body>
+</html>

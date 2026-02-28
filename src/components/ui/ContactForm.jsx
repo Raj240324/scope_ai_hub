@@ -5,6 +5,7 @@ import { useModal } from '../../context/ModalContext';
 import { executeRecaptcha } from '../../utils/recaptcha';
 import { checkRateLimit } from '../../utils/rateLimiter';
 import { submitEnquiry } from '../../services/enquiryService';
+import { courses, TIERS, tierMeta } from '../../data/courses';
 
 /* ─── Step Definitions ──────────────────────────────────────────────── */
 
@@ -19,12 +20,12 @@ const STEPS = [
 ];
 
 const COURSES = [
-  { value: 'General Inquiry', label: 'General Inquiry' },
-  { value: 'Full Stack Web Development (MERN Stack)', label: 'Full Stack Development' },
-  { value: 'Data Science & Artificial Intelligence', label: 'Data Science & AI' },
-  { value: 'UI/UX Design Strategy', label: 'UI/UX Design' },
-  { value: 'Cyber Security & Ethical Hacking', label: 'Cyber Security' },
-  { value: 'Cloud Computing & DevOps', label: 'Cloud Computing' },
+  { value: 'General Inquiry', label: 'General Inquiry', tier: null },
+  ...courses.map(c => ({
+    value: c.title,
+    label: `${c.programNumber} · ${c.title}`,
+    tier: c.tier,
+  })),
 ];
 
 const QUALIFICATIONS = [

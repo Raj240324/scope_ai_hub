@@ -1,449 +1,384 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import Layout from '../../components/layout/Layout';
-import { courses } from '../../data/courses';
+import { courses, tierMeta } from '../../data/courses';
 import { useModal } from '../../context/ModalContext';
 import { BRANDING } from '../../data/branding';
-import { 
-  Clock, 
-  Globe, 
-  ChevronDown, 
-  ChevronUp, 
+import {
+  Clock,
+  ChevronDown,
   ChevronRight,
-  CheckCircle2, 
-  Award, 
-  Terminal,
-  Calendar,
-  User,
-  ArrowRight,
-  BookOpen,
-  Target,
-  FileCheck,
-  Zap,
-  Tag,
+  TrendingUp,
   HelpCircle,
-  Code2
+  Users,
+  BookOpen,
+  Briefcase,
+  ListChecks,
+  ArrowUpRight,
+  Sparkles,
 } from 'lucide-react';
-
-
+import { motion, AnimatePresence } from 'framer-motion';
+import CourseCard from '../../components/ui/CourseCard';
 
 const CourseDetail = () => {
   const { slug } = useParams();
-  const course = courses.find(c => c.slug === slug);
+  const course = courses.find((c) => c.slug === slug);
   const { openModal } = useModal();
-  const [activeModule, setActiveModule] = useState(0);
-  const [activeFaq, setActiveFaq] = useState(0);
-  const [activeTab, setActiveTab] = useState('overview');
-  const [scrollProgress, setScrollProgress] = useState(0);
-
-  // Handle scroll to update active tab and progress
-  useEffect(() => {
-    const handleScroll = () => {
-      // Update active tab
-      const sections = ['overview', 'curriculum', 'projects', 'instructor', 'faq'];
-      const current = sections.find(section => {
-        const element = document.getElementById(section);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          return rect.top <= 150 && rect.bottom >= 150;
-        }
-        return false;
-      });
-      if (current) setActiveTab(current);
-
-      // Update scroll progress
-      const winScroll = document.documentElement.scrollTop;
-      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      const scrolled = (winScroll / height) * 100;
-      setScrollProgress(scrolled);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  const [activeModule, setActiveModule] = useState(-1);
 
   if (!course) {
     return <Navigate to="/courses" replace />;
   }
 
+  const tier = tierMeta[course.tier] || tierMeta.Beginner;
+
   return (
-    <Layout 
+    <Layout
       title={`${course.title} | ${BRANDING.fullName}`}
-      description={course.shortDescription}
+      description={course.tagline}
       immersive={true}
     >
-      {/* 1. Redesigned Hero Section */}
-      <section className="relative bg-[var(--bg-body)] pt-32 md:pt-40 pb-20 overflow-hidden">
-        {/* Subtle Background Glows (New System) */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-[radial-gradient(circle,var(--color-brand-purple-deep)_0%,transparent_70%)] opacity-10 blur-3xl" />
-          <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[radial-gradient(circle,var(--color-brand-cyan-deep)_0%,transparent_70%)] opacity-10 blur-3xl" />
+      {/* ── Hero ── */}
+      <section className="relative bg-[var(--bg-body)] pt-32 md:pt-44 pb-20 md:pb-28 overflow-hidden">
+        {/* Ambient gradients – one per side, organic feel */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <div
+            className="absolute -top-40 -right-40 w-[700px] h-[700px] rounded-full opacity-[0.07] blur-[120px]"
+            style={{ background: tier.color }}
+          />
+          <div
+            className="absolute -bottom-60 -left-40 w-[500px] h-[500px] rounded-full opacity-[0.04] blur-[100px]"
+            style={{ background: tier.color }}
+          />
         </div>
 
         <div className="container-custom relative z-10">
           <div className="max-w-4xl">
             {/* Badges */}
-            <div className="flex flex-wrap items-center gap-3 mb-6 animate-in fade-in slide-in-from-bottom-4 duration-700">
-               <span className="px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider border border-primary/20">
-                 {course.category}
-               </span>
-               <div className="flex items-center space-x-2 px-3 py-1 rounded-full bg-green-500/10 text-green-500 border border-green-500/20">
-                 <span className="h-1.5 w-1.5 rounded-full bg-green-500 animate-pulse"></span>
-                 <span className="text-xs font-bold uppercase tracking-wider">New Batch: {course.enrollment?.nextBatch}</span>
-               </div>
-            </div>
-
-            <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold text-[var(--text-heading)] mb-4 sm:mb-6 tracking-tight leading-[1.1] animate-in fade-in slide-in-from-bottom-6 duration-700 delay-100">
-              {course.title}
-            </h1>
-
-            <p className="text-base sm:text-lg md:text-xl text-[var(--text-muted)] mb-6 sm:mb-10 leading-relaxed max-w-2xl font-medium animate-in fade-in slide-in-from-bottom-8 duration-700 delay-200">
-              {course.shortDescription}
-            </p>
-
-            <div className="flex flex-wrap gap-4 animate-in fade-in slide-in-from-bottom-10 duration-700 delay-300">
-              <button 
-                onClick={() => openModal(course.title)}
-                className="btn-primary px-6 sm:px-8 py-3 sm:py-4 rounded-full text-xs sm:text-sm font-bold uppercase tracking-widest shadow-lg shadow-primary/25 hover:shadow-primary/40 hover:-translate-y-1 transition-all"
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              className="flex flex-wrap items-center gap-3 mb-8"
+            >
+              <span
+                className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wider"
+                style={{
+                  background: tier.softBg,
+                  color: tier.color,
+                }}
               >
+                <span
+                  className="h-1.5 w-1.5 rounded-full"
+                  style={{ background: tier.color, boxShadow: `0 0 6px ${tier.color}60` }}
+                />
+                {course.programNumber} · {course.tier}
+              </span>
+              <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-green-500/10 text-green-600 text-xs font-bold uppercase tracking-wider">
+                <span className="h-1.5 w-1.5 rounded-full bg-green-500 animate-pulse" />
+                Open for Enrollment
+              </span>
+            </motion.div>
+
+            {/* Title */}
+            <motion.h1
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-[var(--text-heading)] mb-5 tracking-tight leading-[1.08]"
+            >
+              {course.title}
+            </motion.h1>
+
+            {/* Tagline */}
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.16, ease: [0.22, 1, 0.36, 1] }}
+              className="text-base sm:text-lg text-[var(--text-muted)] mb-10 leading-relaxed max-w-2xl font-medium"
+            >
+              {course.tagline}
+            </motion.p>
+
+            {/* CTAs */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.24, ease: [0.22, 1, 0.36, 1] }}
+              className="flex flex-wrap gap-4"
+            >
+              <button
+                onClick={() => openModal(course.title)}
+                className="group inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-primary text-white text-sm font-bold uppercase tracking-wider shadow-lg shadow-primary/20 hover:shadow-primary/35 hover:-translate-y-0.5 transition-all duration-300"
+              >
+                <Sparkles className="h-4 w-4 opacity-70 group-hover:opacity-100 transition-opacity" />
                 Enroll Now
               </button>
-              <button 
-                onClick={() => document.getElementById('curriculum').scrollIntoView({ behavior: 'smooth' })}
-                className="px-6 sm:px-8 py-3 sm:py-4 rounded-full bg-[var(--bg-secondary)] text-[var(--text-heading)] border border-[var(--border-color)] text-xs sm:text-sm font-bold uppercase tracking-widest hover:bg-[var(--bg-inverted)] hover:text-[var(--text-on-inverted)] transition-all"
+              <button
+                onClick={() => document.getElementById('syllabus')?.scrollIntoView({ behavior: 'smooth' })}
+                className="px-7 py-3.5 rounded-xl bg-[var(--bg-secondary)] text-[var(--text-heading)] border border-[var(--border-color)] text-sm font-bold uppercase tracking-wider hover:bg-[var(--bg-inverted)] hover:text-[var(--text-on-inverted)] hover:border-transparent transition-all duration-300"
               >
                 View Syllabus
               </button>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Sticky Sub-Nav (Restored & Refined) */}
-      <div className={`sticky top-[64px] md:top-[72px] z-40 bg-[var(--bg-body)]/80 backdrop-blur-xl border-y border-[var(--border-color)] transition-all duration-300 ${scrollProgress > 5 ? 'shadow-md translate-y-0' : ''}`}>
-        <div className="container-custom">
-           <div className="flex items-center justify-between h-14 md:h-16 overflow-hidden">
-              <h2 className={`font-bold text-[var(--text-heading)] transition-opacity duration-300 ${scrollProgress > 10 ? 'opacity-100' : 'opacity-0'} hidden md:block shrink-0 mr-4`}>
-                {course.title}
-              </h2>
-              <div className="flex items-center gap-1 sm:gap-2 md:gap-4 overflow-x-auto no-scrollbar w-full md:w-auto" style={{ WebkitOverflowScrolling: 'touch' }}>
-                 {['Overview', 'Curriculum', 'Instructor', 'FAQ'].map((item) => {
-                    const id = item.toLowerCase();
-                    const isActive = activeTab === id;
-                    return (
-                      <button
-                        key={id}
-                        onClick={() => {
-                          document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                          setActiveTab(id);
-                        }}
-                        className={`px-3 sm:px-4 py-1.5 rounded-full text-xs md:text-sm font-bold transition-all whitespace-nowrap shrink-0 ${isActive ? 'bg-[var(--text-heading)] text-[var(--bg-body)]' : 'text-[var(--text-muted)] hover:text-[var(--text-heading)] hover:bg-[var(--bg-secondary)]'}`}
-                      >
-                        {item}
-                      </button>
-                    )
-                 })}
-                 <button 
-                   onClick={() => openModal(course.title)}
-                   className="ml-1 sm:ml-2 md:ml-4 px-4 sm:px-5 py-1.5 sm:py-2 rounded-full bg-primary text-white text-xs md:text-sm font-bold shadow-lg shadow-primary/20 hover:shadow-primary/40 transition-all whitespace-nowrap shrink-0 md:hidden"
-                 >
-                   Enroll
-                 </button>
+      {/* ── Key Metrics Bar ── */}
+      <section className="border-y border-[var(--border-color)] bg-[var(--bg-secondary)]/40">
+        <div className="container-custom py-7">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {[
+              { label: 'Duration', value: course.duration, icon: <Clock className="h-4 w-4" style={{ color: tier.color }} /> },
+              { label: 'Level', value: course.tier, icon: <span className="text-base">{tier.emoji}</span> },
+              { label: 'Expected CTC', value: course.salaryRange, icon: <TrendingUp className="h-4 w-4" style={{ color: tier.color }} /> },
+              { label: 'Modules', value: `${course.modules.length} Modules`, icon: <BookOpen className="h-4 w-4" style={{ color: tier.color }} /> },
+            ].map((m, i) => (
+              <div key={i}>
+                <div className="text-[10px] text-[var(--text-muted)] uppercase tracking-[0.15em] font-semibold mb-1.5">{m.label}</div>
+                <div className="text-base font-bold text-[var(--text-heading)] flex items-center gap-2">
+                  {m.icon}
+                  {m.value}
+                </div>
               </div>
-           </div>
+            ))}
+          </div>
         </div>
-      </div>
+      </section>
 
-      {/* 2. Main Content - 2 Column Layout */}
-      <section className="py-12 md:py-16">
+      {/* ── Main Content — 2-Column ── */}
+      <section className="py-14 md:py-20">
         <div className="container-custom">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16">
-            
-            {/* LEFT COLUMN: Content */}
-            <div className="lg:col-span-2 space-y-16">
-              
-              {/* Overview Section */}
-              <div id="overview" className="space-y-8 scroll-mt-24">
-                <div>
-                  <h2 className="text-xl sm:text-2xl font-bold text-[var(--text-heading)] mb-3 sm:mb-4">About this Course</h2>
-                  <p className="text-[var(--text-muted)] text-base sm:text-lg leading-relaxed">{course.longDescription}</p>
-                </div>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-20">
 
-                {/* Key Metrics Bar */}
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 py-8 border-y border-[var(--border-color)]">
+            {/* LEFT COLUMN */}
+            <div className="lg:col-span-2 space-y-20">
+
+              {/* Syllabus Accordion */}
+              <div id="syllabus" className="scroll-mt-28">
+                <div className="flex items-end justify-between mb-10">
                   <div>
-                    <div className="text-xs text-[var(--text-muted)] uppercase tracking-wider font-semibold mb-1">Duration</div>
-                    <div className="text-lg font-bold text-[var(--text-heading)] flex items-center gap-2">
-                      <Clock className="h-4 w-4 text-primary" />
-                      {course.duration}
-                    </div>
-                  </div>
-                  <div>
-                    <div className="text-xs text-[var(--text-muted)] uppercase tracking-wider font-semibold mb-1">Level</div>
-                    <div className="text-lg font-bold text-[var(--text-heading)] flex items-center gap-2">
-                       <Target className="h-4 w-4 text-primary" />
-                       {course.level}
-                    </div>
-                  </div>
-                  <div>
-                    <div className="text-xs text-[var(--text-muted)] uppercase tracking-wider font-semibold mb-1">Format</div>
-                    <div className="text-lg font-bold text-[var(--text-heading)] flex items-center gap-2">
-                       <Globe className="h-4 w-4 text-primary" />
-                       {course.mode}
-                    </div>
-                  </div>
-                   <div>
-                    <div className="text-xs text-[var(--text-muted)] uppercase tracking-wider font-semibold mb-1">Certification</div>
-                    <div className="text-lg font-bold text-[var(--text-heading)] flex items-center gap-2">
-                       <Award className="h-4 w-4 text-primary" />
-                       Yes
-                    </div>
+                    <h2 className="text-2xl sm:text-3xl font-extrabold text-[var(--text-heading)] tracking-tight">
+                      Syllabus
+                    </h2>
+                    <p className="text-sm text-[var(--text-muted)] mt-1">
+                      {course.modules.length} modules · Structured progression
+                    </p>
                   </div>
                 </div>
 
-                {/* What you'll learn */}
-                <div className="bg-[var(--bg-secondary)] p-5 sm:p-8 rounded-2xl sm:rounded-3xl border border-[var(--border-color)]">
-                   <h3 className="text-xl font-bold text-[var(--text-heading)] mb-6 flex items-center gap-2">
-                     <CheckCircle2 className="h-5 w-5 text-primary" />
-                     What you will learn
-                   </h3>
-                   <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
-                     {course.learningObjectives?.map((item, i) => (
-                       <li key={i} className="flex items-start gap-3 list-none">
-                         <div className="mt-1.5 h-1.5 w-1.5 rounded-full bg-primary shrink-0" />
-                         <span className="text-[var(--text-muted)] font-medium text-sm leading-relaxed">{item}</span>
-                       </li>
-                     ))}
-                   </div>
-                </div>
-                
-                {/* Tools */}
-                <div>
-                  <h3 className="text-lg font-bold text-[var(--text-heading)] mb-4">Tools & Technologies</h3>
-                  <div className="flex flex-wrap gap-3">
-                     {course.tools?.map((tool, i) => (
-                       <span key={i} className="px-4 py-2 rounded-xl bg-[var(--bg-card)] border border-[var(--border-color)] text-[var(--text-muted)] text-sm font-semibold shadow-sm">
-                         {tool}
-                       </span>
-                     ))}
-                  </div>
-                </div>
-              </div>
-
-
-              {/* Curriculum Section */}
-              <div id="curriculum" className="scroll-mt-24">
-                <div className="flex items-end justify-between mb-8">
-                   <h2 className="text-xl sm:text-2xl font-bold text-[var(--text-heading)]">Curriculum</h2>
-                   <span className="text-sm font-medium text-[var(--text-muted)]">{course.syllabus?.length} Modules</span>
-                </div>
-                
-                <div className="space-y-4">
-                   {course.syllabus?.map((item, index) => (
-                     <div key={index} className="group border border-[var(--border-color)] rounded-2xl overflow-hidden bg-[var(--bg-card)] hover:border-primary/30 transition-all duration-300">
-                        <button 
-                          onClick={() => setActiveModule(activeModule === index ? -1 : index)}
-                          className="w-full flex items-center justify-between p-4 sm:p-6 text-left"
+                <div className="space-y-3">
+                  {course.modules.map((mod, index) => {
+                    const isOpen = activeModule === index;
+                    return (
+                      <motion.div
+                        key={mod.code}
+                        initial={false}
+                        className="rounded-xl overflow-hidden border transition-colors duration-300"
+                        style={{
+                          borderColor: isOpen ? `${tier.color}40` : 'var(--border-color)',
+                          background: isOpen ? `${tier.color}04` : 'var(--bg-card)',
+                        }}
+                      >
+                        <button
+                          onClick={() => setActiveModule(isOpen ? -1 : index)}
+                          className="w-full flex items-center justify-between p-4 sm:p-5 text-left group"
                         >
-                          <div className="flex gap-4 md:gap-6 items-center">
-                             <span className={`h-10 w-10 shrink-0 rounded-full flex items-center justify-center text-sm font-bold transition-colors ${activeModule === index ? 'bg-primary text-white' : 'bg-[var(--bg-secondary)] text-[var(--text-muted)] group-hover:text-primary'}`}>
-                                {index + 1}
-                             </span>
-                             <div>
-                                <h4 className="text-base sm:text-lg font-bold text-[var(--text-heading)]">{item.module}</h4>
-                                 <p className="text-xs sm:text-sm text-[var(--text-muted)]">{item.duration} • {item.topics?.length} Topics</p>
-                             </div>
+                          <div className="flex gap-4 items-center">
+                            <span
+                              className="h-9 w-9 shrink-0 rounded-lg flex items-center justify-center text-[11px] font-black transition-all duration-300"
+                              style={
+                                isOpen
+                                  ? { background: tier.color, color: '#fff', boxShadow: `0 4px 12px ${tier.color}30` }
+                                  : { background: 'var(--bg-secondary)', color: 'var(--text-muted)' }
+                              }
+                            >
+                              {mod.code}
+                            </span>
+                            <h4 className="text-sm sm:text-[15px] font-bold text-[var(--text-heading)] group-hover:text-primary transition-colors duration-300">
+                              {mod.title}
+                            </h4>
                           </div>
-                          <ChevronDown className={`h-5 w-5 text-[var(--text-muted)] transition-transform duration-300 ${activeModule === index ? 'rotate-180 text-primary' : ''}`} />
+                          <ChevronDown
+                            className="h-4 w-4 text-[var(--text-muted)] shrink-0 ml-4 transition-transform duration-400"
+                            style={{
+                              transform: isOpen ? 'rotate(180deg)' : 'none',
+                              color: isOpen ? tier.color : undefined,
+                            }}
+                          />
                         </button>
-                        
-                        <div className={`grid transition-all duration-300 ease-in-out ${activeModule === index ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}>
-                           <div className="overflow-hidden">
-                              <div className="p-6 pt-0 pl-16 md:pl-20 border-t border-[var(--border-color)]/50 bg-[var(--bg-secondary)]/30">
-                                 <ul className="space-y-3">
-                                   {item.topics?.map((topic, i) => (
-                                     <li key={i} className="flex items-center gap-3 text-sm text-[var(--text-muted)] font-medium">
-                                       <div className="h-1.5 w-1.5 rounded-full bg-[var(--border-color)]" />
-                                       {topic}
-                                     </li>
-                                   ))}
-                                 </ul>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                   ))}
+                      </motion.div>
+                    );
+                  })}
                 </div>
               </div>
-              
-              {/* Instructor Section */}
-              <div id="instructor" className="scroll-mt-24">
-                 <h2 className="text-xl sm:text-2xl font-bold text-[var(--text-heading)] mb-6 sm:mb-8">Your Mentor</h2>
-                  <div className="flex flex-col md:flex-row gap-6 sm:gap-8 items-start bg-[var(--bg-card)] p-5 sm:p-8 rounded-2xl sm:rounded-3xl border border-[var(--border-color)]">
-                    <div className="shrink-0 relative">
-                       <img 
-                         src={course.instructor?.avatar} 
-                         alt={course.instructor?.name} 
-                         className="h-32 w-32 rounded-2xl object-cover shadow-lg"
-                       />
-                       <div className="absolute -bottom-3 -right-3 bg-primary text-white p-2 rounded-lg shadow-lg">
-                          <BookOpen className="h-5 w-5" />
-                       </div>
-                    </div>
-                    <div>
-                       <h3 className="text-xl font-bold text-[var(--text-heading)]">{course.instructor?.name}</h3>
-                       <p className="text-primary font-medium mb-4">{course.instructor?.role}</p>
-                       <p className="text-[var(--text-muted)] leading-relaxed text-sm mb-6">{course.instructor?.bio}</p>
-                       <div className="flex gap-6 text-sm">
-                          <div>
-                            <span className="block font-bold text-[var(--text-heading)]">10+ Years</span>
-                            <span className="text-[var(--text-muted)] text-xs">Experience</span>
-                          </div>
-                          <div>
-                            <span className="block font-bold text-[var(--text-heading)]">5000+</span>
-                            <span className="text-[var(--text-muted)] text-xs">Students</span>
-                          </div>
-                       </div>
-                    </div>
-                 </div>
+
+              {/* Who Can Learn */}
+              <div id="who-can-learn" className="scroll-mt-28">
+                <h2 className="text-2xl sm:text-3xl font-extrabold text-[var(--text-heading)] tracking-tight mb-2">
+                  Who Can Learn
+                </h2>
+                <p className="text-sm text-[var(--text-muted)] mb-8">This program is designed for:</p>
+                <div className="flex flex-wrap gap-2.5">
+                  {course.whoCanLearn.map((item, i) => (
+                    <span
+                      key={i}
+                      className="text-sm font-medium px-4 py-2.5 rounded-xl bg-[var(--bg-secondary)] border border-[var(--border-color)] text-[var(--text-muted)] hover:text-[var(--text-heading)] hover:border-primary/20 transition-all duration-300 cursor-default"
+                    >
+                      {item}
+                    </span>
+                  ))}
+                </div>
               </div>
 
-              {/* FAQ Section */}
-              <div id="faq" className="scroll-mt-24">
-                 <h2 className="text-xl sm:text-2xl font-bold text-[var(--text-heading)] mb-6 sm:mb-8">Frequently Asked Questions</h2>
-                 <div className="space-y-4">
-                   {course.faqs?.map((faq, index) => (
-                     <div 
-                       key={index} 
-                       className={`border border-[var(--border-color)] rounded-2xl overflow-hidden transition-all duration-300 ${activeFaq === index ? 'bg-[var(--bg-secondary)] border-primary/30' : 'bg-[var(--bg-card)]'}`}
-                     >
-                       <button
-                         onClick={() => setActiveFaq(activeFaq === index ? -1 : index)}
-                          className="w-full flex items-center justify-between p-4 sm:p-6 text-left"
-                       >
-                          <span className={`font-bold text-base sm:text-lg ${activeFaq === index ? 'text-[var(--text-heading)]' : 'text-[var(--text-muted)]'}`}>
-                           {faq.question}
-                         </span>
-                         {activeFaq === index ? (
-                           <ChevronUp className="h-5 w-5 text-primary shrink-0 ml-4" />
-                         ) : (
-                           <ChevronDown className="h-5 w-5 text-[var(--text-muted)] shrink-0 ml-4" />
-                         )}
-                       </button>
-                       <div 
-                         className={`grid transition-all duration-300 ease-in-out ${activeFaq === index ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}
-                       >
-                         <div className="overflow-hidden">
-                            <div className="px-4 sm:px-6 pb-4 sm:pb-6 pt-0 text-sm sm:text-base text-[var(--text-muted)] leading-relaxed">
-                             {faq.answer}
-                           </div>
-                         </div>
-                       </div>
-                     </div>
-                   ))}
-                 </div>
+              {/* Prerequisites */}
+              <div id="prerequisites" className="scroll-mt-28">
+                <h2 className="text-2xl sm:text-3xl font-extrabold text-[var(--text-heading)] tracking-tight mb-8">
+                  Prerequisites
+                </h2>
+                <ul className="space-y-4">
+                  {course.prerequisites.map((item, i) => (
+                    <li key={i} className="flex items-start gap-3.5 text-[var(--text-muted)] text-sm leading-relaxed">
+                      <ChevronRight
+                        className="h-4 w-4 shrink-0 mt-0.5"
+                        style={{ color: tier.color }}
+                      />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
               </div>
 
+              {/* Job Roles */}
+              <div id="job-roles" className="scroll-mt-28">
+                <h2 className="text-2xl sm:text-3xl font-extrabold text-[var(--text-heading)] tracking-tight mb-2">
+                  Career Paths
+                </h2>
+                <p className="text-sm text-[var(--text-muted)] mb-8">Roles you'll be qualified for after completion:</p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {course.roles.map((role, i) => (
+                    <div
+                      key={i}
+                      className="flex items-center gap-3.5 p-4 rounded-xl bg-[var(--bg-secondary)] border border-[var(--border-color)] text-sm font-medium text-[var(--text-heading)] hover:border-primary/20 hover:bg-[var(--bg-card)] transition-all duration-300 group"
+                    >
+                      <span className="text-lg group-hover:scale-110 transition-transform duration-300">{role.icon}</span>
+                      {role.title}
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
 
             {/* RIGHT COLUMN: Sticky Sidebar */}
             <div className="lg:col-span-1">
-               <div className="sticky top-32 space-y-6">
-                  {/* Enrollment Card */}
-                   <div className="bg-[var(--bg-card)] rounded-2xl sm:rounded-3xl border border-[var(--border-color)] p-5 sm:p-6 shadow-xl shadow-black/5">
-                     <div className="flex justify-between items-start mb-6">
-                        <div>
-                          <p className="text-sm font-medium text-[var(--text-muted)] mb-1">Course Fee</p>
-                          <h3 className="text-2xl font-black text-primary">{course.price}</h3>
-                        </div>
-                        <div className="px-3 py-1 rounded-lg bg-[var(--bg-secondary)] border border-[var(--border-color)] text-xs font-bold text-[var(--text-heading)]">
-                          Next: {course.enrollment?.nextBatch}
-                        </div>
-                     </div>
-                     
-                     <div className="space-y-3 mb-6">
-                        <button 
-                          onClick={() => openModal(course.title)}
-                          className="w-full btn-primary py-4 rounded-xl text-sm font-bold uppercase tracking-wider shadow-lg hover:shadow-primary/30 transition-all"
-                        >
-                          Enroll Now
-                        </button>
-                        <button 
-                          onClick={() => openModal(course.title)}
-                          className="w-full py-4 rounded-xl bg-[var(--bg-secondary)] border border-[var(--border-color)] text-[var(--text-heading)] text-sm font-bold uppercase tracking-wider hover:bg-[var(--bg-body)] transition-all"
-                        >
-                          Talk to Counselor
-                        </button>
-                     </div>
-
-                     <div className="space-y-4 pt-6 border-t border-[var(--border-color)]">
-                        <div className="flex items-center justify-between text-sm">
-                           <span className="text-[var(--text-muted)] flex items-center gap-2">
-                             <User className="h-4 w-4" /> Enrolled
-                           </span>
-                           <span className="font-bold text-[var(--text-heading)]">1,240+ Students</span>
-                        </div>
-                        <div className="flex items-center justify-between text-sm">
-                           <span className="text-[var(--text-muted)] flex items-center gap-2">
-                             <Clock className="h-4 w-4" /> Duration
-                           </span>
-                           <span className="font-bold text-[var(--text-heading)]">{course.duration}</span>
-                        </div>
-                        <div className="flex items-center justify-between text-sm">
-                           <span className="text-[var(--text-muted)] flex items-center gap-2">
-                             <FileCheck className="h-4 w-4" /> Certificate
-                           </span>
-                           <span className="font-bold text-[var(--text-heading)]">Included</span>
-                        </div>
-                     </div>
+              <div className="sticky top-32 space-y-6">
+                {/* Enrollment Card */}
+                <div className="bg-[var(--bg-card)] rounded-2xl border border-[var(--border-color)] p-6 shadow-xl shadow-black/[0.04]">
+                  <div className="flex justify-between items-start mb-6">
+                    <div>
+                      <p className="text-[10px] font-semibold text-[var(--text-muted)] uppercase tracking-[0.15em] mb-1">Expected CTC</p>
+                      <h3 className="text-2xl font-extrabold tracking-tight" style={{ color: tier.color }}>{course.salaryRange}</h3>
+                    </div>
+                    <span
+                      className="px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wider"
+                      style={{
+                        background: tier.softBg,
+                        color: tier.color,
+                      }}
+                    >
+                      {tier.emoji} {course.tier}
+                    </span>
                   </div>
 
-                  {/* Help Card */}
-                  <div className="bg-primary/5 rounded-3xl border border-primary/10 p-6">
-                     <h4 className="font-bold text-[var(--text-heading)] mb-2 flex items-center gap-2">
-                        <HelpCircle className="h-5 w-5 text-primary" />
-                        Need Help?
-                     </h4>
-                     <p className="text-sm text-[var(--text-muted)] mb-4 leading-relaxed">
-                       Unsure if this course is right for you? Our career counselors can help you decide.
-                     </p>
-                     <a href="/contact" className="text-sm font-bold text-primary hover:underline">
-                        Get Free Counseling &rarr;
-                     </a>
+                  <div className="space-y-3 mb-6">
+                    <button
+                      onClick={() => openModal(course.title)}
+                      className="w-full btn-primary py-4 rounded-xl text-sm font-bold uppercase tracking-wider shadow-lg shadow-primary/20 hover:shadow-primary/30 hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-2"
+                    >
+                      <Sparkles className="h-4 w-4" />
+                      Enroll Now
+                    </button>
+                    <button
+                      onClick={() => openModal(course.title)}
+                      className="w-full py-4 rounded-xl bg-[var(--bg-secondary)] border border-[var(--border-color)] text-[var(--text-heading)] text-sm font-bold uppercase tracking-wider hover:bg-[var(--bg-body)] transition-all duration-300"
+                    >
+                      Talk to Counselor
+                    </button>
                   </div>
-               </div>
+
+                  <div className="space-y-4 pt-5 border-t border-[var(--border-color)]/60">
+                    {[
+                      { label: 'Duration', value: course.duration, icon: <Clock className="h-4 w-4" /> },
+                      { label: 'Modules', value: `${course.modules.length} Modules`, icon: <BookOpen className="h-4 w-4" /> },
+                      { label: 'Job Roles', value: `${course.roles.length} Roles`, icon: <Briefcase className="h-4 w-4" /> },
+                    ].map((item, i) => (
+                      <div key={i} className="flex items-center justify-between text-sm">
+                        <span className="text-[var(--text-muted)] flex items-center gap-2">
+                          {item.icon} {item.label}
+                        </span>
+                        <span className="font-bold text-[var(--text-heading)]">{item.value}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Help Card */}
+                <div
+                  className="rounded-2xl border p-6"
+                  style={{
+                    background: `${tier.color}06`,
+                    borderColor: `${tier.color}15`,
+                  }}
+                >
+                  <h4 className="font-bold text-[var(--text-heading)] mb-2 flex items-center gap-2">
+                    <HelpCircle className="h-4 w-4" style={{ color: tier.color }} />
+                    Need Help?
+                  </h4>
+                  <p className="text-sm text-[var(--text-muted)] mb-4 leading-relaxed">
+                    Unsure if this program is right for you? Our career counselors can help.
+                  </p>
+                  <a
+                    href="/contact"
+                    className="inline-flex items-center gap-1.5 text-sm font-bold hover:gap-2.5 transition-all duration-300"
+                    style={{ color: tier.color }}
+                  >
+                    Get Free Counseling
+                    <ArrowUpRight className="h-3.5 w-3.5" />
+                  </a>
+                </div>
+              </div>
             </div>
 
           </div>
         </div>
       </section>
 
-      {/* 3. Related Courses (Simplified) */}
-      <section className="py-20 bg-[var(--bg-secondary)] border-t border-[var(--border-color)]">
+      {/* ── Related Programs ── */}
+      <section className="py-20 sm:py-28 bg-[var(--bg-secondary)] border-t border-[var(--border-color)]">
         <div className="container-custom">
-           <div className="flex justify-between items-end mb-10">
-              <div>
-                <h2 className="text-3xl font-bold text-[var(--text-heading)] mb-2">Explore More</h2>
-                <p className="text-[var(--text-muted)]">Similar courses you might be interested in</p>
-              </div>
-              <Link to="/courses" className="text-primary font-bold hover:underline hidden md:block">View All Courses</Link>
-           </div>
-           
-           {/* Simple Grid of 3 Cards */}
-           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {courses.filter(c => c.id !== course.id).slice(0, 3).map((item) => (
-                 <Link key={item.id} to={`/courses/${item.slug}`} className="group bg-[var(--bg-card)] rounded-2xl border border-[var(--border-color)] overflow-hidden hover:border-primary/40 hover:shadow-xl transition-all duration-300">
-                    <div className="p-6">
-                       <span className="text-xs font-bold text-primary uppercase tracking-wider mb-2 block">{item.category}</span>
-                       <h3 className="text-lg font-bold text-[var(--text-heading)] mb-2 group-hover:text-primary transition-colors">{item.title}</h3>
-                       <p className="text-sm text-[var(--text-muted)] line-clamp-2">{item.shortDescription}</p>
-                    </div>
-                 </Link>
+          <div className="flex justify-between items-end mb-12">
+            <div>
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-[var(--text-heading)] tracking-tight mb-2">
+                Explore More Programs
+              </h2>
+              <p className="text-[var(--text-muted)] text-sm">Continue your learning journey</p>
+            </div>
+            <Link to="/courses" className="text-primary text-sm font-bold hover:underline hidden md:inline-flex items-center gap-1">
+              View All <ArrowUpRight className="h-3.5 w-3.5" />
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {courses
+              .filter((c) => c.id !== course.id)
+              .slice(0, 3)
+              .map((item, i) => (
+                <CourseCard key={item.id} course={item} index={i} />
               ))}
-           </div>
+          </div>
         </div>
       </section>
-
     </Layout>
   );
 };
