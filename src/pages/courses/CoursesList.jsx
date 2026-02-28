@@ -1,8 +1,10 @@
 import React, { useState, useMemo } from 'react';
 import Layout from '../../components/layout/Layout';
 import CourseCard from '../../components/ui/CourseCard';
+import AddonsGrid from '../../components/ui/AddonsGrid';
 import { courses, TIERS, tierMeta } from '../../data/courses';
-import { Search, X, Sparkles, GraduationCap } from 'lucide-react';
+import { addons } from '../../data/addons';
+import { Search, X, Sparkles, GraduationCap, Award } from 'lucide-react';
 import { BRANDING } from '../../data/branding';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -80,140 +82,213 @@ const CoursesList = () => {
         </div>
       </section>
 
-      {/* Filter Bar — Elevated floating panel */}
-      <div className="container-custom -mt-16 sm:-mt-20 relative z-20 mb-16 sm:mb-20">
-        <div className="bg-[var(--bg-card)] rounded-2xl sm:rounded-[1.75rem] p-5 sm:p-8 shadow-2xl shadow-black/[0.06] border border-[var(--border-color)]">
-          <div className="flex flex-col gap-6">
-            {/* Search */}
-            <div className="relative group">
-              <Search className="absolute left-5 top-1/2 -translate-y-1/2 text-[var(--text-muted)] h-4.5 w-4.5 group-focus-within:text-primary transition-colors duration-300" />
-              <label htmlFor="course-search-main" className="sr-only">Search programs</label>
-              <input
-                type="text"
-                id="course-search-main"
-                name="course-search-main"
-                placeholder="Search by name, topic, or program number..."
-                className="w-full pl-12 pr-5 py-4 bg-[var(--bg-secondary)] border border-[var(--border-color)] text-[var(--text-heading)] rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/50 transition-all placeholder:text-[var(--text-muted)]/60 font-medium text-sm"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
-            </div>
+      {/* Main Content: Sidebar + Courses Grid */}
+      <div className="container-custom pb-24 sm:pb-32">
+        <div className="flex flex-col lg:flex-row gap-8 lg:gap-10">
+          
+          {/* Left Sidebar - Filters */}
+          <aside className="lg:w-[28%] xl:w-[25%]">
+            <div className="lg:sticky lg:top-24">
+              <div className="bg-[var(--bg-card)] rounded-2xl p-6 shadow-lg shadow-black/[0.04] border border-[var(--border-color)]">
+                
+                {/* Filter Header */}
+                <div className="mb-6">
+                  <h2 className="text-lg font-bold mb-1" style={{ color: 'var(--text-heading)' }}>
+                    Filter Programs
+                  </h2>
+                  <p className="text-xs" style={{ color: 'var(--text-muted)' }}>
+                    Find your perfect AI course
+                  </p>
+                </div>
 
-            {/* Tier Tabs — Personality bubbles */}
-            <div className="flex flex-wrap items-center gap-2">
-              {tierTabs.map((tier) => {
-                const isActive = selectedTier === tier;
-                const meta = tier !== 'All' ? tierMeta[tier] : null;
+                {/* Search */}
+                <div className="mb-6">
+                  <label htmlFor="course-search-sidebar" className="block text-xs font-bold uppercase tracking-wider mb-2" style={{ color: 'var(--text-muted)' }}>
+                    Search
+                  </label>
+                  <div className="relative group">
+                    <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[var(--text-muted)] h-4 w-4 group-focus-within:text-primary transition-colors duration-300" />
+                    <input
+                      type="text"
+                      id="course-search-sidebar"
+                      name="course-search-sidebar"
+                      placeholder="Search programs..."
+                      className="w-full pl-10 pr-3.5 py-3 bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/50 transition-all placeholder:text-[var(--text-muted)]/60 font-medium text-sm"
+                      style={{ color: 'var(--text-heading)' }}
+                      value={searchTerm}
+                      onChange={(e) => setSearchTerm(e.target.value)}
+                    />
+                  </div>
+                </div>
 
-                return (
-                  <motion.button
-                    key={tier}
-                    onClick={() => setSelectedTier(tier)}
-                    whileTap={{ scale: 0.97 }}
-                    className={`relative px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-300 border ${
-                      isActive
-                        ? 'shadow-md'
-                        : 'bg-transparent border-[var(--border-color)] text-[var(--text-muted)] hover:text-[var(--text-heading)] hover:bg-[var(--bg-secondary)]'
-                    }`}
-                    style={
-                      isActive && meta
-                        ? {
-                            background: meta.softBg,
-                            color: meta.color,
-                            borderColor: meta.borderColor,
-                            boxShadow: `0 4px 16px ${meta.color}15`,
+                {/* Tier Filter */}
+                <div className="mb-6">
+                  <label className="block text-xs font-bold uppercase tracking-wider mb-3" style={{ color: 'var(--text-muted)' }}>
+                    Level
+                  </label>
+                  <div className="space-y-2">
+                    {tierTabs.map((tier) => {
+                      const isActive = selectedTier === tier;
+                      const meta = tier !== 'All' ? tierMeta[tier] : null;
+                      const count = tier === 'All' ? courses.length : courses.filter(c => c.tier === tier).length;
+
+                      return (
+                        <button
+                          key={tier}
+                          onClick={() => setSelectedTier(tier)}
+                          className="w-full flex items-center justify-between px-4 py-3 rounded-lg text-sm font-semibold transition-colors duration-200 border"
+                          style={
+                            isActive && meta
+                              ? {
+                                  background: meta.softBg,
+                                  color: meta.color,
+                                  borderColor: meta.borderColor,
+                                }
+                              : isActive
+                              ? {
+                                  background: 'var(--bg-inverted)',
+                                  color: 'var(--text-on-inverted)',
+                                  borderColor: 'var(--bg-inverted)',
+                                }
+                              : {
+                                  color: 'var(--text-body)',
+                                  borderColor: 'transparent',
+                                  backgroundColor: 'transparent',
+                                }
                           }
-                        : isActive
-                        ? {
-                            background: 'var(--bg-inverted)',
-                            color: 'var(--text-on-inverted)',
-                            borderColor: 'var(--bg-inverted)',
-                          }
-                        : undefined
-                    }
-                  >
-                    {/* Active indicator dot */}
-                    {isActive && (
-                      <motion.span
-                        layoutId="tier-indicator"
-                        className="absolute -top-1 -right-1 h-2.5 w-2.5 rounded-full border-2 border-[var(--bg-card)]"
-                        style={{ background: meta?.color || 'var(--bg-inverted)' }}
-                        transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-                      />
-                    )}
-                    {meta && <span className="mr-1.5">{meta.emoji}</span>}
-                    {tier}
-                    <span className="ml-1.5 opacity-50 font-semibold">
-                      {tier === 'All' ? courses.length : courses.filter(c => c.tier === tier).length}
+                        >
+                          <span className="flex items-center gap-2">
+                            {meta && <span className="text-base">{meta.emoji}</span>}
+                            <span>{tier}</span>
+                          </span>
+                          <span className={`text-xs font-bold px-2 py-0.5 rounded-full transition-opacity duration-200 ${isActive ? 'opacity-100' : 'opacity-50'}`}>
+                            {count}
+                          </span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* Results Count */}
+                <div className="pt-4 border-t" style={{ borderColor: 'var(--border-color)' }}>
+                  <div className="flex items-center justify-between text-xs">
+                    <span className="font-bold uppercase tracking-wider" style={{ color: 'var(--text-muted)' }}>
+                      Results
                     </span>
-                  </motion.button>
-                );
-              })}
+                    <span className="font-bold" style={{ color: 'var(--text-heading)' }}>
+                      {filteredCourses.length} program{filteredCourses.length !== 1 ? 's' : ''}
+                    </span>
+                  </div>
+                </div>
 
-              {(searchTerm || selectedTier !== 'All') && (
-                <button
-                  onClick={clearFilters}
-                  className="flex items-center gap-1.5 px-4 py-2.5 text-[var(--text-muted)] hover:text-red-500 transition-colors text-[10px] font-bold uppercase tracking-wider rounded-xl border border-[var(--border-color)] hover:border-red-500/20 hover:bg-red-500/5"
-                >
-                  <X className="h-3.5 w-3.5" />
-                  Clear
-                </button>
-              )}
-            </div>
+                {/* Clear Filters */}
+                {(searchTerm || selectedTier !== 'All') && (
+                  <button
+                    onClick={clearFilters}
+                    className="w-full mt-4 flex items-center justify-center gap-2 px-4 py-2.5 text-red-500 hover:text-red-600 transition-colors text-xs font-bold uppercase tracking-wider rounded-lg border border-red-500/20 hover:bg-red-500/5"
+                  >
+                    <X className="h-3.5 w-3.5" />
+                    Clear All Filters
+                  </button>
+                )}
 
-            {/* Status bar */}
-            <div className="flex items-center justify-between pt-4 border-t border-[var(--border-color)]/60">
-              <p className="text-[var(--text-muted)] text-[11px] font-bold uppercase tracking-[0.15em]">
-                <span className="inline-block h-1.5 w-1.5 rounded-full bg-primary mr-2 align-middle" />
-                {filteredCourses.length} program{filteredCourses.length !== 1 ? 's' : ''} found
-              </p>
-              <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-wider text-green-600">
-                <span className="h-1.5 w-1.5 rounded-full bg-green-500 animate-pulse" />
-                Enrollment Open
+                {/* Enrollment Status */}
+                <div className="mt-6 pt-6 border-t" style={{ borderColor: 'var(--border-color)' }}>
+                  <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-green-600">
+                    <span className="h-2 w-2 rounded-full bg-green-500 animate-pulse" />
+                    Enrollment Open
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
+          </aside>
+
+          {/* Right Content - Courses Grid */}
+          <main className="flex-1 lg:w-[72%] xl:w-[75%]">
+            <AnimatePresence mode="wait">
+              {filteredCourses.length > 0 ? (
+                <motion.div
+                  key={selectedTier + searchTerm}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8"
+                >
+                  {filteredCourses.map((course, index) => (
+                    <CourseCard
+                      key={course.id}
+                      course={course}
+                      index={index}
+                    />
+                  ))}
+                </motion.div>
+              ) : (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.98 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  className="text-center py-24 bg-[var(--bg-secondary)] rounded-2xl border border-dashed border-[var(--border-color)]"
+                >
+                  <div className="inline-flex items-center justify-center h-16 w-16 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-color)] mb-6">
+                    <GraduationCap className="h-7 w-7 text-[var(--text-muted)]" />
+                  </div>
+                  <h3 className="text-xl font-bold text-[var(--text-heading)] mb-2">No programs found</h3>
+                  <p className="text-[var(--text-muted)] mb-8 text-sm">Try adjusting your search or filters.</p>
+                  <button onClick={clearFilters} className="btn-primary text-sm px-8 py-3 rounded-xl">
+                    Reset Filters
+                  </button>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </main>
         </div>
       </div>
 
-      {/* Course Grid — Staggered masonry-inspired layout */}
-      <div className="container-custom pb-24 sm:pb-32">
-        <AnimatePresence mode="wait">
-          {filteredCourses.length > 0 ? (
+      {/* Career Advantages Section */}
+      <section id="career-benefits" className="bg-[var(--bg-secondary)] border-t border-[var(--border-color)] py-20 md:py-28">
+        <div className="container-custom">
+          {/* Header */}
+          <div className="text-center max-w-3xl mx-auto mb-16">
             <motion.div
-              key={selectedTier + searchTerm}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              className="inline-flex items-center gap-2 px-4 py-2 mb-6 rounded-full bg-primary/5 border border-primary/10 text-primary text-xs font-bold uppercase tracking-[0.2em]"
             >
-              {filteredCourses.map((course, index) => (
-                <CourseCard
-                  key={course.id}
-                  course={course}
-                  index={index}
-                />
-              ))}
+              <Award className="h-3.5 w-3.5" />
+              Included with Every Program
             </motion.div>
-          ) : (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.98 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className="text-center py-24 bg-[var(--bg-secondary)] rounded-2xl border border-dashed border-[var(--border-color)]"
+
+            <motion.h2
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+              className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-6 tracking-tight"
+              style={{ color: 'var(--text-heading)' }}
             >
-              <div className="inline-flex items-center justify-center h-16 w-16 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-color)] mb-6">
-                <GraduationCap className="h-7 w-7 text-[var(--text-muted)]" />
-              </div>
-              <h3 className="text-xl font-bold text-[var(--text-heading)] mb-2">No programs found</h3>
-              <p className="text-[var(--text-muted)] mb-8 text-sm">Try adjusting your search or filters.</p>
-              <button onClick={clearFilters} className="btn-primary text-sm px-8 py-3 rounded-xl">
-                Reset Filters
-              </button>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
+              12 Career Advantages{' '}
+              <span className="text-primary">Included</span>
+            </motion.h2>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+              className="text-base sm:text-lg leading-relaxed font-medium"
+              style={{ color: 'var(--text-muted)' }}
+            >
+              Every program comes with comprehensive career support — from resume preparation to job referrals. We're invested in your success.
+            </motion.p>
+          </div>
+
+          {/* Add-ons Grid */}
+          <AddonsGrid addons={addons} variant="full" showBadge={true} />
+        </div>
+      </section>
     </Layout>
   );
 };

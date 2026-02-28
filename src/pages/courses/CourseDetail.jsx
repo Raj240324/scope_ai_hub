@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import Layout from '../../components/layout/Layout';
 import { courses, tierMeta } from '../../data/courses';
+import { addons } from '../../data/addons';
 import { useModal } from '../../context/ModalContext';
 import { BRANDING } from '../../data/branding';
 import {
@@ -16,6 +17,7 @@ import {
   ListChecks,
   ArrowUpRight,
   Sparkles,
+  Check,
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import CourseCard from '../../components/ui/CourseCard';
@@ -350,6 +352,79 @@ const CourseDetail = () => {
               </div>
             </div>
 
+          </div>
+        </div>
+      </section>
+
+      {/* ── Included Career Benefits ── */}
+      <section className="py-20 sm:py-28 bg-[var(--bg-body)]">
+        <div className="container-custom">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              className="inline-flex items-center gap-2 px-4 py-2 mb-6 rounded-full bg-green-500/10 border border-green-500/20 text-green-600 dark:text-green-400 text-xs font-bold uppercase tracking-[0.2em]"
+            >
+              <Check className="h-3.5 w-3.5" />
+              Included Career Benefits
+            </motion.div>
+
+            <motion.h2
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+              className="text-3xl sm:text-4xl font-extrabold mb-4 tracking-tight"
+              style={{ color: 'var(--text-heading)' }}
+            >
+              Everything You Need to Get Hired
+            </motion.h2>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+              className="text-base leading-relaxed font-medium"
+              style={{ color: 'var(--text-muted)' }}
+            >
+              From resume building to job referrals — comprehensive career support included with this program.
+            </motion.p>
+          </div>
+
+          {/* Compact Add-ons Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {addons.map((addon, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-50px' }}
+                transition={{
+                  duration: 0.5,
+                  delay: index * 0.03,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                className="flex items-start gap-4 p-5 bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl hover:shadow-md transition-all duration-300"
+              >
+                {/* Icon */}
+                <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-primary/10 text-2xl shrink-0">
+                  {addon.icon}
+                </div>
+
+                {/* Content */}
+                <div className="flex-1 min-w-0">
+                  <h3 className="font-bold text-sm mb-1 leading-tight" style={{ color: 'var(--text-heading)' }}>
+                    {addon.title}
+                  </h3>
+                  <p className="text-xs leading-relaxed line-clamp-2" style={{ color: 'var(--text-body)' }}>
+                    {addon.description}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>

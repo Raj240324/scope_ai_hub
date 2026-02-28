@@ -31,6 +31,7 @@ import CTASection from '../components/home/CTASection';
 import CorporateSection from '../components/home/CorporateSection';
 import GlobalReachSection from '../components/home/GlobalReachSection';
 import TrainerSpotlight from '../components/home/TrainerSpotlight';
+import CareerSupportSection from '../components/home/CareerSupportSection';
 
 const learningPartners = [
   { name: "NASSCOM", logo: "/nasscom-logo.webp" },
@@ -141,6 +142,7 @@ const Home = () => {
 
       <MethodologySection openModal={openModal} />
       <CoursesSection courses={flagshipCourses} />
+      <CareerSupportSection />
       <TrainerSpotlight openModal={openModal} />
       <TrustFactors />
       <TestimonialsSection />

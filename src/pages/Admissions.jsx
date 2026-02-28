@@ -6,12 +6,14 @@ import {
   CreditCard, 
   CheckCircle2, 
   ArrowRight,
-  HelpCircle
+  HelpCircle,
+  Award
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useModal } from '../context/ModalContext';
 import Hero from '../components/ui/Hero';
 import { BRANDING } from '../data/branding';
+import { addons } from '../data/addons';
 
 const Admissions = () => {
   const { openModal } = useModal();
@@ -265,6 +267,53 @@ const Admissions = () => {
             </button>
             <Link to="/courses" className="bg-[var(--bg-body)]/10 hover:bg-[var(--bg-body)]/20 text-[var(--text-on-inverted)] font-bold px-8 py-4 rounded-xl transition-colors border border-[var(--bg-body)]/10">
               Explore Courses
+            </Link>
+          </div>
+        </div>
+
+        {/* Career Advantages Block */}
+        <div className="mt-24">
+          <div className="text-center max-w-3xl mx-auto mb-12">
+            <div className="inline-flex items-center gap-2 px-4 py-2 mb-6 rounded-full bg-primary/5 border border-primary/10 text-primary text-xs font-bold uppercase tracking-[0.2em]">
+              <Award className="h-3.5 w-3.5" />
+              Career Advantage
+            </div>
+            <h2 className="text-3xl md:text-4xl font-extrabold text-[var(--text-heading)] mb-4">
+              12 Benefits Included with Every Program
+            </h2>
+            <p className="text-[var(--text-muted)] text-lg">
+              From resume building to job referrals — we're invested in your success.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {addons.slice(0, 6).map((addon, index) => (
+              <div
+                key={index}
+                className="flex items-start gap-4 p-5 bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl hover:shadow-md transition-all duration-300"
+              >
+                <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-primary/10 text-2xl shrink-0">
+                  {addon.icon}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <h3 className="font-bold text-sm mb-1 leading-tight text-[var(--text-heading)]">
+                    {addon.title}
+                  </h3>
+                  <p className="text-xs leading-relaxed line-clamp-2 text-[var(--text-body)]">
+                    {addon.description}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center mt-8">
+            <Link
+              to="/courses"
+              className="inline-flex items-center gap-2 text-primary font-bold hover:underline"
+            >
+              View all 12 career benefits
+              <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
         </div>

@@ -77,12 +77,12 @@ const Footer = () => {
             <ul className="grid grid-cols-2 lg:grid-cols-1 gap-4 text-sm font-medium">
               <li><Link to="/about" className="hover:text-primary hover:translate-x-1 transition-all inline-flex items-center">About Us</Link></li>
               <li><Link to="/courses" className="hover:text-primary hover:translate-x-1 transition-all inline-flex items-center">All Courses</Link></li>
+              <li><Link to="/courses#career-benefits" className="hover:text-primary hover:translate-x-1 transition-all inline-flex items-center">Career Support</Link></li>
               <li><Link to="/admissions" className="hover:text-primary hover:translate-x-1 transition-all inline-flex items-center">Admissions</Link></li>
               <li><Link to="/reviews" className="hover:text-primary hover:translate-x-1 transition-all inline-flex items-center">Student Reviews</Link></li>
               <li><Link to="/contact" className="hover:text-primary hover:translate-x-1 transition-all inline-flex items-center">Contact Us</Link></li>
               <li><Link to="/faq" className="hover:text-primary hover:translate-x-1 transition-all inline-flex items-center">FAQs</Link></li>
               <li><Link to="/careers/trainers" className="hover:text-primary hover:translate-x-1 transition-all inline-flex items-center">Our Trainers</Link></li>
-              <li><Link to="/careers/join-as-trainer" className="hover:text-primary hover:translate-x-1 transition-all inline-flex items-center">Join as Trainer</Link></li>
             </ul>
           </div>
 
@@ -138,8 +138,21 @@ const Footer = () => {
           </div>
         </div>
 
+        {/* Certification Badge */}
+        <div className="pt-10 pb-6 border-t border-primary/10">
+          <div className="flex flex-col items-center gap-3">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/5 border border-primary/10 text-primary text-[10px] font-bold uppercase tracking-wider">
+              <GraduationCap className="h-3.5 w-3.5" />
+              Industry-Recognized Certificates
+            </div>
+            <p className="text-xs text-[var(--text-footer-muted)] text-center max-w-md">
+              Verifiable digital certificates recognized by top hiring companies
+            </p>
+          </div>
+        </div>
+
         {/* Bottom Bar */}
-        <div className="pt-10 border-t border-primary/10 flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0 text-xs font-medium">
+        <div className="pt-6 border-t border-primary/10 flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0 text-xs font-medium">
           <p>© {currentYear} {BRANDING.fullName}. All rights reserved.</p>
             <div className="flex flex-wrap justify-center md:justify-end items-center gap-x-6 gap-y-2">
               <Link to="/privacy-policy" className="hover:text-primary transition-colors">Privacy</Link>

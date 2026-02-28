@@ -42,11 +42,11 @@ const faqData = [
     ]
   },
   {
-    category: "Placements",
+    category: "Placements & Career Support",
     questions: [
       {
         q: "Do you guarantee a job after completion?",
-        a: "We provide dedicated placement assistance, which includes resume building, mock interviews, and job referrals to our 75+ hiring partners. While we don't 'guarantee' a job (as it depends on the student's performance), we support you until you get placed."
+        a: "We provide dedicated placement assistance, which includes resume building, mock interviews, and job referrals to our 50+ hiring partners. While we don't 'guarantee' a job (as it depends on the student's performance), we support you until you get placed."
       },
       {
         q: "What is the average salary package for freshers?",
@@ -55,6 +55,34 @@ const faqData = [
       {
         q: `Which companies hire from ${BRANDING.fullName}?`,
         a: "Our students are placed in top MNCs and startups like Google, Amazon, TCS, Infosys, Wipro, and many others. Check our Placement page for a more comprehensive list."
+      },
+      {
+        q: "Do you provide resume preparation support?",
+        a: "Yes! We provide professionally crafted, ATS-optimized AI-focused resumes. Our career experts tailor it to highlight your projects, skills, and certifications for top employers."
+      },
+      {
+        q: "How many mock interviews will I get?",
+        a: "You'll attend 3 rounds of mock technical + HR interviews with real industry experts. You'll get personalized feedback, improvement tips, and confidence for actual placement drives."
+      },
+      {
+        q: "Will you help optimize my LinkedIn profile?",
+        a: "Absolutely! We review and optimize your LinkedIn profile — headline, about section, skills, and project showcase — so recruiters find YOU first."
+      },
+      {
+        q: "Do you help with GitHub portfolio setup?",
+        a: "Yes, we help you structure and publish all your course projects on GitHub with proper README files, code documentation, and a professional portfolio page recruiters love."
+      },
+      {
+        q: "Will I get a certificate after completion?",
+        a: "Yes! You'll receive a verifiable digital certificate from Scope AI Hub upon program completion. It's shareable on LinkedIn with a unique credential ID — recognized by top hiring companies."
+      },
+      {
+        q: "Can I get 1-on-1 mentor sessions?",
+        a: "Yes! You can book dedicated sessions with industry mentors who have worked at top AI companies. Get career guidance, code reviews, project mentorship, and real-world advice tailored to you."
+      },
+      {
+        q: "Do you conduct industry expert webinars?",
+        a: "Yes, we host monthly live sessions by AI practitioners from top companies like Google, Amazon, and leading startups. Get insider knowledge on hiring, trends, and real projects — ask questions live."
       }
     ]
   },
