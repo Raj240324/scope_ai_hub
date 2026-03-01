@@ -49,6 +49,7 @@ const ContactForm = ({ initialCourse = 'General Inquiry' }) => {
   const [errorMessage, setErrorMessage] = useState('');
   const [fieldError, setFieldError] = useState('');
   const [captchaToken, setCaptchaToken] = useState(null);
+  const [formLoadedAt] = useState(Date.now());
 
 
   useEffect(() => {
@@ -96,6 +97,13 @@ const ContactForm = ({ initialCourse = 'General Inquiry' }) => {
   const handleNext = () => {
     const err = validateCurrent();
     if (err) { setFieldError(err); return; }
+    
+    // Prevent submission before 3 seconds
+    if (currentStep === STEPS.length - 1 && Date.now() - formLoadedAt < 3000) {
+      setFieldError('Please take a moment to review your entry.');
+      return;
+    }
+
     setFieldError('');
     if (currentStep < STEPS.length - 1) {
       setCurrentStep(currentStep + 1);
@@ -141,6 +149,7 @@ const ContactForm = ({ initialCourse = 'General Inquiry' }) => {
       const result = await submitEnquiry({
         ...formData,
         recaptchaToken: captchaToken,
+        formLoadedAt,
       });
 
       if (result.success) {
@@ -205,7 +214,7 @@ const ContactForm = ({ initialCourse = 'General Inquiry' }) => {
         autoComplete="off"
         tabIndex={-1}
         aria-hidden="true"
-        style={{ position: 'absolute', left: '-9999px', opacity: 0, height: 0, width: 0, overflow: 'hidden' }}
+        className="absolute w-1 h-1 opacity-0 -z-50 -left-[9999px]"
       />
       {/* Step indicators */}
       <div className="mb-6 sm:mb-8 flex items-center justify-center gap-1 sm:gap-2">

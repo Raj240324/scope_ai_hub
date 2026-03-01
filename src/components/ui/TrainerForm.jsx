@@ -2,6 +2,8 @@ import React, { useRef, useState } from 'react';
 import { CheckCircle, ArrowRight, ArrowLeft, Send, Loader2, AlertCircle, Check, Globe } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useModal } from '../../context/ModalContext';
+import ReCAPTCHA from 'react-google-recaptcha';
+import { handleApiError, normalizeError } from '../../utils/apiErrorHandler';
 import { BRANDING } from '../../data/branding';
 
 /* ─── Step Definitions ──────────────────────────────────────────────── */
@@ -31,12 +33,16 @@ const EXPERTISE_OPTIONS = [
 
 const TrainerForm = () => {
   const form = useRef();
+  const recaptchaRef = useRef(null);
   const { closeModal } = useModal();
   const [currentStep, setCurrentStep] = useState(0);
   const [formData, setFormData] = useState({});
+  const [honeypot, setHoneypot] = useState('');
   const [status, setStatus] = useState('idle');
   const [errorMessage, setErrorMessage] = useState('');
   const [fieldError, setFieldError] = useState('');
+  const [captchaToken, setCaptchaToken] = useState(null);
+  const [formLoadedAt] = useState(Date.now());
 
   const step = STEPS[currentStep];
   const progress = ((currentStep + 1) / STEPS.length) * 100;
@@ -74,6 +80,13 @@ const TrainerForm = () => {
   const handleNext = () => {
     const err = validateCurrent();
     if (err) { setFieldError(err); return; }
+
+    // Prevent submission before 3 seconds
+    if (currentStep === STEPS.length - 1 && Date.now() - formLoadedAt < 3000) {
+      setFieldError('Please take a moment to review your entry.');
+      return;
+    }
+
     setFieldError('');
     if (currentStep < STEPS.length - 1) {
       setCurrentStep(currentStep + 1);
@@ -92,12 +105,28 @@ const TrainerForm = () => {
     if (fieldError) setFieldError('');
   };
 
-  /* ── Submit ──────────────────────────────────────────────── */
+  /* ── Secure Submit Pipeline ─────────────────────────────── */
   const handleSubmit = async () => {
     setStatus('sending');
-    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+    setErrorMessage('');
+
     try {
-      const response = await fetch(`${API_URL}/trainer`, {
+      // Step 1: Honeypot
+      if (honeypot) {
+        await new Promise((r) => setTimeout(r, 1500));
+        setStatus('success');
+        return;
+      }
+
+      // Step 2: Check reCAPTCHA v2 token
+      if (!captchaToken) {
+        setStatus('error');
+        setErrorMessage('Please complete the reCAPTCHA.');
+        return;
+      }
+
+      // Step 3: Submit to secure serverless function
+      const response = await fetch('/api/send-trainer', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -107,16 +136,26 @@ const TrainerForm = () => {
           experience: formData.experience,
           expertise: formData.expertise,
           linkedin_url: formData.linkedin_url || null,
+          recaptchaToken: captchaToken,
+          formLoadedAt,
         }),
       });
+
       if (!response.ok) {
-        const err = await response.json().catch(() => ({}));
-        throw new Error(err.detail || 'Something went wrong.');
+        const message = await handleApiError(response);
+        setStatus('error');
+        setErrorMessage(message);
+        setCaptchaToken(null);
+        if (recaptchaRef.current) recaptchaRef.current.reset();
+        return;
       }
+
       setStatus('success');
     } catch (e) {
       setStatus('error');
-      setErrorMessage(e.message || 'Something went wrong. Try again.');
+      setErrorMessage(normalizeError(e));
+      setCaptchaToken(null);
+      if (recaptchaRef.current) recaptchaRef.current.reset();
     }
   };
 
@@ -144,6 +183,17 @@ const TrainerForm = () => {
   /* ── Render ──────────────────────────────────────────────── */
   return (
     <div ref={form}>
+      {/* Honeypot — invisible to humans */}
+      <input
+        type="text"
+        name="website"
+        value={honeypot}
+        onChange={(e) => setHoneypot(e.target.value)}
+        autoComplete="off"
+        tabIndex={-1}
+        aria-hidden="true"
+        className="absolute w-1 h-1 opacity-0 -z-50 -left-[9999px]"
+      />
       {/* Step indicators */}
       <div className="mb-8 flex items-center justify-center gap-2">
         {STEPS.map((s, i) => (
@@ -297,6 +347,18 @@ const TrainerForm = () => {
 
       {/* Buttons */}
       <div className="mt-6 space-y-3">
+        {currentStep === STEPS.length - 1 && (
+          <div className="flex justify-center mb-4">
+            <ReCAPTCHA
+              ref={recaptchaRef}
+              sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
+              onChange={(token) => {
+                setCaptchaToken(token);
+                if (status === 'error') setStatus('idle');
+              }}
+            />
+          </div>
+        )}
         <button
           onClick={handleNext}
           disabled={status === 'sending'}

@@ -39,11 +39,8 @@ const SEO = ({
       "addressRegion": "Tamil Nadu",
       "addressCountry": "IN"
     },
-    "contactPoint": {
-      "@type": "ContactPoint",
-      "telephone": "+91-XXXXXXXXXX",
-      "contactType": "customer service"
-    },
+    // TODO: Add real phone number before launch, e.g.:
+    // "contactPoint": { "@type": "ContactPoint", "telephone": "+91-XXXXXXXXXX", "contactType": "customer service" },
     "sameAs": []
   };
 
