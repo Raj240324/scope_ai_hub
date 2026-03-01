@@ -28,7 +28,6 @@ const OWNER_EMAIL = 'nagarajan.webdev@gmail.com'; // TODO: change back to 'info@
 const OWNER_NAME = 'SCOPE AI HUB';
 
 const MAX_BODY_BYTES = 10 * 1024; // 10 KB
-const RECAPTCHA_THRESHOLD = 0.5;
 const EXTERNAL_TIMEOUT_MS = 10_000;
 const IS_TEST = process.env.NODE_ENV === 'test';
 
@@ -157,7 +156,7 @@ async function upsertBrevoContact(email, attributes) {
 async function verifyRecaptcha(token, ip) {
   // Bypass in test mode
   if (IS_TEST) {
-    return { success: true, score: 1.0, action: 'test' };
+    return { success: true };
   }
 
   const params = new URLSearchParams({
@@ -179,8 +178,6 @@ async function verifyRecaptcha(token, ip) {
   const data = await res.json();
   return {
     success: data.success === true,
-    score: data.score || 0,
-    action: data.action || '',
   };
 }
 
@@ -266,12 +263,12 @@ export default async function handler(req, res) {
       return res.status(403).json({ success: false, message: 'Security verification failed. Please try again.' });
     }
 
-    if (!captcha.success || captcha.score < RECAPTCHA_THRESHOLD) {
-      log.warn('reCAPTCHA score too low', { score: captcha.score });
-      return res.status(403).json({ success: false, message: 'Security verification failed. Please try again.' });
+    if (!captcha.success) {
+      log.warn('reCAPTCHA verification failed');
+      return res.status(403).json({ success: false, message: 'Captcha verification failed' });
     }
 
-    log.info('Enquiry validated', { course: courseInterest, score: captcha.score });
+    log.info('Enquiry validated', { course: courseInterest });
 
     // 9. Template parameters (safe — no PII in logs)
     const templateParams = {

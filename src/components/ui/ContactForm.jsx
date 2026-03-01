@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { CheckCircle, ArrowRight, ArrowLeft, Send, Loader2, AlertCircle, Check } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useModal } from '../../context/ModalContext';
-import { executeRecaptcha } from '../../utils/recaptcha';
+import ReCAPTCHA from "react-google-recaptcha";
 import { checkRateLimit } from '../../utils/rateLimiter';
 import { submitEnquiry } from '../../services/enquiryService';
 import { courses, TIERS, tierMeta } from '../../data/courses';
@@ -41,12 +41,14 @@ const QUALIFICATIONS = [
 const ContactForm = ({ initialCourse = 'General Inquiry' }) => {
   const { closeModal } = useModal();
   const form = useRef();
+  const recaptchaRef = useRef(null);
   const [currentStep, setCurrentStep] = useState(0);
   const [formData, setFormData] = useState({ course_interest: initialCourse });
   const [honeypot, setHoneypot] = useState('');
   const [status, setStatus] = useState('idle');
   const [errorMessage, setErrorMessage] = useState('');
   const [fieldError, setFieldError] = useState('');
+  const [captchaToken, setCaptchaToken] = useState(null);
 
 
   useEffect(() => {
@@ -128,13 +130,17 @@ const ContactForm = ({ initialCourse = 'General Inquiry' }) => {
       // Step 2: Client-side rate limit
       checkRateLimit();
 
-      // Step 3: Get reCAPTCHA token
-      const recaptchaToken = await executeRecaptcha('enquiry');
+      // Step 3: Check reCAPTCHA v2 token
+      if (!captchaToken) {
+        setStatus('error');
+        setErrorMessage('Please complete the reCAPTCHA.');
+        return;
+      }
 
       // Step 4: Submit via secure serverless proxy
       const result = await submitEnquiry({
         ...formData,
-        recaptchaToken,
+        recaptchaToken: captchaToken,
       });
 
       if (result.success) {
@@ -142,10 +148,14 @@ const ContactForm = ({ initialCourse = 'General Inquiry' }) => {
       } else {
         setStatus('error');
         setErrorMessage(result.message);
+        setCaptchaToken(null);
+        if (recaptchaRef.current) recaptchaRef.current.reset();
       }
     } catch (e) {
       setStatus('error');
       setErrorMessage(e.message || 'Something went wrong. Please try again.');
+      setCaptchaToken(null);
+      if (recaptchaRef.current) recaptchaRef.current.reset();
     }
   };
 
@@ -162,7 +172,13 @@ const ContactForm = ({ initialCourse = 'General Inquiry' }) => {
         </div>
         <div className="flex gap-3 mt-2">
           <button
-            onClick={() => { setStatus('idle'); setCurrentStep(0); setFormData({ course_interest: initialCourse }); }}
+            onClick={() => { 
+              setStatus('idle'); 
+              setCurrentStep(0); 
+              setFormData({ course_interest: initialCourse }); 
+              setCaptchaToken(null);
+              if (recaptchaRef.current) recaptchaRef.current.reset();
+            }}
             className="btn-primary text-sm"
           >
             Send Another
@@ -338,6 +354,18 @@ const ContactForm = ({ initialCourse = 'General Inquiry' }) => {
 
       {/* Buttons */}
       <div className="mt-6 space-y-3">
+        {currentStep === STEPS.length - 1 && (
+          <div className="flex justify-center mb-4">
+            <ReCAPTCHA
+              ref={recaptchaRef}
+              sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
+              onChange={(token) => {
+                setCaptchaToken(token);
+                if (status === 'error') setStatus('idle');
+              }}
+            />
+          </div>
+        )}
         <button
           onClick={handleNext}
           disabled={status === 'sending'}
