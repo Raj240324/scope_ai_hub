@@ -83,6 +83,7 @@ const Footer = () => {
               <li><Link to="/contact" className="hover:text-primary hover:translate-x-1 transition-all inline-flex items-center">Contact Us</Link></li>
               <li><Link to="/faq" className="hover:text-primary hover:translate-x-1 transition-all inline-flex items-center">FAQs</Link></li>
               <li><Link to="/careers/trainers" className="hover:text-primary hover:translate-x-1 transition-all inline-flex items-center">Our Trainers</Link></li>
+              <li><Link to="/careers/join-as-trainer" className="hover:text-primary hover:translate-x-1 transition-all inline-flex items-center">Join as Trainer</Link></li>
             </ul>
           </div>
 
