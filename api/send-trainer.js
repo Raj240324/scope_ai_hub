@@ -372,10 +372,14 @@ const templateParams = {
   EXPERIENCE: experience + ' years',
   EXPERTISE: expertise,
   LINKEDIN: linkedinUrl || 'Not provided',
-  SUBMITTED_AT: new Date().toLocaleString('en-IN', {
-    dateStyle: 'medium',
-    timeStyle: 'short',
-  }),
+ SUBMITTED_AT: new Date().toLocaleString('en-IN', {
+  timeZone: 'Asia/Kolkata',
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+  hour: '2-digit',
+  minute: '2-digit',
+}),
 };
 
     // 10. Save to Brevo CRM (non-critical)
