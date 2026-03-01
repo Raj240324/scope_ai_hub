@@ -364,14 +364,19 @@ export default async function handler(req, res) {
     log.info('Trainer application validated', { expertise, hostname: captcha.hostname });
 
     // 9. Template parameters
-    const templateParams = {
-      TRAINER_NAME: trainerName,
-      EMAIL: email,
-      PHONE: phone || 'Not provided',
-      EXPERIENCE: experience + ' years',
-      EXPERTISE: expertise,
-      LINKEDIN: linkedinUrl || 'Not provided',
-    };
+ // 9. Template parameters (MUST match Brevo template exactly)
+const templateParams = {
+  TRAINER_NAME: trainerName,
+  EMAIL: email,
+  PHONE: phone || 'Not provided',
+  EXPERIENCE: experience + ' years',
+  EXPERTISE: expertise,
+  LINKEDIN: linkedinUrl || 'Not provided',
+  SUBMITTED_AT: new Date().toLocaleString('en-IN', {
+    dateStyle: 'medium',
+    timeStyle: 'short',
+  }),
+};
 
     // 10. Save to Brevo CRM (non-critical)
     try {
