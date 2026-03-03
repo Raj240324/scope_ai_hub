@@ -2,16 +2,16 @@ import React from 'react';
 import { Building2 } from 'lucide-react';
 
 const companies = [
-  { name: "Google", logo: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" },
-  { name: "Amazon", logo: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" },
-  { name: "Microsoft", logo: "https://upload.wikimedia.org/wikipedia/commons/9/96/Microsoft_logo_%282012%29.svg" },
+  { name: "Google", logo: "https://cdn.brandfetch.io/id6O2oGzv-/theme/dark/logo.svg?c=1bxid64Mup7aczewSAYMX&t=1731911497387" },
+  { name: "Amazon", logo: "https://cdn.brandfetch.io/idawOgYOsG/theme/dark/logo.svg?c=1bxid64Mup7aczewSAYMX&t=1747149760488" },
+  { name: "Microsoft", logo: "https://cdn.brandfetch.io/idchmboHEZ/theme/dark/logo.svg?c=1bxid64Mup7aczewSAYMX&t=1727706672983" },
   { name: "IBM", logo: "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg" },
-  { name: "Accenture", logo: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Accenture.svg" },
-  { name: "Infosys", logo: "https://upload.wikimedia.org/wikipedia/commons/9/95/Infosys_logo.svg" },
-  { name: "TCS", logo: "https://upload.wikimedia.org/wikipedia/commons/b/b1/Tata_Consultancy_Services_Logo.svg" },
-  { name: "Wipro", logo: "https://upload.wikimedia.org/wikipedia/commons/a/a0/Wipro_Primary_Logo_Color_RGB.svg" },
-  { name: "HCLTech", logo: "https://upload.wikimedia.org/wikipedia/commons/a/a3/HCL_Technologies_logo.svg" },
-  { name: "Cognizant", logo: "https://upload.wikimedia.org/wikipedia/commons/1/12/Cognizant%27s_logo.svg" }
+  { name: "Accenture", logo: "https://cdn.brandfetch.io/id44tJQbVE/theme/dark/logo.svg?c=1bxid64Mup7aczewSAYMX&t=1667564496635" },
+  { name: "Infosys", logo: "https://cdn.brandfetch.io/id2jVuQy_9/theme/dark/logo.svg?c=1bxid64Mup7aczewSAYMX&t=1676271043735" },
+  { name: "TCS", logo: "https://cdn.brandfetch.io/idK2mWG2SJ/theme/dark/logo.svg?c=1bxid64Mup7aczewSAYMX&t=1759053200614" },
+  { name: "Wipro", logo: "https://cdn.brandfetch.io/id1uICo497/theme/dark/logo.svg?c=1bxid64Mup7aczewSAYMX&t=1667569578092" },
+  { name: "HCLTech", logo: "https://cdn.brandfetch.io/id8i2DmKRE/theme/dark/logo.svg?c=1bxid64Mup7aczewSAYMX&t=1668078037967" },
+  { name: "Cognizant", logo: "https://cdn.brandfetch.io/idzF9a2Y93/theme/dark/logo.svg?c=1bxid64Mup7aczewSAYMX&t=1667652314787" }
 ];
 
 const HiringPartners = () => (
