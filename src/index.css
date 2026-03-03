@@ -1,229 +1,51 @@
-@import "tailwindcss";
 
-@theme {
-  /* New Brand Palette - Pink/Violet "Ai" Theme */
-  --color-brand-highlight: #D64FD9;
-  --color-brand-mid-high: #C445D4;
-  --color-brand-purple: #A73FD0;
-  --color-brand-mid-low: #7B36CC;
-  --color-brand-deep: #5A2BC6;
+/* Add the following @font-face rules to the top of your CSS file */
 
-  /* Text Colors from User Spec */
-  --color-brand-title-light: #0A2540;
-  --color-brand-tagline-light: #5B6B7A;
-  --color-brand-title-dark: #E6EDF5;
-  --color-brand-tagline-dark: #9BA7B4;
-
-  /* Semantic Mapping — Pink/Violet Gradient Theme */
-  --color-primary: #A73FD0; /* Center Purple as solid primary */
-  --primary-rgb: 167, 63, 208;
-  --color-primary-light: #D64FD9; 
-  --color-primary-dark: #5A2BC6;  
-  
-  --color-secondary: #5A2BC6;     
-  --color-accent: #D64FD9;        
-  
-  --color-navy: #0A2540;
-  --color-success: #10b981;
-  --color-warning: #f59e0b;
-  --color-danger: #ef4444;
-
-  --font-sans: "Inter", "system-ui", "sans-serif";
+/* Regular */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  src: url('./assets/fonts/Inter-Regular.woff2') format('woff2');
 }
 
-:root {
-  /* ===== LIGHT THEME — Clean White & Navy ===== */
-  /* Page */
-  --bg-body: #F5F7FA;
-  --bg-secondary: #F8FAFC;
-  --bg-card: #FFFFFF;
-  --text-body: #5B6B7A; /* User Tagline Color */
-  --text-heading: #0A2540; /* User Title Color */
-  --text-muted: #5B6B7A; /* User Tagline Color */
-  --border-color: #E2E8F0;
-
-  /* Inverted sections (dark accent blocks) */
-  --bg-inverted: #0A2540;
-  --text-on-inverted: #E6EDF5;
-
-  /* Header */
-  --bg-header: #FFFFFF;
-  --bg-header-scrolled: rgba(255, 255, 255, 0.96);
-  --text-nav: #5B6B7A;
-  --text-nav-active: #A73FD0;
-  --border-header: #E2E8F0;
-
-  /* Footer */
-  --bg-footer: #FFFFFF;
-  --text-footer: #0A2540;
-  --text-footer-muted: #5B6B7A;
-
-  /* Buttons — Gradient Pink/Violet */
-  --btn-primary-bg: #A73FD0; /* Fallback */
-  --btn-primary-gradient: linear-gradient(135deg, #D64FD9 0%, #5A2BC6 100%);
-  --btn-primary-text: #FFFFFF;
-  --btn-secondary-border: #A73FD0;
-  --btn-secondary-text: #A73FD0;
-  --btn-secondary-bg: transparent;
+/* Medium */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  src: url('./assets/fonts/Inter-Medium.woff2') format('woff2');
 }
 
-.dark {
-  /* ===== DARK THEME — Premium Deep Violet & Navy ===== */
-  /* Backgrounds — rich dark navy/black */
-  --bg-body: #0B1220; /* Deepest Navy/Black */
-  --bg-secondary: #0A121D;
-  --bg-card: #111b2b;
-  --text-body: #9BA7B4; /* User Dark Tagline */
-  --text-heading: #E6EDF5; /* User Dark Title */
-  --text-muted: #9BA7B4; /* User Dark Tagline */
-  --border-color: rgba(167, 63, 208, 0.15); /* Purple tint */
-
-  /* Inverted sections */
-  --bg-inverted: #111b2b;
-  --text-on-inverted: #E6EDF5;
-
-  /* Header */
-  --bg-header: #050a10;
-  --bg-header-scrolled: rgba(5, 10, 16, 0.96);
-  --text-nav: #9BA7B4;
-  --text-nav-active: #D64FD9;
-  --border-header: rgba(167, 63, 208, 0.15);
-
-  /* Footer */
-  --bg-footer: #020406;
-  --text-footer: #E6EDF5;
-  --text-footer-muted: rgba(155, 167, 180, 0.5);
-
-  /* Buttons */
-  --btn-primary-bg: #A73FD0;
-  --btn-primary-gradient: linear-gradient(135deg, #D64FD9 0%, #5A2BC6 100%);
-  --btn-primary-text: #FFFFFF;
-  --btn-secondary-border: #A73FD0;
-  --btn-secondary-text: #A73FD0;
-  --btn-secondary-bg: transparent;
-
-  /* Brand Colors */
-  --color-primary: #D64FD9; /* Lighter pink for dark mode contrast */
-  --primary-rgb: 214, 79, 217;
-  --color-primary-light: #E085E3;
-  --color-primary-dark: #A73FD0;
+/* Semi-bold */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  src: url('./assets/fonts/Inter-SemiBold.woff2') format('woff2');
 }
 
-@layer base {
-  html {
-    scroll-behavior: smooth;
-    -webkit-text-size-adjust: 100%;
-    text-size-adjust: 100%;
-    overflow-x: clip;
-  }
-
-  body {
-    @apply bg-[var(--bg-body)] text-[var(--text-body)] font-sans;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
-    overflow-x: clip;
-  }
-  
-  html.dark body {
-    background-color: var(--bg-body);
-    color: var(--text-body);
-  }
-
-  /* Premium selection color */
-  ::selection {
-    background-color: var(--btn-primary-bg);
-    color: var(--btn-primary-text);
-  }
-
-  /* Smooth focus outlines */
-  *:focus-visible {
-    outline: 2px solid var(--btn-primary-bg);
-    outline-offset: 2px;
-    border-radius: 4px;
-  }
-
-  /* Smooth image rendering */
-  img {
-    image-rendering: -webkit-optimize-contrast;
-  }
+/* Bold */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  src: url('./assets/fonts/Inter-Bold.woff2') format('woff2');
 }
 
-@layer components {
-  .container-custom {
-    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
-  }
-
-  /* Primary Button - Gradient */
-  .btn-primary {
-    @apply inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-bold rounded-xl transition-all duration-300 shadow-md hover:shadow-xl hover:-translate-y-0.5 active:scale-95;
-    background: var(--btn-primary-gradient);
-    color: var(--btn-primary-text);
-  }
-
-  .btn-primary:hover {
-    filter: brightness(1.1);
-    box-shadow: 0 10px 25px -5px rgba(214, 79, 217, 0.4); /* Glow effect with pink */
-  }
-
-  /* Secondary Button */
-  .btn-secondary {
-    @apply inline-flex items-center justify-center px-6 py-3 text-base font-bold rounded-xl transition-all duration-300 active:scale-95;
-    border: 2px solid var(--btn-secondary-border);
-    color: var(--btn-secondary-text);
-    background: var(--btn-secondary-bg);
-  }
-
-  .btn-secondary:hover {
-    background-color: var(--btn-secondary-border);
-    color: var(--btn-primary-text);
-  }
-
-  .section-padding {
-    @apply py-16 md:py-24;
-  }
-
-  .heading-lg {
-    @apply text-3xl md:text-5xl lg:text-6xl font-black tracking-tight;
-    color: var(--text-heading);
-  }
-
-  .heading-md {
-    @apply text-2xl md:text-3xl font-black tracking-tight;
-    color: var(--text-heading);
-  }
-
-  .no-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
-  .no-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
+/* Extra-bold */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 800;
+  src: url('./assets/fonts/Inter-ExtraBold.woff2') format('woff2');
 }
 
-@keyframes slideInRight {
-  from {
-    transform: translateX(100%);
-  }
-  to {
-    transform: translateX(0);
-  }
+/* Black */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 900;
+  src: url('./assets/fonts/Inter-Black.woff2') format('woff2');
 }
 
-@keyframes marquee {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-33.33%);
-  }
-}
-
-.animate-marquee {
-  animation: marquee 30s linear infinite;
-}
-
-.animate-marquee:hover {
-  animation-play-state: paused;
-}
