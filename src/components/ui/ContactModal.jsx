@@ -65,6 +65,12 @@ const ContactModal = () => {
                     <>Get Your <span className="text-primary">Career Guide</span></>
                   ) : modalCourse === 'Corporate Training' ? (
                     <>Corporate <span className="text-primary">Inquiry</span></>
+                  ) : modalCourse === 'Career Counseling' ? (
+                    <>Free Career <span className="text-primary">Counseling</span></>
+                  ) : modalCourse === 'Placement Inquiry' ? (
+                    <>Placement <span className="text-primary">Support</span></>
+                  ) : modalCourse !== 'General Inquiry' && modalCourse !== '' ? (
+                    <>Join <span className="text-primary">{modalCourse}</span></>
                   ) : (
                     <>Start Your <span className="text-primary">Journey</span></>
                   )}
@@ -76,6 +82,10 @@ const ContactModal = () => {
                     ? "Fill out the form below to receive our 2026 Career Guide and full syllabus in your inbox."
                     : modalCourse === 'Corporate Training'
                     ? "Let us know your organization's requirements, and our corporate training team will get back to you with a customized proposal."
+                    : modalCourse === 'Career Counseling'
+                    ? "Confused about which path to take? Schedule a 1:1 session with our senior experts to map out your career roadmap."
+                    : modalCourse === 'Placement Inquiry'
+                    ? "Looking for job opportunities? Our placement cell will help you connect with our 75+ hiring partners."
                     : modalCourse !== 'General Inquiry' 
                     ? `Join our ${modalCourse} program. Fill out the form below to get complete syllabus and fee structure.`
                     : "Have questions? Our career counselor will help you choose the right path for your future."}

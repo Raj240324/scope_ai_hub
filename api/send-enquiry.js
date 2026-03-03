@@ -308,8 +308,14 @@ export default async function handler(req, res) {
     const phone = normalizePhone(body.user_phone || '');
     const location = stripHtml(body.user_location || '').slice(0, 200);
     const qualification = stripHtml(body.qualification || '').slice(0, 100);
-    const courseInterest = stripHtml(body.course_interest || '').slice(0, 200);
-    const message = stripHtml(body.message || '').slice(0, 1000);
+const inquiryType = stripHtml(body.inquiry_type || '').slice(0, 200);
+const programInterest = stripHtml(body.program_interest || '').slice(0, 200);
+
+// Normalize final course value
+const courseInterest =
+  inquiryType === 'Enroll in an AI Program'
+    ? (programInterest || 'Program Not Selected')
+    : (inquiryType || 'General Inquiry');    const message = stripHtml(body.message || '').slice(0, 1000);
     const recaptchaToken = body.recaptchaToken || '';
 
     if (recaptchaToken) {
@@ -367,16 +373,16 @@ export default async function handler(req, res) {
     log.info('Enquiry validated', { course: courseInterest, hostname: captcha.hostname });
 
     // 9. Template parameters (safe — no PII in logs)
-    const templateParams = {
-      FIRSTNAME: firstName,
-      EMAIL: email,
-      PHONE: phone || 'Not provided',
-      LOCATION: location || 'Not provided',
-      QUALIFICATION: qualification || 'Not provided',
-      COURSE: courseInterest || 'General Inquiry',
-      MESSAGE: message,
-    };
-
+   const templateParams = {
+  FIRSTNAME: firstName,
+  EMAIL: email,
+  PHONE: phone || 'Not provided',
+  LOCATION: location || 'Not provided',
+  QUALIFICATION: qualification || 'Not provided',
+  COURSE: courseInterest,
+  MESSAGE: message,
+  current_year: new Date().getFullYear(),
+};
     // 10. Save to Brevo CRM (non-critical)
     try {
       await upsertBrevoContact(email, {
@@ -384,7 +390,9 @@ export default async function handler(req, res) {
         PHONE: phone,
         LOCATION: location,
         QUALIFICATION: qualification,
-        COURSE_INTEREST: courseInterest,
+        INQUIRY_TYPE: inquiryType || 'General Inquiry',
+PROGRAM_INTEREST: programInterest || 'N/A',
+COURSE_INTEREST: courseInterest,
       });
       log.info('CRM contact upserted');
     } catch (err) {

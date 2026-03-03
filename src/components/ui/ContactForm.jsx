@@ -1,11 +1,11 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, useMemo } from 'react';
 import { CheckCircle, ArrowRight, ArrowLeft, Send, Loader2, AlertCircle, Check } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useModal } from '../../context/ModalContext';
 import ReCAPTCHA from "react-google-recaptcha";
 import { checkRateLimit } from '../../utils/rateLimiter';
 import { submitEnquiry } from '../../services/enquiryService';
-import { courses, TIERS, tierMeta } from '../../data/courses';
+import { courses } from '../../data/courses';
 
 /* ─── Step Definitions ──────────────────────────────────────────────── */
 
@@ -15,18 +15,24 @@ const STEPS = [
   { id: 3, label: 'Phone', field: 'user_phone', placeholder: '98765 43210', type: 'tel' },
   { id: 4, label: 'Location', field: 'user_location', placeholder: 'e.g. Adyar, Chennai', type: 'text' },
   { id: 5, label: 'Status', field: 'qualification', placeholder: 'Select your current status', type: 'select' },
-  { id: 6, label: 'Course', field: 'course_interest', placeholder: 'Select a course', type: 'select' },
-  { id: 7, label: 'Message', field: 'message', placeholder: 'Tell us how we can help you…', type: 'textarea' },
+  { id: 6, label: 'Interest', field: 'inquiry_type', placeholder: 'What are you looking for?', type: 'select' },
+  { id: 7, label: 'Program', field: 'program_interest', placeholder: 'Select an AI program', type: 'select', conditional: true },
+  { id: 8, label: 'Message', field: 'message', placeholder: 'Tell us how we can help you…', type: 'textarea' },
 ];
 
-const COURSES = [
-  { value: 'General Inquiry', label: 'General Inquiry', tier: null },
-  ...courses.map(c => ({
-    value: c.title,
-    label: `${c.programNumber} · ${c.title}`,
-    tier: c.tier,
-  })),
+const INQUIRY_OPTIONS = [
+  { value: 'Enroll in an AI Program', label: 'Enroll in an AI Program' },
+  { value: 'Free Career Counseling', label: 'Free Career Counseling' },
+  { value: 'Corporate AI Training', label: 'Corporate AI Training' },
+  { value: 'Placement Assistance', label: 'Placement Assistance' },
+  { value: 'Download Brochure', label: 'Download Brochure' },
+  { value: 'General Inquiry', label: 'General Inquiry' },
 ];
+
+const PROGRAM_OPTIONS = courses.map(c => ({
+  value: c.title,
+  label: c.title,
+}));
 
 const QUALIFICATIONS = [
   { value: 'Student', label: 'Student (Arts / Science / Engineering)' },
@@ -42,8 +48,19 @@ const ContactForm = ({ initialCourse = 'General Inquiry' }) => {
   const { closeModal } = useModal();
   const form = useRef();
   const recaptchaRef = useRef(null);
+  
   const [currentStep, setCurrentStep] = useState(0);
-  const [formData, setFormData] = useState({ course_interest: initialCourse });
+  const [formData, setFormData] = useState({
+    user_name: '',
+    user_email: '',
+    user_phone: '',
+    user_location: '',
+    qualification: '',
+    inquiry_type: '',
+    program_interest: null,
+    message: ''
+  });
+  
   const [honeypot, setHoneypot] = useState('');
   const [status, setStatus] = useState('idle');
   const [errorMessage, setErrorMessage] = useState('');
@@ -51,22 +68,49 @@ const ContactForm = ({ initialCourse = 'General Inquiry' }) => {
   const [captchaToken, setCaptchaToken] = useState(null);
   const [formLoadedAt] = useState(Date.now());
 
-
+  // Handle initialCourse compatibility
   useEffect(() => {
     if (initialCourse) {
-      setFormData((prev) => ({ ...prev, course_interest: initialCourse }));
+      const isActualCourse = courses.some(c => c.title === initialCourse);
+      if (isActualCourse) {
+        setFormData(prev => ({
+          ...prev,
+          inquiry_type: 'Enroll in an AI Program',
+          program_interest: initialCourse
+        }));
+      } else if (INQUIRY_OPTIONS.some(opt => opt.value === initialCourse)) {
+        setFormData(prev => ({
+          ...prev,
+          inquiry_type: initialCourse,
+          program_interest: null
+        }));
+      } else {
+        setFormData(prev => ({
+          ...prev,
+          inquiry_type: 'General Inquiry',
+          program_interest: null
+        }));
+      }
     }
   }, [initialCourse]);
 
+  // Derived Steps (handle conditional visibility)
+  const activeSteps = useMemo(() => {
+    return STEPS.filter(s => {
+      if (s.field === 'program_interest') {
+        return formData.inquiry_type === 'Enroll in an AI Program';
+      }
+      return true;
+    });
+  }, [formData.inquiry_type]);
 
-
-  const step = STEPS[currentStep];
-  const progress = ((currentStep + 1) / STEPS.length) * 100;
-  const value = formData[step.field] || '';
+  const step = activeSteps[currentStep] || activeSteps[0];
+  const progress = ((currentStep + 1) / activeSteps.length) * 100;
+  const value = formData[step.field] ?? '';
 
   /* ── Validation per step ─────────────────────────────────── */
   const validateCurrent = () => {
-    const v = (formData[step.field] || '').trim();
+    const v = String(formData[step.field] || '').trim();
 
     if (step.field === 'user_name') {
       if (v.length < 2) return 'Name must be at least 2 characters';
@@ -85,8 +129,11 @@ const ContactForm = ({ initialCourse = 'General Inquiry' }) => {
     if (step.field === 'qualification') {
       if (!v) return 'Please select your status';
     }
-    if (step.field === 'course_interest') {
-      if (!v) return 'Please select a course';
+    if (step.field === 'inquiry_type') {
+      if (!v) return 'Please select an inquiry type';
+    }
+    if (step.field === 'program_interest') {
+      if (formData.inquiry_type === 'Enroll in an AI Program' && !v) return 'Please select a program';
     }
     if (step.field === 'message') {
       if (v.length < 10) return 'Tell us a bit more (at least 10 characters)';
@@ -98,15 +145,14 @@ const ContactForm = ({ initialCourse = 'General Inquiry' }) => {
     const err = validateCurrent();
     if (err) { setFieldError(err); return; }
     
-    // Prevent submission before 3 seconds
-    if (currentStep === STEPS.length - 1 && Date.now() - formLoadedAt < 3000) {
+    if (currentStep === activeSteps.length - 1 && Date.now() - formLoadedAt < 3000) {
       setFieldError('Please take a moment to review your entry.');
       return;
     }
 
     setFieldError('');
-    if (currentStep < STEPS.length - 1) {
-      setCurrentStep(currentStep + 1);
+    if (currentStep < activeSteps.length - 1) {
+      setCurrentStep(prev => prev + 1);
     } else {
       handleSubmit();
     }
@@ -114,11 +160,17 @@ const ContactForm = ({ initialCourse = 'General Inquiry' }) => {
 
   const handleBack = () => {
     setFieldError('');
-    if (currentStep > 0) setCurrentStep(currentStep - 1);
+    if (currentStep > 0) setCurrentStep(prev => prev - 1);
   };
 
   const handleChange = (field, val) => {
-    setFormData({ ...formData, [field]: val });
+    setFormData(prev => {
+      const newData = { ...prev, [field]: val };
+      if (field === 'inquiry_type' && val !== 'Enroll in an AI Program') {
+        newData.program_interest = null;
+      }
+      return newData;
+    });
     if (fieldError) setFieldError('');
   };
 
@@ -128,24 +180,20 @@ const ContactForm = ({ initialCourse = 'General Inquiry' }) => {
     setErrorMessage('');
 
     try {
-      // Step 1: Honeypot — silently "succeed" if bot filled it
       if (honeypot) {
-        await new Promise((r) => setTimeout(r, 1500)); // fake delay
+        await new Promise((r) => setTimeout(r, 1500));
         setStatus('success');
         return;
       }
 
-      // Step 2: Client-side rate limit
       checkRateLimit();
 
-      // Step 3: Check reCAPTCHA v2 token
       if (!captchaToken) {
         setStatus('error');
         setErrorMessage('Please complete the reCAPTCHA.');
         return;
       }
 
-      // Step 4: Submit via secure serverless proxy
       const result = await submitEnquiry({
         ...formData,
         recaptchaToken: captchaToken,
@@ -170,6 +218,13 @@ const ContactForm = ({ initialCourse = 'General Inquiry' }) => {
 
   /* ── Success State ───────────────────────────────────────── */
   if (status === 'success') {
+    let successMessage = "Thank you! Our team will get back to you soon.";
+    if (formData.inquiry_type === 'Free Career Counseling') {
+      successMessage = "Our career advisor will contact you within 24 hours.";
+    } else if (formData.inquiry_type === 'Corporate AI Training') {
+      successMessage = "Our enterprise team will reach out shortly.";
+    }
+
     return (
       <div className="flex flex-col items-center gap-5 py-8 animate-in fade-in">
         <div className="flex h-16 w-16 items-center justify-center rounded-full bg-green-500/10 border-2 border-green-500/20">
@@ -177,14 +232,23 @@ const ContactForm = ({ initialCourse = 'General Inquiry' }) => {
         </div>
         <div className="text-center space-y-1">
           <h2 className="text-xl font-bold text-[var(--text-heading)]">You're all set, {formData.user_name}!</h2>
-          <p className="text-sm text-[var(--text-muted)]">Our counselor will reach out within 24 hours.</p>
+          <p className="text-sm text-[var(--text-muted)]">{successMessage}</p>
         </div>
         <div className="flex gap-3 mt-2">
           <button
             onClick={() => { 
               setStatus('idle'); 
               setCurrentStep(0); 
-              setFormData({ course_interest: initialCourse }); 
+              setFormData({
+                user_name: '',
+                user_email: '',
+                user_phone: '',
+                user_location: '',
+                qualification: '',
+                inquiry_type: '',
+                program_interest: null,
+                message: ''
+              }); 
               setCaptchaToken(null);
               if (recaptchaRef.current) recaptchaRef.current.reset();
             }}
@@ -202,10 +266,8 @@ const ContactForm = ({ initialCourse = 'General Inquiry' }) => {
     );
   }
 
-  /* ── Render ──────────────────────────────────────────────── */
   return (
     <div ref={form}>
-      {/* Honeypot — invisible to humans, bots will fill it */}
       <input
         type="text"
         name="website"
@@ -216,9 +278,10 @@ const ContactForm = ({ initialCourse = 'General Inquiry' }) => {
         aria-hidden="true"
         className="absolute w-1 h-1 opacity-0 -z-50 -left-[9999px]"
       />
-      {/* Step indicators */}
+      
+      {/* Stepper indicators */}
       <div className="mb-6 sm:mb-8 flex items-center justify-center gap-1 sm:gap-2">
-        {STEPS.map((s, i) => (
+        {activeSteps.map((s, i) => (
           <div key={s.id} className="flex items-center gap-1 sm:gap-2">
             <button
               onClick={() => i < currentStep && (setFieldError(''), setCurrentStep(i))}
@@ -230,12 +293,12 @@ const ContactForm = ({ initialCourse = 'General Inquiry' }) => {
                 ${i > currentStep ? 'cursor-not-allowed' : 'cursor-pointer'}
               `}
             >
-              {i < currentStep ? <Check className="h-3 w-3 sm:h-3.5 sm:w-3.5" strokeWidth={3} /> : s.id}
+              {i < currentStep ? <Check className="h-3 w-3 sm:h-3.5 sm:w-3.5" strokeWidth={3} /> : i + 1}
               {i === currentStep && (
                 <span className="absolute inset-0 rounded-full bg-primary/20 blur-md animate-pulse" />
               )}
             </button>
-            {i < STEPS.length - 1 && (
+            {i < activeSteps.length - 1 && (
               <div className="relative h-[1.5px] w-2 sm:w-6">
                 <div className="absolute inset-0 bg-[var(--border-color)]" />
                 <div
@@ -248,7 +311,6 @@ const ContactForm = ({ initialCourse = 'General Inquiry' }) => {
         ))}
       </div>
 
-      {/* Progress bar */}
       <div className="mb-6 overflow-hidden rounded-full bg-[var(--bg-secondary)] h-[2px]">
         <div
           className="h-full bg-gradient-to-r from-primary/60 to-primary transition-all duration-1000 ease-out"
@@ -256,27 +318,24 @@ const ContactForm = ({ initialCourse = 'General Inquiry' }) => {
         />
       </div>
 
-      {/* Active step */}
       <AnimatePresence mode="wait">
         <motion.div
-          key={step.id}
+          key={step.field}
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -12 }}
           transition={{ duration: 0.3 }}
           className="space-y-3"
         >
-          {/* Label row */}
           <div className="flex items-baseline justify-between">
             <label className="text-base sm:text-lg font-bold text-[var(--text-heading)]">
               {step.label} <span className="text-red-500 text-xs">*</span>
             </label>
             <span className="text-[10px] font-bold text-[var(--text-muted)] tabular-nums uppercase tracking-wider">
-              {currentStep + 1} / {STEPS.length}
+              {currentStep + 1} / {activeSteps.length}
             </span>
           </div>
 
-          {/* Input */}
           {step.type === 'textarea' ? (
             <textarea
               rows={3}
@@ -290,7 +349,7 @@ const ContactForm = ({ initialCourse = 'General Inquiry' }) => {
             />
           ) : step.type === 'select' ? (
             <div className="flex flex-col gap-2">
-              {(step.field === 'qualification' ? QUALIFICATIONS : COURSES).map((opt, i) => {
+              {(step.field === 'qualification' ? QUALIFICATIONS : (step.field === 'inquiry_type' ? INQUIRY_OPTIONS : PROGRAM_OPTIONS)).map((opt, i) => {
                 const isSelected = value === opt.value;
                 return (
                   <motion.button
@@ -317,6 +376,17 @@ const ContactForm = ({ initialCourse = 'General Inquiry' }) => {
                   </motion.button>
                 );
               })}
+              
+              {step.field === 'inquiry_type' && (
+                <p className="text-[10px] text-[var(--text-muted)] font-medium mt-1">
+                  Not sure which program fits you? Choose Free Career Counseling.
+                </p>
+              )}
+              {step.field === 'program_interest' && (
+                <p className="text-[10px] text-primary font-bold mt-1">
+                  Limited seats available for 2026–27 batch.
+                </p>
+              )}
             </div>
           ) : (
             <input
@@ -337,7 +407,6 @@ const ContactForm = ({ initialCourse = 'General Inquiry' }) => {
             />
           )}
 
-          {/* Error message */}
           <AnimatePresence>
             {fieldError && (
               <motion.p
@@ -351,7 +420,6 @@ const ContactForm = ({ initialCourse = 'General Inquiry' }) => {
             )}
           </AnimatePresence>
 
-          {/* API error */}
           {status === 'error' && (
             <div className="flex items-center space-x-2 text-red-500 bg-red-500/10 p-3 rounded-xl border border-red-500/20">
               <AlertCircle className="h-4 w-4 shrink-0" />
@@ -361,9 +429,8 @@ const ContactForm = ({ initialCourse = 'General Inquiry' }) => {
         </motion.div>
       </AnimatePresence>
 
-      {/* Buttons */}
       <div className="mt-6 space-y-3">
-        {currentStep === STEPS.length - 1 && (
+        {currentStep === activeSteps.length - 1 && (
           <div className="flex justify-center mb-4">
             <ReCAPTCHA
               ref={recaptchaRef}
@@ -385,7 +452,7 @@ const ContactForm = ({ initialCourse = 'General Inquiry' }) => {
               <Loader2 className="h-4 w-4 animate-spin" />
               <span>Submitting…</span>
             </>
-          ) : currentStep === STEPS.length - 1 ? (
+          ) : currentStep === activeSteps.length - 1 ? (
             <>
               <Send className="h-4 w-4" />
               <span>Submit</span>
@@ -408,7 +475,6 @@ const ContactForm = ({ initialCourse = 'General Inquiry' }) => {
         )}
       </div>
 
-      {/* Privacy notice */}
       <p className="text-center text-[10px] text-[var(--text-muted)] font-medium mt-4">
         By submitting, you agree to our <a href="/privacy-policy" className="text-primary hover:underline">Privacy Policy</a>.
       </p>
