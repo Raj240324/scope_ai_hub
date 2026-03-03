@@ -373,14 +373,19 @@ const courseInterest =
     log.info('Enquiry validated', { course: courseInterest, hostname: captcha.hostname });
 
     // 9. Template parameters (safe — no PII in logs)
-   const templateParams = {
+const templateParams = {
   FIRSTNAME: firstName,
   EMAIL: email,
   PHONE: phone || 'Not provided',
   LOCATION: location || 'Not provided',
   QUALIFICATION: qualification || 'Not provided',
-  COURSE: courseInterest,
+
+  INQUIRY_TYPE: inquiryType || 'General Inquiry',
+  PROGRAM_INTEREST: programInterest || 'N/A',
+
+  COURSE: courseInterest, // keep for backward compatibility if needed
   MESSAGE: message,
+
   current_year: new Date().getFullYear(),
 };
     // 10. Save to Brevo CRM (non-critical)
