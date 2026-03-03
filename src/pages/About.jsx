@@ -252,46 +252,65 @@ const About = () => {
       </section>
 
       {/* CEO Leadership Section */}
-      <section className="section-padding bg-[var(--bg-body)]">
+      <section className="py-20 md:py-32 bg-[var(--bg-card)] border-y border-[var(--border-color)] overflow-hidden">
         <div className="container-custom">
-          <div className="text-center max-w-3xl mx-auto mb-12">
-            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-400 text-xs font-bold uppercase tracking-wider mb-4 border border-amber-500/20">
-              Leadership
-            </div>
-            <h2 className="heading-md mb-4">Meet Our <span className="text-primary">CEO</span></h2>
-          </div>
-
-          <FadeIn>
-            <div className="max-w-4xl mx-auto rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl"
-              style={{ background: 'linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #0f172a 100%)' }}>
-              {/* Decorative top stripe */}
-              <div className="h-1.5 w-full" style={{ background: 'linear-gradient(90deg, #f59e0b, #fbbf24, #f59e0b)' }} />
-
-              <div className="flex flex-col md:flex-row items-center gap-8 p-6 sm:p-10 md:p-12">
-                {/* Avatar */}
-                <div className="relative shrink-0">
-                  <div className="absolute inset-0 rounded-full bg-amber-400/20 blur-2xl scale-125" />
-                  <div className="relative w-32 h-32 sm:w-40 sm:h-40 rounded-full bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center shadow-2xl ring-4 ring-amber-400/30">
-                    <span className="text-4xl sm:text-5xl font-black text-white select-none">PR</span>
+          <div className="max-w-6xl mx-auto">
+            <FadeIn>
+              <div className="flex flex-col lg:flex-row gap-16 lg:gap-24 items-center">
+                
+                {/* Left: Minimalist Avatar/Graphic */}
+                <div className="w-full lg:w-5/12 flex justify-center lg:justify-end shrink-0">
+                  <div className="relative group w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96">
+                    {/* Decorative geometric background elements */}
+                    <div className="absolute inset-0 bg-primary/5 rounded-[3rem] -rotate-6 scale-105 transition-transform duration-700 ease-out group-hover:-rotate-3" />
+                    <div className="absolute inset-0 bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-[3rem] rotate-3 scale-100 transition-transform duration-700 ease-out group-hover:rotate-1 shadow-sm" />
+                    
+                    {/* Main Avatar Container */}
+                    <div className="absolute inset-0 bg-[var(--bg-inverted)] rounded-[2.5rem] flex flex-col items-center justify-center shadow-2xl overflow-hidden border border-[var(--border-color)] z-10 transition-transform duration-700 ease-out group-hover:scale-105">
+                       <span className="text-8xl sm:text-9xl font-black text-[var(--text-on-inverted)] tracking-tighter opacity-90 transition-transform duration-700 group-hover:scale-110">
+                         PR
+                       </span>
+                       {/* Subtle inner gradient */}
+                       <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
+                       <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-white/10 to-transparent pointer-events-none" />
+                    </div>
                   </div>
                 </div>
 
-                {/* Info */}
-                <div className="flex-1 text-center md:text-left">
-                  <h3 className="text-2xl sm:text-3xl font-black text-white mb-1">{BRANDING.ceo.name}</h3>
-                  <p className="text-amber-400 font-bold text-sm uppercase tracking-widest mb-4">{BRANDING.ceo.title}</p>
-                  <p className="text-white/70 text-sm sm:text-base leading-relaxed mb-6">{BRANDING.ceo.bio}</p>
-                  <div className="flex flex-wrap justify-center md:justify-start gap-2">
+                {/* Right: Editorial Typography */}
+                <div className="w-full lg:w-7/12 flex flex-col space-y-6 sm:space-y-8 text-center lg:text-left relative z-20">
+                  <div>
+                    <div className="inline-flex items-center space-x-2 px-3 py-1 sm:px-4 sm:py-1.5 rounded-full bg-[var(--bg-secondary)] text-[var(--text-muted)] text-[10px] sm:text-xs font-bold uppercase tracking-widest mb-4 sm:mb-6 border border-[var(--border-color)] shadow-sm">
+                      Leadership
+                    </div>
+                    <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[var(--text-heading)] tracking-tight leading-tight mb-2">
+                      {BRANDING.ceo.name}
+                    </h2>
+                    <p className="text-primary font-black text-xs sm:text-sm uppercase tracking-widest">
+                      {BRANDING.ceo.title}
+                    </p>
+                  </div>
+
+                  <div className="relative">
+                    {/* Decorative large quote mark */}
+                    <span className="absolute -top-6 -left-4 sm:-top-8 sm:-left-8 text-[5rem] sm:text-[6rem] text-[var(--border-color)] font-serif italic leading-none select-none opacity-40">"</span>
+                    <p className="text-base sm:text-lg md:text-xl text-[var(--text-muted)] leading-relaxed relative z-10 font-medium pb-2">
+                      {BRANDING.ceo.bio}
+                    </p>
+                  </div>
+
+                  <div className="pt-2 flex flex-wrap justify-center lg:justify-start gap-3">
                     {["Strategic Vision", "AI & Tech Leadership", "Academic Excellence", "Industry Alignment"].map((tag, i) => (
-                      <span key={i} className="px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-white/10 text-white/80 border border-white/10">
+                      <span key={i} className="px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider bg-[var(--bg-secondary)] text-[var(--text-muted)] border border-[var(--border-color)] shadow-sm hover:border-primary/50 hover:text-primary transition-all cursor-default">
                         {tag}
                       </span>
                     ))}
                   </div>
                 </div>
+
               </div>
-            </div>
-          </FadeIn>
+            </FadeIn>
+          </div>
         </div>
       </section>
 
