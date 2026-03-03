@@ -10,7 +10,7 @@ const CorporateSection = ({ openModal }) => (
     <div className="container-custom relative z-10">
       <div className="grid lg:grid-cols-2 gap-16 items-center">
         <div>
-          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-[var(--bg-body)]/20 text-[var(--text-on-inverted)] text-xs font-bold uppercase tracking-wider mb-6">
+          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-white/10 text-[var(--text-on-inverted)] text-xs font-bold uppercase tracking-wider mb-6">
             For Organizations
           </div>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-6 leading-tight">
@@ -45,21 +45,21 @@ const CorporateSection = ({ openModal }) => (
         <div className="hidden lg:block">
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-4">
-              <div className="h-48 rounded-2xl bg-[var(--bg-body)]/5 border border-[var(--bg-body)]/10 flex items-center justify-center p-8">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google" width={200} height={80} loading="lazy" className="w-full opacity-40 grayscale" />
+              <div className="h-48 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center p-8">
+                <img src="https://cdn.brandfetch.io/id6O2oGzv-/theme/dark/logo.svg?c=1bxid64Mup7aczewSAYMX&t=1731911497387" alt="Google" width={200} height={80} loading="lazy" className="w-full opacity-90 dark:opacity-100" />
               </div>
-              <div className="h-64 rounded-2xl bg-[var(--bg-body)]/10 border border-[var(--bg-body)]/20 flex flex-col items-center justify-center p-8 text-center">
+              <div className="h-64 rounded-2xl bg-white/10 border border-white/20 flex flex-col items-center justify-center p-8 text-center">
                 <div className="text-3xl md:text-4xl font-black text-[var(--text-on-inverted)] mb-2">25+</div>
                 <div className="text-sm font-bold uppercase tracking-widest text-[var(--text-on-inverted)]/60">Organisations Trained</div>
               </div>
             </div>
             <div className="space-y-4 pt-12">
-              <div className="h-64 rounded-2xl bg-[var(--bg-body)]/5 border border-[var(--bg-body)]/10 flex flex-col items-center justify-center p-8 text-center">
+              <div className="h-64 rounded-2xl bg-white/5 border border-white/10 flex flex-col items-center justify-center p-8 text-center">
                 <div className="text-3xl md:text-4xl font-black text-[var(--text-on-inverted)] mb-2">500+</div>
                 <div className="text-sm font-bold uppercase tracking-widest text-[var(--text-on-inverted)]/60">Professionals Upskilled</div>
               </div>
-              <div className="h-48 rounded-2xl bg-[var(--bg-body)]/5 border border-[var(--bg-body)]/10 flex items-center justify-center p-8">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" alt="Amazon" width={200} height={80} loading="lazy" className="w-full opacity-40 grayscale" />
+              <div className="h-48 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center p-8">
+                <img src="https://cdn.brandfetch.io/idawOgYOsG/theme/dark/logo.svg?c=1bxid64Mup7aczewSAYMX&t=1747149760488" alt="Amazon" width={200} height={80} loading="lazy" className="w-full opacity-90 dark:opacity-100" />
               </div>
             </div>
           </div>

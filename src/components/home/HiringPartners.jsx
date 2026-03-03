@@ -40,7 +40,11 @@ const HiringPartners = () => (
               width={160}
               height={40}
               loading="lazy"
-              className="max-h-6 sm:max-h-8 md:max-h-10 object-contain opacity-50 group-hover:opacity-100 transition-opacity duration-300"
+              className={`object-contain opacity-50 group-hover:opacity-100 transition-all duration-300 ${
+                (company.name === 'TCS' || company.name === 'Wipro')
+                  ? 'max-h-8 sm:max-h-10 md:max-h-12 scale-125 md:scale-150'
+                  : 'max-h-6 sm:max-h-8 md:max-h-10'
+              }`}
             />
           </div>
         </div>

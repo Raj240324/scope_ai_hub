@@ -71,7 +71,7 @@ const ServiceGrid = forwardRef(({ title, subtitle, services, className, ...props
                   alt={`${service.name} skill icon`}
                   width={48}
                   height={48}
-                  className="object-contain transition-transform duration-300 group-hover:scale-110 drop-shadow-sm"
+                  className="object-contain rounded-md transition-transform duration-300 group-hover:scale-110 drop-shadow-sm"
                 />
               </div>
               

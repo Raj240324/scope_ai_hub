@@ -42,7 +42,7 @@ const Contact = () => {
                          <MapPin className="h-6 w-6 text-primary" />
                       </div>
                       <div>
-                         <h4 className="text-lg sm:text-xl font-bold text-[var(--text-heading)] mb-1">Visit Us</h4>
+                         <h4 className="text-lg sm:text-xl font-bold text-[#a73fd0] dark:text-[#d64fd9] mb-1">Visit Us</h4>
                          <p className="text-[var(--text-muted)] text-base sm:text-lg leading-relaxed">{BRANDING.address}</p>
                       </div>
                    </div>
@@ -52,7 +52,7 @@ const Contact = () => {
                          <Phone className="h-6 w-6 text-primary" />
                       </div>
                       <div>
-                         <h4 className="text-lg sm:text-xl font-bold text-[var(--text-heading)] mb-1">Call Us</h4>
+                         <h4 className="text-lg sm:text-xl font-bold text-[#a73fd0] dark:text-[#d64fd9] mb-1">Call Us</h4>
                          <p className="text-[var(--text-heading)] text-lg font-bold">{BRANDING.phone}</p>
                          <p className="text-[var(--text-muted)] text-sm">Mon–Sun, 9:00 AM – 7:00 PM</p>
                       </div>
@@ -63,7 +63,7 @@ const Contact = () => {
                          <Mail className="h-6 w-6 text-primary" />
                       </div>
                       <div>
-                         <h4 className="text-lg sm:text-xl font-bold text-[var(--text-heading)] mb-1">Email Us</h4>
+                         <h4 className="text-lg sm:text-xl font-bold text-[#a73fd0] dark:text-[#d64fd9] mb-1">Email Us</h4>
                          <p className="text-[var(--text-heading)] text-lg font-bold">{BRANDING.email}</p>
                          <p className="text-[var(--text-muted)] text-sm">We'll respond within 24 hours.</p>
                       </div>
