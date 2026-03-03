@@ -40,10 +40,12 @@ const HiringPartners = () => (
               width={160}
               height={40}
               loading="lazy"
-              className={`object-contain opacity-50 group-hover:opacity-100 transition-all duration-300 ${
+              className={`object-contain transition-all duration-300 ${
                 (company.name === 'TCS' || company.name === 'Wipro')
                   ? 'max-h-8 sm:max-h-10 md:max-h-12 scale-125 md:scale-150'
                   : 'max-h-6 sm:max-h-8 md:max-h-10'
+              } opacity-70 hover:opacity-100 hover:scale-105 dark:opacity-90 dark:hover:opacity-100 ${
+                company.logo.includes('dark') ? 'brightness-0 contrast-200 dark:brightness-100 dark:contrast-100' : 'grayscale hover:grayscale-0 dark:grayscale-0'
               }`}
             />
           </div>
