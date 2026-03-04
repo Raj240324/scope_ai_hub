@@ -46,7 +46,7 @@ const faqData = [
     questions: [
       {
         q: "Do you guarantee a job after completion?",
-        a: "We provide dedicated placement assistance, which includes resume building, mock interviews, and job referrals to our 50+ hiring partners. While we don't 'guarantee' a job (as it depends on the student's performance), we support you until you get placed."
+        a: "We provide dedicated placement assistance, which includes resume building, mock interviews, and job referrals to our 75+ hiring partners. While we don't 'guarantee' a job (as it depends on the student's performance), we support you until you get placed."
       },
       {
         q: "What is the average salary package for freshers?",
@@ -103,7 +103,7 @@ const faqData = [
       },
       {
         q: "Do you teach AI and Machine Learning?",
-        a: "Yes! We have dedicated programs for Machine Learning & Deep Learning (Program 04), Natural Language Processing (Program 06), Computer Vision (Program 07), and Generative AI & Prompt Engineering (Program 01). We use TensorFlow, PyTorch, Hugging Face, and OpenAI APIs."
+        a: "Yes! We have dedicated programs for Machine Learning & Deep Learning, Natural Language Processing, Computer Vision, and Generative AI & Prompt Engineering. We use TensorFlow, PyTorch, Hugging Face, and OpenAI APIs."
       },
       {
         q: "Can I switch courses after enrollment?",
@@ -302,8 +302,8 @@ const FAQ = () => {
                   Our team of counselors is available to answer any specific questions you may have about your career path or our training programs.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <a href="tel:+916383980415" className="px-8 py-4 bg-[var(--bg-inverted)] text-[var(--text-on-inverted)] font-bold rounded-xl hover:opacity-90 transition-all">
-                    Call +91 63839 80415
+                  <a href="tel:+917010230379" className="px-8 py-4 bg-[var(--bg-inverted)] text-[var(--text-on-inverted)] font-bold rounded-xl hover:opacity-90 transition-all">
+                    Call +91 70102 30379
                   </a>
                   <button 
                     onClick={() => openModal()}

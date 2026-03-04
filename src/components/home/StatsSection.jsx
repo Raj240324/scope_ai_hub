@@ -4,7 +4,7 @@ import { StaggerContainer, StaggerItem, ScrollCountUp } from '../utils/Animation
 
 const stats = [
   { label: "Real-World Projects", value: "157+", icon: <Code2 className="h-5 w-5" /> },
-  { label: "Trainer Experience (Yrs)", value: "5+", icon: <Award className="h-5 w-5" /> },
+  { label: "Trainer Experience (Yrs)", value: "8+", icon: <Award className="h-5 w-5" /> },
   { label: "Hiring Partners", value: "75+", icon: <Building2 className="h-5 w-5" /> },
   { label: "Practical Curriculum", value: "75%", icon: <Zap className="h-5 w-5" /> },
 ];

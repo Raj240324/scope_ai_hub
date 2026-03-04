@@ -11,10 +11,10 @@ import { FadeIn, StaggerContainer, StaggerItem, ScaleOnHover, ScrollCountUp, Par
 const About = () => {
   const { openModal } = useModal();
   const stats = [
-    { label: 'Real-World Projects', value: '100+' },
-    { label: 'Avg. Industry Experience', value: '3+ Years' },
+    { label: 'Real-World Projects', value: '157+' },
+    { label: 'Avg. Industry Experience', value: '8+ Years' },
     { label: 'Hiring Partners', value: '75+' },
-    { label: 'Curriculum in Practice', value: '70%' },
+    { label: 'Curriculum in Practice', value: '75%' },
   ];
 
   const locations = [

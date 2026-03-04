@@ -120,8 +120,7 @@ const Header = () => {
                     const filtered = courses.filter(c =>
                       c.title.toLowerCase().includes(searchQuery.toLowerCase().trim()) ||
                       c.tier.toLowerCase().includes(searchQuery.toLowerCase().trim()) ||
-                      c.tagline.toLowerCase().includes(searchQuery.toLowerCase().trim()) ||
-                      c.programNumber.toLowerCase().includes(searchQuery.toLowerCase().trim())
+                      c.tagline.toLowerCase().includes(searchQuery.toLowerCase().trim())
                     );
 
                     if (filtered.length === 0) {
@@ -162,7 +161,7 @@ const Header = () => {
                               </span>
                             </div>
                             <p className="text-xs text-[var(--text-muted)] mt-1 flex items-center">
-                              {course.duration} · {course.programNumber}
+                              {course.duration} · {course.tier}
                             </p>
                           </div>
                         </Link>
@@ -236,9 +235,9 @@ const Header = () => {
                           <div className="flex items-center justify-between mb-8">
                             <div>
                               <h3 className="text-xl font-black text-[var(--text-heading)] tracking-tight">Our Programs</h3>
-                              <p className="text-[12px] text-[var(--text-muted)] font-semibold">10 AI programs across 3 tiers</p>
+                              <p className="text-sm text-[var(--text-muted)] font-semibold">10 AI programs across 3 tiers</p>
                             </div>
-                            <Link to="/courses" className="text-[10px] font-black text-[var(--text-heading)] hover:opacity-80 transition-all flex items-center bg-[var(--text-heading)]/5 px-3 py-1.5 rounded-full">
+                            <Link to="/courses" className="text-xs font-black text-[var(--text-heading)] hover:opacity-80 transition-all flex items-center bg-[var(--text-heading)]/5 px-3 py-1.5 rounded-full">
                               VIEW ALL
                               <ChevronDown className="ml-1 h-3 w-3 -rotate-90" />
                             </Link>
@@ -249,10 +248,9 @@ const Header = () => {
                               const meta = tierMeta[tier];
                               return (
                                 <div key={tier} className="space-y-3">
-                                  <h4 className="text-[9px] font-black uppercase tracking-[0.25em] flex items-center gap-1.5"
+                                  <h4 className="text-sm font-black uppercase tracking-[0.2em] flex items-center gap-1.5"
                                     style={{ color: meta.color }}
                                   >
-                                    <span className="h-1 w-1 rounded-full" style={{ background: meta.color }} />
                                     {meta.emoji} {tier}
                                   </h4>
                                   <div className="space-y-0.5">
@@ -263,14 +261,13 @@ const Header = () => {
                                         className="group/item flex items-center py-2 px-3 -mx-3 rounded-xl hover:bg-[var(--text-heading)]/5 transition-all"
                                       >
                                         <div
-                                          className="w-1 h-1 rounded-full group-hover/item:scale-150 transition-all mr-3"
+                                          className="w-1.5 h-1.5 min-w-[6px] min-h-[6px] rounded-full shrink-0 group-hover/item:scale-125 transition-all mr-3"
                                           style={{ background: meta.color }}
                                         />
                                         <div>
-                                          <p className="text-[12px] font-bold text-[var(--text-body)] group-hover/item:text-[var(--text-heading)] transition-colors leading-tight">
+                                          <p className="text-sm font-bold text-[var(--text-body)] group-hover/item:text-[var(--text-heading)] transition-colors leading-tight">
                                             {course.title}
                                           </p>
-                                          <p className="text-[10px] text-[var(--text-muted)] mt-0.5">{course.programNumber}</p>
                                         </div>
                                       </Link>
                                     ))}
@@ -284,12 +281,12 @@ const Header = () => {
                         {/* Bottom CTA bar */}
                         <div className="bg-primary p-5 flex items-center justify-between">
                           <div>
-                            <p className="text-white/90 text-[11px] font-bold">Not sure which program is right for you?</p>
-                            <p className="text-white/60 text-[10px]">Talk to our career counselors</p>
+                            <p className="text-white/90 text-sm font-bold">Not sure which program is right for you?</p>
+                            <p className="text-white/60 text-xs">Talk to our career counselors</p>
                           </div>
                           <button
                             onClick={() => openModal()}
-                            className="px-5 py-2.5 bg-white text-primary rounded-xl text-[10px] font-black tracking-widest uppercase hover:bg-white/90 transition-all active:scale-95"
+                            className="px-5 py-2.5 bg-white text-primary rounded-xl text-xs font-black tracking-widest uppercase hover:bg-white/90 transition-all active:scale-95"
                           >
                             Get Guidance
                           </button>
@@ -416,7 +413,7 @@ const Header = () => {
                               return (
                                 <div key={tier}>
                                   <p
-                                    className="text-[9px] font-black uppercase tracking-[0.2em] mb-2 flex items-center gap-1.5"
+                                    className="text-xs font-black uppercase tracking-[0.2em] mb-2 flex items-center gap-1.5"
                                     style={{ color: meta.color }}
                                   >
                                     {meta.emoji} {tier}
@@ -427,7 +424,7 @@ const Header = () => {
                                         key={course.id}
                                         to={`/courses/${course.slug}`}
                                         onClick={() => setIsOpen(false)}
-                                        className="text-[11px] font-semibold px-3 py-1.5 rounded-lg bg-[var(--text-on-inverted)]/5 text-[var(--text-on-inverted)]/60 hover:bg-primary/20 hover:text-primary transition-all border border-[var(--text-on-inverted)]/5"
+                                        className="text-xs font-semibold px-3 py-1.5 rounded-lg bg-[var(--text-on-inverted)]/5 text-[var(--text-on-inverted)]/60 hover:bg-primary/20 hover:text-primary transition-all border border-[var(--text-on-inverted)]/5"
                                       >
                                         {course.title}
                                       </Link>
@@ -439,7 +436,7 @@ const Header = () => {
                             <Link
                               to="/courses"
                               onClick={() => setIsOpen(false)}
-                              className="inline-flex items-center text-[11px] font-black text-primary uppercase tracking-widest hover:underline mt-1"
+                              className="inline-flex items-center text-xs font-black text-primary uppercase tracking-widest hover:underline mt-1"
                             >
                               View All <ArrowRight className="ml-1 h-3 w-3" />
                             </Link>

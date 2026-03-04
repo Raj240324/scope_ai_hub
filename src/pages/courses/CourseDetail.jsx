@@ -74,7 +74,7 @@ const CourseDetail = () => {
                   className="h-1.5 w-1.5 rounded-full"
                   style={{ background: tier.color, boxShadow: `0 0 6px ${tier.color}60` }}
                 />
-                {course.programNumber} · {course.tier}
+                {course.tier}
               </span>
               <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-green-500/10 text-green-600 text-xs font-bold uppercase tracking-wider">
                 <span className="h-1.5 w-1.5 rounded-full bg-green-500 animate-pulse" />

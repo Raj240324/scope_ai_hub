@@ -36,7 +36,7 @@ export const addons = [
   {
     icon: '🤝',
     title: 'Placement Assistance & Job Referrals',
-    description: 'Access our exclusive hiring partner network spanning 50+ companies. We actively refer eligible graduates to open AI positions and conduct internal placement drives.',
+    description: 'Access our exclusive hiring partner network spanning 75+ companies. We actively refer eligible graduates to open AI positions and conduct internal placement drives.',
     isFree: true,
   },
   {

@@ -69,7 +69,7 @@ const JoinAsTrainer = () => {
               <h2 className="text-3xl md:text-4xl font-black mb-8 leading-tight">Who we are <span className="text-primary">looking for.</span></h2>
               <div className="space-y-6">
                 {[
-                  "Industry experience of at least 5+ years in your specialization.",
+                  "Industry experience of at least 8+ years in your specialization.",
                   "A passion for mentoring and simplifying complex technical concepts.",
                   "Experience with real-world production-scale projects.",
                   "Ability to commit to at least 4-6 hours per week.",

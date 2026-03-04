@@ -72,7 +72,7 @@ const Sitemap = () => {
         ...courses.map(c => ({
           href: `/courses/${c.slug}`,
           label: c.title,
-          description: `${c.duration} · ${c.programNumber} · ${c.tier}`,
+          description: `${c.duration} · ${c.tier}`,
         })),
       ],
     },

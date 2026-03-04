@@ -35,8 +35,8 @@ const CourseCard = ({ course, index = 0 }) => {
           {/* Main Content Area */}
           <div className="flex-1 p-6 sm:p-7">
             
-            {/* Header: Tier Badge + Program Number */}
-            <div className="flex items-center justify-between mb-5">
+            {/* Header: Tier Badge */}
+            <div className="flex items-center mb-5">
               <div 
                 className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-wider"
                 style={{
@@ -47,9 +47,6 @@ const CourseCard = ({ course, index = 0 }) => {
                 <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: tier.color }} />
                 {course.tier}
               </div>
-              <span className="text-xs font-semibold uppercase tracking-wider" style={{ color: 'var(--text-muted)' }}>
-                {course.programNumber}
-              </span>
             </div>
 
             {/* Title */}

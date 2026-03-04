@@ -22,7 +22,7 @@ const FAQItem = ({ question, answer }) => {
 
 const faqs = [
   { q: "Do you provide placement support?", a: "We provide an intensive career-ready ecosystem. This includes technical grooming, resume building, and mock interviews, while connecting you with our 75+ hiring partners to help you secure the right role." },
-  { q: "Are your trainers industry experts?", a: "Absolutely! All our mentors are industry veterans with 5+ years of experience in top tech companies like Zoho, Freshworks, and MNCs." },
+  { q: "Are your trainers industry experts?", a: "Absolutely! All our mentors are industry veterans with 8+ years of experience in top tech companies like Zoho, Freshworks, and MNCs." },
   { q: "Is the curriculum updated for 2026 standards?", a: "Yes, our syllabus is regularly updated and aligned with current industrial requirements to ensure you learn the most in-demand technologies." },
   { q: "Do you offer multilingual support for local students?", a: "Yes, we explain complex technical concepts in Tamil, Telugu, and English to ensure every student understands the fundamentals clearly." },
   { q: "Is the certification officially recognized?", a: `Yes, you will receive an official certification from ${BRANDING.fullName} upon successful completion of your projects. This certificate is recognized by our extensive network of hiring partners as a mark of technical proficiency.` },

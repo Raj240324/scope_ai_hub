@@ -50,7 +50,7 @@ export const courses = [
     id: 'generative-ai-prompt-engineering',
     slug: 'generative-ai-prompt-engineering',
     tier: 'Beginner',
-    programNumber: 'Program 01',
+
     title: 'Generative AI & Prompt Engineering',
     tagline: 'Master the world\'s most in-demand AI skill. Learn to work with ChatGPT, Claude, Gemini, and Midjourney like a professional.',
     duration: '6 Weeks',
@@ -88,7 +88,7 @@ export const courses = [
     id: 'python-for-ai-machine-learning',
     slug: 'python-for-ai-machine-learning',
     tier: 'Beginner',
-    programNumber: 'Program 02',
+
     title: 'Python for AI & Machine Learning',
     tagline: 'The gateway to every AI career. Learn Python from scratch and apply it directly to real AI/ML projects and data tasks.',
     duration: '8 Weeks',
@@ -126,7 +126,7 @@ export const courses = [
     id: 'ai-for-business-non-tech-professionals',
     slug: 'ai-for-business-non-tech-professionals',
     tier: 'Beginner',
-    programNumber: 'Program 05',
+
     title: 'AI for Business & Non-Tech Professionals',
     tagline: 'Empower managers, executives, and business teams to integrate AI tools into daily operations without writing a single line of code.',
     duration: '5 Weeks',
@@ -164,7 +164,7 @@ export const courses = [
     id: 'ai-in-digital-marketing',
     slug: 'ai-in-digital-marketing',
     tier: 'Beginner',
-    programNumber: 'Program 08',
+
     title: 'AI in Digital Marketing',
     tagline: 'Supercharge marketing careers using AI tools for SEO, ad campaigns, social media, analytics, and content at scale.',
     duration: '6 Weeks',
@@ -206,7 +206,7 @@ export const courses = [
     id: 'data-analytics-ai',
     slug: 'data-analytics-ai',
     tier: 'Intermediate',
-    programNumber: 'Program 03',
+
     title: 'Data Analytics & AI',
     tagline: 'Turn raw data into powerful decisions. Master data analysis, visualization, and AI-augmented analytics using industry tools.',
     duration: '8 Weeks',
@@ -227,7 +227,7 @@ export const courses = [
     ],
     prerequisites: [
       'Basic Excel or spreadsheet knowledge',
-      'Python basics (Program 02 recommended)',
+      'Python basics (Python for AI & ML recommended)',
       'Basic understanding of numbers and statistics',
       'Logical reasoning & analytical mindset',
     ],
@@ -244,7 +244,7 @@ export const courses = [
     id: 'machine-learning-deep-learning',
     slug: 'machine-learning-deep-learning',
     tier: 'Intermediate',
-    programNumber: 'Program 04',
+
     title: 'Machine Learning & Deep Learning',
     tagline: 'The core of every AI career. Build, train, and evaluate powerful ML/DL models that solve real-world problems from scratch.',
     duration: '12 Weeks',
@@ -266,7 +266,7 @@ export const courses = [
       'Math/Statistics Graduates', 'Research Students', 'Software Developers',
     ],
     prerequisites: [
-      'Proficient in Python (Program 02 mandatory)',
+      'Proficient in Python (Python for AI & ML mandatory)',
       'Linear algebra & basic calculus understanding',
       'Statistics fundamentals (mean, variance, distributions)',
       'Experience with NumPy & Pandas preferred',
@@ -284,7 +284,7 @@ export const courses = [
     id: 'natural-language-processing-nlp',
     slug: 'natural-language-processing-nlp',
     tier: 'Intermediate',
-    programNumber: 'Program 06',
+
     title: 'Natural Language Processing (NLP)',
     tagline: 'Build intelligent systems that understand human language — from chatbots and sentiment tools to advanced LLM-powered applications.',
     duration: '10 Weeks',
@@ -307,7 +307,7 @@ export const courses = [
     ],
     prerequisites: [
       'Strong Python programming skills',
-      'Completed Program 04 (ML & DL) or equivalent',
+      'Completed ML & Deep Learning course or equivalent',
       'Familiarity with neural networks',
       'Basic understanding of probability & statistics',
     ],
@@ -324,7 +324,7 @@ export const courses = [
     id: 'computer-vision-image-ai',
     slug: 'computer-vision-image-ai',
     tier: 'Intermediate',
-    programNumber: 'Program 07',
+
     title: 'Computer Vision & Image AI',
     tagline: 'Teach machines to see. Build image classification, object detection, and video intelligence systems for healthcare, retail, and security.',
     duration: '10 Weeks',
@@ -347,7 +347,7 @@ export const courses = [
     ],
     prerequisites: [
       'Python programming proficiency',
-      'Deep learning fundamentals (Program 04 required)',
+      'Deep learning fundamentals (ML & DL course required)',
       'Linear algebra & matrix operations knowledge',
       'Basic understanding of probability',
     ],
@@ -368,7 +368,7 @@ export const courses = [
     id: 'mlops-ai-deployment',
     slug: 'mlops-ai-deployment',
     tier: 'Advanced',
-    programNumber: 'Program 09',
+
     title: 'MLOps & AI Deployment',
     tagline: 'Bridge the gap between model building and real-world production. Master the tools and pipelines that take AI from notebook to enterprise at scale.',
     duration: '10 Weeks',
@@ -390,7 +390,7 @@ export const courses = [
       'Backend Developers', 'Cloud Engineers', 'Senior AI Practitioners',
     ],
     prerequisites: [
-      'Completed Programs 02 + 04 (Python & ML)',
+      'Completed Python for AI & ML + ML & Deep Learning courses',
       'Familiarity with Linux command line',
       'Basic understanding of cloud computing concepts',
       'Experience deploying at least one ML model',
@@ -408,7 +408,7 @@ export const courses = [
     id: 'ai-ethics-governance-prompt-safety',
     slug: 'ai-ethics-governance-prompt-safety',
     tier: 'Advanced',
-    programNumber: 'Program 10',
+
     title: 'AI Ethics, Governance & Prompt Safety',
     tagline: 'The fastest-growing niche in enterprise AI. Learn to build fair, explainable, safe, and compliant AI systems that organizations and regulators demand.',
     duration: '8 Weeks',

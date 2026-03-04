@@ -13,8 +13,8 @@ export const BRANDING = {
   address: "Nungabakam, Velachery, OMR (Full address to be updated)",
   regions: "Chennai | Coimbatore | Madurai | Pan India | International",
   email: "info@scopeaihub.com",
-  phone: "+91 63839 80415",
-  whatsapp: "+91 63839 80415",
+  phone: "+91 70102 30379",
+  whatsapp: "+91 70102 30379",
   officeHours: {
     weekdays: "9:00 AM – 7:00 PM",
     saturday: "9:00 AM – 5:00 PM",

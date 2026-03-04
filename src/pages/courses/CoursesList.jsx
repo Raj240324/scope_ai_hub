@@ -16,8 +16,7 @@ const CoursesList = () => {
     return courses.filter(course => {
       const matchesSearch =
         course.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        course.tagline.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        course.programNumber.toLowerCase().includes(searchTerm.toLowerCase());
+        course.tagline.toLowerCase().includes(searchTerm.toLowerCase());
       const matchesTier = selectedTier === 'All' || course.tier === selectedTier;
       return matchesSearch && matchesTier;
     });

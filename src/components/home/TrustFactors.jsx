@@ -51,11 +51,11 @@ const TrustFactors = () => (
         <div className="flex flex-col gap-2.5">
           {[
             { num: "1", title: "Industry-Focused Curriculum", sub: "Real Corporate Needs", accent: "#1d4ed8" },
-            { num: "2", title: "70% Practical Learning", sub: "Labs + Projects + Case Studies", accent: "#047857" },
+            { num: "2", title: "75% Practical Learning", sub: "Labs + Projects + Case Studies", accent: "#047857" },
             { num: "3", title: "Industry Mentors", sub: "8+ Years Experience", accent: "#7e22ce" },
-            { num: "4", title: "Real-World Projects", sub: "200+ Projects Completed", accent: "#c2410c" },
+            { num: "4", title: "Real-World Projects", sub: "157+ Projects Completed", accent: "#c2410c" },
             { num: "5", title: "Career Preparation", sub: "Resume + Interviews + Guidance", accent: "#b45309", isPrep: true },
-            { num: "6", title: "Hiring Network", sub: "50+ Partners · Tier 1 & Tier 2 Companies", accent: "#0f766e" },
+            { num: "6", title: "Hiring Network", sub: "75+ Partners · Tier 1 & Tier 2 Companies", accent: "#0f766e" },
           ].map((item, i) => (
             <div key={i} className="flex items-center gap-3 rounded-xl px-3 py-2.5 shadow-sm hover:shadow-md transition-all"
               style={{ background: item.isPrep ? 'rgba(245,158,11,0.12)' : 'var(--bg-card)', borderLeft: `4px solid ${item.accent}`, border: item.isPrep ? '2px solid #fbbf24' : '1px solid var(--border-color)', borderLeftWidth: '4px', borderLeftColor: item.accent }}>
@@ -83,7 +83,7 @@ const TrustFactors = () => (
           <div className="flex flex-col gap-3 flex-1">
             {[
               { num: "1", title: "Industry-Focused Curriculum", sub: "Real Corporate Needs", emoji: "💼", accent: "#1d4ed8" },
-              { num: "2", title: "70% Practical Learning", sub: "Labs + Projects + Case Studies", emoji: "🔬", accent: "#047857" },
+              { num: "2", title: "75% Practical Learning", sub: "Labs + Projects + Case Studies", emoji: "🔬", accent: "#047857" },
               { num: "3", title: "Industry Mentors", sub: "8+ Years Experience", emoji: "🎓", accent: "#7e22ce" },
             ].map((item, i) => (
               <div key={i} className="flex items-center gap-2.5 bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl shadow-sm hover:shadow-md transition-all p-0 overflow-hidden"
@@ -121,9 +121,9 @@ const TrustFactors = () => (
 
           <div className="flex flex-col gap-3 flex-1">
             {[
-              { num: "4", title: "Real-World Projects", sub: "200+ Projects Completed", emoji: "🖥️", accent: "#c2410c" },
+              { num: "4", title: "Real-World Projects", sub: "157+ Projects Completed", emoji: "🖥️", accent: "#c2410c" },
               { num: "5", title: "Career Preparation", sub: "Resume + Interviews + Guidance", emoji: "✍️", accent: "#b45309" },
-              { num: "6", title: "Hiring Network", sub: "50+ Partners · Tier 1 & Tier 2", emoji: "🤝", accent: "#0f766e" },
+              { num: "6", title: "Hiring Network", sub: "75+ Partners · Tier 1 & Tier 2", emoji: "🤝", accent: "#0f766e" },
             ].map((item, i) => (
               <div key={i} className="flex items-center gap-2.5 bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl shadow-sm hover:shadow-md transition-all overflow-hidden"
                 style={{ borderRightWidth: '4px', borderRightColor: item.accent }}>
@@ -153,7 +153,7 @@ const TrustFactors = () => (
         <div className="flex flex-col gap-3.5 w-[320px] shrink-0">
           {[
             { num: "1", title: "Industry-Focused Curriculum", sub: "Real Corporate Needs", emoji: "💼", borderColor: "#3b82f6", badgeBg: "#1d4ed8" },
-            { num: "2", title: "70% Practical Learning", sub: "Labs + Projects + Case Studies", emoji: "🔬", borderColor: "#10b981", badgeBg: "#047857" },
+            { num: "2", title: "75% Practical Learning", sub: "Labs + Projects + Case Studies", emoji: "🔬", borderColor: "#10b981", badgeBg: "#047857" },
             { num: "3", title: "Industry Mentors", sub: "8+ Years Experience", emoji: "🎓", borderColor: "#a855f7", badgeBg: "#7e22ce" },
           ].map((item, i) => (
             <div key={i} className="relative">
@@ -222,9 +222,9 @@ const TrustFactors = () => (
 
         <div className="flex flex-col gap-3.5 w-[320px] shrink-0">
           {[
-            { num: "4", title: "Real-World Projects", sub: "200+ Projects Completed", emoji: "🖥️", borderColor: "#f97316", badgeBg: "#c2410c" },
+            { num: "4", title: "Real-World Projects", sub: "157+ Projects Completed", emoji: "🖥️", borderColor: "#f97316", badgeBg: "#c2410c" },
             { num: "5", title: "Career Preparation", sub: "Resume + Interviews + Guidance", emoji: "✍️", borderColor: "#f59e0b", badgeBg: "#b45309" },
-            { num: "6", title: "Hiring Network", sub: "50+ Partners · Tier 1 & Tier 2", emoji: "🤝", borderColor: "#14b8a6", badgeBg: "#0f766e" },
+            { num: "6", title: "Hiring Network", sub: "75+ Partners · Tier 1 & Tier 2", emoji: "🤝", borderColor: "#14b8a6", badgeBg: "#0f766e" },
           ].map((item, i) => (
             <div key={i} className="relative">
               <div className="absolute top-1/2 -translate-y-1/2 -left-[76px] z-20">
@@ -251,10 +251,10 @@ const TrustFactors = () => (
       <div className="mt-12 rounded-2xl overflow-hidden shadow-xl" style={{ background: 'linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #0f172a 100%)' }}>
         <div className="flex flex-wrap sm:hidden">
           {[
-            { value: "70%", label: "Practical", highlight: true },
-            { value: "200+", label: "Projects", highlight: false },
+            { value: "75%", label: "Practical", highlight: true },
+            { value: "157+", label: "Projects", highlight: false },
             { value: "8+ Yrs", label: "Mentors' Exp", highlight: false },
-            { value: "50+", label: "Hiring Partners", highlight: false },
+            { value: "75+", label: "Hiring Partners", highlight: false },
             { value: "100%", label: "Placement Support", highlight: true },
           ].map((stat, i) => (
             <div key={i} className={`flex flex-col items-center justify-center py-5 px-4 text-center gap-1 hover:bg-white/5 transition-colors ${i < 4 ? 'w-1/2' : 'w-full border-t border-white/10'} ${i === 0 || i === 2 ? 'border-r border-white/10' : ''} ${i < 2 ? 'border-b border-white/10' : ''}`}>
@@ -265,10 +265,10 @@ const TrustFactors = () => (
         </div>
         <div className="hidden sm:grid sm:grid-cols-5 divide-x divide-white/10">
           {[
-            { value: "70%", label: "Practical", highlight: true },
-            { value: "200+", label: "Projects", highlight: false },
+            { value: "75%", label: "Practical", highlight: true },
+            { value: "157+", label: "Projects", highlight: false },
             { value: "8+ Yrs", label: "Mentors' Exp", highlight: false },
-            { value: "50+", label: "Hiring Partners", highlight: false },
+            { value: "75+", label: "Hiring Partners", highlight: false },
             { value: "100%", label: "Placement Support", highlight: true },
           ].map((stat, i) => (
             <div key={i} className="flex flex-col items-center justify-center py-6 px-4 text-center gap-1 hover:bg-white/5 transition-colors">

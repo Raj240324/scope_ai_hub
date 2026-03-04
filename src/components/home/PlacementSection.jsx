@@ -23,7 +23,7 @@ const PlacementSection = ({ openModal }) => (
         {[
           { phase: "Phase 1", title: "Technical Grooming", icon: <Code2 className="h-6 w-6" />, items: ["Advanced DSA & problem-solving sessions", "System design fundamentals", "Live coding practice with real-time feedback", "Code review and optimization techniques", "Portfolio project development"], color: "from-blue-500 to-cyan-600" },
           { phase: "Phase 2", title: "Interview Preparation", icon: <Users className="h-6 w-6" />, items: ["Mock interviews (Technical + HR rounds)", "Resume building & LinkedIn profile optimization", "Communication & soft skills training", "Salary negotiation strategies", "Company-specific interview patterns"], color: "from-purple-500 to-pink-600" },
-          { phase: "Phase 3", title: "Job Connections", icon: <Building2 className="h-6 w-6" />, items: ["Direct referrals to 50+ recruitment partners", "Exclusive campus placement drives", "Job portal guidance (Naukri, LinkedIn)", "Startup & MNC connections", "Ongoing support until placement"], color: "from-orange-500 to-red-600" },
+          { phase: "Phase 3", title: "Job Connections", icon: <Building2 className="h-6 w-6" />, items: ["Direct referrals to 75+ recruitment partners", "Exclusive campus placement drives", "Job portal guidance (Naukri, LinkedIn)", "Startup & MNC connections", "Ongoing support until placement"], color: "from-orange-500 to-red-600" },
         ].map((phase, i) => (
           <ScaleOnHover key={i}>
             <div className="bg-[var(--bg-secondary)] rounded-2xl sm:rounded-3xl p-5 sm:p-8 border border-[var(--border-color)] hover:shadow-2xl transition-all h-full">
