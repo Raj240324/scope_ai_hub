@@ -47,7 +47,7 @@ const Home = () => {
   return (
     <Layout immersive={true}>
       <SEO
-        title="Best AI Training Institute in Chennai | Scope AI Hub"
+        title="AI Training Institute in Chennai with Placement"
         description="Master Generative AI, Machine Learning, NLP, Computer Vision, and more with expert mentorship. Scope AI Hub offers practical AI training in Chennai with placement support."
         keywords="AI Training Institute Chennai, Prompt Engineering Course, Machine Learning Training, NLP Course, Data Analytics, MLOps, Computer Vision, Python AI, Placement Support"
         canonical="/"

@@ -1,11 +1,17 @@
 import React from 'react';
 import Layout from '../../components/layout/Layout';
 import Hero from '../../components/ui/Hero';
+import SEO from '../../components/utils/SEO';
 import { BRANDING } from '../../data/branding';
 
 const PrivacyPolicy = () => {
   return (
     <Layout>
+      <SEO 
+        title={`Privacy Policy | ${BRANDING.fullName}`} 
+        description="Our commitment to protecting your personal data and privacy at Scope AI Hub." 
+        canonical="/privacy-policy"
+      />
       <Hero 
         title={<>Privacy <span className="text-primary">Policy</span></>}
         subtitle={`Last Updated: ${new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}`}

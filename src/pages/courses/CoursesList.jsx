@@ -5,7 +5,7 @@ import AddonsGrid from '../../components/ui/AddonsGrid';
 import { courses, TIERS, tierMeta } from '../../data/courses';
 import { addons } from '../../data/addons';
 import { Search, X, Sparkles, GraduationCap, Award } from 'lucide-react';
-import { BRANDING } from '../../data/branding';
+import SEO from '../../components/utils/SEO';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const CoursesList = () => {
@@ -30,11 +30,12 @@ const CoursesList = () => {
   const tierTabs = ['All', ...TIERS];
 
   return (
-    <Layout
-      title={`All Programs | ${BRANDING.fullName}`}
-      description="Browse our 10 industry-aligned AI programs across Beginner, Intermediate, and Advanced tiers."
-      immersive={true}
-    >
+    <Layout immersive={true}>
+      <SEO 
+        title="AI & Machine Learning Courses in Chennai" 
+        description="Explore our comprehensive range of AI, Machine Learning, Data Science, and Full Stack Development programs." 
+        canonical="/courses"
+      />
       {/* Hero — Editorial Lead-in */}
       <section className="relative bg-[var(--bg-body)] pt-36 md:pt-44 pb-28 md:pb-36 overflow-hidden">
         {/* Ambient texture */}

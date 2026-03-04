@@ -1,94 +1,216 @@
-import React from 'react';
-import { Helmet } from 'react-helmet-async';
-import { BRANDING } from '../../data/branding';
+import React from "react";
+import { Helmet } from "react-helmet-async";
+import { BRANDING } from "../../data/branding";
 
-/**
- * SEO Component — Manages meta tags, Open Graph, Twitter Cards, and JSON-LD structured data.
- * @param {object} props
- * @param {string} props.title - Page title
- * @param {string} props.description - Meta description
- * @param {string} props.keywords - Meta keywords
- * @param {string} props.canonical - Canonical path (e.g. "/courses")
- * @param {string} [props.image] - OG image URL
- * @param {object} [props.courseSchema] - Course data for JSON-LD
- */
+/*
+Enterprise SEO Component
+
+Supports:
+• Meta tags
+• Canonical URLs
+• Open Graph
+• Twitter cards
+• Organization schema
+• Course schema
+• FAQ schema
+• Breadcrumb schema
+• Local SEO
+*/
+
 const SEO = ({
   title,
   description,
   keywords,
   canonical,
-  image = '/scope-social-share.png',
-  courseSchema
+  image = "/scope-social-share.png",
+  courseSchema,
+  faqSchema,
+  breadcrumbs
 }) => {
-  const siteTitle = title ? `${title} | ${BRANDING.fullName}` : `${BRANDING.fullName} | Best Software Training Institute in Chennai`;
-  const metaDescription = description || "Master Generative AI, Machine Learning, NLP, and more with expert mentorship. Get placement support at Scope AI Hub, Chennai's top-rated AI training institute.";
-  const metaKeywords = keywords || "AI Training Institute Chennai, Prompt Engineering Course, Machine Learning Training, NLP Course, Data Analytics, MLOps, Python AI, Placement Support, Scope AI Hub";
-  const siteUrl = "https://scopeaihub.in";
 
-  // EducationalOrganization JSON-LD (shown on every page)
+  const siteUrl = "https://scopeaihub.com";
+
+  /* TITLE SEO */
+
+  const siteTitle = title
+    ? `${title} | Scope AI Hub`
+    : `AI Training Institute in Chennai with Placement Support | Scope AI Hub`;
+
+  /* DESCRIPTION */
+
+  const metaDescription =
+    description ||
+    "Master Generative AI, Machine Learning, NLP and Data Science with expert mentorship. Get placement support at Scope AI Hub — Chennai's leading AI training institute.";
+
+  /* KEYWORDS */
+
+  const metaKeywords =
+    keywords ||
+    "AI Training Institute Chennai, Artificial Intelligence Course Chennai, Generative AI Course Chennai, Machine Learning Course Chennai, Prompt Engineering Training, NLP Course Chennai, Data Science Course Chennai, Python AI Training, MLOps Training, AI Certification Course Chennai, AI Placement Training Chennai, Best AI Institute Chennai, Software Engineering AI Course, AI Bootcamp Chennai, Scope AI Hub Chennai";
+
+  /* URL HANDLING */
+
+  const absoluteCanonical = canonical
+    ? `${siteUrl}${canonical}`
+    : siteUrl;
+
+  const absoluteImage = image.startsWith("http")
+    ? image
+    : `${siteUrl}${image}`;
+
+  /* ORGANIZATION SCHEMA */
+
   const orgSchema = {
     "@context": "https://schema.org",
     "@type": "EducationalOrganization",
-    "name": BRANDING.fullName,
-    "url": siteUrl,
-    "logo": `${siteUrl}/scope-logo.png`,
-    "description": metaDescription,
-    "address": {
+    name: BRANDING.fullName,
+    url: siteUrl,
+    logo: `${siteUrl}/scope-logo.png`,
+    description: metaDescription,
+    address: {
       "@type": "PostalAddress",
-      "addressLocality": "Chennai",
-      "addressRegion": "Tamil Nadu",
-      "addressCountry": "IN"
+      addressLocality: "Chennai",
+      addressRegion: "Tamil Nadu",
+      addressCountry: "IN"
     },
-    // TODO: Add real phone number before launch, e.g.:
-    // "contactPoint": { "@type": "ContactPoint", "telephone": "+91-XXXXXXXXXX", "contactType": "customer service" },
-    "sameAs": []
+    areaServed: {
+      "@type": "Country",
+      name: "India"
+    },
+    contactPoint: {
+      "@type": "ContactPoint",
+      contactType: "customer support",
+      areaServed: "IN"
+    },
+    sameAs: []
   };
 
-  // Course JSON-LD (only on course detail pages)
-  const courseJsonLd = courseSchema ? {
-    "@context": "https://schema.org",
-    "@type": "Course",
-    "name": courseSchema.title,
-    "description": courseSchema.tagline,
-    "provider": {
-      "@type": "EducationalOrganization",
-      "name": BRANDING.fullName,
-      "url": siteUrl
-    },
-    "url": `${siteUrl}/courses/${courseSchema.slug}`,
-    ...(courseSchema.duration && { "timeRequired": courseSchema.duration }),
-    ...(courseSchema.tier && { "educationalLevel": courseSchema.tier }),
-  } : null;
+  /* COURSE SCHEMA */
+
+  const courseJsonLd = courseSchema
+    ? {
+        "@context": "https://schema.org",
+        "@type": "Course",
+        name: courseSchema.title,
+        description: courseSchema.tagline,
+        educationalCredentialAwarded: "Certificate",
+        provider: {
+          "@type": "EducationalOrganization",
+          name: BRANDING.fullName,
+          url: siteUrl
+        },
+        url: `${siteUrl}/courses/${courseSchema.slug}`,
+        ...(courseSchema.duration && {
+          timeRequired: courseSchema.duration
+        }),
+        ...(courseSchema.tier && {
+          educationalLevel: courseSchema.tier
+        })
+      }
+    : null;
+
+  /* FAQ SCHEMA */
+
+  const faqJsonLd = faqSchema
+    ? {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: faqSchema.map((item) => ({
+          "@type": "Question",
+          name: item.question,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: item.answer
+          }
+        }))
+      }
+    : null;
+
+  /* BREADCRUMB SCHEMA */
+
+  const breadcrumbJsonLd = breadcrumbs
+    ? {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        itemListElement: breadcrumbs.map((item, index) => ({
+          "@type": "ListItem",
+          position: index + 1,
+          name: item.name,
+          item: `${siteUrl}${item.path}`
+        }))
+      }
+    : null;
 
   return (
     <Helmet>
-      {/* Basic Meta Tags */}
+
+      {/* BASIC META */}
+
       <title>{siteTitle}</title>
+
       <meta name="description" content={metaDescription} />
       <meta name="keywords" content={metaKeywords} />
-      {canonical && <link rel="canonical" href={`${siteUrl}${canonical}`} />}
+      <meta name="robots" content="index,follow,max-image-preview:large" />
 
-      {/* Open Graph / Facebook */}
+      <link rel="canonical" href={absoluteCanonical} />
+
+      {/* GEO SEO */}
+
+      <meta name="geo.region" content="IN-TN" />
+      <meta name="geo.placename" content="Chennai" />
+      <meta name="geo.position" content="13.0827;80.2707" />
+      <meta name="ICBM" content="13.0827, 80.2707" />
+
+      {/* THEME COLOR */}
+
+      <meta name="theme-color" content="#0B0F19" />
+
+      {/* OPEN GRAPH */}
+
       <meta property="og:type" content="website" />
       <meta property="og:title" content={siteTitle} />
       <meta property="og:description" content={metaDescription} />
-      <meta property="og:image" content={image} />
-      <meta property="og:url" content={canonical ? `${siteUrl}${canonical}` : siteUrl} />
+      <meta property="og:image" content={absoluteImage} />
+      <meta property="og:image:alt" content="Scope AI Hub Training Institute Chennai" />
+      <meta property="og:url" content={absoluteCanonical} />
       <meta property="og:site_name" content={BRANDING.fullName} />
 
-      {/* Twitter */}
+      {/* TWITTER */}
+
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={siteTitle} />
       <meta name="twitter:description" content={metaDescription} />
-      <meta name="twitter:image" content={image} />
+      <meta name="twitter:image" content={absoluteImage} />
+      <meta name="twitter:site" content="@scopeaihub" />
 
-      {/* JSON-LD: EducationalOrganization */}
-      <script type="application/ld+json">{JSON.stringify(orgSchema)}</script>
+      {/* PRELOAD SOCIAL IMAGE */}
 
-      {/* JSON-LD: Course (conditional) */}
+      <link rel="preload" as="image" href={absoluteImage} />
+
+      {/* JSON-LD SCHEMAS */}
+
+      <script type="application/ld+json">
+        {JSON.stringify(orgSchema)}
+      </script>
+
       {courseJsonLd && (
-        <script type="application/ld+json">{JSON.stringify(courseJsonLd)}</script>
+        <script type="application/ld+json">
+          {JSON.stringify(courseJsonLd)}
+        </script>
       )}
+
+      {faqJsonLd && (
+        <script type="application/ld+json">
+          {JSON.stringify(faqJsonLd)}
+        </script>
+      )}
+
+      {breadcrumbJsonLd && (
+        <script type="application/ld+json">
+          {JSON.stringify(breadcrumbJsonLd)}
+        </script>
+      )}
+
     </Helmet>
   );
 };

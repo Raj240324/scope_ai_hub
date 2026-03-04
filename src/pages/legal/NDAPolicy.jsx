@@ -2,11 +2,17 @@ import React from 'react';
 import Layout from '../../components/layout/Layout';
 import Hero from '../../components/ui/Hero';
 import { ShieldCheck, Lock, FileText, Users } from 'lucide-react';
+import SEO from '../../components/utils/SEO';
 import { BRANDING } from '../../data/branding';
 
 const NDAPolicy = () => {
   return (
     <Layout>
+      <SEO 
+        title={`NDA Policy & Confidentiality | ${BRANDING.fullName}`} 
+        description="Our Non-Disclosure Agreement standards for protecting student data and curriculum intellectual property." 
+        canonical="/nda-policy"
+      />
       <Hero 
         title={<>NDA <span className="text-primary">Policy</span></>}
         subtitle={`Non-Disclosure Agreement & Confidentiality Standards | Last Updated: ${new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}`}

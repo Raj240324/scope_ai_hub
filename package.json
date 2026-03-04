@@ -11,7 +11,8 @@
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest",
-    "audit": "npm audit --production"
+    "audit": "npm audit --production",
+    "postbuild": "react-snap"
   },
   "dependencies": {
     "@sentry/react": "^10.40.0",
@@ -33,6 +34,7 @@
     "@testing-library/react": "^16.3.2",
     "@types/react": "^19.2.5",
     "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-legacy": "^7.2.1",
     "@vitejs/plugin-react": "^5.1.1",
     "autoprefixer": "^10.4.23",
     "eslint": "^9.39.1",
@@ -41,8 +43,42 @@
     "globals": "^16.5.0",
     "jsdom": "^28.1.0",
     "postcss": "^8.5.6",
+    "react-snap": "^1.23.0",
     "tailwindcss": "^4.1.18",
     "vite": "^7.2.4",
     "vitest": "^4.0.18"
+  },
+  "reactSnap": {
+    "inlineCss": false,
+    "puppeteerArgs": [
+      "--no-sandbox"
+    ],
+    "source": "dist",
+    "crawl": false,
+    "include": [
+      "/",
+      "/about",
+      "/courses",
+      "/admissions",
+      "/reviews",
+      "/faq",
+      "/privacy-policy",
+      "/terms-conditions",
+      "/nda-policy",
+      "/refund-policy",
+      "/disclaimer",
+      "/careers/join-as-trainer",
+      "/careers/trainers",
+      "/sitemap",
+      "/courses/generative-ai-prompt-engineering",
+      "/courses/full-stack-data-science-ai",
+      "/courses/machine-learning-mlops",
+      "/courses/nlp-large-language-models",
+      "/courses/computer-vision-deep-learning",
+      "/courses/applied-data-analytics",
+      "/courses/python-for-ai-beginners",
+      "/courses/ai-for-business-leaders",
+      "/404"
+    ]
   }
 }

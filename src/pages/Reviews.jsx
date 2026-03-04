@@ -5,6 +5,7 @@ import { clsx } from 'clsx';
 import { courses } from '../data/courses';
 import { useModal } from '../context/ModalContext';
 import { BRANDING } from '../data/branding';
+import SEO from '../components/utils/SEO';
 import Hero from '../components/ui/Hero';
 
 const reviews = [
@@ -101,6 +102,12 @@ const Reviews = () => {
 
   return (
     <Layout>
+      <SEO 
+        title="Student Reviews & Placements | Success Stories" 
+        description="Read what our graduates say about their training experience and successful career transitions after completing programs at Scope AI Hub." 
+        canonical="/reviews"
+      />
+      
       <Hero 
         badge="100+ Verified Reviews · 4.9★ Average"
         title={<>Don't Take Our <span className="text-primary">Word</span> for It.</>}

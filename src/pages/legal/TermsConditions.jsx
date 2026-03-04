@@ -1,11 +1,17 @@
 import React from 'react';
 import Layout from '../../components/layout/Layout';
 import Hero from '../../components/ui/Hero';
+import SEO from '../../components/utils/SEO';
 import { BRANDING } from '../../data/branding';
 
 const TermsConditions = () => {
   return (
     <Layout>
+      <SEO 
+        title={`Terms & Conditions | ${BRANDING.fullName}`} 
+        description="Read the terms and conditions governing enrollment and academic policies at Scope AI Hub." 
+        canonical="/terms-conditions"
+      />
       <Hero 
         title={<>Terms & <span className="text-primary">Conditions</span></>}
         subtitle={`Last Updated: ${new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}`}

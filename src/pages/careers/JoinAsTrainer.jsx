@@ -3,6 +3,7 @@ import Layout from '../../components/layout/Layout';
 import Hero from '../../components/ui/Hero';
 import { Briefcase, GraduationCap, Globe, Zap, CheckCircle2, Users } from 'lucide-react';
 import { useModal } from '../../context/ModalContext';
+import SEO from '../../components/utils/SEO';
 import { BRANDING } from '../../data/branding';
 
 const JoinAsTrainer = () => {
@@ -33,6 +34,11 @@ const JoinAsTrainer = () => {
 
   return (
     <Layout>
+      <SEO 
+        title={`Careers | Join as AI Trainer at ${BRANDING.fullName}`} 
+        description="We are hiring passionate AI, ML, and Software Engineering mentors in Chennai and online. Join our mission to upskill the next generation of engineers." 
+        canonical="/careers/join-as-trainer"
+      />
       <Hero 
         badge="Flexible Hours · Industry Impact"
         title={<>Teach What You've <span className="text-primary">Built</span>.</>}

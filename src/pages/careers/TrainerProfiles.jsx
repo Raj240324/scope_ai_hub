@@ -2,6 +2,7 @@ import React from 'react';
 import Layout from '../../components/layout/Layout';
 import Hero from '../../components/ui/Hero';
 import { Github, Linkedin, Mail, Award, Briefcase } from 'lucide-react';
+import SEO from '../../components/utils/SEO';
 import { BRANDING } from '../../data/branding';
 import { FadeIn, StaggerContainer, StaggerItem } from '../../components/utils/Animations';
 
@@ -64,10 +65,12 @@ const TrainerProfiles = () => {
   ];
 
   return (
-    <Layout 
-      title={`Meet Our Trainers | Expert Mentors at ${BRANDING.fullName}`}
-      description="Learn from industry veterans at ScopeAIHub. Our trainers have worked at Google, Amazon, Microsoft, and top Indian startups. Get mentored by the best."
-    >
+    <Layout>
+      <SEO 
+        title={`Meet Our Mentors | Expert AI Trainers at ${BRANDING.fullName}`} 
+        description="Learn from industry veterans at Scope AI Hub. Our trainers have worked at top enterprise companies and bring real-world AI consulting experience into every session." 
+        canonical="/careers/trainers"
+      />
       <Hero 
         badge="15+ Expert Mentors · 120+ Years Combined Experience"
         title={<>The People Behind Your <span className="text-primary">Growth</span>.</>}

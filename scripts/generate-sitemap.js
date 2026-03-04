@@ -10,7 +10,7 @@ import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-const SITE_URL = 'https://scopeaihub.in';
+const SITE_URL = 'https://scopeaihub.com';
 
 // Static routes
 const staticRoutes = [

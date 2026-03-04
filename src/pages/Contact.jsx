@@ -5,6 +5,7 @@ import ContactForm from '../components/ui/ContactForm';
 import { Mail, Phone, MapPin, Clock, Facebook, Twitter, Linkedin, Instagram } from 'lucide-react';
 import { useModal } from '../context/ModalContext';
 
+import SEO from '../components/utils/SEO';
 import Hero from '../components/ui/Hero';
 
 import { BRANDING } from '../data/branding';
@@ -16,10 +17,13 @@ const Contact = () => {
   const initialCourse = queryParams.get('course') || "General Inquiry";
 
   return (
-    <Layout 
-      title={`Contact Us | Reach ${BRANDING.fullName}`}
-      description="Get in touch with us for course inquiries, batch details, and career counseling. Located in Chennai."
-    >
+    <Layout>
+      <SEO 
+        title={`Contact Us | Reach ${BRANDING.fullName}`} 
+        description="Get in touch with us for course inquiries, batch details, and career counseling. Located in Chennai." 
+        canonical="/contact"
+      />
+      
       <Hero 
         badge="We Respond Within 24 Hours"
         title={<>Let's <span className="text-primary">Talk</span>.</>}

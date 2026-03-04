@@ -3,6 +3,8 @@ import Layout from '../components/layout/Layout';
 import { Plus, Minus, HelpCircle, MessageCircle } from 'lucide-react';
 import { useModal } from '../context/ModalContext';
 import Hero from '../components/ui/Hero';
+import { Helmet } from 'react-helmet-async';
+import SEO from '../components/utils/SEO';
 import { BRANDING } from '../data/branding';
 import { courses, tierMeta } from '../data/courses';
 
@@ -184,11 +186,31 @@ const FAQ = () => {
   const [activeCategory, setActiveCategory] = useState("General");
   const { openModal } = useModal();
 
+  // Generate FAQPage JSON-LD Schema
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqData.flatMap(cat => cat.questions).map(q => ({
+      "@type": "Question",
+      "name": q.q,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": q.a
+      }
+    }))
+  };
+
   return (
-    <Layout 
-      title={`FAQ | Frequently Asked Questions - ${BRANDING.fullName}`}
-      description="Find answers to common questions about our courses, admission process, fees, and placement support."
-    >
+    <Layout>
+      <Helmet>
+        <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
+      </Helmet>
+      <SEO 
+        title={`FAQ | Frequently Asked Questions - ${BRANDING.fullName}`} 
+        description="Find answers to common questions about our courses, admission process, fees, and placement support." 
+        canonical="/faq"
+      />
+      
       <Hero 
         badge="Everything You Need to Know"
         title={<>You Asked. We <span className="text-primary">Answered</span>.</>}

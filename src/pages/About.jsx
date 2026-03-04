@@ -4,6 +4,7 @@ import { Target, Eye, Lightbulb, Users, ShieldCheck, Heart, ArrowRight, Award, C
 import { useModal } from '../context/ModalContext';
 import { BRANDING } from '../data/branding';
 
+import SEO from '../components/utils/SEO';
 import Hero from '../components/ui/Hero';
 import KineticTeamHybrid from '../components/ui/KineticTeamHybrid';
 import { FadeIn, StaggerContainer, StaggerItem, ScaleOnHover, ScrollCountUp, Parallax } from '../components/utils/Animations';
@@ -57,10 +58,12 @@ const About = () => {
   ];
 
   return (
-    <Layout 
-      title={`About Us | ${BRANDING.fullName} — Shaping the AI Generation`}
-      description="Learn how SCOPE AI HUB was founded in 2019 to challenge outdated learning models. Meet our expert team and understand our mission to create the next generation of AI innovators."
-    >
+    <Layout>
+      <SEO 
+        title={`About Us | ${BRANDING.fullName} — Shaping the AI Generation`} 
+        description="Learn how SCOPE AI HUB was founded in 2019 to challenge outdated learning models. Meet our expert team and understand our mission to create the next generation of AI innovators." 
+        canonical="/about"
+      />
       <Hero 
         badge="Est. 2019 · Chennai, India"
         title={<>Where <span className="text-primary">AI Careers</span> Begin.</>}

@@ -2,11 +2,17 @@ import React from 'react';
 import Layout from '../../components/layout/Layout';
 import Hero from '../../components/ui/Hero';
 import { Info, HelpCircle, AlertTriangle, Building2 } from 'lucide-react';
+import SEO from '../../components/utils/SEO';
 import { BRANDING } from '../../data/branding';
 
 const Disclaimer = () => {
   return (
     <Layout>
+      <SEO 
+        title={`Legal Disclaimer | ${BRANDING.fullName}`} 
+        description="Important disclosures regarding educational content, career outcomes, and placement assistance." 
+        canonical="/disclaimer"
+      />
       <Hero 
         title={<>Legal <span className="text-primary">Disclaimer</span></>}
         subtitle={`Important Disclosures & Representation Standards | Last Updated: ${new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}`}

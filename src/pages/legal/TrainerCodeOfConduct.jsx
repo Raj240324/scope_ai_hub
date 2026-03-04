@@ -2,11 +2,17 @@ import React from 'react';
 import Layout from '../../components/layout/Layout';
 import Hero from '../../components/ui/Hero';
 import { BookOpen, ShieldCheck, Star, Heart, Scale } from 'lucide-react';
+import SEO from '../../components/utils/SEO';
 import { BRANDING } from '../../data/branding';
 
 const TrainerCodeOfConduct = () => {
   return (
     <Layout>
+      <SEO 
+        title={`Trainer Code of Conduct | ${BRANDING.fullName}`} 
+        description="Professional standards, ethical conduct, and pedagogical excellence required from our mentoring staff." 
+        canonical="/legal/trainer-conduct"
+      />
       <Hero 
         title={<>Trainer <span className="text-primary">Code of Conduct</span></>}
         subtitle={`Professional Standards & Pedagogical Ethics | Last Updated: ${new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}`}

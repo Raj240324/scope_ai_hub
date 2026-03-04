@@ -2,11 +2,17 @@ import React from 'react';
 import Layout from '../../components/layout/Layout';
 import Hero from '../../components/ui/Hero';
 import { RefreshCw, Clock, AlertCircle, FileCheck } from 'lucide-react';
+import SEO from '../../components/utils/SEO';
 import { BRANDING } from '../../data/branding';
 
 const RefundPolicy = () => {
   return (
     <Layout>
+      <SEO 
+        title={`Refund & Cancellation Policy | ${BRANDING.fullName}`} 
+        description="Clear guidelines on fee cancellations and our strictly adhered refund procedures." 
+        canonical="/refund-policy"
+      />
       <Hero 
         title={<>Refund <span className="text-primary">Policy</span></>}
         subtitle={`Fee Cancellation & Refund Standards | Last Updated: ${new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}`}

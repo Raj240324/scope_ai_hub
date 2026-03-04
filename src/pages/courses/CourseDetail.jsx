@@ -4,7 +4,9 @@ import Layout from '../../components/layout/Layout';
 import { courses, tierMeta } from '../../data/courses';
 import { addons } from '../../data/addons';
 import { useModal } from '../../context/ModalContext';
+import SEO from '../../components/utils/SEO';
 import { BRANDING } from '../../data/branding';
+import { Helmet } from 'react-helmet-async';
 import {
   Clock,
   ChevronDown,
@@ -34,12 +36,27 @@ const CourseDetail = () => {
 
   const tier = tierMeta[course.tier] || tierMeta.Beginner;
 
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://scopeaihub.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Courses", "item": "https://scopeaihub.com/courses" },
+      { "@type": "ListItem", "position": 3, "name": course.title }
+    ]
+  };
+
   return (
-    <Layout
-      title={`${course.title} | ${BRANDING.fullName}`}
-      description={course.tagline}
-      immersive={true}
-    >
+    <Layout immersive={true}>
+      <Helmet>
+        <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
+      </Helmet>
+      <SEO 
+        title={`${course.title} Course in Chennai with Placement`} 
+        description={course.tagline} 
+        canonical={`/courses/${course.slug}`}
+        courseSchema={course}
+      />
       {/* ── Hero ── */}
       <section className="relative bg-[var(--bg-body)] pt-32 md:pt-44 pb-20 md:pb-28 overflow-hidden">
         {/* Ambient gradients – one per side, organic feel */}
@@ -439,8 +456,8 @@ const CourseDetail = () => {
               </h2>
               <p className="text-[var(--text-muted)] text-sm">Continue your learning journey</p>
             </div>
-            <Link to="/courses" className="text-primary text-sm font-bold hover:underline hidden md:inline-flex items-center gap-1">
-              View All <ArrowUpRight className="h-3.5 w-3.5" />
+            <Link to="/courses" className="text-primary text-sm font-bold hover:underline inline-flex items-center gap-1">
+              View All Courses <ArrowUpRight className="h-3.5 w-3.5" />
             </Link>
           </div>
 
