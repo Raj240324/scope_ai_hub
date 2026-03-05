@@ -11,12 +11,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-
       - name: Call Health Endpoint
         run: |
           echo "Checking system health..."
 
-          RESPONSE=$(curl -s "${{ secrets.SITE_URL }}/api/health")
+          RESPONSE=$(curl -s --max-time 15 "${{ secrets.SITE_URL }}/api/health" || echo '{"status":"down","services":{"note":"site unreachable"}}')
 
           echo "Response: $RESPONSE"
 
@@ -24,7 +23,7 @@ jobs:
             echo "System healthy"
             echo "ALERT=false" >> $GITHUB_ENV
           else
-            echo "System degraded"
+            echo "System degraded or unreachable"
             echo "ALERT=true" >> $GITHUB_ENV
           fi
 
@@ -46,5 +45,5 @@ jobs:
               \"email\": \"${{ secrets.ALERT_EMAIL }}\"
             }],
             \"subject\": \"🚨 Scope AI Hub System Alert\",
-            \"htmlContent\": \"<h2>System Health Alert</h2><p>The system health endpoint returned a degraded status.</p><p>Check immediately: ${{ secrets.SITE_URL }}/api/health</p>\"
+            \"htmlContent\": \"<h2>System Health Alert</h2><p>The system health check has failed. The platform may be degraded or unreachable.</p><p>Check immediately: <a href='${{ secrets.SITE_URL }}/api/health'>${{ secrets.SITE_URL }}/api/health</a></p>\"
           }"
