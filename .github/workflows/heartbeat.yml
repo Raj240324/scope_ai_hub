@@ -2,7 +2,7 @@ name: System Health Monitor
 
 on:
   schedule:
-    - cron: "0 9 */5 * *"
+    - cron: "*/30 * * * *"
   workflow_dispatch:
 
 jobs:
