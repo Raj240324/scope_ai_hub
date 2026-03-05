@@ -1,31 +1,51 @@
-name: Heartbeat (Keep Alive)
+name: System Health Monitor
 
 on:
   schedule:
-    # Runs every 5 days at 09:00 UTC
-    - cron: "0 9 */5 * *"
-  workflow_dispatch: # Allow manual trigger from Actions UI
+    - cron: "0 9 */5 * *"   # every 5 days
+  workflow_dispatch:
 
 jobs:
   ping:
     name: Ping Health Endpoint
     runs-on: ubuntu-latest
-    timeout-minutes: 5
 
     steps:
-      - name: Ping site health endpoint
+
+      - name: Call Health Endpoint
+        id: health
         run: |
-          echo "🫀 Sending heartbeat at $(date -u)"
+          echo "Checking system health..."
 
-          HTTP_STATUS=$(curl --silent --fail --write-out "%{http_code}" \
-            --output /dev/null \
-            --max-time 30 \
-            "${{ secrets.SITE_URL }}/api/health")
+          RESPONSE=$(curl -s ${{ secrets.SITE_URL }}/api/health)
 
-          if [ "$HTTP_STATUS" = "200" ]; then
-            echo "✅ Health check passed. Status: $HTTP_STATUS"
-            echo "⏰ Next heartbeat in ~5 days"
+          echo "Response: $RESPONSE"
+
+          STATUS=$(echo $RESPONSE | jq -r '.status')
+
+          if [ "$STATUS" != "ok" ]; then
+            echo "ALERT=true" >> $GITHUB_ENV
           else
-            echo "❌ Health check failed. Status: $HTTP_STATUS"
-            exit 1
+            echo "ALERT=false" >> $GITHUB_ENV
           fi
+
+      - name: Send Email Alert
+        if: env.ALERT == 'true'
+        run: |
+          echo "Sending alert email..."
+
+          curl -X POST https://api.brevo.com/v3/smtp/email \
+          -H "accept: application/json" \
+          -H "api-key: ${{ secrets.BREVO_API_KEY }}" \
+          -H "content-type: application/json" \
+          -d '{
+            "sender": {
+              "name": "Scope AI Hub Monitor",
+              "email": "monitor@scopeaihub.com"
+            },
+            "to": [{
+              "email": "${{ secrets.ALERT_EMAIL }}"
+            }],
+            "subject": "🚨 Scope AI Hub System Alert",
+            "htmlContent": "<h2>System Health Alert</h2><p>The system health endpoint returned a degraded status.</p><p>Please check the system immediately.</p>"
+          }'
