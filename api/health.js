@@ -3,14 +3,12 @@ import { createClient } from "@supabase/supabase-js";
 export default async function handler(req, res) {
 
   const health = {
-    status: "degraded",
+    status: "ok",
     timestamp: new Date().toISOString(),
     services: {}
   };
 
-  /* -------------------------
-     Environment Variables
-  --------------------------*/
+  /* Environment Variables */
 
   if (
     !process.env.SUPABASE_URL ||
@@ -23,9 +21,7 @@ export default async function handler(req, res) {
     health.services.environment = "ok";
   }
 
-  /* -------------------------
-     Supabase Check
-  --------------------------*/
+  /* Supabase Check */
 
   try {
 
@@ -44,13 +40,13 @@ export default async function handler(req, res) {
     if (error) health.status = "degraded";
 
   } catch {
+
     health.services.supabase = "error";
     health.status = "degraded";
+
   }
 
-  /* -------------------------
-     Brevo API Check
-  --------------------------*/
+  /* Brevo Check */
 
   try {
 
@@ -65,8 +61,10 @@ export default async function handler(req, res) {
     if (!response.ok) health.status = "degraded";
 
   } catch {
+
     health.services.brevo = "error";
     health.status = "degraded";
+
   }
 
   res.status(200).json(health);
