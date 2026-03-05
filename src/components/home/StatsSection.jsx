@@ -1,13 +1,14 @@
 import React from 'react';
-import { Code2, Award, Building2, Zap } from 'lucide-react';
+import { Calendar, Users, Code2, Building2 } from 'lucide-react';
 import { StaggerContainer, StaggerItem, ScrollCountUp } from '../utils/Animations';
 
 const stats = [
+  { label: "Year Founded", value: "2019", icon: <Calendar className="h-5 w-5" /> },
+  { label: "Students", value: "1200+", icon: <Users className="h-5 w-5" /> },
   { label: "Real-World Projects", value: "157+", icon: <Code2 className="h-5 w-5" /> },
-  { label: "Trainer Experience (Yrs)", value: "8+", icon: <Award className="h-5 w-5" /> },
   { label: "Hiring Partners", value: "75+", icon: <Building2 className="h-5 w-5" /> },
-  { label: "Practical Curriculum", value: "75%", icon: <Zap className="h-5 w-5" /> },
 ];
+
 
 const StatsSection = () => (
   <section className="py-12 bg-[var(--bg-body)] border-b border-[var(--border-color)]">

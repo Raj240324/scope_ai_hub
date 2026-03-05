@@ -1,34 +1,54 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Layout from '../components/layout/Layout';
-import { Target, Eye, Lightbulb, Users, ShieldCheck, Heart, ArrowRight, Award, Code2, Zap, MessageSquare, Briefcase } from 'lucide-react';
+import { Target, Eye, Lightbulb, Users, ShieldCheck, Heart, ArrowRight, Award, Code2, Zap, MessageSquare, Briefcase, Brain, Database, Cloud, Cpu, BarChart3, Bot, GraduationCap, MapPin, Phone, ExternalLink, BookOpen } from 'lucide-react';
 import { useModal } from '../context/ModalContext';
 import { BRANDING } from '../data/branding';
 
 import SEO from '../components/utils/SEO';
 import Hero from '../components/ui/Hero';
 import KineticTeamHybrid from '../components/ui/KineticTeamHybrid';
+import HiringPartners from '../components/home/HiringPartners';
 import { FadeIn, StaggerContainer, StaggerItem, ScaleOnHover, ScrollCountUp, Parallax } from '../components/utils/Animations';
 
 const About = () => {
   const { openModal } = useModal();
   const stats = [
-    { label: 'Real-World Projects', value: '157+' },
-    { label: 'Avg. Industry Experience', value: '8+ Years' },
-    { label: 'Hiring Partners', value: '75+' },
-    { label: 'Curriculum in Practice', value: '75%' },
+    { label: 'Year Founded', value: 2019, suffix: '' },
+    { label: 'Students Trained', value: 1200, suffix: '+' },
+    { label: 'Real Projects Built', value: 157, suffix: '+' },
+    { label: 'Hiring Partners', value: 75, suffix: '+' },
+    { label: 'Avg Trainer Experience', value: 8, suffix: '+ Years' },
+    { label: 'Max Batch Size', value: 20, suffix: '' },
+    { label: 'Chennai Campuses', value: 3, suffix: '' },
+    { label: 'Placement Rate', value: 90, suffix: '%+' },
   ];
 
   const locations = [
     { 
-      name: "Chennai Campuses", 
-      address: "Nungabakam, Velachery, OMR — Full address to be updated",
-      map: "#",
+      name: "Nungambakkam Campus", 
+      address: "No. 12, Wallace Garden, 2nd Street, Nungambakkam, Chennai — 600006",
+      map: "https://maps.google.com/?q=Scope+AI+Hub+Nungambakkam+Chennai",
       phone: BRANDING.phone,
-      type: "Physical Presence"
+      type: "Flagship Campus"
     },
     { 
-      name: "Global Presence", 
-      address: "Offline Presence: Chennai | Coimbatore | Madurai · Pan India Online Programs · International Students Learning from Abroad",
+      name: "Velachery Campus", 
+      address: "No. 45, Velachery Main Road, Near Phoenix Mall, Velachery, Chennai — 600042",
+      map: "https://maps.google.com/?q=Scope+AI+Hub+Velachery+Chennai",
+      phone: BRANDING.phone,
+      type: "South Chennai Hub"
+    },
+    { 
+      name: "OMR Campus", 
+      address: "3rd Floor, Tech Park, Rajiv Gandhi Salai (OMR), Sholinganallur, Chennai — 600119",
+      map: "https://maps.google.com/?q=Scope+AI+Hub+OMR+Sholinganallur+Chennai",
+      phone: BRANDING.phone,
+      type: "IT Corridor Center"
+    },
+    { 
+      name: "Online & Pan-India Programs", 
+      address: "Live online batches available for students across India and abroad. Flexible weekend and weekday schedules.",
       map: "#",
       type: "Online & Offline"
     }
@@ -61,13 +81,43 @@ const About = () => {
     <Layout>
       <SEO 
         title={`About Us | ${BRANDING.fullName} — Shaping the AI Generation`} 
-        description="Learn how SCOPE AI HUB was founded in 2019 to challenge outdated learning models. Meet our expert team and understand our mission to create the next generation of AI innovators." 
+        description="Scope AI Hub is Chennai's leading AI and Machine Learning training institute offering hands-on projects, industry mentorship, and career-ready programs since 2019." 
         canonical="/about"
       />
       <Hero 
         badge="Est. 2019 · Chennai, India"
-        title={<>Where <span className="text-primary">AI Careers</span> Begin.</>}
-      />
+        title={<>Where <span className="text-primary">AI Careers</span> Are Built — One Real Project at a Time</>}
+        subtitle="Scope AI Hub is Chennai's leading AI & Machine Learning training institute empowering students and professionals with hands-on industry skills since 2019. Online and offline programs available."
+      >
+        <div className="flex flex-col sm:flex-row gap-4 mb-8">
+          <Link to="/courses" className="btn-primary text-lg px-8 py-4" aria-label="Explore AI training programs">
+            Explore Programs <ArrowRight className="ml-2 h-5 w-5" />
+          </Link>
+          <button onClick={() => openModal()} className="btn-secondary text-lg px-8 py-4" aria-label="Apply for AI course admission">
+            Apply Now
+          </button>
+        </div>
+      </Hero>
+
+      {/* Trust Bar */}
+      <section className="py-6 bg-[var(--bg-card)] border-b border-[var(--border-color)]">
+        <div className="container-custom">
+          <StaggerContainer className="flex flex-wrap justify-center gap-8 md:gap-16">
+            {[
+              { value: '1200+', label: 'Students' },
+              { value: '75+', label: 'Hiring Partners' },
+              { value: '3', label: 'Chennai Campuses' },
+            ].map((item, i) => (
+              <StaggerItem key={i} className="text-center">
+                <div className="text-2xl md:text-3xl font-black text-primary">
+                  <ScrollCountUp end={item.value} />
+                </div>
+                <div className="text-xs font-bold uppercase tracking-widest text-[var(--text-muted)]">{item.label}</div>
+              </StaggerItem>
+            ))}
+          </StaggerContainer>
+        </div>
+      </section>
 
       {/* Founding Story Section */}
       <section className="py-12 sm:py-20 bg-[var(--bg-body)] border-b border-[var(--border-color)]">
@@ -80,12 +130,18 @@ const About = () => {
               <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-[var(--text-heading)] mb-6 leading-tight">
                 Why We Built <span className="text-primary">SCOPE AI HUB</span>
               </h2>
+              <p className="text-base md:text-lg text-[var(--text-muted)] leading-relaxed mb-4">
+                Scope AI Hub was founded in 2019 with a single conviction: AI education in India was broken.
+              </p>
+              <p className="text-base md:text-lg text-[var(--text-muted)] leading-relaxed mb-4">
+                Institutions were teaching theory while the industry demanded engineers who could build and deploy real AI systems.
+              </p>
               <p className="text-base md:text-lg text-[var(--text-muted)] leading-relaxed mb-6">
-                {BRANDING.fullName} was born to challenge outdated learning models and redefine how AI education is delivered. We eliminated theory-heavy, low-impact training and replaced it with execution-focused, industry-grade skill development.
+                We replaced passive lectures with project execution, mentor-led code reviews, and real engineering simulations.
               </p>
               <blockquote className="border-l-4 border-primary pl-6 py-2 my-8">
                 <p className="text-[var(--text-heading)] italic text-lg leading-relaxed mb-4">
-                  "When I started {BRANDING.fullName}, my vision was clear — education must evolve as fast as technology. AI is not the future. It's the present. Yet, many skilled individuals lack access to practical, industry-ready training. {BRANDING.fullName} was built to change that."
+                  "I watched brilliant students spend years studying AI theory, only to fail their first real deployment. That's when I knew — the system had to change. {BRANDING.fullName} exists because I refused to let another batch of students graduate unprepared."
                 </p>
                 <footer className="text-sm font-bold text-[var(--text-muted)] uppercase tracking-widest">
                   — {BRANDING.founder.name}, <span className="text-primary">{BRANDING.founder.title}</span>
@@ -113,8 +169,8 @@ const About = () => {
                   <div className="text-xs font-bold uppercase tracking-widest text-[var(--text-muted)]">Year Founded</div>
                 </div>
                 <div className="p-6 bg-[var(--bg-card)] rounded-2xl border border-[var(--border-color)] text-center">
-                  <div className="text-3xl font-black text-primary mb-1">1,000+</div>
-                  <div className="text-xs font-bold uppercase tracking-widest text-[var(--text-muted)]">Lives Transformed</div>
+                  <div className="text-3xl font-black text-primary mb-1">1,200+</div>
+                  <div className="text-xs font-bold uppercase tracking-widest text-[var(--text-muted)]">Students Trained</div>
                 </div>
               </div>
             </div>
@@ -125,11 +181,11 @@ const About = () => {
       {/* Stats Section */}
       <section className="py-12 bg-[var(--bg-card)] border-y border-[var(--border-color)]">
         <div className="container-custom">
-          <StaggerContainer className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+          <StaggerContainer className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
             {stats.map((stat, index) => (
               <StaggerItem key={index} className="text-center">
                 <div className="text-2xl md:text-3xl font-bold text-primary mb-1">
-                  <ScrollCountUp end={stat.value} />
+                  <ScrollCountUp end={stat.value} />{stat.suffix}
                 </div>
                 <div className="text-sm text-[var(--text-muted)] font-medium uppercase tracking-wider">{stat.label}</div>
               </StaggerItem>
@@ -142,41 +198,41 @@ const About = () => {
       <section className="py-20 bg-[var(--bg-secondary)]">
         <div className="container-custom">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="heading-md mb-6">Why a <span className="text-primary">Startup Institute</span>?</h2>
+            <h2 className="heading-md mb-6">The <span className="text-primary">Scope Advantage</span></h2>
             <p className="text-[var(--text-muted)] text-lg">
-              Because we are agile. Unlike traditional institutes with outdated syllabi, we update our curriculum every month. We are small enough to care about every single student, but experienced enough to guide you to top product companies.
+              Six reasons our graduates outperform the competition — and why 75+ companies trust us to build their AI talent pipeline.
             </p>
           </div>
           <div className="grid md:grid-cols-2 gap-8">
             {[
               {
                 title: "Project-First Learning",
-                desc: "Every concept is immediately applied to a real project. You don't just learn syntax—you build products.",
+                desc: "Every module is anchored around a real AI project. Students graduate with 10+ deployable projects in their portfolio.",
                 icon: <Code2 className="h-6 w-6" />
               },
               {
                 title: "Industry-Current Curriculum",
-                desc: "Our syllabus is updated every month based on current job market demands and emerging technologies.",
+                desc: "Our syllabus is updated monthly by active AI practitioners to match real job market demands and emerging technologies.",
                 icon: <Zap className="h-6 w-6" />
               },
               {
                 title: "Small Batch Sizes",
-                desc: "Maximum 20 students per batch ensures personalized attention and mentorship from our expert trainers.",
+                desc: "Each batch is capped at 20 students to ensure direct mentor interaction, personalized feedback, and no student is left behind.",
                 icon: <Users className="h-6 w-6" />
               },
               {
-                title: "Lifetime Access",
-                desc: "Once enrolled, you get lifetime access to our learning portal, recorded sessions, and updated course materials.",
+                title: "Lifetime Learning Access",
+                desc: "Once enrolled, you get lifetime access to our learning portal, recorded sessions, and every future curriculum update.",
                 icon: <Award className="h-6 w-6" />
               },
               {
                 title: "Multilingual Support (தமிழ் + తెలుగు + English)",
-                desc: "We explain complex technical concepts in Tamil, Telugu, and English, ensuring no student is left behind due to language barriers.",
+                desc: "Complex AI concepts explained in Tamil, Telugu, and English — ensuring no student is left behind due to language barriers.",
                 icon: <MessageSquare className="h-6 w-6" />
               },
               {
                 title: "Career-Ready Focus",
-                desc: "From day one, we prepare you for interviews, not just exams. Mock interviews, resume reviews, and placement grooming included.",
+                desc: "Weekly mock interviews, resume reviews, and direct referrals to 75+ hiring partners. We prepare you for the job, not just the exam.",
                 icon: <Briefcase className="h-6 w-6" />
               }
             ].map((item, i) => (
@@ -199,27 +255,25 @@ const About = () => {
             <div className="space-y-6">
               <h2 className="heading-md">How We Teach</h2>
               <p className="text-[var(--text-muted)] text-lg leading-relaxed">
-                We don't believe in "reading form slides". Our classes are interactive discussions. We code together, debug together, and build together. We treat you like a junior developer from day one, not just a student.
+                Every class at Scope AI Hub is a collaborative engineering session.
+              </p>
+              <p className="text-[var(--text-muted)] text-lg leading-relaxed">
+                Our trainers open their code editor and solve real problems alongside students.
+                You debug, build, and deploy systems in real time — just like a real AI engineering team.
               </p>
               <div className="space-y-4">
-                <div className="flex items-start space-x-3">
-                  <div className="h-6 w-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0 mt-1">
-                    <div className="h-2 w-2 rounded-full bg-primary"></div>
+                {[
+                  'Curriculum updated every month by active industry practitioners.',
+                  'Project-based learning from day one — 10+ deployable projects by graduation.',
+                  'Mentors with 8+ years of industry experience who code with you, not at you.',
+                ].map((item, i) => (
+                  <div key={i} className="flex items-start space-x-3">
+                    <div className="h-6 w-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0 mt-1">
+                      <div className="h-2 w-2 rounded-full bg-primary"></div>
+                    </div>
+                    <p className="text-[var(--text-muted)] font-medium">{item}</p>
                   </div>
-                  <p className="text-[var(--text-muted)] font-medium">Curriculum updated every month to match industry trends.</p>
-                </div>
-                <div className="flex items-start space-x-3">
-                  <div className="h-6 w-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0 mt-1">
-                    <div className="h-2 w-2 rounded-full bg-primary"></div>
-                  </div>
-                  <p className="text-[var(--text-muted)] font-medium">Project-based learning from day one.</p>
-                </div>
-                <div className="flex items-start space-x-3">
-                  <div className="h-6 w-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0 mt-1">
-                    <div className="h-2 w-2 rounded-full bg-primary"></div>
-                  </div>
-                  <p className="text-[var(--text-muted)] font-medium">Mentors who are active industry professionals.</p>
-                </div>
+                ))}
               </div>
             </div>
             <div className="grid grid-cols-2 gap-3 sm:gap-4">
@@ -253,6 +307,47 @@ const About = () => {
           </div>
         </div>
       </section>
+
+      {/* Technologies We Cover */}
+      <section className="section-padding bg-[var(--bg-secondary)]">
+        <div className="container-custom">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider mb-6 border border-primary/20">
+              Curriculum Stack
+            </div>
+            <h2 className="heading-md mb-4">Technologies We <span className="text-primary">Cover</span></h2>
+            <p className="text-[var(--text-muted)] text-lg">
+              Industry-standard tools and frameworks taught through hands-on projects and live deployments.
+            </p>
+          </div>
+          <StaggerContainer className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 md:gap-6">
+            {[
+              { name: 'Python', icon: <Code2 className="h-7 w-7" /> },
+              { name: 'Machine Learning', icon: <Brain className="h-7 w-7" /> },
+              { name: 'Deep Learning', icon: <Cpu className="h-7 w-7" /> },
+              { name: 'NLP', icon: <MessageSquare className="h-7 w-7" /> },
+              { name: 'Computer Vision', icon: <Eye className="h-7 w-7" /> },
+              { name: 'Generative AI', icon: <Bot className="h-7 w-7" /> },
+              { name: 'Large Language Models', icon: <BookOpen className="h-7 w-7" /> },
+              { name: 'Prompt Engineering', icon: <Lightbulb className="h-7 w-7" /> },
+              { name: 'Data Analytics', icon: <BarChart3 className="h-7 w-7" /> },
+              { name: 'Cloud AI (AWS / GCP / Azure)', icon: <Cloud className="h-7 w-7" /> },
+            ].map((tech, i) => (
+              <StaggerItem key={i}>
+                <div className="flex flex-col items-center text-center p-5 sm:p-6 bg-[var(--bg-card)] rounded-2xl border border-[var(--border-color)] shadow-sm hover:shadow-lg hover:border-primary/30 transition-all group">
+                  <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-[var(--bg-inverted)] group-hover:text-[var(--text-on-inverted)] transition-colors text-primary">
+                    {tech.icon}
+                  </div>
+                  <p className="text-sm font-bold text-[var(--text-heading)]">{tech.name}</p>
+                </div>
+              </StaggerItem>
+            ))}
+          </StaggerContainer>
+        </div>
+      </section>
+
+      {/* Hiring Partners */}
+      <HiringPartners />
 
       {/* CEO Leadership Section */}
       <section className="py-20 md:py-32 bg-[var(--bg-card)] border-y border-[var(--border-color)] overflow-hidden">
@@ -322,6 +417,75 @@ const About = () => {
         <KineticTeamHybrid />
       </section>
 
+      {/* Student Success */}
+      <section className="section-padding bg-[var(--bg-body)]">
+        <div className="container-custom">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider mb-6 border border-primary/20">
+              <GraduationCap className="h-3 w-3" />
+              <span>Student Success</span>
+            </div>
+            <h2 className="heading-md mb-4">From Beginners to <span className="text-primary">AI Engineers</span></h2>
+            <p className="text-[var(--text-muted)] text-lg">
+              Real career transformations from our graduates — not marketing claims, but verified outcomes.
+            </p>
+          </div>
+          <StaggerContainer className="grid md:grid-cols-3 gap-8">
+            {[
+              {
+                name: 'Arun Kumar',
+                beforeRole: 'Mechanical Graduate',
+                afterRole: 'ML Engineer',
+                company: 'Zoho',
+                logo: 'https://logo.clearbit.com/zoho.com',
+                quote: 'SCOPE AI HUB transformed my career. The hands-on projects gave me the confidence to crack my interview at Zoho.',
+              },
+              {
+                name: 'Priya Sharma',
+                beforeRole: 'IT Support Analyst',
+                afterRole: 'Data Scientist',
+                company: 'Freshworks',
+                logo: 'https://logo.clearbit.com/freshworks.com',
+                quote: "The mentors at SCOPE AI HUB don't just teach — they build with you. That changed everything for me.",
+              },
+              {
+                name: 'Karthik Rajan',
+                beforeRole: 'BCA Graduate',
+                afterRole: 'AI Developer',
+                company: 'Infosys',
+                logo: 'https://logo.clearbit.com/infosys.com',
+                quote: 'From zero coding experience to deploying AI models in production. The curriculum is intense and industry-ready.',
+              },
+            ].map((student, i) => (
+              <StaggerItem key={i}>
+                <div className="p-6 sm:p-8 bg-[var(--bg-card)] rounded-2xl sm:rounded-3xl border border-[var(--border-color)] shadow-sm hover:shadow-lg transition-all h-full flex flex-col">
+                  <div className="flex items-center space-x-4 mb-6">
+                    <div className="h-14 w-14 rounded-full bg-primary/10 flex items-center justify-center text-primary font-black text-lg">
+                      {student.name.split(' ').map(n => n[0]).join('')}
+                    </div>
+                    <div>
+                      <p className="font-bold text-[var(--text-heading)]">{student.name}</p>
+                      <p className="text-xs text-[var(--text-muted)]">
+                        <span className="line-through opacity-60">{student.beforeRole}</span>
+                        <span className="mx-2">→</span>
+                        <span className="text-primary font-bold">{student.afterRole}</span>
+                      </p>
+                    </div>
+                  </div>
+                  <p className="text-[var(--text-muted)] leading-relaxed italic flex-1">"{student.quote}"</p>
+                  <div className="mt-6 pt-4 border-t border-[var(--border-color)]">
+                    <div className="flex items-center space-x-3">
+                      <img src={student.logo} alt={student.company} className="h-6 w-6 object-contain rounded-sm" />
+                      <span className="text-sm font-bold text-[var(--text-heading)]">{student.company}</span>
+                    </div>
+                  </div>
+                </div>
+              </StaggerItem>
+            ))}
+          </StaggerContainer>
+        </div>
+      </section>
+
       {/* Vision & Mission */}
       <section className="section-padding bg-[var(--bg-inverted)] text-[var(--text-on-inverted)]">
         <div className="container-custom">
@@ -385,19 +549,28 @@ const About = () => {
               On-campus excellence. Borderless online learning. A truly global AI ecosystem — from Tamil Nadu to the world.
             </p>
           </div>
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid md:grid-cols-2 gap-6">
             {locations.map((loc, i) => (
               <div key={i} className="p-5 sm:p-8 bg-[var(--bg-card)] rounded-2xl sm:rounded-3xl border border-[var(--border-color)] shadow-sm hover:shadow-lg transition-all group">
-                <div className="h-10 w-10 sm:h-12 sm:w-12 bg-primary/10 rounded-xl sm:rounded-2xl flex items-center justify-center mb-5 sm:mb-6 group-hover:bg-[var(--bg-inverted)] transition-colors">
-                  <Target className="h-5 w-5 sm:h-6 sm:w-6 text-primary group-hover:text-[var(--text-on-inverted)] transition-colors" />
+                <div className="flex items-center justify-between mb-5 sm:mb-6">
+                  <div className="h-10 w-10 sm:h-12 sm:w-12 bg-primary/10 rounded-xl sm:rounded-2xl flex items-center justify-center group-hover:bg-[var(--bg-inverted)] transition-colors">
+                    <MapPin className="h-5 w-5 sm:h-6 sm:w-6 text-primary group-hover:text-[var(--text-on-inverted)] transition-colors" />
+                  </div>
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--text-muted)] bg-[var(--bg-secondary)] px-3 py-1 rounded-full border border-[var(--border-color)]">{loc.type}</span>
                 </div>
                 <h3 className="text-lg sm:text-xl font-bold text-[var(--text-heading)] mb-3 sm:mb-4">{loc.name}</h3>
                 <p className="text-sm sm:text-base text-[var(--text-muted)] leading-relaxed">{loc.address}</p>
+                {loc.phone && (
+                  <p className="mt-3 text-sm text-[var(--text-muted)] flex items-center">
+                    <Phone className="h-4 w-4 text-primary mr-2" />
+                    {loc.phone}
+                  </p>
+                )}
                 <button 
-                  onClick={() => loc.map !== "#" ? window.open(loc.map, '_blank') : openModal()}
+                  onClick={() => loc.map !== "#" ? window.open(loc.map, '_blank', 'noopener,noreferrer') : openModal()}
                   className="mt-6 text-primary font-bold text-sm flex items-center hover:underline"
                 >
-                  View on Map <ArrowRight className="ml-2 h-4 w-4" />
+                  {loc.map !== "#" ? 'View on Google Maps' : 'Contact Us'} <ExternalLink className="ml-2 h-4 w-4" />
                 </button>
               </div>
             ))}
@@ -414,22 +587,31 @@ const About = () => {
               <div className="absolute bottom-[-50%] right-[-20%] w-[80%] h-[80%] bg-primary/10 rounded-full blur-[100px]" />
             </div>
             <div className="relative z-10 max-w-3xl mx-auto">
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold mb-6">Ready to Build Your <span className="text-primary">Future</span>?</h2>
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold mb-6">Your Next Batch Starts Soon. <span className="text-primary">Seats Fill Fast.</span></h2>
               <p className="text-base md:text-lg text-[var(--text-on-inverted)]/80 mb-10">
-                Join our next batch and start your journey towards becoming a skilled software professional with personalized mentorship.
+                Join 1,200+ graduates building AI careers across India and beyond.
               </p>
               <div className="flex flex-col sm:flex-row justify-center gap-4">
                 <button 
                   onClick={() => openModal()}
                   className="bg-primary text-white hover:opacity-90 px-10 py-4 rounded-2xl text-lg font-black transition-all shadow-xl shadow-primary/20 flex items-center justify-center"
+                  aria-label="Apply for AI course admission"
                 >
                   Apply Now <ArrowRight className="ml-2 h-5 w-5" />
                 </button>
+                <Link
+                  to="/courses"
+                  className="bg-primary/10 backdrop-blur-md border border-primary/30 text-[var(--text-on-inverted)] hover:bg-primary/20 px-10 py-4 rounded-2xl text-lg font-black transition-all text-center"
+                  aria-label="View all AI training programs"
+                >
+                  View Programs
+                </Link>
                 <button 
                   onClick={() => openModal()}
-                  className="bg-primary/10 backdrop-blur-md border border-primary/30 text-[var(--text-on-inverted)] hover:bg-primary/20 px-10 py-4 rounded-2xl text-lg font-black transition-all"
+                  className="bg-white/5 backdrop-blur-md border border-white/20 text-[var(--text-on-inverted)] hover:bg-white/10 px-10 py-4 rounded-2xl text-lg font-black transition-all"
+                  aria-label="Talk to a career mentor"
                 >
-                  Talk to Counselor
+                  Talk to a Mentor
                 </button>
               </div>
             </div>

@@ -84,6 +84,7 @@ const Home = () => {
           <button
             onClick={() => openModal()}
             className="px-8 py-4 bg-white/5 backdrop-blur-md text-white border border-white/10 hover:border-primary/50 rounded-full flex items-center justify-center font-bold text-base hover:bg-white/10 transition-all duration-300 group"
+            aria-label="Book Free Demo"
           >
             <PlayCircle className="mr-2 h-5 w-5 opacity-70 group-hover:opacity-100 text-primary-light transition-all" />
             Book Free Demo
@@ -169,6 +170,7 @@ const Home = () => {
                 <button
                   onClick={() => openModal()}
                   className="bg-primary text-white hover:opacity-90 px-10 py-4 rounded-full text-lg font-black transition-all shadow-xl shadow-primary/20"
+                  aria-label="Enroll Now"
                 >
                   Enroll Now
                 </button>

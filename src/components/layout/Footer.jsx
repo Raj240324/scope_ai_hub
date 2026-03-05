@@ -163,12 +163,19 @@ const Footer = () => {
               <Link to="/legal/trainer-conduct" className="hover:text-primary transition-colors">Trainer Conduct</Link>
               <Link to="/disclaimer" className="hover:text-primary transition-colors">Disclaimer</Link>
             </div>
-            <button 
-              onClick={() => openModal()}
-              className="text-primary hover:opacity-80 font-bold uppercase tracking-widest transition-colors"
-            >
-              Enroll Today
-            </button>
+            <div className="flex flex-col items-center md:items-end space-y-2">
+              <span className="text-[10px] font-bold text-primary tracking-widest uppercase flex items-center bg-primary/10 px-3 py-1 rounded-full">
+                <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse mr-2"></span>
+                Next Batch Starting Soon
+              </span>
+              <button 
+                onClick={() => openModal()}
+                className="text-primary hover:opacity-80 font-bold uppercase tracking-widest transition-colors"
+                aria-label="Enroll Today"
+              >
+                Enroll Today
+              </button>
+            </div>
         </div>
       </div>
     </footer>

@@ -75,11 +75,11 @@ const JoinAsTrainer = () => {
               <h2 className="text-3xl md:text-4xl font-black mb-8 leading-tight">Who we are <span className="text-primary">looking for.</span></h2>
               <div className="space-y-6">
                 {[
-                  "Industry experience of at least 8+ years in your specialization.",
+                  "Strong industry experience in AI, Machine Learning, Data Science, or Software Engineering.",
                   "A passion for mentoring and simplifying complex technical concepts.",
-                  "Experience with real-world production-scale projects.",
-                  "Ability to commit to at least 4-6 hours per week.",
-                  "Strong communication skills in English (Tamil/Telugu is a plus for local batches)."
+                  "Experience building or deploying real-world production systems.",
+                  "Ability to commit at least 4–6 hours per week.",
+                  "Strong communication skills in English (Tamil or Telugu is a plus)."
                 ].map((item, i) => (
                   <div key={i} className="flex items-start space-x-4">
                     <CheckCircle2 className="h-6 w-6 text-primary shrink-0 mt-1" />
