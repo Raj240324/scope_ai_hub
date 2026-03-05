@@ -25,7 +25,7 @@ import { generateRequestId, createLogger } from './utils/logger.js';
 import { checkServerRateLimit, blockIpFor, isTokenReplayed, cleanupMemoryCache } from './utils/rateLimiter.js';
 import { verifyRecaptcha } from './utils/recaptcha.js';
 import { sendBrevoEmail, upsertBrevoContact } from './utils/brevo.js';
-import { stripHtml, isValidEmail, normalizePhone, getClientIp, getAllowedOrigin, setSecurityHeaders } from './utils/sanitize.js';
+import { stripHtml, isValidEmail, normalizePhone, getClientIp, isAllowedOrigin, isAllowedReferer, setSecurityHeaders } from './utils/sanitize.js';
 
 // ─── Configuration ──────────────────────────────────────────────────
 const ALLOWED_HOSTNAME = process.env.ALLOWED_HOSTNAME || 'scope-ai-hub.vercel.app';
@@ -44,7 +44,6 @@ const IS_TEST = process.env.NODE_ENV === 'test';
 export default async function handler(req, res) {
   const requestId = generateRequestId();
   const log = createLogger(requestId);
-  const ALLOWED_ORIGIN = getAllowedOrigin();
 
   setSecurityHeaders(res, requestId);
   cleanupMemoryCache();
@@ -58,7 +57,7 @@ export default async function handler(req, res) {
 
   // 1A. Strict Origin Validation
   const origin = req.headers.origin;
-  if (origin !== ALLOWED_ORIGIN) {
+  if (!isAllowedOrigin(origin)) {
     log.warn('Invalid Origin block', { origin });
     blockIpFor(clientIp, 10 * 60 * 1000);
     return res.status(403).json({ success: false, message: 'Request could not be processed' });
@@ -73,9 +72,8 @@ export default async function handler(req, res) {
   }
 
   // 1C. Referrer Validation
-  const allowedHost = ALLOWED_ORIGIN.replace(/^https?:\/\//, '');
   const referer = req.headers.referer || '';
-  if (referer && !referer.includes(allowedHost)) {
+  if (!isAllowedReferer(referer)) {
     log.warn('Invalid Referrer blocked', { referer });
     blockIpFor(clientIp, 10 * 60 * 1000);
     return res.status(403).json({ success: false, message: 'Request could not be processed' });

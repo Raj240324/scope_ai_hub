@@ -48,14 +48,40 @@ export function getClientIp(req) {
 }
 
 /**
- * Derive the allowed origin from environment variables.
- * @returns {string}
+ * Get all allowed origins as an array.
+ * Supports comma-separated ALLOWED_ORIGINS for multi-domain deployments.
+ * Falls back to ALLOWED_ORIGIN, then ALLOWED_HOSTNAME.
+ * @returns {string[]}
  */
-export function getAllowedOrigin() {
-  return (
+export function getAllowedOrigins() {
+  if (process.env.ALLOWED_ORIGINS) {
+    return process.env.ALLOWED_ORIGINS.split(',').map((o) => o.trim()).filter(Boolean);
+  }
+  const single =
     process.env.ALLOWED_ORIGIN ||
-    `https://${process.env.ALLOWED_HOSTNAME || 'scope-ai-hub.vercel.app'}`
-  );
+    `https://${process.env.ALLOWED_HOSTNAME || 'scope-ai-hub.vercel.app'}`;
+  return [single];
+}
+
+/**
+ * Check whether a request origin is allowed.
+ * @param {string} origin
+ * @returns {boolean}
+ */
+export function isAllowedOrigin(origin) {
+  if (!origin) return false;
+  return getAllowedOrigins().includes(origin);
+}
+
+/**
+ * Check whether a referer header matches any allowed origin.
+ * @param {string} referer
+ * @returns {boolean}
+ */
+export function isAllowedReferer(referer) {
+  if (!referer) return true; // Empty referer is acceptable
+  const hosts = getAllowedOrigins().map((o) => o.replace(/^https?:\/\//, ''));
+  return hosts.some((host) => referer.includes(host));
 }
 
 /**
