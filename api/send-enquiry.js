@@ -1,254 +1,65 @@
 /**
  * /api/send-enquiry.js — Vercel Serverless Function
  *
- * Security-hardened enquiry handler with structured logging:
+ * Security-hardened enquiry handler with Supabase storage:
  *  1. POST-only, payload size guard
  *  2. Input sanitization & validation
  *  3. Server-side IP rate limiting (in-memory)
- *  4. reCAPTCHA v3 server-side verification
- *  5. Brevo transactional email (owner + auto-reply)
- *  6. Brevo CRM contact upsert
- *  7. Structured JSON logging with requestId
+ *  4. reCAPTCHA v2 server-side verification
+ *  5. Save to Supabase (primary data store)
+ *  6. Brevo transactional email (owner + auto-reply)
+ *  7. Brevo CRM contact upsert
+ *  8. Update Supabase brevo_synced flag
+ *  9. Structured JSON logging with requestId
  *
  * Environment variables (Vercel Dashboard):
- *   BREVO_API_KEY        — Brevo transactional API key
- *   RECAPTCHA_SECRET_KEY — Google reCAPTCHA v3 secret
- *   SENTRY_DSN           — (optional) Sentry error tracking
+ *   SUPABASE_URL             — Supabase project URL
+ *   SUPABASE_SERVICE_ROLE_KEY — Supabase service role secret
+ *   BREVO_API_KEY            — Brevo transactional API key
+ *   RECAPTCHA_SECRET_KEY     — Google reCAPTCHA v2 secret
+ *   ALLOWED_ORIGIN           — Full allowed origin (e.g. https://scopeaihub.com)
+ *   ALLOWED_HOSTNAME         — Fallback hostname for origin/reCAPTCHA
  */
 import crypto from 'crypto';
 import { generateRequestId, createLogger } from './utils/logger.js';
+import { checkServerRateLimit, blockIpFor, isTokenReplayed, cleanupMemoryCache } from './utils/rateLimiter.js';
+import { verifyRecaptcha } from './utils/recaptcha.js';
+import { sendBrevoEmail, upsertBrevoContact } from './utils/brevo.js';
+import { stripHtml, isValidEmail, normalizePhone, getClientIp, getAllowedOrigin, setSecurityHeaders } from './utils/sanitize.js';
+import { getSupabase } from './utils/supabase.js';
 
 // ─── Configuration ──────────────────────────────────────────────────
-const BREVO_API_KEY = process.env.BREVO_API_KEY;
-const RECAPTCHA_SECRET_KEY = process.env.RECAPTCHA_SECRET_KEY;
 const ALLOWED_HOSTNAME = process.env.ALLOWED_HOSTNAME || 'scope-ai-hub.vercel.app';
 
-const OWNER_TEMPLATE_ID = 2;      // TODO: update after creating owner notification template in Brevo
-const AUTO_REPLY_TEMPLATE_ID = 1;  // Already created and active in Brevo
+const OWNER_TEMPLATE_ID = 2;
+const AUTO_REPLY_TEMPLATE_ID = 1;
 const CRM_LIST_ID = 3;
-const OWNER_EMAIL = 'nagarajan.webdev@gmail.com'; // TODO: change back to 'info@scopeaihub.com' for production
+const OWNER_EMAIL = 'nagarajan.webdev@gmail.com';
 const OWNER_NAME = 'SCOPE AI HUB';
 
 const MAX_BODY_BYTES = 10 * 1024; // 10 KB
-const EXTERNAL_TIMEOUT_MS = 10_000;
 const IS_TEST = process.env.NODE_ENV === 'test';
-
-// ─── Token Replay Cache ─────────────────────────────────────────────
-const tokenCache = new Map();
-const TOKEN_TTL_MS = 2 * 60 * 1000; // 2 minutes
-
-// ─── Server-Side Adaptive Rate Limiter ──────────────────────────────
-const ipMap = new Map();
-const CLEANUP_INTERVAL_MS = 5 * 60 * 1000; // 5 minutes
-
-function checkServerRateLimit(ip) {
-  const now = Date.now();
-  let record = ipMap.get(ip) || { attempts: [], blockedUntil: 0 };
-  
-  if (record.blockedUntil > now) {
-    return { allowed: false, reason: 'blocked' };
-  }
-
-  // Purge older than 30 mins
-  record.attempts = record.attempts.filter((ts) => now - ts < 30 * 60 * 1000);
-  record.attempts.push(now);
-
-  const attempts5m = record.attempts.filter((ts) => now - ts < 5 * 60 * 1000).length;
-  const attempts10m = record.attempts.filter((ts) => now - ts < 10 * 60 * 1000).length;
-  const attempts30m = record.attempts.length;
-
-  if (attempts30m >= 15) {
-    record.blockedUntil = now + 60 * 60 * 1000; // block 1 hour
-    ipMap.set(ip, record);
-    return { allowed: false, reason: 'blocked_1hr' };
-  }
-
-  if (attempts10m >= 8) {
-    record.blockedUntil = now + 10 * 60 * 1000; // block 10 mins
-    ipMap.set(ip, record);
-    return { allowed: false, reason: 'blocked_10m' };
-  }
-
-  ipMap.set(ip, record);
-
-  if (attempts5m >= 5) {
-    return { allowed: true, reason: 'warn' };
-  }
-
-  return { allowed: true, reason: 'ok' };
-}
-
-function blockIpFor(ip, durationMs) {
-  const record = ipMap.get(ip) || { attempts: [], blockedUntil: 0 };
-  record.blockedUntil = Date.now() + durationMs;
-  ipMap.set(ip, record);
-}
-
-// Automatic periodic cleanup to prevent memory leak
-let lastCleanup = Date.now();
-function cleanupMemoryCache() {
-  const now = Date.now();
-  if (now - lastCleanup < CLEANUP_INTERVAL_MS) return;
-  lastCleanup = now;
-
-  // Cleanup rate limiter
-  const cutoff = now - 30 * 60 * 1000;
-  for (const [key, val] of ipMap) {
-    val.attempts = val.attempts.filter((ts) => ts > cutoff);
-    if (val.attempts.length === 0 && val.blockedUntil < now) {
-      ipMap.delete(key);
-    } else {
-      ipMap.set(key, val);
-    }
-  }
-
-  // Cleanup token cache
-  const tokenCutoff = now - TOKEN_TTL_MS;
-  for (const [key, ts] of tokenCache) {
-    if (ts < tokenCutoff) tokenCache.delete(key);
-  }
-}
-
-// ─── Helpers ────────────────────────────────────────────────────────
-
-/** Strip HTML tags from a string */
-function stripHtml(str) {
-  if (typeof str !== 'string') return '';
-  return str.replace(/<[^>]*>/g, '').trim();
-}
-
-/** Basic email format validation */
-function isValidEmail(email) {
-  return /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email);
-}
-
-/** Normalize phone — keep digits, +, spaces only */
-function normalizePhone(phone) {
-  if (!phone) return '';
-  return phone.replace(/[^\d+\s-]/g, '').trim().slice(0, 20);
-}
-
-/** Fetch with timeout using AbortController */
-async function fetchWithTimeout(url, options, timeoutMs = EXTERNAL_TIMEOUT_MS) {
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), timeoutMs);
-
-  try {
-    const res = await fetch(url, { ...options, signal: controller.signal });
-    clearTimeout(timer);
-    return res;
-  } catch (err) {
-    clearTimeout(timer);
-    throw err;
-  }
-}
-
-// ─── Brevo API Calls ────────────────────────────────────────────────
-
-async function sendBrevoEmail(templateId, toEmail, toName, params) {
-  const body = {
-    templateId,
-    to: [{ email: toEmail, name: toName || toEmail }],
-    params,
-  };
-
-  const res = await fetchWithTimeout('https://api.brevo.com/v3/smtp/email', {
-    method: 'POST',
-    headers: {
-      'api-key': BREVO_API_KEY,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(body),
-  });
-
-  if (!res.ok) {
-    const err = await res.text().catch(() => 'Unknown');
-    throw new Error(`Brevo email failed (${res.status}): ${err}`);
-  }
-
-  return true;
-}
-
-async function upsertBrevoContact(email, attributes) {
-  const body = {
-    email,
-    attributes,
-    listIds: [CRM_LIST_ID],
-    updateEnabled: true,
-  };
-
-  const res = await fetchWithTimeout('https://api.brevo.com/v3/contacts', {
-    method: 'POST',
-    headers: {
-      'api-key': BREVO_API_KEY,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(body),
-  });
-
-  if (!res.ok && res.status !== 204) {
-    return false;
-  }
-
-  return true;
-}
-
-async function verifyRecaptcha(token, ip) {
-  // Bypass in test mode
-  if (IS_TEST) {
-    return { success: true };
-  }
-
-  const params = new URLSearchParams({
-    secret: RECAPTCHA_SECRET_KEY,
-    response: token,
-    remoteip: ip || '',
-  });
-
-  const res = await fetchWithTimeout('https://www.google.com/recaptcha/api/siteverify', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: params.toString(),
-  });
-
-  if (!res.ok) {
-    throw new Error('reCAPTCHA verification service unavailable');
-  }
-
-  const data = await res.json();
-  return {
-    success: data.success === true,
-    hostname: data.hostname || '',
-  };
-}
 
 // ─── Main Handler ───────────────────────────────────────────────────
 
 export default async function handler(req, res) {
   const requestId = generateRequestId();
   const log = createLogger(requestId);
+  const ALLOWED_ORIGIN = getAllowedOrigin();
 
-  res.setHeader('X-Request-ID', requestId);
-  res.setHeader('X-Content-Type-Options', 'nosniff');
-  res.setHeader('X-Frame-Options', 'DENY');
-  res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
-
+  setSecurityHeaders(res, requestId);
   cleanupMemoryCache();
 
-  const clientIp =
-    req.headers['x-forwarded-for']?.split(',')[0]?.trim() ||
-    req.headers['x-real-ip'] ||
-    req.socket?.remoteAddress ||
-    'unknown';
+  const clientIp = getClientIp(req);
 
   // 1. Method guard
   if (req.method !== 'POST') {
     return res.status(405).json({ success: false, message: 'Request could not be processed' });
   }
 
-  // 1A. Strict Origin Validation (CORS Lockdown)
+  // 1A. Strict Origin Validation
   const origin = req.headers.origin;
-  if (origin !== 'https://scope-ai-hub.vercel.app') {
+  if (origin !== ALLOWED_ORIGIN) {
     log.warn('Invalid Origin block', { origin });
     blockIpFor(clientIp, 10 * 60 * 1000);
     return res.status(403).json({ success: false, message: 'Request could not be processed' });
@@ -263,16 +74,17 @@ export default async function handler(req, res) {
   }
 
   // 1C. Referrer Validation
+  const allowedHost = ALLOWED_ORIGIN.replace(/^https?:\/\//, '');
   const referer = req.headers.referer || '';
-  if (referer && !referer.includes('scope-ai-hub.vercel.app')) {
+  if (referer && !referer.includes(allowedHost)) {
     log.warn('Invalid Referrer blocked', { referer });
     blockIpFor(clientIp, 10 * 60 * 1000);
     return res.status(403).json({ success: false, message: 'Request could not be processed' });
   }
 
   // 2. Environment check
-  if (!BREVO_API_KEY || !RECAPTCHA_SECRET_KEY) {
-    log.error('Missing environment variables', { missing: !BREVO_API_KEY ? 'BREVO_API_KEY' : 'RECAPTCHA_SECRET_KEY' });
+  if (!process.env.BREVO_API_KEY || !process.env.RECAPTCHA_SECRET_KEY) {
+    log.error('Missing environment variables', { missing: !process.env.BREVO_API_KEY ? 'BREVO_API_KEY' : 'RECAPTCHA_SECRET_KEY' });
     return res.status(500).json({ success: false, message: 'Request could not be processed' });
   }
 
@@ -290,15 +102,14 @@ export default async function handler(req, res) {
     const formLoadedAt = parseInt(body.formLoadedAt, 10);
     if (!formLoadedAt || isNaN(formLoadedAt) || (Date.now() - formLoadedAt < 3000)) {
       log.warn('Instant submission blocked', { timeToSubmitMs: Date.now() - formLoadedAt });
-      blockIpFor(clientIp, 10 * 60 * 1000); // Cooldown
+      blockIpFor(clientIp, 10 * 60 * 1000);
       return res.status(400).json({ success: false, message: 'Request could not be processed' });
     }
 
     // 4. Honeypot check
-    // Wait intentionally to masquerade as processing, then fake success
     if (body.website) {
       log.info('Honeypot triggered — bot detected');
-      blockIpFor(clientIp, 10 * 60 * 1000); // Cooldown
+      blockIpFor(clientIp, 10 * 60 * 1000);
       return res.status(200).json({ success: true, message: 'Enquiry submitted successfully.' });
     }
 
@@ -308,24 +119,26 @@ export default async function handler(req, res) {
     const phone = normalizePhone(body.user_phone || '');
     const location = stripHtml(body.user_location || '').slice(0, 200);
     const qualification = stripHtml(body.qualification || '').slice(0, 100);
-const inquiryType = stripHtml(body.inquiry_type || '').slice(0, 200);
-const programInterest = stripHtml(body.program_interest || '').slice(0, 200);
+    const inquiryType = stripHtml(body.inquiry_type || '').slice(0, 200);
+    const programInterest = stripHtml(body.program_interest || '').slice(0, 200);
 
-// Normalize final course value
-const courseInterest =
-  inquiryType === 'Enroll in an AI Program'
-    ? (programInterest || 'Program Not Selected')
-    : (inquiryType || 'General Inquiry');    const message = stripHtml(body.message || '').slice(0, 1000);
+    // Normalize final course value
+    const courseInterest =
+      inquiryType === 'Enroll in an AI Program'
+        ? (programInterest || 'Program Not Selected')
+        : (inquiryType || 'General Inquiry');
+
+    const message = stripHtml(body.message || '').slice(0, 1000);
     const recaptchaToken = body.recaptchaToken || '';
 
+    // 5B. Token replay protection
     if (recaptchaToken) {
       const tokenHash = crypto.createHash('sha256').update(recaptchaToken).digest('hex');
-      if (tokenCache.has(tokenHash)) {
+      if (isTokenReplayed(tokenHash)) {
         log.warn('reCAPTCHA token replay detected', { hash: tokenHash.slice(0, 8) });
-        blockIpFor(clientIp, 10 * 60 * 1000); // Cooldown
+        blockIpFor(clientIp, 10 * 60 * 1000);
         return res.status(403).json({ success: false, message: 'Request could not be processed' });
       }
-      tokenCache.set(tokenHash, Date.now());
     }
 
     // 6. Required field validation
@@ -353,7 +166,7 @@ const courseInterest =
     // 8. reCAPTCHA verification
     let captcha;
     try {
-      captcha = await verifyRecaptcha(recaptchaToken, clientIp);
+      captcha = await verifyRecaptcha(recaptchaToken, clientIp, ALLOWED_HOSTNAME);
     } catch (err) {
       log.error('reCAPTCHA verification failed', { error: err.message });
       return res.status(403).json({ success: false, message: 'Request could not be processed' });
@@ -372,23 +185,57 @@ const courseInterest =
 
     log.info('Enquiry validated', { course: courseInterest, hostname: captcha.hostname });
 
-    // 9. Template parameters (safe — no PII in logs)
-const templateParams = {
-  FIRSTNAME: firstName,
-  EMAIL: email,
-  PHONE: phone || 'Not provided',
-  LOCATION: location || 'Not provided',
-  QUALIFICATION: qualification || 'Not provided',
+    // ─────────────────────────────────────────────────────────────────
+    // 9. SAVE TO SUPABASE (Primary Data Store)
+    // ─────────────────────────────────────────────────────────────────
+    let enquiryId = null;
 
-  INQUIRY_TYPE: inquiryType || 'General Inquiry',
-  PROGRAM_INTEREST: programInterest || 'N/A',
+    try {
+      const supabase = getSupabase();
+      const { data, error: dbError } = await supabase
+        .from('enquiries')
+        .insert([
+          {
+            name: firstName,
+            email,
+            phone: phone || null,
+            course: courseInterest,
+            message,
+            ip_address: clientIp,
+            user_agent: userAgent.slice(0, 500),
+            brevo_synced: false,
+          },
+        ])
+        .select('id')
+        .single();
 
-  COURSE: courseInterest, // keep for backward compatibility if needed
-  MESSAGE: message,
+      if (dbError) {
+        log.error('Supabase insert failed', { error: dbError.message });
+        // Continue — Brevo will still receive the data
+      } else {
+        enquiryId = data?.id;
+        log.info('Enquiry saved to Supabase', { enquiryId });
+      }
+    } catch (err) {
+      log.error('Supabase connection error', { error: err.message });
+      // Non-blocking — continue to Brevo
+    }
 
-  current_year: new Date().getFullYear(),
-};
-    // 10. Save to Brevo CRM (non-critical)
+    // 10. Template parameters
+    const templateParams = {
+      FIRSTNAME: firstName,
+      EMAIL: email,
+      PHONE: phone || 'Not provided',
+      LOCATION: location || 'Not provided',
+      QUALIFICATION: qualification || 'Not provided',
+      INQUIRY_TYPE: inquiryType || 'General Inquiry',
+      PROGRAM_INTEREST: programInterest || 'N/A',
+      COURSE: courseInterest,
+      MESSAGE: message,
+      current_year: new Date().getFullYear(),
+    };
+
+    // 11. Save to Brevo CRM (non-critical)
     try {
       await upsertBrevoContact(email, {
         FIRSTNAME: firstName,
@@ -396,24 +243,29 @@ const templateParams = {
         LOCATION: location,
         QUALIFICATION: qualification,
         INQUIRY_TYPE: inquiryType || 'General Inquiry',
-PROGRAM_INTEREST: programInterest || 'N/A',
-COURSE_INTEREST: courseInterest,
-      });
+        PROGRAM_INTEREST: programInterest || 'N/A',
+        COURSE_INTEREST: courseInterest,
+      }, CRM_LIST_ID);
       log.info('CRM contact upserted');
     } catch (err) {
       log.error('CRM upsert failed', { error: err.message });
     }
 
-    // 11. Send owner notification (critical)
+    // 12. Send owner notification (critical)
+    let brevoSuccess = false;
     try {
       await sendBrevoEmail(OWNER_TEMPLATE_ID, OWNER_EMAIL, OWNER_NAME, templateParams);
       log.info('Owner notification sent');
+      brevoSuccess = true;
     } catch (err) {
       log.error('Owner email failed', { error: err.message });
-      return res.status(500).json({ success: false, message: 'Failed to submit your enquiry. Please try again or call us directly.' });
+      // If Supabase saved the data, we can still succeed
+      if (!enquiryId) {
+        return res.status(500).json({ success: false, message: 'Failed to submit your enquiry. Please try again or call us directly.' });
+      }
     }
 
-    // 12. Send auto-reply (non-critical)
+    // 13. Send auto-reply (non-critical)
     try {
       await sendBrevoEmail(AUTO_REPLY_TEMPLATE_ID, email, firstName, templateParams);
       log.info('Auto-reply sent');
@@ -421,8 +273,22 @@ COURSE_INTEREST: courseInterest,
       log.error('Auto-reply failed', { error: err.message });
     }
 
-    // 13. Success
-    log.info('Enquiry completed successfully');
+    // 14. Update Supabase brevo_synced flag
+    if (enquiryId && brevoSuccess) {
+      try {
+        const supabase = getSupabase();
+        await supabase
+          .from('enquiries')
+          .update({ brevo_synced: true })
+          .eq('id', enquiryId);
+        log.info('Supabase brevo_synced updated', { enquiryId });
+      } catch (err) {
+        log.error('Supabase sync flag update failed', { error: err.message });
+      }
+    }
+
+    // 15. Success
+    log.info('Enquiry completed successfully', { enquiryId, brevoSuccess });
     return res.status(200).json({ success: true, message: 'Enquiry submitted successfully.' });
   } catch (err) {
     log.error('Unexpected error', { error: err.message });

@@ -2,7 +2,7 @@
  * /api/send-trainer.js — Vercel Serverless Function
  *
  * Security-hardened trainer application handler.
- * Replicates ALL security layers from /api/send-enquiry.js:
+ * Shares all security utilities with /api/send-enquiry.js:
  *  1. POST-only, payload size guard
  *  2. Origin, Referrer, User-Agent validation
  *  3. Timing protection, Honeypot tarpit
@@ -17,225 +17,39 @@
  * Environment variables (Vercel Dashboard):
  *   BREVO_API_KEY        — Brevo transactional API key
  *   RECAPTCHA_SECRET_KEY — Google reCAPTCHA v2 secret
+ *   ALLOWED_ORIGIN       — Full allowed origin
  *   ALLOWED_HOSTNAME     — Expected reCAPTCHA hostname
  */
 import crypto from 'crypto';
 import { generateRequestId, createLogger } from './utils/logger.js';
+import { checkServerRateLimit, blockIpFor, isTokenReplayed, cleanupMemoryCache } from './utils/rateLimiter.js';
+import { verifyRecaptcha } from './utils/recaptcha.js';
+import { sendBrevoEmail, upsertBrevoContact } from './utils/brevo.js';
+import { stripHtml, isValidEmail, normalizePhone, getClientIp, getAllowedOrigin, setSecurityHeaders } from './utils/sanitize.js';
 
 // ─── Configuration ──────────────────────────────────────────────────
-const BREVO_API_KEY = process.env.BREVO_API_KEY;
-const RECAPTCHA_SECRET_KEY = process.env.RECAPTCHA_SECRET_KEY;
 const ALLOWED_HOSTNAME = process.env.ALLOWED_HOSTNAME || 'scope-ai-hub.vercel.app';
 
-const TRAINER_NOTIFY_TEMPLATE_ID = 3; // TODO: create a "Trainer Application" template in Brevo
-const TRAINER_AUTO_REPLY_TEMPLATE_ID = 4; // TODO: create a "Trainer Auto-Reply" template in Brevo
-const CRM_LIST_ID = 4;                // TODO: create a "Trainer Applicants" list in Brevo
-const OWNER_EMAIL = 'nagarajan.webdev@gmail.com'; // TODO: change to 'info@scopeaihub.com' for production
+const TRAINER_NOTIFY_TEMPLATE_ID = 3;
+const TRAINER_AUTO_REPLY_TEMPLATE_ID = 4;
+const CRM_LIST_ID = 4;
+const OWNER_EMAIL = 'nagarajan.webdev@gmail.com';
 const OWNER_NAME = 'SCOPE AI HUB';
 
 const MAX_BODY_BYTES = 10 * 1024; // 10 KB
-const EXTERNAL_TIMEOUT_MS = 10_000;
 const IS_TEST = process.env.NODE_ENV === 'test';
-
-// ─── Token Replay Cache ─────────────────────────────────────────────
-const tokenCache = new Map();
-const TOKEN_TTL_MS = 2 * 60 * 1000; // 2 minutes
-
-// ─── Server-Side Adaptive Rate Limiter ──────────────────────────────
-const ipMap = new Map();
-const CLEANUP_INTERVAL_MS = 5 * 60 * 1000; // 5 minutes
-
-function checkServerRateLimit(ip) {
-  const now = Date.now();
-  let record = ipMap.get(ip) || { attempts: [], blockedUntil: 0 };
-
-  if (record.blockedUntil > now) {
-    return { allowed: false, reason: 'blocked' };
-  }
-
-  record.attempts = record.attempts.filter((ts) => now - ts < 30 * 60 * 1000);
-  record.attempts.push(now);
-
-  const attempts5m = record.attempts.filter((ts) => now - ts < 5 * 60 * 1000).length;
-  const attempts10m = record.attempts.filter((ts) => now - ts < 10 * 60 * 1000).length;
-  const attempts30m = record.attempts.length;
-
-  if (attempts30m >= 15) {
-    record.blockedUntil = now + 60 * 60 * 1000;
-    ipMap.set(ip, record);
-    return { allowed: false, reason: 'blocked_1hr' };
-  }
-
-  if (attempts10m >= 8) {
-    record.blockedUntil = now + 10 * 60 * 1000;
-    ipMap.set(ip, record);
-    return { allowed: false, reason: 'blocked_10m' };
-  }
-
-  ipMap.set(ip, record);
-
-  if (attempts5m >= 5) {
-    return { allowed: true, reason: 'warn' };
-  }
-
-  return { allowed: true, reason: 'ok' };
-}
-
-function blockIpFor(ip, durationMs) {
-  const record = ipMap.get(ip) || { attempts: [], blockedUntil: 0 };
-  record.blockedUntil = Date.now() + durationMs;
-  ipMap.set(ip, record);
-}
-
-// Automatic periodic cleanup
-let lastCleanup = Date.now();
-function cleanupMemoryCache() {
-  const now = Date.now();
-  if (now - lastCleanup < CLEANUP_INTERVAL_MS) return;
-  lastCleanup = now;
-
-  const cutoff = now - 30 * 60 * 1000;
-  for (const [key, val] of ipMap) {
-    val.attempts = val.attempts.filter((ts) => ts > cutoff);
-    if (val.attempts.length === 0 && val.blockedUntil < now) {
-      ipMap.delete(key);
-    } else {
-      ipMap.set(key, val);
-    }
-  }
-
-  const tokenCutoff = now - TOKEN_TTL_MS;
-  for (const [key, ts] of tokenCache) {
-    if (ts < tokenCutoff) tokenCache.delete(key);
-  }
-}
-
-// ─── Helpers ────────────────────────────────────────────────────────
-
-function stripHtml(str) {
-  if (typeof str !== 'string') return '';
-  return str.replace(/<[^>]*>/g, '').trim();
-}
-
-function isValidEmail(email) {
-  return /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email);
-}
-
-function normalizePhone(phone) {
-  if (!phone) return '';
-  return phone.replace(/[^\d+\s-]/g, '').trim().slice(0, 20);
-}
-
-async function fetchWithTimeout(url, options, timeoutMs = EXTERNAL_TIMEOUT_MS) {
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), timeoutMs);
-
-  try {
-    const res = await fetch(url, { ...options, signal: controller.signal });
-    clearTimeout(timer);
-    return res;
-  } catch (err) {
-    clearTimeout(timer);
-    throw err;
-  }
-}
-
-// ─── Brevo API Calls ────────────────────────────────────────────────
-
-async function sendBrevoEmail(templateId, toEmail, toName, params) {
-  const body = {
-    templateId,
-    to: [{ email: toEmail, name: toName || toEmail }],
-    params,
-  };
-
-  const res = await fetchWithTimeout('https://api.brevo.com/v3/smtp/email', {
-    method: 'POST',
-    headers: {
-      'api-key': BREVO_API_KEY,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(body),
-  });
-
-  if (!res.ok) {
-    const err = await res.text().catch(() => 'Unknown');
-    throw new Error(`Brevo email failed (${res.status}): ${err}`);
-  }
-
-  return true;
-}
-
-async function upsertBrevoContact(email, attributes) {
-  const body = {
-    email,
-    attributes,
-    listIds: [CRM_LIST_ID],
-    updateEnabled: true,
-  };
-
-  const res = await fetchWithTimeout('https://api.brevo.com/v3/contacts', {
-    method: 'POST',
-    headers: {
-      'api-key': BREVO_API_KEY,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(body),
-  });
-
-  if (!res.ok && res.status !== 204) {
-    return false;
-  }
-
-  return true;
-}
-
-async function verifyRecaptcha(token, ip) {
-  if (IS_TEST) {
-    return { success: true, hostname: ALLOWED_HOSTNAME };
-  }
-
-  const params = new URLSearchParams({
-    secret: RECAPTCHA_SECRET_KEY,
-    response: token,
-    remoteip: ip || '',
-  });
-
-  const res = await fetchWithTimeout('https://www.google.com/recaptcha/api/siteverify', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: params.toString(),
-  });
-
-  if (!res.ok) {
-    throw new Error('reCAPTCHA verification service unavailable');
-  }
-
-  const data = await res.json();
-  return {
-    success: data.success === true,
-    hostname: data.hostname || '',
-  };
-}
 
 // ─── Main Handler ───────────────────────────────────────────────────
 
 export default async function handler(req, res) {
   const requestId = generateRequestId();
   const log = createLogger(requestId);
+  const ALLOWED_ORIGIN = getAllowedOrigin();
 
-  res.setHeader('X-Request-ID', requestId);
-  res.setHeader('X-Content-Type-Options', 'nosniff');
-  res.setHeader('X-Frame-Options', 'DENY');
-  res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
-
+  setSecurityHeaders(res, requestId);
   cleanupMemoryCache();
 
-  const clientIp =
-    req.headers['x-forwarded-for']?.split(',')[0]?.trim() ||
-    req.headers['x-real-ip'] ||
-    req.socket?.remoteAddress ||
-    'unknown';
+  const clientIp = getClientIp(req);
 
   // 1. Method guard
   if (req.method !== 'POST') {
@@ -244,7 +58,7 @@ export default async function handler(req, res) {
 
   // 1A. Strict Origin Validation
   const origin = req.headers.origin;
-  if (origin !== 'https://scope-ai-hub.vercel.app') {
+  if (origin !== ALLOWED_ORIGIN) {
     log.warn('Invalid Origin block', { origin });
     blockIpFor(clientIp, 10 * 60 * 1000);
     return res.status(403).json({ success: false, message: 'Request could not be processed' });
@@ -259,15 +73,16 @@ export default async function handler(req, res) {
   }
 
   // 1C. Referrer Validation
+  const allowedHost = ALLOWED_ORIGIN.replace(/^https?:\/\//, '');
   const referer = req.headers.referer || '';
-  if (referer && !referer.includes('scope-ai-hub.vercel.app')) {
+  if (referer && !referer.includes(allowedHost)) {
     log.warn('Invalid Referrer blocked', { referer });
     blockIpFor(clientIp, 10 * 60 * 1000);
     return res.status(403).json({ success: false, message: 'Request could not be processed' });
   }
 
   // 2. Environment check
-  if (!BREVO_API_KEY || !RECAPTCHA_SECRET_KEY) {
+  if (!process.env.BREVO_API_KEY || !process.env.RECAPTCHA_SECRET_KEY) {
     log.error('Missing environment variables');
     return res.status(500).json({ success: false, message: 'Request could not be processed' });
   }
@@ -309,12 +124,11 @@ export default async function handler(req, res) {
     // 5B. Token replay protection
     if (recaptchaToken) {
       const tokenHash = crypto.createHash('sha256').update(recaptchaToken).digest('hex');
-      if (tokenCache.has(tokenHash)) {
+      if (isTokenReplayed(tokenHash)) {
         log.warn('reCAPTCHA token replay detected', { hash: tokenHash.slice(0, 8) });
         blockIpFor(clientIp, 10 * 60 * 1000);
         return res.status(403).json({ success: false, message: 'Request could not be processed' });
       }
-      tokenCache.set(tokenHash, Date.now());
     }
 
     // 6. Required field validation
@@ -344,7 +158,7 @@ export default async function handler(req, res) {
     // 8. reCAPTCHA verification
     let captcha;
     try {
-      captcha = await verifyRecaptcha(recaptchaToken, clientIp);
+      captcha = await verifyRecaptcha(recaptchaToken, clientIp, ALLOWED_HOSTNAME);
     } catch (err) {
       log.error('reCAPTCHA verification failed', { error: err.message });
       return res.status(403).json({ success: false, message: 'Request could not be processed' });
@@ -364,23 +178,22 @@ export default async function handler(req, res) {
     log.info('Trainer application validated', { expertise, hostname: captcha.hostname });
 
     // 9. Template parameters
- // 9. Template parameters (MUST match Brevo template exactly)
-const templateParams = {
-  TRAINER_NAME: trainerName,
-  EMAIL: email,
-  PHONE: phone || 'Not provided',
-  EXPERIENCE: experience + ' years',
-  EXPERTISE: expertise,
-  LINKEDIN: linkedinUrl || 'Not provided',
- SUBMITTED_AT: new Date().toLocaleString('en-IN', {
-  timeZone: 'Asia/Kolkata',
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric',
-  hour: '2-digit',
-  minute: '2-digit',
-}),
-};
+    const templateParams = {
+      TRAINER_NAME: trainerName,
+      EMAIL: email,
+      PHONE: phone || 'Not provided',
+      EXPERIENCE: experience + ' years',
+      EXPERTISE: expertise,
+      LINKEDIN: linkedinUrl || 'Not provided',
+      SUBMITTED_AT: new Date().toLocaleString('en-IN', {
+        timeZone: 'Asia/Kolkata',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+      }),
+    };
 
     // 10. Save to Brevo CRM (non-critical)
     try {
@@ -389,7 +202,7 @@ const templateParams = {
         PHONE: phone,
         EXPERTISE: expertise,
         EXPERIENCE: experience,
-      });
+      }, CRM_LIST_ID);
       log.info('CRM contact upserted');
     } catch (err) {
       log.error('CRM upsert failed', { error: err.message });

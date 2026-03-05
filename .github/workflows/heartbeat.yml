@@ -1,0 +1,31 @@
+name: Heartbeat (Keep Alive)
+
+on:
+  schedule:
+    # Runs every 5 days at 09:00 UTC
+    - cron: "0 9 */5 * *"
+  workflow_dispatch: # Allow manual trigger from Actions UI
+
+jobs:
+  ping:
+    name: Ping Health Endpoint
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Ping site health endpoint
+        run: |
+          echo "🫀 Sending heartbeat at $(date -u)"
+
+          HTTP_STATUS=$(curl --silent --fail --write-out "%{http_code}" \
+            --output /dev/null \
+            --max-time 30 \
+            "${{ secrets.SITE_URL }}/api/health")
+
+          if [ "$HTTP_STATUS" = "200" ]; then
+            echo "✅ Health check passed. Status: $HTTP_STATUS"
+            echo "⏰ Next heartbeat in ~5 days"
+          else
+            echo "❌ Health check failed. Status: $HTTP_STATUS"
+            exit 1
+          fi

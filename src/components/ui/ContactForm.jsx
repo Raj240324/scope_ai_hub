@@ -435,6 +435,7 @@ const ContactForm = ({ initialCourse = 'General Inquiry' }) => {
             <ReCAPTCHA
               ref={recaptchaRef}
               sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
+              theme={document.documentElement.classList.contains('dark') ? 'dark' : 'light'}
               onChange={(token) => {
                 setCaptchaToken(token);
                 if (status === 'error') setStatus('idle');
