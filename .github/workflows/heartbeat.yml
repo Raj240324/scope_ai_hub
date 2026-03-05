@@ -2,7 +2,7 @@ name: System Health Monitor
 
 on:
   schedule:
-    - cron: "0 9 */5 * *"   # every 5 days
+    - cron: "0 9 */5 * *"
   workflow_dispatch:
 
 jobs:
@@ -16,7 +16,7 @@ jobs:
         run: |
           echo "Checking system health..."
 
-          RESPONSE=$(curl -s ${{ secrets.SITE_URL }}/api/health)
+          RESPONSE=$(curl -s "${{ secrets.SITE_URL }}/api/health")
 
           echo "Response: $RESPONSE"
 
@@ -37,14 +37,14 @@ jobs:
           -H "accept: application/json" \
           -H "api-key: ${{ secrets.BREVO_API_KEY }}" \
           -H "content-type: application/json" \
-          -d '{
-            "sender": {
-              "name": "Scope AI Hub Monitor",
-              "email": "monitor@scopeaihub.com"
+          -d "{
+            \"sender\": {
+              \"name\": \"Scope AI Hub Monitor\",
+              \"email\": \"nagarajan.webdev@gmail.com\"
             },
-            "to": [{
-              "email": "${{ secrets.ALERT_EMAIL }}"
+            \"to\": [{
+              \"email\": \"${{ secrets.ALERT_EMAIL }}\"
             }],
-            "subject": "🚨 Scope AI Hub System Alert",
-            "htmlContent": "<h2>System Health Alert</h2><p>The system health endpoint returned a degraded status.</p><p>Please check the system immediately.</p>"
-          }'
+            \"subject\": \"🚨 Scope AI Hub System Alert\",
+            \"htmlContent\": \"<h2>System Health Alert</h2><p>The system health endpoint returned a degraded status.</p><p>Check immediately: ${{ secrets.SITE_URL }}/api/health</p>\"
+          }"
