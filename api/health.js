@@ -3,7 +3,7 @@ import { createClient } from "@supabase/supabase-js";
 export default async function handler(req, res) {
 
   const health = {
-    status: "ok",
+    status: "degraded",
     timestamp: new Date().toISOString(),
     services: {}
   };
