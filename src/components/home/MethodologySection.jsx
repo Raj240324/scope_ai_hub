@@ -12,7 +12,7 @@ const methodology = [
 ];
 
 const MethodologySection = ({ openModal }) => (
-  <section className="py-24 bg-[var(--bg-body)] relative border-b border-[var(--border-color)]">
+  <section className="py-24 bg-[var(--bg-secondary)] relative border-b border-[var(--border-color)]">
     <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
       <Parallax offset={20} className="absolute top-0 right-0 w-1/2 h-full z-0">
         <div className="w-full h-full bg-[var(--bg-secondary)]/50 -skew-x-12 translate-x-1/2" />

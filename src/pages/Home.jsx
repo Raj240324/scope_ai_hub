@@ -21,7 +21,6 @@ import { ServiceGrid } from '../components/ui/ServiceGrid';
 // Section components
 import StatsSection from '../components/home/StatsSection';
 import HiringPartners from '../components/home/HiringPartners';
-import TrustFactors from '../components/home/TrustFactors';
 import MethodologySection from '../components/home/MethodologySection';
 import CoursesSection from '../components/home/CoursesSection';
 import TestimonialsSection from '../components/home/TestimonialsSection';
@@ -94,6 +93,11 @@ const Home = () => {
 
       <StatsSection />
       <HiringPartners />
+      <CoursesSection courses={flagshipCourses} />
+      <MethodologySection openModal={openModal} />
+      <TestimonialsSection />
+      <CareerSupportSection />
+      <PlacementSection openModal={openModal} />
 
       {/* Certifications & Recognitions */}
       <section className="py-12 bg-[var(--bg-secondary)] border-b border-[var(--border-color)]">
@@ -123,6 +127,8 @@ const Home = () => {
         </div>
       </section>
 
+      <TrainerSpotlight openModal={openModal} />
+
       <ServiceGrid
         className="bg-[var(--bg-secondary)] border-b border-[var(--border-color)] relative"
         title={<>Why <span className="text-primary">AI & Software Skills</span> Are the Future</>}
@@ -141,17 +147,10 @@ const Home = () => {
         ]}
       />
 
-      <MethodologySection openModal={openModal} />
-      <CoursesSection courses={flagshipCourses} />
-      <CareerSupportSection />
-      <TrainerSpotlight openModal={openModal} />
-      <TrustFactors />
-      <TestimonialsSection />
-      <PlacementSection openModal={openModal} />
+      <GlobalReachSection />
+      <CorporateSection openModal={openModal} />
       <FAQSection />
       <CTASection openModal={openModal} />
-      <CorporateSection openModal={openModal} />
-      <GlobalReachSection />
 
       {/* Final CTA */}
       <section className="py-20">

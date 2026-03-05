@@ -5,7 +5,7 @@ import { StaggerContainer, StaggerItem } from '../utils/Animations';
 import CourseCard from '../ui/CourseCard';
 
 const CoursesSection = ({ courses }) => (
-  <section id="trending-courses" className="section-padding bg-[var(--bg-secondary)] border-b border-[var(--border-color)]">
+  <section id="trending-courses" className="section-padding bg-[var(--bg-body)] border-b border-[var(--border-color)]">
     <div className="container-custom">
       <div className="flex flex-col md:flex-row justify-between items-end mb-12">
         <div className="max-w-2xl">

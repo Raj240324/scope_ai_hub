@@ -9,7 +9,7 @@ const CareerSupportSection = () => {
   const featuredAddons = addons.slice(0, 4);
 
   return (
-    <section className="section-padding bg-[var(--bg-body)] border-y border-[var(--border-color)]">
+    <section className="section-padding bg-[var(--bg-secondary)] border-y border-[var(--border-color)]">
       <div className="container-custom">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">

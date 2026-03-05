@@ -15,7 +15,7 @@ const companies = [
 ];
 
 const HiringPartners = () => (
-  <section className="py-12 md:py-16 bg-[var(--bg-body)] border-b border-[var(--border-color)] overflow-hidden">
+  <section className="py-12 md:py-16 bg-[var(--bg-secondary)] border-b border-[var(--border-color)] overflow-hidden">
     <div className="container-custom">
       <div className="text-center max-w-3xl mx-auto mb-10 md:mb-12">
         <div className="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider mb-6 border border-primary/20">

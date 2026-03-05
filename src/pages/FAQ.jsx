@@ -56,7 +56,7 @@ const faqData = [
       },
       {
         q: `Which companies hire from ${BRANDING.fullName}?`,
-        a: "Our students are placed in top MNCs and startups like Google, Amazon, TCS, Infosys, Wipro, and many others. Check our Placement page for a more comprehensive list."
+        a: "Our students are placed in top MNCs and startups like Google, Amazon, TCS, Infosys, Wipro, and many others. Check our Home or About page for a more comprehensive list."
       },
       {
         q: "Do you provide resume preparation support?",

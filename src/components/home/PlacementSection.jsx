@@ -72,7 +72,7 @@ const PlacementSection = ({ openModal }) => (
           <div className="space-y-6">
             {[
               { value: "8L+ Avg", label: "Average salary package of placed students" },
-              { value: "92%", label: "Placement success rate across all batches" },
+              { value: "90%+", label: "Placement success rate across all batches" },
               { value: "75+", label: "Active hiring partner companies across India" },
             ].map((stat, i) => (
               <div key={i} className="bg-primary/10 backdrop-blur-sm border border-primary/20 rounded-2xl p-6">
