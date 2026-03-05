@@ -13,7 +13,6 @@ jobs:
     steps:
 
       - name: Call Health Endpoint
-        id: health
         run: |
           echo "Checking system health..."
 
@@ -21,12 +20,12 @@ jobs:
 
           echo "Response: $RESPONSE"
 
-          STATUS=$(echo $RESPONSE | jq -r '.status')
-
-          if [ "$STATUS" != "ok" ]; then
-            echo "ALERT=true" >> $GITHUB_ENV
-          else
+          if echo "$RESPONSE" | grep -q '"status":"ok"'; then
+            echo "System healthy"
             echo "ALERT=false" >> $GITHUB_ENV
+          else
+            echo "System degraded"
+            echo "ALERT=true" >> $GITHUB_ENV
           fi
 
       - name: Send Email Alert
