@@ -34,6 +34,7 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 110px;
+  overflow-x: hidden;
 }
 
 :root {
@@ -127,7 +128,7 @@ html {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
-    overflow-x: clip;
+    overflow-x: hidden;
   }
   
   html.dark body {
