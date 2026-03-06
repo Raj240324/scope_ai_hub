@@ -77,7 +77,7 @@ const Footer = () => {
             <ul className="grid grid-cols-2 lg:grid-cols-1 gap-4 text-sm font-medium">
               <li><Link to="/about" className="hover:text-primary hover:translate-x-1 transition-all inline-flex items-center">About Us</Link></li>
               <li><Link to="/courses" className="hover:text-primary hover:translate-x-1 transition-all inline-flex items-center">All Courses</Link></li>
-              <li><Link to="/courses#career-benefits" className="hover:text-primary hover:translate-x-1 transition-all inline-flex items-center">Career Support</Link></li>
+              <li><Link to="/career-support" className="hover:text-primary hover:translate-x-1 transition-all inline-flex items-center">Career Support</Link></li>
               <li><Link to="/admissions" className="hover:text-primary hover:translate-x-1 transition-all inline-flex items-center">Admissions</Link></li>
               <li><Link to="/reviews" className="hover:text-primary hover:translate-x-1 transition-all inline-flex items-center">Student Reviews</Link></li>
               <li><Link to="/contact" className="hover:text-primary hover:translate-x-1 transition-all inline-flex items-center">Contact Us</Link></li>

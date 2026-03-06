@@ -54,9 +54,7 @@ const SEO = ({
     ? `${siteUrl}${canonical}`
     : siteUrl;
 
-  const absoluteImage = image.startsWith("http")
-    ? image
-    : `${siteUrl}${image}`;
+  const absoluteImage = image;
 
   /* ORGANIZATION SCHEMA */
 

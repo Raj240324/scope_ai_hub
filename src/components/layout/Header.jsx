@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import { Menu, X, GraduationCap, Mail, Phone, Search, ChevronDown, ArrowRight } from 'lucide-react';
 import { clsx } from 'clsx';
 import { useModal } from '../../context/ModalContext';
@@ -12,7 +12,8 @@ const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [showCourses, setShowCourses] = useState(false);
-  const [showMobileCourses, setShowMobileCourses] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState(null);
+  const [mobileExpanded, setMobileExpanded] = useState(null);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const location = useLocation();
@@ -45,23 +46,51 @@ const Header = () => {
 
   useEffect(() => {
     setIsOpen(false);
+    setActiveDropdown(null);
   }, [location]);
 
   const navigation = [
     { name: 'Home', href: '/' },
-    { name: 'About', href: '/about' },
-    { name: 'Courses', href: '/courses' },
+    { name: 'Courses', href: '/courses', megaDropdown: true },
     { name: 'Admissions', href: '/admissions' },
+    { name: 'Career Support', href: '/career-support' },
+    {
+      name: 'Success',
+      href: '/reviews',
+      children: [
+        { name: 'Student Reviews', href: '/reviews' },
+      ],
+    },
+    {
+      name: 'Resources',
+      href: '/careers/trainers',
+      children: [
+        { name: 'Our Trainers', href: '/careers/trainers' },
+        { name: 'FAQs', href: '/faq' },
+        { name: 'Join as Trainer', href: '/careers/join-as-trainer' },
+      ],
+    },
     { name: 'Contact', href: '/contact' },
   ];
+
+  // Check if any child route is active (for dropdown parent highlighting)
+  const isNavActive = (item) => {
+    if (item.children) {
+      return item.children.some(child => location.pathname === child.href);
+    }
+    if (item.megaDropdown) {
+      return location.pathname.startsWith('/courses');
+    }
+    return location.pathname === item.href;
+  };
 
   return (
     <>
     <header className={clsx(
-      "fixed top-0 left-0 w-full z-[999] transition-all duration-300",
+      "fixed top-0 left-0 w-full z-[999] transition-all duration-300 h-[72px] md:h-[80px] flex items-center",
       isTransparent
-        ? "bg-transparent py-6 border-b border-transparent"
-        : "bg-[var(--bg-header-scrolled)] backdrop-blur-md shadow-md py-3 border-b border-[var(--border-header)]"
+        ? "bg-transparent border-b border-transparent"
+        : "bg-[var(--bg-header-scrolled)] backdrop-blur-md shadow-md border-b border-[var(--border-header)]"
     )}>
       {/* Search Overlay */}
       {isSearchOpen && (
@@ -191,45 +220,105 @@ const Header = () => {
       )}
 
       {/* Main Header Content */}
-      <div className="container-custom">
+      <div className="container mx-auto max-w-[1320px] px-4 md:px-6">
         <div className="w-full">
-          <nav className="flex items-center justify-between">
+          <nav className="flex items-center justify-between gap-4">
             {/* Logo */}
-            <Link to="/" className="flex items-center group">
+            <Link to="/" className="flex items-center group shrink-0">
               <img
                 src={(isTransparent || theme === 'dark') ? BRANDING.logoLight : BRANDING.logoDark}
                 alt={BRANDING.fullName}
-                className="h-20 md:h-24 -my-5 md:-my-6 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+                className="h-16 md:h-20 -my-4 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
               />
             </Link>
 
             {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center space-x-1">
-              {navigation.map((item) => (
+            <div className="hidden lg:flex items-center gap-x-1 flex-nowrap">
+              {navigation.map((item) => {
+                const hasDropdown = item.children && item.children.length > 0;
+                const isMegaCourses = item.megaDropdown;
+                const isActive = isNavActive(item);
+
+                return (
                 <div
                   key={item.name}
-                  className="relative group"
-                  onMouseEnter={() => item.name === 'Courses' && setShowCourses(true)}
-                  onMouseLeave={() => item.name === 'Courses' && setShowCourses(false)}
+                  className="relative group shrink-0"
+                  onMouseEnter={() => {
+                    if (isMegaCourses) setShowCourses(true);
+                    if (hasDropdown) setActiveDropdown(item.name);
+                  }}
+                  onMouseLeave={() => {
+                    if (isMegaCourses) setShowCourses(false);
+                    if (hasDropdown) setActiveDropdown(null);
+                  }}
                 >
-                  <Link
-                    to={item.href}
-                    className={clsx(
-                      'px-4 py-2 text-[14px] font-bold transition-all rounded-lg relative flex items-center',
-                      isTransparent
-                        ? 'text-white hover:text-white/80 hover:bg-white/10'
-                        : location.pathname === item.href
-                          ? 'text-[var(--text-nav-active)] bg-[var(--text-nav)]/10'
-                          : 'text-[var(--text-nav)] hover:text-[var(--text-nav-active)] hover:bg-[var(--text-nav)]/5'
-                    )}
-                  >
-                    {item.name}
-                    {item.name === 'Courses' && <ChevronDown className={clsx("ml-1 h-3 w-3 transition-transform duration-300", showCourses && "rotate-180")} />}
-                  </Link>
+                  {(hasDropdown || isMegaCourses) ? (
+                    <button
+                      className={clsx(
+                        'px-3 py-2 text-[14px] font-semibold transition-all rounded-lg relative flex items-center whitespace-nowrap',
+                        isTransparent
+                          ? 'text-white hover:text-white/80 hover:bg-white/10'
+                          : isActive
+                            ? 'text-[var(--text-nav-active)] bg-[var(--text-nav)]/10'
+                            : 'text-[var(--text-nav)] hover:text-[var(--text-nav-active)] hover:bg-[var(--text-nav)]/5'
+                      )}
+                      aria-expanded={isMegaCourses ? showCourses : activeDropdown === item.name}
+                      aria-controls={`dropdown-${item.name.toLowerCase().replace(/\s/g, '-')}`}
+                    >
+                      {item.name}
+                      <ChevronDown className={clsx(
+                        "ml-1 h-3 w-3 transition-transform duration-300",
+                        (isMegaCourses ? showCourses : activeDropdown === item.name) && "rotate-180"
+                      )} />
+                    </button>
+                  ) : (
+                    <NavLink
+                      to={item.href}
+                      className={({ isActive: navActive }) => clsx(
+                        'px-3 py-2 text-[14px] font-semibold transition-all rounded-lg relative flex items-center whitespace-nowrap',
+                        isTransparent
+                          ? 'text-white hover:text-white/80 hover:bg-white/10'
+                          : navActive
+                            ? 'text-[var(--text-nav-active)] bg-[var(--text-nav)]/10'
+                            : 'text-[var(--text-nav)] hover:text-[var(--text-nav-active)] hover:bg-[var(--text-nav)]/5'
+                      )}
+                      end={item.href === '/'}
+                    >
+                      {item.name}
+                    </NavLink>
+                  )}
+
+                  {/* Simple Dropdown (Success, Resources) */}
+                  {hasDropdown && activeDropdown === item.name && (
+                    <div
+                      id={`dropdown-${item.name.toLowerCase().replace(/\s/g, '-')}`}
+                      className="absolute top-full left-0 w-56 pt-3 animate-in fade-in slide-in-from-top-4 zoom-in-95 duration-200 z-[60]"
+                    >
+                      <div className="bg-[var(--bg-card)] rounded-xl shadow-xl border border-[var(--border-color)] overflow-hidden py-2">
+                        {item.children.map((child) => (
+                          <NavLink
+                            key={child.href}
+                            to={child.href}
+                            className={({ isActive: childActive }) => clsx(
+                              'block px-5 py-3 text-sm font-bold transition-all hover:bg-[var(--text-heading)]/5',
+                              childActive
+                                ? 'text-primary bg-primary/5'
+                                : 'text-[var(--text-body)] hover:text-[var(--text-heading)]'
+                            )}
+                          >
+                            {child.name}
+                          </NavLink>
+                        ))}
+                      </div>
+                    </div>
+                  )}
 
                   {/* Courses Mega Dropdown — Tier-Based */}
-                  {item.name === 'Courses' && showCourses && (
-                    <div className="absolute top-full left-1/2 -translate-x-1/2 w-[720px] pt-4 animate-in fade-in slide-in-from-top-4 zoom-in-95 duration-300 z-[60]">
+                  {isMegaCourses && showCourses && (
+                    <div
+                      id="dropdown-courses"
+                      className="absolute top-full left-1/2 -translate-x-1/2 w-[720px] pt-4 animate-in fade-in slide-in-from-top-4 zoom-in-95 duration-300 z-[60]"
+                    >
                       <div className="bg-[var(--bg-card)] rounded-[1.5rem] shadow-2xl border border-[var(--border-color)] overflow-hidden">
                         <div className="p-8">
                           <div className="flex items-center justify-between mb-8">
@@ -295,31 +384,34 @@ const Header = () => {
                     </div>
                   )}
                 </div>
-              ))}
+                );
+              })}
 
-              <div className="h-6 w-[1px] bg-[var(--border-color)] mx-4" />
+              <div className="flex items-center gap-x-2 ml-2">
+                <div className="h-6 w-[1px] bg-[var(--border-color)] mx-2" />
 
-              <ThemeToggle className={clsx("mr-2", isTransparent ? "text-white hover:bg-white/10" : "text-[var(--text-nav)] hover:bg-[var(--text-nav)]/10")} />
+                <ThemeToggle className={clsx(isTransparent ? "text-white hover:bg-white/10" : "text-[var(--text-nav)] hover:bg-[var(--text-nav)]/10")} />
 
-              <button
-                onClick={() => setIsSearchOpen(true)}
-                className={clsx(
-                  "p-2 transition-colors mr-2 group",
-                  isTransparent
-                    ? "text-white hover:text-white/80"
-                    : "text-[var(--text-nav)] hover:text-[var(--text-nav-active)]"
-                )}
-                title="Search Programs"
-              >
-                <Search className="h-5 w-5 group-hover:scale-110 transition-transform" />
-              </button>
+                <button
+                  onClick={() => setIsSearchOpen(true)}
+                  className={clsx(
+                    "p-2 transition-colors group shrink-0",
+                    isTransparent
+                      ? "text-white hover:text-white/80"
+                      : "text-[var(--text-nav)] hover:text-[var(--text-nav-active)]"
+                  )}
+                  title="Search Programs"
+                >
+                  <Search className="h-5 w-5 group-hover:scale-110 transition-transform" />
+                </button>
 
-              <button
-                onClick={() => openModal()}
-                className="btn-primary"
-              >
-                ENROLL NOW
-              </button>
+                <button
+                  onClick={() => openModal()}
+                  className="btn-primary px-5 py-2.5 text-[13px] whitespace-nowrap"
+                >
+                  ENROLL NOW
+                </button>
+              </div>
             </div>
 
             {/* Mobile Menu Button */}
@@ -382,12 +474,21 @@ const Header = () => {
             {/* Navigation Items */}
             <div className="flex-1 overflow-y-auto py-6 px-6">
               <nav className="space-y-1">
-                {navigation.map((item, index) => (
+                {navigation.map((item, index) => {
+                  const hasDropdown = item.children && item.children.length > 0;
+                  const isMegaCourses = item.megaDropdown;
+                  const isExpanded = mobileExpanded === item.name;
+                  const isActive = isNavActive(item);
+
+                  return (
                   <div key={item.name}>
-                    {item.name === 'Courses' ? (
+                    {/* Courses mega-expandable */}
+                    {isMegaCourses ? (
                       <>
                         <button
-                          onClick={() => setShowMobileCourses(!showMobileCourses)}
+                          onClick={() => setMobileExpanded(isExpanded ? null : item.name)}
+                          aria-expanded={isExpanded}
+                          aria-controls={`mobile-${item.name.toLowerCase().replace(/\s/g, '-')}`}
                           className={clsx(
                             'w-full flex items-center py-4 group transition-all relative',
                             location.pathname.startsWith('/courses') && 'text-primary'
@@ -402,12 +503,12 @@ const Header = () => {
                           <span className="text-base font-bold flex-1 text-left group-hover:text-primary transition-colors">{item.name}</span>
                           <ChevronDown className={clsx(
                             "h-4 w-4 text-[var(--text-on-inverted)]/30 transition-transform duration-300",
-                            showMobileCourses && "rotate-180 text-primary"
+                            isExpanded && "rotate-180 text-primary"
                           )} />
                         </button>
 
-                        {showMobileCourses && (
-                          <div className="ml-12 mr-2 mb-4 space-y-4">
+                        {isExpanded && (
+                          <div id={`mobile-${item.name.toLowerCase().replace(/\s/g, '-')}`} className="ml-12 mr-2 mb-4 space-y-4">
                             {TIERS.map((tier) => {
                               const meta = tierMeta[tier];
                               return (
@@ -443,7 +544,53 @@ const Header = () => {
                           </div>
                         )}
                       </>
+                    ) : hasDropdown ? (
+                      /* Simple dropdown (Success, Resources) */
+                      <>
+                        <button
+                          onClick={() => setMobileExpanded(isExpanded ? null : item.name)}
+                          aria-expanded={isExpanded}
+                          aria-controls={`mobile-${item.name.toLowerCase().replace(/\s/g, '-')}`}
+                          className={clsx(
+                            'w-full flex items-center py-4 group transition-all relative',
+                            isActive && 'text-primary'
+                          )}
+                        >
+                          {isActive && (
+                            <div className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-6 bg-primary rounded-full" />
+                          )}
+                          <span className="text-[10px] font-black text-[var(--text-on-inverted)]/20 tracking-widest mr-5 ml-3 tabular-nums">
+                            0{index + 1}
+                          </span>
+                          <span className="text-base font-bold flex-1 text-left group-hover:text-primary transition-colors">{item.name}</span>
+                          <ChevronDown className={clsx(
+                            "h-4 w-4 text-[var(--text-on-inverted)]/30 transition-transform duration-300",
+                            isExpanded && "rotate-180 text-primary"
+                          )} />
+                        </button>
+
+                        {isExpanded && (
+                          <div id={`mobile-${item.name.toLowerCase().replace(/\s/g, '-')}`} className="ml-12 mr-2 mb-4 space-y-1">
+                            {item.children.map((child) => (
+                              <Link
+                                key={child.href}
+                                to={child.href}
+                                onClick={() => setIsOpen(false)}
+                                className={clsx(
+                                  'block py-2.5 text-sm font-semibold transition-colors',
+                                  location.pathname === child.href
+                                    ? 'text-primary'
+                                    : 'text-[var(--text-on-inverted)]/60 hover:text-primary'
+                                )}
+                              >
+                                {child.name}
+                              </Link>
+                            ))}
+                          </div>
+                        )}
+                      </>
                     ) : (
+                      /* Simple link */
                       <Link
                         to={item.href}
                         onClick={() => setIsOpen(false)}
@@ -462,7 +609,8 @@ const Header = () => {
                       </Link>
                     )}
                   </div>
-                ))}
+                  );
+                })}
               </nav>
             </div>
 

@@ -27,6 +27,7 @@ const Disclaimer = lazy(() => import('./pages/legal/Disclaimer'));
 const TrainerCodeOfConduct = lazy(() => import('./pages/legal/TrainerCodeOfConduct'));
 const JoinAsTrainer = lazy(() => import('./pages/careers/JoinAsTrainer'));
 const TrainerProfiles = lazy(() => import('./pages/careers/TrainerProfiles'));
+const CareerSupport = lazy(() => import('./pages/career-support/CareerSupport'));
 const Sitemap = lazy(() => import('./pages/Sitemap'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
@@ -84,21 +85,28 @@ function App() {
             <Suspense fallback={<PageLoader />}>
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/admissions" element={<Admissions />} />
-              <Route path="/reviews" element={<Reviews />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/faq" element={<FAQ />} />
+
               <Route path="/courses" element={<CoursesList />} />
               <Route path="/courses/:slug" element={<CourseDetail />} />
+
+              <Route path="/admissions" element={<Admissions />} />
+              <Route path="/career-support" element={<CareerSupport />} />
+              <Route path="/reviews" element={<Reviews />} />
+
+              <Route path="/careers/trainers" element={<TrainerProfiles />} />
+              <Route path="/careers/join-as-trainer" element={<JoinAsTrainer />} />
+
+              <Route path="/faq" element={<FAQ />} />
+              <Route path="/contact" element={<Contact />} />
+
+              {/* Legal Routes */}
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
               <Route path="/terms-conditions" element={<TermsConditions />} />
               <Route path="/nda-policy" element={<NDAPolicy />} />
-              <Route path="/refund-policy" element={<RefundPolicy />} />
               <Route path="/disclaimer" element={<Disclaimer />} />
+              <Route path="/refund-policy" element={<RefundPolicy />} />
               <Route path="/legal/trainer-conduct" element={<TrainerCodeOfConduct />} />
-              <Route path="/careers/join-as-trainer" element={<JoinAsTrainer />} />
-              <Route path="/careers/trainers" element={<TrainerProfiles />} />
+
               <Route path="/sitemap" element={<Sitemap />} />
 
               {/* 404 Route */}

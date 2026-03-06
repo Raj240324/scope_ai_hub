@@ -61,6 +61,7 @@ const Sitemap = () => {
         { href: '/faq', label: 'Frequently Asked Questions', description: 'Answers to common questions' },
         { href: '/reviews', label: 'Student Reviews', description: 'Testimonials and success stories' },
         { href: '/admissions', label: 'Admissions', description: 'How to apply and enrollment process' },
+        { href: '/career-support', label: 'Career Support', description: 'Placement assistance, resume building, and job referrals' },
       ],
     },
     {
