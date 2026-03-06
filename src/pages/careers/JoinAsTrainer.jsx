@@ -68,7 +68,7 @@ const JoinAsTrainer = () => {
 
       {/* Requirements */}
       <section className="section-padding bg-[var(--bg-inverted)] text-[var(--text-on-inverted)] relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl -mr-48 -mt-48" />
+        <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl blur-layer -mr-48 -mt-48" />
         <div className="container-custom">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>

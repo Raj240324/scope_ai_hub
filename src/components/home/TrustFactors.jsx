@@ -6,9 +6,9 @@ const TrustFactors = () => (
   <section className="section-padding bg-[var(--bg-body)] relative overflow-hidden border-b border-[var(--border-color)]">
     {/* Soft radial glow background */}
     <div className="absolute inset-0 pointer-events-none">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px]" />
-      <div className="absolute top-0 right-0 w-80 h-80 bg-amber-400/5 rounded-full blur-[100px]" />
-      <div className="absolute bottom-0 left-0 w-80 h-80 bg-cyan-400/5 rounded-full blur-[100px]" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-primary/5 rounded-full blur-3xl blur-layer" />
+      <div className="absolute top-0 right-0 w-64 h-64 bg-amber-400/5 rounded-full blur-3xl blur-layer" />
+      <div className="absolute bottom-0 left-0 w-64 h-64 bg-cyan-400/5 rounded-full blur-3xl blur-layer" />
     </div>
 
     <div className="container-custom relative z-10">
@@ -30,7 +30,7 @@ const TrustFactors = () => (
       <div className="block md:hidden">
         <div className="flex justify-center mb-8">
           <div className="relative">
-            <div className="absolute inset-0 rounded-full bg-primary/20 blur-xl scale-110" />
+            <div className="absolute inset-0 rounded-full bg-primary/20 blur-3xl blur-layer scale-110" />
             <div className="relative w-36 h-36 rounded-full flex flex-col items-center justify-center text-center shadow-2xl"
               style={{ background: 'conic-gradient(from 180deg at 50% 50%, #1e3a8a 0deg, #1d4ed8 90deg, #0284c7 180deg, #1d4ed8 270deg, #1e3a8a 360deg)', border: '4px solid #FFD700' }}>
               <div className="absolute inset-3 rounded-full bg-white/10 backdrop-blur-sm" />
@@ -100,7 +100,7 @@ const TrustFactors = () => (
 
           <div className="flex flex-col items-center gap-4 shrink-0">
             <div className="relative">
-              <div className="absolute inset-0 rounded-full bg-primary/20 blur-xl scale-110" />
+              <div className="absolute inset-0 rounded-full bg-primary/20 blur-3xl blur-layer scale-110" />
               <div className="absolute -inset-3 rounded-full border-2 border-dashed border-primary/20 animate-spin" style={{ animationDuration: '20s' }} />
               <div className="relative w-44 h-44 rounded-full flex flex-col items-center justify-center text-center shadow-2xl"
                 style={{ background: 'conic-gradient(from 180deg at 50% 50%, #1e3a8a 0deg, #1d4ed8 90deg, #0284c7 180deg, #1d4ed8 270deg, #1e3a8a 360deg)', border: '4px solid #FFD700' }}>
@@ -179,7 +179,7 @@ const TrustFactors = () => (
         <div className="flex-1 flex flex-col items-center justify-between px-8 min-h-[480px]">
           <div className="flex-1 flex items-center justify-center w-full">
             <div className="relative shrink-0">
-              <div className="absolute inset-0 rounded-full bg-primary/20 blur-[20px] scale-110" />
+              <div className="absolute inset-0 rounded-full bg-primary/20 blur-3xl blur-layer scale-110" />
               <div className="absolute -inset-4 rounded-full border-2 border-dashed border-primary/20 animate-spin" style={{ animationDuration: '20s' }} />
               <div className="relative w-52 h-52 rounded-full flex flex-col items-center justify-center text-center shadow-2xl"
                 style={{ background: 'conic-gradient(from 180deg at 50% 50%, #1e3a8a 0deg, #1d4ed8 90deg, #0284c7 180deg, #1d4ed8 270deg, #1e3a8a 360deg)', border: '4px solid #FFD700' }}>

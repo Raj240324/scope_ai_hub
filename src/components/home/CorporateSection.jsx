@@ -4,8 +4,8 @@ import { CheckCircle2 } from 'lucide-react';
 const CorporateSection = ({ openModal }) => (
   <section className="py-20 bg-[var(--bg-inverted)] text-[var(--text-on-inverted)] relative overflow-hidden">
     <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-      <div className="absolute top-[-20%] left-[-10%] w-[600px] h-[600px] bg-primary/20 rounded-full blur-[120px]" />
-      <div className="absolute bottom-[-20%] right-[-10%] w-[500px] h-[500px] bg-primary/10 rounded-full blur-[100px]" />
+      <div className="absolute top-[-10%] left-[-5%] w-[400px] h-[400px] bg-primary/20 rounded-full blur-3xl blur-layer" />
+      <div className="absolute bottom-[-10%] right-[-5%] w-[350px] h-[350px] bg-primary/10 rounded-full blur-3xl blur-layer" />
     </div>
     <div className="container-custom relative z-10">
       <div className="grid lg:grid-cols-2 gap-16 items-center">

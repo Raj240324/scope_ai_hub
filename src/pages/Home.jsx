@@ -157,8 +157,8 @@ const Home = () => {
         <div className="container-custom">
           <div className="bg-[var(--bg-inverted)] rounded-2xl md:rounded-[3rem] p-6 sm:p-8 md:p-16 text-center text-[var(--text-on-inverted)] relative overflow-hidden shadow-2xl">
             <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-              <div className="absolute top-[-50%] left-[-20%] w-[80%] h-[80%] bg-primary/20 rounded-full blur-[100px]" />
-              <div className="absolute bottom-[-50%] right-[-20%] w-[80%] h-[80%] bg-primary/10 rounded-full blur-[100px]" />
+              <div className="absolute top-[-25%] left-[-10%] w-[60%] h-[60%] bg-primary/20 rounded-full blur-3xl blur-layer" />
+              <div className="absolute bottom-[-25%] right-[-10%] w-[60%] h-[60%] bg-primary/10 rounded-full blur-3xl blur-layer" />
             </div>
             <div className="relative z-10 max-w-3xl mx-auto">
               <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold mb-6">Ready to Build Your <span className="text-primary">Future</span>?</h2>

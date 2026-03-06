@@ -102,7 +102,7 @@ const TrainerProfiles = () => {
                 {/* Image Section */}
                 <div className="lg:w-1/3 relative bg-gradient-to-br from-primary/10 to-blue-100 p-6 sm:p-12 flex flex-col items-center justify-center">
                   <div className="relative mb-6">
-                    <div className="absolute inset-0 bg-primary/20 rounded-full blur-2xl"></div>
+                    <div className="absolute inset-0 bg-primary/20 rounded-full blur-3xl blur-layer"></div>
                     <img 
                       src={trainer.image} 
                       alt={trainer.name}

@@ -107,8 +107,8 @@ const About = () => {
       {/* Vision & Mission */}
       <section className="section-padding bg-[var(--bg-inverted)] text-[var(--text-on-inverted)] relative overflow-hidden">
         {/* Ambient background decoration */}
-        <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
-        <div className="absolute bottom-0 left-0 w-64 h-64 bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
+        <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl blur-layer pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl blur-layer pointer-events-none" />
 
         <div className="container-custom relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 max-w-5xl mx-auto">
@@ -588,9 +588,9 @@ const About = () => {
         <div className="container-custom">
           <div className="bg-[var(--bg-inverted)] rounded-2xl md:rounded-[3rem] p-6 sm:p-8 md:p-16 text-center text-[var(--text-on-inverted)] relative overflow-hidden shadow-2xl">
             <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-              <div className="absolute top-[-50%] left-[-20%] w-[80%] h-[80%] bg-primary/20 rounded-full blur-[100px]" />
-              <div className="absolute bottom-[-50%] right-[-20%] w-[80%] h-[80%] bg-primary/10 rounded-full blur-[100px]" />
-            </div>
+                <div className="absolute top-[-25%] left-[-10%] w-[60%] h-[60%] bg-primary/20 rounded-full blur-3xl blur-layer" />
+                <div className="absolute bottom-[-25%] right-[-10%] w-[60%] h-[60%] bg-primary/10 rounded-full blur-3xl blur-layer" />
+              </div>
             <div className="relative z-10 max-w-3xl mx-auto">
               <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold mb-6">Your Next Batch Starts Soon. <span className="text-primary">Seats Fill Fast.</span></h2>
               <p className="text-base md:text-lg text-[var(--text-on-inverted)]/80 mb-10">

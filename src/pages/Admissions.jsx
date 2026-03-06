@@ -196,7 +196,7 @@ const Admissions = () => {
             transition={{ duration: 0.7 }}
             className="relative p-8 rounded-3xl border border-[var(--border-color)] bg-[var(--bg-secondary)] mb-16 overflow-hidden"
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-primary/5 blur-xl"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-primary/5 blur-3xl blur-layer"></div>
             <h3 className="text-xl font-bold text-[var(--text-heading)] mb-4 relative z-10">
               🇮🇳 India's First Hybrid AI Training — Online Meets In-Person
             </h3>
@@ -227,7 +227,7 @@ const Admissions = () => {
                 className="group relative rounded-3xl border border-[var(--border-color)] bg-[var(--bg-card)] p-8 overflow-hidden transition-all duration-500"
               >
                 {/* Glow border */}
-                <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition duration-500 bg-gradient-to-r from-primary/20 via-transparent to-primary/20 blur-xl"></div>
+                <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition duration-500 bg-gradient-to-r from-primary/20 via-transparent to-primary/20 blur-3xl blur-layer"></div>
 
                 {/* Status badge */}
                 <span

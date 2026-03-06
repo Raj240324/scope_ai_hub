@@ -12,13 +12,13 @@ const methodology = [
 ];
 
 const MethodologySection = ({ openModal }) => (
-  <section className="py-24 bg-[var(--bg-secondary)] relative border-b border-[var(--border-color)]">
+  <section className="py-24 bg-[var(--bg-secondary)] relative overflow-hidden border-b border-[var(--border-color)]">
     <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
       <Parallax offset={20} className="absolute top-0 right-0 w-1/2 h-full z-0">
         <div className="w-full h-full bg-[var(--bg-secondary)]/50 -skew-x-12 translate-x-1/2" />
       </Parallax>
       <Parallax offset={-30} className="absolute bottom-0 left-0 w-64 h-64 z-0">
-        <div className="w-full h-full bg-primary/10 rounded-full blur-[120px]" />
+        <div className="w-full h-full bg-primary/10 rounded-full blur-3xl blur-layer" />
       </Parallax>
     </div>
 

@@ -35,6 +35,19 @@ html {
   scroll-behavior: smooth;
   scroll-padding-top: 110px;
   overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  overflow-x: hidden;
+  position: relative;
+  width: 100%;
+}
+
+section {
+  position: relative;
+  overflow: hidden;
 }
 
 :root {
@@ -205,6 +218,14 @@ html {
   .no-scrollbar {
     -ms-overflow-style: none;
     scrollbar-width: none;
+  }
+
+  /* Prevent iOS GPU painting bugs */
+  .blur-layer {
+    transform: translateZ(0);
+    will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
   }
 }
 

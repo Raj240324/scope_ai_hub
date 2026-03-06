@@ -6,8 +6,8 @@ const CTASection = ({ openModal }) => (
     <div className="container-custom">
       <div className="bg-[var(--bg-inverted)] rounded-2xl md:rounded-[3rem] p-6 sm:p-10 md:p-16 text-[var(--text-on-inverted)] text-center relative overflow-hidden shadow-2xl">
         <div className="absolute top-0 left-0 w-full h-full opacity-10">
-          <div className="absolute top-[-50%] left-[-20%] w-[80%] h-[80%] bg-primary/20 rounded-full blur-[100px]" />
-          <div className="absolute bottom-[-50%] right-[-20%] w-[80%] h-[80%] bg-primary/10 rounded-full blur-[100px]" />
+          <div className="absolute top-[-25%] left-[-10%] w-[60%] h-[60%] bg-primary/20 rounded-full blur-3xl blur-layer" />
+          <div className="absolute bottom-[-25%] right-[-10%] w-[60%] h-[60%] bg-primary/10 rounded-full blur-3xl blur-layer" />
         </div>
         <div className="relative z-10 max-w-4xl mx-auto">
           <div className="inline-flex items-center justify-center w-20 h-20 bg-primary/10 rounded-3xl mb-8 backdrop-blur-sm border border-primary/20">

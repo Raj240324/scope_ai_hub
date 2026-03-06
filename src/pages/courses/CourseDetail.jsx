@@ -62,11 +62,11 @@ const CourseDetail = () => {
         {/* Ambient gradients – one per side, organic feel */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           <div
-            className="absolute -top-40 -right-40 w-[700px] h-[700px] rounded-full opacity-[0.07] blur-[120px]"
+            className="absolute -top-20 -right-20 w-[400px] h-[400px] rounded-full opacity-[0.07] blur-3xl blur-layer"
             style={{ background: tier.color }}
           />
           <div
-            className="absolute -bottom-60 -left-40 w-[500px] h-[500px] rounded-full opacity-[0.04] blur-[100px]"
+            className="absolute -bottom-30 -left-20 w-[300px] h-[300px] rounded-full opacity-[0.04] blur-3xl blur-layer"
             style={{ background: tier.color }}
           />
         </div>

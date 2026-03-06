@@ -70,10 +70,10 @@ const Hero = ({
           
           {/* 2. Brand Gradient Mesh - "Purple -> Magenta" & "Cyan -> Blue" fusion */}
           {/* Top-Right: Cyan/Blue Glow (Tech/Human Shape vibe) */}
-          <div className="absolute top-[-20%] right-[-10%] w-[70%] h-[70%] bg-[radial-gradient(circle,_var(--color-brand-cyan-primary)_0%,_transparent_70%)] opacity-20 z-[2] mix-blend-screen pointer-events-none" />
+          <div className="absolute top-[-10%] right-[-5%] w-[60%] h-[60%] bg-[radial-gradient(circle,_var(--color-brand-cyan-primary)_0%,_transparent_70%)] opacity-20 z-[2] mix-blend-screen pointer-events-none blur-3xl blur-layer" />
           
           {/* Bottom-Left: Purple/Magenta Glow (Base vibe) */}
-          <div className="absolute bottom-[-10%] left-[-10%] w-[60%] h-[60%] bg-[radial-gradient(circle,_var(--color-brand-purple-highlight)_0%,_transparent_70%)] opacity-20 z-[2] mix-blend-screen pointer-events-none" />
+          <div className="absolute bottom-[-5%] left-[-5%] w-[50%] h-[50%] bg-[radial-gradient(circle,_var(--color-brand-purple-highlight)_0%,_transparent_70%)] opacity-20 z-[2] mix-blend-screen pointer-events-none blur-3xl blur-layer" />
           
           {/* 3. Bottom cinematic fade */}
           <div className="absolute bottom-0 left-0 w-full h-48 bg-gradient-to-t from-black via-black/70 to-transparent z-[3]" />
@@ -125,9 +125,9 @@ const Hero = ({
     >
       {/* Background Elements - Premium Mesh Effect */}
       <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none" aria-hidden="true">
-        <div className={`absolute top-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full blur-[120px] ${isHome ? 'bg-primary/20' : 'bg-primary/5'}`} />
-        <div className={`absolute bottom-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full blur-[120px] ${isHome ? 'bg-primary/15' : 'bg-secondary/5'}`} />
-        {isHome && <div className="absolute top-[20%] left-[10%] w-[20%] h-[20%] bg-primary/5 rounded-full blur-[80px]" />}
+        <div className={`absolute top-[-5%] right-[-5%] w-[40%] h-[40%] rounded-full blur-3xl blur-layer ${isHome ? 'bg-primary/20' : 'bg-primary/5'}`} />
+        <div className={`absolute bottom-[-5%] left-[-5%] w-[35%] h-[35%] rounded-full blur-3xl blur-layer ${isHome ? 'bg-primary/15' : 'bg-secondary/5'}`} />
+        {isHome && <div className="absolute top-[20%] left-[10%] w-[15%] h-[15%] bg-primary/5 rounded-full blur-3xl blur-layer" />}
       </div>
 
       <div className="container-custom relative z-10">
