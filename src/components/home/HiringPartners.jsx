@@ -33,7 +33,7 @@ const HiringPartners = () => (
     <div className="flex animate-marquee gap-6 sm:gap-8 md:gap-10 items-center w-max">
       {[...companies, ...companies, ...companies].map((company, i) => (
         <div key={i} className="flex-shrink-0 group">
-          <div className="h-14 w-28 sm:h-16 sm:w-32 md:h-20 md:w-40 flex items-center justify-center px-3 sm:px-4 py-2 sm:py-3 rounded-xl sm:rounded-2xl bg-[var(--bg-card)] border border-[var(--border-color)] shadow-sm hover:shadow-lg hover:border-primary/30 transition-all">
+          <div className="h-14 w-28 sm:h-16 sm:w-32 md:h-20 md:w-40 flex items-center justify-center px-3 sm:px-4 py-2 sm:py-3 rounded-xl sm:rounded-2xl bg-white dark:bg-white border border-[var(--border-color)] shadow-sm hover:shadow-lg hover:border-primary/30 transition-all">
             <img
               src={company.logo}
               alt={company.name}
@@ -41,12 +41,10 @@ const HiringPartners = () => (
               height={40}
               loading="lazy"
               className={`object-contain transition-all duration-300 ${
-                (company.name === 'TCS' || company.name === 'Wipro')
-                  ? 'max-h-8 sm:max-h-10 md:max-h-12 scale-125 md:scale-150'
-                  : 'max-h-6 sm:max-h-8 md:max-h-10'
-              } opacity-70 hover:opacity-100 hover:scale-105 dark:opacity-90 dark:hover:opacity-100 ${
-                company.logo.includes('dark') ? 'brightness-0 contrast-200 dark:brightness-100 dark:contrast-100' : 'grayscale hover:grayscale-0 dark:grayscale-0'
-              }`}
+  (company.name === 'TCS' || company.name === 'Wipro')
+    ? 'max-h-8 sm:max-h-10 md:max-h-12 scale-125 md:scale-150'
+    : 'max-h-6 sm:max-h-8 md:max-h-10'
+} opacity-80 hover:opacity-100 hover:scale-105`}
             />
           </div>
         </div>
