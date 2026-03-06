@@ -126,7 +126,7 @@ const Contact = () => {
 
           {/* Right Column: Contact Form */}
           <div className="space-y-8">
-            <div className="bg-[var(--bg-card)] rounded-2xl sm:rounded-[2rem] shadow-2xl shadow-primary/5 border border-[var(--border-color)] p-5 sm:p-8 md:p-12 relative overflow-visible">
+            <div className="bg-[var(--bg-card)] rounded-2xl sm:rounded-[2rem] shadow-2xl shadow-primary/5 border border-[var(--border-color)] p-5 sm:p-8 md:p-12 relative overflow-hidden">
               <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-bl-[100px] pointer-events-none" />
               <div className="relative z-10">
                  <h3 className="text-2xl font-bold text-[var(--text-heading)] mb-2">Send us a message</h3>

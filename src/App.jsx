@@ -92,7 +92,7 @@ function App() {
 
               <Route path="/admissions" element={<Admissions />} />
               <Route path="/career-support" element={<CareerSupport />} />
-              <Route path="/reviews" e lement={<Reviews />} />
+              <Route path="/reviews" element={<Reviews />} />
 
               <Route path="/careers/trainers" element={<TrainerProfiles />} />
               <Route path="/careers/join-as-trainer" element={<JoinAsTrainer />} />

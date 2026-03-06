@@ -443,28 +443,44 @@ const ContactForm = ({ initialCourse = 'General Inquiry' }) => {
             />
           </div>
         )}
-        <button
-          onClick={handleNext}
-          disabled={status === 'sending'}
-          className="w-full bg-primary hover:bg-primary-dark text-white font-bold py-3.5 rounded-xl flex items-center justify-center gap-2 transition-all shadow-lg shadow-primary/20 group disabled:opacity-70 disabled:cursor-not-allowed"
-        >
-          {status === 'sending' ? (
-            <>
-              <Loader2 className="h-4 w-4 animate-spin" />
-              <span>Submitting…</span>
-            </>
-          ) : currentStep === activeSteps.length - 1 ? (
-            <>
-              <Send className="h-4 w-4" />
-              <span>Submit</span>
-            </>
-          ) : (
-            <>
-              <span>Continue</span>
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-            </>
-          )}
-        </button>
+        
+        {currentStep === activeSteps.length - 1 ? (
+          <button
+            onClick={handleNext}
+            disabled={status === 'sending'}
+            className="w-full bg-primary hover:bg-primary-dark text-white font-bold py-3.5 rounded-xl flex items-center justify-center gap-2 transition-all shadow-lg shadow-primary/20 group disabled:opacity-70 disabled:cursor-not-allowed"
+          >
+            {status === 'sending' ? (
+              <>
+                <Loader2 className="h-4 w-4 animate-spin" />
+                <span>Submitting…</span>
+              </>
+            ) : (
+              <>
+                <Send className="h-4 w-4" />
+                <span>Send Message</span>
+              </>
+            )}
+          </button>
+        ) : (
+          <button
+            onClick={handleNext}
+            disabled={status === 'sending'}
+            className="w-full bg-primary hover:bg-primary-dark text-white font-bold py-3.5 rounded-xl flex items-center justify-center gap-2 transition-all shadow-lg shadow-primary/20 group disabled:opacity-70 disabled:cursor-not-allowed"
+          >
+            {status === 'sending' ? (
+              <>
+                <Loader2 className="h-4 w-4 animate-spin" />
+                <span>Submitting…</span>
+              </>
+            ) : (
+              <>
+                <span>Continue</span>
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+              </>
+            )}
+          </button>
+        )}
 
         {currentStep > 0 && (
           <button

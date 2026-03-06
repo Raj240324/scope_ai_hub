@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import Layout from '../../components/layout/Layout';
 import CourseCard from '../../components/ui/CourseCard';
 import AddonsGrid from '../../components/ui/AddonsGrid';
@@ -11,6 +11,28 @@ import { motion, AnimatePresence } from 'framer-motion';
 const CoursesList = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedTier, setSelectedTier] = useState('All');
+
+  // Scroll to courses grid with header offset
+  const scrollToCourses = () => {
+    const element = document.getElementById("courses-grid");
+    if (element) {
+      const headerOffset = 100; // Adjust to match navbar height
+      const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+      const offsetPosition = elementPosition - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
+    }
+  };
+
+  // Trigger scroll whenever filters change
+  useEffect(() => {
+    if (selectedTier !== 'All' || searchTerm !== '') {
+      scrollToCourses();
+    }
+  }, [selectedTier, searchTerm]);
 
   const filteredCourses = useMemo(() => {
     return courses.filter(course => {
@@ -205,7 +227,7 @@ const CoursesList = () => {
           </aside>
 
           {/* Right Content - Courses Grid */}
-          <main className="flex-1 lg:w-[72%] xl:w-[75%]">
+          <main id="courses-grid" className="flex-1 lg:w-[72%] xl:w-[75%]">
             <AnimatePresence mode="wait">
               {filteredCourses.length > 0 ? (
                 <motion.div

@@ -292,15 +292,16 @@ const Header = () => {
                   {hasDropdown && activeDropdown === item.name && (
                     <div
                       id={`dropdown-${item.name.toLowerCase().replace(/\s/g, '-')}`}
-                      className="absolute top-full left-0 w-56 pt-3 animate-in fade-in slide-in-from-top-4 zoom-in-95 duration-200 z-[60]"
+                      className="absolute top-full left-0 w-60 pt-3 animate-in fade-in slide-in-from-top-4 zoom-in-95 duration-200 z-[60]"
                     >
-                      <div className="bg-[var(--bg-card)] rounded-xl shadow-xl border border-[var(--border-color)] overflow-hidden py-2">
+                      <div className="bg-[var(--bg-card)] rounded-2xl shadow-xl border border-[var(--border-color)] p-2">
                         {item.children.map((child) => (
                           <NavLink
                             key={child.href}
                             to={child.href}
                             className={({ isActive: childActive }) => clsx(
-                              'block px-5 py-3 text-sm font-bold transition-all hover:bg-[var(--text-heading)]/5',
+                              'block px-4 py-3 text-sm font-bold transition-all rounded-xl',
+                              'hover:bg-[var(--text-heading)]/5',
                               childActive
                                 ? 'text-primary bg-primary/5'
                                 : 'text-[var(--text-body)] hover:text-[var(--text-heading)]'
