@@ -9,6 +9,11 @@ import SEO from '../components/utils/SEO';
 import Hero from '../components/ui/Hero';
 import KineticTeamHybrid from '../components/ui/KineticTeamHybrid';
 import HiringPartners from '../components/home/HiringPartners';
+import LottieAnimation from '../components/ui/LottieAnimation';
+
+import visionAnimation from '../assets/animations/Vision Eye.json';
+import missionAnimation from '../assets/animations/Mission.json';
+
 import { FadeIn, StaggerContainer, StaggerItem, ScaleOnHover, ScrollCountUp, Parallax } from '../components/utils/Animations';
 
 const About = () => {
@@ -100,27 +105,46 @@ const About = () => {
       </Hero>
 
       {/* Vision & Mission */}
-      <section className="section-padding bg-[var(--bg-inverted)] text-[var(--text-on-inverted)]">
-        <div className="container-custom">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
-            <div className="space-y-6">
-              <div className="h-12 w-12 rounded-2xl bg-[var(--bg-body)]/10 flex items-center justify-center">
-                <Eye className="h-6 w-6 text-primary-light" />
+      <section className="section-padding bg-[var(--bg-inverted)] text-[var(--text-on-inverted)] relative overflow-hidden">
+        {/* Ambient background decoration */}
+        <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-64 h-64 bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
+
+        <div className="container-custom relative z-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 max-w-5xl mx-auto">
+            <FadeIn direction="up" delay={0.1}>
+              <div className="space-y-6 p-6 md:p-8 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-md hover:bg-white/10 transition-all duration-500 group shadow-xl shadow-primary/5">
+                <div className="h-16 w-16 flex items-center justify-center group-hover:scale-110 transition-transform duration-500 ease-out">
+                  <LottieAnimation animationData={visionAnimation} className="w-full h-full" />
+                </div>
+                <div>
+                  <h2 className="text-xl md:text-2xl font-bold mb-3 flex items-center gap-3">
+                    <span className="w-8 h-1 bg-primary rounded-full"></span>
+                    Our Vision
+                  </h2>
+                  <p className="text-[var(--text-on-inverted)]/70 text-base md:text-lg leading-relaxed">
+                    To build a globally recognised AI learning ecosystem that elevates the next generation of intelligent innovators and technology leaders.
+                  </p>
+                </div>
               </div>
-              <h2 className="text-2xl md:text-3xl font-bold">Our Vision</h2>
-              <p className="text-[var(--text-on-inverted)]/70 text-lg leading-relaxed">
-                To build a globally recognised AI learning ecosystem that elevates the next generation of intelligent innovators and technology leaders.
-              </p>
-            </div>
-            <div className="space-y-6">
-              <div className="h-12 w-12 rounded-2xl bg-[var(--bg-body)]/10 flex items-center justify-center">
-                <Target className="h-6 w-6 text-primary-light" />
+            </FadeIn>
+
+            <FadeIn direction="up" delay={0.2}>
+              <div className="space-y-6 p-6 md:p-8 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-md hover:bg-white/10 transition-all duration-500 group shadow-xl shadow-primary/5">
+                <div className="h-16 w-16 flex items-center justify-center group-hover:scale-110 transition-transform duration-500 ease-out">
+                  <LottieAnimation animationData={missionAnimation} className="w-full h-full" />
+                </div>
+                <div>
+                  <h2 className="text-xl md:text-2xl font-bold mb-3 flex items-center gap-3">
+                    <span className="w-8 h-1 bg-primary rounded-full"></span>
+                    Our Mission
+                  </h2>
+                  <p className="text-[var(--text-on-inverted)]/70 text-base md:text-lg leading-relaxed">
+                    To provide practical, industry-grade AI education that converts ambition into measurable career outcomes.
+                  </p>
+                </div>
               </div>
-              <h2 className="text-2xl md:text-3xl font-bold">Our Mission</h2>
-              <p className="text-[var(--text-on-inverted)]/70 text-lg leading-relaxed">
-                To provide practical, industry-grade AI education that converts ambition into measurable career outcomes.
-              </p>
-            </div>
+            </FadeIn>
           </div>
         </div>
       </section>

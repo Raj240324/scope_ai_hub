@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Header from './Header';
 import Footer from './Footer';
 import WhatsAppButton from '../ui/WhatsAppButton';
+import ScrollToTopButton from '../ui/ScrollToTopButton';
 import { BRANDING } from '../../data/branding';
 
 const Layout = ({ 
@@ -37,6 +38,7 @@ const Layout = ({
 
       <Footer />
       <WhatsAppButton />
+      <ScrollToTopButton />
     </div>
   );
 };
