@@ -10,6 +10,7 @@ import {
   Award
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { useModal } from '../context/ModalContext';
 import SEO from '../components/utils/SEO';
 import Hero from '../components/ui/Hero';
@@ -42,10 +43,46 @@ const Admissions = () => {
   ];
 
   const batches = [
-    { name: 'Weekday Batch', time: '10:00 AM - 1:00 PM', days: 'Mon - Fri', status: 'Admissions Open' },
-    { name: 'Evening Batch', time: '6:30 PM - 8:30 PM', days: 'Mon - Fri', status: 'Filling Fast' },
-    { name: 'Weekend Batch', time: '10:00 AM - 4:00 PM', days: 'Sat - Sun', status: 'Admissions Open' },
+    {
+      title: "Weekday Morning",
+      days: "Mon – Fri",
+      time: "Before 10:00 AM",
+      desc: "Pick your preferred 2-hour slot",
+      mode: "Online",
+      status: "Admissions Open"
+    },
+    {
+      title: "Weekday Evening",
+      days: "Mon – Fri",
+      time: "After 5:00 PM",
+      desc: "Perfect after office hours",
+      mode: "Online",
+      status: "Filling Fast"
+    },
+    {
+      title: "Weekend Batch",
+      days: "Sat – Sun",
+      time: "Any Time — 3 hr session",
+      desc: "1.5 hrs · Break · 1.5 hrs",
+      mode: "At Center",
+      status: "Admissions Open"
+    }
   ];
+
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15
+      }
+    }
+  };
+
+  const item = {
+    hidden: { opacity: 0, y: 40 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+  };
 
   return (
     <Layout>
@@ -61,57 +98,65 @@ const Admissions = () => {
       />
 
       <div className="container-custom section-padding">
-        {/* Admission Steps - Connected Visual Pathway */}
+        {/* How It Works - Premium Flip Cards */}
         <div className="mb-24">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <h2 className="heading-md mb-4">How It Works</h2>
             <p className="text-[var(--text-muted)] text-lg">
-              Your journey to a thriving tech career is simple and transparent. Follow these 4 easy steps to get started.
+              Your journey to a thriving tech career is simple and transparent.
+              Follow these 4 easy steps to get started.
             </p>
           </div>
 
-          <div className="relative">
-            {/* Desktop Horizontal Line */}
-            <div className="hidden lg:block absolute top-[4.5rem] left-[10%] right-[10%] h-1 bg-[var(--border-color)] z-0 rounded-full" />
-            
-            {/* Mobile Vertical Line */}
-            <div className="lg:hidden absolute top-8 bottom-8 left-[2.25rem] w-1 bg-[var(--border-color)] z-0 rounded-full" />
-
-            <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 lg:gap-4 relative z-10">
-              {steps.map((step, index) => (
-                <div key={index} className="flex flex-row lg:flex-col items-start lg:items-center relative group">
-                  
-                  {/* Step Number Badge */}
-                  <div className="absolute top-0 left-4 lg:left-1/2 lg:-translate-x-1/2 -translate-y-1/2 bg-[var(--bg-body)] px-3 text-[10px] font-black text-primary uppercase tracking-widest border border-[var(--border-color)] rounded-full z-20 shadow-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    Step 0{index + 1}
-                  </div>
-
-                  {/* Icon Node */}
-                  <div className="shrink-0 h-16 w-16 sm:h-20 sm:w-20 rounded-2xl bg-[var(--bg-card)] border-2 border-[var(--border-color)] group-hover:border-primary shadow-sm group-hover:shadow-xl transition-all duration-300 flex items-center justify-center relative z-10 mb-0 lg:mb-8 ml-4 lg:ml-0 group-hover:-translate-y-2">
-                    <div className="bg-primary/10 h-10 w-10 sm:h-12 sm:w-12 rounded-xl flex items-center justify-center text-primary transition-transform duration-300 group-hover:scale-110">
+          <motion.div
+            variants={container}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"
+          >
+            {steps.map((step, index) => {
+              const titleColors = ['#67e8f9', '#fbbf24', '#6ee7b7', '#f9a8d4'];
+              return (
+              <motion.div
+                key={index}
+                variants={item}
+                className="flip-card"
+              >
+                <div className="flip-card-inner">
+                  {/* FRONT */}
+                  <div className="flip-card-front">
+                    <span className="step-badge">
+                      STEP 0{index + 1}
+                    </span>
+                    <div className="step-icon">
                       {step.icon}
                     </div>
-                  </div>
-
-                  {/* Content */}
-                  <div className="ml-8 lg:ml-0 flex-1 lg:text-center mt-2 lg:mt-0">
-                    <h3 className="text-xl font-bold text-[var(--text-heading)] mb-3 group-hover:text-primary transition-colors">
+                    <h3 className="step-title">
                       {step.title}
                     </h3>
-                    <p className="text-base text-[var(--text-muted)] leading-relaxed lg:max-w-[280px] mx-auto">
+                  </div>
+
+                  {/* BACK */}
+                  <div className="flip-card-back">
+                    <h3 className="step-title-back" style={{ color: titleColors[index] }}>
+                      {step.title}
+                    </h3>
+                    <p className="step-desc">
                       {step.description}
                     </p>
                   </div>
                 </div>
-              ))}
-            </div>
-          </div>
+              </motion.div>
+              );
+            })}
+          </motion.div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+        <div className="max-w-3xl mx-auto mb-16">
           {/* Eligibility */}
           <div className="space-y-8">
-            <h2 className="heading-md">Eligibility Criteria</h2>
+            <h2 className="heading-md text-center">Eligibility Criteria</h2>
             <div className="space-y-4">
               {[
                 "College students (any stream) looking for industry skills.",
@@ -127,43 +172,107 @@ const Admissions = () => {
               ))}
             </div>
           </div>
+        </div>
 
-          {/* Batch Schedules */}
-          <div className="space-y-8">
-            <h2 className="heading-md">Batch Schedules</h2>
-            <div className="bg-[var(--bg-card)] rounded-2xl sm:rounded-3xl border border-[var(--border-color)] overflow-hidden">
-              <div className="overflow-x-auto">
-                <table className="w-full text-left">
-                  <thead className="bg-[var(--bg-secondary)] border-b border-[var(--border-color)]">
-                    <tr>
-                      <th className="px-6 py-4 text-sm font-bold text-[var(--text-heading)] uppercase tracking-wider">Batch</th>
-                      <th className="px-6 py-4 text-sm font-bold text-[var(--text-heading)] uppercase tracking-wider">Timings</th>
-                      <th className="px-6 py-4 text-sm font-bold text-[var(--text-heading)] uppercase tracking-wider">Status</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-[var(--border-color)]">
-                    {batches.map((batch, i) => (
-                      <tr key={i} className="hover:bg-[var(--bg-secondary)] transition-colors">
-                        <td className="px-6 py-6">
-                          <div className="font-bold text-[var(--text-heading)]">{batch.name}</div>
-                          <div className="text-xs text-[var(--text-muted)]">{batch.days}</div>
-                        </td>
-                        <td className="px-6 py-6 text-sm text-[var(--text-muted)] font-medium">
-                          {batch.time}
-                        </td>
-                        <td className="px-6 py-6">
-                          <span className={`inline-block px-3 py-1 rounded-full text-xs font-bold ${
-                            batch.status === 'Filling Fast' ? 'bg-accent-warning/10 text-accent-warning' : 'bg-accent-success/10 text-accent-success'
-                          }`}>
-                            {batch.status}
-                          </span>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+        {/* Premium Batch Section */}
+        <div className="mt-24">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <div className="inline-flex items-center px-4 py-2 mb-6 rounded-full bg-primary/5 border border-primary/10 text-primary text-xs font-bold tracking-wider">
+              Flexible Scheduling
             </div>
+            <h2 className="text-3xl md:text-4xl font-extrabold text-[var(--text-heading)] mb-4">
+              Batch Schedules Built for Professionals
+            </h2>
+            <p className="text-[var(--text-muted)] text-lg">
+              Our trainers are working IT professionals — so we schedule around real lives, not the other way around.
+            </p>
+          </div>
+
+          {/* Hybrid Training Block */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+            className="relative p-8 rounded-3xl border border-[var(--border-color)] bg-[var(--bg-secondary)] mb-16 overflow-hidden"
+          >
+            <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-primary/5 blur-xl"></div>
+            <h3 className="text-xl font-bold text-[var(--text-heading)] mb-4 relative z-10">
+              🇮🇳 India's First Hybrid AI Training — Online Meets In-Person
+            </h3>
+            <p className="text-[var(--text-muted)] max-w-2xl mb-6 relative z-10">
+              Train online on weekdays from home. Walk into our center on alternate weekends for hands-on sessions with your trainer.
+              No other institute in India offers this model.
+            </p>
+            <div className="flex items-center gap-6 text-sm font-medium relative z-10">
+              <span>📻 Weekdays Online</span>
+              <span className="text-primary animate-pulse">⇄</span>
+              <span>🏢 Alternate Weekends In-Person</span>
+            </div>
+          </motion.div>
+
+          {/* Batch Cards */}
+          <motion.div
+            variants={container}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            className="grid md:grid-cols-3 gap-8"
+          >
+            {batches.map((batch, i) => (
+              <motion.div
+                key={i}
+                variants={item}
+                whileHover={{ y: -12 }}
+                className="group relative rounded-3xl border border-[var(--border-color)] bg-[var(--bg-card)] p-8 overflow-hidden transition-all duration-500"
+              >
+                {/* Glow border */}
+                <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition duration-500 bg-gradient-to-r from-primary/20 via-transparent to-primary/20 blur-xl"></div>
+
+                {/* Status badge */}
+                <span
+                  className={`inline-flex items-center px-3 py-1 mb-5 text-xs font-bold rounded-full relative z-10 ${
+                    batch.status === "Filling Fast"
+                      ? "bg-orange-500/10 text-orange-500 animate-pulse"
+                      : "bg-green-500/10 text-green-500"
+                  }`}
+                >
+                  🔥 {batch.status}
+                </span>
+
+                <h3 className="text-xl font-bold text-[var(--text-heading)] mb-2 relative z-10">
+                  {batch.title}
+                </h3>
+                <p className="text-sm text-[var(--text-muted)] mb-6 relative z-10">
+                  {batch.days}
+                </p>
+
+                <div className="space-y-3 text-sm relative z-10">
+                  <div className="flex justify-between">
+                    <span className="text-[var(--text-muted)]">Time</span>
+                    <span className="font-semibold">{batch.time}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-[var(--text-muted)]">Mode</span>
+                    <span className="font-semibold">{batch.mode}</span>
+                  </div>
+                </div>
+                <p className="mt-6 text-xs text-[var(--text-muted)] relative z-10">
+                  {batch.desc}
+                </p>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          {/* CTA */}
+          <div className="text-center mt-14">
+            <button
+              onClick={() => openModal()}
+              className="group inline-flex items-center gap-2 px-8 py-4 bg-primary text-white font-bold rounded-xl hover:shadow-xl transition-all"
+            >
+              Book Your Free Counseling Session
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </button>
           </div>
         </div>
 
@@ -242,7 +351,6 @@ const Admissions = () => {
         {/* Fee Structure Note */}
         {/* Course Programs Overview */}
         <div className="mt-16 sm:mt-24 p-5 sm:p-8 md:p-12 bg-[var(--bg-inverted)] text-[var(--text-on-inverted)] rounded-2xl sm:rounded-3xl relative overflow-hidden text-center">
-          <CreditCard className="absolute -top-4 -left-4 h-32 w-32 text-[var(--text-on-inverted)]/5" />
           <h2 className="text-2xl md:text-3xl font-bold mb-6 relative z-10">Programs Designed For You</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10 text-left">
              <div className="bg-[var(--bg-body)]/10 p-6 rounded-2xl border border-[var(--bg-body)]/10">

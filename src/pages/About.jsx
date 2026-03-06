@@ -99,23 +99,29 @@ const About = () => {
         </div>
       </Hero>
 
-      {/* Trust Bar */}
-      <section className="py-6 bg-[var(--bg-card)] border-b border-[var(--border-color)]">
+      {/* Vision & Mission */}
+      <section className="section-padding bg-[var(--bg-inverted)] text-[var(--text-on-inverted)]">
         <div className="container-custom">
-          <StaggerContainer className="flex flex-wrap justify-center gap-8 md:gap-16">
-            {[
-              { value: '1200+', label: 'Students' },
-              { value: '75+', label: 'Hiring Partners' },
-              { value: '3', label: 'Chennai Campuses' },
-            ].map((item, i) => (
-              <StaggerItem key={i} className="text-center">
-                <div className="text-2xl md:text-3xl font-black text-primary">
-                  <ScrollCountUp end={item.value} />
-                </div>
-                <div className="text-xs font-bold uppercase tracking-widest text-[var(--text-muted)]">{item.label}</div>
-              </StaggerItem>
-            ))}
-          </StaggerContainer>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
+            <div className="space-y-6">
+              <div className="h-12 w-12 rounded-2xl bg-[var(--bg-body)]/10 flex items-center justify-center">
+                <Eye className="h-6 w-6 text-primary-light" />
+              </div>
+              <h2 className="text-2xl md:text-3xl font-bold">Our Vision</h2>
+              <p className="text-[var(--text-on-inverted)]/70 text-lg leading-relaxed">
+                To build a globally recognised AI learning ecosystem that elevates the next generation of intelligent innovators and technology leaders.
+              </p>
+            </div>
+            <div className="space-y-6">
+              <div className="h-12 w-12 rounded-2xl bg-[var(--bg-body)]/10 flex items-center justify-center">
+                <Target className="h-6 w-6 text-primary-light" />
+              </div>
+              <h2 className="text-2xl md:text-3xl font-bold">Our Mission</h2>
+              <p className="text-[var(--text-on-inverted)]/70 text-lg leading-relaxed">
+                To provide practical, industry-grade AI education that converts ambition into measurable career outcomes.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -486,31 +492,6 @@ const About = () => {
         </div>
       </section>
 
-      {/* Vision & Mission */}
-      <section className="section-padding bg-[var(--bg-inverted)] text-[var(--text-on-inverted)]">
-        <div className="container-custom">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
-            <div className="space-y-6">
-              <div className="h-12 w-12 rounded-2xl bg-[var(--bg-body)]/10 flex items-center justify-center">
-                <Eye className="h-6 w-6 text-primary-light" />
-              </div>
-              <h2 className="text-2xl md:text-3xl font-bold">Our Vision</h2>
-              <p className="text-[var(--text-on-inverted)]/70 text-lg leading-relaxed">
-                To build a globally recognised AI learning ecosystem that elevates the next generation of intelligent innovators and technology leaders.
-              </p>
-            </div>
-            <div className="space-y-6">
-              <div className="h-12 w-12 rounded-2xl bg-[var(--bg-body)]/10 flex items-center justify-center">
-                <Target className="h-6 w-6 text-primary-light" />
-              </div>
-              <h2 className="text-2xl md:text-3xl font-bold">Our Mission</h2>
-              <p className="text-[var(--text-on-inverted)]/70 text-lg leading-relaxed">
-                To provide practical, industry-grade AI education that converts ambition into measurable career outcomes.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Core Values */}
       <section className="section-padding bg-[var(--bg-card)]">
