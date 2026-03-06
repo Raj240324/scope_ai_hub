@@ -13,7 +13,7 @@ const Footer = () => {
   const { theme } = useTheme();
 
   return (
-    <footer className="bg-[var(--bg-footer)] text-[var(--text-footer-muted)] pt-20 pb-10 border-t border-[var(--border-color)]">
+    <footer className="bg-[var(--bg-body)] text-[var(--text-body)] pt-20 pb-10 border-t border-[var(--border-color)] transition-colors duration-300">
       <div className="container-custom">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           {/* Institute Info */}
@@ -25,7 +25,7 @@ const Footer = () => {
                 className="h-16 md:h-20 w-auto object-contain" 
               />
             </Link>
-            <p className="text-sm leading-relaxed">
+            <p className="text-sm leading-relaxed text-[var(--text-muted)]">
               {BRANDING.description}
             </p>
             <div className="flex flex-col gap-3">
@@ -70,33 +70,33 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-[var(--text-footer)] font-bold text-lg mb-8 relative inline-block">
+            <h3 className="text-[var(--text-heading)] font-bold text-lg mb-8 relative inline-block">
               Quick Links
               <span className="absolute -bottom-2 left-0 w-8 h-1 bg-primary rounded-full"></span>
             </h3>
             <ul className="grid grid-cols-2 lg:grid-cols-1 gap-4 text-sm font-medium">
-              <li><Link to="/about" className="hover:text-primary hover:translate-x-1 transition-all inline-flex items-center">About Us</Link></li>
-              <li><Link to="/courses" className="hover:text-primary hover:translate-x-1 transition-all inline-flex items-center">All Courses</Link></li>
-              <li><Link to="/career-support" className="hover:text-primary hover:translate-x-1 transition-all inline-flex items-center">Career Support</Link></li>
-              <li><Link to="/admissions" className="hover:text-primary hover:translate-x-1 transition-all inline-flex items-center">Admissions</Link></li>
-              <li><Link to="/reviews" className="hover:text-primary hover:translate-x-1 transition-all inline-flex items-center">Student Reviews</Link></li>
-              <li><Link to="/contact" className="hover:text-primary hover:translate-x-1 transition-all inline-flex items-center">Contact Us</Link></li>
-              <li><Link to="/faq" className="hover:text-primary hover:translate-x-1 transition-all inline-flex items-center">FAQs</Link></li>
-              <li><Link to="/careers/trainers" className="hover:text-primary hover:translate-x-1 transition-all inline-flex items-center">Our Trainers</Link></li>
-              <li><Link to="/careers/join-as-trainer" className="hover:text-primary hover:translate-x-1 transition-all inline-flex items-center">Join as Trainer</Link></li>
+              <li><Link to="/about" className="text-[var(--text-muted)] hover:text-primary hover:translate-x-1 transition-all inline-flex items-center">About Us</Link></li>
+              <li><Link to="/courses" className="text-[var(--text-muted)] hover:text-primary hover:translate-x-1 transition-all inline-flex items-center">All Courses</Link></li>
+              <li><Link to="/career-support" className="text-[var(--text-muted)] hover:text-primary hover:translate-x-1 transition-all inline-flex items-center">Career Support</Link></li>
+              <li><Link to="/admissions" className="text-[var(--text-muted)] hover:text-primary hover:translate-x-1 transition-all inline-flex items-center">Admissions</Link></li>
+              <li><Link to="/reviews" className="text-[var(--text-muted)] hover:text-primary hover:translate-x-1 transition-all inline-flex items-center">Student Reviews</Link></li>
+              <li><Link to="/contact" className="text-[var(--text-muted)] hover:text-primary hover:translate-x-1 transition-all inline-flex items-center">Contact Us</Link></li>
+              <li><Link to="/faq" className="text-[var(--text-muted)] hover:text-primary hover:translate-x-1 transition-all inline-flex items-center">FAQs</Link></li>
+              <li><Link to="/careers/trainers" className="text-[var(--text-muted)] hover:text-primary hover:translate-x-1 transition-all inline-flex items-center">Our Trainers</Link></li>
+              <li><Link to="/careers/join-as-trainer" className="text-[var(--text-muted)] hover:text-primary hover:translate-x-1 transition-all inline-flex items-center">Join as Trainer</Link></li>
             </ul>
           </div>
 
           {/* Top Courses */}
           <div>
-            <h3 className="text-[var(--text-footer)] font-bold text-lg mb-8 relative inline-block">
+            <h3 className="text-[var(--text-heading)] font-bold text-lg mb-8 relative inline-block">
               Popular Programs
               <span className="absolute -bottom-2 left-0 w-8 h-1 bg-primary rounded-full"></span>
             </h3>
             <ul className="space-y-4 text-sm font-medium">
               {courses.slice(0, 6).map(c => (
                 <li key={c.id}>
-                  <Link to={`/courses/${c.slug}`} className="hover:text-primary hover:translate-x-1 transition-all">
+                  <Link to={`/courses/${c.slug}`} className="text-[var(--text-muted)] hover:text-primary hover:translate-x-1 transition-all block">
                     {c.title}
                   </Link>
                 </li>
@@ -112,7 +112,7 @@ const Footer = () => {
 
           {/* Contact Info */}
           <div>
-            <h3 className="text-[var(--text-footer)] font-bold text-lg mb-8 relative inline-block">
+            <h3 className="text-[var(--text-heading)] font-bold text-lg mb-8 relative inline-block">
               Get In Touch
               <span className="absolute -bottom-2 left-0 w-8 h-1 bg-primary rounded-full"></span>
             </h3>
@@ -121,47 +121,47 @@ const Footer = () => {
                 <div className="bg-primary/10 p-3 rounded-xl text-primary">
                   <MapPin className="h-5 w-5" />
                 </div>
-                <span className="leading-relaxed">{BRANDING.address}</span>
+                <span className="text-[var(--text-muted)] leading-relaxed">{BRANDING.address}</span>
               </li>
-              <li className="flex items-center space-x-4">
-                <div className="bg-primary/10 p-3 rounded-xl text-primary">
+              <li className="flex items-center space-x-4 group">
+                <div className="bg-primary/10 p-3 rounded-xl text-primary group-hover:bg-primary group-hover:text-white transition-all">
                   <Phone className="h-5 w-5" />
                 </div>
-                <span className="font-bold">{BRANDING.phone}</span>
+                <a href={`tel:${BRANDING.phone}`} className="text-[var(--text-heading)] font-bold hover:text-primary transition-colors">{BRANDING.phone}</a>
               </li>
-              <li className="flex items-center space-x-4">
-                <div className="bg-primary/10 p-3 rounded-xl text-primary">
+              <li className="flex items-center space-x-4 group">
+                <div className="bg-primary/10 p-3 rounded-xl text-primary group-hover:bg-primary group-hover:text-white transition-all">
                   <Mail className="h-5 w-5" />
                 </div>
-                <span className="font-bold">{BRANDING.email}</span>
+                <a href={`mailto:${BRANDING.email}`} className="text-[var(--text-heading)] font-bold hover:text-primary transition-colors">{BRANDING.email}</a>
               </li>
             </ul>
           </div>
         </div>
 
         {/* Certification Badge */}
-        <div className="pt-10 pb-6 border-t border-primary/10">
+        <div className="pt-10 pb-6 border-t border-[var(--border-color)]">
           <div className="flex flex-col items-center gap-3">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/5 border border-primary/10 text-primary text-[10px] font-bold uppercase tracking-wider">
               <GraduationCap className="h-3.5 w-3.5" />
               Industry-Recognized Certificates
             </div>
-            <p className="text-xs text-[var(--text-footer-muted)] text-center max-w-md">
+            <p className="text-xs text-[var(--text-muted)] text-center max-w-md">
               Verifiable digital certificates recognized by top hiring companies
             </p>
           </div>
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-6 border-t border-primary/10 flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0 text-xs font-medium">
-          <p>© {currentYear} {BRANDING.fullName}. All rights reserved.</p>
+        <div className="pt-6 border-t border-[var(--border-color)] flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0 text-xs font-medium">
+          <p className="text-[var(--text-muted)]">© {currentYear} {BRANDING.fullName}. All rights reserved.</p>
             <div className="flex flex-wrap justify-center md:justify-end items-center gap-x-6 gap-y-2">
-              <Link to="/privacy-policy" className="hover:text-primary transition-colors">Privacy</Link>
-              <Link to="/terms-conditions" className="hover:text-primary transition-colors">Terms</Link>
-              <Link to="/nda-policy" className="hover:text-primary transition-colors">NDA</Link>
-              <Link to="/refund-policy" className="hover:text-primary transition-colors">Refunds</Link>
-              <Link to="/legal/trainer-conduct" className="hover:text-primary transition-colors">Trainer Conduct</Link>
-              <Link to="/disclaimer" className="hover:text-primary transition-colors">Disclaimer</Link>
+              <Link to="/privacy-policy" className="text-[var(--text-muted)] hover:text-primary transition-colors">Privacy</Link>
+              <Link to="/terms-conditions" className="text-[var(--text-muted)] hover:text-primary transition-colors">Terms</Link>
+              <Link to="/nda-policy" className="text-[var(--text-muted)] hover:text-primary transition-colors">NDA</Link>
+              <Link to="/refund-policy" className="text-[var(--text-muted)] hover:text-primary transition-colors">Refunds</Link>
+              <Link to="/legal/trainer-conduct" className="text-[var(--text-muted)] hover:text-primary transition-colors">Trainer Conduct</Link>
+              <Link to="/disclaimer" className="text-[var(--text-muted)] hover:text-primary transition-colors">Disclaimer</Link>
             </div>
             <div className="flex flex-col items-center md:items-end space-y-2">
               <span className="text-[10px] font-bold text-primary tracking-widest uppercase flex items-center bg-primary/10 px-3 py-1 rounded-full">

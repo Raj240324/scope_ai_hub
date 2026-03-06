@@ -50,13 +50,13 @@ const CorporateSection = ({ openModal }) => (
               </div>
               <div className="h-64 rounded-2xl bg-white/10 border border-white/20 flex flex-col items-center justify-center p-8 text-center">
                 <div className="text-3xl md:text-4xl font-black text-[var(--text-on-inverted)] mb-2">25+</div>
-                <div className="text-sm font-bold uppercase tracking-widest text-[var(--text-on-inverted)]/60">Organisations Trained</div>
+                <div className="text-sm font-bold uppercase tracking-widest text-[var(--text-on-inverted)]/70">Organisations Trained</div>
               </div>
             </div>
             <div className="space-y-4 pt-12">
               <div className="h-64 rounded-2xl bg-white/5 border border-white/10 flex flex-col items-center justify-center p-8 text-center">
                 <div className="text-3xl md:text-4xl font-black text-[var(--text-on-inverted)] mb-2">500+</div>
-                <div className="text-sm font-bold uppercase tracking-widest text-[var(--text-on-inverted)]/60">Professionals Upskilled</div>
+                <div className="text-sm font-bold uppercase tracking-widest text-[var(--text-on-inverted)]/70">Professionals Upskilled</div>
               </div>
               <div className="h-48 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center p-8">
                 <img src="https://cdn.brandfetch.io/idawOgYOsG/theme/dark/logo.svg?c=1bxid64Mup7aczewSAYMX&t=1747149760488" alt="Amazon" width={200} height={80} loading="lazy" className="w-full opacity-90 dark:opacity-100" />

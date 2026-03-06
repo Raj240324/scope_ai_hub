@@ -43,7 +43,7 @@ const MethodologySection = ({ openModal }) => (
                 <div className={`w-12 h-12 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl ${item.color} flex items-center justify-center text-white shadow-lg shadow-black/20`}>
                   {item.icon}
                 </div>
-                <span className="text-2xl sm:text-4xl font-black text-[var(--text-muted)] opacity-20 group-hover:opacity-40 transition-opacity">
+                <span className="text-2xl sm:text-4xl font-black text-[var(--text-muted)] opacity-30 group-hover:opacity-50 transition-opacity">
                   {item.step}
                 </span>
               </div>

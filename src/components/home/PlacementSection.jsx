@@ -63,7 +63,7 @@ const PlacementSection = ({ openModal }) => (
                   </div>
                   <div>
                     <h4 className="font-bold text-[var(--text-on-inverted)] mb-1">{item.title}</h4>
-                    <p className="text-[var(--text-on-inverted)]/60 text-sm">{item.desc}</p>
+                    <p className="text-[var(--text-on-inverted)]/75 text-sm">{item.desc}</p>
                   </div>
                 </div>
               ))}
@@ -77,13 +77,13 @@ const PlacementSection = ({ openModal }) => (
             ].map((stat, i) => (
               <div key={i} className="bg-primary/10 backdrop-blur-sm border border-primary/20 rounded-2xl p-6">
                 <div className="text-2xl sm:text-4xl font-black text-primary mb-2">{stat.value}</div>
-                <div className="text-sm text-[var(--text-on-inverted)]/60 font-medium">{stat.label}</div>
+                <div className="text-sm text-[var(--text-on-inverted)]/75 font-medium">{stat.label}</div>
               </div>
             ))}
           </div>
         </div>
         <div className="mt-10 pt-10 border-t border-primary/10 text-center">
-          <p className="text-[var(--text-on-inverted)]/60 text-sm mb-6">
+          <p className="text-[var(--text-on-inverted)]/75 text-sm mb-6">
             <span className="text-primary font-bold">Important Note:</span> While we provide comprehensive placement assistance, final selection depends on your performance in interviews and company requirements. We prepare you thoroughly to maximize your success rate.
           </p>
           <button

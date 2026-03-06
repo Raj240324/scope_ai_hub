@@ -138,13 +138,13 @@ const TrustFactors = () => (
           </div>
         </div>
 
-        <div className="w-full max-w-md border-2 border-amber-400 rounded-xl shadow-md p-4 text-center" style={{ background: '#1e293b' }}>
+        <div className="w-full max-w-md border-2 border-amber-400/50 rounded-xl shadow-md p-4 text-center" style={{ background: 'var(--bg-inverted)' }}>
           <div className="inline-flex items-center gap-2 mb-1">
             <span className="w-6 h-6 rounded-full bg-amber-500 text-white text-xs font-black flex items-center justify-center shrink-0">7</span>
-            <p className="font-bold text-sm text-white">Career Launch</p>
+            <p className="font-bold text-sm text-[var(--text-on-inverted)]">Career Launch</p>
             <span className="text-lg">🚀</span>
           </div>
-          <p className="text-white/60 text-xs">Job-Ready AI Professionals</p>
+          <p className="text-[var(--text-on-inverted)]/60 text-xs">Job-Ready AI Professionals</p>
         </div>
       </div>
 
@@ -168,8 +168,8 @@ const TrustFactors = () => (
               </div>
               <div className="absolute top-1/2 -translate-y-1/2 -right-[76px] z-20">
                 <svg width="76" height="44" viewBox="0 0 80 44" fill="none">
-                  <path d="M2 38 Q20 38 36 22 Q52 6 72 6" stroke="rgba(37,99,235,0.75)" strokeWidth="2.5" strokeLinecap="round" fill="none"/>
-                  <polygon points="72,1 80,6 72,11" fill="rgba(37,99,235,0.85)"/>
+                  <path d="M2 38 Q20 38 36 22 Q52 6 72 6" stroke="var(--color-primary)" strokeWidth="2.5" strokeLinecap="round" fill="none" opacity="0.5" />
+                  <polygon points="72,1 80,6 72,11" fill="var(--color-primary)" opacity="0.6" />
                 </svg>
               </div>
             </div>
@@ -205,14 +205,14 @@ const TrustFactors = () => (
                 <polygon points="3,8 8,0 13,8" fill="#F59E0B" fillOpacity="0.9"/>
               </svg>
             </div>
-            <div className="border-2 border-amber-400 rounded-xl shadow-md hover:shadow-xl transition-all overflow-hidden" style={{ background: '#1e293b' }}>
+            <div className="border-2 border-amber-400/50 rounded-xl shadow-md hover:shadow-xl transition-all overflow-hidden" style={{ background: 'var(--bg-inverted)' }}>
               <div className="flex items-center gap-3 px-4 py-4">
                 <div className="bg-amber-500 text-white w-8 h-8 rounded-full flex items-center justify-center shrink-0">
                   <Award className="h-4 w-4" />
                 </div>
                 <div className="flex-1 text-center">
-                  <p className="font-black text-base text-white leading-snug">7. Career Launch</p>
-                  <p className="text-white/60 text-xs mt-0.5">Job-Ready AI Professionals</p>
+                  <p className="font-black text-base text-[var(--text-on-inverted)] leading-snug">7. Career Launch</p>
+                  <p className="text-[var(--text-on-inverted)]/60 text-xs mt-0.5">Job-Ready AI Professionals</p>
                 </div>
                 <span className="text-2xl shrink-0">🚀</span>
               </div>
@@ -229,8 +229,8 @@ const TrustFactors = () => (
             <div key={i} className="relative">
               <div className="absolute top-1/2 -translate-y-1/2 -left-[76px] z-20">
                 <svg width="76" height="44" viewBox="0 0 80 44" fill="none">
-                  <path d="M78 38 Q60 38 44 22 Q28 6 8 6" stroke="rgba(37,99,235,0.75)" strokeWidth="2.5" strokeLinecap="round" fill="none"/>
-                  <polygon points="8,1 0,6 8,11" fill="rgba(37,99,235,0.85)"/>
+                  <path d="M78 38 Q60 38 44 22 Q28 6 8 6" stroke="var(--color-primary)" strokeWidth="2.5" strokeLinecap="round" fill="none" opacity="0.5" />
+                  <polygon points="8,1 0,6 8,11" fill="var(--color-primary)" opacity="0.6" />
                 </svg>
               </div>
               <div className="flex items-center gap-2.5 bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl shadow-sm hover:shadow-md transition-all overflow-hidden"
