@@ -141,7 +141,7 @@ section {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
-    overflow-x: hidden;
+    overflow-x: clip;
   }
   
   html.dark body {
@@ -371,7 +371,9 @@ section {
 
 /* Fix GSAP pin spacer overflow */
 .pin-spacer {
-  width: 100% !important;
-  max-width: 100% !important;
   overflow: hidden;
+}
+
+canvas {
+  display: block;
 }

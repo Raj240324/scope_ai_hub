@@ -88,17 +88,7 @@ export default function HeroScroll({ children, badge, title, subtitle }) {
 
   }, [])
 
-  useEffect(() => {
 
-  const handleResize = () => {
-    ScrollTrigger.refresh()
-  }
-
-  window.addEventListener("resize", handleResize)
-
-  return () => window.removeEventListener("resize", handleResize)
-
-}, [])
 
   /* ---------------- FRAME LOADING ---------------- */
 
@@ -224,7 +214,6 @@ export default function HeroScroll({ children, badge, title, subtitle }) {
   start: "top top",
   end: `+=${SCROLL_DISTANCE}`,
   pin: true,
-  pinType: "transform",
   scrub: 1,
   invalidateOnRefresh: true,
   onUpdate: (self) => {
@@ -232,7 +221,7 @@ export default function HeroScroll({ children, badge, title, subtitle }) {
   }
 })
 
-setTimeout(() => ScrollTrigger.refresh(), 50)
+
 
     const tick = () => {
 
@@ -310,7 +299,6 @@ setTimeout(() => ScrollTrigger.refresh(), 50)
 
       canvasSizeRef.current = { w, h }
 
-      ScrollTrigger.refresh()
 
     }
 
@@ -332,7 +320,7 @@ setTimeout(() => ScrollTrigger.refresh(), 50)
 
       <canvas
         ref={canvasRef}
-        className="absolute inset-0 w-full h-full max-w-[100vw]"
+        className="absolute inset-0 w-full h-full"
       />
 
       <div
