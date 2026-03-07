@@ -231,8 +231,8 @@ const ContactForm = ({ initialCourse = 'General Inquiry' }) => {
           <CheckCircle className="h-8 w-8 text-green-500" />
         </div>
         <div className="text-center space-y-1">
-          <h2 className="text-xl font-bold text-[var(--text-heading)]">You're all set, {formData.user_name}!</h2>
-          <p className="text-sm text-[var(--text-muted)]">{successMessage}</p>
+          <h2 className="heading-sm font-bold text-[var(--text-heading)]">You're all set, {formData.user_name}!</h2>
+          <p className="text-small text-[var(--text-muted)]">{successMessage}</p>
         </div>
         <div className="flex gap-3 mt-2">
           <button
@@ -252,12 +252,12 @@ const ContactForm = ({ initialCourse = 'General Inquiry' }) => {
               setCaptchaToken(null);
               if (recaptchaRef.current) recaptchaRef.current.reset();
             }}
-            className="btn-primary text-sm"
+            className="btn-primary text-small"
           >
             Send Another
           </button>
           {closeModal && (
-            <button onClick={closeModal} className="px-6 py-3 bg-[var(--bg-inverted)] text-[var(--text-on-inverted)] font-bold rounded-xl text-sm hover:opacity-90 transition-all">
+            <button onClick={closeModal} className="px-6 py-3 bg-[var(--bg-inverted)] text-[var(--text-on-inverted)] font-bold rounded-xl text-small hover:opacity-90 transition-all">
               Close
             </button>
           )}
@@ -286,7 +286,7 @@ const ContactForm = ({ initialCourse = 'General Inquiry' }) => {
             <button
               onClick={() => i < currentStep && (setFieldError(''), setCurrentStep(i))}
               disabled={i > currentStep}
-              className={`relative flex h-7 w-7 sm:h-8 sm:w-8 shrink-0 items-center justify-center rounded-full transition-all duration-500 text-[11px] sm:text-xs font-bold
+              className={`relative flex h-7 w-7 sm:h-8 sm:w-8 shrink-0 items-center justify-center rounded-full transition-all duration-500 text-caption sm:text-xs font-bold
                 ${i < currentStep ? 'bg-primary/15 text-primary' : ''}
                 ${i === currentStep ? 'bg-primary text-white shadow-lg shadow-primary/30' : ''}
                 ${i > currentStep ? 'bg-[var(--bg-secondary)] text-[var(--text-muted)]' : ''}
@@ -328,10 +328,10 @@ const ContactForm = ({ initialCourse = 'General Inquiry' }) => {
           className="space-y-3"
         >
           <div className="flex items-baseline justify-between">
-            <label className="text-base sm:text-lg font-bold text-[var(--text-heading)]">
-              {step.label} <span className="text-red-500 text-xs">*</span>
+            <label className="text-body sm:text-lg font-bold text-[var(--text-heading)]">
+              {step.label} <span className="text-red-500 text-caption">*</span>
             </label>
-            <span className="text-[10px] font-bold text-[var(--text-muted)] tabular-nums uppercase tracking-wider">
+            <span className="text-caption font-bold text-[var(--text-muted)] tabular-nums uppercase tracking-wider">
               {currentStep + 1} / {activeSteps.length}
             </span>
           </div>
@@ -343,7 +343,7 @@ const ContactForm = ({ initialCourse = 'General Inquiry' }) => {
               value={value}
               onChange={(e) => handleChange(step.field, e.target.value)}
               autoFocus
-              className={`w-full px-4 py-3 bg-[var(--bg-secondary)] border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-base sm:text-sm text-[var(--text-heading)] resize-none ${
+              className={`w-full px-4 py-3 bg-[var(--bg-secondary)] border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-body sm:text-sm text-[var(--text-heading)] resize-none ${
                 fieldError ? 'border-red-500' : 'border-[var(--border-color)]'
               }`}
             />
@@ -359,7 +359,7 @@ const ContactForm = ({ initialCourse = 'General Inquiry' }) => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.25, delay: i * 0.04 }}
                     onClick={() => handleChange(step.field, opt.value)}
-                    className={`group relative w-full px-4 py-3 rounded-xl text-sm font-medium text-left transition-all duration-300 flex items-center justify-between border ${
+                    className={`group relative w-full px-4 py-3 rounded-xl text-small font-medium text-left transition-all duration-300 flex items-center justify-between border ${
                       isSelected
                         ? 'bg-primary/10 border-primary text-primary shadow-sm shadow-primary/10'
                         : 'bg-[var(--bg-secondary)] border-[var(--border-color)] text-[var(--text-muted)] hover:border-primary/40 hover:text-[var(--text-heading)]'
@@ -378,12 +378,12 @@ const ContactForm = ({ initialCourse = 'General Inquiry' }) => {
               })}
               
               {step.field === 'inquiry_type' && (
-                <p className="text-[10px] text-[var(--text-muted)] font-medium mt-1">
+                <p className="text-caption text-[var(--text-muted)] font-medium mt-1">
                   Not sure which program fits you? Choose Free Career Counseling.
                 </p>
               )}
               {step.field === 'program_interest' && (
-                <p className="text-[10px] text-primary font-bold mt-1">
+                <p className="text-caption text-primary font-bold mt-1">
                   Limited seats available for 2026–27 batch.
                 </p>
               )}
@@ -401,7 +401,7 @@ const ContactForm = ({ initialCourse = 'General Inquiry' }) => {
               }}
               onKeyDown={(e) => e.key === 'Enter' && handleNext()}
               autoFocus
-              className={`w-full px-4 py-3.5 bg-[var(--bg-secondary)] border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-base sm:text-sm text-[var(--text-heading)] ${
+              className={`w-full px-4 py-3.5 bg-[var(--bg-secondary)] border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-body sm:text-sm text-[var(--text-heading)] ${
                 fieldError ? 'border-red-500' : 'border-[var(--border-color)]'
               }`}
             />
@@ -413,7 +413,7 @@ const ContactForm = ({ initialCourse = 'General Inquiry' }) => {
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: 'auto' }}
                 exit={{ opacity: 0, height: 0 }}
-                className="text-[11px] text-red-500 font-bold flex items-center gap-1"
+                className="text-caption text-red-500 font-bold flex items-center gap-1"
               >
                 <AlertCircle className="h-3 w-3 shrink-0" /> {fieldError}
               </motion.p>
@@ -423,7 +423,7 @@ const ContactForm = ({ initialCourse = 'General Inquiry' }) => {
           {status === 'error' && (
             <div className="flex items-center space-x-2 text-red-500 bg-red-500/10 p-3 rounded-xl border border-red-500/20">
               <AlertCircle className="h-4 w-4 shrink-0" />
-              <p className="text-xs font-bold">{errorMessage}</p>
+              <p className="text-caption font-bold">{errorMessage}</p>
             </div>
           )}
         </motion.div>
@@ -485,14 +485,14 @@ const ContactForm = ({ initialCourse = 'General Inquiry' }) => {
         {currentStep > 0 && (
           <button
             onClick={handleBack}
-            className="w-full text-center text-sm text-[var(--text-muted)] hover:text-[var(--text-heading)] transition-colors flex items-center justify-center gap-1"
+            className="w-full text-center text-small text-[var(--text-muted)] hover:text-[var(--text-heading)] transition-colors flex items-center justify-center gap-1"
           >
             <ArrowLeft className="h-3.5 w-3.5" /> Go back
           </button>
         )}
       </div>
 
-      <p className="text-center text-[10px] text-[var(--text-muted)] font-medium mt-4">
+      <p className="text-center text-caption text-[var(--text-muted)] font-medium mt-4">
         By submitting, you agree to our <a href="/privacy-policy" className="text-primary hover:underline">Privacy Policy</a>.
       </p>
     </div>

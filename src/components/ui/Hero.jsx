@@ -85,7 +85,7 @@ const Hero = ({
             <StaggerContainer>
               <StaggerItem>
                 {badge && (
-                  <div className="inline-flex items-center space-x-2.5 px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-[0.2em] mb-8 bg-white/5 text-white/90 border border-white/10 backdrop-blur-xl hover:bg-white/10 transition-colors cursor-default shadow-lg shadow-black/10">
+                  <div className="inline-flex items-center space-x-2.5 px-5 py-2 rounded-full text-caption font-bold uppercase tracking-[0.2em] mb-8 bg-white/5 text-white/90 border border-white/10 backdrop-blur-xl hover:bg-white/10 transition-colors cursor-default shadow-lg shadow-black/10">
                     {badge}
                   </div>
                 )}
@@ -93,14 +93,14 @@ const Hero = ({
               
               <StaggerItem>
                 {/* Elegant Typography - Bold but not Heavy */}
-                <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-white tracking-tight mb-8 leading-[1.1] drop-shadow-2xl">
+                <h1 className="heading-hero text-white tracking-tight mb-8 leading-[1.1] drop-shadow-2xl">
                   {title}
                 </h1>
               </StaggerItem>
               
               <StaggerItem>
                 {subtitle && (
-                  <p className="text-lg md:text-xl mb-12 leading-relaxed text-white/80 max-w-2xl mx-auto font-medium drop-shadow-md">
+                  <p className="text-body-lg md:text-xl mb-12 leading-relaxed text-white/80 max-w-2xl mx-auto font-medium drop-shadow-md">
                     {subtitle}
                   </p>
                 )}
@@ -136,21 +136,21 @@ const Hero = ({
           <StaggerContainer>
             <StaggerItem>
               {badge && (
-                <div className={`inline-flex items-center space-x-2 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider mb-6 ${isHome ? 'bg-primary/10 text-primary border border-primary/20' : 'bg-primary/10 text-primary'}`}>
+                <div className={`inline-flex items-center space-x-2 px-4 py-1.5 rounded-full text-caption font-bold uppercase tracking-wider mb-6 ${isHome ? 'bg-primary/10 text-primary border border-primary/20' : 'bg-primary/10 text-primary'}`}>
                   {badge}
                 </div>
               )}
             </StaggerItem>
             
             <StaggerItem>
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-black text-[var(--text-heading)] tracking-tight mb-6 leading-[1.1]">
+              <h1 className="heading-lg md:text-4xl lg:text-5xl font-black text-[var(--text-heading)] tracking-tight mb-6 leading-[1.1]">
                 {title}
               </h1>
             </StaggerItem>
             
             <StaggerItem>
               {subtitle && (
-                <p className={`text-base md:text-lg mb-8 leading-relaxed text-[var(--text-muted)] ${isHome ? 'max-w-xl' : 'max-w-3xl'}`}>
+                <p className={`text-body md:text-lg mb-8 leading-relaxed text-[var(--text-muted)] ${isHome ? 'max-w-xl' : 'max-w-3xl'}`}>
                   {subtitle}
                 </p>
               )}

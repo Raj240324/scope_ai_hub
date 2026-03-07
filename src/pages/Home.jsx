@@ -72,7 +72,7 @@ const Home = () => {
         <div className="flex flex-col sm:flex-row gap-6 justify-center">
           <Link
             to="/courses"
-            className="group relative px-8 py-4 bg-primary text-white rounded-full flex items-center justify-center font-bold text-base shadow-[0_0_20px_-5px_rgba(var(--primary-rgb),0.3)] hover:shadow-[0_0_25px_-5px_rgba(var(--primary-rgb),0.5)] hover:-translate-y-0.5 transition-all duration-300"
+            className="group relative px-8 py-4 bg-primary text-white rounded-full flex items-center justify-center font-bold text-body shadow-[0_0_20px_-5px_rgba(var(--primary-rgb),0.3)] hover:shadow-[0_0_25px_-5px_rgba(var(--primary-rgb),0.5)] hover:-translate-y-0.5 transition-all duration-300"
           >
             <span className="relative z-10 flex items-center">
               Explore Courses <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
@@ -82,7 +82,7 @@ const Home = () => {
 
           <button
             onClick={() => openModal()}
-            className="px-8 py-4 bg-white/5 backdrop-blur-md text-white border border-white/10 hover:border-primary/50 rounded-full flex items-center justify-center font-bold text-base hover:bg-white/10 transition-all duration-300 group"
+            className="px-8 py-4 bg-white/5 backdrop-blur-md text-white border border-white/10 hover:border-primary/50 rounded-full flex items-center justify-center font-bold text-body hover:bg-white/10 transition-all duration-300 group"
             aria-label="Book Free Demo"
           >
             <PlayCircle className="mr-2 h-5 w-5 opacity-70 group-hover:opacity-100 text-primary-light transition-all" />
@@ -102,7 +102,7 @@ const Home = () => {
       {/* Certifications & Recognitions */}
       <section className="py-12 bg-[var(--bg-secondary)] border-b border-[var(--border-color)]">
         <div className="container-custom">
-          <p className="text-center text-xs font-black text-[var(--text-muted)] uppercase tracking-[0.3em] mb-8">Recognized &amp; Certified By</p>
+          <p className="text-center text-caption font-black text-[var(--text-muted)] uppercase tracking-[0.3em] mb-8">Recognized &amp; Certified By</p>
           <div className="flex flex-wrap justify-center items-center gap-10 md:gap-16">
             {learningPartners.map((partner, index) => (
               <div key={index} className="flex flex-col items-center group">
@@ -117,10 +117,10 @@ const Home = () => {
                       className="max-h-16 md:max-h-20 object-contain group-hover:scale-110 transition-transform duration-500"
                     />
                   ) : (
-                    <span className="text-xl font-black text-[var(--text-muted)] group-hover:text-[var(--text-heading)] transition-colors">{partner.name}</span>
+                    <span className="heading-sm font-black text-[var(--text-muted)] group-hover:text-[var(--text-heading)] transition-colors">{partner.name}</span>
                   )}
                 </div>
-                <span className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-widest mt-2">{partner.name}</span>
+                <span className="text-caption font-bold text-[var(--text-muted)] uppercase tracking-widest mt-2">{partner.name}</span>
               </div>
             ))}
           </div>
@@ -161,21 +161,21 @@ const Home = () => {
               <div className="absolute bottom-[-25%] right-[-10%] w-[60%] h-[60%] bg-primary/10 rounded-full blur-3xl blur-layer" />
             </div>
             <div className="relative z-10 max-w-3xl mx-auto">
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold mb-6">Ready to Build Your <span className="text-primary">Future</span>?</h2>
-              <p className="text-base md:text-lg text-[var(--text-on-inverted)]/80 mb-10">
+              <h2 className="heading-md md:text-3xl lg:heading-hero">Ready to Build Your <span className="text-primary">Future</span>?</h2>
+              <p className="text-body md:text-lg text-[var(--text-on-inverted)]/80 mb-10">
                 Join our next batch and learn from industry experts who are passionate about teaching.
               </p>
               <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
                 <button
                   onClick={() => openModal()}
-                  className="bg-primary text-white hover:opacity-90 px-10 py-4 rounded-full text-lg font-black transition-all shadow-xl shadow-primary/20"
+                  className="bg-primary text-white hover:opacity-90 px-10 py-4 rounded-full text-body-lg font-black transition-all shadow-xl shadow-primary/20"
                   aria-label="Enroll Now"
                 >
                   Enroll Now
                 </button>
                 <Link
                   to="/contact"
-                  className="bg-primary/10 backdrop-blur-md border border-primary/30 text-[var(--text-on-inverted)] hover:bg-primary/20 px-10 py-4 rounded-full text-lg font-black transition-all"
+                  className="bg-primary/10 backdrop-blur-md border border-primary/30 text-[var(--text-on-inverted)] hover:bg-primary/20 px-10 py-4 rounded-full text-body-lg font-black transition-all"
                 >
                   Contact Admissions
                 </Link>

@@ -95,10 +95,10 @@ const About = () => {
         subtitle="Scope AI Hub is Chennai's leading AI & Machine Learning training institute empowering students and professionals with hands-on industry skills since 2019. Online and offline programs available."
       >
         <div className="flex flex-col sm:flex-row gap-4 mb-8">
-          <Link to="/courses" className="btn-primary text-lg px-8 py-4" aria-label="Explore AI training programs">
+          <Link to="/courses" className="btn-primary text-body-lg px-8 py-4" aria-label="Explore AI training programs">
             Explore Programs <ArrowRight className="ml-2 h-5 w-5" />
           </Link>
-          <button onClick={() => openModal()} className="btn-secondary text-lg px-8 py-4" aria-label="Apply for AI course admission">
+          <button onClick={() => openModal()} className="btn-secondary text-body-lg px-8 py-4" aria-label="Apply for AI course admission">
             Apply Now
           </button>
         </div>
@@ -118,11 +118,11 @@ const About = () => {
                   <LottieAnimation animationData={visionAnimation} className="w-full h-full" />
                 </div>
                 <div>
-                  <h2 className="text-xl md:text-2xl font-bold mb-3 flex items-center gap-3">
+                  <h2 className="heading-sm md:heading-md mb-3 flex items-center gap-3">
                     <span className="w-8 h-1 bg-primary rounded-full"></span>
                     Our Vision
                   </h2>
-                  <p className="text-[var(--text-on-inverted)]/70 text-base md:text-lg leading-relaxed">
+                  <p className="text-[var(--text-on-inverted)]/70 text-body md:text-lg leading-relaxed">
                     To build a globally recognised AI learning ecosystem that elevates the next generation of intelligent innovators and technology leaders.
                   </p>
                 </div>
@@ -135,11 +135,11 @@ const About = () => {
                   <LottieAnimation animationData={missionAnimation} className="w-full h-full" />
                 </div>
                 <div>
-                  <h2 className="text-xl md:text-2xl font-bold mb-3 flex items-center gap-3">
+                  <h2 className="heading-sm md:heading-md mb-3 flex items-center gap-3">
                     <span className="w-8 h-1 bg-primary rounded-full"></span>
                     Our Mission
                   </h2>
-                  <p className="text-[var(--text-on-inverted)]/70 text-base md:text-lg leading-relaxed">
+                  <p className="text-[var(--text-on-inverted)]/70 text-body md:text-lg leading-relaxed">
                     To provide practical, industry-grade AI education that converts ambition into measurable career outcomes.
                   </p>
                 </div>
@@ -154,33 +154,33 @@ const About = () => {
         <div className="container-custom">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
-              <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider mb-6 border border-primary/20">
+              <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-caption font-bold uppercase tracking-wider mb-6 border border-primary/20">
                 Our Founding Story
               </div>
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-[var(--text-heading)] mb-6 leading-tight">
+              <h2 className="heading-md md:text-3xl lg:heading-hero text-[var(--text-heading)] mb-6 leading-tight">
                 Why We Built <span className="text-primary">SCOPE AI HUB</span>
               </h2>
-              <p className="text-base md:text-lg text-[var(--text-muted)] leading-relaxed mb-4">
+              <p className="text-body md:text-lg text-body mb-4">
                 Scope AI Hub was founded in 2019 with a single conviction: AI education in India was broken.
               </p>
-              <p className="text-base md:text-lg text-[var(--text-muted)] leading-relaxed mb-4">
+              <p className="text-body md:text-lg text-body mb-4">
                 Institutions were teaching theory while the industry demanded engineers who could build and deploy real AI systems.
               </p>
-              <p className="text-base md:text-lg text-[var(--text-muted)] leading-relaxed mb-6">
+              <p className="text-body md:text-lg text-body mb-6">
                 We replaced passive lectures with project execution, mentor-led code reviews, and real engineering simulations.
               </p>
               <blockquote className="border-l-4 border-primary pl-6 py-2 my-8">
-                <p className="text-[var(--text-heading)] italic text-lg leading-relaxed mb-4">
+                <p className="text-[var(--text-heading)] italic text-body-lg leading-relaxed mb-4">
                   "I watched brilliant students spend years studying AI theory, only to fail their first real deployment. That's when I knew — the system had to change. {BRANDING.fullName} exists because I refused to let another batch of students graduate unprepared."
                 </p>
-                <footer className="text-sm font-bold text-[var(--text-muted)] uppercase tracking-widest">
+                <footer className="text-small font-bold text-[var(--text-muted)] uppercase tracking-widest">
                   — {BRANDING.founder.name}, <span className="text-primary">{BRANDING.founder.title}</span>
                 </footer>
               </blockquote>
             </div>
             <div className="space-y-6">
               <div className="p-5 sm:p-8 bg-[var(--bg-secondary)] rounded-2xl sm:rounded-3xl border border-[var(--border-color)] shadow-sm">
-                <p className="text-[var(--text-muted)] leading-relaxed text-lg">
+                <p className="text-body-lg">
                   "This is more than an institute. It is a movement to build the next generation of AI professionals."
                 </p>
                 <div className="mt-6 flex items-center space-x-4">
@@ -189,18 +189,18 @@ const About = () => {
                   </div>
                   <div>
                     <p className="font-bold text-[var(--text-heading)]">{BRANDING.founder.name}</p>
-                    <p className="text-sm text-[var(--text-muted)]">{BRANDING.founder.title}</p>
+                    <p className="text-small text-[var(--text-muted)]">{BRANDING.founder.title}</p>
                   </div>
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div className="p-6 bg-[var(--bg-card)] rounded-2xl border border-[var(--border-color)] text-center">
-                  <div className="text-3xl font-black text-primary mb-1">2019</div>
-                  <div className="text-xs font-bold uppercase tracking-widest text-[var(--text-muted)]">Year Founded</div>
+                  <div className="heading-hero text-primary mb-1">2019</div>
+                  <div className="text-caption font-bold uppercase tracking-widest text-[var(--text-muted)]">Year Founded</div>
                 </div>
                 <div className="p-6 bg-[var(--bg-card)] rounded-2xl border border-[var(--border-color)] text-center">
-                  <div className="text-3xl font-black text-primary mb-1">1,200+</div>
-                  <div className="text-xs font-bold uppercase tracking-widest text-[var(--text-muted)]">Students Trained</div>
+                  <div className="heading-hero text-primary mb-1">1,200+</div>
+                  <div className="text-caption font-bold uppercase tracking-widest text-[var(--text-muted)]">Students Trained</div>
                 </div>
               </div>
             </div>
@@ -214,10 +214,10 @@ const About = () => {
           <StaggerContainer className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
             {stats.map((stat, index) => (
               <StaggerItem key={index} className="text-center">
-                <div className="text-2xl md:text-3xl font-bold text-primary mb-1">
+                <div className="heading-md md:heading-hero text-primary mb-1">
                   <ScrollCountUp end={stat.value} />{stat.suffix}
                 </div>
-                <div className="text-sm text-[var(--text-muted)] font-medium uppercase tracking-wider">{stat.label}</div>
+                <div className="text-small text-[var(--text-muted)] font-medium uppercase tracking-wider">{stat.label}</div>
               </StaggerItem>
             ))}
           </StaggerContainer>
@@ -229,7 +229,7 @@ const About = () => {
         <div className="container-custom">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <h2 className="heading-md mb-6">The <span className="text-primary">Scope Advantage</span></h2>
-            <p className="text-[var(--text-muted)] text-lg">
+            <p className="text-[var(--text-muted)] text-body-lg">
               Six reasons our graduates outperform the competition — and why 75+ companies trust us to build their AI talent pipeline.
             </p>
           </div>
@@ -270,8 +270,8 @@ const About = () => {
                 <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-primary/10 flex items-center justify-center mb-5 sm:mb-6 group-hover:bg-[var(--bg-inverted)] group-hover:text-[var(--text-on-inverted)] transition-colors text-primary">
                   {item.icon}
                 </div>
-                <h3 className="text-lg sm:text-xl font-bold text-[var(--text-heading)] mb-3">{item.title}</h3>
-                <p className="text-sm sm:text-base text-[var(--text-muted)] leading-relaxed">{item.desc}</p>
+                <h3 className="text-body-lg sm:text-xl font-bold text-[var(--text-heading)] mb-3">{item.title}</h3>
+                <p className="text-small sm:text-base text-body">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -284,10 +284,10 @@ const About = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="space-y-6">
               <h2 className="heading-md">How We Teach</h2>
-              <p className="text-[var(--text-muted)] text-lg leading-relaxed">
+              <p className="text-[var(--text-muted)] text-body-lg leading-relaxed">
                 Every class at Scope AI Hub is a collaborative engineering session.
               </p>
-              <p className="text-[var(--text-muted)] text-lg leading-relaxed">
+              <p className="text-[var(--text-muted)] text-body-lg leading-relaxed">
                 Our trainers open their code editor and solve real problems alongside students.
                 You debug, build, and deploy systems in real time — just like a real AI engineering team.
               </p>
@@ -316,7 +316,7 @@ const About = () => {
                 <Parallax offset={-20}>
                   <div className="aspect-square bg-primary rounded-3xl p-8 flex flex-col justify-end text-white shadow-xl shadow-primary/20">
                     <Lightbulb className="h-10 w-10 mb-4" />
-                    <p className="font-bold text-lg leading-tight text-[var(--text-on-inverted)]">Innovation in every lesson.</p>
+                    <p className="font-bold text-body-lg leading-tight text-[var(--text-on-inverted)]">Innovation in every lesson.</p>
                   </div>
                 </Parallax>
               </div>
@@ -324,7 +324,7 @@ const About = () => {
                 <Parallax offset={20}>
                   <div className="aspect-square bg-[var(--bg-inverted)] rounded-3xl p-8 flex flex-col justify-end text-[var(--text-on-inverted)] shadow-xl">
                     <Target className="h-10 w-10 mb-4 text-primary-light" />
-                    <p className="font-bold text-lg leading-tight text-[var(--text-on-inverted)]">Goal-oriented training.</p>
+                    <p className="font-bold text-body-lg leading-tight text-[var(--text-on-inverted)]">Goal-oriented training.</p>
                   </div>
                 </Parallax>
                 <Parallax offset={-20}>
@@ -342,11 +342,11 @@ const About = () => {
       <section className="section-padding bg-[var(--bg-secondary)]">
         <div className="container-custom">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider mb-6 border border-primary/20">
+            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-caption font-bold uppercase tracking-wider mb-6 border border-primary/20">
               Curriculum Stack
             </div>
             <h2 className="heading-md mb-4">Technologies We <span className="text-primary">Cover</span></h2>
-            <p className="text-[var(--text-muted)] text-lg">
+            <p className="text-[var(--text-muted)] text-body-lg">
               Industry-standard tools and frameworks taught through hands-on projects and live deployments.
             </p>
           </div>
@@ -368,7 +368,7 @@ const About = () => {
                   <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-[var(--bg-inverted)] group-hover:text-[var(--text-on-inverted)] transition-colors text-primary">
                     {tech.icon}
                   </div>
-                  <p className="text-sm font-bold text-[var(--text-heading)]">{tech.name}</p>
+                  <p className="text-small font-bold text-[var(--text-heading)]">{tech.name}</p>
                 </div>
               </StaggerItem>
             ))}
@@ -408,13 +408,13 @@ const About = () => {
                 {/* Right: Editorial Typography */}
                 <div className="w-full lg:w-7/12 flex flex-col space-y-6 sm:space-y-8 text-center lg:text-left relative z-20">
                   <div>
-                    <div className="inline-flex items-center space-x-2 px-3 py-1 sm:px-4 sm:py-1.5 rounded-full bg-[var(--bg-secondary)] text-[var(--text-muted)] text-[10px] sm:text-xs font-bold uppercase tracking-widest mb-4 sm:mb-6 border border-[var(--border-color)] shadow-sm">
+                    <div className="inline-flex items-center space-x-2 px-3 py-1 sm:px-4 sm:py-1.5 rounded-full bg-[var(--bg-secondary)] text-[var(--text-muted)] text-caption sm:text-xs font-bold uppercase tracking-widest mb-4 sm:mb-6 border border-[var(--border-color)] shadow-sm">
                       Leadership
                     </div>
-                    <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[var(--text-heading)] tracking-tight leading-tight mb-2">
+                    <h2 className="heading-hero text-[var(--text-heading)] tracking-tight leading-tight mb-2">
                       {BRANDING.ceo.name}
                     </h2>
-                    <p className="text-primary font-black text-xs sm:text-sm uppercase tracking-widest">
+                    <p className="text-primary font-black text-caption sm:text-sm uppercase tracking-widest">
                       {BRANDING.ceo.title}
                     </p>
                   </div>
@@ -422,14 +422,14 @@ const About = () => {
                   <div className="relative">
                     {/* Decorative large quote mark */}
                     <span className="absolute -top-6 -left-4 sm:-top-8 sm:-left-8 text-[5rem] sm:text-[6rem] text-[var(--border-color)] font-serif italic leading-none select-none opacity-40">"</span>
-                    <p className="text-base sm:text-lg md:text-xl text-[var(--text-muted)] leading-relaxed relative z-10 font-medium pb-2">
+                    <p className="text-body sm:text-lg md:text-xl text-body relative z-10 font-medium pb-2">
                       {BRANDING.ceo.bio}
                     </p>
                   </div>
 
                   <div className="pt-2 flex flex-wrap justify-center lg:justify-start gap-3">
                     {["Strategic Vision", "AI & Tech Leadership", "Academic Excellence", "Industry Alignment"].map((tag, i) => (
-                      <span key={i} className="px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider bg-[var(--bg-secondary)] text-[var(--text-muted)] border border-[var(--border-color)] shadow-sm hover:border-primary/50 hover:text-primary transition-all cursor-default">
+                      <span key={i} className="px-4 py-2 rounded-full text-caption font-bold uppercase tracking-wider bg-[var(--bg-secondary)] text-[var(--text-muted)] border border-[var(--border-color)] shadow-sm hover:border-primary/50 hover:text-primary transition-all cursor-default">
                         {tag}
                       </span>
                     ))}
@@ -451,12 +451,12 @@ const About = () => {
       <section className="section-padding bg-[var(--bg-body)]">
         <div className="container-custom">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider mb-6 border border-primary/20">
+            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-caption font-bold uppercase tracking-wider mb-6 border border-primary/20">
               <GraduationCap className="h-3 w-3" />
               <span>Student Success</span>
             </div>
             <h2 className="heading-md mb-4">From Beginners to <span className="text-primary">AI Engineers</span></h2>
-            <p className="text-[var(--text-muted)] text-lg">
+            <p className="text-[var(--text-muted)] text-body-lg">
               Real career transformations from our graduates — not marketing claims, but verified outcomes.
             </p>
           </div>
@@ -490,23 +490,23 @@ const About = () => {
               <StaggerItem key={i}>
                 <div className="p-6 sm:p-8 bg-[var(--bg-card)] rounded-2xl sm:rounded-3xl border border-[var(--border-color)] shadow-sm hover:shadow-lg transition-all h-full flex flex-col">
                   <div className="flex items-center space-x-4 mb-6">
-                    <div className="h-14 w-14 rounded-full bg-primary/10 flex items-center justify-center text-primary font-black text-lg">
+                    <div className="h-14 w-14 rounded-full bg-primary/10 flex items-center justify-center text-primary font-black text-body-lg">
                       {student.name.split(' ').map(n => n[0]).join('')}
                     </div>
                     <div>
                       <p className="font-bold text-[var(--text-heading)]">{student.name}</p>
-                      <p className="text-xs text-[var(--text-muted)]">
+                      <p className="text-caption text-[var(--text-muted)]">
                         <span className="line-through opacity-60">{student.beforeRole}</span>
                         <span className="mx-2">→</span>
                         <span className="text-primary font-bold">{student.afterRole}</span>
                       </p>
                     </div>
                   </div>
-                  <p className="text-[var(--text-muted)] leading-relaxed italic flex-1">"{student.quote}"</p>
+                  <p className="text-body italic flex-1">"{student.quote}"</p>
                   <div className="mt-6 pt-4 border-t border-[var(--border-color)]">
                     <div className="flex items-center space-x-3">
                       <img src={student.logo} alt={student.company} className="h-6 w-6 object-contain rounded-sm" />
-                      <span className="text-sm font-bold text-[var(--text-heading)]">{student.company}</span>
+                      <span className="text-small font-bold text-[var(--text-heading)]">{student.company}</span>
                     </div>
                   </div>
                 </div>
@@ -534,8 +534,8 @@ const About = () => {
                   <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center">
                     {value.icon}
                   </div>
-                  <h3 className="text-xl font-bold text-[var(--text-heading)]">{value.title}</h3>
-                  <p className="text-[var(--text-muted)] leading-relaxed">
+                  <h3 className="heading-sm font-bold text-[var(--text-heading)]">{value.title}</h3>
+                  <p className="text-body">
                     {value.description}
                   </p>
                 </div>
@@ -549,8 +549,8 @@ const About = () => {
       <section className="py-20 bg-[var(--bg-secondary)]">
         <div className="container-custom">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-[var(--text-heading)] mb-6">Our <span className="text-primary">Presence</span></h2>
-            <p className="text-base md:text-lg text-[var(--text-muted)]">
+            <h2 className="heading-md md:text-3xl lg:heading-hero text-[var(--text-heading)] mb-6">Our <span className="text-primary">Presence</span></h2>
+            <p className="text-body md:text-lg text-[var(--text-muted)]">
               On-campus excellence. Borderless online learning. A truly global AI ecosystem — from Tamil Nadu to the world.
             </p>
           </div>
@@ -561,19 +561,19 @@ const About = () => {
                   <div className="h-10 w-10 sm:h-12 sm:w-12 bg-primary/10 rounded-xl sm:rounded-2xl flex items-center justify-center group-hover:bg-[var(--bg-inverted)] transition-colors">
                     <MapPin className="h-5 w-5 sm:h-6 sm:w-6 text-primary group-hover:text-[var(--text-on-inverted)] transition-colors" />
                   </div>
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--text-muted)] bg-[var(--bg-secondary)] px-3 py-1 rounded-full border border-[var(--border-color)]">{loc.type}</span>
+                  <span className="text-caption font-bold uppercase tracking-widest text-[var(--text-muted)] bg-[var(--bg-secondary)] px-3 py-1 rounded-full border border-[var(--border-color)]">{loc.type}</span>
                 </div>
-                <h3 className="text-lg sm:text-xl font-bold text-[var(--text-heading)] mb-3 sm:mb-4">{loc.name}</h3>
-                <p className="text-sm sm:text-base text-[var(--text-muted)] leading-relaxed">{loc.address}</p>
+                <h3 className="text-body-lg sm:text-xl font-bold text-[var(--text-heading)] mb-3 sm:mb-4">{loc.name}</h3>
+                <p className="text-small sm:text-base text-body">{loc.address}</p>
                 {loc.phone && (
-                  <p className="mt-3 text-sm text-[var(--text-muted)] flex items-center">
+                  <p className="mt-3 text-small text-[var(--text-muted)] flex items-center">
                     <Phone className="h-4 w-4 text-primary mr-2" />
                     {loc.phone}
                   </p>
                 )}
                 <button 
                   onClick={() => loc.map !== "#" ? window.open(loc.map, '_blank', 'noopener,noreferrer') : openModal()}
-                  className="mt-6 text-primary font-bold text-sm flex items-center hover:underline"
+                  className="mt-6 text-primary font-bold text-small flex items-center hover:underline"
                 >
                   {loc.map !== "#" ? 'View on Google Maps' : 'Contact Us'} <ExternalLink className="ml-2 h-4 w-4" />
                 </button>
@@ -592,28 +592,28 @@ const About = () => {
                 <div className="absolute bottom-[-25%] right-[-10%] w-[60%] h-[60%] bg-primary/10 rounded-full blur-3xl blur-layer" />
               </div>
             <div className="relative z-10 max-w-3xl mx-auto">
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold mb-6">Your Next Batch Starts Soon. <span className="text-primary">Seats Fill Fast.</span></h2>
-              <p className="text-base md:text-lg text-[var(--text-on-inverted)]/80 mb-10">
+              <h2 className="heading-md md:text-3xl lg:heading-hero">Your Next Batch Starts Soon. <span className="text-primary">Seats Fill Fast.</span></h2>
+              <p className="text-body md:text-lg text-[var(--text-on-inverted)]/80 mb-10">
                 Join 1,200+ graduates building AI careers across India and beyond.
               </p>
               <div className="flex flex-col sm:flex-row justify-center gap-4">
                 <button 
                   onClick={() => openModal()}
-                  className="bg-primary text-white hover:opacity-90 px-10 py-4 rounded-2xl text-lg font-black transition-all shadow-xl shadow-primary/20 flex items-center justify-center"
+                  className="bg-primary text-white hover:opacity-90 px-10 py-4 rounded-2xl text-body-lg font-black transition-all shadow-xl shadow-primary/20 flex items-center justify-center"
                   aria-label="Apply for AI course admission"
                 >
                   Apply Now <ArrowRight className="ml-2 h-5 w-5" />
                 </button>
                 <Link
                   to="/courses"
-                  className="bg-primary/10 backdrop-blur-md border border-primary/30 text-[var(--text-on-inverted)] hover:bg-primary/20 px-10 py-4 rounded-2xl text-lg font-black transition-all text-center"
+                  className="bg-primary/10 backdrop-blur-md border border-primary/30 text-[var(--text-on-inverted)] hover:bg-primary/20 px-10 py-4 rounded-2xl text-body-lg font-black transition-all text-center"
                   aria-label="View all AI training programs"
                 >
                   View Programs
                 </Link>
                 <button 
                   onClick={() => openModal()}
-                  className="bg-white/5 backdrop-blur-md border border-white/20 text-[var(--text-on-inverted)] hover:bg-white/10 px-10 py-4 rounded-2xl text-lg font-black transition-all"
+                  className="bg-white/5 backdrop-blur-md border border-white/20 text-[var(--text-on-inverted)] hover:bg-white/10 px-10 py-4 rounded-2xl text-body-lg font-black transition-all"
                   aria-label="Talk to a career mentor"
                 >
                   Talk to a Mentor

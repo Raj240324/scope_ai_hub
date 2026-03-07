@@ -123,8 +123,8 @@ const Reviews = () => {
                   {stat.icon}
                 </div>
                 <div>
-                  <div className="text-2xl font-bold text-[var(--text-heading)]">{stat.value}</div>
-                  <div className="text-sm font-medium text-[var(--text-muted)]">{stat.label}</div>
+                  <div className="heading-md">{stat.value}</div>
+                  <div className="text-small font-medium text-[var(--text-muted)]">{stat.label}</div>
                 </div>
               </div>
             ))}
@@ -159,7 +159,7 @@ const Reviews = () => {
                     key={courseName}
                     onClick={() => setSelectedCourse(courseName)}
                     className={clsx(
-                      "px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all",
+                      "px-4 py-2 rounded-lg text-small font-medium whitespace-nowrap transition-all",
                       selectedCourse === courseName
                         ? "bg-primary text-[var(--text-on-inverted)] shadow-md shadow-primary/20"
                         : "bg-[var(--bg-card)] text-[var(--text-muted)] hover:bg-[var(--bg-secondary)] border border-[var(--border-color)]"
@@ -186,7 +186,7 @@ const Reviews = () => {
                       />
                       <div>
                         <h3 className="font-bold text-[var(--text-heading)] leading-tight">{review.name}</h3>
-                        <p className="text-sm text-[var(--text-muted)]">{review.role}</p>
+                        <p className="text-small text-[var(--text-muted)]">{review.role}</p>
                       </div>
                     </div>
                     {review.verified && (
@@ -210,16 +210,16 @@ const Reviews = () => {
 
                   <div className="relative mb-6">
                     <Quote className="absolute -top-2 -left-2 h-8 w-8 text-primary/5 -z-10" />
-                    <p className="text-[var(--text-muted)] leading-relaxed italic">
+                    <p className="text-body italic">
                       "{review.content}"
                     </p>
                   </div>
 
                   <div className="pt-6 border-t border-[var(--bg-secondary)] flex items-center justify-between">
-                    <span className="text-xs font-semibold text-primary px-3 py-1 bg-primary/5 rounded-full uppercase tracking-wider">
+                    <span className="text-caption font-semibold text-primary px-3 py-1 bg-primary/5 rounded-full uppercase tracking-wider">
                       {review.course.split(' ').slice(0, 2).join(' ')}
                     </span>
-                    <span className="text-xs text-[var(--text-muted)] font-medium">{review.date}</span>
+                    <span className="text-caption text-[var(--text-muted)] font-medium">{review.date}</span>
                   </div>
                 </div>
               ))}
@@ -229,7 +229,7 @@ const Reviews = () => {
               <div className="inline-flex items-center justify-center h-20 w-20 rounded-full bg-[var(--bg-secondary)] mb-6">
                 <MessageSquare className="h-10 w-10 text-[var(--text-muted)]" />
               </div>
-              <h3 className="text-xl font-bold text-[var(--text-heading)] mb-2">No reviews found</h3>
+              <h3 className="heading-sm font-bold text-[var(--text-heading)] mb-2">No reviews found</h3>
               <p className="text-[var(--text-muted)]">Try adjusting your filters or search query.</p>
             </div>
           )}
@@ -240,7 +240,7 @@ const Reviews = () => {
       <section className="py-20 bg-[var(--bg-inverted)] overflow-hidden relative">
         <div className="absolute top-0 right-0 w-64 h-64 bg-[var(--bg-body)]/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
         <div className="container-custom text-center relative z-10">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[var(--text-on-inverted)] mb-8">
+          <h2 className="heading-hero text-[var(--text-on-inverted)] mb-8">
             Ready to be our next success story?
           </h2>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

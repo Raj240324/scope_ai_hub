@@ -32,13 +32,13 @@ const TrainerSpotlight = ({ openModal }) => (
     <div className="container-custom relative z-10">
       <div className="flex flex-col lg:flex-row items-center justify-between mb-16 gap-8 text-center lg:text-left">
         <div className="max-w-2xl">
-          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider mb-6">
+          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-caption font-bold uppercase tracking-wider mb-6">
             Learn from the Best
           </div>
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-[var(--text-heading)] mb-6 leading-tight">
+          <h2 className="heading-md md:text-3xl lg:heading-hero text-[var(--text-heading)] mb-6 leading-tight">
             Our Mentors Come from <span className="text-primary">Global Tech Leaders</span>
           </h2>
-          <p className="text-base md:text-lg text-[var(--text-muted)] leading-relaxed">
+          <p className="text-body md:text-lg text-body">
             At {BRANDING.fullName}, you aren't taught by academics. You are mentored by engineers who have built the tools you use every day.
           </p>
         </div>
@@ -53,10 +53,10 @@ const TrainerSpotlight = ({ openModal }) => (
               </div>
             ))}
             <div className="w-12 h-12 rounded-full border-4 border-[var(--bg-body)] bg-[var(--bg-inverted)] flex items-center justify-center shadow-lg">
-              <span className="text-xs font-bold text-[var(--text-on-inverted)]">+10</span>
+              <span className="text-caption font-bold text-[var(--text-on-inverted)]">+10</span>
             </div>
           </div>
-          <div className="flex items-center text-primary font-black uppercase tracking-widest text-sm hover:underline">
+          <div className="flex items-center text-primary font-black uppercase tracking-widest text-small hover:underline">
             Join our teaching faculty <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
           </div>
         </div>
@@ -69,15 +69,15 @@ const TrainerSpotlight = ({ openModal }) => (
               <div className="flex items-center space-x-4 mb-5 sm:mb-6">
                 <img src={mentor.image} alt={mentor.name} width={64} height={64} loading="lazy" className="h-14 w-14 sm:h-16 sm:w-16 rounded-xl sm:rounded-2xl object-cover shadow-md" />
                 <div>
-                  <h3 className="text-lg sm:text-xl font-bold text-[var(--text-heading)] leading-tight">{mentor.name}</h3>
-                  <p className="text-primary font-bold text-xs uppercase tracking-wider mt-1">{mentor.role}</p>
+                  <h3 className="text-body-lg sm:text-xl font-bold text-[var(--text-heading)] leading-tight">{mentor.name}</h3>
+                  <p className="text-primary font-bold text-caption uppercase tracking-wider mt-1">{mentor.role}</p>
                 </div>
               </div>
               <div className="flex-1">
-                <p className="text-sm font-bold text-[var(--text-muted)] mb-4">{mentor.company}</p>
+                <p className="text-small font-bold text-[var(--text-muted)] mb-4">{mentor.company}</p>
                 <div className="flex flex-wrap gap-2">
                   {mentor.expertise.map((skill, i) => (
-                    <span key={i} className="px-2 py-1 bg-[var(--bg-secondary)] text-[var(--text-muted)] text-[10px] font-black uppercase tracking-wider rounded-lg border border-[var(--border-color)]">
+                    <span key={i} className="px-2 py-1 bg-[var(--bg-secondary)] text-[var(--text-muted)] text-caption font-black uppercase tracking-wider rounded-lg border border-[var(--border-color)]">
                       {skill}
                     </span>
                   ))}

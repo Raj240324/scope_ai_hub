@@ -9,8 +9,8 @@ function NotFound() {
       <div className="w-80 max-w-[90%]">
         <LottieAnimation animationData={animation404} loop={true} autoplay={true} />
       </div>
-      <h1 className="mt-6 text-4xl font-extrabold text-[var(--text-heading)]">404 - Page Not Found</h1>
-      <p className="mt-3 text-lg text-[var(--text-muted)] max-w-md mx-auto">
+      <h1 className="mt-6 heading-hero text-[var(--text-heading)]">404 - Page Not Found</h1>
+      <p className="mt-3 text-body-lg text-[var(--text-muted)] max-w-md mx-auto">
         The page you are looking for does not exist or has been moved.
       </p>
       <Link

@@ -135,14 +135,42 @@ section {
     text-size-adjust: 100%;
     overflow-x: clip;
   }
+body {
+  @apply bg-[var(--bg-body)] text-[var(--text-body)] font-sans;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+}
 
-  body {
-    @apply bg-[var(--bg-body)] text-[var(--text-body)] font-sans;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
-    overflow-x: clip;
-  }
+/* =========================
+   AI CUSTOM CURSOR SYSTEM
+   ========================= */
+
+body, button, a, [role="button"], input {
+  cursor: none !important;
+}
+
+/* sparkle cursor */
+.ai-cursor {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 28px;
+  height: 28px;
+  background: url("/sparkle-cursor.svg") center/contain no-repeat;
+  pointer-events: none;
+  z-index: 99999;
+  /* Smooth easing out positional trailing */
+  transition: transform 0.08s cubic-bezier(0.2, 0, 0, 1), background-image 0.2s ease;
+}
+
+/* circle hover cursor */
+.ai-cursor.hover {
+  background: url("/circle-cursor.svg") center/contain no-repeat;
+  width: 32px;
+  height: 32px;
+}
   
   html.dark body {
     background-color: var(--bg-body);
@@ -173,9 +201,59 @@ section {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
 
+  .section-padding {
+    @apply py-16 md:py-24;
+  }
+
+  /* ===== TYPOGRAPHY SYSTEM ===== */
+  .heading-hero {
+    @apply text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-tight;
+    color: var(--text-heading);
+  }
+
+  .heading-lg {
+    @apply text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight leading-tight;
+    color: var(--text-heading);
+  }
+
+  .heading-md {
+    @apply text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight leading-tight;
+    color: var(--text-heading);
+  }
+
+  .heading-sm {
+    @apply text-xl sm:text-2xl font-semibold tracking-tight leading-tight;
+    color: var(--text-heading);
+  }
+
+  .text-body-lg {
+    @apply text-lg leading-relaxed;
+    color: var(--text-body);
+  }
+
+  .text-body {
+    @apply text-base leading-relaxed;
+    color: var(--text-body);
+  }
+
+  .text-small {
+    @apply text-sm leading-normal;
+    color: var(--text-body);
+  }
+
+  .text-caption {
+    @apply text-xs leading-normal;
+    color: var(--text-body);
+  }
+
+  .text-muted {
+    @apply text-sm;
+    color: var(--text-muted);
+  }
+
   /* Primary Button - Gradient */
   .btn-primary {
-    @apply inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-bold rounded-xl transition-all duration-300 shadow-md hover:shadow-xl hover:-translate-y-0.5 active:scale-95;
+    @apply inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-bold rounded-xl transition-all duration-300 shadow-md hover:shadow-xl hover:-translate-y-0.5 active:scale-95 cursor-pointer;
     background: var(--btn-primary-gradient);
     color: var(--btn-primary-text);
   }
@@ -187,7 +265,7 @@ section {
 
   /* Secondary Button */
   .btn-secondary {
-    @apply inline-flex items-center justify-center px-6 py-3 text-base font-bold rounded-xl transition-all duration-300 active:scale-95;
+    @apply inline-flex items-center justify-center px-6 py-3 text-base font-bold rounded-xl transition-all duration-300 active:scale-95 cursor-pointer;
     border: 2px solid var(--btn-secondary-border);
     color: var(--btn-secondary-text);
     background: var(--btn-secondary-bg);
@@ -196,20 +274,6 @@ section {
   .btn-secondary:hover {
     background-color: var(--btn-secondary-border);
     color: var(--btn-primary-text);
-  }
-
-  .section-padding {
-    @apply py-16 md:py-24;
-  }
-
-  .heading-lg {
-    @apply text-3xl md:text-5xl lg:text-6xl font-black tracking-tight;
-    color: var(--text-heading);
-  }
-
-  .heading-md {
-    @apply text-2xl md:text-3xl font-black tracking-tight;
-    color: var(--text-heading);
   }
 
   .no-scrollbar::-webkit-scrollbar {
@@ -376,4 +440,14 @@ section {
 
 canvas {
   display: block;
+}
+
+/* disable cursor on mobile */
+@media (pointer: coarse) {
+  body, button, a, [role="button"], input {
+    cursor: auto !important;
+  }
+  .ai-cursor {
+    display: none !important;
+  }
 }

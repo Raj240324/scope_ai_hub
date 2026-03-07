@@ -10,13 +10,13 @@ const CorporateSection = ({ openModal }) => (
     <div className="container-custom relative z-10">
       <div className="grid lg:grid-cols-2 gap-16 items-center">
         <div>
-          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-white/10 text-[var(--text-on-inverted)] text-xs font-bold uppercase tracking-wider mb-6">
+          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-white/10 text-[var(--text-on-inverted)] text-caption font-bold uppercase tracking-wider mb-6">
             For Organizations
           </div>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-6 leading-tight">
+          <h2 className="heading-lg md:text-4xl lg:text-5xl font-black mb-6 leading-tight">
             Empower Your Workforce with <span className="text-primary">Corporate Training</span>
           </h2>
-          <p className="text-base md:text-lg text-[var(--text-on-inverted)]/70 mb-10 leading-relaxed">
+          <p className="text-body md:text-lg text-[var(--text-on-inverted)]/70 mb-10 leading-relaxed">
             We provide customized training solutions for corporate teams to stay ahead in the rapidly evolving tech landscape. From upskilling in AI/ML to Cloud transformations.
           </p>
           <div className="grid sm:grid-cols-2 gap-8 mb-10">
@@ -31,7 +31,7 @@ const CorporateSection = ({ openModal }) => (
                   <CheckCircle2 className="h-4 w-4 text-[var(--text-on-inverted)]/80 mr-2" />
                   {item.title}
                 </h4>
-                <p className="text-sm text-[var(--text-on-inverted)]/60">{item.desc}</p>
+                <p className="text-small text-[var(--text-on-inverted)]/60">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -49,14 +49,14 @@ const CorporateSection = ({ openModal }) => (
                 <img src="https://cdn.brandfetch.io/id6O2oGzv-/theme/dark/logo.svg?c=1bxid64Mup7aczewSAYMX&t=1731911497387" alt="Google" width={200} height={80} loading="lazy" className="w-full opacity-90 dark:opacity-100" />
               </div>
               <div className="h-64 rounded-2xl bg-white/10 border border-white/20 flex flex-col items-center justify-center p-8 text-center">
-                <div className="text-3xl md:text-4xl font-black text-[var(--text-on-inverted)] mb-2">25+</div>
-                <div className="text-sm font-bold uppercase tracking-widest text-[var(--text-on-inverted)]/70">Organisations Trained</div>
+                <div className="heading-lg md:heading-hero text-[var(--text-on-inverted)] mb-2">25+</div>
+                <div className="text-small font-bold uppercase tracking-widest text-[var(--text-on-inverted)]/70">Organisations Trained</div>
               </div>
             </div>
             <div className="space-y-4 pt-12">
               <div className="h-64 rounded-2xl bg-white/5 border border-white/10 flex flex-col items-center justify-center p-8 text-center">
-                <div className="text-3xl md:text-4xl font-black text-[var(--text-on-inverted)] mb-2">500+</div>
-                <div className="text-sm font-bold uppercase tracking-widest text-[var(--text-on-inverted)]/70">Professionals Upskilled</div>
+                <div className="heading-lg md:heading-hero text-[var(--text-on-inverted)] mb-2">500+</div>
+                <div className="text-small font-bold uppercase tracking-widest text-[var(--text-on-inverted)]/70">Professionals Upskilled</div>
               </div>
               <div className="h-48 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center p-8">
                 <img src="https://cdn.brandfetch.io/idawOgYOsG/theme/dark/logo.svg?c=1bxid64Mup7aczewSAYMX&t=1747149760488" alt="Amazon" width={200} height={80} loading="lazy" className="w-full opacity-90 dark:opacity-100" />

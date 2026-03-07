@@ -38,7 +38,7 @@ const CourseCard = ({ course, index = 0 }) => {
             {/* Header: Tier Badge */}
             <div className="flex items-center mb-5">
               <div 
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-wider"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-caption font-bold uppercase tracking-wider"
                 style={{
                   backgroundColor: `${tier.color}15`,
                   color: tier.color,
@@ -61,7 +61,7 @@ const CourseCard = ({ course, index = 0 }) => {
 
             {/* Meta Information Grid */}
             <div className="space-y-3 mb-5">
-              <div className="flex items-center gap-2.5 text-[13px] font-medium" style={{ color: 'var(--text-body)' }}>
+              <div className="flex items-center gap-2.5 text-small font-medium" style={{ color: 'var(--text-body)' }}>
                 <div 
                   className="flex items-center justify-center w-7 h-7 rounded-lg"
                   style={{ backgroundColor: `${tier.color}15` }}
@@ -70,7 +70,7 @@ const CourseCard = ({ course, index = 0 }) => {
                 </div>
                 <span>{course.duration}</span>
               </div>
-              <div className="flex items-center gap-2.5 text-[13px] font-semibold" style={{ color: tier.color }}>
+              <div className="flex items-center gap-2.5 text-small font-semibold" style={{ color: tier.color }}>
                 <div 
                   className="flex items-center justify-center w-7 h-7 rounded-lg"
                   style={{ backgroundColor: `${tier.color}15` }}
@@ -79,7 +79,7 @@ const CourseCard = ({ course, index = 0 }) => {
                 </div>
                 <span>{course.salaryRange}</span>
               </div>
-              <div className="flex items-center gap-2.5 text-[13px] font-medium" style={{ color: 'var(--text-body)' }}>
+              <div className="flex items-center gap-2.5 text-small font-medium" style={{ color: 'var(--text-body)' }}>
                 <div 
                   className="flex items-center justify-center w-7 h-7 rounded-lg"
                   style={{ backgroundColor: `${tier.color}15` }}
@@ -100,7 +100,7 @@ const CourseCard = ({ course, index = 0 }) => {
             }}
           >
             <div className="flex items-center justify-between">
-              <span className="text-xs font-bold uppercase tracking-wider" style={{ color: 'var(--text-muted)' }}>
+              <span className="text-caption font-bold uppercase tracking-wider" style={{ color: 'var(--text-muted)' }}>
                 View Course
               </span>
               <div 

@@ -25,7 +25,7 @@ const Footer = () => {
                 className="h-16 md:h-20 w-auto object-contain" 
               />
             </Link>
-            <p className="text-sm leading-relaxed text-[var(--text-muted)]">
+            <p className="text-small leading-relaxed text-[var(--text-muted)]">
               {BRANDING.description}
             </p>
             <div className="flex flex-col gap-3">
@@ -70,11 +70,11 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-[var(--text-heading)] font-bold text-lg mb-8 relative inline-block">
+            <h3 className="text-[var(--text-heading)] font-bold text-body-lg mb-8 relative inline-block">
               Quick Links
               <span className="absolute -bottom-2 left-0 w-8 h-1 bg-primary rounded-full"></span>
             </h3>
-            <ul className="grid grid-cols-2 lg:grid-cols-1 gap-4 text-sm font-medium">
+            <ul className="grid grid-cols-2 lg:grid-cols-1 gap-4 text-small font-medium">
               <li><Link to="/about" className="text-[var(--text-muted)] hover:text-primary hover:translate-x-1 transition-all inline-flex items-center">About Us</Link></li>
               <li><Link to="/courses" className="text-[var(--text-muted)] hover:text-primary hover:translate-x-1 transition-all inline-flex items-center">All Courses</Link></li>
               <li><Link to="/career-support" className="text-[var(--text-muted)] hover:text-primary hover:translate-x-1 transition-all inline-flex items-center">Career Support</Link></li>
@@ -89,11 +89,11 @@ const Footer = () => {
 
           {/* Top Courses */}
           <div>
-            <h3 className="text-[var(--text-heading)] font-bold text-lg mb-8 relative inline-block">
+            <h3 className="text-[var(--text-heading)] font-bold text-body-lg mb-8 relative inline-block">
               Popular Programs
               <span className="absolute -bottom-2 left-0 w-8 h-1 bg-primary rounded-full"></span>
             </h3>
-            <ul className="space-y-4 text-sm font-medium">
+            <ul className="space-y-4 text-small font-medium">
               {courses.slice(0, 6).map(c => (
                 <li key={c.id}>
                   <Link to={`/courses/${c.slug}`} className="text-[var(--text-muted)] hover:text-primary hover:translate-x-1 transition-all block">
@@ -112,16 +112,16 @@ const Footer = () => {
 
           {/* Contact Info */}
           <div>
-            <h3 className="text-[var(--text-heading)] font-bold text-lg mb-8 relative inline-block">
+            <h3 className="text-[var(--text-heading)] font-bold text-body-lg mb-8 relative inline-block">
               Get In Touch
               <span className="absolute -bottom-2 left-0 w-8 h-1 bg-primary rounded-full"></span>
             </h3>
-            <ul className="space-y-6 text-sm">
+            <ul className="space-y-6 text-small">
               <li className="flex items-start space-x-4">
                 <div className="bg-primary/10 p-3 rounded-xl text-primary">
                   <MapPin className="h-5 w-5" />
                 </div>
-                <span className="text-[var(--text-muted)] leading-relaxed">{BRANDING.address}</span>
+                <span className="text-body">{BRANDING.address}</span>
               </li>
               <li className="flex items-center space-x-4 group">
                 <div className="bg-primary/10 p-3 rounded-xl text-primary group-hover:bg-primary group-hover:text-white transition-all">
@@ -142,18 +142,18 @@ const Footer = () => {
         {/* Certification Badge */}
         <div className="pt-10 pb-6 border-t border-[var(--border-color)]">
           <div className="flex flex-col items-center gap-3">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/5 border border-primary/10 text-primary text-[10px] font-bold uppercase tracking-wider">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/5 border border-primary/10 text-primary text-caption font-bold uppercase tracking-wider">
               <GraduationCap className="h-3.5 w-3.5" />
               Industry-Recognized Certificates
             </div>
-            <p className="text-xs text-[var(--text-muted)] text-center max-w-md">
+            <p className="text-caption text-[var(--text-muted)] text-center max-w-md">
               Verifiable digital certificates recognized by top hiring companies
             </p>
           </div>
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-6 border-t border-[var(--border-color)] flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0 text-xs font-medium">
+        <div className="pt-6 border-t border-[var(--border-color)] flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0 text-caption font-medium">
           <p className="text-[var(--text-muted)]">© {currentYear} {BRANDING.fullName}. All rights reserved.</p>
             <div className="flex flex-wrap justify-center md:justify-end items-center gap-x-6 gap-y-2">
               <Link to="/privacy-policy" className="text-[var(--text-muted)] hover:text-primary transition-colors">Privacy</Link>
@@ -164,7 +164,7 @@ const Footer = () => {
               <Link to="/disclaimer" className="text-[var(--text-muted)] hover:text-primary transition-colors">Disclaimer</Link>
             </div>
             <div className="flex flex-col items-center md:items-end space-y-2">
-              <span className="text-[10px] font-bold text-primary tracking-widest uppercase flex items-center bg-primary/10 px-3 py-1 rounded-full">
+              <span className="text-caption font-bold text-primary tracking-widest uppercase flex items-center bg-primary/10 px-3 py-1 rounded-full">
                 <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse mr-2"></span>
                 Next Batch Starting Soon
               </span>

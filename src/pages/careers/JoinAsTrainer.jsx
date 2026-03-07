@@ -58,8 +58,8 @@ const JoinAsTrainer = () => {
                 <div className="h-12 w-12 rounded-2xl bg-[var(--bg-card)] flex items-center justify-center mb-6 shadow-sm">
                   {benefit.icon}
                 </div>
-                <h3 className="text-xl font-bold text-[var(--text-heading)] mb-3">{benefit.title}</h3>
-                <p className="text-[var(--text-muted)] text-sm leading-relaxed">{benefit.description}</p>
+                <h3 className="heading-sm font-bold text-[var(--text-heading)] mb-3">{benefit.title}</h3>
+                <p className="text-[var(--text-muted)] text-small leading-relaxed">{benefit.description}</p>
               </div>
             ))}
           </div>
@@ -72,7 +72,7 @@ const JoinAsTrainer = () => {
         <div className="container-custom">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
-              <h2 className="text-3xl md:text-4xl font-black mb-8 leading-tight">Who we are <span className="text-primary">looking for.</span></h2>
+              <h2 className="heading-lg md:heading-hero leading-tight">Who we are <span className="text-primary">looking for.</span></h2>
               <div className="space-y-6">
                 {[
                   "Strong industry experience in AI, Machine Learning, Data Science, or Software Engineering.",
@@ -89,7 +89,7 @@ const JoinAsTrainer = () => {
               </div>
             </div>
             <div className="bg-white/5 p-8 md:p-12 rounded-[2.5rem] border border-white/10 backdrop-blur-md">
-              <h3 className="text-2xl font-bold mb-6">Apply to be a Mentor</h3>
+              <h3 className="heading-md mb-6">Apply to be a Mentor</h3>
               <p className="text-[var(--text-on-inverted)]/60 mb-8">Tell us about your expertise and we'll reach out to schedule a technical discussion.</p>
               <button 
                 onClick={() => openModal('Trainer Application', 'trainer')}
@@ -97,7 +97,7 @@ const JoinAsTrainer = () => {
               >
                 Submit Application
               </button>
-              <p className="text-center text-[var(--text-on-inverted)]/50 text-xs mt-6">All mentors are required to sign a professional NDA upon joining.</p>
+              <p className="text-center text-[var(--text-on-inverted)]/50 text-caption mt-6">All mentors are required to sign a professional NDA upon joining.</p>
             </div>
           </div>
         </div>

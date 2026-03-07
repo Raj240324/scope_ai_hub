@@ -21,7 +21,7 @@ const Disclaimer = () => {
       <div className="container-custom section-padding">
         <div className="max-w-4xl mx-auto prose prose-slate prose-lg">
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-[var(--text-heading)] mb-4 flex items-center">
+            <h2 className="heading-md mb-4 flex items-center">
               <Info className="h-6 w-6 text-primary mr-3" />
               1. General Information
             </h2>
@@ -31,7 +31,7 @@ const Disclaimer = () => {
           </section>
 
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-[var(--text-heading)] mb-4 flex items-center">
+            <h2 className="heading-md mb-4 flex items-center">
               <AlertTriangle className="h-6 w-6 text-primary mr-3" />
               2. Career & Salary Outcomes
             </h2>
@@ -46,7 +46,7 @@ const Disclaimer = () => {
           </section>
 
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-[var(--text-heading)] mb-4 flex items-center">
+            <h2 className="heading-md mb-4 flex items-center">
               <Building2 className="h-6 w-6 text-primary mr-3" />
               3. Representation of Hiring Partners
             </h2>
@@ -60,7 +60,7 @@ const Disclaimer = () => {
           </section>
 
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-[var(--text-heading)] mb-4 flex items-center">
+            <h2 className="heading-md mb-4 flex items-center">
               <HelpCircle className="h-6 w-6 text-primary mr-3" />
               4. External Links Disclaimer
             </h2>
@@ -70,9 +70,9 @@ const Disclaimer = () => {
           </section>
 
           <section className="p-8 bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-3xl">
-            <p className="font-black text-lg text-[var(--text-heading)] mb-2">{BRANDING.fullName}</p>
+            <p className="font-black text-body-lg text-[var(--text-heading)] mb-2">{BRANDING.fullName}</p>
             <p className="text-[var(--text-muted)]">Legal Compliance Department</p>
-            <div className="flex flex-col space-y-2 text-sm font-medium mt-4">
+            <div className="flex flex-col space-y-2 text-small font-medium mt-4">
               <p className="text-[var(--text-muted)]">Email: <span className="text-primary">{BRANDING.email}</span></p>
             </div>
           </section>

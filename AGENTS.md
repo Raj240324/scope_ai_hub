@@ -292,7 +292,127 @@ import { cn } from "../../lib/utils";
 <div className={cn("base-class", isActive && "active-class")} />;
 ```
 
----
+## 5.1 Typography System
+
+## Typography System Rules
+
+The project follows a standardized typography system to maintain visual
+consistency across the entire website.
+
+Arbitrary font sizes are strictly prohibited.
+
+### Do NOT use
+
+text-[9px]
+text-[10px]
+text-[11px]
+text-[13px]
+text-[17px]
+text-[19px]
+text-[22px]
+
+or any other custom Tailwind font size utilities.
+
+### Always use the global typography classes
+
+.heading-hero
+.heading-lg
+.heading-md
+.heading-sm
+
+.text-body-lg
+.text-body
+.text-small
+.text-caption
+.text-muted
+
+These classes are defined in `src/index.css` under `@layer components`.
+
+### Typography Role Mapping
+
+Hero titles  
+→ `.heading-hero`
+
+Section titles  
+→ `.heading-lg`
+
+Subsection titles / card titles  
+→ `.heading-sm`
+
+Body paragraphs  
+→ `.text-body`
+
+Large body text / hero subtitle  
+→ `.text-body-lg`
+
+Small metadata text  
+→ `.text-small`
+
+Captions / tags / helper text  
+→ `.text-caption`
+
+Muted secondary text  
+→ `.text-muted`
+
+### Accessibility Rules
+
+Minimum font sizes must follow WCAG readability guidelines:
+
+Body text → 16px minimum  
+Small text → 14px minimum  
+Caption text → 12px minimum
+
+Text smaller than **12px is strictly forbidden**.
+
+### Responsive Typography
+
+All heading classes must include responsive scaling:
+
+Hero headings  
+text-4xl sm:text-5xl md:text-6xl lg:text-7xl
+
+Large headings  
+text-3xl sm:text-4xl md:text-5xl
+
+Medium headings  
+text-2xl sm:text-3xl md:text-4xl
+
+### Component Rules
+
+Components must not define their own typography scale.
+
+Instead they must use the standardized classes.
+
+Examples:
+
+Card title  
+.heading-sm
+
+Card description  
+.text-body
+
+Button text  
+.text-small font-semibold
+
+Form labels  
+.text-small
+
+Form helper text  
+.text-caption
+
+### AI Agent Enforcement
+
+AI agents modifying this repository MUST follow the typography system.
+
+If typography inconsistencies are detected, agents must refactor components
+to use the standardized classes instead of creating new font size utilities.
+
+### Design System Goal
+
+The typography system ensures the site maintains a professional design
+standard similar to modern SaaS platforms such as Stripe, Linear, and Vercel.
+
+## All new components must comply with this system.
 
 ## 6. Theme (Light / Dark) Rules
 

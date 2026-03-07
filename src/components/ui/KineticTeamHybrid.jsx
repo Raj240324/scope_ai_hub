@@ -78,12 +78,12 @@ export default function KineticTeamHybrid() {
           className="mb-16 md:mb-20 flex flex-col gap-4 md:flex-row md:items-end md:justify-between"
         >
           <div>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight text-[var(--text-heading)]">
+            <h2 className="heading-md sm:heading-hero text-[var(--text-heading)]">
               Our <span className="text-primary">Mentors</span>
             </h2>
           </div>
           <div className="h-px flex-1 bg-[var(--border-color)] mx-8 hidden md:block" />
-          <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[var(--text-muted)]">
+          <p className="text-caption font-bold uppercase tracking-[0.3em] text-[var(--text-muted)]">
             Industry Veterans
           </p>
         </motion.header>
@@ -129,7 +129,7 @@ export default function KineticTeamHybrid() {
                 <div className="absolute bottom-0 w-full bg-gradient-to-t from-black/80 to-transparent p-4">
                   <div className="flex items-center gap-2">
                     <div className="h-1.5 w-1.5 rounded-full bg-green-500 animate-pulse" />
-                    <span className="text-[10px] uppercase tracking-widest text-white/80">
+                    <span className="text-caption uppercase tracking-widest text-white/80">
                       {TEAM.find((t) => t.id === activeId)?.role}
                     </span>
                   </div>
@@ -172,17 +172,17 @@ function TeamRow({ data, index, isActive, setActiveId, isMobile, isAnyActive }) 
       <div className="relative z-10 flex flex-col py-6 md:flex-row md:items-center md:justify-between md:py-8">
         {/* Name & Index */}
         <div className="flex items-baseline gap-6 md:gap-12 pl-4 md:pl-0 transition-transform duration-500 group-hover:translate-x-4">
-          <span className="font-mono text-[10px] text-[var(--text-muted)]">
+          <span className="font-mono text-caption text-[var(--text-muted)]">
             {data.id}
           </span>
-          <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-[var(--text-muted)] transition-colors duration-300 group-hover:text-[var(--text-heading)] md:text-3xl">
+          <h3 className="heading-sm sm:heading-md tracking-tight text-[var(--text-muted)] transition-colors duration-300 group-hover:text-[var(--text-heading)] md:text-3xl">
             {data.name}
           </h3>
         </div>
 
         {/* Role & Icon */}
         <div className="mt-4 flex items-center justify-between pl-12 pr-4 md:mt-0 md:justify-end md:gap-12 md:pl-0 md:pr-0">
-          <span className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-[var(--text-muted)] transition-colors group-hover:text-primary">
+          <span className="text-caption sm:text-xs font-bold uppercase tracking-[0.2em] text-[var(--text-muted)] transition-colors group-hover:text-primary">
             {data.role}
           </span>
 
@@ -221,14 +221,14 @@ function TeamRow({ data, index, isActive, setActiveId, isMobile, isAnyActive }) 
                   />
                 </div>
                 <div className="flex-1">
-                  <p className="text-sm text-[var(--text-muted)] leading-relaxed mb-3">
+                  <p className="text-small text-body mb-3">
                     {data.bio}
                   </p>
                   <div className="flex flex-wrap gap-1.5">
                     {data.expertise.map((skill, i) => (
                       <span
                         key={i}
-                        className="px-2 py-0.5 bg-primary/10 text-primary text-[9px] font-bold uppercase tracking-wider rounded-md border border-primary/20"
+                        className="px-2 py-0.5 bg-primary/10 text-primary text-caption font-bold uppercase tracking-wider rounded-md border border-primary/20"
                       >
                         {skill}
                       </span>

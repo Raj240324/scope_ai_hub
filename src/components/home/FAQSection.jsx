@@ -8,13 +8,13 @@ const FAQItem = ({ question, answer }) => {
   return (
     <div className="border-b border-[var(--border-color)] last:border-0">
       <button onClick={() => setIsOpen(!isOpen)} className="w-full py-5 flex items-center justify-between text-left group">
-        <span className="text-base md:text-lg font-bold text-[var(--text-heading)] group-hover:text-primary transition-colors pr-4">{question}</span>
+        <span className="text-body md:text-lg font-bold text-[var(--text-heading)] group-hover:text-primary transition-colors pr-4">{question}</span>
         <div className={`flex-shrink-0 h-6 w-6 rounded-full border-2 border-[var(--border-color)] flex items-center justify-center transition-all ${isOpen ? 'bg-[var(--bg-inverted)] border-[var(--text-heading)] text-[var(--text-on-inverted)] rotate-180' : 'text-[var(--text-muted)]'}`}>
           {isOpen ? <Minus className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
         </div>
       </button>
       <div className={`overflow-hidden transition-all duration-300 ${isOpen ? 'max-h-96 pb-5' : 'max-h-0'}`}>
-        <p className="text-[var(--text-muted)] leading-relaxed">{answer}</p>
+        <p className="text-body">{answer}</p>
       </div>
     </div>
   );
@@ -35,7 +35,7 @@ const FAQSection = () => (
       <div className="grid lg:grid-cols-2 gap-16">
         <div>
           <h2 className="heading-md mb-6">Got Questions? <br /> We Have Answers.</h2>
-          <p className="text-[var(--text-muted)] text-lg mb-8 leading-relaxed">
+          <p className="text-[var(--text-muted)] text-body-lg mb-8 leading-relaxed">
             If you have any other questions, feel free to reach out to our team. We're happy to help you choose the right path for your career.
           </p>
           <Link to="/faq" className="btn-secondary inline-flex items-center">

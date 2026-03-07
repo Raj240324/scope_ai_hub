@@ -84,7 +84,7 @@ export default function DesignTestimonial() {
           {/* Left column — vertical text + progress */}
           <div className="hidden md:flex flex-col items-center justify-center pr-12 lg:pr-16 border-r border-[var(--border-color)]">
             <motion.span
-              className="text-[10px] font-bold text-[var(--text-muted)] tracking-widest uppercase"
+              className="text-caption font-bold text-[var(--text-muted)] tracking-widest uppercase"
               style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -117,7 +117,7 @@ export default function DesignTestimonial() {
                 transition={{ duration: 0.4 }}
                 className="mb-6"
               >
-                <span className="inline-flex items-center gap-2 text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-wider border border-[var(--border-color)] rounded-full px-3 py-1">
+                <span className="inline-flex items-center gap-2 text-caption font-bold text-[var(--text-muted)] uppercase tracking-wider border border-[var(--border-color)] rounded-full px-3 py-1">
                   <span className="w-1.5 h-1.5 rounded-full bg-primary" />
                   Now at {current.company}
                 </span>
@@ -129,7 +129,7 @@ export default function DesignTestimonial() {
               <AnimatePresence mode="wait">
                 <motion.blockquote
                   key={activeIndex}
-                  className="text-xl sm:text-2xl md:text-3xl font-bold text-[var(--text-heading)] leading-snug tracking-tight"
+                  className="heading-sm sm:text-2xl md:heading-hero text-[var(--text-heading)] leading-snug tracking-tight"
                   initial="hidden"
                   animate="visible"
                   exit="exit"
@@ -185,8 +185,8 @@ export default function DesignTestimonial() {
                     style={{ originX: 0 }}
                   />
                   <div>
-                    <p className="text-sm font-bold text-[var(--text-heading)]">{current.author}</p>
-                    <p className="text-xs text-primary font-bold uppercase tracking-wider">{current.role}</p>
+                    <p className="text-small font-bold text-[var(--text-heading)]">{current.author}</p>
+                    <p className="text-caption text-primary font-bold uppercase tracking-wider">{current.role}</p>
                   </div>
                 </motion.div>
               </AnimatePresence>
@@ -222,7 +222,7 @@ export default function DesignTestimonial() {
         {/* Bottom ticker */}
         <div className="absolute -bottom-10 left-0 right-0 overflow-hidden opacity-[0.04] pointer-events-none">
           <motion.div
-            className="flex whitespace-nowrap text-4xl md:text-5xl font-black tracking-tight text-[var(--text-heading)]"
+            className="flex whitespace-nowrap heading-hero text-[var(--text-heading)]"
             animate={{ x: [0, -1000] }}
             transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
           >

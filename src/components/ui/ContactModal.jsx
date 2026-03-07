@@ -55,10 +55,10 @@ const ContactModal = () => {
 
             <div className="p-6 md:p-8 overflow-y-auto no-scrollbar">
               <div className="mb-4 md:mb-6">
-                <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-[10px] font-bold uppercase tracking-widest mb-2 md:mb-3">
+                <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-caption font-bold uppercase tracking-widest mb-2 md:mb-3">
                   <span>{modalType === 'trainer' ? 'Join Academic Faculty' : 'Admissions Open 2026-27'}</span>
                 </div>
-                <h2 className="text-2xl md:text-3xl font-black text-[var(--text-heading)] mb-2 md:mb-3 tracking-tight">
+                <h2 className="heading-md md:heading-hero text-[var(--text-heading)] mb-2 md:mb-3 tracking-tight">
                   {modalType === 'trainer' ? (
                     <>Expert <span className="text-primary">Mentor Program</span></>
                   ) : modalCourse === 'Download Brochure' ? (
@@ -75,7 +75,7 @@ const ContactModal = () => {
                     <>Start Your <span className="text-primary">Journey</span></>
                   )}
                 </h2>
-                <p className="text-[var(--text-muted)] text-xs md:text-sm leading-relaxed">
+                <p className="text-[var(--text-muted)] text-caption md:text-sm leading-relaxed">
                   {modalType === 'trainer'
                     ? "Apply to join our expert teaching faculty. Share your industry experience and shape the future of tech talent in Chennai."
                     : modalCourse === 'Download Brochure' 

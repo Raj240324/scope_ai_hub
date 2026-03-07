@@ -21,7 +21,7 @@ const RefundPolicy = () => {
       <div className="container-custom section-padding">
         <div className="max-w-4xl mx-auto prose prose-slate prose-lg">
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-[var(--text-heading)] mb-4 flex items-center">
+            <h2 className="heading-md mb-4 flex items-center">
               <RefreshCw className="h-6 w-6 text-primary mr-3" />
               1. General Refund Principles
             </h2>
@@ -31,7 +31,7 @@ const RefundPolicy = () => {
           </section>
 
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-[var(--text-heading)] mb-4 flex items-center">
+            <h2 className="heading-md mb-4 flex items-center">
               <AlertCircle className="h-6 w-6 text-primary mr-3" />
               2. Non-Refundable Items
             </h2>
@@ -44,12 +44,12 @@ const RefundPolicy = () => {
           </section>
 
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-[var(--text-heading)] mb-4 flex items-center">
+            <h2 className="heading-md mb-4 flex items-center">
               <Clock className="h-6 w-6 text-primary mr-3" />
               3. Refund Eligibility & Timelines
             </h2>
             <div className="overflow-x-auto">
-              <table className="min-w-full border-collapse border border-[var(--border-color)] text-sm">
+              <table className="min-w-full border-collapse border border-[var(--border-color)] text-small">
                 <thead>
                   <tr className="bg-[var(--bg-secondary)]">
                     <th className="border border-[var(--border-color)] px-4 py-2 text-left">Request Timeline</th>
@@ -75,7 +75,7 @@ const RefundPolicy = () => {
           </section>
 
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-[var(--text-heading)] mb-4 flex items-center">
+            <h2 className="heading-md mb-4 flex items-center">
               <FileCheck className="h-6 w-6 text-primary mr-3" />
               4. Refund Request Process
             </h2>
@@ -91,9 +91,9 @@ const RefundPolicy = () => {
           </section>
 
           <section className="p-8 bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-3xl">
-            <p className="font-black text-lg text-[var(--text-heading)] mb-2">{BRANDING.fullName}</p>
+            <p className="font-black text-body-lg text-[var(--text-heading)] mb-2">{BRANDING.fullName}</p>
             <p className="text-[var(--text-muted)] mb-4">Accounts & Finance Department</p>
-            <div className="flex flex-col space-y-2 text-sm font-medium">
+            <div className="flex flex-col space-y-2 text-small font-medium">
               <p className="text-[var(--text-muted)]">Email: <span className="text-primary">{BRANDING.email}</span></p>
             </div>
           </section>

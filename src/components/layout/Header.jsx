@@ -109,7 +109,7 @@ const Header = () => {
                 id="header_search"
                 aria-label="Search programs"
                 placeholder="Search programs (e.g. NLP, MLOps, Prompt...)"
-                className="flex-1 bg-transparent border-none outline-none text-lg font-medium text-[var(--text-heading)] placeholder:text-[var(--text-muted)]"
+                className="flex-1 bg-transparent border-none outline-none text-body-lg font-medium text-[var(--text-heading)] placeholder:text-[var(--text-muted)]"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
@@ -132,13 +132,13 @@ const Header = () => {
             <div className="max-h-[60vh] overflow-y-auto p-4">
               {!searchQuery.trim() && (
                 <div className="p-4">
-                  <h4 className="text-[10px] font-black text-[var(--text-muted)] uppercase tracking-widest mb-4">Popular Searches</h4>
+                  <h4 className="text-caption font-black text-[var(--text-muted)] uppercase tracking-widest mb-4">Popular Searches</h4>
                   <div className="flex flex-wrap gap-2">
                     {['Prompt Engineering', 'Python AI', 'NLP', 'MLOps', 'Data Analytics'].map(term => (
                       <button
                         key={term}
                         onClick={() => setSearchQuery(term)}
-                        className="px-4 py-2 bg-[var(--text-heading)]/5 hover:bg-[var(--text-heading)]/15 rounded-xl text-sm font-bold text-[var(--text-body)] border border-[var(--border-color)] transition-all"
+                        className="px-4 py-2 bg-[var(--text-heading)]/5 hover:bg-[var(--text-heading)]/15 rounded-xl text-small font-bold text-[var(--text-body)] border border-[var(--border-color)] transition-all"
                       >
                         {term}
                       </button>
@@ -162,7 +162,7 @@ const Header = () => {
                             <Search className="h-8 w-8 text-[var(--text-muted)]" />
                           </div>
                           <p className="text-[var(--text-body)] font-bold">No programs found matching &quot;{searchQuery}&quot;</p>
-                          <p className="text-sm text-[var(--text-muted)] mt-1">Try searching for NLP, Python, or MLOps</p>
+                          <p className="text-small text-[var(--text-muted)] mt-1">Try searching for NLP, Python, or MLOps</p>
                         </div>
                       );
                     }
@@ -186,13 +186,13 @@ const Header = () => {
                             <div className="flex items-center justify-between">
                               <h4 className="font-bold text-[var(--text-heading)] group-hover:text-[var(--text-body)] transition-colors">{course.title}</h4>
                               <span
-                                className="text-[10px] font-black px-2 py-0.5 rounded-full uppercase tracking-wider border"
+                                className="text-caption font-black px-2 py-0.5 rounded-full uppercase tracking-wider border"
                                 style={{ background: t.softBg, color: t.color, borderColor: t.borderColor }}
                               >
                                 {t.emoji} {course.tier}
                               </span>
                             </div>
-                            <p className="text-xs text-[var(--text-muted)] mt-1 flex items-center">
+                            <p className="text-caption text-[var(--text-muted)] mt-1 flex items-center">
                               {course.duration} · {course.tier}
                             </p>
                           </div>
@@ -203,13 +203,13 @@ const Header = () => {
                 </div>
               ) : (
                 <div className="py-8 text-center">
-                  <p className="text-[var(--text-muted)] text-sm font-bold uppercase tracking-widest">Popular Searches</p>
+                  <p className="text-[var(--text-muted)] text-small font-bold uppercase tracking-widest">Popular Searches</p>
                   <div className="flex flex-wrap justify-center gap-2 mt-4">
                     {['Prompt Engineering', 'Machine Learning', 'Computer Vision', 'Data Analytics', 'AI Ethics'].map(tag => (
                       <button
                         key={tag}
                         onClick={() => setSearchQuery(tag)}
-                        className="px-4 py-2 bg-[var(--text-heading)]/10 hover:bg-[var(--bg-inverted)] hover:text-[var(--text-on-inverted)] rounded-full text-sm font-bold text-[var(--text-body)] transition-all"
+                        className="px-4 py-2 bg-[var(--text-heading)]/10 hover:bg-[var(--bg-inverted)] hover:text-[var(--text-on-inverted)] rounded-full text-small font-bold text-[var(--text-body)] transition-all"
                       >
                         {tag}
                       </button>
@@ -258,7 +258,7 @@ const Header = () => {
                   {(hasDropdown || isMegaCourses) ? (
                     <button
                       className={clsx(
-                        'px-3 py-2 text-[14px] font-semibold transition-all rounded-lg relative flex items-center whitespace-nowrap',
+                        'px-3 py-2 text-small font-semibold transition-all rounded-lg relative flex items-center whitespace-nowrap',
                         isTransparent
                           ? 'text-white hover:text-white/80 hover:bg-white/10'
                           : isActive
@@ -278,7 +278,7 @@ const Header = () => {
                     <NavLink
                       to={item.href}
                       className={({ isActive: navActive }) => clsx(
-                        'px-3 py-2 text-[14px] font-semibold transition-all rounded-lg relative flex items-center whitespace-nowrap',
+                        'px-3 py-2 text-small font-semibold transition-all rounded-lg relative flex items-center whitespace-nowrap',
                         isTransparent
                           ? 'text-white hover:text-white/80 hover:bg-white/10'
                           : navActive
@@ -303,7 +303,7 @@ const Header = () => {
                             key={child.href}
                             to={child.href}
                             className={({ isActive: childActive }) => clsx(
-                              'block px-4 py-3 text-sm font-bold transition-all rounded-xl',
+                              'block px-4 py-3 text-small font-bold transition-all rounded-xl',
                               'hover:bg-[var(--text-heading)]/5',
                               childActive
                                 ? 'text-primary bg-primary/5'
@@ -327,10 +327,10 @@ const Header = () => {
                         <div className="p-8">
                           <div className="flex items-center justify-between mb-8">
                             <div>
-                              <h3 className="text-xl font-black text-[var(--text-heading)] tracking-tight">Our Programs</h3>
-                              <p className="text-sm text-[var(--text-muted)] font-semibold">10 AI programs across 3 tiers</p>
+                              <h3 className="heading-sm font-black text-[var(--text-heading)] tracking-tight">Our Programs</h3>
+                              <p className="text-small text-[var(--text-muted)] font-semibold">10 AI programs across 3 tiers</p>
                             </div>
-                            <Link to="/courses" className="text-xs font-black text-[var(--text-heading)] hover:opacity-80 transition-all flex items-center bg-[var(--text-heading)]/5 px-3 py-1.5 rounded-full">
+                            <Link to="/courses" className="text-caption font-black text-[var(--text-heading)] hover:opacity-80 transition-all flex items-center bg-[var(--text-heading)]/5 px-3 py-1.5 rounded-full">
                               VIEW ALL
                               <ChevronDown className="ml-1 h-3 w-3 -rotate-90" />
                             </Link>
@@ -341,7 +341,7 @@ const Header = () => {
                               const meta = tierMeta[tier];
                               return (
                                 <div key={tier} className="space-y-3">
-                                  <h4 className="text-sm font-black uppercase tracking-[0.2em] flex items-center gap-1.5"
+                                  <h4 className="text-small font-black uppercase tracking-[0.2em] flex items-center gap-1.5"
                                     style={{ color: meta.color }}
                                   >
                                     {meta.emoji} {tier}
@@ -358,7 +358,7 @@ const Header = () => {
                                           style={{ background: meta.color }}
                                         />
                                         <div>
-                                          <p className="text-sm font-bold text-[var(--text-body)] group-hover/item:text-[var(--text-heading)] transition-colors leading-tight">
+                                          <p className="text-small font-bold text-[var(--text-body)] group-hover/item:text-[var(--text-heading)] transition-colors leading-tight">
                                             {course.title}
                                           </p>
                                         </div>
@@ -374,12 +374,12 @@ const Header = () => {
                         {/* Bottom CTA bar */}
                         <div className="bg-primary p-5 flex items-center justify-between">
                           <div>
-                            <p className="text-white/90 text-sm font-bold">Not sure which program is right for you?</p>
-                            <p className="text-white/60 text-xs">Talk to our career counselors</p>
+                            <p className="text-white/90 text-small font-bold">Not sure which program is right for you?</p>
+                            <p className="text-white/60 text-caption">Talk to our career counselors</p>
                           </div>
                           <button
                             onClick={() => openModal()}
-                            className="px-5 py-2.5 bg-white text-primary rounded-xl text-xs font-black tracking-widest uppercase hover:bg-white/90 transition-all active:scale-95"
+                            className="px-5 py-2.5 bg-white text-primary rounded-xl text-caption font-black tracking-widest uppercase hover:bg-white/90 transition-all active:scale-95"
                           >
                             Get Guidance
                           </button>
@@ -411,7 +411,7 @@ const Header = () => {
 
                 <button
                   onClick={() => openModal()}
-                  className="btn-primary px-5 py-2.5 text-[13px] whitespace-nowrap"
+                  className="btn-primary px-5 py-2.5 text-small whitespace-nowrap"
                 >
                   ENROLL NOW
                 </button>
@@ -464,8 +464,8 @@ const Header = () => {
             {/* Panel Header */}
             <div className="flex items-center justify-between p-6 pb-4 border-b border-[var(--text-on-inverted)]/10">
               <div>
-                <p className="text-[9px] font-black uppercase tracking-[0.3em] text-primary">{BRANDING.fullName}</p>
-                <p className="text-[10px] text-[var(--text-on-inverted)]/40 font-medium mt-1">Navigation Menu</p>
+                <p className="text-caption font-black uppercase tracking-[0.3em] text-primary">{BRANDING.fullName}</p>
+                <p className="text-caption text-[var(--text-on-inverted)]/40 font-medium mt-1">Navigation Menu</p>
               </div>
               <button
                 onClick={() => setIsOpen(false)}
@@ -501,10 +501,10 @@ const Header = () => {
                           {location.pathname.startsWith('/courses') && (
                             <div className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-6 bg-primary rounded-full" />
                           )}
-                          <span className="text-[10px] font-black text-[var(--text-on-inverted)]/20 tracking-widest mr-5 ml-3 tabular-nums">
+                          <span className="text-caption font-black text-[var(--text-on-inverted)]/20 tracking-widest mr-5 ml-3 tabular-nums">
                             0{index + 1}
                           </span>
-                          <span className="text-base font-bold flex-1 text-left group-hover:text-primary transition-colors">{item.name}</span>
+                          <span className="text-body font-bold flex-1 text-left group-hover:text-primary transition-colors">{item.name}</span>
                           <ChevronDown className={clsx(
                             "h-4 w-4 text-[var(--text-on-inverted)]/30 transition-transform duration-300",
                             isExpanded && "rotate-180 text-primary"
@@ -518,7 +518,7 @@ const Header = () => {
                               return (
                                 <div key={tier}>
                                   <p
-                                    className="text-xs font-black uppercase tracking-[0.2em] mb-2 flex items-center gap-1.5"
+                                    className="text-caption font-black uppercase tracking-[0.2em] mb-2 flex items-center gap-1.5"
                                     style={{ color: meta.color }}
                                   >
                                     {meta.emoji} {tier}
@@ -529,7 +529,7 @@ const Header = () => {
                                         key={course.id}
                                         to={`/courses/${course.slug}`}
                                         onClick={() => setIsOpen(false)}
-                                        className="text-xs font-semibold px-3 py-1.5 rounded-lg bg-[var(--text-on-inverted)]/5 text-[var(--text-on-inverted)]/60 hover:bg-primary/20 hover:text-primary transition-all border border-[var(--text-on-inverted)]/5"
+                                        className="text-caption font-semibold px-3 py-1.5 rounded-lg bg-[var(--text-on-inverted)]/5 text-[var(--text-on-inverted)]/60 hover:bg-primary/20 hover:text-primary transition-all border border-[var(--text-on-inverted)]/5"
                                       >
                                         {course.title}
                                       </Link>
@@ -541,7 +541,7 @@ const Header = () => {
                             <Link
                               to="/courses"
                               onClick={() => setIsOpen(false)}
-                              className="inline-flex items-center text-xs font-black text-primary uppercase tracking-widest hover:underline mt-1"
+                              className="inline-flex items-center text-caption font-black text-primary uppercase tracking-widest hover:underline mt-1"
                             >
                               View All <ArrowRight className="ml-1 h-3 w-3" />
                             </Link>
@@ -563,10 +563,10 @@ const Header = () => {
                           {isActive && (
                             <div className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-6 bg-primary rounded-full" />
                           )}
-                          <span className="text-[10px] font-black text-[var(--text-on-inverted)]/20 tracking-widest mr-5 ml-3 tabular-nums">
+                          <span className="text-caption font-black text-[var(--text-on-inverted)]/20 tracking-widest mr-5 ml-3 tabular-nums">
                             0{index + 1}
                           </span>
-                          <span className="text-base font-bold flex-1 text-left group-hover:text-primary transition-colors">{item.name}</span>
+                          <span className="text-body font-bold flex-1 text-left group-hover:text-primary transition-colors">{item.name}</span>
                           <ChevronDown className={clsx(
                             "h-4 w-4 text-[var(--text-on-inverted)]/30 transition-transform duration-300",
                             isExpanded && "rotate-180 text-primary"
@@ -581,7 +581,7 @@ const Header = () => {
                                 to={child.href}
                                 onClick={() => setIsOpen(false)}
                                 className={clsx(
-                                  'block py-2.5 text-sm font-semibold transition-colors',
+                                  'block py-2.5 text-small font-semibold transition-colors',
                                   location.pathname === child.href
                                     ? 'text-primary'
                                     : 'text-[var(--text-on-inverted)]/60 hover:text-primary'
@@ -606,10 +606,10 @@ const Header = () => {
                         {location.pathname === item.href && (
                           <div className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-6 bg-primary rounded-full" />
                         )}
-                        <span className="text-[10px] font-black text-[var(--text-on-inverted)]/20 tracking-widest mr-5 ml-3 tabular-nums">
+                        <span className="text-caption font-black text-[var(--text-on-inverted)]/20 tracking-widest mr-5 ml-3 tabular-nums">
                           0{index + 1}
                         </span>
-                        <span className="text-base font-bold group-hover:text-primary transition-colors">{item.name}</span>
+                        <span className="text-body font-bold group-hover:text-primary transition-colors">{item.name}</span>
                       </Link>
                     )}
                   </div>
@@ -620,7 +620,7 @@ const Header = () => {
 
             {/* Bottom CTA */}
             <div className="p-6 pt-4 border-t border-[var(--text-on-inverted)]/10 space-y-4">
-              <div className="flex items-center justify-between text-[10px] text-[var(--text-on-inverted)]/40">
+              <div className="flex items-center justify-between text-caption text-[var(--text-on-inverted)]/40">
                 <a href={`tel:${BRANDING.phone}`} className="flex items-center hover:text-primary transition-colors">
                   <Phone className="h-3 w-3 mr-1.5" /> {BRANDING.phone}
                 </a>
@@ -630,7 +630,7 @@ const Header = () => {
               </div>
               <button
                 onClick={() => { openModal(); setIsOpen(false); }}
-                className="w-full py-4 bg-primary text-white font-black text-sm tracking-wider uppercase rounded-2xl shadow-xl shadow-primary/20 hover:opacity-90 transition-all active:scale-[0.98]"
+                className="w-full py-4 bg-primary text-white font-black text-small tracking-wider uppercase rounded-2xl shadow-xl shadow-primary/20 hover:opacity-90 transition-all active:scale-[0.98]"
               >
                 Enroll Now →
               </button>

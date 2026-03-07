@@ -21,7 +21,7 @@ const TrainerCodeOfConduct = () => {
       <div className="container-custom section-padding">
         <div className="max-w-4xl mx-auto prose prose-slate prose-lg">
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-[var(--text-heading)] mb-4 flex items-center">
+            <h2 className="heading-md mb-4 flex items-center">
               <Star className="h-6 w-6 text-primary mr-3" />
               1. Pedagogical Excellence
             </h2>
@@ -31,7 +31,7 @@ const TrainerCodeOfConduct = () => {
           </section>
 
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-[var(--text-heading)] mb-4 flex items-center">
+            <h2 className="heading-md mb-4 flex items-center">
               <ShieldCheck className="h-6 w-6 text-primary mr-3" />
               2. Data Ethics & Confidentiality
             </h2>
@@ -41,7 +41,7 @@ const TrainerCodeOfConduct = () => {
           </section>
 
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-[var(--text-heading)] mb-4 flex items-center">
+            <h2 className="heading-md mb-4 flex items-center">
               <Heart className="h-6 w-6 text-primary mr-3" />
               3. Inclusive Learning Environment
             </h2>
@@ -51,7 +51,7 @@ const TrainerCodeOfConduct = () => {
           </section>
 
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-[var(--text-heading)] mb-4 flex items-center">
+            <h2 className="heading-md mb-4 flex items-center">
               <Scale className="h-6 w-6 text-primary mr-3" />
               4. Professional Integrity
             </h2>
@@ -63,9 +63,9 @@ const TrainerCodeOfConduct = () => {
           </section>
 
           <section className="p-8 bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-3xl">
-            <p className="font-black text-lg text-[var(--text-heading)] mb-2">{BRANDING.fullName}</p>
+            <p className="font-black text-body-lg text-[var(--text-heading)] mb-2">{BRANDING.fullName}</p>
             <p className="text-[var(--text-muted)]">Educational Quality Assurance Team</p>
-            <div className="flex flex-col space-y-2 text-sm font-medium mt-4">
+            <div className="flex flex-col space-y-2 text-small font-medium mt-4">
               <p className="text-[var(--text-muted)]">Inquiries: <span className="text-primary">{BRANDING.email}</span></p>
             </div>
           </section>

@@ -14,11 +14,11 @@ const TrustFactors = () => (
     <div className="container-custom relative z-10">
       {/* Section Header */}
       <div className="text-center mb-14">
-        <p className="text-xs font-black uppercase tracking-[0.3em] text-[var(--text-muted)] mb-2">Trusted Education Partner</p>
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-[var(--text-heading)] leading-tight mb-4">
+        <p className="text-caption font-black uppercase tracking-[0.3em] text-[var(--text-muted)] mb-2">Trusted Education Partner</p>
+        <h2 className="heading-hero text-[var(--text-heading)] leading-tight mb-4">
           Why Choose <span className="text-primary">{BRANDING.fullName}?</span>
         </h2>
-        <div className="inline-flex items-center gap-3 px-6 py-2.5 rounded-full text-sm sm:text-base font-bold text-white shadow-lg"
+        <div className="inline-flex items-center gap-3 px-6 py-2.5 rounded-full text-small sm:text-base font-bold text-white shadow-lg"
           style={{ background: 'linear-gradient(90deg, #B8860B 0%, #DAA520 40%, #FFD700 60%, #DAA520 80%, #B8860B 100%)' }}>
           <Rocket className="h-4 w-4 shrink-0" />
           Your Career Launchpad in AI &amp; Cloud
@@ -38,8 +38,8 @@ const TrustFactors = () => (
                 <div className="w-9 h-9 rounded-full bg-white/20 flex items-center justify-center mb-1">
                   <Cpu className="h-5 w-5 text-white" />
                 </div>
-                <p className="text-[9px] font-black text-white/80 uppercase tracking-widest leading-none">Ai</p>
-                <p className="text-sm font-black text-white leading-none mt-0.5 whitespace-nowrap">SCOPE AI HUB</p>
+                <p className="text-caption font-black text-white/80 uppercase tracking-widest leading-none">Ai</p>
+                <p className="text-small font-black text-white leading-none mt-0.5 whitespace-nowrap">SCOPE AI HUB</p>
                 <div className="mt-1 flex gap-0.5">
                   {[...Array(5)].map((_, i) => <div key={i} className="w-1 h-1 rounded-full bg-white/40" />)}
                 </div>
@@ -59,20 +59,20 @@ const TrustFactors = () => (
           ].map((item, i) => (
             <div key={i} className="flex items-center gap-3 rounded-xl px-3 py-2.5 shadow-sm hover:shadow-md transition-all"
               style={{ background: item.isPrep ? 'rgba(245,158,11,0.12)' : 'var(--bg-card)', borderLeft: `4px solid ${item.accent}`, border: item.isPrep ? '2px solid #fbbf24' : '1px solid var(--border-color)', borderLeftWidth: '4px', borderLeftColor: item.accent }}>
-              <span className="w-6 h-6 rounded-full text-white text-[10px] font-black flex items-center justify-center shrink-0" style={{ background: item.accent }}>{item.num}</span>
+              <span className="w-6 h-6 rounded-full text-white text-caption font-black flex items-center justify-center shrink-0" style={{ background: item.accent }}>{item.num}</span>
               <div className="flex-1">
-                <p className="font-bold text-[13px] leading-snug text-[var(--text-heading)]">{item.title}</p>
-                <p className="text-[11px] text-[var(--text-muted)] mt-0.5">{item.sub}</p>
+                <p className="font-bold text-small leading-snug text-[var(--text-heading)]">{item.title}</p>
+                <p className="text-caption text-[var(--text-muted)] mt-0.5">{item.sub}</p>
               </div>
             </div>
           ))}
           <div className="flex items-center gap-3 rounded-xl px-3 py-3 shadow-md" style={{ background: '#1e293b', border: '2px solid #fbbf24' }}>
-            <span className="w-7 h-7 rounded-full bg-amber-500 text-white text-xs font-black flex items-center justify-center shrink-0">7</span>
+            <span className="w-7 h-7 rounded-full bg-amber-500 text-white text-caption font-black flex items-center justify-center shrink-0">7</span>
             <div className="flex-1">
-              <p className="font-bold text-[13px] text-white leading-snug">Career Launch</p>
-              <p className="text-[11px] text-white/60 mt-0.5">Job-Ready AI Professionals</p>
+              <p className="font-bold text-small text-white leading-snug">Career Launch</p>
+              <p className="text-caption text-white/60 mt-0.5">Job-Ready AI Professionals</p>
             </div>
-            <span className="text-lg shrink-0">🚀</span>
+            <span className="text-body-lg shrink-0">🚀</span>
           </div>
         </div>
       </div>
@@ -88,12 +88,12 @@ const TrustFactors = () => (
             ].map((item, i) => (
               <div key={i} className="flex items-center gap-2.5 bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl shadow-sm hover:shadow-md transition-all p-0 overflow-hidden"
                 style={{ borderRightWidth: '4px', borderRightColor: item.accent }}>
-                <span className="w-7 text-center text-white text-xs font-black py-4 shrink-0 self-stretch flex items-center justify-center" style={{ background: item.accent }}>{item.num}</span>
+                <span className="w-7 text-center text-white text-caption font-black py-4 shrink-0 self-stretch flex items-center justify-center" style={{ background: item.accent }}>{item.num}</span>
                 <div className="flex-1 py-2.5 pr-2">
-                  <p className="font-bold text-[13px] text-[var(--text-heading)] leading-snug">{item.title}</p>
-                  <p className="text-[var(--text-muted)] text-xs mt-0.5">({item.sub})</p>
+                  <p className="font-bold text-small text-[var(--text-heading)] leading-snug">{item.title}</p>
+                  <p className="text-[var(--text-muted)] text-caption mt-0.5">({item.sub})</p>
                 </div>
-                <span className="text-lg pr-3 shrink-0">{item.emoji}</span>
+                <span className="text-body-lg pr-3 shrink-0">{item.emoji}</span>
               </div>
             ))}
           </div>
@@ -109,8 +109,8 @@ const TrustFactors = () => (
                   <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center mb-1">
                     <Cpu className="h-5 w-5 text-white" />
                   </div>
-                  <p className="text-[9px] font-black text-white/80 uppercase tracking-widest leading-none">Ai</p>
-                  <p className="text-sm font-black text-white leading-none mt-0.5 whitespace-nowrap">SCOPE AI HUB</p>
+                  <p className="text-caption font-black text-white/80 uppercase tracking-widest leading-none">Ai</p>
+                  <p className="text-small font-black text-white leading-none mt-0.5 whitespace-nowrap">SCOPE AI HUB</p>
                   <div className="mt-1.5 flex gap-0.5">
                     {[...Array(5)].map((_, i) => <div key={i} className="w-1 h-1 rounded-full bg-white/40" />)}
                   </div>
@@ -127,12 +127,12 @@ const TrustFactors = () => (
             ].map((item, i) => (
               <div key={i} className="flex items-center gap-2.5 bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl shadow-sm hover:shadow-md transition-all overflow-hidden"
                 style={{ borderRightWidth: '4px', borderRightColor: item.accent }}>
-                <span className="w-7 text-center text-white text-xs font-black py-4 shrink-0 self-stretch flex items-center justify-center" style={{ background: item.accent }}>{item.num}</span>
+                <span className="w-7 text-center text-white text-caption font-black py-4 shrink-0 self-stretch flex items-center justify-center" style={{ background: item.accent }}>{item.num}</span>
                 <div className="flex-1 py-2.5 pr-2">
-                  <p className="font-bold text-[13px] text-[var(--text-heading)] leading-snug">{item.title}</p>
-                  <p className="text-[var(--text-muted)] text-xs mt-0.5">({item.sub})</p>
+                  <p className="font-bold text-small text-[var(--text-heading)] leading-snug">{item.title}</p>
+                  <p className="text-[var(--text-muted)] text-caption mt-0.5">({item.sub})</p>
                 </div>
-                <span className="text-lg pr-3 shrink-0">{item.emoji}</span>
+                <span className="text-body-lg pr-3 shrink-0">{item.emoji}</span>
               </div>
             ))}
           </div>
@@ -140,11 +140,11 @@ const TrustFactors = () => (
 
         <div className="w-full max-w-md border-2 border-amber-400/50 rounded-xl shadow-md p-4 text-center" style={{ background: 'var(--bg-inverted)' }}>
           <div className="inline-flex items-center gap-2 mb-1">
-            <span className="w-6 h-6 rounded-full bg-amber-500 text-white text-xs font-black flex items-center justify-center shrink-0">7</span>
-            <p className="font-bold text-sm text-[var(--text-on-inverted)]">Career Launch</p>
-            <span className="text-lg">🚀</span>
+            <span className="w-6 h-6 rounded-full bg-amber-500 text-white text-caption font-black flex items-center justify-center shrink-0">7</span>
+            <p className="font-bold text-small text-[var(--text-on-inverted)]">Career Launch</p>
+            <span className="text-body-lg">🚀</span>
           </div>
-          <p className="text-[var(--text-on-inverted)]/60 text-xs">Job-Ready AI Professionals</p>
+          <p className="text-[var(--text-on-inverted)]/60 text-caption">Job-Ready AI Professionals</p>
         </div>
       </div>
 
@@ -159,12 +159,12 @@ const TrustFactors = () => (
             <div key={i} className="relative">
               <div className="flex items-center gap-2.5 bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl shadow-sm hover:shadow-md transition-all overflow-hidden"
                 style={{ borderRightWidth: '4px', borderRightColor: item.borderColor }}>
-                <span className="text-[11px] font-black text-white px-2 py-4 flex items-center justify-center shrink-0 self-stretch" style={{ background: item.badgeBg, borderRadius: '10px 0 0 10px' }}>{item.num}</span>
+                <span className="text-caption font-black text-white px-2 py-4 flex items-center justify-center shrink-0 self-stretch" style={{ background: item.badgeBg, borderRadius: '10px 0 0 10px' }}>{item.num}</span>
                 <div className="flex-1 py-3">
-                  <p className="font-bold text-sm text-[var(--text-heading)] leading-snug">{item.title}</p>
-                  <p className="text-[var(--text-muted)] text-xs mt-0.5">({item.sub})</p>
+                  <p className="font-bold text-small text-[var(--text-heading)] leading-snug">{item.title}</p>
+                  <p className="text-[var(--text-muted)] text-caption mt-0.5">({item.sub})</p>
                 </div>
-                <span className="text-xl pr-3 shrink-0">{item.emoji}</span>
+                <span className="heading-sm pr-3 shrink-0">{item.emoji}</span>
               </div>
               <div className="absolute top-1/2 -translate-y-1/2 -right-[76px] z-20">
                 <svg width="76" height="44" viewBox="0 0 80 44" fill="none">
@@ -188,8 +188,8 @@ const TrustFactors = () => (
                   <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center mb-1">
                     <Cpu className="h-6 w-6 text-white" />
                   </div>
-                  <p className="text-[10px] font-black text-white/80 uppercase tracking-widest leading-none">Ai</p>
-                  <p className="text-lg font-black text-white leading-none mt-0.5 whitespace-nowrap">SCOPE AI HUB</p>
+                  <p className="text-caption font-black text-white/80 uppercase tracking-widest leading-none">Ai</p>
+                  <p className="text-body-lg font-black text-white leading-none mt-0.5 whitespace-nowrap">SCOPE AI HUB</p>
                   <div className="mt-1.5 flex gap-0.5">
                     {[...Array(5)].map((_, i) => <div key={i} className="w-1 h-1 rounded-full bg-white/40" />)}
                   </div>
@@ -211,10 +211,10 @@ const TrustFactors = () => (
                   <Award className="h-4 w-4" />
                 </div>
                 <div className="flex-1 text-center">
-                  <p className="font-black text-base text-[var(--text-on-inverted)] leading-snug">7. Career Launch</p>
-                  <p className="text-[var(--text-on-inverted)]/60 text-xs mt-0.5">Job-Ready AI Professionals</p>
+                  <p className="font-black text-body text-[var(--text-on-inverted)] leading-snug">7. Career Launch</p>
+                  <p className="text-[var(--text-on-inverted)]/60 text-caption mt-0.5">Job-Ready AI Professionals</p>
                 </div>
-                <span className="text-2xl shrink-0">🚀</span>
+                <span className="heading-md shrink-0">🚀</span>
               </div>
             </div>
           </div>
@@ -235,12 +235,12 @@ const TrustFactors = () => (
               </div>
               <div className="flex items-center gap-2.5 bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl shadow-sm hover:shadow-md transition-all overflow-hidden"
                 style={{ borderRightWidth: '4px', borderRightColor: item.borderColor }}>
-                <span className="text-[11px] font-black text-white px-2 py-4 flex items-center justify-center shrink-0 self-stretch" style={{ background: item.badgeBg, borderRadius: '10px 0 0 10px' }}>{item.num}</span>
+                <span className="text-caption font-black text-white px-2 py-4 flex items-center justify-center shrink-0 self-stretch" style={{ background: item.badgeBg, borderRadius: '10px 0 0 10px' }}>{item.num}</span>
                 <div className="flex-1 py-3">
-                  <p className="font-bold text-sm text-[var(--text-heading)] leading-snug">{item.title}</p>
-                  <p className="text-[var(--text-muted)] text-xs mt-0.5">({item.sub})</p>
+                  <p className="font-bold text-small text-[var(--text-heading)] leading-snug">{item.title}</p>
+                  <p className="text-[var(--text-muted)] text-caption mt-0.5">({item.sub})</p>
                 </div>
-                <span className="text-xl pr-3 shrink-0">{item.emoji}</span>
+                <span className="heading-sm pr-3 shrink-0">{item.emoji}</span>
               </div>
             </div>
           ))}
@@ -258,8 +258,8 @@ const TrustFactors = () => (
             { value: "100%", label: "Placement Support", highlight: true },
           ].map((stat, i) => (
             <div key={i} className={`flex flex-col items-center justify-center py-5 px-4 text-center gap-1 hover:bg-white/5 transition-colors ${i < 4 ? 'w-1/2' : 'w-full border-t border-white/10'} ${i === 0 || i === 2 ? 'border-r border-white/10' : ''} ${i < 2 ? 'border-b border-white/10' : ''}`}>
-              <span className={`text-2xl font-black ${stat.highlight ? 'text-amber-400' : 'text-white'}`}>{stat.value}</span>
-              <span className="text-[10px] font-bold uppercase tracking-wider text-white/60">{stat.label}</span>
+              <span className={`heading-md font-black ${stat.highlight ? 'text-amber-400' : 'text-white'}`}>{stat.value}</span>
+              <span className="text-caption font-bold uppercase tracking-wider text-white/60">{stat.label}</span>
             </div>
           ))}
         </div>
@@ -272,8 +272,8 @@ const TrustFactors = () => (
             { value: "100%", label: "Placement Support", highlight: true },
           ].map((stat, i) => (
             <div key={i} className="flex flex-col items-center justify-center py-6 px-4 text-center gap-1 hover:bg-white/5 transition-colors">
-              <span className={`text-3xl font-black ${stat.highlight ? 'text-amber-400' : 'text-white'}`}>{stat.value}</span>
-              <span className="text-[11px] font-bold uppercase tracking-wider text-white/60">{stat.label}</span>
+              <span className={`heading-hero${stat.highlight ? 'text-amber-400' : 'text-white'}`}>{stat.value}</span>
+              <span className="text-caption font-bold uppercase tracking-wider text-white/60">{stat.label}</span>
             </div>
           ))}
         </div>

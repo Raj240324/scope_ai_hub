@@ -71,7 +71,7 @@ const CoursesList = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            className="inline-flex items-center gap-2 px-4 py-2 mb-8 rounded-full bg-primary/5 border border-primary/10 text-primary text-xs font-bold uppercase tracking-[0.2em]"
+            className="inline-flex items-center gap-2 px-4 py-2 mb-8 rounded-full bg-primary/5 border border-primary/10 text-primary text-caption font-bold uppercase tracking-[0.2em]"
           >
             <Sparkles className="h-3.5 w-3.5" />
             10 Industry-Aligned Programs
@@ -81,7 +81,7 @@ const CoursesList = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-[var(--text-heading)] tracking-tight leading-[1.05] max-w-4xl mx-auto mb-6"
+            className="heading-hero text-[var(--text-heading)] tracking-tight leading-[1.05] max-w-4xl mx-auto mb-6"
           >
             Choose Your
             <span className="relative inline-block ml-3">
@@ -96,7 +96,7 @@ const CoursesList = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
-            className="text-base sm:text-lg text-[var(--text-muted)] max-w-2xl mx-auto leading-relaxed font-medium"
+            className="text-body sm:text-lg text-[var(--text-muted)] max-w-2xl mx-auto leading-relaxed font-medium"
           >
             From your first prompt to production-grade ML pipelines — programs engineered 
             for every stage of your AI career.
@@ -115,17 +115,17 @@ const CoursesList = () => {
                 
                 {/* Filter Header */}
                 <div className="mb-6">
-                  <h2 className="text-lg font-bold mb-1" style={{ color: 'var(--text-heading)' }}>
+                  <h2 className="text-body-lg font-bold mb-1" style={{ color: 'var(--text-heading)' }}>
                     Filter Programs
                   </h2>
-                  <p className="text-xs" style={{ color: 'var(--text-muted)' }}>
+                  <p className="text-caption" style={{ color: 'var(--text-muted)' }}>
                     Find your perfect AI course
                   </p>
                 </div>
 
                 {/* Search */}
                 <div className="mb-6">
-                  <label htmlFor="course-search-sidebar" className="block text-xs font-bold uppercase tracking-wider mb-2" style={{ color: 'var(--text-muted)' }}>
+                  <label htmlFor="course-search-sidebar" className="block text-caption font-bold uppercase tracking-wider mb-2" style={{ color: 'var(--text-muted)' }}>
                     Search
                   </label>
                   <div className="relative group">
@@ -135,7 +135,7 @@ const CoursesList = () => {
                       id="course-search-sidebar"
                       name="course-search-sidebar"
                       placeholder="Search programs..."
-                      className="w-full pl-10 pr-3.5 py-3 bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/50 transition-all placeholder:text-[var(--text-muted)]/60 font-medium text-sm"
+                      className="w-full pl-10 pr-3.5 py-3 bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/50 transition-all placeholder:text-[var(--text-muted)]/60 font-medium text-small"
                       style={{ color: 'var(--text-heading)' }}
                       value={searchTerm}
                       onChange={(e) => setSearchTerm(e.target.value)}
@@ -145,7 +145,7 @@ const CoursesList = () => {
 
                 {/* Tier Filter */}
                 <div className="mb-6">
-                  <label className="block text-xs font-bold uppercase tracking-wider mb-3" style={{ color: 'var(--text-muted)' }}>
+                  <label className="block text-caption font-bold uppercase tracking-wider mb-3" style={{ color: 'var(--text-muted)' }}>
                     Level
                   </label>
                   <div className="space-y-2">
@@ -158,7 +158,11 @@ const CoursesList = () => {
                         <button
                           key={tier}
                           onClick={() => setSelectedTier(tier)}
-                          className="w-full flex items-center justify-between px-4 py-3 rounded-lg text-sm font-semibold transition-colors duration-200 border"
+                          className={`w-full flex items-center justify-between px-4 py-3 rounded-lg text-small font-semibold transition-all duration-200 border cursor-pointer ${
+                            isActive
+                              ? 'shadow-sm'
+                              : 'border-transparent text-[var(--text-body)] hover:bg-[var(--bg-body)] hover:border-[var(--border-color)] hover:text-[var(--text-heading)]'
+                          }`}
                           style={
                             isActive && meta
                               ? {
@@ -172,18 +176,14 @@ const CoursesList = () => {
                                   color: 'var(--text-on-inverted)',
                                   borderColor: 'var(--bg-inverted)',
                                 }
-                              : {
-                                  color: 'var(--text-body)',
-                                  borderColor: 'transparent',
-                                  backgroundColor: 'transparent',
-                                }
+                              : {}
                           }
                         >
                           <span className="flex items-center gap-2">
-                            {meta && <span className="text-base">{meta.emoji}</span>}
+                            {meta && <span className="text-body">{meta.emoji}</span>}
                             <span>{tier}</span>
                           </span>
-                          <span className={`text-xs font-bold px-2 py-0.5 rounded-full transition-opacity duration-200 ${isActive ? 'opacity-100' : 'opacity-50'}`}>
+                          <span className={`text-caption font-bold px-2 py-0.5 rounded-full transition-opacity duration-200 ${isActive ? 'opacity-100' : 'opacity-50'}`}>
                             {count}
                           </span>
                         </button>
@@ -194,7 +194,7 @@ const CoursesList = () => {
 
                 {/* Results Count */}
                 <div className="pt-4 border-t" style={{ borderColor: 'var(--border-color)' }}>
-                  <div className="flex items-center justify-between text-xs">
+                  <div className="flex items-center justify-between text-caption">
                     <span className="font-bold uppercase tracking-wider" style={{ color: 'var(--text-muted)' }}>
                       Results
                     </span>
@@ -208,7 +208,7 @@ const CoursesList = () => {
                 {(searchTerm || selectedTier !== 'All') && (
                   <button
                     onClick={clearFilters}
-                    className="w-full mt-4 flex items-center justify-center gap-2 px-4 py-2.5 text-red-500 hover:text-red-600 transition-colors text-xs font-bold uppercase tracking-wider rounded-lg border border-red-500/20 hover:bg-red-500/5"
+                    className="w-full mt-4 flex items-center justify-center gap-2 px-4 py-2.5 text-red-500 hover:text-red-600 transition-colors text-caption font-bold uppercase tracking-wider rounded-lg border border-red-500/20 hover:bg-red-500/5"
                   >
                     <X className="h-3.5 w-3.5" />
                     Clear All Filters
@@ -217,7 +217,7 @@ const CoursesList = () => {
 
                 {/* Enrollment Status */}
                 <div className="mt-6 pt-6 border-t" style={{ borderColor: 'var(--border-color)' }}>
-                  <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-green-600">
+                  <div className="flex items-center gap-2 text-caption font-bold uppercase tracking-wider text-green-600">
                     <span className="h-2 w-2 rounded-full bg-green-500 animate-pulse" />
                     Enrollment Open
                   </div>
@@ -255,9 +255,9 @@ const CoursesList = () => {
                   <div className="inline-flex items-center justify-center h-16 w-16 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-color)] mb-6">
                     <GraduationCap className="h-7 w-7 text-[var(--text-muted)]" />
                   </div>
-                  <h3 className="text-xl font-bold text-[var(--text-heading)] mb-2">No programs found</h3>
-                  <p className="text-[var(--text-muted)] mb-8 text-sm">Try adjusting your search or filters.</p>
-                  <button onClick={clearFilters} className="btn-primary text-sm px-8 py-3 rounded-xl">
+                  <h3 className="heading-sm font-bold text-[var(--text-heading)] mb-2">No programs found</h3>
+                  <p className="text-[var(--text-muted)] mb-8 text-small">Try adjusting your search or filters.</p>
+                  <button onClick={clearFilters} className="btn-primary text-small px-8 py-3 rounded-xl">
                     Reset Filters
                   </button>
                 </motion.div>
@@ -277,7 +277,7 @@ const CoursesList = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-              className="inline-flex items-center gap-2 px-4 py-2 mb-6 rounded-full bg-primary/5 border border-primary/10 text-primary text-xs font-bold uppercase tracking-[0.2em]"
+              className="inline-flex items-center gap-2 px-4 py-2 mb-6 rounded-full bg-primary/5 border border-primary/10 text-primary text-caption font-bold uppercase tracking-[0.2em]"
             >
               <Award className="h-3.5 w-3.5" />
               Included with Every Program
@@ -288,7 +288,7 @@ const CoursesList = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-              className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-6 tracking-tight"
+              className="heading-hero tracking-tight"
               style={{ color: 'var(--text-heading)' }}
             >
               12 Career Advantages{' '}
@@ -300,7 +300,7 @@ const CoursesList = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-              className="text-base sm:text-lg leading-relaxed font-medium"
+              className="text-body sm:text-lg leading-relaxed font-medium"
               style={{ color: 'var(--text-muted)' }}
             >
               Every program comes with comprehensive career support — from resume preparation to job referrals. We're invested in your success.

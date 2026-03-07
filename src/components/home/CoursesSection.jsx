@@ -10,7 +10,7 @@ const CoursesSection = ({ courses }) => (
       <div className="flex flex-col md:flex-row justify-between items-end mb-12">
         <div className="max-w-2xl">
           <h2 className="heading-md mb-4 text-[var(--text-heading)]">Top Trending Courses</h2>
-          <p className="text-[var(--text-muted)] text-base md:text-lg">
+          <p className="text-[var(--text-muted)] text-body md:text-lg">
             Choose from our high-demand courses designed to make you industry-ready.
           </p>
         </div>
@@ -28,7 +28,7 @@ const CoursesSection = ({ courses }) => (
       </StaggerContainer>
 
       <div className="mt-12 text-center md:hidden">
-        <Link to="/courses" className="btn-secondary w-full py-4 text-lg">
+        <Link to="/courses" className="btn-secondary w-full py-4 text-body-lg">
           Explore All Courses
         </Link>
       </div>

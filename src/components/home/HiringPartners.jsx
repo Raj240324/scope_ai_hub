@@ -18,14 +18,14 @@ const HiringPartners = () => (
   <section className="py-12 md:py-16 bg-[var(--bg-secondary)] border-b border-[var(--border-color)] overflow-hidden">
     <div className="container-custom">
       <div className="text-center max-w-3xl mx-auto mb-10 md:mb-12">
-        <div className="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider mb-6 border border-primary/20">
+        <div className="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-caption font-bold uppercase tracking-wider mb-6 border border-primary/20">
           <Building2 className="h-3 w-3" />
           <span>Hiring Partners</span>
         </div>
-        <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-[var(--text-heading)] mb-4 leading-tight">
+        <h2 className="heading-md md:text-3xl lg:heading-hero text-[var(--text-heading)] mb-4 leading-tight">
           Our Graduates Work Across <span className="text-primary">Leading Companies</span>
         </h2>
-        <p className="text-base md:text-lg text-[var(--text-muted)] leading-relaxed">
+        <p className="text-body md:text-lg text-body">
           Our graduates work across leading companies such as...
         </p>
       </div>

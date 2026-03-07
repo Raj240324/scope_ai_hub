@@ -38,11 +38,11 @@ const ServiceGrid = forwardRef(({ title, subtitle, services, className, ...props
         {/* Header Section */}
         <div className="flex flex-col items-center justify-center space-y-4 text-center mb-12 md:mb-16">
           <div className="space-y-4 max-w-4xl mx-auto">
-            <h2 className="text-3xl font-black tracking-tight sm:text-4xl md:text-5xl text-[var(--text-heading)]">
+            <h2 className="heading-hero sm:text-4xl md:text-5xl text-[var(--text-heading)]">
               {title}
             </h2>
             {subtitle && (
-              <p className="text-[var(--text-muted)] text-lg md:text-xl leading-relaxed">
+              <p className="text-[var(--text-muted)] text-body-lg md:text-xl leading-relaxed">
                 {subtitle}
               </p>
             )}
@@ -76,13 +76,13 @@ const ServiceGrid = forwardRef(({ title, subtitle, services, className, ...props
               </div>
               
               <div className="flex flex-col gap-1 items-center">
-                <span className="text-base sm:text-lg font-bold text-[var(--text-heading)] transition-colors duration-300 group-hover:text-primary">
+                <span className="text-body sm:text-lg font-bold text-[var(--text-heading)] transition-colors duration-300 group-hover:text-primary">
                   {service.name}
                 </span>
                 
                 {/* Custom Demand Pill */}
                 {service.demand && (
-                  <span className={`text-[10px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full border mt-1 ${
+                  <span className={`text-caption font-black uppercase tracking-widest px-2.5 py-1 rounded-full border mt-1 ${
                     service.demand === 'Critical' ? 'bg-red-500/10 text-red-500 border-red-500/20' :
                     service.demand === 'Very High' ? 'bg-orange-500/10 text-orange-500 border-orange-500/20' :
                     service.demand === 'High' ? 'bg-yellow-500/10 text-yellow-500 border-yellow-500/20' :

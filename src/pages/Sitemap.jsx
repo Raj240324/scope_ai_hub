@@ -16,8 +16,8 @@ const SitemapSection = ({ icon: IconComponent, title, color, links }) => (
       <div className="p-2 bg-white/20 rounded-xl">
         <IconComponent className="h-5 w-5 text-white" />
       </div>
-      <h2 className="text-white font-black text-base tracking-wide">{title}</h2>
-      <span className="ml-auto text-white/60 text-xs font-bold">{links.length} page{links.length !== 1 ? 's' : ''}</span>
+      <h2 className="text-white font-black text-body tracking-wide">{title}</h2>
+      <span className="ml-auto text-white/60 text-caption font-bold">{links.length} page{links.length !== 1 ? 's' : ''}</span>
     </div>
     {/* Links */}
     <ul className="divide-y divide-[var(--border-color)]">
@@ -28,15 +28,15 @@ const SitemapSection = ({ icon: IconComponent, title, color, links }) => (
             className="flex items-center justify-between px-6 py-4 group hover:bg-[var(--bg-secondary)] transition-colors"
           >
             <div>
-              <p className="font-bold text-[var(--text-heading)] group-hover:text-primary transition-colors text-sm">
+              <p className="font-bold text-[var(--text-heading)] group-hover:text-primary transition-colors text-small">
                 {link.label}
               </p>
               {link.description && (
-                <p className="text-xs text-[var(--text-muted)] mt-0.5">{link.description}</p>
+                <p className="text-caption text-[var(--text-muted)] mt-0.5">{link.description}</p>
               )}
             </div>
             <div className="flex items-center gap-2">
-              <span className="text-[10px] font-mono text-[var(--text-muted)] bg-[var(--bg-secondary)] px-2 py-1 rounded-lg hidden sm:block">
+              <span className="text-caption font-mono text-[var(--text-muted)] bg-[var(--bg-secondary)] px-2 py-1 rounded-lg hidden sm:block">
                 {link.href}
               </span>
               <ArrowRight className="h-4 w-4 text-[var(--text-muted)] group-hover:text-primary group-hover:translate-x-1 transition-all flex-shrink-0" />
@@ -127,8 +127,8 @@ const Sitemap = () => {
                   <s.icon className="h-5 w-5 text-white" />
                 </div>
                 <div>
-                  <p className="text-2xl font-black text-[var(--text-heading)]">{s.links.length}</p>
-                  <p className="text-xs font-bold text-[var(--text-muted)] leading-tight">{s.title}</p>
+                  <p className="heading-md font-black text-[var(--text-heading)]">{s.links.length}</p>
+                  <p className="text-caption font-bold text-[var(--text-muted)] leading-tight">{s.title}</p>
                 </div>
               </div>
             ))}
@@ -144,20 +144,20 @@ const Sitemap = () => {
           {/* Bottom note */}
           <div className="mt-12 text-center p-8 bg-[var(--bg-card)] rounded-2xl border border-[var(--border-color)] shadow-sm">
             <Globe className="h-8 w-8 text-primary mx-auto mb-4" />
-            <h3 className="text-lg font-black text-[var(--text-heading)] mb-2">Can't find what you're looking for?</h3>
-            <p className="text-[var(--text-muted)] text-sm mb-6 max-w-md mx-auto">
+            <h3 className="text-body-lg font-black text-[var(--text-heading)] mb-2">Can't find what you're looking for?</h3>
+            <p className="text-[var(--text-muted)] text-small mb-6 max-w-md mx-auto">
               This sitemap lists all publicly available pages. If you're looking for something specific, use our search or contact us.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Link
                 to="/contact"
-                className="px-6 py-3 bg-[var(--bg-inverted)] text-[var(--text-on-inverted)] font-bold rounded-xl hover:opacity-90 transition-all text-sm"
+                className="px-6 py-3 bg-[var(--bg-inverted)] text-[var(--text-on-inverted)] font-bold rounded-xl hover:opacity-90 transition-all text-small"
               >
                 Contact Us
               </Link>
               <Link
                 to="/faq"
-                className="px-6 py-3 bg-primary text-white font-bold rounded-xl hover:opacity-90 transition-all text-sm shadow-lg shadow-primary/25"
+                className="px-6 py-3 bg-primary text-white font-bold rounded-xl hover:opacity-90 transition-all text-small shadow-lg shadow-primary/25"
               >
                 View FAQs
               </Link>

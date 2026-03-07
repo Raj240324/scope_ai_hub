@@ -83,7 +83,7 @@ export function CoreSpinLoader() {
         <span
           key={loadingText}
           className="
-            text-xs sm:text-sm md:text-base font-medium tracking-[0.2em] sm:tracking-[0.3em] uppercase
+            text-caption sm:text-sm md:text-base font-medium tracking-[0.2em] sm:tracking-[0.3em] uppercase
             text-[var(--color-primary)]
             animate-in fade-in slide-in-from-bottom-2 duration-500
           "

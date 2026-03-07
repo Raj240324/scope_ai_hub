@@ -166,7 +166,7 @@ const FAQItem = ({ question, answer }) => {
         onClick={() => setIsOpen(!isOpen)}
         className="w-full py-6 flex items-center justify-between text-left hover:text-primary transition-colors group"
       >
-        <span className="text-base sm:text-lg font-bold text-[var(--text-heading)] group-hover:text-primary transition-colors pr-6 sm:pr-8">
+        <span className="text-body sm:text-lg font-bold text-[var(--text-heading)] group-hover:text-primary transition-colors pr-6 sm:pr-8">
           {question}
         </span>
         <div className={`flex-shrink-0 h-6 w-6 rounded-full border-2 border-[var(--border-color)] flex items-center justify-center transition-all ${isOpen ? 'bg-primary border-primary text-[var(--text-on-inverted)] rotate-180' : 'text-[var(--text-muted)]'}`}>
@@ -174,7 +174,7 @@ const FAQItem = ({ question, answer }) => {
         </div>
       </button>
       <div className={`overflow-hidden transition-all duration-300 ${isOpen ? 'max-h-96 pb-6' : 'max-h-0'}`}>
-        <p className="text-[var(--text-muted)] leading-relaxed">
+        <p className="text-body">
           {answer}
         </p>
       </div>
@@ -222,7 +222,7 @@ const FAQ = () => {
             {/* Sidebar Categories */}
             <div className="lg:col-span-1">
               <div className="bg-[var(--bg-card)] p-4 sm:p-6 rounded-2xl sm:rounded-3xl shadow-sm border border-[var(--border-color)] sticky top-32">
-                <h3 className="text-sm font-bold text-[var(--text-muted)] uppercase tracking-widest mb-6 px-4">Categories</h3>
+                <h3 className="text-small font-bold text-[var(--text-muted)] uppercase tracking-widest mb-6 px-4">Categories</h3>
                 <nav className="space-y-2">
                   {faqData.map((cat) => (
                     <button
@@ -242,10 +242,10 @@ const FAQ = () => {
                 <div className="mt-10 p-6 bg-[var(--bg-inverted)] rounded-2xl text-[var(--text-on-inverted)]">
                   <MessageCircle className="h-8 w-8 text-primary mb-4" />
                   <h4 className="font-bold mb-2">Still have questions?</h4>
-                  <p className="text-[var(--text-on-inverted)]/60 text-xs mb-6">Can't find what you're looking for? Reach out to our team.</p>
+                  <p className="text-[var(--text-on-inverted)]/60 text-caption mb-6">Can't find what you're looking for? Reach out to our team.</p>
                   <button 
                     onClick={() => openModal()}
-                    className="w-full text-center py-3 bg-[var(--bg-body)] text-[var(--text-heading)] text-sm font-bold rounded-xl hover:bg-primary hover:text-[var(--text-on-inverted)] transition-all"
+                    className="w-full text-center py-3 bg-[var(--bg-body)] text-[var(--text-heading)] text-small font-bold rounded-xl hover:bg-primary hover:text-[var(--text-on-inverted)] transition-all"
                   >
                     Contact Support
                   </button>
@@ -257,7 +257,7 @@ const FAQ = () => {
             <div className="lg:col-span-3">
               <div className="bg-[var(--bg-card)] rounded-2xl sm:rounded-3xl shadow-sm border border-[var(--border-color)] overflow-hidden">
                 <div className="p-5 sm:p-8 md:p-12">
-                  <h2 className="text-2xl font-bold text-[var(--text-heading)] mb-8 flex items-center gap-3">
+                  <h2 className="heading-md mb-8 flex items-center gap-3">
                     <HelpCircle className="h-6 w-6 text-primary" />
                     {activeCategory} Questions
                   </h2>
@@ -274,11 +274,11 @@ const FAQ = () => {
               {/* Course Comparison Table */}
               <div className="mt-8 sm:mt-12 bg-[var(--bg-card)] rounded-2xl sm:rounded-3xl border border-[var(--border-color)] shadow-sm overflow-hidden">
                 <div className="p-5 sm:p-8 bg-primary/5 border-b border-[var(--border-color)]">
-                  <h3 className="text-xl sm:text-2xl font-bold text-[var(--text-heading)]">📊 Quick Course Comparison</h3>
+                  <h3 className="heading-sm sm:heading-md">📊 Quick Course Comparison</h3>
                   <p className="text-[var(--text-muted)] mt-2">Compare our top courses to find the perfect fit for your career goals.</p>
                 </div>
                 <div className="overflow-x-auto">
-                  <table className="w-full text-sm">
+                  <table className="w-full text-small">
                     <thead className="bg-[var(--bg-secondary)]">
                       <tr>
                         <th className="text-left p-4 font-bold text-[var(--text-heading)]">Course</th>
@@ -300,7 +300,7 @@ const FAQ = () => {
                           <td className="p-4 font-bold text-primary">{item.course}</td>
                           <td className="p-4 text-[var(--text-muted)]">{item.duration}</td>
                           <td className="p-4">
-                            <span className={`px-3 py-1 rounded-full text-xs font-bold ${
+                            <span className={`px-3 py-1 rounded-full text-caption font-bold ${
                               item.difficulty === 'Beginner' ? 'bg-green-100 text-green-700' :
                               item.difficulty === 'Intermediate' ? 'bg-yellow-100 text-yellow-700' :
                               'bg-blue-100 text-blue-700'
@@ -319,7 +319,7 @@ const FAQ = () => {
 
               {/* Still Need Help Section */}
               <div className="mt-8 sm:mt-12 text-center p-6 sm:p-12 bg-[var(--bg-card)] rounded-2xl sm:rounded-3xl border border-[var(--border-color)] shadow-sm">
-                <h3 className="text-xl sm:text-2xl font-bold text-[var(--text-heading)] mb-4">Didn't find your answer?</h3>
+                <h3 className="heading-sm sm:heading-md mb-4">Didn't find your answer?</h3>
                 <p className="text-[var(--text-muted)] mb-8 max-w-xl mx-auto">
                   Our team of counselors is available to answer any specific questions you may have about your career path or our training programs.
                 </p>

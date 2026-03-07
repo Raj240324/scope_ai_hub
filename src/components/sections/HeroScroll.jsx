@@ -353,7 +353,7 @@ export default function HeroScroll({ children, badge, title, subtitle }) {
 
     {/* Badge */}
     {badge && (
-      <div className="mb-8 text-[11px] font-bold uppercase tracking-[0.25em] text-white/80">
+      <div className="mb-8 text-caption font-bold uppercase tracking-[0.25em] text-white/80">
         {badge}
       </div>
     )}
@@ -379,7 +379,7 @@ export default function HeroScroll({ children, badge, title, subtitle }) {
     {/* Subtitle */}
     {subtitle && (
       <p className="
-        text-lg
+        text-body-lg
         md:text-xl
         leading-relaxed
         text-white/80
@@ -407,7 +407,7 @@ export default function HeroScroll({ children, badge, title, subtitle }) {
 
         <ChevronDown className="animate-bounce" />
 
-        <p className="text-xs uppercase tracking-widest mt-2">
+        <p className="text-caption uppercase tracking-widest mt-2">
           Scroll
         </p>
 

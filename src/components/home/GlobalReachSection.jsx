@@ -6,7 +6,7 @@ const GlobalReachSection = () => (
     <div className="container-custom">
       <div className="text-center max-w-3xl mx-auto mb-16">
         <h2 className="heading-md mb-6">Learn From Anywhere. <span className="text-primary">Compete Everywhere.</span></h2>
-        <p className="text-[var(--text-muted)] text-lg">
+        <p className="text-[var(--text-muted)] text-body-lg">
           Can't make it to our Chennai campus? Our immersive live online programs bring the classroom experience directly to you — no compromise on quality, interaction, or mentorship.
         </p>
       </div>
@@ -20,8 +20,8 @@ const GlobalReachSection = () => (
             <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl bg-primary/10 flex items-center justify-center mb-5 sm:mb-8 text-primary shadow-sm group-hover:bg-primary group-hover:text-white transition-colors">
               {item.icon}
             </div>
-            <h3 className="text-lg sm:text-xl font-bold text-[var(--text-heading)] mb-3 sm:mb-4">{item.title}</h3>
-            <p className="text-sm sm:text-base text-[var(--text-muted)] leading-relaxed">{item.desc}</p>
+            <h3 className="text-body-lg sm:text-xl font-bold text-[var(--text-heading)] mb-3 sm:mb-4">{item.title}</h3>
+            <p className="text-small sm:text-base text-body">{item.desc}</p>
           </div>
         ))}
       </div>

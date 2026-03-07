@@ -36,7 +36,7 @@ const Contact = () => {
           <div className="space-y-12">
              <div>
                 <h2 className="heading-md mb-6">Contact Information</h2>
-                <p className="text-[var(--text-muted)] text-lg mb-8 leading-relaxed">
+                <p className="text-[var(--text-muted)] text-body-lg mb-8 leading-relaxed">
                    We'd love to hear from you. Whether you have a question about courses, pricing, or just want to say hello, our team is ready to answer all your questions.
                 </p>
 
@@ -46,8 +46,8 @@ const Contact = () => {
                          <MapPin className="h-6 w-6 text-primary" />
                       </div>
                       <div>
-                         <h4 className="text-lg sm:text-xl font-bold text-[#a73fd0] dark:text-[#d64fd9] mb-1">Visit Us</h4>
-                         <p className="text-[var(--text-muted)] text-base sm:text-lg leading-relaxed">{BRANDING.address}</p>
+                         <h4 className="text-body-lg sm:text-xl font-bold text-[#a73fd0] dark:text-[#d64fd9] mb-1">Visit Us</h4>
+                         <p className="text-[var(--text-muted)] text-body sm:text-lg leading-relaxed">{BRANDING.address}</p>
                       </div>
                    </div>
 
@@ -56,9 +56,9 @@ const Contact = () => {
                          <Phone className="h-6 w-6 text-primary" />
                       </div>
                       <div>
-                         <h4 className="text-lg sm:text-xl font-bold text-[#a73fd0] dark:text-[#d64fd9] mb-1">Call Us</h4>
-                         <p className="text-[var(--text-heading)] text-lg font-bold">{BRANDING.phone}</p>
-                         <p className="text-[var(--text-muted)] text-sm">Mon–Sun, 9:00 AM – 7:00 PM</p>
+                         <h4 className="text-body-lg sm:text-xl font-bold text-[#a73fd0] dark:text-[#d64fd9] mb-1">Call Us</h4>
+                         <p className="text-[var(--text-heading)] text-body-lg font-bold">{BRANDING.phone}</p>
+                         <p className="text-[var(--text-muted)] text-small">Mon–Sun, 9:00 AM – 7:00 PM</p>
                       </div>
                    </div>
 
@@ -67,9 +67,9 @@ const Contact = () => {
                          <Mail className="h-6 w-6 text-primary" />
                       </div>
                       <div>
-                         <h4 className="text-lg sm:text-xl font-bold text-[#a73fd0] dark:text-[#d64fd9] mb-1">Email Us</h4>
-                         <p className="text-[var(--text-heading)] text-lg font-bold">{BRANDING.email}</p>
-                         <p className="text-[var(--text-muted)] text-sm">We'll respond within 24 hours.</p>
+                         <h4 className="text-body-lg sm:text-xl font-bold text-[#a73fd0] dark:text-[#d64fd9] mb-1">Email Us</h4>
+                         <p className="text-[var(--text-heading)] text-body-lg font-bold">{BRANDING.email}</p>
+                         <p className="text-[var(--text-muted)] text-small">We'll respond within 24 hours.</p>
                       </div>
                    </div>
                 </div>
@@ -79,7 +79,7 @@ const Contact = () => {
              <div className="p-5 sm:p-8 bg-[var(--bg-secondary)] rounded-2xl sm:rounded-3xl border border-[var(--border-color)]">
                 <div className="flex items-center gap-3 mb-6">
                    <Clock className="h-6 w-6 text-primary" />
-                   <h3 className="text-xl font-bold text-[var(--text-heading)]">Office Hours</h3>
+                   <h3 className="heading-sm font-bold text-[var(--text-heading)]">Office Hours</h3>
                 </div>
                 <div className="space-y-3">
                    <div className="flex justify-between items-center pb-3 border-b border-[var(--border-color)]">
@@ -99,7 +99,7 @@ const Contact = () => {
 
              {/* Socials */}
              <div>
-                <h3 className="text-xl font-bold text-[var(--text-heading)] mb-6">Follow Us</h3>
+                <h3 className="heading-sm font-bold text-[var(--text-heading)] mb-6">Follow Us</h3>
                 <div className="flex gap-4">
                   {[
                     { icon: <Facebook className="h-5 w-5" />, link: BRANDING.socials.facebook, color: '#1877F2' },
@@ -129,7 +129,7 @@ const Contact = () => {
             <div className="bg-[var(--bg-card)] rounded-2xl sm:rounded-[2rem] shadow-2xl shadow-primary/5 border border-[var(--border-color)] p-5 sm:p-8 md:p-12 relative overflow-hidden">
               <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-bl-[100px] pointer-events-none" />
               <div className="relative z-10">
-                 <h3 className="text-2xl font-bold text-[var(--text-heading)] mb-2">Send us a message</h3>
+                 <h3 className="heading-md mb-2">Send us a message</h3>
                  <p className="text-[var(--text-muted)] mb-8">Fill out the form below and we'll get back to you shortly.</p>
                  <ContactForm initialCourse={initialCourse} />
               </div>
@@ -137,15 +137,15 @@ const Contact = () => {
 
             {/* Quick FAQs */}
             <div className="bg-[var(--bg-secondary)] rounded-2xl sm:rounded-[2rem] border border-[var(--border-color)] p-5 sm:p-8">
-               <h3 className="text-xl font-bold text-[var(--text-heading)] mb-4">Quick Answers</h3>
+               <h3 className="heading-sm font-bold text-[var(--text-heading)] mb-4">Quick Answers</h3>
                <div className="space-y-4">
                   <div>
-                    <h4 className="font-bold text-[var(--text-heading)] text-sm mb-1">Do you offer weekend batches?</h4>
-                    <p className="text-[var(--text-muted)] text-sm">Yes, we have dedicated weekend batches designed specifically for working professionals.</p>
+                    <h4 className="font-bold text-[var(--text-heading)] text-small mb-1">Do you offer weekend batches?</h4>
+                    <p className="text-[var(--text-muted)] text-small">Yes, we have dedicated weekend batches designed specifically for working professionals.</p>
                   </div>
                   <div>
-                    <h4 className="font-bold text-[var(--text-heading)] text-sm mb-1">Is job placement guaranteed?</h4>
-                    <p className="text-[var(--text-muted)] text-sm">We provide extensive placement assistance, portfolio building, and mock interviews to ensure you are job-ready.</p>
+                    <h4 className="font-bold text-[var(--text-heading)] text-small mb-1">Is job placement guaranteed?</h4>
+                    <p className="text-[var(--text-muted)] text-small">We provide extensive placement assistance, portfolio building, and mock interviews to ensure you are job-ready.</p>
                   </div>
                </div>
             </div>

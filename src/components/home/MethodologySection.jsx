@@ -24,13 +24,13 @@ const MethodologySection = ({ openModal }) => (
 
     <div className="container-custom relative z-10">
       <div className="max-w-3xl mb-16">
-        <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider mb-6 border border-primary/20">
+        <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-caption font-bold uppercase tracking-wider mb-6 border border-primary/20">
           The {BRANDING.fullName} Advantage
         </div>
-        <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-[var(--text-heading)] mb-6 leading-tight">
+        <h2 className="heading-md md:text-3xl lg:heading-hero text-[var(--text-heading)] mb-6 leading-tight">
           Why We're the <span className="text-primary">Best Choice</span> for Your IT Career.
         </h2>
-        <p className="text-lg text-[var(--text-muted)] leading-relaxed">
+        <p className="text-body-lg text-body">
           Our unique learning ecosystem is designed to provide you with the edge you need. From dedicated lab support to real-time industrial training, we ensure you're ready for the global tech stage.
         </p>
       </div>
@@ -43,14 +43,14 @@ const MethodologySection = ({ openModal }) => (
                 <div className={`w-12 h-12 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl ${item.color} flex items-center justify-center text-white shadow-lg shadow-black/20`}>
                   {item.icon}
                 </div>
-                <span className="text-2xl sm:text-4xl font-black text-[var(--text-muted)] opacity-30 group-hover:opacity-50 transition-opacity">
+                <span className="heading-md sm:heading-hero text-[var(--text-muted)] opacity-30 group-hover:opacity-50 transition-opacity">
                   {item.step}
                 </span>
               </div>
-              <h3 className="text-lg sm:text-xl font-bold text-[var(--text-heading)] mb-3 sm:mb-4 group-hover:text-primary transition-colors">
+              <h3 className="text-body-lg sm:text-xl font-bold text-[var(--text-heading)] mb-3 sm:mb-4 group-hover:text-primary transition-colors">
                 {item.title}
               </h3>
-              <p className="text-[var(--text-muted)] text-sm leading-relaxed transition-colors">
+              <p className="text-[var(--text-muted)] text-small leading-relaxed transition-colors">
                 {item.desc}
               </p>
             </div>
@@ -69,7 +69,7 @@ const MethodologySection = ({ openModal }) => (
           </div>
           <div>
             <p className="text-[var(--text-heading)] font-bold">1:1 Mentorship Available</p>
-            <p className="text-[var(--text-muted)] text-sm">Personal guidance from industry experts</p>
+            <p className="text-[var(--text-muted)] text-small">Personal guidance from industry experts</p>
           </div>
         </div>
         <button

@@ -122,7 +122,7 @@ const MicroExpander = React.forwardRef(
           }}
           className='overflow-hidden'
         >
-          <div className='whitespace-nowrap font-medium text-sm uppercase tracking-wide pr-6 pl-0'>
+          <div className='whitespace-nowrap font-medium text-small uppercase tracking-wide pr-6 pl-0'>
             {text}
           </div>
         </motion.div>

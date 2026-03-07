@@ -41,7 +41,7 @@ const ScrollToTopButton = () => {
           aria-label="Scroll to top"
         >
           <ChevronUp className="w-7 h-7 transition-transform group-hover:-translate-y-1" />
-          <span className="absolute right-16 bg-white text-slate-900 px-4 py-2 rounded-xl text-xs font-bold shadow-xl opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap border border-slate-100 pointer-events-none">
+          <span className="absolute right-16 bg-white text-slate-900 px-4 py-2 rounded-xl text-caption font-bold shadow-xl opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap border border-slate-100 pointer-events-none">
             Back to Top
           </span>
         </motion.button>
