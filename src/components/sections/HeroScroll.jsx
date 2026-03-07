@@ -78,6 +78,16 @@ export default function HeroScroll({ children, badge, title, subtitle }) {
 
   const [ready, setReady] = useState(false)
 
+
+  /* ✅ ADD THIS HERE */
+  useEffect(() => {
+
+    ScrollTrigger.config({
+      ignoreMobileResize: true
+    })
+
+  }, [])
+
   /* ---------------- FRAME LOADING ---------------- */
 
   const loadFrame = async (index) => {
@@ -288,7 +298,7 @@ export default function HeroScroll({ children, badge, title, subtitle }) {
 
     }
 
-    window.addEventListener("resize", onResize)
+    window.addEventListener("resize", onResize, { passive: true })
 
     return () => window.removeEventListener("resize", onResize)
 
@@ -301,7 +311,7 @@ export default function HeroScroll({ children, badge, title, subtitle }) {
       id="hero-scroll"
       aria-label="Homepage hero"
       ref={containerRef}
-      className="relative w-full h-screen overflow-hidden"
+      className="relative w-full min-h-[100svh] h-[100dvh] overflow-hidden"
     >
 
       <canvas
