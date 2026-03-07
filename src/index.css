@@ -34,13 +34,13 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 110px;
-  overflow-x: hidden;
+  overflow-x: clip;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
 }
 
 body {
-  overflow-x: hidden;
+  overflow-x: clip;
   position: relative;
   width: 100%;
 }
@@ -367,4 +367,11 @@ section {
   font-size: 14px;
   color: rgba(255,255,255,0.9);
   line-height: 1.6;
+}
+
+/* Fix GSAP pin spacer overflow */
+.pin-spacer {
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow: hidden;
 }

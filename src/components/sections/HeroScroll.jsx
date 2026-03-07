@@ -88,6 +88,18 @@ export default function HeroScroll({ children, badge, title, subtitle }) {
 
   }, [])
 
+  useEffect(() => {
+
+  const handleResize = () => {
+    ScrollTrigger.refresh()
+  }
+
+  window.addEventListener("resize", handleResize)
+
+  return () => window.removeEventListener("resize", handleResize)
+
+}, [])
+
   /* ---------------- FRAME LOADING ---------------- */
 
   const loadFrame = async (index) => {
@@ -207,16 +219,20 @@ export default function HeroScroll({ children, badge, title, subtitle }) {
 
     }
 
-    scrollRef.current = ScrollTrigger.create({
-      trigger: containerRef.current,
-      start: "top top",
-      end: `+=${SCROLL_DISTANCE}`,
-      pin: true,
-      scrub: 1,
-      onUpdate: (self) => {
-        targetFrameRef.current = self.progress * (TOTAL_FRAMES - 1)
-      }
-    })
+ scrollRef.current = ScrollTrigger.create({
+  trigger: containerRef.current,
+  start: "top top",
+  end: `+=${SCROLL_DISTANCE}`,
+  pin: true,
+  pinType: "transform",
+  scrub: 1,
+  invalidateOnRefresh: true,
+  onUpdate: (self) => {
+    targetFrameRef.current = self.progress * (TOTAL_FRAMES - 1)
+  }
+})
+
+setTimeout(() => ScrollTrigger.refresh(), 50)
 
     const tick = () => {
 
@@ -316,7 +332,7 @@ export default function HeroScroll({ children, badge, title, subtitle }) {
 
       <canvas
         ref={canvasRef}
-        className="absolute inset-0 w-full h-full"
+        className="absolute inset-0 w-full h-full max-w-[100vw]"
       />
 
       <div
@@ -327,7 +343,7 @@ export default function HeroScroll({ children, badge, title, subtitle }) {
           backgroundSize: "cover",
           backgroundPosition: "center",
           filter: "blur(25px)",
-          transform: "scale(1.1)",
+          transform: "scale(1.05)",
           transition: "opacity 0.4s"
         }}
       />
