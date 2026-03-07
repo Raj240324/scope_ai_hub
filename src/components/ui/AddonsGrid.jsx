@@ -33,10 +33,10 @@ const AddonsGrid = ({ addons, variant = 'full', showBadge = true }) => {
 
           {/* Icon */}
           <div className="flex items-center gap-4 mb-4">
-            <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-primary/10 heading-lg group-hover:scale-110 transition-transform duration-300">
+            <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-primary/10 text-primary group-hover:scale-110 transition-transform duration-300">
               {addon.icon}
             </div>
-            <h3 className="font-bold text-body-lg leading-tight" style={{ color: 'var(--text-heading)' }}>
+            <h3 className="heading-sm font-semibold leading-tight" style={{ color: 'var(--text-heading)' }}>
               {addon.title}
             </h3>
           </div>

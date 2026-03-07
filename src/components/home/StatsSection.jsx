@@ -19,10 +19,10 @@ const StatsSection = () => (
             <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-primary/5 text-primary mb-4 group-hover:bg-primary group-hover:text-white transition-colors shadow-sm">
               {stat.icon}
             </div>
-            <div className="heading-heromd:heading-hero text-[var(--text-heading)]">
+            <div className="heading-md font-bold text-[var(--text-heading)]">
               {/^\d/.test(stat.value) ? <ScrollCountUp end={stat.value} /> : stat.value}
             </div>
-            <div className="text-caption sm:text-sm text-[var(--text-muted)] font-bold uppercase tracking-wider">{stat.label}</div>
+            <div className="text-caption text-[var(--text-muted)] font-bold uppercase tracking-wider">{stat.label}</div>
           </StaggerItem>
         ))}
       </StaggerContainer>

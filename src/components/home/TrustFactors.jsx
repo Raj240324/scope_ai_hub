@@ -15,8 +15,8 @@ const TrustFactors = () => (
       {/* Section Header */}
       <div className="text-center mb-14">
         <p className="text-caption font-black uppercase tracking-[0.3em] text-[var(--text-muted)] mb-2">Trusted Education Partner</p>
-        <h2 className="heading-hero text-[var(--text-heading)] leading-tight mb-4">
-          Why Choose <span className="text-primary">{BRANDING.fullName}?</span>
+        <h2 className="heading-lg font-bold text-[var(--text-heading)] leading-tight mb-4">
+          Why Choose <span className="font-extrabold text-primary">{BRANDING.fullName}?</span>
         </h2>
         <div className="inline-flex items-center gap-3 px-6 py-2.5 rounded-full text-small sm:text-base font-bold text-white shadow-lg"
           style={{ background: 'linear-gradient(90deg, #B8860B 0%, #DAA520 40%, #FFD700 60%, #DAA520 80%, #B8860B 100%)' }}>
@@ -248,7 +248,7 @@ const TrustFactors = () => (
       </div>
 
       {/* Bottom Stats Bar */}
-      <div className="mt-12 rounded-2xl overflow-hidden shadow-xl" style={{ background: 'linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #0f172a 100%)' }}>
+      <div className="mt-12 dark-section rounded-2xl shadow-xl">
         <div className="flex flex-wrap sm:hidden">
           {[
             { value: "75%", label: "Practical", highlight: true },
@@ -257,13 +257,13 @@ const TrustFactors = () => (
             { value: "75+", label: "Hiring Partners", highlight: false },
             { value: "100%", label: "Placement Support", highlight: true },
           ].map((stat, i) => (
-            <div key={i} className={`flex flex-col items-center justify-center py-5 px-4 text-center gap-1 hover:bg-white/5 transition-colors ${i < 4 ? 'w-1/2' : 'w-full border-t border-white/10'} ${i === 0 || i === 2 ? 'border-r border-white/10' : ''} ${i < 2 ? 'border-b border-white/10' : ''}`}>
-              <span className={`heading-md font-black ${stat.highlight ? 'text-amber-400' : 'text-white'}`}>{stat.value}</span>
+            <div key={i} className={`flex flex-col items-center justify-center py-5 px-4 text-center gap-1 hover:bg-[var(--glass-bg)] transition-colors ${i < 4 ? 'w-1/2' : 'w-full border-t border-[var(--glass-border)]'} ${i === 0 || i === 2 ? 'border-r border-[var(--glass-border)]' : ''} ${i < 2 ? 'border-b border-[var(--glass-border)]' : ''}`}>
+              <span className={`heading-md font-bold ${stat.highlight ? 'text-amber-400' : 'text-white'}`}>{stat.value}</span>
               <span className="text-caption font-bold uppercase tracking-wider text-white/60">{stat.label}</span>
             </div>
           ))}
         </div>
-        <div className="hidden sm:grid sm:grid-cols-5 divide-x divide-white/10">
+        <div className="hidden sm:grid sm:grid-cols-5 divide-x divide-[var(--glass-border)]">
           {[
             { value: "75%", label: "Practical", highlight: true },
             { value: "157+", label: "Projects", highlight: false },
@@ -271,8 +271,8 @@ const TrustFactors = () => (
             { value: "75+", label: "Hiring Partners", highlight: false },
             { value: "100%", label: "Placement Support", highlight: true },
           ].map((stat, i) => (
-            <div key={i} className="flex flex-col items-center justify-center py-6 px-4 text-center gap-1 hover:bg-white/5 transition-colors">
-              <span className={`heading-hero${stat.highlight ? 'text-amber-400' : 'text-white'}`}>{stat.value}</span>
+            <div key={i} className="flex flex-col items-center justify-center py-6 px-4 text-center gap-1 hover:bg-[var(--glass-bg)] transition-colors">
+              <span className={`heading-md font-bold ${stat.highlight ? 'text-amber-400' : 'text-white'}`}>{stat.value}</span>
               <span className="text-caption font-bold uppercase tracking-wider text-white/60">{stat.label}</span>
             </div>
           ))}

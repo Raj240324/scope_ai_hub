@@ -78,8 +78,8 @@ export default function KineticTeamHybrid() {
           className="mb-16 md:mb-20 flex flex-col gap-4 md:flex-row md:items-end md:justify-between"
         >
           <div>
-            <h2 className="heading-md sm:heading-hero text-[var(--text-heading)]">
-              Our <span className="text-primary">Mentors</span>
+            <h2 className="heading-lg font-bold text-[var(--text-heading)]">
+              Our <span className="font-extrabold text-primary">Mentors</span>
             </h2>
           </div>
           <div className="h-px flex-1 bg-[var(--border-color)] mx-8 hidden md:block" />
@@ -175,7 +175,7 @@ function TeamRow({ data, index, isActive, setActiveId, isMobile, isAnyActive }) 
           <span className="font-mono text-caption text-[var(--text-muted)]">
             {data.id}
           </span>
-          <h3 className="heading-sm sm:heading-md tracking-tight text-[var(--text-muted)] transition-colors duration-300 group-hover:text-[var(--text-heading)] md:text-3xl">
+          <h3 className="heading-sm font-semibold tracking-tight text-[var(--text-muted)] transition-colors duration-300 group-hover:text-[var(--text-heading)]">
             {data.name}
           </h3>
         </div>

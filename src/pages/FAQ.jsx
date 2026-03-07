@@ -166,7 +166,7 @@ const FAQItem = ({ question, answer }) => {
         onClick={() => setIsOpen(!isOpen)}
         className="w-full py-6 flex items-center justify-between text-left hover:text-primary transition-colors group"
       >
-        <span className="text-body sm:text-lg font-bold text-[var(--text-heading)] group-hover:text-primary transition-colors pr-6 sm:pr-8">
+        <span className="heading-sm font-semibold text-[var(--text-heading)] group-hover:text-primary transition-colors pr-6 sm:pr-8">
           {question}
         </span>
         <div className={`flex-shrink-0 h-6 w-6 rounded-full border-2 border-[var(--border-color)] flex items-center justify-center transition-all ${isOpen ? 'bg-primary border-primary text-[var(--text-on-inverted)] rotate-180' : 'text-[var(--text-muted)]'}`}>
@@ -213,7 +213,7 @@ const FAQ = () => {
       
       <Hero 
         badge="Everything You Need to Know"
-        title={<>You Asked. We <span className="text-primary">Answered</span>.</>}
+        title={<>You Asked. We <span className="font-extrabold text-primary">Answered</span>.</>}
       />
 
       <div className="bg-[var(--bg-secondary)] py-20">

@@ -94,14 +94,14 @@ const Admissions = () => {
       
       <Hero 
         badge="Simple · Transparent · Fast"
-        title={<>Your Seat Is <span className="text-primary">Waiting</span>.</>}
+        title={<>Your Seat Is <span className="font-extrabold text-primary">Waiting</span>.</>}
       />
 
       <div className="container-custom section-padding">
         {/* How It Works - Premium Flip Cards */}
         <div className="mb-24">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="heading-md mb-4">How It Works</h2>
+            <h2 className="heading-lg font-bold mb-4">How It Works</h2>
             <p className="text-[var(--text-muted)] text-body-lg">
               Your journey to a thriving tech career is simple and transparent.
               Follow these 4 easy steps to get started.
@@ -156,7 +156,7 @@ const Admissions = () => {
         <div className="max-w-3xl mx-auto mb-16">
           {/* Eligibility */}
           <div className="space-y-8">
-            <h2 className="heading-md text-center">Eligibility Criteria</h2>
+            <h2 className="heading-lg font-bold text-center mb-0">Eligibility Criteria</h2>
             <div className="space-y-4">
               {[
                 "College students (any stream) looking for industry skills.",
@@ -180,7 +180,7 @@ const Admissions = () => {
             <div className="inline-flex items-center px-4 py-2 mb-6 rounded-full bg-primary/5 border border-primary/10 text-primary text-caption font-bold tracking-wider">
               Flexible Scheduling
             </div>
-            <h2 className="heading-lg md:heading-hero text-[var(--text-heading)] mb-4">
+            <h2 className="heading-lg font-bold text-[var(--text-heading)] mb-4">
               Batch Schedules Built for Professionals
             </h2>
             <p className="text-[var(--text-muted)] text-body-lg">
@@ -197,7 +197,7 @@ const Admissions = () => {
             className="relative p-8 rounded-3xl border border-[var(--border-color)] bg-[var(--bg-secondary)] mb-16 overflow-hidden"
           >
             <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-primary/5 blur-3xl blur-layer"></div>
-            <h3 className="heading-sm font-bold text-[var(--text-heading)] mb-4 relative z-10">
+            <h3 className="heading-md font-bold text-[var(--text-heading)] mb-4 relative z-10">
               India's First Hybrid AI Training — Online Meets In-Person
             </h3>
             <p className="text-[var(--text-muted)] max-w-2xl mb-6 relative z-10">
@@ -240,7 +240,7 @@ const Admissions = () => {
                   🔥 {batch.status}
                 </span>
 
-                <h3 className="heading-sm font-bold text-[var(--text-heading)] mb-2 relative z-10">
+                <h3 className="heading-sm font-semibold text-[var(--text-heading)] mb-2 relative z-10">
                   {batch.title}
                 </h3>
                 <p className="text-small text-[var(--text-muted)] mb-6 relative z-10">
@@ -278,7 +278,7 @@ const Admissions = () => {
 
         {/* Scholarships & Financial Aid */}
         <div className="mb-24 mt-12">
-          <h2 className="heading-md mb-12  text-center">Financial Assistance Programs</h2>
+          <h2 className="heading-lg font-bold mb-12 text-center">Financial Assistance Programs</h2>
           <div className="grid md:grid-cols-3 gap-8">
             {[
               {
@@ -350,21 +350,21 @@ const Admissions = () => {
 
         {/* Fee Structure Note */}
         {/* Course Programs Overview */}
-        <div className="mt-16 sm:mt-24 p-5 sm:p-8 md:p-12 bg-[var(--bg-inverted)] text-[var(--text-on-inverted)] rounded-2xl sm:rounded-3xl relative overflow-hidden text-center">
-          <h2 className="heading-md md:heading-hero relative z-10">Programs Designed For You</h2>
+        <div className="mt-16 sm:mt-24 p-5 sm:p-8 md:p-12 dark-section text-[var(--text-on-inverted)] rounded-2xl sm:rounded-3xl text-center">
+          <h2 className="heading-lg font-bold text-[var(--text-on-inverted)] mb-8 relative z-10">Programs Designed For You</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10 text-left">
-             <div className="bg-[var(--bg-body)]/10 p-6 rounded-2xl border border-[var(--bg-body)]/10">
-                <h3 className="font-bold text-body-lg mb-2 text-primary-light">Upskill Courses</h3>
+             <div className="glass-card p-6 text-left">
+                <h3 className="heading-sm font-semibold mb-2 text-primary-light">Upskill Courses</h3>
                 <p className="text-small text-[var(--text-on-inverted)]/80 mb-2">Targeted training to master specific technologies or tools quickly.</p>
                 <p className="text-caption text-[var(--text-on-inverted)]/60 font-bold uppercase tracking-wider">Duration: 1-2 Months</p>
              </div>
-             <div className="bg-[var(--bg-body)]/10 p-6 rounded-2xl border border-[var(--bg-body)]/10">
-                <h3 className="font-bold text-body-lg mb-2 text-primary-light">Career Tracks</h3>
+             <div className="glass-card p-6 text-left">
+                <h3 className="heading-sm font-semibold mb-2 text-primary-light">Career Tracks</h3>
                 <p className="text-small text-[var(--text-on-inverted)]/80 mb-2">Comprehensive pathways to transform you into a job-ready professional.</p>
                 <p className="text-caption text-[var(--text-on-inverted)]/60 font-bold uppercase tracking-wider">Duration: 4-6 Months</p>
              </div>
-             <div className="bg-[var(--bg-body)]/10 p-6 rounded-2xl border border-[var(--bg-body)]/10">
-                <h3 className="font-bold text-body-lg mb-2 text-primary-light">Master Programs</h3>
+             <div className="glass-card p-6 text-left">
+                <h3 className="heading-sm font-semibold mb-2 text-primary-light">Master Programs</h3>
                 <p className="text-small text-[var(--text-on-inverted)]/80 mb-2">Deep-dive intensive programs with extensive projects and mentorship.</p>
                 <p className="text-caption text-[var(--text-on-inverted)]/60 font-bold uppercase tracking-wider">Duration: 8-12 Months</p>
              </div>
@@ -377,7 +377,7 @@ const Admissions = () => {
             >
               Enquire About Admissions
             </button>
-            <Link to="/courses" className="bg-[var(--bg-body)]/10 hover:bg-[var(--bg-body)]/20 text-[var(--text-on-inverted)] font-bold px-8 py-4 rounded-xl transition-colors border border-[var(--bg-body)]/10">
+            <Link to="/courses" className="glass-button text-[var(--text-on-inverted)] font-bold px-8 py-4">
               Explore Courses
             </Link>
           </div>
@@ -390,7 +390,7 @@ const Admissions = () => {
               <Award className="h-3.5 w-3.5" />
               Career Advantage
             </div>
-            <h2 className="heading-lg md:heading-hero text-[var(--text-heading)] mb-4">
+            <h2 className="heading-lg font-bold text-[var(--text-heading)] mb-4">
               12 Benefits Included with Every Program
             </h2>
             <p className="text-[var(--text-muted)] text-body-lg">

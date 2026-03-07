@@ -72,7 +72,7 @@ const Home = () => {
         <div className="flex flex-col sm:flex-row gap-6 justify-center">
           <Link
             to="/courses"
-            className="group relative px-8 py-4 bg-primary text-white rounded-full flex items-center justify-center font-bold text-body shadow-[0_0_20px_-5px_rgba(var(--primary-rgb),0.3)] hover:shadow-[0_0_25px_-5px_rgba(var(--primary-rgb),0.5)] hover:-translate-y-0.5 transition-all duration-300"
+            className="group relative px-8 py-4 bg-primary text-white rounded-full flex items-center justify-center text-small font-semibold shadow-[0_0_20px_-5px_rgba(var(--primary-rgb),0.3)] hover:shadow-[0_0_25px_-5px_rgba(var(--primary-rgb),0.5)] hover:-translate-y-0.5 transition-all duration-300"
           >
             <span className="relative z-10 flex items-center">
               Explore Courses <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
@@ -82,7 +82,7 @@ const Home = () => {
 
           <button
             onClick={() => openModal()}
-            className="px-8 py-4 bg-white/5 backdrop-blur-md text-white border border-white/10 hover:border-primary/50 rounded-full flex items-center justify-center font-bold text-body hover:bg-white/10 transition-all duration-300 group"
+            className="glass-button rounded-full px-8 py-4 text-white hover:border-primary/50 flex items-center justify-center text-small font-semibold transition-all duration-300 group"
             aria-label="Book Free Demo"
           >
             <PlayCircle className="mr-2 h-5 w-5 opacity-70 group-hover:opacity-100 text-primary-light transition-all" />
@@ -155,27 +155,27 @@ const Home = () => {
       {/* Final CTA */}
       <section className="py-20">
         <div className="container-custom">
-          <div className="bg-[var(--bg-inverted)] rounded-2xl md:rounded-[3rem] p-6 sm:p-8 md:p-16 text-center text-[var(--text-on-inverted)] relative overflow-hidden shadow-2xl">
+          <div className="dark-section rounded-2xl md:rounded-[3rem] p-6 sm:p-8 md:p-16 text-center text-[var(--text-on-inverted)] shadow-2xl">
             <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
               <div className="absolute top-[-25%] left-[-10%] w-[60%] h-[60%] bg-primary/20 rounded-full blur-3xl blur-layer" />
               <div className="absolute bottom-[-25%] right-[-10%] w-[60%] h-[60%] bg-primary/10 rounded-full blur-3xl blur-layer" />
             </div>
             <div className="relative z-10 max-w-3xl mx-auto">
-              <h2 className="heading-md md:text-3xl lg:heading-hero">Ready to Build Your <span className="text-primary">Future</span>?</h2>
-              <p className="text-body md:text-lg text-[var(--text-on-inverted)]/80 mb-10">
+              <h2 className="heading-lg font-bold text-white mb-6">Ready to Build Your <span className="text-primary">Future</span>?</h2>
+              <p className="text-body text-[var(--text-on-inverted)]/80 mb-10">
                 Join our next batch and learn from industry experts who are passionate about teaching.
               </p>
               <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
                 <button
                   onClick={() => openModal()}
-                  className="bg-primary text-white hover:opacity-90 px-10 py-4 rounded-full text-body-lg font-black transition-all shadow-xl shadow-primary/20"
+                  className="bg-primary text-white hover:opacity-90 px-10 py-4 rounded-full text-small font-semibold transition-all shadow-xl shadow-primary/20"
                   aria-label="Enroll Now"
                 >
                   Enroll Now
                 </button>
                 <Link
                   to="/contact"
-                  className="bg-primary/10 backdrop-blur-md border border-primary/30 text-[var(--text-on-inverted)] hover:bg-primary/20 px-10 py-4 rounded-full text-body-lg font-black transition-all"
+                  className="glass-button rounded-full text-[var(--text-on-inverted)] px-10 py-4 text-small font-semibold transition-all"
                 >
                   Contact Admissions
                 </Link>

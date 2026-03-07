@@ -104,7 +104,7 @@ const CourseDetail = () => {
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
-              className="heading-hero text-[var(--text-heading)] mb-5 tracking-tight leading-[1.08]"
+              className="heading-hero font-extrabold text-[var(--text-heading)] mb-5 tracking-tight leading-[1.08]"
             >
               {course.title}
             </motion.h1>
@@ -178,7 +178,7 @@ const CourseDetail = () => {
               <div id="syllabus" className="scroll-mt-28">
                 <div className="flex items-end justify-between mb-10">
                   <div>
-                    <h2 className="heading-md sm:heading-hero text-[var(--text-heading)] tracking-tight">
+                    <h2 className="heading-lg font-bold text-[var(--text-heading)] tracking-tight">
                       Syllabus
                     </h2>
                     <p className="text-small text-[var(--text-muted)] mt-1">
@@ -235,7 +235,7 @@ const CourseDetail = () => {
 
               {/* Who Can Learn */}
               <div id="who-can-learn" className="scroll-mt-28">
-                <h2 className="heading-md sm:heading-hero text-[var(--text-heading)] tracking-tight mb-2">
+                <h2 className="heading-lg font-bold text-[var(--text-heading)] tracking-tight mb-2">
                   Who Can Learn
                 </h2>
                 <p className="text-small text-[var(--text-muted)] mb-8">This program is designed for:</p>
@@ -253,7 +253,7 @@ const CourseDetail = () => {
 
               {/* Prerequisites */}
               <div id="prerequisites" className="scroll-mt-28">
-                <h2 className="heading-md sm:heading-hero text-[var(--text-heading)] tracking-tight mb-8">
+                <h2 className="heading-lg font-bold text-[var(--text-heading)] tracking-tight mb-8">
                   Prerequisites
                 </h2>
                 <ul className="space-y-4">
@@ -271,7 +271,7 @@ const CourseDetail = () => {
 
               {/* Job Roles */}
               <div id="job-roles" className="scroll-mt-28">
-                <h2 className="heading-md sm:heading-hero text-[var(--text-heading)] tracking-tight mb-2">
+                <h2 className="heading-lg font-bold text-[var(--text-heading)] tracking-tight mb-2">
                   Career Paths
                 </h2>
                 <p className="text-small text-[var(--text-muted)] mb-8">Roles you'll be qualified for after completion:</p>
@@ -297,7 +297,7 @@ const CourseDetail = () => {
                   <div className="flex justify-between items-start mb-6">
                     <div>
                       <p className="text-caption font-semibold text-[var(--text-muted)] uppercase tracking-[0.15em] mb-1">Expected CTC</p>
-                      <h3 className="heading-md font-extrabold tracking-tight" style={{ color: tier.color }}>{course.salaryRange}</h3>
+                      <h3 className="heading-md font-bold tracking-tight" style={{ color: tier.color }}>{course.salaryRange}</h3>
                     </div>
                     <span
                       className="px-2.5 py-1 rounded-md text-caption font-bold uppercase tracking-wider"
@@ -393,7 +393,7 @@ const CourseDetail = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-              className="heading-hero tracking-tight"
+              className="heading-lg font-bold tracking-tight"
               style={{ color: 'var(--text-heading)' }}
             >
               Everything You Need to Get Hired
@@ -433,7 +433,7 @@ const CourseDetail = () => {
 
                 {/* Content */}
                 <div className="flex-1 min-w-0">
-                  <h3 className="font-bold text-small mb-1 leading-tight" style={{ color: 'var(--text-heading)' }}>
+                  <h3 className="heading-sm font-semibold mb-1 leading-tight" style={{ color: 'var(--text-heading)' }}>
                     {addon.title}
                   </h3>
                   <p className="text-caption leading-relaxed line-clamp-2" style={{ color: 'var(--text-body)' }}>
@@ -451,7 +451,7 @@ const CourseDetail = () => {
         <div className="container-custom">
           <div className="flex justify-between items-end mb-12">
             <div>
-              <h2 className="heading-md sm:heading-hero text-[var(--text-heading)] tracking-tight mb-2">
+              <h2 className="heading-lg font-bold text-[var(--text-heading)] tracking-tight mb-2">
                 Explore More Programs
               </h2>
               <p className="text-[var(--text-muted)] text-small">Continue your learning journey</p>

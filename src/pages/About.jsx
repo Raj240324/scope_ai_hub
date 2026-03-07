@@ -91,7 +91,7 @@ const About = () => {
       />
       <Hero 
         badge="Est. 2019 · Chennai, India"
-        title={<>Where <span className="text-primary">AI Careers</span> Are Built — One Real Project at a Time</>}
+        title={<>Where <span className="font-extrabold text-primary">AI Careers</span> Are Built — One Real Project at a Time</>}
         subtitle="Scope AI Hub is Chennai's leading AI & Machine Learning training institute empowering students and professionals with hands-on industry skills since 2019. Online and offline programs available."
       >
         <div className="flex flex-col sm:flex-row gap-4 mb-8">
@@ -113,16 +113,16 @@ const About = () => {
         <div className="container-custom relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 max-w-5xl mx-auto">
             <FadeIn direction="up" delay={0.1}>
-              <div className="space-y-6 p-6 md:p-8 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-md hover:bg-white/10 transition-all duration-500 group shadow-xl shadow-primary/5">
+              <div className="space-y-6 p-6 md:p-8 rounded-3xl bg-[var(--bg-secondary)] border border-[var(--border-color)] transition-all duration-500 group shadow-xl">
                 <div className="h-16 w-16 flex items-center justify-center group-hover:scale-110 transition-transform duration-500 ease-out">
                   <LottieAnimation animationData={visionAnimation} className="w-full h-full" />
                 </div>
                 <div>
-                  <h2 className="heading-sm md:heading-md mb-3 flex items-center gap-3">
+                  <h2 className="heading-md font-bold text-[var(--text-heading)] mb-3 flex items-center gap-3">
                     <span className="w-8 h-1 bg-primary rounded-full"></span>
                     Our Vision
                   </h2>
-                  <p className="text-[var(--text-on-inverted)]/70 text-body md:text-lg leading-relaxed">
+                  <p className="text-[var(--text-muted)] text-body md:text-lg leading-relaxed">
                     To build a globally recognised AI learning ecosystem that elevates the next generation of intelligent innovators and technology leaders.
                   </p>
                 </div>
@@ -130,16 +130,16 @@ const About = () => {
             </FadeIn>
 
             <FadeIn direction="up" delay={0.2}>
-              <div className="space-y-6 p-6 md:p-8 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-md hover:bg-white/10 transition-all duration-500 group shadow-xl shadow-primary/5">
+              <div className="space-y-6 p-6 md:p-8 rounded-3xl bg-[var(--bg-secondary)] border border-[var(--border-color)] transition-all duration-500 group shadow-xl">
                 <div className="h-16 w-16 flex items-center justify-center group-hover:scale-110 transition-transform duration-500 ease-out">
                   <LottieAnimation animationData={missionAnimation} className="w-full h-full" />
                 </div>
                 <div>
-                  <h2 className="heading-sm md:heading-md mb-3 flex items-center gap-3">
+                  <h2 className="heading-md font-bold text-[var(--text-heading)] mb-3 flex items-center gap-3">
                     <span className="w-8 h-1 bg-primary rounded-full"></span>
                     Our Mission
                   </h2>
-                  <p className="text-[var(--text-on-inverted)]/70 text-body md:text-lg leading-relaxed">
+                  <p className="text-[var(--text-muted)] text-body md:text-lg leading-relaxed">
                     To provide practical, industry-grade AI education that converts ambition into measurable career outcomes.
                   </p>
                 </div>
@@ -157,8 +157,8 @@ const About = () => {
               <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-caption font-bold uppercase tracking-wider mb-6 border border-primary/20">
                 Our Founding Story
               </div>
-              <h2 className="heading-md md:text-3xl lg:heading-hero text-[var(--text-heading)] mb-6 leading-tight">
-                Why We Built <span className="text-primary">SCOPE AI HUB</span>
+              <h2 className="heading-lg font-bold text-[var(--text-heading)] mb-6 leading-tight">
+                Why We Built <span className="font-extrabold text-primary">SCOPE AI HUB</span>
               </h2>
               <p className="text-body md:text-lg text-body mb-4">
                 Scope AI Hub was founded in 2019 with a single conviction: AI education in India was broken.
@@ -228,7 +228,7 @@ const About = () => {
       <section className="py-20 bg-[var(--bg-secondary)]">
         <div className="container-custom">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="heading-md mb-6">The <span className="text-primary">Scope Advantage</span></h2>
+            <h2 className="heading-lg font-bold mb-6">The <span className="font-extrabold text-primary">Scope Advantage</span></h2>
             <p className="text-[var(--text-muted)] text-body-lg">
               Six reasons our graduates outperform the competition — and why 75+ companies trust us to build their AI talent pipeline.
             </p>
@@ -270,7 +270,7 @@ const About = () => {
                 <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-primary/10 flex items-center justify-center mb-5 sm:mb-6 group-hover:bg-[var(--bg-inverted)] group-hover:text-[var(--text-on-inverted)] transition-colors text-primary">
                   {item.icon}
                 </div>
-                <h3 className="text-body-lg sm:text-xl font-bold text-[var(--text-heading)] mb-3">{item.title}</h3>
+                <h3 className="heading-sm font-semibold text-[var(--text-heading)] mb-3">{item.title}</h3>
                 <p className="text-small sm:text-base text-body">{item.desc}</p>
               </div>
             ))}
@@ -283,7 +283,7 @@ const About = () => {
         <div className="container-custom">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="space-y-6">
-              <h2 className="heading-md">How We Teach</h2>
+              <h2 className="heading-lg font-bold">How We Teach</h2>
               <p className="text-[var(--text-muted)] text-body-lg leading-relaxed">
                 Every class at Scope AI Hub is a collaborative engineering session.
               </p>
@@ -345,7 +345,7 @@ const About = () => {
             <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-caption font-bold uppercase tracking-wider mb-6 border border-primary/20">
               Curriculum Stack
             </div>
-            <h2 className="heading-md mb-4">Technologies We <span className="text-primary">Cover</span></h2>
+            <h2 className="heading-lg font-bold mb-4">Technologies We <span className="font-extrabold text-primary">Cover</span></h2>
             <p className="text-[var(--text-muted)] text-body-lg">
               Industry-standard tools and frameworks taught through hands-on projects and live deployments.
             </p>
@@ -411,7 +411,7 @@ const About = () => {
                     <div className="inline-flex items-center space-x-2 px-3 py-1 sm:px-4 sm:py-1.5 rounded-full bg-[var(--bg-secondary)] text-[var(--text-muted)] text-caption sm:text-xs font-bold uppercase tracking-widest mb-4 sm:mb-6 border border-[var(--border-color)] shadow-sm">
                       Leadership
                     </div>
-                    <h2 className="heading-hero text-[var(--text-heading)] tracking-tight leading-tight mb-2">
+                    <h2 className="heading-lg font-bold text-[var(--text-heading)] tracking-tight leading-tight mb-2">
                       {BRANDING.ceo.name}
                     </h2>
                     <p className="text-primary font-black text-caption sm:text-sm uppercase tracking-widest">
@@ -455,7 +455,7 @@ const About = () => {
               <GraduationCap className="h-3 w-3" />
               <span>Student Success</span>
             </div>
-            <h2 className="heading-md mb-4">From Beginners to <span className="text-primary">AI Engineers</span></h2>
+            <h2 className="heading-lg font-bold mb-4">From Beginners to <span className="font-extrabold text-primary">AI Engineers</span></h2>
             <p className="text-[var(--text-muted)] text-body-lg">
               Real career transformations from our graduates — not marketing claims, but verified outcomes.
             </p>
@@ -521,7 +521,7 @@ const About = () => {
       <section className="section-padding bg-[var(--bg-card)]">
         <div className="container-custom">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="heading-md mb-4">The Values We Live By</h2>
+            <h2 className="heading-lg font-bold mb-4">The Values We Live By</h2>
             <p className="text-[var(--text-muted)]">
               As a startup, our values define our culture and our commitment to our students.
             </p>
@@ -534,7 +534,7 @@ const About = () => {
                   <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center">
                     {value.icon}
                   </div>
-                  <h3 className="heading-sm font-bold text-[var(--text-heading)]">{value.title}</h3>
+                  <h3 className="heading-sm font-semibold text-[var(--text-heading)]">{value.title}</h3>
                   <p className="text-body">
                     {value.description}
                   </p>
@@ -549,7 +549,7 @@ const About = () => {
       <section className="py-20 bg-[var(--bg-secondary)]">
         <div className="container-custom">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="heading-md md:text-3xl lg:heading-hero text-[var(--text-heading)] mb-6">Our <span className="text-primary">Presence</span></h2>
+            <h2 className="heading-lg font-bold text-[var(--text-heading)] mb-6">Our <span className="font-extrabold text-primary">Presence</span></h2>
             <p className="text-body md:text-lg text-[var(--text-muted)]">
               On-campus excellence. Borderless online learning. A truly global AI ecosystem — from Tamil Nadu to the world.
             </p>
@@ -586,13 +586,13 @@ const About = () => {
       {/* CTA Section */}
       <section className="section-padding bg-[var(--bg-secondary)]">
         <div className="container-custom">
-          <div className="bg-[var(--bg-inverted)] rounded-2xl md:rounded-[3rem] p-6 sm:p-8 md:p-16 text-center text-[var(--text-on-inverted)] relative overflow-hidden shadow-2xl">
+          <div className="dark-section rounded-2xl md:rounded-[3rem] p-6 sm:p-8 md:p-16 text-center text-[var(--text-on-inverted)] shadow-2xl">
             <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
                 <div className="absolute top-[-25%] left-[-10%] w-[60%] h-[60%] bg-primary/20 rounded-full blur-3xl blur-layer" />
                 <div className="absolute bottom-[-25%] right-[-10%] w-[60%] h-[60%] bg-primary/10 rounded-full blur-3xl blur-layer" />
               </div>
             <div className="relative z-10 max-w-3xl mx-auto">
-              <h2 className="heading-md md:text-3xl lg:heading-hero">Your Next Batch Starts Soon. <span className="text-primary">Seats Fill Fast.</span></h2>
+              <h2 className="heading-lg font-bold mb-6">Your Next Batch Starts Soon. <span className="font-extrabold text-primary">Seats Fill Fast.</span></h2>
               <p className="text-body md:text-lg text-[var(--text-on-inverted)]/80 mb-10">
                 Join 1,200+ graduates building AI careers across India and beyond.
               </p>
@@ -606,14 +606,14 @@ const About = () => {
                 </button>
                 <Link
                   to="/courses"
-                  className="bg-primary/10 backdrop-blur-md border border-primary/30 text-[var(--text-on-inverted)] hover:bg-primary/20 px-10 py-4 rounded-2xl text-body-lg font-black transition-all text-center"
+                  className="glass-button text-[var(--text-on-inverted)] px-10 py-4 text-body-lg font-black text-center"
                   aria-label="View all AI training programs"
                 >
                   View Programs
                 </Link>
                 <button 
                   onClick={() => openModal()}
-                  className="bg-white/5 backdrop-blur-md border border-white/20 text-[var(--text-on-inverted)] hover:bg-white/10 px-10 py-4 rounded-2xl text-body-lg font-black transition-all"
+                  className="glass-button text-[var(--text-on-inverted)] px-10 py-4 text-body-lg font-black"
                   aria-label="Talk to a career mentor"
                 >
                   Talk to a Mentor

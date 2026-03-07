@@ -281,6 +281,27 @@ Use the pre-defined component classes from `index.css`:
 | `heading-md`       | Medium heading (section-level)                     |
 | `no-scrollbar`     | Hide scrollbar on overflow containers              |
 | `blur-layer`       | GPU-accelerated layer for blur effects             |
+| `glass-card`       | Adaptive glass container surface                   |
+| `glass-button`     | Adaptive glass button surface                      |
+| `dark-section`     | Deep layered background wrapper for inverted UI    |
+
+### Forbidden Glass Utilities
+
+The following Tailwind utilities are **banned** for creating glass surfaces, as they break contrast in dark mode against dark containers:
+
+- `bg-white/5`
+- `bg-white/10`
+- `bg-white/20`
+- `bg-[var(--bg-body)]/10`
+- `bg-[var(--bg-secondary)]/10`
+- `border-white/10`
+- `border-white/20`
+
+**Instead, strictly use:**
+
+- `.glass-card` for cards, panels, and containers.
+- `.glass-button` for CTA buttons on dark sections.
+- `.dark-section` for the container background wrapper.
 
 ### Class Merging
 

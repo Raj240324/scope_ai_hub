@@ -38,7 +38,7 @@ const ServiceGrid = forwardRef(({ title, subtitle, services, className, ...props
         {/* Header Section */}
         <div className="flex flex-col items-center justify-center space-y-4 text-center mb-12 md:mb-16">
           <div className="space-y-4 max-w-4xl mx-auto">
-            <h2 className="heading-hero sm:text-4xl md:text-5xl text-[var(--text-heading)]">
+            <h2 className="heading-lg font-semibold text-[var(--text-heading)]">
               {title}
             </h2>
             {subtitle && (

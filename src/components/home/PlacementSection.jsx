@@ -11,10 +11,10 @@ const PlacementSection = ({ openModal }) => (
           <Briefcase className="h-3 w-3" />
           <span>100% Placement Support</span>
         </div>
-        <h2 className="heading-lg md:text-4xl lg:text-5xl font-black text-[var(--text-heading)] mb-6 leading-tight">
+        <h2 className="heading-lg font-semibold text-[var(--text-heading)] mb-6 leading-tight">
           Your Success is <span className="text-primary">Our Commitment</span>
         </h2>
-        <p className="text-body-lg text-body">
+        <p className="text-body-lg">
           We don't just train you—we prepare you for the real world. Our comprehensive placement support ensures you're completely job-ready when you complete your course.
         </p>
       </div>
@@ -31,7 +31,7 @@ const PlacementSection = ({ openModal }) => (
                 {phase.icon}
               </div>
               <div className="text-caption sm:text-sm font-black text-[var(--text-muted)] uppercase tracking-widest mb-2">{phase.phase}</div>
-              <h3 className="heading-sm sm:heading-md mb-4 sm:mb-6">{phase.title}</h3>
+              <h3 className="heading-sm font-semibold mb-4 sm:mb-6">{phase.title}</h3>
               <ul className="space-y-3">
                 {phase.items.map((item, j) => (
                   <li key={j} className="flex items-start space-x-3">
@@ -48,7 +48,7 @@ const PlacementSection = ({ openModal }) => (
       <div className="bg-[var(--bg-inverted)] rounded-2xl sm:rounded-3xl p-5 sm:p-8 md:p-12 text-[var(--text-on-inverted)]">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div>
-            <h3 className="heading-md md:heading-hero text-[var(--text-on-inverted)] mb-6">
+            <h3 className="heading-md font-semibold text-[var(--text-on-inverted)] mb-6">
               What Does <span className="text-primary">"100% Placement Support"</span> Mean?
             </h3>
             <div className="space-y-4">
@@ -76,8 +76,8 @@ const PlacementSection = ({ openModal }) => (
               { value: "75+", label: "Active hiring partner companies across India" },
             ].map((stat, i) => (
               <div key={i} className="bg-primary/10 backdrop-blur-sm border border-primary/20 rounded-2xl p-6">
-                <div className="heading-md sm:heading-hero text-primary mb-2">{stat.value}</div>
-                <div className="text-small text-[var(--text-on-inverted)]/75 font-medium">{stat.label}</div>
+                <div className="heading-md font-bold text-primary mb-2">{stat.value}</div>
+                <div className="text-caption text-[var(--text-on-inverted)]/75 font-semibold">{stat.label}</div>
               </div>
             ))}
           </div>
@@ -88,7 +88,7 @@ const PlacementSection = ({ openModal }) => (
           </p>
           <button
             onClick={() => openModal('Placement Inquiry')}
-            className="bg-primary text-white font-bold px-6 sm:px-10 py-3 sm:py-4 rounded-2xl hover:opacity-90 transition-all shadow-xl text-small sm:text-base"
+            className="bg-primary text-white text-small font-semibold px-6 sm:px-10 py-3 sm:py-4 rounded-2xl hover:opacity-90 transition-all shadow-xl"
           >
             Learn More About Placement Support
           </button>

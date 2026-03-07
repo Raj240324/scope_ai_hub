@@ -29,11 +29,11 @@ const CareerSupportSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-            className="heading-hero tracking-tight"
+            className="heading-lg font-bold tracking-tight"
             style={{ color: 'var(--text-heading)' }}
           >
             Everything You Need to{' '}
-            <span className="text-primary">Get Hired</span>
+            <span className="font-extrabold text-primary">Get Hired</span>
           </motion.h2>
 
           <motion.p
@@ -69,7 +69,7 @@ const CareerSupportSection = () => {
               </div>
 
               {/* Title */}
-              <h3 className="font-bold text-body-lg mb-3 leading-tight" style={{ color: 'var(--text-heading)' }}>
+              <h3 className="heading-sm font-semibold mb-3 leading-tight" style={{ color: 'var(--text-heading)' }}>
                 {addon.title}
               </h3>
 

@@ -26,7 +26,7 @@ const Contact = () => {
       
       <Hero 
         badge="We Respond Within 24 Hours"
-        title={<>Let's <span className="text-primary">Talk</span>.</>}
+        title={<>Let's <span className="font-extrabold text-primary">Talk</span>.</>}
       />
 
       <div className="container-custom section-padding">
@@ -35,7 +35,7 @@ const Contact = () => {
           {/* Left Column: Information */}
           <div className="space-y-12">
              <div>
-                <h2 className="heading-md mb-6">Contact Information</h2>
+                <h2 className="heading-lg font-bold text-[var(--text-heading)] mb-6">Contact Information</h2>
                 <p className="text-[var(--text-muted)] text-body-lg mb-8 leading-relaxed">
                    We'd love to hear from you. Whether you have a question about courses, pricing, or just want to say hello, our team is ready to answer all your questions.
                 </p>
@@ -79,7 +79,7 @@ const Contact = () => {
              <div className="p-5 sm:p-8 bg-[var(--bg-secondary)] rounded-2xl sm:rounded-3xl border border-[var(--border-color)]">
                 <div className="flex items-center gap-3 mb-6">
                    <Clock className="h-6 w-6 text-primary" />
-                   <h3 className="heading-sm font-bold text-[var(--text-heading)]">Office Hours</h3>
+                   <h3 className="heading-sm font-semibold text-[var(--text-heading)]">Office Hours</h3>
                 </div>
                 <div className="space-y-3">
                    <div className="flex justify-between items-center pb-3 border-b border-[var(--border-color)]">
@@ -99,7 +99,7 @@ const Contact = () => {
 
              {/* Socials */}
              <div>
-                <h3 className="heading-sm font-bold text-[var(--text-heading)] mb-6">Follow Us</h3>
+                <h3 className="heading-sm font-semibold text-[var(--text-heading)] mb-6">Follow Us</h3>
                 <div className="flex gap-4">
                   {[
                     { icon: <Facebook className="h-5 w-5" />, link: BRANDING.socials.facebook, color: '#1877F2' },
@@ -129,7 +129,7 @@ const Contact = () => {
             <div className="bg-[var(--bg-card)] rounded-2xl sm:rounded-[2rem] shadow-2xl shadow-primary/5 border border-[var(--border-color)] p-5 sm:p-8 md:p-12 relative overflow-hidden">
               <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-bl-[100px] pointer-events-none" />
               <div className="relative z-10">
-                 <h3 className="heading-md mb-2">Send us a message</h3>
+                 <h3 className="heading-lg font-bold text-[var(--text-heading)] mb-2">Send us a message</h3>
                  <p className="text-[var(--text-muted)] mb-8">Fill out the form below and we'll get back to you shortly.</p>
                  <ContactForm initialCourse={initialCourse} />
               </div>
@@ -137,7 +137,7 @@ const Contact = () => {
 
             {/* Quick FAQs */}
             <div className="bg-[var(--bg-secondary)] rounded-2xl sm:rounded-[2rem] border border-[var(--border-color)] p-5 sm:p-8">
-               <h3 className="heading-sm font-bold text-[var(--text-heading)] mb-4">Quick Answers</h3>
+               <h3 className="heading-sm font-semibold text-[var(--text-heading)] mb-4">Quick Answers</h3>
                <div className="space-y-4">
                   <div>
                     <h4 className="font-bold text-[var(--text-heading)] text-small mb-1">Do you offer weekend batches?</h4>

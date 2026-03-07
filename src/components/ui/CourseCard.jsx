@@ -50,18 +50,18 @@ const CourseCard = ({ course, index = 0 }) => {
             </div>
 
             {/* Title */}
-            <h3 className="font-extrabold text-[1.2rem] sm:text-[1.35rem] leading-[1.3] tracking-tight mb-3 transition-colors duration-300" style={{ color: 'var(--text-heading)' }}>
+            <h3 className="heading-sm font-semibold mb-3 transition-colors duration-300">
               {course.title}
             </h3>
 
             {/* Tagline */}
-            <p className="text-[13.5px] leading-[1.65] font-medium mb-6 line-clamp-2" style={{ color: 'var(--text-body)' }}>
+            <p className="text-body mb-6 line-clamp-2">
               {course.tagline}
             </p>
 
             {/* Meta Information Grid */}
             <div className="space-y-3 mb-5">
-              <div className="flex items-center gap-2.5 text-small font-medium" style={{ color: 'var(--text-body)' }}>
+              <div className="flex items-center gap-2.5 text-caption font-semibold" style={{ color: 'var(--text-body)' }}>
                 <div 
                   className="flex items-center justify-center w-7 h-7 rounded-lg"
                   style={{ backgroundColor: `${tier.color}15` }}
@@ -70,7 +70,7 @@ const CourseCard = ({ course, index = 0 }) => {
                 </div>
                 <span>{course.duration}</span>
               </div>
-              <div className="flex items-center gap-2.5 text-small font-semibold" style={{ color: tier.color }}>
+              <div className="flex items-center gap-2.5 text-caption font-semibold" style={{ color: tier.color }}>
                 <div 
                   className="flex items-center justify-center w-7 h-7 rounded-lg"
                   style={{ backgroundColor: `${tier.color}15` }}
@@ -79,7 +79,7 @@ const CourseCard = ({ course, index = 0 }) => {
                 </div>
                 <span>{course.salaryRange}</span>
               </div>
-              <div className="flex items-center gap-2.5 text-small font-medium" style={{ color: 'var(--text-body)' }}>
+              <div className="flex items-center gap-2.5 text-caption font-semibold" style={{ color: 'var(--text-body)' }}>
                 <div 
                   className="flex items-center justify-center w-7 h-7 rounded-lg"
                   style={{ backgroundColor: `${tier.color}15` }}

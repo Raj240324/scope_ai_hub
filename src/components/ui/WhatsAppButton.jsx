@@ -27,7 +27,7 @@ const WhatsAppButton = () => {
       aria-label="Chat on WhatsApp"
     >
       <WhatsAppIcon className="w-8 h-8 fill-current" />
-      <span className="absolute left-20 bg-white text-slate-900 px-4 py-2 rounded-xl text-small font-bold shadow-xl opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap border border-slate-100">
+      <span className="absolute left-20 bg-[var(--bg-card)] text-[var(--text-heading)] px-4 py-2 rounded-xl text-small font-bold shadow-xl opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap border border-[var(--border-color)]">
         Chat with us!
       </span>
     </a>

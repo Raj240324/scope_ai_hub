@@ -13,14 +13,14 @@ const CTASection = ({ openModal }) => (
           <div className="inline-flex items-center justify-center w-20 h-20 bg-primary/10 rounded-3xl mb-8 backdrop-blur-sm border border-primary/20">
             <Users className="h-10 w-10 text-primary" />
           </div>
-          <h2 className="heading-md sm:heading-hero text-[var(--text-on-inverted)]">Confused About Your <span className="text-primary">Career Path</span>?</h2>
-          <p className="text-body sm:text-xl text-[var(--text-on-inverted)]/80 mb-8 sm:mb-10 leading-relaxed max-w-2xl mx-auto">
-            Don't guess your future. Speak to our expert career counselors for a <span className="font-bold text-primary border-b-2 border-primary/40">free 1:1 session</span>. We'll analyze your skills and suggest the perfect roadmap for 2026.
+          <h2 className="heading-lg font-bold text-[var(--text-on-inverted)] mb-6">Confused About Your <span className="text-primary">Career Path</span>?</h2>
+          <p className="text-body text-[var(--text-on-inverted)]/80 mb-8 sm:mb-10 leading-relaxed max-w-2xl mx-auto">
+            Don't guess your future. Speak to our expert career counselors for a <strong className="text-primary border-b-2 border-primary/40">free 1:1 session</strong>. We'll analyze your skills and suggest the perfect roadmap for 2026.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
             <button
               onClick={() => openModal('Career Counseling')}
-              className="bg-primary text-white font-bold px-6 sm:px-10 py-4 sm:py-5 rounded-2xl hover:opacity-90 transition-all flex items-center shadow-xl text-body sm:text-lg group w-full sm:w-auto justify-center"
+              className="bg-primary text-white text-small font-semibold px-6 sm:px-10 py-4 sm:py-5 rounded-2xl hover:opacity-90 transition-all flex items-center shadow-xl group w-full sm:w-auto justify-center"
             >
               Book Free Session <ArrowRight className="ml-3 h-5 w-5 group-hover:translate-x-1 transition-transform" />
             </button>

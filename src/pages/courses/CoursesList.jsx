@@ -85,7 +85,7 @@ const CoursesList = () => {
           >
             Choose Your
             <span className="relative inline-block ml-3">
-              <span className="text-primary">Path</span>
+              <span className="font-extrabold text-primary">Path</span>
               <svg className="absolute -bottom-2 left-0 w-full h-3 text-primary/30" viewBox="0 0 200 9" fill="none">
                 <path d="M2 7C30 2 130 -3 198 7" stroke="currentColor" strokeWidth="3" strokeLinecap="round"/>
               </svg>
@@ -115,7 +115,7 @@ const CoursesList = () => {
                 
                 {/* Filter Header */}
                 <div className="mb-6">
-                  <h2 className="text-body-lg font-bold mb-1" style={{ color: 'var(--text-heading)' }}>
+                  <h2 className="heading-sm font-semibold mb-1" style={{ color: 'var(--text-heading)' }}>
                     Filter Programs
                   </h2>
                   <p className="text-caption" style={{ color: 'var(--text-muted)' }}>
@@ -255,7 +255,7 @@ const CoursesList = () => {
                   <div className="inline-flex items-center justify-center h-16 w-16 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-color)] mb-6">
                     <GraduationCap className="h-7 w-7 text-[var(--text-muted)]" />
                   </div>
-                  <h3 className="heading-sm font-bold text-[var(--text-heading)] mb-2">No programs found</h3>
+                  <h3 className="heading-sm font-semibold text-[var(--text-heading)] mb-2">No programs found</h3>
                   <p className="text-[var(--text-muted)] mb-8 text-small">Try adjusting your search or filters.</p>
                   <button onClick={clearFilters} className="btn-primary text-small px-8 py-3 rounded-xl">
                     Reset Filters
@@ -288,11 +288,11 @@ const CoursesList = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-              className="heading-hero tracking-tight"
+              className="heading-lg font-bold tracking-tight"
               style={{ color: 'var(--text-heading)' }}
             >
               12 Career Advantages{' '}
-              <span className="text-primary">Included</span>
+              <span className="font-extrabold text-primary">Included</span>
             </motion.h2>
 
             <motion.p

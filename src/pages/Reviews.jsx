@@ -123,8 +123,8 @@ const Reviews = () => {
                   {stat.icon}
                 </div>
                 <div>
-                  <div className="heading-md">{stat.value}</div>
-                  <div className="text-small font-medium text-[var(--text-muted)]">{stat.label}</div>
+                  <div className="heading-md font-bold">{stat.value}</div>
+                  <div className="text-caption text-[var(--text-muted)]">{stat.label}</div>
                 </div>
               </div>
             ))}
@@ -185,8 +185,8 @@ const Reviews = () => {
                         className="h-14 w-14 rounded-2xl object-cover ring-4 ring-[var(--bg-secondary)]"
                       />
                       <div>
-                        <h3 className="font-bold text-[var(--text-heading)] leading-tight">{review.name}</h3>
-                        <p className="text-small text-[var(--text-muted)]">{review.role}</p>
+                        <h3 className="text-body font-semibold text-[var(--text-heading)] leading-tight">{review.name}</h3>
+                        <p className="text-caption text-[var(--text-muted)]">{review.role}</p>
                       </div>
                     </div>
                     {review.verified && (
@@ -240,7 +240,7 @@ const Reviews = () => {
       <section className="py-20 bg-[var(--bg-inverted)] overflow-hidden relative">
         <div className="absolute top-0 right-0 w-64 h-64 bg-[var(--bg-body)]/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
         <div className="container-custom text-center relative z-10">
-          <h2 className="heading-hero text-[var(--text-on-inverted)] mb-8">
+          <h2 className="heading-lg font-bold text-[var(--text-on-inverted)] mb-8">
             Ready to be our next success story?
           </h2>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

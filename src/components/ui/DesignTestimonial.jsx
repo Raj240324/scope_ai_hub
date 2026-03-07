@@ -129,7 +129,7 @@ export default function DesignTestimonial() {
               <AnimatePresence mode="wait">
                 <motion.blockquote
                   key={activeIndex}
-                  className="heading-sm sm:text-2xl md:heading-hero text-[var(--text-heading)] leading-snug tracking-tight"
+                  className="text-body text-[var(--text-heading)] leading-relaxed italic"
                   initial="hidden"
                   animate="visible"
                   exit="exit"
@@ -185,8 +185,8 @@ export default function DesignTestimonial() {
                     style={{ originX: 0 }}
                   />
                   <div>
-                    <p className="text-small font-bold text-[var(--text-heading)]">{current.author}</p>
-                    <p className="text-caption text-primary font-bold uppercase tracking-wider">{current.role}</p>
+                    <p className="text-body font-semibold text-[var(--text-heading)]">{current.author}</p>
+                    <p className="text-caption text-[var(--text-muted)] mt-1">{current.role}</p>
                   </div>
                 </motion.div>
               </AnimatePresence>

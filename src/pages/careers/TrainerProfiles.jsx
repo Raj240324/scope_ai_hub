@@ -73,7 +73,7 @@ const TrainerProfiles = () => {
       />
       <Hero 
         badge="15+ Expert Mentors · 120+ Years Combined Experience"
-        title={<>The People Behind Your <span className="text-primary">Growth</span>.</>}
+        title={<>The People Behind Your <span className="font-extrabold text-primary">Growth</span>.</>}
       />
 
       <div className="container-custom section-padding">
@@ -87,7 +87,7 @@ const TrainerProfiles = () => {
           ].map((stat, i) => (
             <FadeIn key={i} delay={i * 0.1}>
               <div className="text-center p-6 bg-[var(--bg-secondary)] rounded-2xl border border-[var(--border-color)]">
-                <div className="heading-lg md:heading-hero text-primary mb-2">{stat.value}</div>
+                <div className="heading-md font-bold text-primary mb-2">{stat.value}</div>
                 <div className="text-small font-medium text-[var(--text-muted)]">{stat.label}</div>
               </div>
             </FadeIn>
@@ -109,7 +109,7 @@ const TrainerProfiles = () => {
                       className="relative h-32 w-32 sm:h-48 sm:w-48 rounded-full object-cover ring-8 ring-[var(--bg-card)] shadow-2xl"
                     />
                   </div>
-                  <h3 className="heading-sm sm:text-2xl font-black text-[var(--text-heading)] text-center mb-2">{trainer.name}</h3>
+                  <h3 className="heading-sm font-semibold text-[var(--text-heading)] text-center mb-2">{trainer.name}</h3>
                   <p className="text-primary font-bold text-center mb-6">{trainer.role}</p>
                   <div className="flex space-x-4">
                     <a href={trainer.linkedin} target="_blank" rel="noopener noreferrer" className="p-2 bg-[var(--bg-card)] rounded-lg hover:bg-primary hover:text-white transition-colors text-[var(--text-muted)]">
@@ -184,7 +184,7 @@ const TrainerProfiles = () => {
 
         {/* CTA Section */}
         <div className="mt-12 sm:mt-20 text-center p-6 sm:p-12 bg-[var(--bg-inverted)] rounded-2xl sm:rounded-3xl text-[var(--text-on-inverted)]">
-          <h2 className="heading-lg md:heading-hero">Want to Learn from These Experts?</h2>
+          <h2 className="heading-lg font-bold text-[var(--text-on-inverted)]">Want to Learn from These Experts?</h2>
           <p className="text-body-lg text-[var(--text-on-inverted)]/60 mb-10 max-w-2xl mx-auto">
             Join our next batch and get personalized mentorship from industry veterans who are passionate about teaching.
           </p>

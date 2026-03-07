@@ -8,7 +8,7 @@ const FAQItem = ({ question, answer }) => {
   return (
     <div className="border-b border-[var(--border-color)] last:border-0">
       <button onClick={() => setIsOpen(!isOpen)} className="w-full py-5 flex items-center justify-between text-left group">
-        <span className="text-body md:text-lg font-bold text-[var(--text-heading)] group-hover:text-primary transition-colors pr-4">{question}</span>
+        <span className="heading-sm font-semibold text-[var(--text-heading)] group-hover:text-primary transition-colors pr-4">{question}</span>
         <div className={`flex-shrink-0 h-6 w-6 rounded-full border-2 border-[var(--border-color)] flex items-center justify-center transition-all ${isOpen ? 'bg-[var(--bg-inverted)] border-[var(--text-heading)] text-[var(--text-on-inverted)] rotate-180' : 'text-[var(--text-muted)]'}`}>
           {isOpen ? <Minus className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
         </div>
@@ -34,7 +34,7 @@ const FAQSection = () => (
     <div className="container-custom">
       <div className="grid lg:grid-cols-2 gap-16">
         <div>
-          <h2 className="heading-md mb-6">Got Questions? <br /> We Have Answers.</h2>
+          <h2 className="heading-lg font-bold text-[var(--text-heading)] mb-6">Got Questions? <br /> We Have <span className="font-extrabold text-primary">Answers</span>.</h2>
           <p className="text-[var(--text-muted)] text-body-lg mb-8 leading-relaxed">
             If you have any other questions, feel free to reach out to our team. We're happy to help you choose the right path for your career.
           </p>

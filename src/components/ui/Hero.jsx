@@ -85,7 +85,7 @@ const Hero = ({
             <StaggerContainer>
               <StaggerItem>
                 {badge && (
-                  <div className="inline-flex items-center space-x-2.5 px-5 py-2 rounded-full text-caption font-bold uppercase tracking-[0.2em] mb-8 bg-white/5 text-white/90 border border-white/10 backdrop-blur-xl hover:bg-white/10 transition-colors cursor-default shadow-lg shadow-black/10">
+                  <div className="inline-flex glass-card items-center space-x-2.5 px-5 py-2 rounded-full text-caption font-bold uppercase tracking-[0.2em] mb-8 text-white/90 shadow-lg shadow-black/10">
                     {badge}
                   </div>
                 )}
@@ -93,7 +93,7 @@ const Hero = ({
               
               <StaggerItem>
                 {/* Elegant Typography - Bold but not Heavy */}
-                <h1 className="heading-hero text-white tracking-tight mb-8 leading-[1.1] drop-shadow-2xl">
+                <h1 className="heading-hero font-bold text-white tracking-tight mb-8 leading-[1.1] drop-shadow-2xl">
                   {title}
                 </h1>
               </StaggerItem>
@@ -143,14 +143,14 @@ const Hero = ({
             </StaggerItem>
             
             <StaggerItem>
-              <h1 className="heading-lg md:text-4xl lg:text-5xl font-black text-[var(--text-heading)] tracking-tight mb-6 leading-[1.1]">
+              <h1 className="heading-hero font-bold text-[var(--text-heading)] tracking-tight mb-6 leading-[1.1]">
                 {title}
               </h1>
             </StaggerItem>
             
             <StaggerItem>
               {subtitle && (
-                <p className={`text-body md:text-lg mb-8 leading-relaxed text-[var(--text-muted)] ${isHome ? 'max-w-xl' : 'max-w-3xl'}`}>
+                <p className={`text-body-lg mb-8 leading-relaxed text-[var(--text-muted)] ${isHome ? 'max-w-xl' : 'max-w-3xl'}`}>
                   {subtitle}
                 </p>
               )}
@@ -166,7 +166,7 @@ const Hero = ({
             <div className="relative hidden md:block p-8">
               {rightContent || (
                 <FadeIn direction="left" delay={0.2}>
-                  <div className="relative z-10 rounded-3xl overflow-hidden shadow-2xl border-4 border-white/10">
+                  <div className="relative z-10 rounded-3xl overflow-hidden shadow-2xl border-4 border-[var(--glass-border)]">
                     <img 
                       src={image} 
                       alt="Hero Image" 

@@ -22,8 +22,8 @@ const HiringPartners = () => (
           <Building2 className="h-3 w-3" />
           <span>Hiring Partners</span>
         </div>
-        <h2 className="heading-md md:text-3xl lg:heading-hero text-[var(--text-heading)] mb-4 leading-tight">
-          Our Graduates Work Across <span className="text-primary">Leading Companies</span>
+        <h2 className="heading-lg font-bold text-[var(--text-heading)] mb-4 leading-tight">
+          Our Graduates Work Across <span className="font-extrabold text-primary">Leading Companies</span>
         </h2>
         <p className="text-body md:text-lg text-body">
           Our graduates work across leading companies such as...
