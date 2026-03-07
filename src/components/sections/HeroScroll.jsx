@@ -7,16 +7,24 @@ gsap.registerPlugin(ScrollTrigger);
 
 // ─── Config ──────────────────────────────────────────────────────────────────
 const TOTAL_FRAMES = 192;
-const SCROLL_HEIGHT = "400vh";
 
-// Higher = snappier response, 1 = instant (no lerp). 0.25 is butter-smooth
-// without perceptible lag. On weaker GPUs the lerp hides dropped frames.
-const LERP_FACTOR = 0.25;
+// Scroll distance: enough scroll travel to address every single frame
+const SCROLL_PER_FRAME = 25; // px of scroll per frame
+const SCROLL_DISTANCE  = TOTAL_FRAMES * SCROLL_PER_FRAME; // 4800px total
+
+// Lerp: 0.15 = cinema-smooth interpolation without perceptible lag
+const LERP_FACTOR = 0.15;
+
+// Max frames to advance per tick — prevents skipping during fast scroll
+const MAX_STEP = 0.6;
+
+// DPR cap for canvas rendering (1.5 balances quality vs GPU cost)
+const MAX_DPR = 1.5;
 
 // Loading pipeline configuration
-const CRITICAL_BATCH_END = 40;       // Frames 2-40 loaded immediately after frame 1
-const BATCH_CONCURRENCY  = 4;        // Max parallel fetches per batch
-const FRAME_CACHE_LIMIT  = 60;       // Max decoded bitmaps held in memory
+const CRITICAL_BATCH_END = TOTAL_FRAMES; // Load ALL frames upfront in batches
+const BATCH_CONCURRENCY  = 4;            // Max parallel fetches per batch
+const FRAME_CACHE_LIMIT  = TOTAL_FRAMES; // Keep all frames in memory
 
 const FRAME_PATH = (n) => `/frames/${String(n).padStart(5, "0")}.jpg`;
 
@@ -108,6 +116,7 @@ export default function HeroScroll({ children, badge, title, subtitle }) {
 
   const [firstFrameReady, setFirstFrameReady] = useState(false);
   const scrollIndicatorRef = useRef(null);
+  const placeholderRef = useRef(null);
 
   // ── Bounded cache helper ────────────────────────────────────────────────
   const cacheSet = useCallback((idx, bmp) => {
@@ -160,7 +169,7 @@ export default function HeroScroll({ children, badge, title, subtitle }) {
         // Immediately draw frame 1 to canvas so hero is never blank
         const canvas = canvasRef.current;
         if (canvas) {
-          const dpr = Math.min(window.devicePixelRatio || 1, 2);
+          const dpr = Math.min(window.devicePixelRatio || 1, MAX_DPR);
           const w = window.innerWidth;
           const h = window.innerHeight;
           canvas.width  = w * dpr;
@@ -171,6 +180,16 @@ export default function HeroScroll({ children, badge, title, subtitle }) {
           ctx.scale(dpr, dpr);
           drawCover(ctx, bmp, w, h);
           canvasSizeRef.current = { w, h };
+
+          // Fade out the placeholder now that canvas has real content
+          if (placeholderRef.current) {
+            placeholderRef.current.style.opacity = "0";
+            setTimeout(() => {
+              if (placeholderRef.current) {
+                placeholderRef.current.remove();
+              }
+            }, 400);
+          }
         }
       } catch {
         // Even if frame 1 fails, don't block — let scroll indicator show
@@ -238,7 +257,7 @@ export default function HeroScroll({ children, badge, title, subtitle }) {
 
     const syncSize = () => {
       // Recompute DPR on every resize (handles monitor switching / zoom)
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const dpr = Math.min(window.devicePixelRatio || 1, MAX_DPR);
       const w = window.innerWidth;
       const h = window.innerHeight;
       canvas.width  = w * dpr;
@@ -284,25 +303,31 @@ export default function HeroScroll({ children, badge, title, subtitle }) {
     }
   }, []);
 
-  // ── 4. Optimized render loop + scroll-driven transforms ───────────────
+  // ── 4. Render loop + scroll-driven transforms (video-smooth) ──────────
   useEffect(() => {
     if (!firstFrameReady) return;
 
     const canvas = canvasRef.current;
-    const ctx    = canvas.getContext("2d", { alpha: false }); // opaque = faster
+    // desynchronized: true reduces compositing latency on supported browsers
+    const ctx = canvas.getContext("2d", { alpha: false, desynchronized: true });
+
+    // High-quality image scaling for crisp frame rendering
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = "high";
 
     // Ensure frame 1 is drawn (guarantee: hero never blank)
     const { w, h } = canvasSizeRef.current;
     const frame0 = findNearest(0);
     if (frame0) drawCover(ctx, frame0, w, h);
 
+    // ScrollTrigger: only updates targetFrame — never draws
     stRef.current = ScrollTrigger.create({
       trigger: containerRef.current,
       start:   "top top",
-      end:     `+=${SCROLL_HEIGHT}`,
+      end:     `+=${SCROLL_DISTANCE}`,
       pin:     true,
-      scrub:   0, // instant scrub — we handle smoothing in RAF
-      invalidateOnRefresh: true, // recalculate after layout changes
+      scrub:   1, // smooth scrub tracking
+      invalidateOnRefresh: true,
       onUpdate: (self) => {
         const p = self.progress;
         targetFrameRef.current = p * (TOTAL_FRAMES - 1);
@@ -310,36 +335,51 @@ export default function HeroScroll({ children, badge, title, subtitle }) {
       },
     });
 
-    // RAF loop — runs at display refresh rate
-    let lastDrawn = -1;
-
+    // ── RAF render loop — video-smooth with frame blending ──────────
     const tick = () => {
       rafRef.current = requestAnimationFrame(tick);
 
-      // Lerp for silky frame interpolation
-      const prev = currentFrameRef.current;
+      // Interpolate currentFrame toward targetFrame
+      const prev   = currentFrameRef.current;
       const target = targetFrameRef.current;
-      const diff = Math.abs(target - prev);
+      let delta = target - prev;
 
-      // Skip lerp if very close (avoid infinite micro-updates)
-      if (diff < 0.05) {
+      // Clamp step size — prevents frame skips during fast scroll
+      if (Math.abs(delta) > MAX_STEP) {
+        currentFrameRef.current += Math.sign(delta) * MAX_STEP;
+      } else if (Math.abs(delta) < 0.01) {
         currentFrameRef.current = target;
       } else {
         currentFrameRef.current = lerp(prev, target, LERP_FACTOR);
       }
 
-      const frameIndex = Math.round(currentFrameRef.current);
+      // Smooth frame rendering (Apple-style frame blending)
+      const current = currentFrameRef.current;
+      const baseFrame = Math.floor(current);
+      const nextFrame = Math.min(baseFrame + 1, TOTAL_FRAMES - 1);
+      const blend = current - baseFrame;
 
-      // Read live dimensions from ref (updated by resize handler)
       const size = canvasSizeRef.current;
 
-      // Only redraw canvas when the actual frame changes
-      if (frameIndex !== lastDrawn && frameIndex >= 0 && frameIndex < TOTAL_FRAMES) {
-        const bmp = findNearest(frameIndex);
-        if (bmp) {
-          drawCover(ctx, bmp, size.w, size.h);
-          lastDrawn = frameIndex;
+      const img1 = findNearest(baseFrame);
+      const img2 = cacheRef.current.get(nextFrame) || null;
+
+      if (img1) {
+
+        // Clear canvas
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Draw base frame
+        ctx.globalAlpha = 1 - blend;
+        drawCover(ctx, img1, size.w, size.h);
+
+        // Blend next frame for smooth transition
+        if (img2) {
+          ctx.globalAlpha = blend;
+          drawCover(ctx, img2, size.w, size.h);
         }
+
+        ctx.globalAlpha = 1;
       }
 
       // Update content transform directly (no GSAP overhead)
@@ -383,16 +423,29 @@ export default function HeroScroll({ children, badge, title, subtitle }) {
         aria-hidden="true"
       />
 
-      {/* Static first-frame fallback — visible until canvas draws */}
-      {!firstFrameReady && (
-        <img
-          src={FRAME_PATH(1)}
-          alt=""
-          aria-hidden="true"
-          className="absolute inset-0 w-full h-full object-cover"
-          fetchpriority="high"
+      {/* Blurred placeholder — visible until canvas draws frame 1 */}
+      <div
+        ref={placeholderRef}
+        aria-hidden="true"
+        className="absolute inset-0 z-[1]"
+        style={{
+          backgroundImage: `url(${FRAME_PATH(1)})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          filter: "blur(30px)",
+          transform: "scale(1.1)",
+          transition: "opacity 0.4s ease",
+        }}
+      >
+        {/* Gradient overlay on top of blurred frame for a cinematic base */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background: "radial-gradient(circle at center, #1e1e1e 0%, #111111 60%, #000000 100%)",
+            opacity: 0.6,
+          }}
         />
-      )}
+      </div>
 
       {/* Overlay gradients */}
       <div className="absolute inset-0 bg-navy/30 mix-blend-multiply z-[1]" />
