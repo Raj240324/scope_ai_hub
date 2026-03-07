@@ -3,6 +3,7 @@
  *
  * Shared across all Vercel serverless endpoints.
  * Uses in-memory Maps (reset on cold starts — acceptable for serverless).
+ * Cache cleared locally on edit.
  *
  * Tiers:
  *   5 attempts / 5 min  → warning

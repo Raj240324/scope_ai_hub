@@ -95,13 +95,9 @@ export default async function handler(req, res) {
 
     const body = req.body;
 
-    // 3B. Timing validation
-    const formLoadedAt = parseInt(body.formLoadedAt, 10);
-    if (!formLoadedAt || isNaN(formLoadedAt) || (Date.now() - formLoadedAt < 3000)) {
-      log.warn('Instant submission blocked', { timeToSubmitMs: Date.now() - formLoadedAt });
-      blockIpFor(clientIp, 10 * 60 * 1000);
-      return res.status(400).json({ success: false, message: 'Request could not be processed' });
-    }
+    // 3B. Removed Minimum Submission Time Validation
+    // Relying on client timestamp vs server Date.now() is unreliable due to clock skew.
+    // The frontend already enforces a 3-second delay before submission.
 
     // 4. Honeypot check
     if (body.website) {
@@ -124,8 +120,8 @@ export default async function handler(req, res) {
       const tokenHash = crypto.createHash('sha256').update(recaptchaToken).digest('hex');
       if (isTokenReplayed(tokenHash)) {
         log.warn('reCAPTCHA token replay detected', { hash: tokenHash.slice(0, 8) });
-        blockIpFor(clientIp, 10 * 60 * 1000);
-        return res.status(403).json({ success: false, message: 'Request could not be processed' });
+        // Don't block IP for 10 mins purely on token replay, it could be a simple double-click
+        return res.status(403).json({ success: false, message: 'Invalid or expired security token. Please refresh the page.' });
       }
     }
 
