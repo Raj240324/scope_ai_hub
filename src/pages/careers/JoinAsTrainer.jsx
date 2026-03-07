@@ -72,7 +72,7 @@ const JoinAsTrainer = () => {
         <div className="container-custom">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
-              <h2 className="heading-lg font-bold text-[var(--text-on-inverted)] leading-tight">Who we are <span className="font-extrabold text-primary">looking for.</span></h2>
+              <h2 className="heading-lg font-bold text-[var(--text-on-inverted)] leading-tight mb-6">Who we are <span className="font-extrabold text-primary">looking for.</span></h2>
               <div className="space-y-6">
                 {[
                   "Strong industry experience in AI, Machine Learning, Data Science, or Software Engineering.",

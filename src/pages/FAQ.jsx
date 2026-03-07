@@ -166,7 +166,7 @@ const FAQItem = ({ question, answer }) => {
         onClick={() => setIsOpen(!isOpen)}
         className="w-full py-6 flex items-center justify-between text-left hover:text-primary transition-colors group"
       >
-        <span className="heading-sm font-semibold text-[var(--text-heading)] group-hover:text-primary transition-colors pr-6 sm:pr-8">
+        <span className="text-base md:text-lg font-semibold text-[var(--text-heading)] group-hover:text-primary transition-colors pr-6 sm:pr-8">
           {question}
         </span>
         <div className={`flex-shrink-0 h-6 w-6 rounded-full border-2 border-[var(--border-color)] flex items-center justify-center transition-all ${isOpen ? 'bg-primary border-primary text-[var(--text-on-inverted)] rotate-180' : 'text-[var(--text-muted)]'}`}>
@@ -174,7 +174,7 @@ const FAQItem = ({ question, answer }) => {
         </div>
       </button>
       <div className={`overflow-hidden transition-all duration-300 ${isOpen ? 'max-h-96 pb-6' : 'max-h-0'}`}>
-        <p className="text-body">
+        <p className="text-sm md:text-base text-[var(--text-muted)] leading-relaxed">
           {answer}
         </p>
       </div>
