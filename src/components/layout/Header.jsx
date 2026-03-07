@@ -29,13 +29,16 @@ const Header = () => {
         setScrolled(window.scrollY > 20);
         return;
       }
-      const heroEl = document.querySelector('section[aria-label="Homepage hero"]');
+      const heroEl = document.getElementById('hero-scroll') || document.querySelector('section[aria-label="Homepage hero"]');
       if (heroEl) {
-        const spacer = heroEl.nextElementSibling;
-        const boundary = spacer
-          ? spacer.getBoundingClientRect().bottom + window.scrollY
-          : heroEl.getBoundingClientRect().bottom + window.scrollY;
-        setScrolled(window.scrollY > boundary - window.innerHeight * 0.1);
+        const pinSpacer = heroEl.closest('.pin-spacer');
+        const boundaryElement = pinSpacer || heroEl;
+        
+        const boundaryY = boundaryElement.getBoundingClientRect().bottom + window.scrollY;
+        
+        // Header background appears when the top of the viewport reaches
+        // the bottom of the hero section, offset by header height (~80px).
+        setScrolled(window.scrollY >= boundaryY - 80);
       } else {
         setScrolled(window.scrollY > window.innerHeight * 0.9);
       }

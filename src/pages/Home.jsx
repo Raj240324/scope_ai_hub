@@ -53,10 +53,10 @@ const Home = () => {
       />
       <HeroScroll
         badge={
-          <>
+          <div className="flex items-center justify-center gap-1.5">
             <ShieldCheck className="h-3.5 w-3.5 text-primary-light" />
             <span className="text-primary-light">Built for the AI Era.</span>
-          </>
+          </div>
         }
         title={
           <>
