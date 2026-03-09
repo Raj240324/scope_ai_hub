@@ -5,25 +5,25 @@ import { BRANDING } from '../../data/branding';
 
 const mentors = [
   {
-    name: "Sanjula",
-    role: "Head of Academics",
-    company: "8+ Years in AI & Data Science",
-    image: "https://randomuser.me/api/portraits/women/75.jpg",
-    expertise: ["Curriculum Design", "AI & Data Science"]
+    name:"Sanjula",
+    role:"Head of Academics",
+    company:"8+ Years in AI & Data Science",
+    image:"https://randomuser.me/api/portraits/women/75.jpg",
+    expertise: ["Curriculum Design","AI & Data Science"]
   },
   {
-    name: "Raghavi",
-    role: "Head – Placements & Corporate Relations",
-    company: "Former Enterprise HR Professional",
-    image: "https://randomuser.me/api/portraits/women/68.jpg",
-    expertise: ["Placements", "Industry Partnerships"]
+    name:"Raghavi",
+    role:"Head – Placements & Corporate Relations",
+    company:"Former Enterprise HR Professional",
+    image:"https://randomuser.me/api/portraits/women/68.jpg",
+    expertise: ["Placements","Industry Partnerships"]
   },
   {
-    name: "Suresh M",
-    role: "Principal AI Consultant & Lead Trainer",
-    company: "Enterprise AI Practitioner",
-    image: "https://randomuser.me/api/portraits/men/36.jpg",
-    expertise: ["AI Consulting", "Machine Learning"]
+    name:"Suresh M",
+    role:"Principal AI Consultant & Lead Trainer",
+    company:"Enterprise AI Practitioner",
+    image:"https://randomuser.me/api/portraits/men/36.jpg",
+    expertise: ["AI Consulting","Machine Learning"]
   }
 ];
 
@@ -53,7 +53,7 @@ const TrainerSpotlight = ({ openModal }) => (
               </div>
             ))}
             <div className="w-12 h-12 rounded-full border-4 border-[var(--bg-body)] bg-[var(--bg-inverted)] flex items-center justify-center shadow-lg">
-              <span className="text-caption font-bold text-[var(--text-on-inverted)]">+10</span>
+              <span className="text-caption font-bold text-[var(--text-on-light)]">+10</span>
             </div>
           </div>
           <div className="flex items-center text-primary font-black uppercase tracking-widest text-small hover:underline">

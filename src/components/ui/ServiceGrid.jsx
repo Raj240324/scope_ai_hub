@@ -1,6 +1,6 @@
-import React, { forwardRef } from "react";
-import { motion } from "framer-motion";
-import { cn } from "../../lib/utils"; 
+import React, { forwardRef } from"react";
+import { motion } from"framer-motion";
+import { cn } from"../../lib/utils"; 
 
 const ServiceGrid = forwardRef(({ title, subtitle, services, className, ...props }, ref) => {
   // Animation variants for the container to orchestrate children animations
@@ -21,7 +21,7 @@ const ServiceGrid = forwardRef(({ title, subtitle, services, className, ...props
       y: 0,
       opacity: 1,
       transition: {
-        type: "spring",
+        type:"spring",
         stiffness: 100,
         damping: 10,
       },
@@ -55,7 +55,7 @@ const ServiceGrid = forwardRef(({ title, subtitle, services, className, ...props
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true, margin:"-100px" }}
         >
           {services.map((service, index) => (
             <motion.div
@@ -63,7 +63,7 @@ const ServiceGrid = forwardRef(({ title, subtitle, services, className, ...props
               className="group flex flex-col items-center justify-start gap-4 text-center p-6 rounded-3xl bg-[var(--bg-card)] border border-[var(--border-color)] shadow-sm cursor-default"
               variants={itemVariants}
               whileHover={{ scale: 1.05, y: -8 }} // Hover animation
-              transition={{ type: "spring", stiffness: 300, damping: 15 }}
+              transition={{ type:"spring", stiffness: 300, damping: 15 }}
             >
               <div className="flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-primary/5 mb-2 group-hover:bg-primary/10 transition-colors">
                 <img
@@ -101,6 +101,6 @@ const ServiceGrid = forwardRef(({ title, subtitle, services, className, ...props
   );
 });
 
-ServiceGrid.displayName = "ServiceGrid";
+ServiceGrid.displayName ="ServiceGrid";
 
 export { ServiceGrid };

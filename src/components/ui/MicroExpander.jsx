@@ -115,7 +115,7 @@ const MicroExpander = React.forwardRef(
             opacity: isHovered && !isLoading ? 1 : 0 
           }}
           transition={{ 
-            type: "spring", 
+            type:"spring", 
             stiffness: 500, 
             damping: 30, 
             mass: 0.5 

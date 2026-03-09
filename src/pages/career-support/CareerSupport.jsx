@@ -26,8 +26,8 @@ const CareerSupport = () => {
         title={<>Your Career, Our <span className="text-primary">Mission</span>.</>}
         subtitle="From resume building to job referrals — we support you at every step until you land your dream role."
         actions={[
-          { label: "Explore Courses", href: "/courses" },
-          { label: "Enroll Now", onClick: openModal }
+          { label:"Explore Courses", href:"/courses" },
+          { label:"Enroll Now", onClick: openModal }
         ]}
       />
 

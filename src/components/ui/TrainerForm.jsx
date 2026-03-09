@@ -172,7 +172,7 @@ const TrainerForm = () => {
         </div>
         <button
           onClick={closeModal}
-          className="btn-secondary text-small px-8 py-3"
+          className="btn-secondary text-small px-8 py-3 focus:outline-none focus:ring-2 focus:ring-[var(--accent-primary)]"
         >
           Close
         </button>
@@ -203,7 +203,7 @@ const TrainerForm = () => {
               disabled={i > currentStep}
               className={`relative flex h-8 w-8 items-center justify-center rounded-full transition-all duration-500 text-caption font-bold
                 ${i < currentStep ? 'bg-primary/15 text-primary' : ''}
-                ${i === currentStep ? 'bg-primary text-white shadow-lg shadow-primary/30' : ''}
+                ${i === currentStep ? 'bg-primary text-[var(--text-on-inverted)] shadow-lg shadow-primary/30' : ''}
                 ${i > currentStep ? 'bg-[var(--bg-secondary)] text-[var(--text-muted)]' : ''}
                 ${i > currentStep ? 'cursor-not-allowed' : 'cursor-pointer'}
               `}
@@ -277,7 +277,7 @@ const TrainerForm = () => {
                     <span>{opt.label}</span>
                     <span className={`flex h-5 w-5 items-center justify-center rounded-full transition-all duration-300 ${
                       isSelected
-                        ? 'bg-primary text-white scale-100'
+                        ? 'bg-primary text-[var(--text-on-inverted)] scale-100'
                         : 'border border-[var(--border-color)] scale-90 opacity-0 group-hover:opacity-40'
                     }`}>
                       <Check className="h-3 w-3" strokeWidth={3} />
@@ -296,7 +296,7 @@ const TrainerForm = () => {
                 onChange={(e) => handleChange(step.field, e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && handleNext()}
                 autoFocus
-                className={`w-full pl-11 pr-4 py-3.5 bg-[var(--bg-secondary)] border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-small text-[var(--text-heading)] ${
+                className={`w-full pl-11 pr-4 py-3.5 bg-[var(--bg-secondary)] border rounded-xl focus:outline-none focus:ring-2 focus:ring-[var(--accent-primary)] focus:border-[var(--accent-primary)] transition-all text-small text-[var(--text-heading)] ${
                   fieldError ? 'border-red-500' : 'border-[var(--border-color)]'
                 }`}
               />
@@ -315,7 +315,7 @@ const TrainerForm = () => {
               }}
               onKeyDown={(e) => e.key === 'Enter' && handleNext()}
               autoFocus
-              className={`w-full px-4 py-3.5 bg-[var(--bg-secondary)] border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-small text-[var(--text-heading)] ${
+              className={`w-full px-4 py-3.5 bg-[var(--bg-secondary)] border rounded-xl focus:outline-none focus:ring-2 focus:ring-[var(--accent-primary)] focus:border-[var(--accent-primary)] transition-all text-small text-[var(--text-heading)] ${
                 fieldError ? 'border-red-500' : 'border-[var(--border-color)]'
               }`}
             />
@@ -362,7 +362,7 @@ const TrainerForm = () => {
         <button
           onClick={handleNext}
           disabled={status === 'sending'}
-          className="w-full btn-primary py-3.5 flex items-center justify-center gap-2 group disabled:opacity-70 disabled:cursor-not-allowed"
+          className="w-full btn-primary py-3.5 flex items-center justify-center gap-2 group disabled:opacity-70 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-[var(--accent-primary)]"
         >
           {status === 'sending' ? (
             <>

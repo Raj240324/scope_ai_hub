@@ -22,7 +22,7 @@ const CoursesList = () => {
 
       window.scrollTo({
         top: offsetPosition,
-        behavior: "smooth"
+        behavior:"smooth"
       });
     }
   };
@@ -115,17 +115,17 @@ const CoursesList = () => {
                 
                 {/* Filter Header */}
                 <div className="mb-6">
-                  <h2 className="heading-sm font-semibold mb-1" style={{ color: 'var(--text-heading)' }}>
+                  <h2 className="heading-sm font-semibold mb-1 text-[var(--text-heading)]">
                     Filter Programs
                   </h2>
-                  <p className="text-caption" style={{ color: 'var(--text-muted)' }}>
+                  <p className="text-caption text-[var(--text-muted)]">
                     Find your perfect AI course
                   </p>
                 </div>
 
                 {/* Search */}
                 <div className="mb-6">
-                  <label htmlFor="course-search-sidebar" className="block text-caption font-bold uppercase tracking-wider mb-2" style={{ color: 'var(--text-muted)' }}>
+                  <label htmlFor="course-search-sidebar" className="block text-caption font-bold uppercase tracking-wider mb-2 text-[var(--text-muted)]">
                     Search
                   </label>
                   <div className="relative group">
@@ -135,8 +135,7 @@ const CoursesList = () => {
                       id="course-search-sidebar"
                       name="course-search-sidebar"
                       placeholder="Search programs..."
-                      className="w-full pl-10 pr-3.5 py-3 bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/50 transition-all placeholder:text-[var(--text-muted)]/60 font-medium text-small"
-                      style={{ color: 'var(--text-heading)' }}
+                      className="w-full pl-10 pr-3.5 py-3 bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/50 transition-all placeholder:text-[var(--text-muted)]/60 font-medium text-small text-[var(--text-on-light)] dark:text-[var(--text-on-dark)]"
                       value={searchTerm}
                       onChange={(e) => setSearchTerm(e.target.value)}
                     />
@@ -145,7 +144,7 @@ const CoursesList = () => {
 
                 {/* Tier Filter */}
                 <div className="mb-6">
-                  <label className="block text-caption font-bold uppercase tracking-wider mb-3" style={{ color: 'var(--text-muted)' }}>
+                  <label className="block text-caption font-bold uppercase tracking-wider mb-3 text-[var(--text-muted)]">
                     Level
                   </label>
                   <div className="space-y-2">
@@ -173,7 +172,7 @@ const CoursesList = () => {
                               : isActive
                               ? {
                                   background: 'var(--bg-inverted)',
-                                  color: 'var(--text-on-inverted)',
+                                  color: 'var(--text-on-light)',
                                   borderColor: 'var(--bg-inverted)',
                                 }
                               : {}
@@ -193,12 +192,12 @@ const CoursesList = () => {
                 </div>
 
                 {/* Results Count */}
-                <div className="pt-4 border-t" style={{ borderColor: 'var(--border-color)' }}>
+                <div className="pt-4 border-t border-[var(--border-color)]">
                   <div className="flex items-center justify-between text-caption">
-                    <span className="font-bold uppercase tracking-wider" style={{ color: 'var(--text-muted)' }}>
+                    <span className="font-bold uppercase tracking-wider text-[var(--text-muted)]">
                       Results
                     </span>
-                    <span className="font-bold" style={{ color: 'var(--text-heading)' }}>
+                    <span className="font-bold text-[var(--text-heading)]">
                       {filteredCourses.length} program{filteredCourses.length !== 1 ? 's' : ''}
                     </span>
                   </div>
@@ -216,7 +215,7 @@ const CoursesList = () => {
                 )}
 
                 {/* Enrollment Status */}
-                <div className="mt-6 pt-6 border-t" style={{ borderColor: 'var(--border-color)' }}>
+                <div className="mt-6 pt-6 border-t border-[var(--border-color)]">
                   <div className="flex items-center gap-2 text-caption font-bold uppercase tracking-wider text-green-600">
                     <span className="h-2 w-2 rounded-full bg-green-500 animate-pulse" />
                     Enrollment Open
@@ -257,7 +256,7 @@ const CoursesList = () => {
                   </div>
                   <h3 className="heading-sm font-semibold text-[var(--text-heading)] mb-2">No programs found</h3>
                   <p className="text-[var(--text-muted)] mb-8 text-small">Try adjusting your search or filters.</p>
-                  <button onClick={clearFilters} className="btn-primary text-small px-8 py-3 rounded-xl">
+                  <button onClick={clearFilters} className="btn-primary text-small px-8 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--accent-primary)]">
                     Reset Filters
                   </button>
                 </motion.div>
@@ -288,8 +287,7 @@ const CoursesList = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-              className="heading-lg font-bold tracking-tight"
-              style={{ color: 'var(--text-heading)' }}
+              className="heading-lg font-bold tracking-tight text-[var(--text-heading)]"
             >
               12 Career Advantages{' '}
               <span className="font-extrabold text-primary">Included</span>
@@ -300,8 +298,7 @@ const CoursesList = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-              className="text-body sm:text-lg leading-relaxed font-medium"
-              style={{ color: 'var(--text-muted)' }}
+              className="text-body sm:text-lg leading-relaxed font-medium text-[var(--text-muted)]"
             >
               Every program comes with comprehensive career support — from resume preparation to job referrals. We're invested in your success.
             </motion.p>

@@ -492,6 +492,7 @@ const HeroScrollCanvas = ({ badge, title, subtitle, children }) => {
             </div>
             {/* Trust micro-bar */}
 <div
+  className="text-[var(--text-muted)]"
   style={{
     marginTop: "0.85rem",
     display: "flex",
@@ -501,7 +502,6 @@ const HeroScrollCanvas = ({ badge, title, subtitle, children }) => {
     fontFamily: "'DM Mono', monospace",
     fontSize: "0.65rem",
     letterSpacing: "0.12em",
-    color: "rgba(245,240,234,0.55)",
     animation: anim("0.65s"),
   }}
 >

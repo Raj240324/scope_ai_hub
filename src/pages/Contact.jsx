@@ -14,7 +14,7 @@ const Contact = () => {
   const { openModal } = useModal();
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
-  const initialCourse = queryParams.get('course') || "General Inquiry";
+  const initialCourse = queryParams.get('course') ||"General Inquiry";
 
   return (
     <Layout>
@@ -112,7 +112,7 @@ const Contact = () => {
                       href={social.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="h-12 w-12 rounded-full border border-[var(--border-color)] flex items-center justify-center text-[var(--text-muted)] hover:text-white hover:border-transparent transition-all duration-300 shadow-sm hover:shadow-lg hover:-translate-y-1"
+                      className="h-12 w-12 rounded-full border border-[var(--border-color)] flex items-center justify-center text-[var(--text-muted)] hover:text-[var(--text-on-inverted)] hover:border-transparent transition-all duration-300 shadow-sm hover:shadow-lg hover:-translate-y-1"
                       style={{ '--hover-color': social.color }}
                       onMouseEnter={(e) => e.currentTarget.style.backgroundColor = social.color}
                       onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}

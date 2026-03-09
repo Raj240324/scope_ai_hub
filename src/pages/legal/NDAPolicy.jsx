@@ -64,7 +64,7 @@ const NDAPolicy = () => {
               4. Data Protection Standards
             </h2>
             <p className="text-[var(--text-muted)] mb-4">
-              Access to confidential data is strictly controlled on a "need-to-know" basis. We employ secure internal systems to manage student records and project repositories. Any data breach or unauthorized disclosure is taken seriously and may lead to legal action in accordance with Indian IT laws.
+              Access to confidential data is strictly controlled on a"need-to-know" basis. We employ secure internal systems to manage student records and project repositories. Any data breach or unauthorized disclosure is taken seriously and may lead to legal action in accordance with Indian IT laws.
             </p>
           </section>
 

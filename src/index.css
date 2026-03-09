@@ -59,18 +59,33 @@ section {
 
 :root {
   /* ===== LIGHT THEME — Clean White & Navy ===== */
-  /* Page */
-  --bg-body: #f8f5ff;
-  --bg-secondary: #F8FAFC;
+  /* Page Theme Spec */
+  --bg-body: #ffffff;
+  --bg-surface: #f7f7f9;
   --bg-card: #ffffff;
-  --text-body: rgba(13, 2, 20, 0.80);
-  --text-heading: #0d0214;
-  --text-muted: rgba(13, 2, 20, 0.45);
-  --border-color: rgba(214, 79, 217, 0.15);
 
-  /* Inverted sections (dark accent blocks) */
-  --bg-inverted: #0d0214;
+  --text-primary: #0f0f14;
+  --text-heading: #0f0f14;
+  --text-body: #1f2937;
+  --text-muted: #6b7280;
+  --text-on-dark: #f5f0ea;
+  --text-on-light: #0f0f14;
+
+  --icon-default: #d64fd9;
+  --icon-on-light: #d64fd9;
+  --icon-on-dark: #f5f0ea;
+
+  --border-subtle: #e5e7eb;
+
+  --accent-primary: #d64fd9;
+  --accent-secondary: #b833bb;
+
+  /* Inverted sections — light highlight surface */
+  --bg-inverted: #f5f0ea;
   --text-on-inverted: #f5f0ea;
+  
+  /* Fallback legacy border */
+  --border-color: var(--border-subtle);
 
   /* Header */
   --bg-header: #FFFFFF;
@@ -107,16 +122,28 @@ section {
   /* ===== DARK THEME — Premium Deep Violet & Navy ===== */
   /* Backgrounds — rich dark navy/black */
   --bg-body: #010408;
-  --bg-secondary: #0A121D;
-  --bg-card: #0d1117;
-  --text-body: rgba(245, 240, 234, 0.75);
+  --bg-surface: #0a0f1a;
+  --bg-card: #0f1624;
+
+  --text-primary: #f5f0ea;
   --text-heading: #f5f0ea;
-  --text-muted: rgba(245, 240, 234, 0.40);
-  --border-color: rgba(214, 79, 217, 0.12);
+  --text-body: #e2e2e7;
+  --text-muted: #9ca3af;
+  --text-on-dark: #f5f0ea;
+  --text-on-light: #0f0f14;
+
+  --icon-default: #d64fd9;
+  --icon-on-light: #d64fd9;
+  --icon-on-dark: #f5f0ea;
+
+  --border-subtle: #2a2f3d;
 
   /* Inverted sections */
   --bg-inverted: #f5f0ea;
-  --text-on-inverted: #010408;
+  --text-on-inverted: #f5f0ea;
+  
+  /* Fallback legacy border */
+  --border-color: var(--border-subtle);
 
   /* Header */
   --bg-header: #050a10;
@@ -169,6 +196,24 @@ body {
   overflow-x: clip;
 }
 
+  /* Surface Utility Classes (Phase 2) */
+  .dark-surface {
+    color: var(--text-on-dark);
+  }
+
+  .light-surface {
+    color: var(--text-on-light);
+  }
+
+  .light-surface h1,
+  .light-surface h2,
+  .light-surface h3,
+  .light-surface p,
+  .light-surface span,
+  .light-surface li,
+  .light-surface a {
+    color: var(--text-on-light);
+  }
 
   
   html.dark body {
@@ -192,6 +237,13 @@ body {
   /* Smooth image rendering */
   img {
     image-rendering: -webkit-optimize-contrast;
+  }
+
+  /* Accessible links (Phase 6) — opt-in only via .link-underline */
+  a.link-underline:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-decoration-thickness: 1.5px;
   }
 }
 

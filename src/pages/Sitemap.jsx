@@ -17,7 +17,7 @@ const SitemapSection = ({ icon: IconComponent, title, color, links }) => (
         <IconComponent className="h-5 w-5 text-white" />
       </div>
       <h2 className="text-white font-black text-body tracking-wide">{title}</h2>
-      <span className="ml-auto text-white/60 text-caption font-bold">{links.length} page{links.length !== 1 ? 's' : ''}</span>
+      <span className="ml-auto text-[var(--text-muted)] text-caption font-bold">{links.length} page{links.length !== 1 ? 's' : ''}</span>
     </div>
     {/* Links */}
     <ul className="divide-y divide-[var(--border-color)]">
@@ -151,7 +151,7 @@ const Sitemap = () => {
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Link
                 to="/contact"
-                className="px-6 py-3 bg-[var(--bg-inverted)] text-[var(--text-on-inverted)] font-bold rounded-xl hover:opacity-90 transition-all text-small"
+                className="px-6 py-3 bg-[var(--bg-inverted)] text-[var(--text-on-light)] font-bold rounded-xl hover:opacity-90 transition-all text-small"
               >
                 Contact Us
               </Link>

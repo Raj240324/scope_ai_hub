@@ -1,6 +1,6 @@
-import React from "react";
-import { Helmet } from "react-helmet-async";
-import { BRANDING } from "../../data/branding";
+import React from"react";
+import { Helmet } from"react-helmet-async";
+import { BRANDING } from"../../data/branding";
 
 /*
 Enterprise SEO Component
@@ -22,13 +22,13 @@ const SEO = ({
   description,
   keywords,
   canonical,
-  image = "/scope-social-share.png",
+  image ="/scope-social-share.png",
   courseSchema,
   faqSchema,
   breadcrumbs
 }) => {
 
-  const siteUrl = "https://scopeaihub.com";
+  const siteUrl ="https://scopeaihub.com";
 
   /* TITLE SEO */
 
@@ -39,14 +39,12 @@ const SEO = ({
   /* DESCRIPTION */
 
   const metaDescription =
-    description ||
-    "Master Generative AI, Machine Learning, NLP and Data Science with expert mentorship. Get placement support at Scope AI Hub — Chennai's leading AI training institute.";
+    description ||"Master Generative AI, Machine Learning, NLP and Data Science with expert mentorship. Get placement support at Scope AI Hub — Chennai's leading AI training institute.";
 
   /* KEYWORDS */
 
   const metaKeywords =
-    keywords ||
-    "AI Training Institute Chennai, Artificial Intelligence Course Chennai, Generative AI Course Chennai, Machine Learning Course Chennai, Prompt Engineering Training, NLP Course Chennai, Data Science Course Chennai, Python AI Training, MLOps Training, AI Certification Course Chennai, AI Placement Training Chennai, Best AI Institute Chennai, Software Engineering AI Course, AI Bootcamp Chennai, Scope AI Hub Chennai";
+    keywords ||"AI Training Institute Chennai, Artificial Intelligence Course Chennai, Generative AI Course Chennai, Machine Learning Course Chennai, Prompt Engineering Training, NLP Course Chennai, Data Science Course Chennai, Python AI Training, MLOps Training, AI Certification Course Chennai, AI Placement Training Chennai, Best AI Institute Chennai, Software Engineering AI Course, AI Bootcamp Chennai, Scope AI Hub Chennai";
 
   /* URL HANDLING */
 
@@ -58,27 +56,22 @@ const SEO = ({
 
   /* ORGANIZATION SCHEMA */
 
-  const orgSchema = {
-    "@context": "https://schema.org",
-    "@type": "EducationalOrganization",
+  const orgSchema = {"@context":"https://schema.org","@type":"EducationalOrganization",
     name: BRANDING.fullName,
     url: siteUrl,
     logo: `${siteUrl}/scope-logo.png`,
     description: metaDescription,
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: "Chennai",
-      addressRegion: "Tamil Nadu",
-      addressCountry: "IN"
+    address: {"@type":"PostalAddress",
+      addressLocality:"Chennai",
+      addressRegion:"Tamil Nadu",
+      addressCountry:"IN"
     },
-    areaServed: {
-      "@type": "Country",
-      name: "India"
+    areaServed: {"@type":"Country",
+      name:"India"
     },
-    contactPoint: {
-      "@type": "ContactPoint",
-      contactType: "customer support",
-      areaServed: "IN"
+    contactPoint: {"@type":"ContactPoint",
+      contactType:"customer support",
+      areaServed:"IN"
     },
     sameAs: []
   };
@@ -86,14 +79,11 @@ const SEO = ({
   /* COURSE SCHEMA */
 
   const courseJsonLd = courseSchema
-    ? {
-        "@context": "https://schema.org",
-        "@type": "Course",
+    ? {"@context":"https://schema.org","@type":"Course",
         name: courseSchema.title,
         description: courseSchema.tagline,
-        educationalCredentialAwarded: "Certificate",
-        provider: {
-          "@type": "EducationalOrganization",
+        educationalCredentialAwarded:"Certificate",
+        provider: {"@type":"EducationalOrganization",
           name: BRANDING.fullName,
           url: siteUrl
         },
@@ -110,14 +100,10 @@ const SEO = ({
   /* FAQ SCHEMA */
 
   const faqJsonLd = faqSchema
-    ? {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        mainEntity: faqSchema.map((item) => ({
-          "@type": "Question",
+    ? {"@context":"https://schema.org","@type":"FAQPage",
+        mainEntity: faqSchema.map((item) => ({"@type":"Question",
           name: item.question,
-          acceptedAnswer: {
-            "@type": "Answer",
+          acceptedAnswer: {"@type":"Answer",
             text: item.answer
           }
         }))
@@ -127,11 +113,8 @@ const SEO = ({
   /* BREADCRUMB SCHEMA */
 
   const breadcrumbJsonLd = breadcrumbs
-    ? {
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        itemListElement: breadcrumbs.map((item, index) => ({
-          "@type": "ListItem",
+    ? {"@context":"https://schema.org","@type":"BreadcrumbList",
+        itemListElement: breadcrumbs.map((item, index) => ({"@type":"ListItem",
           position: index + 1,
           name: item.name,
           item: `${siteUrl}${item.path}`

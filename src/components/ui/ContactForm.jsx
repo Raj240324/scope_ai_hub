@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect, useMemo } from 'react';
 import { CheckCircle, ArrowRight, ArrowLeft, Send, Loader2, AlertCircle, Check } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useModal } from '../../context/ModalContext';
-import ReCAPTCHA from "react-google-recaptcha";
+import ReCAPTCHA from"react-google-recaptcha";
 import { checkRateLimit } from '../../utils/rateLimiter';
 import { submitEnquiry } from '../../services/enquiryService';
 import { courses } from '../../data/courses';
@@ -218,11 +218,11 @@ const ContactForm = ({ initialCourse = 'General Inquiry' }) => {
 
   /* ── Success State ───────────────────────────────────────── */
   if (status === 'success') {
-    let successMessage = "Thank you! Our team will get back to you soon.";
+    let successMessage ="Thank you! Our team will get back to you soon.";
     if (formData.inquiry_type === 'Free Career Counseling') {
-      successMessage = "Our career advisor will contact you within 24 hours.";
+      successMessage ="Our career advisor will contact you within 24 hours.";
     } else if (formData.inquiry_type === 'Corporate AI Training') {
-      successMessage = "Our enterprise team will reach out shortly.";
+      successMessage ="Our enterprise team will reach out shortly.";
     }
 
     return (
@@ -252,12 +252,12 @@ const ContactForm = ({ initialCourse = 'General Inquiry' }) => {
               setCaptchaToken(null);
               if (recaptchaRef.current) recaptchaRef.current.reset();
             }}
-            className="btn-primary text-small"
+            className="btn-primary text-small focus:outline-none focus:ring-2 focus:ring-[var(--accent-primary)]"
           >
             Send Another
           </button>
           {closeModal && (
-            <button onClick={closeModal} className="btn-secondary text-small">
+            <button onClick={closeModal} className="btn-secondary text-small focus:outline-none focus:ring-2 focus:ring-[var(--accent-primary)]">
               Close
             </button>
           )}
@@ -288,7 +288,7 @@ const ContactForm = ({ initialCourse = 'General Inquiry' }) => {
               disabled={i > currentStep}
               className={`relative flex h-7 w-7 sm:h-8 sm:w-8 shrink-0 items-center justify-center rounded-full transition-all duration-500 text-caption sm:text-xs font-bold
                 ${i < currentStep ? 'bg-primary/15 text-primary' : ''}
-                ${i === currentStep ? 'bg-primary text-white shadow-lg shadow-primary/30' : ''}
+                ${i === currentStep ? 'bg-primary text-[var(--text-on-inverted)] shadow-lg shadow-primary/30' : ''}
                 ${i > currentStep ? 'bg-[var(--bg-secondary)] text-[var(--text-muted)]' : ''}
                 ${i > currentStep ? 'cursor-not-allowed' : 'cursor-pointer'}
               `}
@@ -343,7 +343,7 @@ const ContactForm = ({ initialCourse = 'General Inquiry' }) => {
               value={value}
               onChange={(e) => handleChange(step.field, e.target.value)}
               autoFocus
-              className={`w-full px-4 py-3 bg-[var(--bg-secondary)] border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-body sm:text-sm text-[var(--text-heading)] resize-none ${
+              className={`w-full px-4 py-3 bg-[var(--bg-secondary)] border rounded-xl focus:outline-none focus:ring-2 focus:ring-[var(--accent-primary)] focus:border-[var(--accent-primary)] transition-all text-body sm:text-sm text-[var(--text-heading)] resize-none ${
                 fieldError ? 'border-red-500' : 'border-[var(--border-color)]'
               }`}
             />
@@ -368,7 +368,7 @@ const ContactForm = ({ initialCourse = 'General Inquiry' }) => {
                     <span>{opt.label}</span>
                     <span className={`flex h-5 w-5 items-center justify-center rounded-full transition-all duration-300 ${
                       isSelected
-                        ? 'bg-primary text-white scale-100'
+                        ? 'bg-primary text-[var(--text-on-inverted)] scale-100'
                         : 'border border-[var(--border-color)] scale-90 opacity-0 group-hover:opacity-40'
                     }`}>
                       <Check className="h-3 w-3" strokeWidth={3} />
@@ -401,7 +401,7 @@ const ContactForm = ({ initialCourse = 'General Inquiry' }) => {
               }}
               onKeyDown={(e) => e.key === 'Enter' && handleNext()}
               autoFocus
-              className={`w-full px-4 py-3.5 bg-[var(--bg-secondary)] border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-body sm:text-sm text-[var(--text-heading)] ${
+              className={`w-full px-4 py-3.5 bg-[var(--bg-secondary)] border rounded-xl focus:outline-none focus:ring-2 focus:ring-[var(--accent-primary)] focus:border-[var(--accent-primary)] transition-all text-body sm:text-sm text-[var(--text-heading)] ${
                 fieldError ? 'border-red-500' : 'border-[var(--border-color)]'
               }`}
             />
@@ -448,7 +448,7 @@ const ContactForm = ({ initialCourse = 'General Inquiry' }) => {
           <button
             onClick={handleNext}
             disabled={status === 'sending'}
-            className="w-full btn-primary py-3.5 flex items-center justify-center gap-2 group disabled:opacity-70 disabled:cursor-not-allowed"
+            className="w-full btn-primary py-3.5 flex items-center justify-center gap-2 group disabled:opacity-70 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-[var(--accent-primary)]"
           >
             {status === 'sending' ? (
               <>
@@ -466,7 +466,7 @@ const ContactForm = ({ initialCourse = 'General Inquiry' }) => {
           <button
             onClick={handleNext}
             disabled={status === 'sending'}
-            className="w-full btn-primary py-3.5 flex items-center justify-center gap-2 group disabled:opacity-70 disabled:cursor-not-allowed"
+            className="w-full btn-primary py-3.5 flex items-center justify-center gap-2 group disabled:opacity-70 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-[var(--accent-primary)]"
           >
             {status === 'sending' ? (
               <>

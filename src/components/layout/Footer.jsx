@@ -33,7 +33,7 @@ const Footer = () => {
                 <MicroExpander 
                   text="Facebook" 
                   icon={<Facebook className="h-5 w-5" />} 
-                  className="bg-primary/5 border-none text-primary hover:bg-[#1877F2] hover:text-white"
+                  className="bg-primary/5 border-none text-primary hover:bg-[#1877F2] hover:text-[var(--text-on-inverted)]"
                   href={BRANDING.socials.facebook}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -41,7 +41,7 @@ const Footer = () => {
                 <MicroExpander 
                   text="Twitter" 
                   icon={<Twitter className="h-5 w-5" />} 
-                  className="bg-primary/5 border-none text-primary hover:bg-[#1DA1F2] hover:text-white"
+                  className="bg-primary/5 border-none text-primary hover:bg-[#1DA1F2] hover:text-[var(--text-on-inverted)]"
                   href={BRANDING.socials.twitter}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -51,7 +51,7 @@ const Footer = () => {
                 <MicroExpander 
                   text="LinkedIn" 
                   icon={<Linkedin className="h-5 w-5" />} 
-                  className="bg-primary/5 border-none text-primary hover:bg-[#0A66C2] hover:text-white"
+                  className="bg-primary/5 border-none text-primary hover:bg-[#0A66C2] hover:text-[var(--text-on-inverted)]"
                   href={BRANDING.socials.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -59,7 +59,7 @@ const Footer = () => {
                 <MicroExpander 
                   text="Instagram" 
                   icon={<Instagram className="h-5 w-5" />} 
-                  className="bg-primary/5 border-none text-primary hover:bg-[#E4405F] hover:text-white"
+                  className="bg-primary/5 border-none text-primary hover:bg-[#E4405F] hover:text-[var(--text-on-inverted)]"
                   href={BRANDING.socials.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -124,13 +124,13 @@ const Footer = () => {
                 <span className="text-body">{BRANDING.address}</span>
               </li>
               <li className="flex items-center space-x-4 group">
-                <div className="bg-primary/10 p-3 rounded-xl text-primary group-hover:bg-primary group-hover:text-white transition-all">
+                <div className="bg-primary/10 p-3 rounded-xl text-primary group-hover:bg-primary group-hover:text-[var(--text-on-inverted)] transition-all">
                   <Phone className="h-5 w-5" />
                 </div>
                 <a href={`tel:${BRANDING.phone}`} className="text-[var(--text-heading)] font-bold hover:text-primary transition-colors">{BRANDING.phone}</a>
               </li>
               <li className="flex items-center space-x-4 group">
-                <div className="bg-primary/10 p-3 rounded-xl text-primary group-hover:bg-primary group-hover:text-white transition-all">
+                <div className="bg-primary/10 p-3 rounded-xl text-primary group-hover:bg-primary group-hover:text-[var(--text-on-inverted)] transition-all">
                   <Mail className="h-5 w-5" />
                 </div>
                 <a href={`mailto:${BRANDING.email}`} className="text-[var(--text-heading)] font-bold hover:text-primary transition-colors">{BRANDING.email}</a>
@@ -170,7 +170,7 @@ const Footer = () => {
               </span>
               <button 
                 onClick={() => openModal()}
-                className="btn-primary px-5 py-2 text-small"
+                className="btn-primary px-5 py-2 text-small focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--accent-primary)]"
                 aria-label="Enroll Today"
               >
                 Enroll Today

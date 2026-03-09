@@ -36,19 +36,19 @@ const AddonsGrid = ({ addons, variant = 'full', showBadge = true }) => {
             <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-primary/10 text-primary group-hover:scale-110 transition-transform duration-300">
               {addon.icon}
             </div>
-            <h3 className="heading-sm font-semibold leading-tight" style={{ color: 'var(--text-heading)' }}>
+            <h3 className="heading-sm font-semibold leading-tight text-[var(--text-heading))]">
               {addon.title}
             </h3>
           </div>
 
           {/* Description */}
-          <p className="text-small leading-relaxed" style={{ color: 'var(--text-body)' }}>
+          <p className="text-small leading-relaxed text-[var(--text-body))]">
             {addon.description}
           </p>
 
           {/* Check Icon for Included Items */}
           {addon.isFree && (
-            <div className="mt-4 pt-4 border-t" style={{ borderColor: 'var(--border-color)' }}>
+            <div className="mt-4 pt-4 border-t border-[var(--border-color))]">
               <div className="flex items-center gap-2 text-caption font-semibold text-green-600 dark:text-green-400">
                 <Check className="h-4 w-4" />
                 <span>Included with every program</span>

@@ -36,7 +36,7 @@ const Disclaimer = () => {
               2. Career & Salary Outcomes
             </h2>
             <p className="text-[var(--text-muted)] mb-4">
-              Any mentions of "Placement Guidance" or "Career Success" are illustrative and reflect our commitment to supporting our students. However:
+              Any mentions of"Placement Guidance" or"Career Success" are illustrative and reflect our commitment to supporting our students. However:
             </p>
             <ul className="list-disc pl-6 text-[var(--text-muted)] space-y-2">
               <li>Individual career results depend on various factors including personal aptitude, interview performance, and market conditions.</li>

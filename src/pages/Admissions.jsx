@@ -22,50 +22,50 @@ const Admissions = () => {
   const steps = [
     {
       icon: <ClipboardList className="h-6 w-6 text-primary" />,
-      title: "Choose Your Course",
-      description: "Explore our range of courses and select the one that aligns with your career goals."
+      title:"Choose Your Course",
+      description:"Explore our range of courses and select the one that aligns with your career goals."
     },
     {
       icon: <HelpCircle className="h-6 w-6 text-primary" />,
-      title: "Free Counseling",
-      description: "Speak with our career experts to understand the course roadmap and outcomes."
+      title:"Free Counseling",
+      description:"Speak with our career experts to understand the course roadmap and outcomes."
     },
     {
       icon: <CheckCircle2 className="h-6 w-6 text-primary" />,
-      title: "Enrollment",
-      description: "Complete the registration process and secure your seat for the upcoming batch."
+      title:"Enrollment",
+      description:"Complete the registration process and secure your seat for the upcoming batch."
     },
     {
       icon: <Calendar className="h-6 w-6 text-primary" />,
-      title: "Start Learning",
-      description: "Join the induction session and begin your journey towards mastering tech skills."
+      title:"Start Learning",
+      description:"Join the induction session and begin your journey towards mastering tech skills."
     }
   ];
 
   const batches = [
     {
-      title: "Weekday Morning",
-      days: "Mon – Fri",
-      time: "Before 10:00 AM",
-      desc: "Pick your preferred 2-hour slot",
-      mode: "Online",
-      status: "Admissions Open"
+      title:"Weekday Morning",
+      days:"Mon – Fri",
+      time:"Before 10:00 AM",
+      desc:"Pick your preferred 2-hour slot",
+      mode:"Online",
+      status:"Admissions Open"
     },
     {
-      title: "Weekday Evening",
-      days: "Mon – Fri",
-      time: "After 5:00 PM",
-      desc: "Perfect after office hours",
-      mode: "Online",
-      status: "Filling Fast"
+      title:"Weekday Evening",
+      days:"Mon – Fri",
+      time:"After 5:00 PM",
+      desc:"Perfect after office hours",
+      mode:"Online",
+      status:"Filling Fast"
     },
     {
-      title: "Weekend Batch",
-      days: "Sat – Sun",
-      time: "Any Time — 3 hr session",
-      desc: "1.5 hrs · Break · 1.5 hrs",
-      mode: "At Center",
-      status: "Admissions Open"
+      title:"Weekend Batch",
+      days:"Sat – Sun",
+      time:"Any Time — 3 hr session",
+      desc:"1.5 hrs · Break · 1.5 hrs",
+      mode:"At Center",
+      status:"Admissions Open"
     }
   ];
 
@@ -158,12 +158,7 @@ const Admissions = () => {
           <div className="space-y-8">
             <h2 className="heading-lg font-bold text-center mb-0">Eligibility Criteria</h2>
             <div className="space-y-4">
-              {[
-                "College students (any stream) looking for industry skills.",
-                "Fresh graduates wanting to kickstart their IT career.",
-                "Working professionals looking to switch to tech roles.",
-                "Basic understanding of computers and a passion for learning.",
-                "No prior coding experience required for beginner courses."
+              {["College students (any stream) looking for industry skills.","Fresh graduates wanting to kickstart their IT career.","Working professionals looking to switch to tech roles.","Basic understanding of computers and a passion for learning.","No prior coding experience required for beginner courses."
               ].map((item, i) => (
                 <div key={i} className="flex items-start space-x-3 p-4 bg-[var(--bg-secondary)] rounded-xl border border-[var(--border-color)]">
                   <CheckCircle2 className="h-5 w-5 text-accent-success shrink-0 mt-0.5" />
@@ -232,9 +227,9 @@ const Admissions = () => {
                 {/* Status badge */}
                 <span
                   className={`inline-flex items-center px-3 py-1 mb-5 text-caption font-bold rounded-full relative z-10 ${
-                    batch.status === "Filling Fast"
-                      ? "bg-orange-500/10 text-orange-500 animate-pulse"
-                      : "bg-green-500/10 text-green-500"
+                    batch.status ==="Filling Fast"
+                      ?"bg-orange-500/10 text-orange-500 animate-pulse"
+                      :"bg-green-500/10 text-green-500"
                   }`}
                 >
                   🔥 {batch.status}
@@ -268,7 +263,7 @@ const Admissions = () => {
           <div className="text-center mt-14">
             <button
               onClick={() => openModal()}
-              className="group inline-flex items-center gap-2 px-8 py-4 btn-primary text-body-lg text-white font-bold"
+              className="group inline-flex items-center gap-2 px-8 py-4 btn-primary text-body-lg text-[var(--text-on-inverted)] font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--accent-primary)]"
             >
               Book Your Free Counseling Session
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -282,29 +277,29 @@ const Admissions = () => {
           <div className="grid md:grid-cols-3 gap-8">
             {[
               {
-                title: "Early Enrollment",
-                discount: "Fee Benefits",
-                desc: "Secure your seat well in advance of the batch start date to unlock special fee structures.",
-                color: "from-green-500 to-emerald-600",
-                icon: "🌟"
+                title:"Early Enrollment",
+                discount:"Fee Benefits",
+                desc:"Secure your seat well in advance of the batch start date to unlock special fee structures.",
+                color:"from-green-500 to-emerald-600",
+                icon:"🌟"
               },
               {
-                title: "Merit-Based Support",
-                discount: "Scholarships",
-                desc: "Deserving students with strong academic or technical backgrounds may qualify for fee assistance.",
-                color: "from-blue-500 to-cyan-600",
-                icon: "🎓"
+                title:"Merit-Based Support",
+                discount:"Scholarships",
+                desc:"Deserving students with strong academic or technical backgrounds may qualify for fee assistance.",
+                color:"from-blue-500 to-cyan-600",
+                icon:"🎓"
               },
               {
-                title: "Group Registrations",
-                discount: "Corporate / Peers",
-                desc: "Enrolling as a group of friends or corporate team? Contact us for specialized group pricing.",
-                color: "from-purple-500 to-pink-600",
-                icon: "👥"
+                title:"Group Registrations",
+                discount:"Corporate / Peers",
+                desc:"Enrolling as a group of friends or corporate team? Contact us for specialized group pricing.",
+                color:"from-purple-500 to-pink-600",
+                icon:"👥"
               }
             ].map((scheme, i) => (
               <div key={i} className="bg-[var(--bg-card)] rounded-2xl sm:rounded-3xl p-5 sm:p-8 border border-[var(--border-color)] shadow-sm hover:shadow-lg transition-all">
-                <div className={`h-12 w-12 sm:h-16 sm:w-16 rounded-xl sm:rounded-2xl bg-gradient-to-br ${scheme.color} flex items-center justify-center mb-5 sm:mb-6 text-white heading-sm sm:text-2xl font-black shadow-lg`}>
+                <div className={`h-12 w-12 sm:h-16 sm:w-16 rounded-xl sm:rounded-2xl bg-gradient-to-br ${scheme.color} flex items-center justify-center mb-5 sm:mb-6 text-[var(--text-on-inverted)] heading-sm sm:text-2xl font-black shadow-lg`}>
                   {scheme.icon}
                 </div>
                 <h3 className="text-body-lg sm:text-xl font-bold text-[var(--text-heading)] mb-3">{scheme.title}</h3>
@@ -350,34 +345,34 @@ const Admissions = () => {
 
         {/* Fee Structure Note */}
         {/* Course Programs Overview */}
-        <div className="mt-16 sm:mt-24 p-5 sm:p-8 md:p-12 dark-section text-white rounded-2xl sm:rounded-3xl text-center">
-          <h2 className="heading-lg font-bold text-white mb-8 relative z-10">Programs Designed For You</h2>
+        <div className="mt-16 sm:mt-24 p-5 sm:p-8 md:p-12 dark-section text-[var(--text-on-inverted)] rounded-2xl sm:rounded-3xl text-center dark-surface">
+          <h2 className="heading-lg font-bold text-[var(--text-on-inverted)] mb-8 relative z-10">Programs Designed For You</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10 text-left">
              <div className="glass-card p-6 text-left">
                 <h3 className="heading-sm font-semibold mb-2 text-primary-light">Upskill Courses</h3>
-                <p className="text-small text-white/80 mb-2">Targeted training to master specific technologies or tools quickly.</p>
-                <p className="text-caption text-white/60 font-bold uppercase tracking-wider">Duration: 1-2 Months</p>
+                <p className="text-small text-[var(--text-muted)] mb-2">Targeted training to master specific technologies or tools quickly.</p>
+                <p className="text-caption text-[var(--text-muted)] font-bold uppercase tracking-wider">Duration: 1-2 Months</p>
              </div>
              <div className="glass-card p-6 text-left">
                 <h3 className="heading-sm font-semibold mb-2 text-primary-light">Career Tracks</h3>
-                <p className="text-small text-white/80 mb-2">Comprehensive pathways to transform you into a job-ready professional.</p>
-                <p className="text-caption text-white/60 font-bold uppercase tracking-wider">Duration: 4-6 Months</p>
+                <p className="text-small text-[var(--text-muted)] mb-2">Comprehensive pathways to transform you into a job-ready professional.</p>
+                <p className="text-caption text-[var(--text-muted)] font-bold uppercase tracking-wider">Duration: 4-6 Months</p>
              </div>
              <div className="glass-card p-6 text-left">
                 <h3 className="heading-sm font-semibold mb-2 text-primary-light">Master Programs</h3>
-                <p className="text-small text-white/80 mb-2">Deep-dive intensive programs with extensive projects and mentorship.</p>
-                <p className="text-caption text-white/60 font-bold uppercase tracking-wider">Duration: 8-12 Months</p>
+                <p className="text-small text-[var(--text-muted)] mb-2">Deep-dive intensive programs with extensive projects and mentorship.</p>
+                <p className="text-caption text-[var(--text-muted)] font-bold uppercase tracking-wider">Duration: 8-12 Months</p>
              </div>
           </div>
-          <p className="text-white/80 max-w-2xl mx-auto mb-10 relative z-10 font-medium">To maintain high training quality, class sizes are strictly limited. Contact our admission desk for detailed fee structures and availability.</p>
+          <p className="text-[var(--text-muted)] max-w-2xl mx-auto mb-10 relative z-10 font-medium">To maintain high training quality, class sizes are strictly limited. Contact our admission desk for detailed fee structures and availability.</p>
           <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6 relative z-10">
             <button 
               onClick={() => openModal()}
-              className="btn-primary"
+              className="btn-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--accent-primary)]"
             >
               Enquire About Admissions
             </button>
-            <Link to="/courses" className="btn-secondary text-white font-bold px-8 py-4">
+            <Link to="/courses" className="btn-secondary text-[var(--text-on-inverted)] font-bold px-8 py-4 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--accent-primary)]">
               Explore Courses
             </Link>
           </div>

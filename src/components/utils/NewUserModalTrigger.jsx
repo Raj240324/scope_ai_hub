@@ -1,8 +1,8 @@
-import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
-import { useModal } from "../../context/ModalContext";
+import { useEffect } from"react";
+import { useLocation } from"react-router-dom";
+import { useModal } from"../../context/ModalContext";
 
-const VISIT_KEY = "ai_institute_last_modal_visit";
+const VISIT_KEY ="ai_institute_last_modal_visit";
 const MODAL_DELAY = 800; // Natural UX delay
 const EXPIRY_DAYS = 30;
 
@@ -15,10 +15,10 @@ export default function NewUserModalTrigger({ isAppReady }) {
     if (!isAppReady) return;
 
     // Only trigger on homepage
-    if (location.pathname !== "/") return;
+    if (location.pathname !=="/") return;
 
     // Prevent SSR errors (if ever deployed with SSR)
-    if (typeof window === "undefined") return;
+    if (typeof window ==="undefined") return;
 
     const now = Date.now();
     const lastVisit = localStorage.getItem(VISIT_KEY);

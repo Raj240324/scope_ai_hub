@@ -98,7 +98,7 @@ const CareerSupportSection = () => {
         >
           <Link
             to="/courses"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-primary text-white rounded-full font-bold text-small uppercase tracking-wider shadow-lg shadow-primary/20 hover:shadow-primary/35 hover:-translate-y-0.5 transition-all duration-300 group"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-primary text-[var(--text-on-inverted)] rounded-full font-bold text-small uppercase tracking-wider shadow-lg shadow-primary/20 hover:shadow-primary/35 hover:-translate-y-0.5 transition-all duration-300 group"
           >
             View All 12 Benefits
             <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />

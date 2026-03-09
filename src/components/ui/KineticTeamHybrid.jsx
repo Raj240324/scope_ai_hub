@@ -129,7 +129,7 @@ export default function KineticTeamHybrid() {
                 <div className="absolute bottom-0 w-full bg-gradient-to-t from-black/80 to-transparent p-4">
                   <div className="flex items-center gap-2">
                     <div className="h-1.5 w-1.5 rounded-full bg-green-500 animate-pulse" />
-                    <span className="text-caption uppercase tracking-widest text-white/80">
+                    <span className="text-caption uppercase tracking-widest text-[var(--text-muted)]">
                       {TEAM.find((t) => t.id === activeId)?.role}
                     </span>
                   </div>

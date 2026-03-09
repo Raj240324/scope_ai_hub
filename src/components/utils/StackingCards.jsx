@@ -6,7 +6,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
  * On mobile (< 768px), cards become sticky and stack on top of each other.
  * On desktop (>= 768px), it acts as a pass-through wrapper.
  */
-export const StackingCards = ({ children, className = "" }) => {
+export const StackingCards = ({ children, className ="" }) => {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -51,7 +51,7 @@ const StackingCard = ({ children, index, total }) => {
   // Track the scroll of this specific card's relative viewport
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start " + stickyTop + "px", "end " + (stickyTop - 150) + "px"]
+    offset: ["start" + stickyTop +"px","end" + (stickyTop - 150) +"px"]
   });
 
   // Calculate scaling and dimming based on scroll progress
@@ -66,10 +66,10 @@ const StackingCard = ({ children, index, total }) => {
       className="sticky z-10 w-full transition-transform duration-300 ease-out"
       style={{ 
         top: stickyTop,
-        height: "max-content",
+        height:"max-content",
         zIndex: index + 10,
         // Provide standard spacing between cards before they stick
-        marginTop: index === 0 ? "0" : "1.5rem" 
+        marginTop: index === 0 ?"0" :"1.5rem" 
       }}
     >
       <motion.div style={{ scale, opacity }} className="origin-top w-full shadow-2xl rounded-[2.5rem]">

@@ -28,7 +28,7 @@ const CoursesSection = ({ courses }) => (
       </StaggerContainer>
 
       <div className="mt-12 text-center md:hidden">
-        <Link to="/courses" className="btn-secondary w-full py-4 text-body-lg">
+        <Link to="/courses" className="btn-secondary w-full py-4 text-body-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--accent-primary)]">
           Explore All Courses
         </Link>
       </div>

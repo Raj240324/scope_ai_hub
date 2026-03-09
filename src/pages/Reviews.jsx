@@ -11,68 +11,68 @@ import Hero from '../components/ui/Hero';
 const reviews = [
   {
     id: 1,
-    name: "Senthil Kumar",
-    role: "Prompt Engineer",
-    course: "Generative AI & Prompt Engineering",
+    name:"Senthil Kumar",
+    role:"Prompt Engineer",
+    course:"Generative AI & Prompt Engineering",
     rating: 5,
     content: `The Prompt Engineering course at ${BRANDING.fullName} was a game-changer. I learned to work with ChatGPT, Claude, and Midjourney like a professional. The hands-on AI workflow projects were exceptional.`,
-    image: "https://randomuser.me/api/portraits/men/32.jpg",
-    date: "2 weeks ago",
+    image:"https://randomuser.me/api/portraits/men/32.jpg",
+    date:"2 weeks ago",
     verified: true
   },
   {
     id: 2,
-    name: "Priya Dharshini",
-    role: "Data Analyst",
-    course: "Data Analytics & AI",
+    name:"Priya Dharshini",
+    role:"Data Analyst",
+    course:"Data Analytics & AI",
     rating: 5,
-    content: "I switched from a non-tech background to data analytics. The Power BI and AI-driven analytics modules were incredible. Landed a data analyst role within a month of completion!",
-    image: "https://randomuser.me/api/portraits/women/44.jpg",
-    date: "1 month ago",
+    content:"I switched from a non-tech background to data analytics. The Power BI and AI-driven analytics modules were incredible. Landed a data analyst role within a month of completion!",
+    image:"https://randomuser.me/api/portraits/women/44.jpg",
+    date:"1 month ago",
     verified: true
   },
   {
     id: 3,
-    name: "Arun Rajan",
-    role: "ML Engineer",
-    course: "Machine Learning & Deep Learning",
+    name:"Arun Rajan",
+    role:"ML Engineer",
+    course:"Machine Learning & Deep Learning",
     rating: 4,
-    content: "The ML & Deep Learning course helped me transition from a Python developer to a full ML engineer. The TensorFlow and PyTorch labs were intense and production-grade.",
-    image: "https://randomuser.me/api/portraits/men/45.jpg",
-    date: "2 months ago",
+    content:"The ML & Deep Learning course helped me transition from a Python developer to a full ML engineer. The TensorFlow and PyTorch labs were intense and production-grade.",
+    image:"https://randomuser.me/api/portraits/men/45.jpg",
+    date:"2 months ago",
     verified: true
   },
   {
     id: 4,
-    name: "Kavitha Murugan",
-    role: "NLP Engineer",
-    course: "Natural Language Processing (NLP)",
+    name:"Kavitha Murugan",
+    role:"NLP Engineer",
+    course:"Natural Language Processing (NLP)",
     rating: 5,
-    content: "The NLP program was outstanding! From transformers to building real chatbots with RAG, every module was practical and industry-relevant. The Hugging Face ecosystem training was a highlight.",
-    image: "https://randomuser.me/api/portraits/women/65.jpg",
-    date: "3 months ago",
+    content:"The NLP program was outstanding! From transformers to building real chatbots with RAG, every module was practical and industry-relevant. The Hugging Face ecosystem training was a highlight.",
+    image:"https://randomuser.me/api/portraits/women/65.jpg",
+    date:"3 months ago",
     verified: true
   },
   {
     id: 5,
-    name: "Rahul Bose",
-    role: "Python AI Developer",
-    course: "Python for AI & Machine Learning",
+    name:"Rahul Bose",
+    role:"Python AI Developer",
+    course:"Python for AI & Machine Learning",
     rating: 5,
-    content: "As a complete beginner, Python for AI was the perfect starting point. I went from zero to building sentiment analyzers and price predictors in 8 weeks. Truly transformative.",
-    image: "https://randomuser.me/api/portraits/men/22.jpg",
-    date: "4 months ago",
+    content:"As a complete beginner, Python for AI was the perfect starting point. I went from zero to building sentiment analyzers and price predictors in 8 weeks. Truly transformative.",
+    image:"https://randomuser.me/api/portraits/men/22.jpg",
+    date:"4 months ago",
     verified: true
   },
   {
     id: 6,
-    name: "Deepika Raj",
-    role: "Computer Vision Engineer",
-    course: "Computer Vision & Image AI",
+    name:"Deepika Raj",
+    role:"Computer Vision Engineer",
+    course:"Computer Vision & Image AI",
     rating: 5,
-    content: "The Computer Vision program is top-notch. From YOLO object detection to medical imaging AI, the modules were incredibly practical. The capstone project gave me a real-world edge.",
-    image: "https://randomuser.me/api/portraits/women/28.jpg",
-    date: "5 months ago",
+    content:"The Computer Vision program is top-notch. From YOLO object detection to medical imaging AI, the modules were incredibly practical. The capstone project gave me a real-world edge.",
+    image:"https://randomuser.me/api/portraits/women/28.jpg",
+    date:"5 months ago",
     verified: true
   }
 ];
@@ -158,11 +158,10 @@ const Reviews = () => {
                   <button
                     key={courseName}
                     onClick={() => setSelectedCourse(courseName)}
-                    className={clsx(
-                      "px-4 py-2 rounded-lg text-small font-medium whitespace-nowrap transition-all",
+                    className={clsx("px-4 py-2 rounded-lg text-small font-medium whitespace-nowrap transition-all",
                       selectedCourse === courseName
-                        ? "bg-primary text-[var(--text-on-inverted)] shadow-md shadow-primary/20"
-                        : "bg-[var(--bg-card)] text-[var(--text-muted)] hover:bg-[var(--bg-secondary)] border border-[var(--border-color)]"
+                        ?"bg-primary text-[var(--text-on-inverted)] shadow-md shadow-primary/20"
+                        :"bg-[var(--bg-card)] text-[var(--text-muted)] hover:bg-[var(--bg-secondary)] border border-[var(--border-color)]"
                     )}
                   >
                     {courseName === 'All' ? 'All' : courseName.split(' ').slice(0, 2).join(' ')}
@@ -200,9 +199,8 @@ const Reviews = () => {
                     {[...Array(5)].map((_, i) => (
                       <Star 
                         key={i} 
-                        className={clsx(
-                          "h-4 w-4",
-                          i < review.rating ? "text-yellow-400 fill-yellow-400" : "text-[var(--border-color)]"
+                        className={clsx("h-4 w-4",
+                          i < review.rating ?"text-yellow-400 fill-yellow-400" :"text-[var(--border-color)]"
                         )} 
                       />
                     ))}
@@ -210,8 +208,7 @@ const Reviews = () => {
 
                   <div className="relative mb-6">
                     <Quote className="absolute -top-2 -left-2 h-8 w-8 text-primary/5 -z-10" />
-                    <p className="text-body italic">
-                      "{review.content}"
+                    <p className="text-body italic">"{review.content}"
                     </p>
                   </div>
 
@@ -237,22 +234,22 @@ const Reviews = () => {
       </section>
 
       {/* Call to Action */}
-      <section className="py-20 bg-[var(--bg-inverted)] overflow-hidden relative">
+      <section className="py-20 bg-[var(--bg-inverted)] light-surface overflow-hidden relative text-[var(--text-on-light)]">
         <div className="absolute top-0 right-0 w-64 h-64 bg-[var(--bg-body)]/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
         <div className="container-custom text-center relative z-10">
-          <h2 className="heading-lg font-bold text-[var(--text-on-inverted)] mb-8">
+          <h2 className="heading-lg font-bold text-[var(--text-on-light)] mb-8">
             Ready to be our next success story?
           </h2>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button 
               onClick={() => openModal()}
-              className="btn-primary px-10 py-4 text-body-lg"
+              className="btn-primary px-10 py-4 text-body-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--accent-primary)]"
             >
               Enroll Now
             </button>
             <button 
               onClick={() => openModal()}
-              className="btn-secondary px-10 py-4 text-body-lg text-[var(--text-on-inverted)] border-[var(--bg-body)]/20"
+              className="btn-secondary px-10 py-4 text-body-lg text-[var(--text-on-light)] border-[var(--bg-body)]/20 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--accent-primary)]"
             >
               Free Career Counseling
             </button>

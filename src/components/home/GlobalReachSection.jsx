@@ -12,12 +12,12 @@ const GlobalReachSection = () => (
       </div>
       <div className="grid md:grid-cols-3 gap-8">
         {[
-          { title: "Live Interactive Classes", desc: "Real-time engagement with instructors and peers, just like a physical classroom.", icon: <PlayCircle className="h-8 w-8" /> },
-          { title: "24/7 LMS Access", desc: "Lifetime access to recorded sessions, study materials, and project files through our portal.", icon: <Zap className="h-8 w-8" /> },
-          { title: "Global Certification", desc: "Certificates recognized in USA, UK, Canada, Australia, UAE, and beyond.", icon: <Award className="h-8 w-8" /> },
+          { title:"Live Interactive Classes", desc:"Real-time engagement with instructors and peers, just like a physical classroom.", icon: <PlayCircle className="h-8 w-8" /> },
+          { title:"24/7 LMS Access", desc:"Lifetime access to recorded sessions, study materials, and project files through our portal.", icon: <Zap className="h-8 w-8" /> },
+          { title:"Global Certification", desc:"Certificates recognized in USA, UK, Canada, Australia, UAE, and beyond.", icon: <Award className="h-8 w-8" /> },
         ].map((item, i) => (
           <div key={i} className="p-5 sm:p-8 rounded-2xl sm:rounded-[2rem] bg-[var(--bg-card)] border border-[var(--border-color)] hover:shadow-xl transition-all group">
-            <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl bg-primary/10 flex items-center justify-center mb-5 sm:mb-8 text-primary shadow-sm group-hover:bg-primary group-hover:text-white transition-colors">
+            <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl bg-primary/10 flex items-center justify-center mb-5 sm:mb-8 text-primary shadow-sm group-hover:bg-primary group-hover:text-[var(--text-on-inverted)] transition-colors">
               {item.icon}
             </div>
             <h3 className="text-body-lg sm:text-xl font-bold text-[var(--text-heading)] mb-3 sm:mb-4">{item.title}</h3>

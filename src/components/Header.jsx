@@ -439,19 +439,13 @@ const Header = () => {
                     {hasDropdown || isMegaCourses ? (
                       <button
                         aria-expanded={isMegaCourses ? showCourses : activeDropdown === item.name}
-                        style={{
-                          display: "flex", alignItems: "center", gap: "0.2rem",
-                          padding: "0.5rem 0.75rem",
-                          background: "none", border: "none", cursor: "pointer",
-                          fontFamily: T.fontNav, fontWeight: 600, fontSize: "0.9rem",
-                          letterSpacing: "0.06em", textTransform: "uppercase",
-                          color: isActive
-                            ? T.orange
-                            : isTransparent ? "rgba(245,240,234,0.8)" : (theme === 'dark' ? T.muted : 'rgba(13,2,20,0.6)'),
-                          transition: "color 0.15s",
-                          whiteSpace: "nowrap",
-                          position: "relative",
-                        }}
+                        className={`flex items-center gap-1 px-3 py-2 bg-transparent border-none cursor-pointer font-nav font-semibold text-[0.9rem] tracking-[0.06em] uppercase transition-colors whitespace-nowrap relative ${
+                          isActive 
+                            ? 'text-[var(--accent-primary)]' 
+                            : isTransparent 
+                              ? 'text-[rgba(245,240,234,0.8)] hover:text-[var(--text-on-inverted)]' 
+                              : 'text-[var(--text-body)] hover:text-[var(--accent-primary)]'
+                        }`}
                       >
                         {isActive && <ActiveBar />}
                         {item.name}
@@ -467,19 +461,13 @@ const Header = () => {
                     ) : (
                       <Link
                         to={item.href}
-                        style={{
-                          display: "flex", alignItems: "center",
-                          padding: "0.5rem 0.75rem",
-                          fontFamily: T.fontNav, fontWeight: 600, fontSize: "0.9rem",
-                          letterSpacing: "0.06em", textTransform: "uppercase",
-                          color: isActive
-                            ? T.orange
-                            : isTransparent ? "rgba(245,240,234,0.8)" : (theme === 'dark' ? T.muted : 'rgba(13,2,20,0.6)'),
-                          textDecoration: "none",
-                          whiteSpace: "nowrap",
-                          position: "relative",
-                          transition: "color 0.15s",
-                        }}
+                        className={`flex items-center px-3 py-2 font-nav font-semibold text-[0.9rem] tracking-[0.06em] uppercase transition-colors no-underline whitespace-nowrap relative ${
+                          isActive 
+                            ? 'text-[var(--accent-primary)]' 
+                            : isTransparent 
+                              ? 'text-[rgba(245,240,234,0.8)] hover:text-[var(--text-on-inverted)]' 
+                              : 'text-[var(--text-body)] hover:text-[var(--accent-primary)]'
+                        }`}
                       >
                         {isActive && <ActiveBar />}
                         {item.name}
@@ -502,14 +490,7 @@ const Header = () => {
                           }, 120);
                         }}
                       >
-                        <div style={{
-                          background: theme === 'dark' ? "#0a0f1a" : "#ffffff",
-                          border: `1px solid ${theme === 'dark' ? T.border : 'rgba(214,79,217,0.12)'}`,
-                          borderRadius: 4,
-                          overflow: "hidden",
-                          boxShadow: theme === 'dark' ? "0 20px 60px rgba(0,0,0,0.6)" : "0 20px 60px rgba(0,0,0,0.08)",
-                          padding: "0.4rem",
-                        }}>
+                        <div className="bg-[var(--bg-card)] border border-[var(--border-subtle)] rounded shadow-2xl overflow-hidden p-[0.4rem]">
                           {item.children.map((child) => (
                             <Link
                               key={child.href}
@@ -550,13 +531,7 @@ const Header = () => {
                           }, 120);
                         }}
                       >
-                        <div style={{
-                          background: theme === 'dark' ? "#0a0f1a" : "#ffffff",
-                          border: `1px solid ${theme === 'dark' ? T.border : 'rgba(214,79,217,0.12)'}`,
-                          borderRadius: 4,
-                          overflow: "hidden",
-                          boxShadow: theme === 'dark' ? "0 32px 80px rgba(0,0,0,0.7)" : "0 32px 80px rgba(0,0,0,0.08)",
-                        }}>
+                        <div className="bg-[var(--bg-card)] border border-[var(--border-subtle)] rounded shadow-2xl overflow-hidden">
                           {/* Header row */}
                           <div style={{
                             display: "flex", alignItems: "center", justifyContent: "space-between",
@@ -564,14 +539,10 @@ const Header = () => {
                             borderBottom: `1px solid ${theme === 'dark' ? T.border : 'rgba(214,79,217,0.12)'}`,
                           }}>
                             <div>
-                              <h3 style={{
-                                fontFamily: T.fontDisplay, fontSize: "1.4rem",
-                                letterSpacing: "0.05em", color: theme === 'dark' ? T.white : '#0d0214', lineHeight: 1,
-                              }}>
+                              <h3 className="font-display text-[1.4rem] tracking-[0.05em] leading-none text-[var(--text-heading)]">
                                 Our Programs
                               </h3>
-                              <p style={{ fontFamily: T.fontMono, fontSize: "0.65rem", color: theme === 'dark' ? T.muted : 'rgba(13,2,20,0.6)',
-                                          letterSpacing: "0.15em", marginTop: "0.25rem", fontWeight: 600 }}>
+                              <p className="font-mono text-[0.65rem] tracking-[0.15em] mt-1 font-semibold text-[var(--text-muted)]">
                                 {courses.length} AI programs across {TIERS.length} tiers
                               </p>
                             </div>

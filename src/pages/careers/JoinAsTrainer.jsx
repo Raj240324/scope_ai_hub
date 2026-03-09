@@ -12,23 +12,23 @@ const JoinAsTrainer = () => {
   const benefits = [
     {
       icon: <Zap className="h-6 w-6 text-primary" />,
-      title: "Flexibility",
-      description: "Choose between weekday, evening, or weekend batches to suit your professional schedule."
+      title:"Flexibility",
+      description:"Choose between weekday, evening, or weekend batches to suit your professional schedule."
     },
     {
       icon: <GraduationCap className="h-6 w-6 text-primary" />,
-      title: "Pedagogical Support",
-      description: "Access our pre-built course materials, slide decks, and project repositories."
+      title:"Pedagogical Support",
+      description:"Access our pre-built course materials, slide decks, and project repositories."
     },
     {
       icon: <Globe className="h-6 w-6 text-primary" />,
-      title: "Global Reach",
-      description: "Train students from across the world in our remote-first online hybrid classrooms."
+      title:"Global Reach",
+      description:"Train students from across the world in our remote-first online hybrid classrooms."
     },
     {
       icon: <Briefcase className="h-6 w-6 text-primary" />,
-      title: "Industry Networking",
-      description: "Connect with other expert mentors and lead workshops for our 75+ hiring partners."
+      title:"Industry Networking",
+      description:"Connect with other expert mentors and lead workshops for our 75+ hiring partners."
     }
   ];
 
@@ -67,23 +67,20 @@ const JoinAsTrainer = () => {
       </section>
 
       {/* Requirements */}
-      <section className="section-padding bg-[var(--bg-inverted)] text-[var(--text-on-inverted)] relative overflow-hidden">
+      <section className="section-padding bg-[var(--bg-inverted)] light-surface text-[var(--text-on-light)] relative overflow-hidden">
         <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl blur-layer -mr-48 -mt-48" />
         <div className="container-custom">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
-              <h2 className="heading-lg font-bold text-[var(--text-on-inverted)] leading-tight mb-6">Who we are <span className="font-extrabold text-primary">looking for.</span></h2>
+              <h2 className="heading-lg font-bold text-[var(--text-on-light)] leading-tight mb-6">
+                Who we are <span className="font-extrabold text-primary">looking for.</span>
+              </h2>
               <div className="space-y-6">
-                {[
-                  "Strong industry experience in AI, Machine Learning, Data Science, or Software Engineering.",
-                  "A passion for mentoring and simplifying complex technical concepts.",
-                  "Experience building or deploying real-world production systems.",
-                  "Ability to commit at least 4–6 hours per week.",
-                  "Strong communication skills in English (Tamil or Telugu is a plus)."
+                {["Strong industry experience in AI, Machine Learning, Data Science, or Software Engineering.","A passion for mentoring and simplifying complex technical concepts.","Experience building or deploying real-world production systems.","Ability to commit at least 4–6 hours per week.","Strong communication skills in English (Tamil or Telugu is a plus)."
                 ].map((item, i) => (
                   <div key={i} className="flex items-start space-x-4">
                     <CheckCircle2 className="h-6 w-6 text-primary shrink-0 mt-1" />
-                    <p className="text-[var(--text-on-inverted)]/70 font-medium">{item}</p>
+                    <p className="text-[var(--text-on-light)]/70 font-medium">{item}</p>
                   </div>
                 ))}
               </div>

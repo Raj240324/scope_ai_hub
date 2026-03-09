@@ -6,9 +6,9 @@ export const FadeIn = ({
   direction = 'up', 
   delay = 0, 
   duration = 0.5, 
-  className = "",
+  className ="",
   fullWidth = false,
-  viewportMargin = "-50px" // Expose margin as prop for flexibility
+  viewportMargin ="-50px" // Expose margin as prop for flexibility
 }) => {
   const directions = {
     up: { y: 60 },
@@ -33,7 +33,7 @@ export const FadeIn = ({
       }}
       viewport={{ once: true, margin: viewportMargin }}
       transition={{ 
-        type: "spring",
+        type:"spring",
         stiffness: 70,
         damping: 20,
         delay: delay,
@@ -49,7 +49,7 @@ export const FadeIn = ({
 
 export const StaggerContainer = ({ 
   children, 
-  className = "",
+  className ="",
   delayChildren = 0.1,
   staggerChildren = 0.15
 }) => {
@@ -57,7 +57,7 @@ export const StaggerContainer = ({
     <motion.div
       initial="hidden"
       whileInView="show"
-      viewport={{ once: true, margin: "-50px" }}
+      viewport={{ once: true, margin:"-50px" }}
       variants={{
         hidden: {},
         show: {
@@ -74,7 +74,7 @@ export const StaggerContainer = ({
   );
 };
 
-export const StaggerItem = ({ children, className = "" }) => {
+export const StaggerItem = ({ children, className ="" }) => {
   return (
     <motion.div
       variants={{
@@ -83,7 +83,7 @@ export const StaggerItem = ({ children, className = "" }) => {
           opacity: 1, 
           y: 0, 
           scale: 1,
-          transition: { type: "spring", stiffness: 80, damping: 20 } 
+          transition: { type:"spring", stiffness: 80, damping: 20 } 
         }
       }}
       className={className}
@@ -93,12 +93,12 @@ export const StaggerItem = ({ children, className = "" }) => {
   );
 };
 
-export const ScaleOnHover = ({ children, className = "", scale = 1.05 }) => {
+export const ScaleOnHover = ({ children, className ="", scale = 1.05 }) => {
   return (
     <motion.div
       whileHover={{ scale }}
       whileTap={{ scale: 0.95 }}
-      transition={{ type: "spring", stiffness: 400, damping: 17 }}
+      transition={{ type:"spring", stiffness: 400, damping: 17 }}
       className={className}
     >
       {children}
@@ -106,11 +106,11 @@ export const ScaleOnHover = ({ children, className = "", scale = 1.05 }) => {
   );
 };
 
-export const Parallax = ({ children, offset = 50, className = "" }) => {
+export const Parallax = ({ children, offset = 50, className ="" }) => {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start end", "end start"]
+    offset: ["start end","end start"]
   });
 
   const springConfig = { stiffness: 300, damping: 30, mass: 1 };
@@ -128,7 +128,7 @@ export const Parallax = ({ children, offset = 50, className = "" }) => {
   );
 };
 
-export const CountUp = ({ end, duration = 2, suffix = "", prefix = "" }) => {
+export const CountUp = ({ end, duration = 2, suffix ="", prefix ="" }) => {
   const nodeRef = useRef();
   const from = 0;
   const to = parseFloat(end.replace(/,/g, '').replace(suffix, '').replace(prefix, '')) || 0;
@@ -143,7 +143,7 @@ export const CountUp = ({ end, duration = 2, suffix = "", prefix = "" }) => {
       onUpdate(value) {
         node.textContent = `${prefix}${to === 2019 || to === '2019' ? Math.floor(value) : Math.floor(value).toLocaleString()}${suffix}`;
       },
-      ease: "easeOut"
+      ease:"easeOut"
     });
 
     return () => controls.stop();
@@ -152,9 +152,9 @@ export const CountUp = ({ end, duration = 2, suffix = "", prefix = "" }) => {
   return <span ref={nodeRef} />;
 };
 
-export const ScrollCountUp = ({ end, duration = 2.5, suffix = "", prefix = "", className="" }) => {
+export const ScrollCountUp = ({ end, duration = 2.5, suffix ="", prefix ="", className="" }) => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-50px" });
+  const isInView = useInView(ref, { once: true, margin:"-50px" });
   
   let targetValue = 0;
   let computedSuffix = suffix;
@@ -166,8 +166,8 @@ export const ScrollCountUp = ({ end, duration = 2.5, suffix = "", prefix = "", c
       targetValue = parseFloat(numberMatch[0].replace(/,/g, ''));
       if (!suffix && !prefix) {
         const parts = end.split(numberMatch[0]);
-        computedPrefix = parts[0] || "";
-        computedSuffix = parts[1] || "";
+        computedPrefix = parts[0] ||"";
+        computedSuffix = parts[1] ||"";
       }
     }
   } else {
@@ -199,16 +199,16 @@ export const ScrollCountUp = ({ end, duration = 2.5, suffix = "", prefix = "", c
   );
 }
 
-export const Marquee = ({ children, speed = 20, className = "" }) => {
+export const Marquee = ({ children, speed = 20, className ="" }) => {
   return (
     <div className={`overflow-hidden flex ${className}`}>
       <motion.div
         initial={{ x: 0 }}
-        animate={{ x: "-50%" }}
+        animate={{ x:"-50%" }}
         transition={{ 
           duration: speed, 
           repeat: Infinity, 
-          ease: "linear" 
+          ease:"linear" 
         }}
         className="flex flex-shrink-0"
       >

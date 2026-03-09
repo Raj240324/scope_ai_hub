@@ -31,54 +31,54 @@ const About = () => {
 
   const locations = [
     { 
-      name: "Nungambakkam Campus", 
-      address: "No. 12, Wallace Garden, 2nd Street, Nungambakkam, Chennai — 600006",
-      map: "https://maps.google.com/?q=Scope+AI+Hub+Nungambakkam+Chennai",
+      name:"Nungambakkam Campus", 
+      address:"No. 12, Wallace Garden, 2nd Street, Nungambakkam, Chennai — 600006",
+      map:"https://maps.google.com/?q=Scope+AI+Hub+Nungambakkam+Chennai",
       phone: BRANDING.phone,
-      type: "Flagship Campus"
+      type:"Flagship Campus"
     },
     { 
-      name: "Velachery Campus", 
-      address: "No. 45, Velachery Main Road, Near Phoenix Mall, Velachery, Chennai — 600042",
-      map: "https://maps.google.com/?q=Scope+AI+Hub+Velachery+Chennai",
+      name:"Velachery Campus", 
+      address:"No. 45, Velachery Main Road, Near Phoenix Mall, Velachery, Chennai — 600042",
+      map:"https://maps.google.com/?q=Scope+AI+Hub+Velachery+Chennai",
       phone: BRANDING.phone,
-      type: "South Chennai Hub"
+      type:"South Chennai Hub"
     },
     { 
-      name: "OMR Campus", 
-      address: "3rd Floor, Tech Park, Rajiv Gandhi Salai (OMR), Sholinganallur, Chennai — 600119",
-      map: "https://maps.google.com/?q=Scope+AI+Hub+OMR+Sholinganallur+Chennai",
+      name:"OMR Campus", 
+      address:"3rd Floor, Tech Park, Rajiv Gandhi Salai (OMR), Sholinganallur, Chennai — 600119",
+      map:"https://maps.google.com/?q=Scope+AI+Hub+OMR+Sholinganallur+Chennai",
       phone: BRANDING.phone,
-      type: "IT Corridor Center"
+      type:"IT Corridor Center"
     },
     { 
-      name: "Online & Pan-India Programs", 
-      address: "Live online batches available for students across India and abroad. Flexible weekend and weekday schedules.",
-      map: "#",
-      type: "Online & Offline"
+      name:"Online & Pan-India Programs", 
+      address:"Live online batches available for students across India and abroad. Flexible weekend and weekday schedules.",
+      map:"#",
+      type:"Online & Offline"
     }
   ];
 
   const values = [
     {
       icon: <ShieldCheck className="h-6 w-6 text-primary" />,
-      title: "Integrity",
-      description: "We commit to transparency, honesty, and delivering measurable outcomes — not empty promises."
+      title:"Integrity",
+      description:"We commit to transparency, honesty, and delivering measurable outcomes — not empty promises."
     },
     {
       icon: <Target className="h-6 w-6 text-primary" />,
-      title: "Accountability",
-      description: "We take ownership of learner success and stand by our commitment to real career outcomes."
+      title:"Accountability",
+      description:"We take ownership of learner success and stand by our commitment to real career outcomes."
     },
     {
       icon: <Award className="h-6 w-6 text-primary" />,
-      title: "Leadership",
-      description: "We cultivate confidence, discipline, and the mindset required to lead in the AI era."
+      title:"Leadership",
+      description:"We cultivate confidence, discipline, and the mindset required to lead in the AI era."
     },
     {
       icon: <Users className="h-6 w-6 text-primary" />,
-      title: "Community",
-      description: "Students first, always. We build a supportive ecosystem where every learner thrives together."
+      title:"Community",
+      description:"Students first, always. We build a supportive ecosystem where every learner thrives together."
     }
   ];
 
@@ -95,17 +95,17 @@ const About = () => {
         subtitle="Scope AI Hub is Chennai's leading AI & Machine Learning training institute empowering students and professionals with hands-on industry skills since 2019. Online and offline programs available."
       >
         <div className="flex flex-col sm:flex-row gap-4 mb-8">
-          <Link to="/courses" className="btn-primary text-body-lg px-8 py-4" aria-label="Explore AI training programs">
+          <Link to="/courses" className="btn-primary text-body-lg px-8 py-4 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--accent-primary)]" aria-label="Explore AI training programs">
             Explore Programs <ArrowRight className="ml-2 h-5 w-5" />
           </Link>
-          <button onClick={() => openModal()} className="btn-secondary text-body-lg px-8 py-4" aria-label="Apply for AI course admission">
+          <button onClick={() => openModal()} className="btn-secondary text-body-lg px-8 py-4 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--accent-primary)]" aria-label="Apply for AI course admission">
             Apply Now
           </button>
         </div>
       </Hero>
 
       {/* Vision & Mission */}
-      <section className="section-padding bg-[var(--bg-inverted)] text-[var(--text-on-inverted)] relative overflow-hidden">
+      <section className="section-padding bg-[var(--bg-inverted)] light-surface text-[var(--text-on-light)] relative overflow-hidden">
         {/* Ambient background decoration */}
         <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl blur-layer pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl blur-layer pointer-events-none" />
@@ -113,16 +113,16 @@ const About = () => {
         <div className="container-custom relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 max-w-5xl mx-auto">
             <FadeIn direction="up" delay={0.1}>
-              <div className="space-y-6 p-6 md:p-8 rounded-3xl bg-[var(--bg-secondary)] border border-[var(--border-color)] transition-all duration-500 group shadow-xl">
+              <div className="space-y-6 p-6 md:p-8 rounded-3xl bg-[var(--bg-inverted)] light-surface border border-[var(--border-color)] transition-all duration-500 group shadow-xl h-full flex flex-col">
                 <div className="h-16 w-16 flex items-center justify-center group-hover:scale-110 transition-transform duration-500 ease-out">
                   <LottieAnimation animationData={visionAnimation} className="w-full h-full" />
                 </div>
-                <div>
-                  <h2 className="heading-md font-bold text-[var(--text-heading)] mb-3 flex items-center gap-3">
+                <div className="flex-1 flex flex-col">
+                  <h2 className="heading-md font-bold text-[var(--text-on-light)] mb-3 flex items-center gap-3">
                     <span className="w-8 h-1 bg-primary rounded-full"></span>
                     Our Vision
                   </h2>
-                  <p className="text-[var(--text-muted)] text-body md:text-lg leading-relaxed">
+                  <p className="text-body md:text-lg leading-relaxed text-[var(--text-on-light)]/80">
                     To build a globally recognised AI learning ecosystem that elevates the next generation of intelligent innovators and technology leaders.
                   </p>
                 </div>
@@ -130,16 +130,16 @@ const About = () => {
             </FadeIn>
 
             <FadeIn direction="up" delay={0.2}>
-              <div className="space-y-6 p-6 md:p-8 rounded-3xl bg-[var(--bg-secondary)] border border-[var(--border-color)] transition-all duration-500 group shadow-xl">
+              <div className="space-y-6 p-6 md:p-8 rounded-3xl bg-[var(--bg-inverted)] light-surface border border-[var(--border-color)] transition-all duration-500 group shadow-xl h-full flex flex-col">
                 <div className="h-16 w-16 flex items-center justify-center group-hover:scale-110 transition-transform duration-500 ease-out">
                   <LottieAnimation animationData={missionAnimation} className="w-full h-full" />
                 </div>
-                <div>
-                  <h2 className="heading-md font-bold text-[var(--text-heading)] mb-3 flex items-center gap-3">
+                <div className="flex-1 flex flex-col">
+                  <h2 className="heading-md font-bold text-[var(--text-on-light)] mb-3 flex items-center gap-3">
                     <span className="w-8 h-1 bg-primary rounded-full"></span>
                     Our Mission
                   </h2>
-                  <p className="text-[var(--text-muted)] text-body md:text-lg leading-relaxed">
+                  <p className="text-body md:text-lg leading-relaxed text-[var(--text-on-light)]/80">
                     To provide practical, industry-grade AI education that converts ambition into measurable career outcomes.
                   </p>
                 </div>
@@ -170,8 +170,7 @@ const About = () => {
                 We replaced passive lectures with project execution, mentor-led code reviews, and real engineering simulations.
               </p>
               <blockquote className="border-l-4 border-primary pl-6 py-2 my-8">
-                <p className="text-[var(--text-heading)] italic text-body-lg leading-relaxed mb-4">
-                  "I watched brilliant students spend years studying AI theory, only to fail their first real deployment. That's when I knew — the system had to change. {BRANDING.fullName} exists because I refused to let another batch of students graduate unprepared."
+                <p className="text-[var(--text-heading)] italic text-body-lg leading-relaxed mb-4">"I watched brilliant students spend years studying AI theory, only to fail their first real deployment. That's when I knew — the system had to change. {BRANDING.fullName} exists because I refused to let another batch of students graduate unprepared."
                 </p>
                 <footer className="text-small font-bold text-[var(--text-muted)] uppercase tracking-widest">
                   — {BRANDING.founder.name}, <span className="text-primary">{BRANDING.founder.title}</span>
@@ -180,8 +179,7 @@ const About = () => {
             </div>
             <div className="space-y-6">
               <div className="p-5 sm:p-8 bg-[var(--bg-secondary)] rounded-2xl sm:rounded-3xl border border-[var(--border-color)] shadow-sm">
-                <p className="text-body-lg">
-                  "This is more than an institute. It is a movement to build the next generation of AI professionals."
+                <p className="text-body-lg">"This is more than an institute. It is a movement to build the next generation of AI professionals."
                 </p>
                 <div className="mt-6 flex items-center space-x-4">
                   <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center">
@@ -236,38 +234,38 @@ const About = () => {
           <div className="grid md:grid-cols-2 gap-8">
             {[
               {
-                title: "Project-First Learning",
-                desc: "Every module is anchored around a real AI project. Students graduate with 10+ deployable projects in their portfolio.",
+                title:"Project-First Learning",
+                desc:"Every module is anchored around a real AI project. Students graduate with 10+ deployable projects in their portfolio.",
                 icon: <Code2 className="h-6 w-6" />
               },
               {
-                title: "Industry-Current Curriculum",
-                desc: "Our syllabus is updated monthly by active AI practitioners to match real job market demands and emerging technologies.",
+                title:"Industry-Current Curriculum",
+                desc:"Our syllabus is updated monthly by active AI practitioners to match real job market demands and emerging technologies.",
                 icon: <Zap className="h-6 w-6" />
               },
               {
-                title: "Small Batch Sizes",
-                desc: "Each batch is capped at 20 students to ensure direct mentor interaction, personalized feedback, and no student is left behind.",
+                title:"Small Batch Sizes",
+                desc:"Each batch is capped at 20 students to ensure direct mentor interaction, personalized feedback, and no student is left behind.",
                 icon: <Users className="h-6 w-6" />
               },
               {
-                title: "Lifetime Learning Access",
-                desc: "Once enrolled, you get lifetime access to our learning portal, recorded sessions, and every future curriculum update.",
+                title:"Lifetime Learning Access",
+                desc:"Once enrolled, you get lifetime access to our learning portal, recorded sessions, and every future curriculum update.",
                 icon: <Award className="h-6 w-6" />
               },
               {
-                title: "Multilingual Support (தமிழ் + తెలుగు + English)",
-                desc: "Complex AI concepts explained in Tamil, Telugu, and English — ensuring no student is left behind due to language barriers.",
+                title:"Multilingual Support (தமிழ் + తెలుగు + English)",
+                desc:"Complex AI concepts explained in Tamil, Telugu, and English — ensuring no student is left behind due to language barriers.",
                 icon: <MessageSquare className="h-6 w-6" />
               },
               {
-                title: "Career-Ready Focus",
-                desc: "Weekly mock interviews, resume reviews, and direct referrals to 75+ hiring partners. We prepare you for the job, not just the exam.",
+                title:"Career-Ready Focus",
+                desc:"Weekly mock interviews, resume reviews, and direct referrals to 75+ hiring partners. We prepare you for the job, not just the exam.",
                 icon: <Briefcase className="h-6 w-6" />
               }
             ].map((item, i) => (
               <div key={i} className="p-5 sm:p-8 bg-[var(--bg-card)] rounded-2xl sm:rounded-3xl border border-[var(--border-color)] shadow-sm hover:shadow-lg transition-all group">
-                <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-primary/10 flex items-center justify-center mb-5 sm:mb-6 group-hover:bg-[var(--bg-inverted)] group-hover:text-[var(--text-on-inverted)] transition-colors text-primary">
+                <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-primary/10 flex items-center justify-center mb-5 sm:mb-6 group-hover:bg-[var(--bg-inverted)] group-hover:text-[var(--text-on-light)] transition-colors text-primary">
                   {item.icon}
                 </div>
                 <h3 className="heading-sm font-semibold text-[var(--text-heading)] mb-3">{item.title}</h3>
@@ -314,7 +312,7 @@ const About = () => {
                   </div>
                 </Parallax>
                 <Parallax offset={-20}>
-                  <div className="aspect-square bg-primary rounded-3xl p-8 flex flex-col justify-end text-white shadow-xl shadow-primary/20">
+                  <div className="aspect-square bg-primary rounded-3xl p-8 flex flex-col justify-end text-[var(--text-on-inverted)] shadow-xl shadow-primary/20">
                     <Lightbulb className="h-10 w-10 mb-4" />
                     <p className="font-bold text-body-lg leading-tight text-[var(--text-on-inverted)]">Innovation in every lesson.</p>
                   </div>
@@ -322,9 +320,11 @@ const About = () => {
               </div>
               <div className="space-y-4 pt-12">
                 <Parallax offset={20}>
-                  <div className="aspect-square bg-[var(--bg-inverted)] rounded-3xl p-8 flex flex-col justify-end text-[var(--text-on-inverted)] shadow-xl">
+                  <div className="aspect-square bg-[var(--bg-inverted)] light-surface rounded-3xl p-8 flex flex-col justify-end text-[var(--text-on-light)] shadow-xl">
                     <Target className="h-10 w-10 mb-4 text-primary-light" />
-                    <p className="font-bold text-body-lg leading-tight text-[var(--text-on-inverted)]">Goal-oriented training.</p>
+                    <p className="font-bold text-body-lg leading-tight text-[var(--text-on-light)]">
+                      Goal-oriented training.
+                    </p>
                   </div>
                 </Parallax>
                 <Parallax offset={-20}>
@@ -365,7 +365,7 @@ const About = () => {
             ].map((tech, i) => (
               <StaggerItem key={i}>
                 <div className="flex flex-col items-center text-center p-5 sm:p-6 bg-[var(--bg-card)] rounded-2xl border border-[var(--border-color)] shadow-sm hover:shadow-lg hover:border-primary/30 transition-all group">
-                  <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-[var(--bg-inverted)] group-hover:text-[var(--text-on-inverted)] transition-colors text-primary">
+                  <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-[var(--bg-inverted)] group-hover:text-[var(--text-on-light)] transition-colors text-primary">
                     {tech.icon}
                   </div>
                   <p className="text-small font-bold text-[var(--text-heading)]">{tech.name}</p>
@@ -428,7 +428,7 @@ const About = () => {
                   </div>
 
                   <div className="pt-2 flex flex-wrap justify-center lg:justify-start gap-3">
-                    {["Strategic Vision", "AI & Tech Leadership", "Academic Excellence", "Industry Alignment"].map((tag, i) => (
+                    {["Strategic Vision","AI & Tech Leadership","Academic Excellence","Industry Alignment"].map((tag, i) => (
                       <span key={i} className="px-4 py-2 rounded-full text-caption font-bold uppercase tracking-wider bg-[var(--bg-secondary)] text-[var(--text-muted)] border border-[var(--border-color)] shadow-sm hover:border-primary/50 hover:text-primary transition-all cursor-default">
                         {tag}
                       </span>
@@ -476,7 +476,7 @@ const About = () => {
                 afterRole: 'Data Scientist',
                 company: 'Freshworks',
                 logo: 'https://logo.clearbit.com/freshworks.com',
-                quote: "The mentors at SCOPE AI HUB don't just teach — they build with you. That changed everything for me.",
+                quote:"The mentors at SCOPE AI HUB don't just teach — they build with you. That changed everything for me.",
               },
               {
                 name: 'Karthik Rajan',
@@ -559,7 +559,7 @@ const About = () => {
               <div key={i} className="p-5 sm:p-8 bg-[var(--bg-card)] rounded-2xl sm:rounded-3xl border border-[var(--border-color)] shadow-sm hover:shadow-lg transition-all group">
                 <div className="flex items-center justify-between mb-5 sm:mb-6">
                   <div className="h-10 w-10 sm:h-12 sm:w-12 bg-primary/10 rounded-xl sm:rounded-2xl flex items-center justify-center group-hover:bg-[var(--bg-inverted)] transition-colors">
-                    <MapPin className="h-5 w-5 sm:h-6 sm:w-6 text-primary group-hover:text-[var(--text-on-inverted)] transition-colors" />
+                    <MapPin className="h-5 w-5 sm:h-6 sm:w-6 text-primary group-hover:text-[var(--text-on-light)] transition-colors" />
                   </div>
                   <span className="text-caption font-bold uppercase tracking-widest text-[var(--text-muted)] bg-[var(--bg-secondary)] px-3 py-1 rounded-full border border-[var(--border-color)]">{loc.type}</span>
                 </div>
@@ -572,10 +572,10 @@ const About = () => {
                   </p>
                 )}
                 <button 
-                  onClick={() => loc.map !== "#" ? window.open(loc.map, '_blank', 'noopener,noreferrer') : openModal()}
+                  onClick={() => loc.map !=="#" ? window.open(loc.map, '_blank', 'noopener,noreferrer') : openModal()}
                   className="mt-6 text-primary font-bold text-small flex items-center hover:underline"
                 >
-                  {loc.map !== "#" ? 'View on Google Maps' : 'Contact Us'} <ExternalLink className="ml-2 h-4 w-4" />
+                  {loc.map !=="#" ? 'View on Google Maps' : 'Contact Us'} <ExternalLink className="ml-2 h-4 w-4" />
                 </button>
               </div>
             ))}
@@ -586,7 +586,7 @@ const About = () => {
       {/* CTA Section */}
       <section className="section-padding bg-[var(--bg-secondary)]">
         <div className="container-custom">
-          <div className="dark-section rounded-2xl md:rounded-[3rem] p-6 sm:p-8 md:p-16 text-center text-[var(--text-on-inverted)] shadow-2xl">
+          <div className="dark-section rounded-2xl md:rounded-[3rem] p-6 sm:p-8 md:p-16 text-center text-[var(--text-on-inverted)] shadow-2xl dark-surface">
             <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
                 <div className="absolute top-[-25%] left-[-10%] w-[60%] h-[60%] bg-primary/20 rounded-full blur-3xl blur-layer" />
                 <div className="absolute bottom-[-25%] right-[-10%] w-[60%] h-[60%] bg-primary/10 rounded-full blur-3xl blur-layer" />
@@ -599,21 +599,21 @@ const About = () => {
               <div className="flex flex-col sm:flex-row justify-center gap-4">
                 <button 
                   onClick={() => openModal()}
-                  className="btn-primary px-10 py-4 text-body-lg"
+                  className="btn-primary px-10 py-4 text-body-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--accent-primary)]"
                   aria-label="Apply for AI course admission"
                 >
                   Apply Now <ArrowRight className="ml-2 h-5 w-5" />
                 </button>
                 <Link
                   to="/courses"
-                  className="btn-secondary text-[var(--text-on-inverted)] border-white/20 px-10 py-4 text-body-lg text-center"
+                  className="btn-secondary text-[var(--text-on-inverted)] border-white/20 px-10 py-4 text-body-lg text-center focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--accent-primary)]"
                   aria-label="View all AI training programs"
                 >
                   View Programs
                 </Link>
                 <button 
                   onClick={() => openModal()}
-                  className="btn-secondary text-[var(--text-on-inverted)] border-white/20 px-10 py-4 text-body-lg"
+                  className="btn-secondary text-[var(--text-on-inverted)] border-white/20 px-10 py-4 text-body-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--accent-primary)]"
                   aria-label="Talk to a career mentor"
                 >
                   Talk to a Mentor

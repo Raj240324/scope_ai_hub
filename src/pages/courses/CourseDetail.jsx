@@ -36,13 +36,10 @@ const CourseDetail = () => {
 
   const tier = tierMeta[course.tier] || tierMeta.Beginner;
 
-  const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://scopeaihub.com/" },
-      { "@type": "ListItem", "position": 2, "name": "Courses", "item": "https://scopeaihub.com/courses" },
-      { "@type": "ListItem", "position": 3, "name": course.title }
+  const breadcrumbSchema = {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement": [
+      {"@type":"ListItem","position": 1,"name":"Home","item":"https://scopeaihub.com/" },
+      {"@type":"ListItem","position": 2,"name":"Courses","item":"https://scopeaihub.com/courses" },
+      {"@type":"ListItem","position": 3,"name": course.title }
     ]
   };
 
@@ -128,14 +125,14 @@ const CourseDetail = () => {
             >
               <button
                 onClick={() => openModal(course.title)}
-                className="group inline-flex items-center gap-2 px-7 py-3.5 btn-primary text-small font-bold"
+                className="group inline-flex items-center gap-2 px-7 py-3.5 btn-primary text-small font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--accent-primary)]"
               >
                 <Sparkles className="h-4 w-4 opacity-70 group-hover:opacity-100 transition-opacity" />
                 Enroll Now
               </button>
               <button
                 onClick={() => document.getElementById('syllabus')?.scrollIntoView({ behavior: 'smooth' })}
-                className="px-7 py-3.5 btn-secondary text-small font-bold"
+                className="px-7 py-3.5 btn-secondary text-small font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--accent-primary)]"
               >
                 View Syllabus
               </button>
@@ -313,14 +310,14 @@ const CourseDetail = () => {
                   <div className="space-y-3 mb-6">
                     <button
                       onClick={() => openModal(course.title)}
-                      className="w-full btn-primary py-4 text-small font-bold flex items-center justify-center gap-2"
+                      className="w-full btn-primary py-4 text-small font-bold flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--accent-primary)]"
                     >
                       <Sparkles className="h-4 w-4" />
                       Enroll Now
                     </button>
                     <button
                       onClick={() => openModal(course.title)}
-                      className="w-full py-4 btn-secondary text-small font-bold"
+                      className="w-full py-4 btn-secondary text-small font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--accent-primary)]"
                     >
                       Talk to Counselor
                     </button>
@@ -393,8 +390,7 @@ const CourseDetail = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-              className="heading-lg font-bold tracking-tight"
-              style={{ color: 'var(--text-heading)' }}
+              className="heading-lg font-bold tracking-tight text-[var(--text-heading))]"
             >
               Everything You Need to Get Hired
             </motion.h2>
@@ -404,8 +400,7 @@ const CourseDetail = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-              className="text-body leading-relaxed font-medium"
-              style={{ color: 'var(--text-muted)' }}
+              className="text-body leading-relaxed font-medium text-[var(--text-muted))]"
             >
               From resume building to job referrals — comprehensive career support included with this program.
             </motion.p>
@@ -433,10 +428,10 @@ const CourseDetail = () => {
 
                 {/* Content */}
                 <div className="flex-1 min-w-0">
-                  <h3 className="heading-sm font-semibold mb-1 leading-tight" style={{ color: 'var(--text-heading)' }}>
+                  <h3 className="heading-sm font-semibold mb-1 leading-tight text-[var(--text-heading))]">
                     {addon.title}
                   </h3>
-                  <p className="text-caption leading-relaxed line-clamp-2" style={{ color: 'var(--text-body)' }}>
+                  <p className="text-caption leading-relaxed line-clamp-2 text-[var(--text-body))]">
                     {addon.description}
                   </p>
                 </div>

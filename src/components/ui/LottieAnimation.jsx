@@ -5,7 +5,7 @@ const LottieAnimation = ({
   animationData, 
   loop = true, 
   autoplay = true, 
-  className = "w-full h-full",
+  className ="w-full h-full",
   style = {} 
 }) => {
   if (!animationData) return null;

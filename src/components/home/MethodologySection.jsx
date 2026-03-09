@@ -5,10 +5,10 @@ import { StackingCards } from '../utils/StackingCards';
 import { BRANDING } from '../../data/branding';
 
 const methodology = [
-  { step: "01", title: "Master the Foundations", desc: "Expert-led, industry-aligned sessions that build deep understanding of AI and Cloud technologies.", icon: <Cpu className="h-6 w-6" />, color: "bg-blue-500" },
-  { step: "02", title: "Practice with Real Systems", desc: "Hands-on labs and real-world projects designed to simulate industry environments.", icon: <Code2 className="h-6 w-6" />, color: "bg-purple-500" },
-  { step: "03", title: "Create Industry-Grade Solutions", desc: "Develop advanced capstone projects that demonstrate your real-world problem-solving ability.", icon: <Users className="h-6 w-6" />, color: "bg-orange-500" },
-  { step: "04", title: "Accelerate Your Career", desc: "End-to-end career support including mentorship, portfolio building, and placement guidance.", icon: <GraduationCap className="h-6 w-6" />, color: "bg-green-500" },
+  { step:"01", title:"Master the Foundations", desc:"Expert-led, industry-aligned sessions that build deep understanding of AI and Cloud technologies.", icon: <Cpu className="h-6 w-6" />, color:"bg-blue-500" },
+  { step:"02", title:"Practice with Real Systems", desc:"Hands-on labs and real-world projects designed to simulate industry environments.", icon: <Code2 className="h-6 w-6" />, color:"bg-purple-500" },
+  { step:"03", title:"Create Industry-Grade Solutions", desc:"Develop advanced capstone projects that demonstrate your real-world problem-solving ability.", icon: <Users className="h-6 w-6" />, color:"bg-orange-500" },
+  { step:"04", title:"Accelerate Your Career", desc:"End-to-end career support including mentorship, portfolio building, and placement guidance.", icon: <GraduationCap className="h-6 w-6" />, color:"bg-green-500" },
 ];
 
 const MethodologySection = ({ openModal }) => (
@@ -40,7 +40,7 @@ const MethodologySection = ({ openModal }) => (
           <StaggerItem key={index} className="h-full">
             <div className="bg-[var(--bg-card)] border border-[var(--border-color)] p-5 sm:p-8 rounded-2xl sm:rounded-[2.5rem] relative z-10 hover:shadow-xl transition-all duration-500 hover:-translate-y-2 h-full flex flex-col group">
               <div className="flex justify-between items-start mb-6 sm:mb-8">
-                <div className={`w-12 h-12 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl ${item.color} flex items-center justify-center text-white shadow-lg shadow-black/20`}>
+                <div className={`w-12 h-12 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl ${item.color} flex items-center justify-center text-[var(--text-on-inverted)] shadow-lg shadow-black/20`}>
                   {item.icon}
                 </div>
                 <span className="heading-md font-bold text-[var(--text-muted)] opacity-30 group-hover:opacity-50 transition-opacity">
@@ -74,7 +74,7 @@ const MethodologySection = ({ openModal }) => (
         </div>
         <button
           onClick={() => openModal()}
-          className="btn-primary px-10 py-4 shadow-xl shadow-primary/20"
+          className="btn-primary px-10 py-4 shadow-xl shadow-primary/20 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--accent-primary)]"
         >
           Start Your Transformation
         </button>

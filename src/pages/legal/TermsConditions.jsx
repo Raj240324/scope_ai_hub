@@ -62,7 +62,7 @@ const TermsConditions = () => {
           <section className="mb-12">
             <h2 className="heading-md mb-4">5. Placement Assistance</h2>
             <p className="text-[var(--text-muted)] mb-4">
-              Our "Strategic Placement Guidance" includes resume building, mock interviews, and sharing profiles with hiring partners. However:
+              Our"Strategic Placement Guidance" includes resume building, mock interviews, and sharing profiles with hiring partners. However:
             </p>
             <ul className="list-disc pl-6 text-[var(--text-muted)] space-y-2">
               <li>Placement is not a guarantee of a job offer; it depends on your performance in the actual interviews.</li>

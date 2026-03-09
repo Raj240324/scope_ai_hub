@@ -9,58 +9,49 @@ import { FadeIn, StaggerContainer, StaggerItem } from '../../components/utils/An
 const TrainerProfiles = () => {
   const trainers = [
     {
-      name: "Sanjula",
-      role: "Head of Academics",
-      image: "https://randomuser.me/api/portraits/women/75.jpg",
-      expertise: ["AI & Data Science", "Curriculum Design", "Academic Leadership", "Machine Learning"],
-      experience: "8+ years",
-      companies: ["Industry", "Academia"],
-      bio: "8+ years of AI & Data Science industry experience, leading curriculum design aligned with global tech standards. Dedicated to building structured, outcome-driven learning pathways that bridge real-world industry demands with learner growth.",
-      education: "AI & Data Science — Industry Specialist",
-      achievements: [
-        "Designed AI & Cloud curriculum aligned with global tech standards",
-        "Led academic programmes producing 1,000+ career-ready graduates",
-        "Spearheaded outcome-driven curriculum reform at SCOPE AI HUB"
+      name:"Sanjula",
+      role:"Head of Academics",
+      image:"https://randomuser.me/api/portraits/women/75.jpg",
+      expertise: ["AI & Data Science","Curriculum Design","Academic Leadership","Machine Learning"],
+      experience:"8+ years",
+      companies: ["Industry","Academia"],
+      bio:"8+ years of AI & Data Science industry experience, leading curriculum design aligned with global tech standards. Dedicated to building structured, outcome-driven learning pathways that bridge real-world industry demands with learner growth.",
+      education:"AI & Data Science — Industry Specialist",
+      achievements: ["Designed AI & Cloud curriculum aligned with global tech standards","Led academic programmes producing 1,000+ career-ready graduates","Spearheaded outcome-driven curriculum reform at SCOPE AI HUB"
       ],
-      linkedin: "https://linkedin.com",
-      github: "https://github.com",
-      email: "academics@scopeaihub.com"
+      linkedin:"https://linkedin.com",
+      github:"https://github.com",
+      email:"academics@scopeaihub.com"
     },
     {
-      name: "Raghavi",
-      role: "Head – Placements & Corporate Relations",
-      image: "https://randomuser.me/api/portraits/women/68.jpg",
-      expertise: ["Corporate Relations", "Placements", "Enterprise HR", "Career Coaching"],
-      experience: "Industry Expert",
-      companies: ["Enterprise Organizations", "Tech Industry"],
-      bio: "Former HR professional with experience in enterprise hiring, building strong industry partnerships for student career acceleration. Strategically connects graduates with top tech companies across India and beyond.",
-      education: "HR & Corporate Relations — Enterprise Specialist",
-      achievements: [
-        "Built a network of 75+ active hiring partners across India",
-        "Managed placement drives placing 500+ students into tech roles",
-        "Developed structured interview grooming and career readiness programmes"
+      name:"Raghavi",
+      role:"Head – Placements & Corporate Relations",
+      image:"https://randomuser.me/api/portraits/women/68.jpg",
+      expertise: ["Corporate Relations","Placements","Enterprise HR","Career Coaching"],
+      experience:"Industry Expert",
+      companies: ["Enterprise Organizations","Tech Industry"],
+      bio:"Former HR professional with experience in enterprise hiring, building strong industry partnerships for student career acceleration. Strategically connects graduates with top tech companies across India and beyond.",
+      education:"HR & Corporate Relations — Enterprise Specialist",
+      achievements: ["Built a network of 75+ active hiring partners across India","Managed placement drives placing 500+ students into tech roles","Developed structured interview grooming and career readiness programmes"
       ],
-      linkedin: "https://linkedin.com",
-      github: "https://github.com",
-      email: "placements@scopeaihub.com"
+      linkedin:"https://linkedin.com",
+      github:"https://github.com",
+      email:"placements@scopeaihub.com"
     },
     {
-      name: "Suresh M",
-      role: "Principal AI Consultant & Lead Trainer",
-      image: "https://randomuser.me/api/portraits/men/36.jpg",
-      expertise: ["AI Consulting", "Machine Learning", "Deep Learning", "Applied AI"],
-      experience: "Enterprise AI Practitioner",
-      companies: ["Enterprise Clients", "Tech Industry"],
-      bio: "Enterprise AI practitioner transforming complex technologies into practical, career-ready skillsets. Brings real-world AI consulting experience into every session, ensuring students learn by building — not just watching.",
-      education: "AI & Machine Learning — Enterprise Consultant",
-      achievements: [
-        "Delivered AI consulting to enterprise clients across multiple industries",
-        "Designed hands-on AI and ML labs used in live industry-grade projects",
-        "Trained professionals from 25+ organisations in applied AI techniques"
+      name:"Suresh M",
+      role:"Principal AI Consultant & Lead Trainer",
+      image:"https://randomuser.me/api/portraits/men/36.jpg",
+      expertise: ["AI Consulting","Machine Learning","Deep Learning","Applied AI"],
+      experience:"Enterprise AI Practitioner",
+      companies: ["Enterprise Clients","Tech Industry"],
+      bio:"Enterprise AI practitioner transforming complex technologies into practical, career-ready skillsets. Brings real-world AI consulting experience into every session, ensuring students learn by building — not just watching.",
+      education:"AI & Machine Learning — Enterprise Consultant",
+      achievements: ["Delivered AI consulting to enterprise clients across multiple industries","Designed hands-on AI and ML labs used in live industry-grade projects","Trained professionals from 25+ organisations in applied AI techniques"
       ],
-      linkedin: "https://linkedin.com",
-      github: "https://github.com",
-      email: "training@scopeaihub.com"
+      linkedin:"https://linkedin.com",
+      github:"https://github.com",
+      email:"training@scopeaihub.com"
     }
   ];
 
@@ -80,10 +71,10 @@ const TrainerProfiles = () => {
         {/* Stats Bar */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-20">
           {[
-            { value: "15+", label: "Expert Trainers" },
-            { value: "120+", label: "Combined Years Experience" },
-            { value: "500+", label: "Students Mentored" },
-            { value: "95%", label: "Student Satisfaction" }
+            { value:"15+", label:"Expert Trainers" },
+            { value:"120+", label:"Combined Years Experience" },
+            { value:"500+", label:"Students Mentored" },
+            { value:"95%", label:"Student Satisfaction" }
           ].map((stat, i) => (
             <FadeIn key={i} delay={i * 0.1}>
               <div className="text-center p-6 bg-[var(--bg-secondary)] rounded-2xl border border-[var(--border-color)]">
@@ -112,13 +103,13 @@ const TrainerProfiles = () => {
                   <h3 className="heading-sm font-semibold text-[var(--text-heading)] text-center mb-2">{trainer.name}</h3>
                   <p className="text-primary font-bold text-center mb-6">{trainer.role}</p>
                   <div className="flex space-x-4">
-                    <a href={trainer.linkedin} target="_blank" rel="noopener noreferrer" className="p-2 bg-[var(--bg-card)] rounded-lg hover:bg-primary hover:text-white transition-colors text-[var(--text-muted)]">
+                    <a href={trainer.linkedin} target="_blank" rel="noopener noreferrer" className="p-2 bg-[var(--bg-card)] rounded-lg hover:bg-primary hover:text-[var(--text-on-inverted)] transition-colors text-[var(--text-muted)]">
                       <Linkedin className="h-5 w-5" />
                     </a>
-                    <a href={trainer.github} target="_blank" rel="noopener noreferrer" className="p-2 bg-[var(--bg-card)] rounded-lg hover:bg-primary hover:text-white transition-colors text-[var(--text-muted)]">
+                    <a href={trainer.github} target="_blank" rel="noopener noreferrer" className="p-2 bg-[var(--bg-card)] rounded-lg hover:bg-primary hover:text-[var(--text-on-inverted)] transition-colors text-[var(--text-muted)]">
                       <Github className="h-5 w-5" />
                     </a>
-                    <a href={`mailto:${trainer.email}`} className="p-2 bg-[var(--bg-card)] rounded-lg hover:bg-primary hover:text-white transition-colors text-[var(--text-muted)]">
+                    <a href={`mailto:${trainer.email}`} className="p-2 bg-[var(--bg-card)] rounded-lg hover:bg-primary hover:text-[var(--text-on-inverted)] transition-colors text-[var(--text-muted)]">
                       <Mail className="h-5 w-5" />
                     </a>
                   </div>
@@ -143,13 +134,13 @@ const TrainerProfiles = () => {
                   {/* Companies */}
                   <div className="mb-6">
                     <h4 className="text-caption font-black uppercase tracking-wider text-[var(--text-muted)] mb-3">Previous Companies</h4>
-                    <div className="flex flex-wrap gap-2">
-                      {trainer.companies.map((company, i) => (
-                        <span key={i} className="px-4 py-2 bg-[var(--bg-inverted)] text-[var(--text-on-inverted)] text-caption font-bold rounded-lg">
-                          {company}
-                        </span>
-                      ))}
-                    </div>
+                  <div className="flex flex-wrap gap-2">
+                    {trainer.companies.map((company, i) => (
+                      <span key={i} className="px-4 py-2 bg-[var(--bg-inverted)] text-[var(--text-on-light)] text-caption font-bold rounded-lg">
+                        {company}
+                      </span>
+                    ))}
+                  </div>
                   </div>
 
                   {/* Expertise */}
@@ -183,9 +174,9 @@ const TrainerProfiles = () => {
         </StaggerContainer>
 
         {/* CTA Section */}
-        <div className="mt-12 sm:mt-20 text-center p-6 sm:p-12 bg-[var(--bg-inverted)] rounded-2xl sm:rounded-3xl text-[var(--text-on-inverted)]">
-          <h2 className="heading-lg font-bold text-[var(--text-on-inverted)]">Want to Learn from These Experts?</h2>
-          <p className="text-body-lg text-[var(--text-on-inverted)]/60 mb-10 max-w-2xl mx-auto">
+        <div className="mt-12 sm:mt-20 text-center p-6 sm:p-12 bg-[var(--bg-inverted)] light-surface text-[var(--text-on-light)] rounded-2xl sm:rounded-3xl">
+          <h2 className="heading-lg font-bold text-[var(--text-on-light)]">Want to Learn from These Experts?</h2>
+          <p className="text-body-lg text-[var(--text-on-light)]/60 mb-10 max-w-2xl mx-auto">
             Join our next batch and get personalized mentorship from industry veterans who are passionate about teaching.
           </p>
           <a href="/admissions" className="inline-block px-6 sm:px-10 py-3 sm:py-4 bg-primary hover:bg-primary-dark text-white font-black rounded-xl transition-all shadow-xl shadow-primary/30">

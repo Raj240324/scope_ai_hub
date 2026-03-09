@@ -21,7 +21,7 @@ const CourseCard = ({ course, index = 0 }) => {
     >
       <Link
         to={`/courses/${course.slug}`}
-        className="block h-full relative rounded-[20px] overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-2 hover:shadow-2xl hover:shadow-gray-900/8 dark:hover:shadow-black/40"
+        className="block h-full relative rounded-[20px] overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-2 hover:shadow-2xl hover:shadow-gray-900/8 dark:hover:shadow-black/40 no-underline"
         style={{
           backgroundColor: 'var(--bg-card)',
           borderWidth: '1px',
@@ -61,7 +61,7 @@ const CourseCard = ({ course, index = 0 }) => {
 
             {/* Meta Information Grid */}
             <div className="space-y-3 mb-5">
-              <div className="flex items-center gap-2.5 text-caption font-semibold" style={{ color: 'var(--text-body)' }}>
+              <div className="flex items-center gap-2.5 text-caption font-semibold text-[var(--text-body))]">
                 <div 
                   className="flex items-center justify-center w-7 h-7 rounded-lg"
                   style={{ backgroundColor: `${tier.color}15` }}
@@ -79,7 +79,7 @@ const CourseCard = ({ course, index = 0 }) => {
                 </div>
                 <span>{course.salaryRange}</span>
               </div>
-              <div className="flex items-center gap-2.5 text-caption font-semibold" style={{ color: 'var(--text-body)' }}>
+              <div className="flex items-center gap-2.5 text-caption font-semibold text-[var(--text-body))]">
                 <div 
                   className="flex items-center justify-center w-7 h-7 rounded-lg"
                   style={{ backgroundColor: `${tier.color}15` }}
@@ -93,14 +93,13 @@ const CourseCard = ({ course, index = 0 }) => {
 
           {/* Bottom Action Bar */}
           <div 
-            className="px-6 sm:px-7 py-4 border-t"
+            className="px-6 sm:px-7 py-4"
             style={{
-              borderColor: 'var(--border-color)',
-              backgroundColor: 'var(--bg-secondary)',
+              backgroundColor: 'var(--bg-card)',
             }}
           >
             <div className="flex items-center justify-between">
-              <span className="text-caption font-bold uppercase tracking-wider" style={{ color: 'var(--text-muted)' }}>
+              <span className="text-caption font-bold uppercase tracking-wider text-[var(--text-muted))]">
                 View Course
               </span>
               <div 
@@ -109,7 +108,7 @@ const CourseCard = ({ course, index = 0 }) => {
                   backgroundColor: tier.color,
                 }}
               >
-                <ArrowRight className="h-4 w-4 text-white transition-transform duration-300 group-hover:translate-x-0.5" />
+                <ArrowRight className="h-4 w-4 text-[var(--text-on-inverted)] transition-transform duration-300 group-hover:translate-x-0.5" />
               </div>
             </div>
           </div>

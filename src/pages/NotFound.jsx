@@ -1,7 +1,7 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import LottieAnimation from "../components/ui/LottieAnimation";
-import animation404 from "../assets/animations/Error 404.json";
+import React from"react";
+import { Link } from"react-router-dom";
+import LottieAnimation from"../components/ui/LottieAnimation";
+import animation404 from"../assets/animations/Error 404.json";
 
 function NotFound() {
   return (
@@ -15,7 +15,7 @@ function NotFound() {
       </p>
       <Link
         to="/"
-        className="mt-5 btn-primary"
+        className="mt-5 btn-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--accent-primary)]"
       >
         Go Back Home
       </Link>
