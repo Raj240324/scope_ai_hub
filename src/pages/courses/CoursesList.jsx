@@ -1,7 +1,7 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo, useEffect, Suspense } from 'react';
 import Layout from '../../components/layout/Layout';
 import CourseCard from '../../components/ui/CourseCard';
-import AddonsGrid from '../../components/ui/AddonsGrid';
+const AddonsGrid = React.lazy(() => import('../../components/ui/AddonsGrid'));
 import { courses, TIERS, tierMeta } from '../../data/courses';
 import { addons } from '../../data/addons';
 import { Search, X, Sparkles, GraduationCap, Award } from 'lucide-react';
@@ -364,47 +364,49 @@ const CoursesList = () => {
       </div>
 
       {/* Career Advantages Section */}
-      <section id="career-benefits" className="bg-[var(--bg-secondary)] border-t border-[var(--border-color)] py-20 md:py-28">
-        <div className="container-custom">
-          {/* Header */}
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-              className="inline-flex items-center gap-2 px-4 py-2 mb-6 rounded-full bg-primary/5 border border-primary/10 text-primary text-caption font-bold uppercase tracking-[0.2em]"
-            >
-              <Award className="h-3.5 w-3.5" />
-              Included with Every Program
-            </motion.div>
+      <Suspense fallback={null}>
+        <section id="career-benefits" className="bg-[var(--bg-secondary)] border-t border-[var(--border-color)] py-20 md:py-28">
+          <div className="container-custom">
+            {/* Header */}
+            <div className="text-center max-w-3xl mx-auto mb-16">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                className="inline-flex items-center gap-2 px-4 py-2 mb-6 rounded-full bg-primary/5 border border-primary/10 text-primary text-caption font-bold uppercase tracking-[0.2em]"
+              >
+                <Award className="h-3.5 w-3.5" />
+                Included with Every Program
+              </motion.div>
 
-            <motion.h2
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-              className="heading-lg font-bold tracking-tight text-[var(--text-heading)]"
-            >
-              12 Career Advantages{' '}
-              <span className="font-extrabold text-primary">Included</span>
-            </motion.h2>
+              <motion.h2
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+                className="heading-lg font-bold tracking-tight text-[var(--text-heading)]"
+              >
+                12 Career Advantages{' '}
+                <span className="font-extrabold text-primary">Included</span>
+              </motion.h2>
 
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-              className="text-body sm:text-lg leading-relaxed font-medium text-[var(--text-muted)]"
-            >
-              Every program comes with comprehensive career support — from resume preparation to job referrals. We're invested in your success.
-            </motion.p>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+                className="text-body sm:text-lg leading-relaxed font-medium text-[var(--text-muted)]"
+              >
+                Every program comes with comprehensive career support — from resume preparation to job referrals. We're invested in your success.
+              </motion.p>
+            </div>
+
+            {/* Add-ons Grid */}
+            <AddonsGrid addons={addons} variant="full" showBadge={true} />
           </div>
-
-          {/* Add-ons Grid */}
-          <AddonsGrid addons={addons} variant="full" showBadge={true} />
-        </div>
-      </section>
+        </section>
+      </Suspense>
     </Layout>
   );
 };

@@ -43,7 +43,7 @@ function AppPreloader({ onReady }) {
       return;
     }
 
-    // Show for 2 seconds (faster animation cycle), then fade out
+    // Show briefly on first load, then fade out
     const timer = setTimeout(() => {
       setFadeOut(true);
       window.__appPreloaderShown = true;
@@ -52,7 +52,7 @@ function AppPreloader({ onReady }) {
         setVisible(false);
         if (onReady) onReady();
       }, 500);
-    }, 2000);
+    }, 900);
 
     return () => clearTimeout(timer);
   }, []);

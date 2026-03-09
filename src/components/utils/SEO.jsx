@@ -164,10 +164,6 @@ const SEO = ({
       <meta name="twitter:image" content={absoluteImage} />
       <meta name="twitter:site" content="@scopeaihub" />
 
-      {/* PRELOAD SOCIAL IMAGE */}
-
-      <link rel="preload" as="image" href={absoluteImage} />
-
       {/* JSON-LD SCHEMAS */}
 
       <script type="application/ld+json">

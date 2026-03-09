@@ -4,7 +4,7 @@ import { Clock, TrendingUp, BookOpen, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { tierMeta } from '../../data/courses';
 
-const CourseCard = ({ course, index = 0 }) => {
+const CourseCardComponent = ({ course, index = 0 }) => {
   const tier = tierMeta[course.tier] || tierMeta.Beginner;
 
   return (
@@ -117,5 +117,7 @@ const CourseCard = ({ course, index = 0 }) => {
     </motion.div>
   );
 };
+
+const CourseCard = React.memo(CourseCardComponent);
 
 export default CourseCard;
