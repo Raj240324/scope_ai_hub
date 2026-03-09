@@ -9,7 +9,7 @@ import { ThemeProvider } from './context/ThemeContext';
 import ContactModal from './components/ui/ContactModal';
 import NewUserModalTrigger from './components/utils/NewUserModalTrigger';
 import { CoreSpinLoader } from './components/ui/CoreSpinLoader';
-import AICursor from './components/AICursor';
+
 
 // Lazy Load Pages
 const Home = lazy(() => import('./pages/Home'));
@@ -79,7 +79,7 @@ function App() {
   return (
     <ErrorBoundary>
       <AppPreloader onReady={() => setIsAppReady(true)} />
-      <AICursor />
+
       <ModalProvider>
         <ThemeProvider>
           <Router>

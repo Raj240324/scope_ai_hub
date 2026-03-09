@@ -257,7 +257,7 @@ const ContactForm = ({ initialCourse = 'General Inquiry' }) => {
             Send Another
           </button>
           {closeModal && (
-            <button onClick={closeModal} className="px-6 py-3 bg-[var(--bg-inverted)] text-[var(--text-on-inverted)] font-bold rounded-xl text-small hover:opacity-90 transition-all">
+            <button onClick={closeModal} className="btn-secondary text-small">
               Close
             </button>
           )}
@@ -448,7 +448,7 @@ const ContactForm = ({ initialCourse = 'General Inquiry' }) => {
           <button
             onClick={handleNext}
             disabled={status === 'sending'}
-            className="w-full bg-primary hover:bg-primary-dark text-white font-bold py-3.5 rounded-xl flex items-center justify-center gap-2 transition-all shadow-lg shadow-primary/20 group disabled:opacity-70 disabled:cursor-not-allowed"
+            className="w-full btn-primary py-3.5 flex items-center justify-center gap-2 group disabled:opacity-70 disabled:cursor-not-allowed"
           >
             {status === 'sending' ? (
               <>
@@ -466,7 +466,7 @@ const ContactForm = ({ initialCourse = 'General Inquiry' }) => {
           <button
             onClick={handleNext}
             disabled={status === 'sending'}
-            className="w-full bg-primary hover:bg-primary-dark text-white font-bold py-3.5 rounded-xl flex items-center justify-center gap-2 transition-all shadow-lg shadow-primary/20 group disabled:opacity-70 disabled:cursor-not-allowed"
+            className="w-full btn-primary py-3.5 flex items-center justify-center gap-2 group disabled:opacity-70 disabled:cursor-not-allowed"
           >
             {status === 'sending' ? (
               <>

@@ -170,7 +170,7 @@ const Footer = () => {
               </span>
               <button 
                 onClick={() => openModal()}
-                className="text-primary hover:opacity-80 font-bold uppercase tracking-widest transition-colors"
+                className="btn-primary px-5 py-2 text-small"
                 aria-label="Enroll Today"
               >
                 Enroll Today

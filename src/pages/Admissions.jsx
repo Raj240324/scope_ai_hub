@@ -268,7 +268,7 @@ const Admissions = () => {
           <div className="text-center mt-14">
             <button
               onClick={() => openModal()}
-              className="group inline-flex items-center gap-2 px-8 py-4 bg-primary text-white font-bold rounded-xl hover:shadow-xl transition-all"
+              className="group inline-flex items-center gap-2 px-8 py-4 btn-primary text-body-lg text-white font-bold"
             >
               Book Your Free Counseling Session
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -350,26 +350,26 @@ const Admissions = () => {
 
         {/* Fee Structure Note */}
         {/* Course Programs Overview */}
-        <div className="mt-16 sm:mt-24 p-5 sm:p-8 md:p-12 dark-section text-[var(--text-on-inverted)] rounded-2xl sm:rounded-3xl text-center">
-          <h2 className="heading-lg font-bold text-[var(--text-on-inverted)] mb-8 relative z-10">Programs Designed For You</h2>
+        <div className="mt-16 sm:mt-24 p-5 sm:p-8 md:p-12 dark-section text-white rounded-2xl sm:rounded-3xl text-center">
+          <h2 className="heading-lg font-bold text-white mb-8 relative z-10">Programs Designed For You</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10 text-left">
              <div className="glass-card p-6 text-left">
                 <h3 className="heading-sm font-semibold mb-2 text-primary-light">Upskill Courses</h3>
-                <p className="text-small text-[var(--text-on-inverted)]/80 mb-2">Targeted training to master specific technologies or tools quickly.</p>
-                <p className="text-caption text-[var(--text-on-inverted)]/60 font-bold uppercase tracking-wider">Duration: 1-2 Months</p>
+                <p className="text-small text-white/80 mb-2">Targeted training to master specific technologies or tools quickly.</p>
+                <p className="text-caption text-white/60 font-bold uppercase tracking-wider">Duration: 1-2 Months</p>
              </div>
              <div className="glass-card p-6 text-left">
                 <h3 className="heading-sm font-semibold mb-2 text-primary-light">Career Tracks</h3>
-                <p className="text-small text-[var(--text-on-inverted)]/80 mb-2">Comprehensive pathways to transform you into a job-ready professional.</p>
-                <p className="text-caption text-[var(--text-on-inverted)]/60 font-bold uppercase tracking-wider">Duration: 4-6 Months</p>
+                <p className="text-small text-white/80 mb-2">Comprehensive pathways to transform you into a job-ready professional.</p>
+                <p className="text-caption text-white/60 font-bold uppercase tracking-wider">Duration: 4-6 Months</p>
              </div>
              <div className="glass-card p-6 text-left">
                 <h3 className="heading-sm font-semibold mb-2 text-primary-light">Master Programs</h3>
-                <p className="text-small text-[var(--text-on-inverted)]/80 mb-2">Deep-dive intensive programs with extensive projects and mentorship.</p>
-                <p className="text-caption text-[var(--text-on-inverted)]/60 font-bold uppercase tracking-wider">Duration: 8-12 Months</p>
+                <p className="text-small text-white/80 mb-2">Deep-dive intensive programs with extensive projects and mentorship.</p>
+                <p className="text-caption text-white/60 font-bold uppercase tracking-wider">Duration: 8-12 Months</p>
              </div>
           </div>
-          <p className="text-[var(--text-on-inverted)]/80 max-w-2xl mx-auto mb-10 relative z-10 font-medium">To maintain high training quality, class sizes are strictly limited. Contact our admission desk for detailed fee structures and availability.</p>
+          <p className="text-white/80 max-w-2xl mx-auto mb-10 relative z-10 font-medium">To maintain high training quality, class sizes are strictly limited. Contact our admission desk for detailed fee structures and availability.</p>
           <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6 relative z-10">
             <button 
               onClick={() => openModal()}
@@ -377,7 +377,7 @@ const Admissions = () => {
             >
               Enquire About Admissions
             </button>
-            <Link to="/courses" className="glass-button text-[var(--text-on-inverted)] font-bold px-8 py-4">
+            <Link to="/courses" className="btn-secondary text-white font-bold px-8 py-4">
               Explore Courses
             </Link>
           </div>

@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,600;0,700;1,300&family=Barlow+Condensed:wght@500;600;700;800&family=DM+Mono:wght@400;500&display=swap');
 
 @theme {
   /* New Brand Palette - Pink/Violet "Ai" Theme */
@@ -28,7 +29,10 @@
   --color-warning: #f59e0b;
   --color-danger: #ef4444;
 
-  --font-sans: "Inter", "system-ui", "sans-serif";
+  --font-sans: "Barlow", "system-ui", "sans-serif";
+  --font-display: "Bebas Neue", "Arial Black", "sans-serif";
+  --font-nav: "Barlow Condensed", "Arial Narrow", "sans-serif";
+  --font-mono: "DM Mono", "Courier New", "monospace";
 }
 
 html {
@@ -45,32 +49,35 @@ body {
   width: 100%;
 }
 
+::-webkit-scrollbar        { width: 4px; }
+::-webkit-scrollbar-track  { background: var(--bg-body); }
+::-webkit-scrollbar-thumb  { background: #d64fd9; border-radius: 2px; }
+
 section {
   position: relative;
-  overflow: hidden;
 }
 
 :root {
   /* ===== LIGHT THEME — Clean White & Navy ===== */
   /* Page */
-  --bg-body: #F5F7FA;
+  --bg-body: #f8f5ff;
   --bg-secondary: #F8FAFC;
-  --bg-card: #FFFFFF;
-  --text-body: #5B6B7A; /* User Tagline Color */
-  --text-heading: #0A2540; /* User Title Color */
-  --text-muted: #5B6B7A; /* User Tagline Color */
-  --border-color: #E2E8F0;
+  --bg-card: #ffffff;
+  --text-body: rgba(13, 2, 20, 0.80);
+  --text-heading: #0d0214;
+  --text-muted: rgba(13, 2, 20, 0.45);
+  --border-color: rgba(214, 79, 217, 0.15);
 
   /* Inverted sections (dark accent blocks) */
-  --bg-inverted: #0A2540;
-  --text-on-inverted: #E6EDF5;
+  --bg-inverted: #0d0214;
+  --text-on-inverted: #f5f0ea;
 
   /* Header */
   --bg-header: #FFFFFF;
-  --bg-header-scrolled: rgba(255, 255, 255, 0.96);
-  --text-nav: #5B6B7A;
-  --text-nav-active: #A73FD0;
-  --border-header: #E2E8F0;
+  --bg-header-scrolled: rgba(248, 245, 255, 0.92);
+  --text-nav: rgba(13, 2, 20, 0.65);
+  --text-nav-active: #d64fd9;
+  --border-header: rgba(214, 79, 217, 0.20);
 
   /* Footer */
   --bg-footer: #FFFFFF;
@@ -99,24 +106,24 @@ section {
 .dark {
   /* ===== DARK THEME — Premium Deep Violet & Navy ===== */
   /* Backgrounds — rich dark navy/black */
-  --bg-body: #0B1220; /* Deepest Navy/Black */
+  --bg-body: #010408;
   --bg-secondary: #0A121D;
-  --bg-card: #111b2b;
-  --text-body: #9BA7B4; /* User Dark Tagline */
-  --text-heading: #E6EDF5; /* User Dark Title */
-  --text-muted: #9BA7B4; /* User Dark Tagline */
-  --border-color: rgba(167, 63, 208, 0.15); /* Purple tint */
+  --bg-card: #0d1117;
+  --text-body: rgba(245, 240, 234, 0.75);
+  --text-heading: #f5f0ea;
+  --text-muted: rgba(245, 240, 234, 0.40);
+  --border-color: rgba(214, 79, 217, 0.12);
 
   /* Inverted sections */
-  --bg-inverted: #111b2b;
-  --text-on-inverted: #E6EDF5;
+  --bg-inverted: #f5f0ea;
+  --text-on-inverted: #010408;
 
   /* Header */
   --bg-header: #050a10;
-  --bg-header-scrolled: rgba(5, 10, 16, 0.96);
-  --text-nav: #9BA7B4;
-  --text-nav-active: #D64FD9;
-  --border-header: rgba(167, 63, 208, 0.15);
+  --bg-header-scrolled: rgba(4, 6, 12, 0.92);
+  --text-nav: rgba(245, 240, 234, 0.55);
+  --text-nav-active: #d64fd9;
+  --border-header: rgba(214, 79, 217, 0.15);
 
   /* Footer */
   --bg-footer: #020406;
@@ -162,34 +169,7 @@ body {
   overflow-x: clip;
 }
 
-/* =========================
-   AI CUSTOM CURSOR SYSTEM
-   ========================= */
 
-body, button, a, [role="button"], input {
-  cursor: none !important;
-}
-
-/* sparkle cursor */
-.ai-cursor {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 28px;
-  height: 28px;
-  background: url("/sparkle-cursor.svg") center/contain no-repeat;
-  pointer-events: none;
-  z-index: 99999;
-  /* Smooth easing out positional trailing */
-  transition: transform 0.08s cubic-bezier(0.2, 0, 0, 1), background-image 0.2s ease;
-}
-
-/* circle hover cursor */
-.ai-cursor.hover {
-  background: url("/circle-cursor.svg") center/contain no-repeat;
-  width: 32px;
-  height: 32px;
-}
   
   html.dark body {
     background-color: var(--bg-body);
@@ -353,29 +333,49 @@ body, button, a, [role="button"], input {
     color: var(--text-muted);
   }
 
-  /* Primary Button - Gradient */
+  /* Primary Button — matches hero-btn-primary */
   .btn-primary {
-    @apply inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-bold rounded-xl transition-all duration-300 shadow-md hover:shadow-xl hover:-translate-y-0.5 active:scale-95 cursor-pointer;
-    background: var(--btn-primary-gradient);
-    color: var(--btn-primary-text);
+    @apply inline-flex items-center justify-center font-black tracking-wider uppercase transition-all active:scale-95 cursor-pointer border-0;
+    padding: 0.8rem 1.8rem;
+    background: linear-gradient(110deg, #d64fd9, #b833bb);
+    color: #fff;
+    font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+    font-weight: 700;
+    font-size: clamp(0.82rem, 2.5vw, 1rem);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+    box-shadow: 0 4px 28px rgba(214, 79, 217, 0.45);
+    white-space: nowrap;
   }
 
   .btn-primary:hover {
-    filter: brightness(1.1);
-    box-shadow: 0 10px 25px -5px rgba(214, 79, 217, 0.4); /* Glow effect with pink */
+    transform: translateY(-2px);
+    box-shadow: 0 8px 36px rgba(214, 79, 217, 0.65);
   }
 
-  /* Secondary Button */
+  /* Secondary Button — matches hero-btn-ghost */
   .btn-secondary {
-    @apply inline-flex items-center justify-center px-6 py-3 text-base font-bold rounded-xl transition-all duration-300 active:scale-95 cursor-pointer;
-    border: 2px solid var(--btn-secondary-border);
+    @apply inline-flex items-center justify-center transition-all duration-300 active:scale-95 cursor-pointer;
+    padding: 0.8rem 1.8rem;
+    border: 1px solid rgba(214, 79, 217, 0.3);
     color: var(--btn-secondary-text);
-    background: var(--btn-secondary-bg);
+    background: transparent;
+    font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+    font-weight: 700;
+    font-size: clamp(0.82rem, 2.5vw, 1rem);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+    white-space: nowrap;
   }
 
   .btn-secondary:hover {
-    background-color: var(--btn-secondary-border);
-    color: var(--btn-primary-text);
+    background: rgba(214, 79, 217, 0.1);
+    border-color: rgba(214, 79, 217, 0.5);
+    color: var(--btn-primary-text, #fff);
   }
 
   .no-scrollbar::-webkit-scrollbar {
@@ -544,12 +544,4 @@ canvas {
   display: block;
 }
 
-/* disable cursor on mobile */
-@media (pointer: coarse) {
-  body, button, a, [role="button"], input {
-    cursor: auto !important;
-  }
-  .ai-cursor {
-    display: none !important;
-  }
-}
+

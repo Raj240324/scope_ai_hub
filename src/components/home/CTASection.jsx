@@ -20,7 +20,7 @@ const CTASection = ({ openModal }) => (
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
             <button
               onClick={() => openModal('Career Counseling')}
-              className="bg-primary text-white text-small font-semibold px-6 sm:px-10 py-4 sm:py-5 rounded-2xl hover:opacity-90 transition-all flex items-center shadow-xl group w-full sm:w-auto justify-center"
+              className="btn-primary text-small px-6 sm:px-10 py-4 sm:py-5 w-full sm:w-auto shadow-xl flex items-center justify-center group"
             >
               Book Free Session <ArrowRight className="ml-3 h-5 w-5 group-hover:translate-x-1 transition-transform" />
             </button>

@@ -246,13 +246,13 @@ const Reviews = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button 
               onClick={() => openModal()}
-              className="px-10 py-4 bg-[var(--bg-body)] text-[var(--text-heading)] font-bold rounded-xl hover:opacity-90 transition-all shadow-xl"
+              className="btn-primary px-10 py-4 text-body-lg"
             >
               Enroll Now
             </button>
             <button 
               onClick={() => openModal()}
-              className="px-10 py-4 bg-[var(--bg-body)]/10 text-[var(--text-on-inverted)] font-bold rounded-xl hover:bg-[var(--bg-body)]/20 transition-all border border-[var(--bg-body)]/20"
+              className="btn-secondary px-10 py-4 text-body-lg text-[var(--text-on-inverted)] border-[var(--bg-body)]/20"
             >
               Free Career Counseling
             </button>

@@ -599,21 +599,21 @@ const About = () => {
               <div className="flex flex-col sm:flex-row justify-center gap-4">
                 <button 
                   onClick={() => openModal()}
-                  className="bg-primary text-white hover:opacity-90 px-10 py-4 rounded-2xl text-body-lg font-black transition-all shadow-xl shadow-primary/20 flex items-center justify-center"
+                  className="btn-primary px-10 py-4 text-body-lg"
                   aria-label="Apply for AI course admission"
                 >
                   Apply Now <ArrowRight className="ml-2 h-5 w-5" />
                 </button>
                 <Link
                   to="/courses"
-                  className="glass-button text-[var(--text-on-inverted)] px-10 py-4 text-body-lg font-black text-center"
+                  className="btn-secondary text-[var(--text-on-inverted)] border-white/20 px-10 py-4 text-body-lg text-center"
                   aria-label="View all AI training programs"
                 >
                   View Programs
                 </Link>
                 <button 
                   onClick={() => openModal()}
-                  className="glass-button text-[var(--text-on-inverted)] px-10 py-4 text-body-lg font-black"
+                  className="btn-secondary text-[var(--text-on-inverted)] border-white/20 px-10 py-4 text-body-lg"
                   aria-label="Talk to a career mentor"
                 >
                   Talk to a Mentor

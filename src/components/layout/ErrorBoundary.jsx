@@ -31,13 +31,13 @@ class ErrorBoundary extends React.Component {
             <div className="flex flex-col space-y-3">
               <button 
                 onClick={() => window.location.reload()}
-                className="btn-primary py-3"
+                className="btn-primary"
               >
                 Refresh Page
               </button>
               <a 
                 href="/"
-                className="text-primary font-bold hover:underline py-2"
+                className="btn-secondary"
               >
                 Go to Homepage
               </a>

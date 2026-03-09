@@ -245,7 +245,7 @@ const FAQ = () => {
                   <p className="text-[var(--text-on-inverted)]/60 text-caption mb-6">Can't find what you're looking for? Reach out to our team.</p>
                   <button 
                     onClick={() => openModal()}
-                    className="w-full text-center py-3 bg-[var(--bg-body)] text-[var(--text-heading)] text-small font-bold rounded-xl hover:bg-primary hover:text-[var(--text-on-inverted)] transition-all"
+                    className="w-full btn-primary py-3 text-small"
                   >
                     Contact Support
                   </button>
@@ -324,12 +324,12 @@ const FAQ = () => {
                   Our team of counselors is available to answer any specific questions you may have about your career path or our training programs.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <a href="tel:+917010230379" className="px-8 py-4 bg-[var(--bg-inverted)] text-[var(--text-on-inverted)] font-bold rounded-xl hover:opacity-90 transition-all">
+                  <a href="tel:+917010230379" className="btn-secondary px-8 py-4">
                     Call +91 70102 30379
                   </a>
                   <button 
                     onClick={() => openModal()}
-                    className="px-8 py-4 bg-primary text-[var(--text-on-inverted)] font-bold rounded-xl hover:bg-primary-dark transition-all shadow-lg shadow-primary/25"
+                    className="btn-primary px-8 py-4"
                   >
                     Send an Inquiry
                   </button>

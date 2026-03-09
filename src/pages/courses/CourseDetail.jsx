@@ -128,14 +128,14 @@ const CourseDetail = () => {
             >
               <button
                 onClick={() => openModal(course.title)}
-                className="group inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-primary text-white text-small font-bold uppercase tracking-wider shadow-lg shadow-primary/20 hover:shadow-primary/35 hover:-translate-y-0.5 transition-all duration-300"
+                className="group inline-flex items-center gap-2 px-7 py-3.5 btn-primary text-small font-bold"
               >
                 <Sparkles className="h-4 w-4 opacity-70 group-hover:opacity-100 transition-opacity" />
                 Enroll Now
               </button>
               <button
                 onClick={() => document.getElementById('syllabus')?.scrollIntoView({ behavior: 'smooth' })}
-                className="px-7 py-3.5 rounded-xl bg-[var(--bg-secondary)] text-[var(--text-heading)] border border-[var(--border-color)] text-small font-bold uppercase tracking-wider hover:bg-[var(--bg-inverted)] hover:text-[var(--text-on-inverted)] hover:border-transparent transition-all duration-300"
+                className="px-7 py-3.5 btn-secondary text-small font-bold"
               >
                 View Syllabus
               </button>
@@ -313,14 +313,14 @@ const CourseDetail = () => {
                   <div className="space-y-3 mb-6">
                     <button
                       onClick={() => openModal(course.title)}
-                      className="w-full btn-primary py-4 rounded-xl text-small font-bold uppercase tracking-wider shadow-lg shadow-primary/20 hover:shadow-primary/30 hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-2"
+                      className="w-full btn-primary py-4 text-small font-bold flex items-center justify-center gap-2"
                     >
                       <Sparkles className="h-4 w-4" />
                       Enroll Now
                     </button>
                     <button
                       onClick={() => openModal(course.title)}
-                      className="w-full py-4 rounded-xl bg-[var(--bg-secondary)] border border-[var(--border-color)] text-[var(--text-heading)] text-small font-bold uppercase tracking-wider hover:bg-[var(--bg-body)] transition-all duration-300"
+                      className="w-full py-4 btn-secondary text-small font-bold"
                     >
                       Talk to Counselor
                     </button>

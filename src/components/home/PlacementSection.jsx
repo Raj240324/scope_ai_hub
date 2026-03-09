@@ -88,7 +88,7 @@ const PlacementSection = ({ openModal }) => (
           </p>
           <button
             onClick={() => openModal('Placement Inquiry')}
-            className="bg-primary text-white text-small font-semibold px-6 sm:px-10 py-3 sm:py-4 rounded-2xl hover:opacity-90 transition-all shadow-xl"
+            className="btn-primary text-small px-6 sm:px-10 py-3 sm:py-4 shadow-xl"
           >
             Learn More About Placement Support
           </button>

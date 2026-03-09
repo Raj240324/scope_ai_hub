@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { motion, AnimatePresence } from 'framer-motion';
-import Header from './Header';
+import Header from '../Header';
 import Footer from './Footer';
 import WhatsAppButton from '../ui/WhatsAppButton';
-import ScrollToTopButton from '../ui/ScrollToTopButton';
+import DynamicScrollButton from '../ui/DynamicScrollButton';
 import { BRANDING } from '../../data/branding';
 
 const Layout = ({ 
@@ -27,6 +27,7 @@ const Layout = ({
       <AnimatePresence mode="wait">
         <motion.main 
           className="flex-grow"
+          style={{ position: 'relative', overflow: 'visible' }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -38,7 +39,7 @@ const Layout = ({
 
       <Footer />
       <WhatsAppButton />
-      <ScrollToTopButton />
+      <DynamicScrollButton />
     </div>
   );
 };

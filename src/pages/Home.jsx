@@ -8,7 +8,7 @@ import {
 } from 'lucide-react';
 import { StaggerContainer, StaggerItem, ScaleOnHover, ScrollCountUp, Marquee, Parallax } from '../components/utils/Animations';
 import Layout from '../components/layout/Layout';
-import HeroScroll from '../components/sections/HeroScroll';
+import HeroScrollCanvas from '../components/HeroScrollCanvas';
 import CourseCard from '../components/ui/CourseCard';
 import DesignTestimonial from '../components/ui/DesignTestimonial';
 import { courses } from '../data/courses';
@@ -51,45 +51,29 @@ const Home = () => {
         keywords="AI Training Institute Chennai, Prompt Engineering Course, Machine Learning Training, NLP Course, Data Analytics, MLOps, Computer Vision, Python AI, Placement Support"
         canonical="/"
       />
-      <HeroScroll
-        badge={
-          <div className="flex items-center justify-center gap-1.5">
-            <ShieldCheck className="h-3.5 w-3.5 text-primary-light" />
-            <span className="text-primary-light">Built for the AI Era.</span>
-          </div>
-        }
-        title={
-          <>
-            <span className="whitespace-nowrap">Dominate with Intelligence.</span> <br className="hidden sm:block" />
-            <span className="text-white relative inline-block">
-              Lead Without Limits.
-              <svg className="absolute w-full h-3 -bottom-1 left-0 text-primary opacity-60" viewBox="0 0 200 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.00025 6.99997C25.7501 2.49994 132.5 -3.50004 198 6.99997" stroke="currentColor" strokeWidth="3" strokeLinecap="round"/></svg>
-            </span>
-          </>
-        }
+      <HeroScrollCanvas
+        badge="Built for the AI Era"
         subtitle="Advanced AI and Cloud programs engineered to create fearless innovators ready to compete on a global stage."
       >
-        <div className="flex flex-col sm:flex-row gap-6 justify-center">
-          <Link
-            to="/courses"
-            className="group relative px-8 py-4 bg-primary text-white rounded-full flex items-center justify-center text-small font-semibold shadow-[0_0_20px_-5px_rgba(var(--primary-rgb),0.3)] hover:shadow-[0_0_25px_-5px_rgba(var(--primary-rgb),0.5)] hover:-translate-y-0.5 transition-all duration-300"
-          >
-            <span className="relative z-10 flex items-center">
-              Explore Courses <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-            </span>
-            <div className="absolute inset-0 rounded-full bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity" />
-          </Link>
+        <Link to="/courses" className="hero-btn-primary">
+          Explore Courses
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ marginLeft: "4px" }}>
+            <path d="M2 7h10M8 3l4 4-4 4" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </Link>
 
-          <button
-            onClick={() => openModal()}
-            className="glass-button rounded-full px-8 py-4 text-white hover:border-primary/50 flex items-center justify-center text-small font-semibold transition-all duration-300 group"
-            aria-label="Book Free Demo"
-          >
-            <PlayCircle className="mr-2 h-5 w-5 opacity-70 group-hover:opacity-100 text-primary-light transition-all" />
-            Book Free Demo
-          </button>
-        </div>
-      </HeroScroll>
+        <button
+          onClick={() => openModal()}
+          className="hero-btn-ghost"
+          aria-label="Book Free Demo"
+        >
+          <svg width="16" height="16" viewBox="0 0 14 14" fill="none" style={{ marginRight: "6px" }}>
+            <circle cx="7" cy="7" r="5.5" stroke="currentColor" strokeWidth="1.2" />
+            <path d="M5.5 5l3 2-3 2V5z" fill="currentColor" />
+          </svg>
+          Book Free Demo
+        </button>
+      </HeroScrollCanvas>
 
       <StatsSection />
       <HiringPartners />
@@ -155,27 +139,27 @@ const Home = () => {
       {/* Final CTA */}
       <section className="py-20">
         <div className="container-custom">
-          <div className="dark-section rounded-2xl md:rounded-[3rem] p-6 sm:p-8 md:p-16 text-center text-[var(--text-on-inverted)] shadow-2xl">
+          <div className="dark-section rounded-2xl md:rounded-[3rem] p-6 sm:p-8 md:p-16 text-center text-white shadow-2xl">
             <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
               <div className="absolute top-[-25%] left-[-10%] w-[60%] h-[60%] bg-primary/20 rounded-full blur-3xl blur-layer" />
               <div className="absolute bottom-[-25%] right-[-10%] w-[60%] h-[60%] bg-primary/10 rounded-full blur-3xl blur-layer" />
             </div>
             <div className="relative z-10 max-w-3xl mx-auto">
               <h2 className="heading-lg font-bold text-white mb-6">Ready to Build Your <span className="text-primary">Future</span>?</h2>
-              <p className="text-body text-[var(--text-on-inverted)]/80 mb-10">
+              <p className="text-body text-white/80 mb-10">
                 Join our next batch and learn from industry experts who are passionate about teaching.
               </p>
               <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
                 <button
                   onClick={() => openModal()}
-                  className="bg-primary text-white hover:opacity-90 px-10 py-4 rounded-full text-small font-semibold transition-all shadow-xl shadow-primary/20"
+                  className="btn-primary px-10 py-4 text-small font-semibold shadow-xl"
                   aria-label="Enroll Now"
                 >
                   Enroll Now
                 </button>
                 <Link
                   to="/contact"
-                  className="glass-button rounded-full text-[var(--text-on-inverted)] px-10 py-4 text-small font-semibold transition-all"
+                  className="btn-secondary px-10 py-4 text-small font-semibold text-white border-white/20"
                 >
                   Contact Admissions
                 </Link>
