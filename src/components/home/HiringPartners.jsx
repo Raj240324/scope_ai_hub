@@ -37,14 +37,14 @@ const HiringPartners = () => (
             <img
               src={company.logo}
               alt={company.name}
-              width={160}
-              height={40}
+              width={220}
+              height={70}
               loading="lazy"
-              className={`object-contain transition-all duration-300 ${
-  (company.name === 'TCS' || company.name === 'Wipro')
-    ? 'max-h-8 sm:max-h-10 md:max-h-12 scale-125 md:scale-150'
-    : 'max-h-6 sm:max-h-8 md:max-h-10'
-} opacity-80 hover:opacity-100 hover:scale-105`}
+              className={`object-contain transition-transform duration-300 opacity-80 hover:opacity-100 hover:scale-105 ${
+                (company.name === "TCS" || company.name === "Wipro")
+                  ? "max-h-12 sm:max-h-16 md:max-h-20"
+                  : "max-h-6 sm:max-h-8 md:max-h-10"
+              }`}
             />
           </div>
         </div>

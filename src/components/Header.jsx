@@ -50,6 +50,7 @@ const T = {
 const navigation = [
   { name: "Home",           href: "/" },
   { name: "Courses",        href: "/courses",         megaDropdown: true },
+  { name: "About",          href: "/about" },
   { name: "Admissions",     href: "/admissions" },
   { name: "Career Support", href: "/career-support" },
   {
