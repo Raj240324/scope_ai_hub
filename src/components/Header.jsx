@@ -134,6 +134,20 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isHomePage]);
 
+  // ── Close mobile menu when resizing to desktop breakpoint ────────────────────
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 1024) {
+        setIsOpen(false);
+        setMobileExpanded(null);
+      }
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   // ── Close on route change ───────────────────────────────────────────────────
   useEffect(() => {
     setIsOpen(false);
@@ -834,7 +848,11 @@ const Header = () => {
                           </span>
                           <ChevronDown
                             size={14}
-                            color={isExpanded ? T.orange : T.faint}
+                            color={
+                              isExpanded
+                                ? T.orange
+                                : (theme === 'dark' ? T.white : '#0d0214')
+                            }
                             style={{ transition: "transform 0.25s", transform: isExpanded ? "rotate(180deg)" : "none" }}
                           />
                         </button>

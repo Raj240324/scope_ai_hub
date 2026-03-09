@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { BRANDING } from '../../data/branding';
 
 const WhatsAppIcon = ({ className }) => (
@@ -13,20 +13,35 @@ const WhatsAppIcon = ({ className }) => (
 );
 
 const WhatsAppButton = () => {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => {
+      // Show only after user has scrolled past the hero (approx 80vh)
+      const threshold = window.innerHeight * 0.8;
+      setIsVisible(window.scrollY > threshold);
+    };
+
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
   const phoneNumber = BRANDING.phone.replace(/\D/g, ''); 
   const message = `Hi ${BRANDING.fullName}, I'm interested in your courses. Can you please provide more details?`;
   
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+
+  if (!isVisible) return null;
 
   return (
     <a
       href={whatsappUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed bottom-28 right-8 z-50 flex items-center justify-center w-16 h-16 bg-[#25D366] text-[var(--text-on-inverted)] rounded-full shadow-2xl hover:scale-110 transition-transform group animate-bounce-slow"
+      className="fixed bottom-8 right-4 sm:bottom-8 sm:right-4 z-50 flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 bg-[#25D366] text-[var(--text-on-inverted)] rounded-full shadow-2xl hover:scale-110 transition-transform group animate-bounce-slow"
       aria-label="Chat on WhatsApp"
     >
-      <WhatsAppIcon className="w-8 h-8 fill-current" />
+      <WhatsAppIcon className="w-6 h-6 sm:w-7 sm:h-7 fill-current" />
       <span className="absolute left-20 bg-[var(--bg-card)] text-[var(--text-heading)] px-4 py-2 rounded-xl text-small font-bold shadow-xl opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap border border-[var(--border-color)]">
         Chat with us!
       </span>

@@ -120,7 +120,11 @@ const Hero = ({
   // Original hero variants (home & simple)
   return (
     <section 
-      className={`relative overflow-hidden ${isHome ? 'bg-[var(--bg-body)] pt-28 pb-12 md:pt-40 md:pb-24 border-b border-[var(--border-color)]' : 'bg-[var(--bg-body)] pt-32 pb-12 md:pt-40 md:pb-20 border-b border-[var(--border-color)]'} ${className}`}
+      className={`relative overflow-hidden ${
+        isHome
+          ? 'bg-[var(--bg-body)] pt-24 pb-10 md:pt-32 md:pb-20 border-b border-[var(--border-color)]'
+          : 'bg-[var(--bg-body)] pt-28 pb-10 md:pt-32 md:pb-18 border-b border-[var(--border-color)]'
+      } ${className}`}
       aria-label={isHome ? 'Homepage hero' : undefined}
     >
       {/* Background Elements - Premium Mesh Effect */}

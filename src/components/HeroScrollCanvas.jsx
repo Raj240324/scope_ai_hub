@@ -221,8 +221,25 @@ const HeroScrollCanvas = ({ badge, title, subtitle, children }) => {
     img.src = "/hero-frames/frame_0001.webp";
   
     img.onload = () => {
+      const canvasRatio = canvas.width / canvas.height;
+      const imgRatio = img.width / img.height;
+  
+      let drawWidth, drawHeight, offsetX, offsetY;
+  
+      if (canvasRatio > imgRatio) {
+        drawWidth = canvas.width;
+        drawHeight = canvas.width / imgRatio;
+        offsetX = 0;
+        offsetY = (canvas.height - drawHeight) / 2;
+      } else {
+        drawHeight = canvas.height;
+        drawWidth = canvas.height * imgRatio;
+        offsetX = (canvas.width - drawWidth) / 2;
+        offsetY = 0;
+      }
+  
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      ctx.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
     };
   }, []);
 
@@ -274,8 +291,8 @@ const HeroScrollCanvas = ({ badge, title, subtitle, children }) => {
         .hero-h1 {
           font-family: 'Bebas Neue', 'Arial Black', sans-serif;
           font-weight: 400;
-          font-size: clamp(2.2rem, 10vw, 6rem);
-          line-height: 0.93;
+          font-size: clamp(2.2rem, 6vw, 4.25rem);
+          line-height: 0.96;
           letter-spacing: 0.02em;
           color: #f5f0ea;
           margin: 0 0 0.75rem;
@@ -287,7 +304,7 @@ const HeroScrollCanvas = ({ badge, title, subtitle, children }) => {
           font-weight: 300;
           font-style: italic;
           font-size: clamp(0.88rem, 3.2vw, 1.15rem);
-          line-height: 1.65;
+          line-height: 1.75;
           color: rgba(245,240,234,0.55);
           max-width: 46ch;
           margin: 0 0 1.4rem;
@@ -370,14 +387,14 @@ const HeroScrollCanvas = ({ badge, title, subtitle, children }) => {
           pointer-events: none;
           background: linear-gradient(
             to right,
-            rgba(4,6,12,0.82) 0%,
-            rgba(4,6,12,0.55) 50%,
+            rgba(4,6,12,0.92) 0%,
+            rgba(4,6,12,0.70) 50%,
             transparent 100%
           );
         }
 
         @media (max-width: 1024px) {
-          .hero-h1 { font-size: clamp(2.4rem, 7.5vw, 4rem); }
+          .hero-h1 { font-size: clamp(2.1rem, 6vw, 3.6rem); }
         }
 
         @media (max-width: 768px) {
@@ -385,11 +402,19 @@ const HeroScrollCanvas = ({ badge, title, subtitle, children }) => {
           .hero-scroll-indicator { display: none; }
           .hero-content-wrap {
             justify-content: flex-end;
-            padding: 72px 1.25rem 1.75rem;
+            padding: 64px 1.25rem 1.75rem;
           }
-          .hero-eyebrow { font-size: 0.6rem; margin-bottom: 0.6rem; }
-          .hero-h1 { font-size: clamp(2rem, 11vw, 3rem); line-height: 0.94; margin-bottom: 0.65rem; }
-          .hero-sub { font-size: 0.9rem; margin-bottom: 1.2rem; max-width: 36ch; }
+          .hero-eyebrow { font-size: 0.58rem; margin-bottom: 0.5rem; }
+          .hero-h1 {
+            font-size: clamp(1.9rem, 9.5vw, 2.6rem);
+            line-height: 1.02;
+            margin-bottom: 0.6rem;
+          }
+          .hero-sub {
+            font-size: 0.88rem;
+            margin-bottom: 1.1rem;
+            max-width: 34ch;
+          }
           .hero-cta-row { gap: 0.6rem; }
           .hero-btn-primary,
           .hero-btn-ghost {
@@ -399,7 +424,9 @@ const HeroScrollCanvas = ({ badge, title, subtitle, children }) => {
         }
 
         @media (max-width: 480px) {
-          .hero-h1 { font-size: clamp(1.8rem, 12vw, 2.6rem); }
+          .hero-h1 {
+            font-size: clamp(1.7rem, 9vw, 2.2rem);
+          }
           .hero-cta-row { flex-direction: column; align-items: flex-start; }
           .hero-btn-primary,
           .hero-btn-ghost {
@@ -409,12 +436,12 @@ const HeroScrollCanvas = ({ badge, title, subtitle, children }) => {
         }
       `}</style>
 
-      <section
+        <section
         ref={sectionRef}
         aria-label="Hero animation section"
         style={{
           position: "relative",
-          height: "170vh", // Reduced from 200vh to 150vh for tighter pinning (50vh of scroll room)
+          height: "140vh",
           backgroundColor: "#010408",
           margin: 0,
           padding: 0,
