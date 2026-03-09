@@ -667,20 +667,34 @@ const Header = () => {
               })}
 
               {/* ── Desktop actions ─────────────────────────────────────── */}
-              <div style={{
-                display: "flex", alignItems: "center", gap: "0.5rem",
-                marginLeft: "0.5rem",
-                paddingLeft: "1rem",
-                borderLeft: `1px solid ${theme === 'dark' ? T.border : 'rgba(214,79,217,0.12)'}`,
-              }}>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "0.5rem",
+                  marginLeft: "0.5rem",
+                  paddingLeft: "1rem",
+                  borderLeft: `1px solid ${
+                    theme === "dark" ? T.border : "rgba(214,79,217,0.12)"
+                  }`,
+                }}
+              >
                 {/* Search */}
                 <button
                   onClick={() => setIsSearchOpen(true)}
                   title="Search Programs"
                   style={{
-                    background: "none", border: "none", cursor: "pointer",
-                    color: isTransparent ? T.white : (theme === 'dark' ? T.muted : 'rgba(13,2,20,0.5)'), padding: "0.5rem",
-                    display: "flex", alignItems: "center",
+                    background: "none",
+                    border: "none",
+                    cursor: "pointer",
+                    color: isTransparent
+                      ? T.white
+                      : theme === "dark"
+                      ? T.muted
+                      : "rgba(13,2,20,0.5)",
+                    padding: "0.5rem",
+                    display: "flex",
+                    alignItems: "center",
                     transition: "color 0.15s",
                   }}
                 >
@@ -689,35 +703,21 @@ const Header = () => {
 
                 <ThemeToggle />
 
-                {/* Book Free Demo */}
-                <Link
-                  to="#demo"
-                  style={{
-                    display: "inline-flex", alignItems: "center", gap: "0.4rem",
-                    padding: "0.55rem 1.2rem",
-                    border: `1px solid ${isTransparent ? 'rgba(245,240,234,0.3)' : (theme === 'dark' ? T.border : 'rgba(214,79,217,0.3)')}`,
-                    color: isTransparent ? T.white : (theme === 'dark' ? T.muted : T.orange),
-                    fontFamily: T.fontNav, fontWeight: 700,
-                    fontSize: "0.78rem", letterSpacing: "0.1em", textTransform: "uppercase",
-                    textDecoration: "none",
-                    clipPath: CLIP,
-                    transition: "border-color 0.15s, color 0.15s, background 0.15s",
-                    whiteSpace: "nowrap",
-                  }}
-                >
-                  Free Demo
-                </Link>
-
                 {/* Enroll Now */}
                 <button
                   onClick={() => openModal()}
                   style={{
-                    display: "inline-flex", alignItems: "center",
+                    display: "inline-flex",
+                    alignItems: "center",
                     padding: "0.55rem 1.4rem",
                     background: T.grad,
-                    border: "none", cursor: "pointer",
-                    fontFamily: T.fontNav, fontWeight: 700,
-                    fontSize: "0.78rem", letterSpacing: "0.1em", textTransform: "uppercase",
+                    border: "none",
+                    cursor: "pointer",
+                    fontFamily: T.fontNav,
+                    fontWeight: 700,
+                    fontSize: "0.78rem",
+                    letterSpacing: "0.1em",
+                    textTransform: "uppercase",
                     color: "#fff",
                     clipPath: CLIP,
                     boxShadow: "0 4px 18px rgba(214,79,217,0.4)",

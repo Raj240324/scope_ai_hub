@@ -576,7 +576,7 @@ const HeroScrollCanvas = ({ badge, title, subtitle, children }) => {
                 fontSize: "0.58rem",
                 letterSpacing: "0.22em",
                 textTransform: "uppercase",
-                color: "rgba(214,79,217,0.6)",
+                color: "var(--color-brand-highlight)",
               }}>
                 Scroll to explore
               </span>

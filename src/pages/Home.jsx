@@ -51,12 +51,12 @@ const Home = () => {
             <path d="M2 7h10M8 3l4 4-4 4" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </Link>
-        <button onClick={() => openModal()} className="hero-btn-ghost focus:outline-none focus:ring-2 focus:ring-[var(--accent-primary)]" aria-label="Book Free Demo">
+        <button onClick={() => openModal()} className="hero-btn-ghost focus:outline-none focus:ring-2 focus:ring-[var(--accent-primary)]" aria-label="Book Free Career Counseling">
           <svg width="16" height="16" viewBox="0 0 14 14" fill="none" style={{ marginRight:"6px" }}>
             <circle cx="7" cy="7" r="5.5" stroke="currentColor" strokeWidth="1.2" />
             <path d="M5.5 5l3 2-3 2V5z" fill="currentColor" />
           </svg>
-          Book Free Demo
+          Free Career Counseling
         </button>
       </HeroScrollCanvas>
 
