@@ -141,7 +141,7 @@ export const CountUp = ({ end, duration = 2, suffix = "", prefix = "" }) => {
     const controls = animate(from, to, {
       duration: duration,
       onUpdate(value) {
-        node.textContent = `${prefix}${Math.floor(value).toLocaleString()}${suffix}`;
+        node.textContent = `${prefix}${to === 2019 || to === '2019' ? Math.floor(value) : Math.floor(value).toLocaleString()}${suffix}`;
       },
       ease: "easeOut"
     });
@@ -194,7 +194,7 @@ export const ScrollCountUp = ({ end, duration = 2.5, suffix = "", prefix = "", c
       ref={ref} 
       className={`tabular-nums tracking-tight ${className}`} 
     >
-      {computedPrefix}{Math.floor(displayValue).toLocaleString("en-US")}{computedSuffix}
+      {computedPrefix}{targetValue === 2019 || targetValue === '2019' ? Math.floor(displayValue) : Math.floor(displayValue).toLocaleString("en-US")}{computedSuffix}
     </span>
   );
 }
