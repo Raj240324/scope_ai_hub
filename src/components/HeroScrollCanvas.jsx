@@ -211,6 +211,21 @@ const HeroScrollCanvas = ({ badge, title, subtitle, children }) => {
     reducedMotion,
   });
 
+  useEffect(() => {
+    if (!canvasRef.current) return;
+  
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext("2d");
+  
+    const img = new Image();
+    img.src = "/hero-frames/frame_0001.webp";
+  
+    img.onload = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+    };
+  }, []);
+
   const anim = (delay) =>
     reducedMotion ? "none" : `fadeSlideUp 0.9s cubic-bezier(.16,1,.3,1) ${delay} both`;
 
