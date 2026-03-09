@@ -11,6 +11,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 const CoursesList = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedTier, setSelectedTier] = useState('All');
+  const [showMobileFilters, setShowMobileFilters] = useState(false);
 
   // Scroll to courses grid with header offset
   const scrollToCourses = () => {
@@ -104,12 +105,60 @@ const CoursesList = () => {
         </div>
       </section>
 
+      {/* Mobile Filter Bottom Sheet */}
+      <AnimatePresence>
+        {showMobileFilters && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/40 z-50 flex items-end lg:hidden"
+          >
+            <motion.div
+              initial={{ y: 400 }}
+              animate={{ y: 0 }}
+              exit={{ y: 400 }}
+              transition={{ type: 'spring', stiffness: 200, damping: 25 }}
+              className="w-full bg-[var(--bg-card)] rounded-t-3xl p-6 max-h-[80vh] overflow-y-auto"
+            >
+              <div className="flex justify-between items-center mb-6">
+                <h3 className="heading-sm">Filters</h3>
+                <button
+                  onClick={() => setShowMobileFilters(false)}
+                  className="p-2 rounded-full hover:bg-[var(--bg-secondary)]"
+                  aria-label="Close filters"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              {/* Level Filter */}
+              <div className="space-y-3">
+                {tierTabs.map((tier) => (
+                  <button
+                    key={tier}
+                    onClick={() => setSelectedTier(tier)}
+                    className={`w-full text-left px-4 py-3 rounded-lg border text-small font-semibold ${
+                      selectedTier === tier
+                        ? 'bg-primary/10 border-primary text-primary'
+                        : 'border-[var(--border-color)] text-[var(--text-body)] bg-[var(--bg-secondary)]'
+                    }`}
+                  >
+                    {tier}
+                  </button>
+                ))}
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Main Content: Sidebar + Courses Grid */}
       <div className="container-custom pb-24 sm:pb-32">
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-10">
           
           {/* Left Sidebar - Filters */}
-          <aside className="lg:w-[28%] xl:w-[25%]">
+          <aside className="hidden lg:block lg:w-[28%] xl:w-[25%]">
             <div className="lg:sticky lg:top-24">
               <div className="bg-[var(--bg-card)] rounded-2xl p-6 shadow-lg shadow-black/[0.04] border border-[var(--border-color)]">
                 
@@ -227,6 +276,54 @@ const CoursesList = () => {
 
           {/* Right Content - Courses Grid */}
           <main id="courses-grid" className="flex-1 lg:w-[72%] xl:w-[75%]">
+            {/* Mobile Search + Filter */}
+            <div className="lg:hidden mb-6 sticky top-16 z-20 bg-[var(--bg-body)] pt-2 pb-4">
+              <div className="space-y-4">
+                {/* Search */}
+                <div className="relative">
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[var(--text-muted)]" />
+                  <input
+                    type="text"
+                    placeholder="Search programs..."
+                    className="w-full pl-10 pr-4 py-3 rounded-xl border border-[var(--border-color)] bg-[var(--bg-card)] text-small text-[var(--text-body)] placeholder:text-[var(--text-muted)] focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/50 transition-all"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                  />
+                </div>
+
+                {/* Tier Chips */}
+                <div className="flex gap-2 overflow-x-auto pb-1 no-scrollbar">
+                  {tierTabs.map((tier) => (
+                    <button
+                      key={tier}
+                      onClick={() => setSelectedTier(tier)}
+                      className={`px-4 py-2 rounded-full text-small font-semibold whitespace-nowrap border transition-colors ${
+                        selectedTier === tier
+                          ? 'bg-primary text-white border-primary'
+                          : 'border-[var(--border-color)] text-[var(--text-body)] bg-[var(--bg-secondary)]'
+                      }`}
+                    >
+                      {tier}
+                    </button>
+                  ))}
+                </div>
+
+                {/* Filter Button */}
+                <div className="flex justify-between items-center">
+                  <button
+                    onClick={() => setShowMobileFilters(true)}
+                    className="px-4 py-2 rounded-lg border border-[var(--border-color)] text-small font-semibold bg-[var(--bg-card)]"
+                  >
+                    Filters
+                  </button>
+
+                  <span className="text-small text-[var(--text-muted)]">
+                    {filteredCourses.length} program{filteredCourses.length !== 1 ? 's' : ''}
+                  </span>
+                </div>
+              </div>
+            </div>
+
             <AnimatePresence mode="wait">
               {filteredCourses.length > 0 ? (
                 <motion.div
