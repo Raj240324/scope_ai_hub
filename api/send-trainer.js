@@ -25,6 +25,7 @@ import { generateRequestId, createLogger } from './utils/logger.js';
 import { checkServerRateLimit, blockIpFor, isTokenReplayed, cleanupMemoryCache } from './utils/rateLimiter.js';
 import { verifyRecaptcha } from './utils/recaptcha.js';
 import { sendBrevoEmail, upsertBrevoContact } from './utils/brevo.js';
+import { getSupabase } from './utils/supabase.js';
 import { stripHtml, isValidEmail, normalizePhone, getClientIp, isAllowedOrigin, isAllowedReferer, setSecurityHeaders } from './utils/sanitize.js';
 
 // ─── Configuration ──────────────────────────────────────────────────
@@ -171,7 +172,40 @@ export default async function handler(req, res) {
 
     log.info('Trainer application validated', { expertise, hostname: captcha.hostname });
 
-    // 9. Template parameters
+    // 9. Persist trainer application to Supabase (primary data store)
+    let trainerId = null;
+
+    try {
+      const supabase = getSupabase();
+      const { data, error: dbError } = await supabase
+        .from('trainer_applications')
+        .insert([
+          {
+            name: trainerName,
+            email,
+            phone: phone || null,
+            experience,
+            expertise,
+            linkedin_url: linkedinUrl || null,
+            ip_address: clientIp,
+            user_agent: userAgent.slice(0, 500),
+          },
+        ])
+        .select('id')
+        .single();
+
+      if (dbError) {
+        log.error('Supabase trainer insert failed', { error: dbError.message });
+      } else {
+        trainerId = data?.id;
+        log.info('Trainer application saved to Supabase', { trainerId });
+      }
+    } catch (err) {
+      log.error('Supabase trainer connection error', { error: err.message });
+      // Non-blocking — continue with Brevo so email notifications can still fire
+    }
+
+    // 10. Template parameters
     const templateParams = {
       TRAINER_NAME: trainerName,
       EMAIL: email,
@@ -189,7 +223,7 @@ export default async function handler(req, res) {
       }),
     };
 
-    // 10. Save to Brevo CRM (non-critical)
+    // 11. Save to Brevo CRM (non-critical)
     try {
       await upsertBrevoContact(email, {
         FIRSTNAME: trainerName,
@@ -202,16 +236,16 @@ export default async function handler(req, res) {
       log.error('CRM upsert failed', { error: err.message });
     }
 
-    // 11. Send owner notification (critical)
+    // 12. Send owner notification (non-critical for persistence)
     try {
       await sendBrevoEmail(TRAINER_NOTIFY_TEMPLATE_ID, OWNER_EMAIL, OWNER_NAME, templateParams);
       log.info('Owner notification sent');
     } catch (err) {
-      log.error('Owner email failed', { error: err.message });
-      return res.status(500).json({ success: false, message: 'Failed to submit your application. Please try again or contact us directly.' });
+      log.error('Owner email failed', { error: err.message, trainerId });
+      // Database insert has already been attempted; do not block the submission
     }
 
-    // 12. Send auto-reply to applicant (non-critical)
+    // 13. Send auto-reply to applicant (non-critical)
     try {
       await sendBrevoEmail(TRAINER_AUTO_REPLY_TEMPLATE_ID, email, trainerName, templateParams);
       log.info('Trainer auto-reply sent');
@@ -219,8 +253,8 @@ export default async function handler(req, res) {
       log.error('Trainer auto-reply failed', { error: err.message });
     }
 
-    // 13. Success
-    log.info('Trainer application completed successfully');
+    // 14. Success
+    log.info('Trainer application completed successfully', { trainerId });
     return res.status(200).json({ success: true, message: 'Application submitted successfully.' });
   } catch (err) {
     log.error('Unexpected error', { error: err.message });
