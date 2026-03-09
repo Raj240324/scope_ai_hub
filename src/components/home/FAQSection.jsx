@@ -29,27 +29,31 @@ const faqs = [
   { q: "Is my project data and idea protected?", a: "Absolutely. We maintain a strict NDA (Non-Disclosure Agreement) policy. All our trainers and staff are legally bound to protect student project data and intellectual property." },
 ];
 
-const FAQSection = () => (
-  <section className="section-padding bg-[var(--bg-body)]">
-    <div className="container-custom">
-      <div className="grid lg:grid-cols-2 gap-16">
-        <div>
-          <h2 className="heading-lg font-bold text-[var(--text-heading)] mb-6">Got Questions? <br /> We Have <span className="font-extrabold text-primary">Answers</span>.</h2>
-          <p className="text-[var(--text-muted)] text-body-lg mb-8 leading-relaxed">
-            If you have any other questions, feel free to reach out to our team. We're happy to help you choose the right path for your career.
-          </p>
-          <Link to="/faq" className="btn-secondary inline-flex items-center">
-            View All FAQs <ArrowRight className="ml-2 h-4 w-4" />
-          </Link>
-        </div>
-        <div className="space-y-2">
-          {faqs.map((faq, i) => (
-            <FAQItem key={i} question={faq.q} answer={faq.a} />
-          ))}
+const FAQSection = ({ limit }) => {
+  const displayFaqs = limit ? faqs.slice(0, limit) : faqs;
+
+  return (
+    <section className="section-padding bg-[var(--bg-body)]">
+      <div className="container-custom">
+        <div className="grid lg:grid-cols-2 gap-16">
+          <div>
+            <h2 className="heading-lg font-bold text-[var(--text-heading)] mb-6">Got Questions? <br /> We Have <span className="font-extrabold text-primary">Answers</span>.</h2>
+            <p className="text-[var(--text-muted)] text-body-lg mb-8 leading-relaxed">
+              If you have any other questions, feel free to reach out to our team. We're happy to help you choose the right path for your career.
+            </p>
+            <Link to="/faq" className="btn-secondary inline-flex items-center">
+              View All FAQs <ArrowRight className="ml-2 h-4 w-4" />
+            </Link>
+          </div>
+          <div className="space-y-2">
+            {displayFaqs.map((faq, i) => (
+              <FAQItem key={i} question={faq.q} answer={faq.a} />
+            ))}
+          </div>
         </div>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 export default FAQSection;

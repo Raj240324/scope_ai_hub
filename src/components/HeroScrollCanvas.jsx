@@ -139,6 +139,21 @@ function ScrollIndicator({ sectionRef }) {
     return () => window.removeEventListener("scroll", update);
   }, [sectionRef]);
 
+  const HERO_PARTNERS = [
+  {
+    name: "TCS",
+    logo: "https://cdn.brandfetch.io/idK2mWG2SJ/theme/dark/logo.svg?c=1bxid64Mup7aczewSAYMX&t=1759053200614",
+  },
+  {
+    name: "Infosys",
+    logo: "https://cdn.brandfetch.io/id2jVuQy_9/theme/dark/logo.svg?c=1bxid64Mup7aczewSAYMX&t=1676271043735",
+  },
+  {
+    name: "Cognizant",
+    logo: "https://cdn.brandfetch.io/idzF9a2Y93/theme/dark/logo.svg?c=1bxid64Mup7aczewSAYMX&t=1667652314787",
+  },
+];
+
   return (
     <div className="hero-scroll-indicator">
       <div
@@ -384,7 +399,7 @@ const HeroScrollCanvas = ({ badge, title, subtitle, children }) => {
         aria-label="Hero animation section"
         style={{
           position: "relative",
-          height: "150vh", // Reduced from 200vh to 150vh for tighter pinning (50vh of scroll room)
+          height: "170vh", // Reduced from 200vh to 150vh for tighter pinning (50vh of scroll room)
           backgroundColor: "#010408",
           margin: 0,
           padding: 0,
@@ -475,6 +490,27 @@ const HeroScrollCanvas = ({ badge, title, subtitle, children }) => {
             <div className="hero-cta-row" style={{ animation: anim("0.55s") }}>
               {children}
             </div>
+            {/* Trust micro-bar */}
+<div
+  style={{
+    marginTop: "0.85rem",
+    display: "flex",
+    flexWrap: "wrap",
+    gap: "0.75rem",
+    alignItems: "center",
+    fontFamily: "'DM Mono', monospace",
+    fontSize: "0.65rem",
+    letterSpacing: "0.12em",
+    color: "rgba(245,240,234,0.55)",
+    animation: anim("0.65s"),
+  }}
+>
+  <span>⭐ 4.9 Student Rating</span>
+  <span style={{ opacity: 0.4 }}>•</span>
+  <span>1000+ Students Trained</span>
+  <span style={{ opacity: 0.4 }}>•</span>
+  <span>Hiring Partners: TCS, Infosys</span>
+</div>
 
             {/* Scroll hint */}
             <div

@@ -570,8 +570,8 @@ const Header = () => {
                               }}>
                                 Our Programs
                               </h3>
-                              <p style={{ fontFamily: T.fontMono, fontSize: "0.65rem", color: T.muted,
-                                          letterSpacing: "0.15em", marginTop: "0.25rem" }}>
+                              <p style={{ fontFamily: T.fontMono, fontSize: "0.65rem", color: theme === 'dark' ? T.muted : 'rgba(13,2,20,0.6)',
+                                          letterSpacing: "0.15em", marginTop: "0.25rem", fontWeight: 600 }}>
                                 {courses.length} AI programs across {TIERS.length} tiers
                               </p>
                             </div>
@@ -602,10 +602,10 @@ const Header = () => {
                               return (
                                 <div key={tier}>
                                   <h4 style={{
-                                    fontFamily: T.fontMono, fontSize: "0.62rem",
-                                    letterSpacing: "0.22em", textTransform: "uppercase",
-                                    color: meta.color, marginBottom: "0.75rem",
-                                    display: "flex", alignItems: "center", gap: "0.35rem",
+                                    fontFamily: T.fontMono, fontSize: "0.85rem",
+                                    letterSpacing: "0.15em", textTransform: "uppercase", fontWeight: 700,
+                                    color: meta.color, marginBottom: "1rem",
+                                    display: "flex", alignItems: "center", gap: "0.4rem",
                                   }}>
                                     {meta.emoji} {tier}
                                   </h4>
