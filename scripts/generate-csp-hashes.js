@@ -53,11 +53,25 @@ vercelConfig.headers.forEach((header) => {
           `$1 ${hashes.join(" ")}`
         );
 
+        // Add perplexity to font-src
+        if (!h.value.includes("https://r2cdn.perplexity.ai")) {
+          h.value = h.value.replace(
+            /(font-src\s[^;]*)/,
+            `$1 https://r2cdn.perplexity.ai`
+          );
+        }
+
         // Append object-src and base-uri if they don't exist
         if (!h.value.includes("object-src")) {
           h.value = h.value.trim();
           if (!h.value.endsWith(";")) h.value += ";";
           h.value += " object-src 'none'; base-uri 'self';";
+        }
+        
+        // Remove duplicate base-uri 'self' if it appears more than once
+        const baseUriMatches = h.value.match(/base-uri 'self'/g);
+        if (baseUriMatches && baseUriMatches.length > 1) {
+          h.value = h.value.replace(/;\s*base-uri 'self'/, "");
         }
       }
     });
