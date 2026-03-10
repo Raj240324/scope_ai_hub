@@ -1,6 +1,6 @@
 # SCOPE AI HUB 🚀
 
-A production-grade, security-hardened React platform for SCOPE AI HUB — Chennai's AI & Cloud training institute. Features a serverless backend, automated monitoring, CRM integration, and enterprise SEO.
+A production-grade, security-hardened React platform for SCOPE AI HUB — Chennai's AI & Cloud training institute. Features a serverless backend, automated monitoring, CRM integration, enterprise SEO, and state-of-the-art UI/UX animations.
 
 > **Live:** [scopeaihub.com](https://scopeaihub.com)
 
@@ -8,25 +8,34 @@ A production-grade, security-hardened React platform for SCOPE AI HUB — Chenna
 
 ## ✨ Key Features
 
-### Frontend
-- ⚡ **High-Performance SPA** — Vite 7 + React 18 with lazy-loaded pages and manual code splitting
-- 🌗 **Light / Dark Theme** — System-preference detection with localStorage persistence
-- 📱 **Fully Responsive** — Mobile-first Tailwind CSS v4 with premium animations (Framer Motion, GSAP)
-- 🔍 **Enterprise SEO** — Dynamic meta tags, Open Graph, Twitter Cards, JSON-LD schemas (Organization, Course, FAQ, Breadcrumb), auto-generated sitemap
-- 🎓 **10 AI/ML Courses** — Tiered catalog (Beginner → Advanced) with detailed syllabi, career roles, and prerequisites
-- 💬 **Tawk.to Live Chat** — Desktop-only chat widget integration
+### Frontend & UX
+- ⚡ **High-Performance SPA** — Vite 7 + React 18 with lazy-loaded pages and ES2020 build targets for ultra-low bundle sizes.
+- 🎨 **Premium Aesthetic** — Unified CSS variable design system, light/dark theme persistence, and accessible high-contrast UI combinations.
+- 🎥 **Cinematic Animations** — 192-frame blended canvas HeroScroll sequence (GSAP), viewport-triggered Framer Motion components, and dynamic Lottie vector art.
+- 🔍 **Enterprise SEO** — Dynamic meta tags, Open Graph, Twitter Cards, JSON-LD schemas (Organization, Course, FAQ, Breadcrumb), and auto-generated XML sitemaps.
+- 🎓 **10 AI/ML Courses** — Tiered catalog (Beginner → Advanced) with detailed syllabi, career roles, and prerequisites.
 
 ### Backend & Security
-- 🔒 **12-Layer API Security** — Origin validation, User-Agent filtering, referrer checks, payload size guard, timing protection, honeypot, input sanitization, token replay prevention (SHA-256), adaptive rate limiting, reCAPTCHA v2 verification, hostname validation, security headers
-- 🗄️ **Supabase Database** — PostgreSQL storage for enquiry data with sync tracking
-- 📧 **Brevo CRM + Email** — Transactional emails (4 templates) and CRM contact management (2 lists)
-- 📊 **Structured Logging** — JSON-formatted logs with unique request IDs for traceability
+- 🔒 **12-Layer API Defense** — Origin validation, User-Agent filtering, referrer checks, payload size caps, honeypots, token replay prevention (SHA-256), adaptive IP rate limiting, and server-side Google reCAPTCHA v2 verification.
+- 🛡️ **Hardened Application** — Strict Content Security Policies (CSP) with dynamically built SHA-256 inline script hashes, X-XSS-Protection, HSTS, and Frame/Referrer policies preventing plugin injection and iframe hijacking.
+- 🗄️ **Supabase Database** — Managed PostgreSQL storage for enquiry data.
+- 📧 **Brevo CRM + Email** — Securely routes transactional emails and syncs student/trainer leads into CRM lists.
+- 🕵️ **Data Privacy (PII)** — Custom Sentry hooks aggressively scrub PII (emails, names, phone numbers) out of error reports and breadcrumb trails before leaving the browser.
 
-### Operations
-- 🏥 **Health Monitoring** — `/api/health` endpoint checking Supabase, Brevo, and environment variables
-- ⏰ **Automated Alerts** — GitHub Actions pings health endpoint every 30 minutes; sends email alerts on degradation
-- 🤖 **Dependabot** — Weekly dependency update PRs
-- 🐛 **Sentry** — Frontend error monitoring with PII stripping
+### Operations & Reliability
+- 🏥 **Active Health Monitoring** — An `/api/health` endpoint simultaneously verifies Supabase connectivity, Brevo API availability, and environment variable configuration.
+- ⏰ **Automated Resilience** — GitHub Actions systematically ping the health endpoint every 30 minutes, keeping Supabase from pausing while detecting downtime. Triggers automatic email alerts via Brevo if the system degrades.
+- 🐛 **Sentry Error Tracking** — Comprehensive frontend exception catchers wrapped inside React Error Boundaries.
+
+---
+
+## 📚 Documentation
+For detailed architecture and internal guidelines, consult the following project documents:
+- **`AGENTS.md`**: Master rulebook for UI components, routing, accessibility, and styling constraints.
+- **`SECURITY_AUDIT_REPORT.md`**: Results of the exhaustive 10-phase production security audit.
+- **`SECURITY.md`**: Known security exceptions and dependency statuses (e.g., build-time dependencies).
+- **`MONITORING.md`**: Documentation surrounding external uptime monitoring (Uptime Robot) and internal heartbeat systems.
+- **`SCOPEAIHUB-PRODUCTION-PARITY.md`**: History of production-parity fixes, including legacy bundle purging and PII protections.
 
 ---
 
@@ -35,20 +44,16 @@ A production-grade, security-hardened React platform for SCOPE AI HUB — Chenna
 | Layer | Technology |
 |---|---|
 | **Framework** | React 18 (Hooks, Context API, Lazy/Suspense) |
-| **Bundler** | Vite 7 |
-| **Styling** | Tailwind CSS v4, CSS custom properties |
+| **Bundler** | Vite 7 (ES2020 Target, Chrome 100+) |
+| **Styling** | Tailwind CSS v4 |
 | **Routing** | React Router v7 |
-| **Animations** | Framer Motion, GSAP |
-| **Icons** | Lucide React |
-| **SEO** | react-helmet-async |
+| **Animations** | Framer Motion, GSAP (ScrollTrigger), Lottie React |
 | **Backend** | Vercel Serverless Functions (Node.js) |
 | **Database** | Supabase (PostgreSQL) |
 | **Email / CRM** | Brevo (Sendinblue) |
 | **Bot Protection** | Google reCAPTCHA v2 |
-| **Error Monitoring** | Sentry |
-| **Live Chat** | Tawk.to |
-| **CI/CD** | Vercel Git Integration, GitHub Actions |
-| **Hosting** | Vercel |
+| **Monitoring** | Sentry (with PII Redaction) |
+| **CI/CD** | Vercel Git Integration, GitHub Actions (Cron) |
 
 ---
 
@@ -64,30 +69,25 @@ A production-grade, security-hardened React platform for SCOPE AI HUB — Chenna
 │       ├── supabase.js         # Supabase singleton client
 │       ├── rateLimiter.js      # Adaptive IP rate limiter + token replay cache
 │       ├── recaptcha.js        # reCAPTCHA v2 server verification
-│       ├── sanitize.js         # Input sanitization & origin validation
+│       ├── sanitize.js         # Input sanitization
 │       └── logger.js           # Structured JSON logger
 ├── src/
-│   ├── components/
-│   │   ├── layout/             # Header, Footer, Layout, ErrorBoundary
-│   │   ├── ui/                 # ContactForm, TrainerForm, CourseCard, Hero, Modal, etc.
-│   │   ├── home/               # Homepage sections (CTA, Courses, Placements, etc.)
-│   │   ├── sections/           # Shared section components (HeroScroll)
-│   │   └── utils/              # SEO, ScrollToTop, Animations, TawkChat
+│   ├── components/             # Reusable UI primitives, Home sections, Layouts (Header/Footer)
 │   ├── context/                # ThemeContext, ModalContext
-│   ├── data/                   # courses.js, branding.js, addons.js
-│   ├── services/               # enquiryService.js (frontend API client)
-│   ├── utils/                  # sentry.js, rateLimiter.js, apiErrorHandler.js
-│   ├── pages/                  # 18+ pages (Home, About, Courses, Legal, Careers, etc.)
-│   ├── App.jsx                 # Root component with routing & lazy loading
-│   └── main.jsx                # Entry point with Sentry init & hydration support
+│   ├── data/                   # Dynamic course payload configurations & branding assets
+│   ├── pages/                  # Route-level React views
+│   ├── services/               # Frontend API callers (enquiryService.js)
+│   ├── utils/                  # Sentry configuration, rate limiting boundaries
+│   ├── App.jsx                 # Routing tree and Suspense boundaries
+│   └── main.jsx                # DOM Injection and Sentry initialization
 ├── scripts/
-│   └── generate-sitemap.js     # Build-time sitemap generator
-├── public/                     # Static assets, robots.txt, sitemap.xml
-├── .github/
-│   ├── workflows/heartbeat.yml # 30-min health monitoring + email alerts
-│   └── dependabot.yml          # Weekly dependency updates
-├── vercel.json                 # SPA rewrites + security headers (CSP, HSTS, etc.)
-└── vite.config.js              # Build config with code splitting & legacy support
+│   ├── generate-sitemap.js     # Build-time static sitemap.xml generator
+│   └── generate-csp-hashes.js  # Build-time Content Security Policy hash generator
+├── public/                     # Canvas visual frames, WebP assets, robots.txt
+├── .github/ workflows/         # CI/CD action runners (Heartbeat monitor)
+├── .gitignore                  # Source-control filter configuration
+├── vercel.json                 # Core Vercel configurations and Security Headers
+└── vite.config.js              # Build instructions and code splitting thresholds
 ```
 
 ---
@@ -109,83 +109,49 @@ npm install
 
 ### 2. Configure Environment Variables
 
-Copy `.env.example` to `.env` and fill in the values:
+Copy `.env.example` to `.env` and assign your development keys:
 
 ```bash
 cp .env.example .env
 ```
+*(Your `.env` profile is strictly shielded from git via `.gitignore`.)*
 
-**Frontend variables** (exposed to browser via `VITE_` prefix):
+**Frontend variables** (Exposed to Vite via `VITE_` prefix):
 | Variable | Purpose |
 |---|---|
-| `VITE_RECAPTCHA_SITE_KEY` | Google reCAPTCHA v2 site key |
-| `VITE_SENTRY_DSN` | Sentry DSN for error monitoring |
+| `VITE_RECAPTCHA_SITE_KEY` | Google reCAPTCHA v2 public site key |
+| `VITE_SENTRY_DSN` | Sentry DSN target URL for error monitoring |
 | `VITE_TAWK_PROPERTY_ID` | Tawk.to property ID |
 | `VITE_TAWK_WIDGET_ID` | Tawk.to widget ID |
 
-**Backend variables** (set in Vercel Dashboard — never commit):
+**Backend variables** (Managed inside Vercel Dashboard — never commit):
 | Variable | Purpose |
 |---|---|
-| `RECAPTCHA_SECRET_KEY` | reCAPTCHA v2 secret key |
-| `BREVO_API_KEY` | Brevo transactional API key |
-| `SUPABASE_URL` | Supabase project URL |
-| `SUPABASE_SERVICE_ROLE_KEY` | Supabase service role secret |
-| `ALLOWED_ORIGINS` | Comma-separated allowed origins |
-| `ALLOWED_HOSTNAME` | Expected hostname for reCAPTCHA |
+| `RECAPTCHA_SECRET_KEY` | reCAPTCHA v2 validation secret |
+| `BREVO_API_KEY` | Brevo REST API communication token |
+| `SUPABASE_URL` | Supabase instance gateway |
+| `SUPABASE_SERVICE_ROLE_KEY` | Supabase elevated privileges (Bypass RLS) |
+| `ALLOWED_ORIGIN` | Enforced frontend requestor domains |
+| `ALLOWED_HOSTNAME` | Expected hostname enforcing reCAPTCHA interactions |
+| `ALERT_EMAIL` | Administrator target receiving system outage notices |
+| `SITE_URL` | Base URI used by Github Actions payload checks |
 
-### 3. Run Development Server
+### 3. Build & Run Operations
 
+**Local Development Server:**
 ```bash
 npm run dev
 ```
 
-### 4. Build for Production
-
+**Production Compilation (Includes CSP & Sitemap generation):**
 ```bash
 npm run build
 ```
 
-This runs `vite build` followed by automatic sitemap generation.
-
-**Optional** — Pre-render pages locally (requires Puppeteer):
+**Local Production Preview:**
 ```bash
-npm run build:full
+npm run preview
 ```
-
----
-
-## 🔒 API Endpoints
-
-| Endpoint | Method | Purpose |
-|---|---|---|
-| `/api/send-enquiry` | POST | Student enquiry submission with Supabase + Brevo |
-| `/api/send-trainer` | POST | Trainer application submission with Brevo |
-| `/api/health` | GET | System health check (Supabase, Brevo, env vars) |
-
-All POST endpoints share a 12-layer security pipeline: method guard → origin validation → User-Agent filtering → referrer validation → payload size guard (10 KB) → timing protection (3s minimum) → honeypot → input sanitization → token replay prevention → adaptive rate limiting → reCAPTCHA v2 verification → security headers.
-
----
-
-## 🏥 Monitoring
-
-- **Health endpoint** (`/api/health`) checks Supabase connectivity, Brevo API availability, and environment variable configuration
-- **GitHub Actions** pings the health endpoint every 30 minutes and sends an email alert via Brevo if the system is degraded
-- **Sentry** captures and reports frontend errors in production (with PII stripped)
-
----
-
-## 📜 Available Scripts
-
-| Script | Description |
-|---|---|
-| `npm run dev` | Start Vite dev server |
-| `npm run build` | Production build + sitemap generation |
-| `npm run build:full` | Production build + sitemap + react-snap pre-rendering |
-| `npm run preview` | Preview production build locally |
-| `npm run lint` | Run ESLint |
-| `npm run test` | Run Vitest tests |
-| `npm run test:watch` | Run Vitest in watch mode |
-| `npm run audit` | Audit production dependencies |
 
 ---
 
