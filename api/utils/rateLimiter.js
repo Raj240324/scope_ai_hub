@@ -1,4 +1,26 @@
 /**
+ * RATE LIMITER — ARCHITECTURE NOTE
+ * =================================
+ * This rate limiter uses an in-memory Map.
+ *
+ * Known limitation: Vercel serverless functions are stateless.
+ * Each Lambda container has isolated memory, so rate limits
+ * apply per-container, not globally across all instances.
+ *
+ * Why this is acceptable for scopeaihub:
+ * - Primary spam protection is Google reCAPTCHA v2 (server-verified)
+ * - Secondary protection: honeypot field
+ * - Tertiary protection: origin/referrer validation
+ * - This rate limiter is the 4th layer of defense
+ *
+ * Upgrade path if needed:
+ * Replace Map with Upstash Redis for global rate limiting:
+ * https://upstash.com (free tier: 10K requests/day)
+ *
+ * Last reviewed: 2026-03-10
+ */
+
+/**
  * Server-Side Adaptive Rate Limiter
  *
  * Shared across all Vercel serverless endpoints.

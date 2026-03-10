@@ -47,14 +47,18 @@ vercelConfig.headers.forEach((header) => {
   if (header.headers) {
     header.headers.forEach((h) => {
       if (h.key === "Content-Security-Policy") {
-        // Remove any existing sha256 hashes from script-src
-        h.value = h.value.replace(/ ?'sha256-[^']+'/g, "");
-
         // Insert hashes into script-src directive
         h.value = h.value.replace(
           /(script-src\s[^;]*)/,
           `$1 ${hashes.join(" ")}`
         );
+
+        // Append object-src and base-uri if they don't exist
+        if (!h.value.includes("object-src")) {
+          h.value = h.value.trim();
+          if (!h.value.endsWith(";")) h.value += ";";
+          h.value += " object-src 'none'; base-uri 'self';";
+        }
       }
     });
   }

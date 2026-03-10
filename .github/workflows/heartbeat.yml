@@ -9,6 +9,8 @@ jobs:
   ping:
     name: Ping Health Endpoint
     runs-on: ubuntu-latest
+    env:
+      ALERT: 'false'
 
     steps:
       - name: Call Health Endpoint

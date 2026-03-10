@@ -1,0 +1,24 @@
+# ============================================================
+# KEEP ACTIVE: Prevents Supabase Free Tier from pausing
+# Runs every 30 minutes — do not disable
+# ============================================================
+
+name: Supabase Heartbeat
+
+on:
+  schedule:
+    - cron: "*/30 * * * *"  # Every 30 minutes
+  workflow_dispatch:         # Allow manual trigger
+
+jobs:
+  heartbeat:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Supabase via Heartbeat API
+        run: |
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://scopeaihub.com/api/health)
+          echo "Heartbeat status: $STATUS"
+          if [ "$STATUS" != "200" ]; then
+            echo "Heartbeat failed with status $STATUS"
+            exit 1
+          fi
