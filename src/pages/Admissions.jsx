@@ -13,6 +13,7 @@ import { m } from 'framer-motion';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import { fadeUp, staggerContainer, staggerItem } from '../utils/motionVariants';
 import { useModal } from '../context/ModalContext';
+import { useTheme } from '../context/ThemeContext';
 import SEO from '../components/utils/SEO';
 import Hero from '../components/ui/Hero';
 import { BRANDING } from '../data/branding';
@@ -21,6 +22,7 @@ import BatchScheduleSection from '../components/sections/BatchScheduleSection';
 
 const Admissions = () => {
   const { openModal } = useModal();
+  const { theme } = useTheme();
 
   const steps = [
     {
@@ -182,32 +184,32 @@ const Admissions = () => {
         </div>
 
         {/* ── Programs Overview ─────────────────────────────────────────── */}
-        <div className="mt-16 sm:mt-24 p-5 sm:p-8 md:p-12 dark-section text-[var(--text-on-inverted)] rounded-2xl sm:rounded-3xl text-center dark-surface">
+        <div className="mt-16 sm:mt-24 p-5 sm:p-8 md:p-12 dark-section text-white rounded-2xl sm:rounded-3xl text-center dark-surface">
           <m.div
             ref={ctaRef}
             variants={fadeUp}
             initial="hidden"
             animate={ctaVisible ? 'visible' : 'hidden'}
           >
-            <h2 className="heading-lg font-bold text-[var(--text-on-inverted)] mb-8 relative z-10">Programs Designed For You</h2>
+            <h2 className="heading-lg font-bold text-primary mb-8 relative z-10">Programs Designed For You</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10 text-left">
-              <div className="glass-card p-6 text-left">
-                <h3 className="heading-sm font-semibold mb-2 text-primary-light">Upskill Courses</h3>
-                <p className="text-small text-[var(--text-muted)] mb-2">Targeted training to master specific technologies or tools quickly.</p>
-                <p className="text-caption text-[var(--text-muted)] font-bold uppercase tracking-wider">Duration: 1-2 Months</p>
+              <div className={theme === 'dark' ? 'glass-card p-6 text-left' : 'bg-white/10 border border-white/20 rounded-2xl shadow-lg p-6 text-left'}>
+                <h3 className="heading-sm font-semibold mb-2 text-primary">Upskill Courses</h3>
+                <p className="text-small text-white mb-2">Targeted training to master specific technologies or tools quickly.</p>
+                <p className="text-caption text-white/80 font-bold uppercase tracking-wider">Duration: 1-2 Months</p>
               </div>
-              <div className="glass-card p-6 text-left">
-                <h3 className="heading-sm font-semibold mb-2 text-primary-light">Career Tracks</h3>
-                <p className="text-small text-[var(--text-muted)] mb-2">Comprehensive pathways to transform you into a job-ready professional.</p>
-                <p className="text-caption text-[var(--text-muted)] font-bold uppercase tracking-wider">Duration: 4-6 Months</p>
+              <div className={theme === 'dark' ? 'glass-card p-6 text-left' : 'bg-white/10 border border-white/20 rounded-2xl shadow-lg p-6 text-left'}>
+                <h3 className="heading-sm font-semibold mb-2 text-primary">Career Tracks</h3>
+                <p className="text-small text-white mb-2">Comprehensive pathways to transform you into a job-ready professional.</p>
+                <p className="text-caption text-white/80 font-bold uppercase tracking-wider">Duration: 4-6 Months</p>
               </div>
-              <div className="glass-card p-6 text-left">
-                <h3 className="heading-sm font-semibold mb-2 text-primary-light">Master Programs</h3>
-                <p className="text-small text-[var(--text-muted)] mb-2">Deep-dive intensive programs with extensive projects and mentorship.</p>
-                <p className="text-caption text-[var(--text-muted)] font-bold uppercase tracking-wider">Duration: 8-12 Months</p>
+              <div className={theme === 'dark' ? 'glass-card p-6 text-left' : 'bg-white/10 border border-white/20 rounded-2xl shadow-lg p-6 text-left'}>
+                <h3 className="heading-sm font-semibold mb-2 text-primary">Master Programs</h3>
+                <p className="text-small text-white mb-2">Deep-dive intensive programs with extensive projects and mentorship.</p>
+                <p className="text-caption text-white/80 font-bold uppercase tracking-wider">Duration: 8-12 Months</p>
               </div>
             </div>
-            <p className="text-[var(--text-muted)] max-w-2xl mx-auto mb-10 relative z-10 font-medium">
+            <p className="text-white max-w-2xl mx-auto mb-10 relative z-10 font-medium">
               To maintain high training quality, class sizes are strictly limited. Contact our admission desk for detailed fee structures and availability.
             </p>
             <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6 relative z-10">
