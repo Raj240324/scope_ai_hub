@@ -349,7 +349,6 @@ const ContactForm = ({ initialCourse = 'General Inquiry' }) => {
               placeholder={step.placeholder}
               value={value}
               onChange={(e) => handleChange(step.field, e.target.value)}
-              autoFocus
               className={`w-full px-4 py-3 bg-[var(--bg-secondary)] border rounded-xl focus:outline-none focus:ring-2 focus:ring-[var(--accent-primary)] focus:border-[var(--accent-primary)] transition-all text-body sm:text-sm text-[var(--text-heading)] resize-none ${
                 fieldError ? 'border-red-500' : 'border-[var(--border-color)]'
               }`}
@@ -409,7 +408,6 @@ const ContactForm = ({ initialCourse = 'General Inquiry' }) => {
                 handleChange(step.field, v);
               }}
               onKeyDown={(e) => e.key === 'Enter' && handleNext()}
-              autoFocus
               className={`w-full px-4 py-3.5 bg-[var(--bg-secondary)] border rounded-xl focus:outline-none focus:ring-2 focus:ring-[var(--accent-primary)] focus:border-[var(--accent-primary)] transition-all text-body sm:text-sm text-[var(--text-heading)] ${
                 fieldError ? 'border-red-500' : 'border-[var(--border-color)]'
               }`}
