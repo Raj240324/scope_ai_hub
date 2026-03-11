@@ -5,6 +5,7 @@ import { Briefcase, GraduationCap, Globe, Zap, CheckCircle2, Users } from 'lucid
 import { useModal } from '../../context/ModalContext';
 import SEO from '../../components/utils/SEO';
 import { BRANDING } from '../../data/branding';
+import { m } from 'framer-motion';
 
 const JoinAsTrainer = () => {
   const { openModal } = useModal();
@@ -88,12 +89,14 @@ const JoinAsTrainer = () => {
             <div className="bg-[var(--bg-card)] p-8 md:p-12 rounded-[2.5rem] border border-[var(--border-color)] backdrop-blur-md">
               <h3 className="heading-md font-bold text-[var(--text-heading)] mb-6">Apply to be a Mentor</h3>
               <p className="text-[var(--text-muted)] mb-8">Tell us about your expertise and we'll reach out to schedule a technical discussion.</p>
-              <button 
+              <m.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
                 onClick={() => openModal('Trainer Application', 'trainer')}
                 className="w-full bg-primary hover:bg-primary-dark text-white py-4 rounded-xl font-black tracking-widest uppercase transition-all shadow-xl shadow-primary/20"
               >
                 Submit Application
-              </button>
+              </m.button>
               <p className="text-center text-[var(--text-muted)] text-caption mt-6">All mentors are required to sign a professional NDA upon joining.</p>
             </div>
           </div>

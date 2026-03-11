@@ -7,6 +7,9 @@ import { Helmet } from 'react-helmet-async';
 import SEO from '../components/utils/SEO';
 import { BRANDING } from '../data/branding';
 import { courses, tierMeta } from '../data/courses';
+import { m } from 'framer-motion';
+import { useScrollReveal } from '../hooks/useScrollReveal';
+import { fadeUp, staggerContainer, staggerItem } from '../utils/motionVariants';
 
 const faqData = [
   {
@@ -162,7 +165,9 @@ const FAQItem = ({ question, answer }) => {
 
   return (
     <div className="border-b border-[var(--border-color)] last:border-0">
-      <button
+      <m.button
+        whileHover={{ scale: 1.01 }}
+        whileTap={{ scale: 0.99 }}
         onClick={() => setIsOpen(!isOpen)}
         className="w-full py-6 flex items-center justify-between text-left hover:text-primary transition-colors group"
       >
@@ -172,7 +177,7 @@ const FAQItem = ({ question, answer }) => {
         <div className={`flex-shrink-0 h-6 w-6 rounded-full border-2 border-[var(--border-color)] flex items-center justify-center transition-all ${isOpen ? 'bg-primary border-primary text-white rotate-180' : 'text-[var(--text-muted)]'}`}>
           {isOpen ? <Minus className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
         </div>
-      </button>
+      </m.button>
       <div className={`overflow-hidden transition-all duration-300 ${isOpen ? 'max-h-96 pb-6' : 'max-h-0'}`}>
         <p className="text-sm md:text-base text-[var(--text-muted)] leading-relaxed">
           {answer}
@@ -186,6 +191,9 @@ const FAQ = () => {
   const [activeCategory, setActiveCategory] = useState("General");
   const { openModal } = useModal();
   const contentRef = useRef(null);
+  
+  const { ref: sidebarRef, isVisible: sidebarVisible } = useScrollReveal();
+  const { ref: mainRef, isVisible: mainVisible } = useScrollReveal();
 
   // Generate FAQPage JSON-LD Schema
   const faqSchema = {"@context":"https://schema.org","@type":"FAQPage","mainEntity": faqData.flatMap(cat => cat.questions).map(q => ({"@type":"Question","name": q.q,"acceptedAnswer": {"@type":"Answer","text": q.a
@@ -213,12 +221,20 @@ const FAQ = () => {
         <div className="container-custom">
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-12">
             {/* Sidebar Categories */}
-            <div className="lg:col-span-1">
+            <m.div 
+              ref={sidebarRef}
+              variants={fadeUp}
+              initial="hidden"
+              animate={sidebarVisible ? 'visible' : 'hidden'}
+              className="lg:col-span-1"
+            >
               <div className="bg-[var(--bg-card)] p-4 sm:p-6 rounded-2xl sm:rounded-3xl shadow-sm border border-[var(--border-color)] sticky top-32">
                 <h3 className="text-small font-bold text-[var(--text-muted)] uppercase tracking-widest mb-6 px-4">Categories</h3>
                 <nav className="space-y-2">
                   {faqData.map((cat) => (
-                    <button
+                    <m.button
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
                       key={cat.category}
                       onClick={() => {
                         setActiveCategory(cat.category);
@@ -233,7 +249,7 @@ const FAQ = () => {
                       }`}
                     >
                       {cat.category}
-                    </button>
+                    </m.button>
                   ))}
                 </nav>
 
@@ -241,19 +257,27 @@ const FAQ = () => {
                   <MessageCircle className="h-8 w-8 text-primary mb-4" />
                   <h4 className="font-bold mb-2">Still have questions?</h4>
                   <p className="text-[var(--text-on-light)]/60 text-caption mb-6">Can't find what you're looking for? Reach out to our team.</p>
-                  <button 
+                  <m.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                     onClick={() => openModal()}
                     className="w-full btn-primary py-3 text-small focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--accent-primary)]"
                   >
                     Contact Support
-                  </button>
+                  </m.button>
                 </div>
               </div>
-            </div>
+            </m.div>
 
             {/* FAQ List */}
-            <div ref={contentRef} className="lg:col-span-3">
-              <div className="bg-[var(--bg-card)] rounded-2xl sm:rounded-3xl shadow-sm border border-[var(--border-color)] overflow-hidden">
+            <m.div 
+              ref={mainRef}
+              variants={staggerContainer}
+              initial="hidden"
+              animate={mainVisible ? 'visible' : 'hidden'}
+              className="lg:col-span-3"
+            >
+              <div ref={contentRef} className="bg-[var(--bg-card)] rounded-2xl sm:rounded-3xl shadow-sm border border-[var(--border-color)] overflow-hidden">
                 <div className="p-5 sm:p-8 md:p-12">
                   <h2 className="heading-md mb-8 flex items-center gap-3">
                     <HelpCircle className="h-6 w-6 text-primary" />
@@ -270,7 +294,7 @@ const FAQ = () => {
               </div>
 
               {/* Course Comparison Table */}
-              <div className="mt-8 sm:mt-12 bg-[var(--bg-card)] rounded-2xl sm:rounded-3xl border border-[var(--border-color)] shadow-sm overflow-hidden">
+              <m.div variants={staggerItem} className="mt-8 sm:mt-12 bg-[var(--bg-card)] rounded-2xl sm:rounded-3xl border border-[var(--border-color)] shadow-sm overflow-hidden">
                 <div className="p-5 sm:p-8 bg-primary/5 border-b border-[var(--border-color)]">
                   <h3 className="heading-sm sm:heading-md">📊 Quick Course Comparison</h3>
                   <p className="text-[var(--text-muted)] mt-2">Compare our top courses to find the perfect fit for your career goals.</p>
@@ -313,10 +337,10 @@ const FAQ = () => {
                     </tbody>
                   </table>
                 </div>
-              </div>
+              </m.div>
 
               {/* Still Need Help Section */}
-              <div className="mt-8 sm:mt-12 text-center p-6 sm:p-12 bg-[var(--bg-card)] rounded-2xl sm:rounded-3xl border border-[var(--border-color)] shadow-sm">
+              <m.div variants={staggerItem} className="mt-8 sm:mt-12 text-center p-6 sm:p-12 bg-[var(--bg-card)] rounded-2xl sm:rounded-3xl border border-[var(--border-color)] shadow-sm">
                 <h3 className="heading-sm sm:heading-md mb-4">Didn't find your answer?</h3>
                 <p className="text-[var(--text-muted)] mb-8 max-w-xl mx-auto">
                   Our team of counselors is available to answer any specific questions you may have about your career path or our training programs.
@@ -325,15 +349,17 @@ const FAQ = () => {
                   <a href="tel:+917010230379" className="btn-secondary px-8 py-4 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--accent-primary)]">
                     Call +91 70102 30379
                   </a>
-                  <button 
+                  <m.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                     onClick={() => openModal()}
                     className="btn-primary px-8 py-4 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--accent-primary)]"
                   >
                     Send an Inquiry
-                  </button>
+                  </m.button>
                 </div>
-              </div>
-            </div>
+              </m.div>
+            </m.div>
           </div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect, useMemo } from 'react';
 import { CheckCircle, ArrowRight, ArrowLeft, Send, Loader2, AlertCircle, Check } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from 'framer-motion';
 import { useModal } from '../../context/ModalContext';
 import ReCAPTCHA from"react-google-recaptcha";
 import { checkRateLimit } from '../../utils/rateLimiter';
@@ -235,7 +235,9 @@ const ContactForm = ({ initialCourse = 'General Inquiry' }) => {
           <p className="text-small text-[var(--text-muted)]">{successMessage}</p>
         </div>
         <div className="flex gap-3 mt-2">
-          <button
+          <m.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             onClick={() => { 
               setStatus('idle'); 
               setCurrentStep(0); 
@@ -255,11 +257,16 @@ const ContactForm = ({ initialCourse = 'General Inquiry' }) => {
             className="btn-primary text-small focus:outline-none focus:ring-2 focus:ring-[var(--accent-primary)]"
           >
             Send Another
-          </button>
+          </m.button>
           {closeModal && (
-            <button onClick={closeModal} className="btn-secondary text-small focus:outline-none focus:ring-2 focus:ring-[var(--accent-primary)]">
+            <m.button 
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={closeModal} 
+              className="btn-secondary text-small focus:outline-none focus:ring-2 focus:ring-[var(--accent-primary)]"
+            >
               Close
-            </button>
+            </m.button>
           )}
         </div>
       </div>
@@ -319,7 +326,7 @@ const ContactForm = ({ initialCourse = 'General Inquiry' }) => {
       </div>
 
       <AnimatePresence mode="wait">
-        <motion.div
+        <m.div
           key={step.field}
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
@@ -352,11 +359,13 @@ const ContactForm = ({ initialCourse = 'General Inquiry' }) => {
               {(step.field === 'qualification' ? QUALIFICATIONS : (step.field === 'inquiry_type' ? INQUIRY_OPTIONS : PROGRAM_OPTIONS)).map((opt, i) => {
                 const isSelected = value === opt.value;
                 return (
-                  <motion.button
+                  <m.button
                     key={opt.value}
                     type="button"
                     initial={{ opacity: 0, y: 8 }}
                     animate={{ opacity: 1, y: 0 }}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
                     transition={{ duration: 0.25, delay: i * 0.04 }}
                     onClick={() => handleChange(step.field, opt.value)}
                     className={`group relative w-full px-4 py-3 rounded-xl text-small font-medium text-left transition-all duration-300 flex items-center justify-between border ${
@@ -373,7 +382,7 @@ const ContactForm = ({ initialCourse = 'General Inquiry' }) => {
                     }`}>
                       <Check className="h-3 w-3" strokeWidth={3} />
                     </span>
-                  </motion.button>
+                  </m.button>
                 );
               })}
               
@@ -409,14 +418,14 @@ const ContactForm = ({ initialCourse = 'General Inquiry' }) => {
 
           <AnimatePresence>
             {fieldError && (
-              <motion.p
+              <m.p
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: 'auto' }}
                 exit={{ opacity: 0, height: 0 }}
                 className="text-caption text-red-500 font-bold flex items-center gap-1"
               >
                 <AlertCircle className="h-3 w-3 shrink-0" /> {fieldError}
-              </motion.p>
+              </m.p>
             )}
           </AnimatePresence>
 
@@ -426,7 +435,7 @@ const ContactForm = ({ initialCourse = 'General Inquiry' }) => {
               <p className="text-caption font-bold">{errorMessage}</p>
             </div>
           )}
-        </motion.div>
+        </m.div>
       </AnimatePresence>
 
       <div className="mt-6 space-y-3">
@@ -445,7 +454,9 @@ const ContactForm = ({ initialCourse = 'General Inquiry' }) => {
         )}
         
         {currentStep === activeSteps.length - 1 ? (
-          <button
+          <m.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
             onClick={handleNext}
             disabled={status === 'sending'}
             className="w-full btn-primary py-3.5 flex items-center justify-center gap-2 group disabled:opacity-70 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-[var(--accent-primary)]"
@@ -461,9 +472,11 @@ const ContactForm = ({ initialCourse = 'General Inquiry' }) => {
                 <span>Send Message</span>
               </>
             )}
-          </button>
+          </m.button>
         ) : (
-          <button
+          <m.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
             onClick={handleNext}
             disabled={status === 'sending'}
             className="w-full btn-primary py-3.5 flex items-center justify-center gap-2 group disabled:opacity-70 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-[var(--accent-primary)]"
@@ -479,16 +492,18 @@ const ContactForm = ({ initialCourse = 'General Inquiry' }) => {
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
               </>
             )}
-          </button>
+          </m.button>
         )}
 
         {currentStep > 0 && (
-          <button
+          <m.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
             onClick={handleBack}
             className="w-full text-center text-small text-[var(--text-muted)] hover:text-[var(--text-heading)] transition-colors flex items-center justify-center gap-1"
           >
             <ArrowLeft className="h-3.5 w-3.5" /> Go back
-          </button>
+          </m.button>
         )}
       </div>
 

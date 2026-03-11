@@ -15,9 +15,13 @@ import visionAnimation from '../assets/animations/Vision Eye.json';
 import missionAnimation from '../assets/animations/Mission.json';
 
 import { FadeIn, StaggerContainer, StaggerItem, ScaleOnHover, ScrollCountUp, Parallax } from '../components/utils/Animations';
+import { m } from 'framer-motion';
+import { useScrollReveal } from '../hooks/useScrollReveal';
+import { fadeUp } from '../utils/motionVariants';
 
 const About = () => {
   const { openModal } = useModal();
+  const { ref: ctaRef, isVisible: ctaVisible } = useScrollReveal();
   const stats = [
     { label: 'Year Founded', value: 2019, suffix: '' },
     { label: 'Students Trained', value: 1200, suffix: '+' },
@@ -98,9 +102,15 @@ const About = () => {
           <Link to="/courses" className="btn-primary text-body-lg px-8 py-4 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--accent-primary)]" aria-label="Explore AI training programs">
             Explore Programs <ArrowRight className="ml-2 h-5 w-5" />
           </Link>
-          <button onClick={() => openModal()} className="btn-secondary text-body-lg px-8 py-4 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--accent-primary)]" aria-label="Apply for AI course admission">
+          <m.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => openModal()}
+            className="btn-secondary text-body-lg px-8 py-4 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--accent-primary)]"
+            aria-label="Apply for AI course admission"
+          >
             Apply Now
-          </button>
+          </m.button>
         </div>
       </Hero>
 
@@ -571,12 +581,14 @@ const About = () => {
                     {loc.phone}
                   </p>
                 )}
-                <button 
+                <m.button
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
                   onClick={() => loc.map !=="#" ? window.open(loc.map, '_blank', 'noopener,noreferrer') : openModal()}
                   className="mt-6 text-primary font-bold text-small flex items-center hover:underline"
                 >
                   {loc.map !=="#" ? 'View on Google Maps' : 'Contact Us'} <ExternalLink className="ml-2 h-4 w-4" />
-                </button>
+                </m.button>
               </div>
             ))}
           </div>
@@ -586,7 +598,13 @@ const About = () => {
       {/* CTA Section */}
       <section className="section-padding bg-[var(--bg-secondary)]">
         <div className="container-custom">
-          <div className="dark-section rounded-2xl md:rounded-[3rem] p-6 sm:p-8 md:p-16 text-center text-[var(--text-on-inverted)] shadow-2xl dark-surface">
+          <m.div 
+            ref={ctaRef}
+            variants={fadeUp}
+            initial="hidden"
+            animate={ctaVisible ? 'visible' : 'hidden'}
+            className="dark-section rounded-2xl md:rounded-[3rem] p-6 sm:p-8 md:p-16 text-center text-[var(--text-on-inverted)] shadow-2xl dark-surface"
+          >
             <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
                 <div className="absolute top-[-25%] left-[-10%] w-[60%] h-[60%] bg-primary/20 rounded-full blur-3xl blur-layer" />
                 <div className="absolute bottom-[-25%] right-[-10%] w-[60%] h-[60%] bg-primary/10 rounded-full blur-3xl blur-layer" />
@@ -597,13 +615,15 @@ const About = () => {
                 Join 1,200+ graduates building AI careers across India and beyond.
               </p>
               <div className="flex flex-col sm:flex-row justify-center gap-4">
-                <button 
+                <m.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                   onClick={() => openModal()}
                   className="btn-primary px-10 py-4 text-body-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--accent-primary)]"
                   aria-label="Apply for AI course admission"
                 >
                   Apply Now <ArrowRight className="ml-2 h-5 w-5" />
-                </button>
+                </m.button>
                 <Link
                   to="/courses"
                   className="btn-secondary text-[var(--text-on-inverted)] border-white/20 px-10 py-4 text-body-lg text-center focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--accent-primary)]"
@@ -611,16 +631,18 @@ const About = () => {
                 >
                   View Programs
                 </Link>
-                <button 
+                <m.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                   onClick={() => openModal()}
                   className="btn-secondary text-[var(--text-on-inverted)] border-white/20 px-10 py-4 text-body-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--accent-primary)]"
                   aria-label="Talk to a career mentor"
                 >
                   Talk to a Mentor
-                </button>
+                </m.button>
               </div>
             </div>
-          </div>
+          </m.div>
         </div>
       </section>
     </Layout>

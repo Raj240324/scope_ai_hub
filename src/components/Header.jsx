@@ -23,6 +23,7 @@ import { useTheme } from "../context/ThemeContext";
 import ThemeToggle from './ui/ThemeToggle';
 import { courses, TIERS, coursesByTier, tierMeta } from "../data/courses";
 import { BRANDING } from "../data/branding";
+import { m } from "framer-motion";
 
 // ─── Design tokens (mirror hero palette) ─────────────────────────────────────
 
@@ -403,9 +404,12 @@ const Header = () => {
 
             {/* ── Logo ──────────────────────────────────────────────────── */}
             <Link to="/" style={{ textDecoration: "none", flexShrink: 0, display: "flex", alignItems: "center", height: "100%" }}>
-              <img 
+              <m.img 
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
                 src={(isTransparent || theme === 'dark') ? BRANDING.logoLight : BRANDING.logoDark} 
                 alt={BRANDING.fullName} 
+                fetchpriority="high"
                 style={{
                   height: 60,
                   width: "auto",
@@ -643,7 +647,9 @@ const Header = () => {
                                 Talk to our career counselors
                               </p>
                             </div>
-                            <button
+                            <m.button
+                              whileHover={{ scale: 1.05 }}
+                              whileTap={{ scale: 0.95 }}
                               onClick={() => openModal()}
                               style={{
                                 padding: "0.6rem 1.4rem",
@@ -657,7 +663,7 @@ const Header = () => {
                               }}
                             >
                               Get Guidance
-                            </button>
+                            </m.button>
                           </div>
                         </div>
                       </div>
@@ -704,7 +710,9 @@ const Header = () => {
                 <ThemeToggle />
 
                 {/* Enroll Now */}
-                <button
+                <m.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                   onClick={() => openModal()}
                   style={{
                     display: "inline-flex",
@@ -726,7 +734,7 @@ const Header = () => {
                   }}
                 >
                   Enroll Now
-                </button>
+                </m.button>
               </div>
             </div>
 

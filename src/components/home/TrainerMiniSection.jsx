@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
+import { useScrollReveal } from '../../hooks/useScrollReveal';
+import { fadeUp, staggerContainer, staggerItem } from '../../utils/motionVariants';
 import { ArrowRight, Star } from 'lucide-react';
 
 const mentors = [
@@ -27,36 +29,42 @@ const mentors = [
 const TrainerMiniSection = () => {
   // Take top 3 trainers
   const topTrainers = mentors.slice(0, 3);
+  const { ref, isVisible } = useScrollReveal();
 
   return (
     <section className="py-20 bg-[var(--bg-body)] border-y border-[var(--border-color)]">
-      <div className="container-custom">
+      <m.div 
+        ref={ref}
+        variants={staggerContainer}
+        initial="hidden"
+        animate={isVisible ? 'visible' : 'hidden'}
+        className="container-custom"
+      >
         <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
           <div className="max-w-xl">
-            <h2 className="heading-lg font-bold text-[var(--text-heading)] mb-4 tracking-tight">
+            <m.h2 variants={fadeUp} className="heading-lg font-bold text-[var(--text-heading)] mb-4 tracking-tight">
               Learn from <span className="text-primary">Industry Experts</span>
-            </h2>
-            <p className="text-body text-[var(--text-muted)]">
+            </m.h2>
+            <m.p variants={fadeUp} className="text-body text-[var(--text-muted)]">
               Our mentors have 8+ years of experience building scalable AI solutions at top tech companies.
-            </p>
+            </m.p>
           </div>
-          <Link
-            to="/careers/trainers"
-            className="group flex items-center gap-2 text-small font-bold text-primary hover:text-[var(--text-heading)] transition-colors no-underline"
-          >
-            Meet All Trainers
-            <ArrowRight className="h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
-          </Link>
+          <m.div variants={fadeUp}>
+            <Link
+              to="/careers/trainers"
+              className="group flex items-center gap-2 text-small font-bold text-primary hover:text-[var(--text-heading)] transition-colors no-underline"
+            >
+              Meet All Trainers
+              <ArrowRight className="h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </m.div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {topTrainers.map((trainer, index) => (
-            <motion.div
+            <m.div
               key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1, duration: 0.5 }}
+              variants={fadeUp}
               className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all"
             >
               <div className="flex items-center gap-4 mb-4">
@@ -78,10 +86,10 @@ const TrainerMiniSection = () => {
                 <Star className="h-4 w-4 text-amber-500 fill-amber-500" />
                 <span className="text-caption font-bold text-[var(--text-heading)]">4.9/5 Average Rating</span>
               </div>
-            </motion.div>
+            </m.div>
           ))}
         </div>
-      </div>
+      </m.div>
     </section>
   );
 };

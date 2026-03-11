@@ -7,6 +7,9 @@ import SEO from '../components/utils/SEO';
 import Layout from '../components/layout/Layout';
 import HeroScrollCanvas from '../components/HeroScrollCanvas';
 import StatsSection from '../components/home/StatsSection';
+import { m } from 'framer-motion';
+import { useScrollReveal } from '../hooks/useScrollReveal';
+import { fadeUp, staggerContainer, staggerItem } from '../utils/motionVariants';
 
 // Lazy load below-the-fold components for better LCP
 const HiringPartners = React.lazy(() => import('../components/home/HiringPartners'));
@@ -30,6 +33,8 @@ const SectionLoader = () => <div className="py-20 flex justify-center"><div clas
 const Home = () => {
   const { openModal } = useModal();
   const flagshipCourses = courses.slice(0, 6);
+  const { ref: partnersRef, isVisible: partnersVisible } = useScrollReveal();
+  const { ref: ctaRef, isVisible: ctaVisible } = useScrollReveal();
 
   return (
     <Layout immersive={true}>
@@ -45,19 +50,21 @@ const Home = () => {
         badge="Built for the AI Era"
         subtitle="Advanced AI and Cloud programs engineered to create fearless innovators ready to compete on a global stage."
       >
-        <Link to="/courses" className="hero-btn-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--accent-primary)]">
-          Explore Courses
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ marginLeft:"4px" }}>
-            <path d="M2 7h10M8 3l4 4-4 4" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-        </Link>
-        <button onClick={() => openModal()} className="hero-btn-ghost focus:outline-none focus:ring-2 focus:ring-[var(--accent-primary)]" aria-label="Book Free Career Counseling">
+        <m.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} style={{ display: 'inline-block' }}>
+          <Link to="/courses" className="hero-btn-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--accent-primary)]">
+            Explore Courses
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ marginLeft:"4px" }}>
+              <path d="M2 7h10M8 3l4 4-4 4" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </Link>
+        </m.div>
+        <m.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => openModal()} className="hero-btn-ghost focus:outline-none focus:ring-2 focus:ring-[var(--accent-primary)]" aria-label="Book Free Career Counseling">
           <svg width="16" height="16" viewBox="0 0 14 14" fill="none" style={{ marginRight:"6px" }}>
             <circle cx="7" cy="7" r="5.5" stroke="currentColor" strokeWidth="1.2" />
             <path d="M5.5 5l3 2-3 2V5z" fill="currentColor" />
           </svg>
           Free Career Counseling
-        </button>
+        </m.button>
       </HeroScrollCanvas>
 
       {/* 2. Stats Section (Eager) */}
@@ -85,11 +92,17 @@ const Home = () => {
 
         {/* 9. Recognitions */}
         <section className="py-12 bg-[var(--bg-secondary)] border-b border-[var(--border-color)]">
-          <div className="container-custom">
-            <p className="text-center text-caption font-black text-[var(--text-muted)] uppercase tracking-[0.3em] mb-8">Recognized &amp; Certified By</p>
-            <div className="flex flex-wrap justify-center items-center gap-10 md:gap-16">
+          <m.div 
+            ref={partnersRef}
+            variants={staggerContainer}
+            initial="hidden"
+            animate={partnersVisible ? 'visible' : 'hidden'}
+            className="container-custom"
+          >
+            <m.p variants={fadeUp} className="text-center text-caption font-black text-[var(--text-muted)] uppercase tracking-[0.3em] mb-8">Recognized &amp; Certified By</m.p>
+            <m.div variants={staggerContainer} className="flex flex-wrap justify-center items-center gap-10 md:gap-16">
               {learningPartners.map((partner, index) => (
-                <div key={index} className="flex flex-col items-center group">
+                <m.div key={index} variants={staggerItem} className="flex flex-col items-center group">
                   <div className="h-20 w-36 md:h-24 md:w-44 flex items-center justify-center transition-all">
                     {partner.logo ? (
                       <img src={partner.logo} alt={partner.name} width={176} height={80} loading="lazy" className="max-h-16 md:max-h-20 object-contain group-hover:scale-110 transition-transform duration-500" />
@@ -98,10 +111,10 @@ const Home = () => {
                     )}
                   </div>
                   <span className="text-caption font-bold text-[var(--text-muted)] uppercase tracking-widest mt-2">{partner.name}</span>
-                </div>
+                </m.div>
               ))}
-            </div>
-          </div>
+            </m.div>
+          </m.div>
         </section>
 
         {/* 10. FAQ Preview */}
@@ -112,7 +125,13 @@ const Home = () => {
         <section className="py-20">
           <div className="container-custom">
             {/* Added .dark-surface class here for Phase 2 Theme Refactor */}
-            <div className="dark-section dark-surface rounded-2xl md:rounded-[3rem] p-6 sm:p-8 md:p-16 text-center text-[var(--text-on-dark)] shadow-2xl">
+            <m.div 
+              ref={ctaRef}
+              variants={fadeUp}
+              initial="hidden"
+              animate={ctaVisible ? 'visible' : 'hidden'}
+              className="dark-section dark-surface rounded-2xl md:rounded-[3rem] p-6 sm:p-8 md:p-16 text-center text-[var(--text-on-dark)] shadow-2xl"
+            >
               <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
                 <div className="absolute top-[-25%] left-[-10%] w-[60%] h-[60%] bg-primary/20 rounded-full blur-3xl blur-layer" />
                 <div className="absolute bottom-[-25%] right-[-10%] w-[60%] h-[60%] bg-primary/10 rounded-full blur-3xl blur-layer" />
@@ -123,15 +142,17 @@ const Home = () => {
                   Join our next batch and learn from industry experts who are passionate about teaching.
                 </p>
                 <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
-                  <button onClick={() => openModal()} className="btn-primary px-10 py-4 text-small font-semibold shadow-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--accent-primary)]" aria-label="Enroll Now">
+                  <m.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => openModal()} className="btn-primary px-10 py-4 text-small font-semibold shadow-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--accent-primary)]" aria-label="Enroll Now">
                     Enroll Now
-                  </button>
-                  <Link to="/contact" className="btn-secondary px-10 py-4 text-small font-semibold text-[var(--text-on-dark)] border-white/20 hover:border-white/40 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--accent-primary)]">
-                    Contact Admissions
-                  </Link>
+                  </m.button>
+                  <m.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} style={{ display: 'inline-block' }}>
+                    <Link to="/contact" className="btn-secondary px-10 py-4 text-small font-semibold text-[var(--text-on-dark)] border-white/20 hover:border-white/40 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--accent-primary)]">
+                      Contact Admissions
+                    </Link>
+                  </m.div>
                 </div>
               </div>
-            </div>
+            </m.div>
           </div>
         </section>
       </Suspense>

@@ -1,5 +1,8 @@
 import React from 'react';
 import { Building2 } from 'lucide-react';
+import { m } from 'framer-motion';
+import { useScrollReveal } from '../../hooks/useScrollReveal';
+import { fadeIn } from '../../utils/motionVariants';
 
 const companies = [
   { name:"Google", logo:"https://cdn.brandfetch.io/id6O2oGzv-/theme/dark/logo.svg?c=1bxid64Mup7aczewSAYMX&t=1731911497387" },
@@ -14,8 +17,17 @@ const companies = [
   { name:"Cognizant", logo:"https://cdn.brandfetch.io/idzF9a2Y93/theme/dark/logo.svg?c=1bxid64Mup7aczewSAYMX&t=1667652314787" }
 ];
 
-const HiringPartners = () => (
-  <section className="py-12 md:py-16 bg-[var(--bg-secondary)] border-b border-[var(--border-color)] overflow-hidden">
+const HiringPartners = () => {
+  const { ref, isVisible } = useScrollReveal();
+
+  return (
+  <m.section 
+    ref={ref}
+    variants={fadeIn}
+    initial="hidden"
+    animate={isVisible ? 'visible' : 'hidden'}
+    className="py-12 md:py-16 bg-[var(--bg-secondary)] border-b border-[var(--border-color)] overflow-hidden"
+  >
     <div className="container-custom">
       <div className="text-center max-w-3xl mx-auto mb-10 md:mb-12">
         <div className="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-caption font-bold uppercase tracking-wider mb-6 border border-primary/20">
@@ -50,7 +62,8 @@ const HiringPartners = () => (
         </div>
       ))}
     </div>
-  </section>
-);
+  </m.section>
+  );
+};
 
 export default HiringPartners;

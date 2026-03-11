@@ -7,6 +7,9 @@ import { useModal } from '../context/ModalContext';
 import { BRANDING } from '../data/branding';
 import SEO from '../components/utils/SEO';
 import Hero from '../components/ui/Hero';
+import { m } from 'framer-motion';
+import { useScrollReveal } from '../hooks/useScrollReveal';
+import { fadeUp, staggerContainer, staggerItem } from '../utils/motionVariants';
 
 const reviews = [
   {
@@ -83,6 +86,10 @@ const Reviews = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const { openModal } = useModal();
 
+  const { ref: statsRef, isVisible: statsVisible } = useScrollReveal();
+  const { ref: gridRef, isVisible: gridVisible } = useScrollReveal();
+  const { ref: ctaRef, isVisible: ctaVisible } = useScrollReveal();
+
   const reviewCourseNames = [...new Set(reviews.map(r => r.course))];
 
   const filteredReviews = useMemo(() => {
@@ -116,9 +123,15 @@ const Reviews = () => {
       {/* Stats Section */}
       <section className="py-12 bg-[var(--bg-card)] border-b border-[var(--border-color)]">
         <div className="container-custom">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <m.div 
+            ref={statsRef}
+            variants={staggerContainer}
+            initial="hidden"
+            animate={statsVisible ? 'visible' : 'hidden'}
+            className="grid grid-cols-1 md:grid-cols-3 gap-8"
+          >
             {stats.map((stat, index) => (
-              <div key={index} className="flex items-center space-x-4 p-6 bg-[var(--bg-secondary)] rounded-2xl border border-[var(--border-color)]">
+              <m.div variants={staggerItem} key={index} className="flex items-center space-x-4 p-6 bg-[var(--bg-secondary)] rounded-2xl border border-[var(--border-color)]">
                 <div className="h-12 w-12 rounded-xl bg-[var(--bg-card)] shadow-sm flex items-center justify-center">
                   {stat.icon}
                 </div>
@@ -126,9 +139,9 @@ const Reviews = () => {
                   <div className="heading-md font-bold">{stat.value}</div>
                   <div className="text-caption text-[var(--text-muted)]">{stat.label}</div>
                 </div>
-              </div>
+              </m.div>
             ))}
-          </div>
+          </m.div>
         </div>
       </section>
 
@@ -155,7 +168,9 @@ const Reviews = () => {
               <Filter className="h-5 w-5 text-[var(--text-muted)] shrink-0 hidden md:block" />
               <div className="flex space-x-2">
                 {['All', ...reviewCourseNames].map((courseName) => (
-                  <button
+                  <m.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                     key={courseName}
                     onClick={() => setSelectedCourse(courseName)}
                     className={clsx("px-4 py-2 rounded-lg text-small font-medium whitespace-nowrap transition-all",
@@ -165,7 +180,7 @@ const Reviews = () => {
                     )}
                   >
                     {courseName === 'All' ? 'All' : courseName.split(' ').slice(0, 2).join(' ')}
-                  </button>
+                  </m.button>
                 ))}
               </div>
             </div>
@@ -173,9 +188,15 @@ const Reviews = () => {
 
           {/* Grid */}
           {filteredReviews.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <m.div 
+              ref={gridRef}
+              variants={staggerContainer}
+              initial="hidden"
+              animate={gridVisible ? 'visible' : 'hidden'}
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            >
               {filteredReviews.map((review) => (
-                <div key={review.id} className="bg-[var(--bg-card)] p-5 sm:p-8 rounded-2xl sm:rounded-3xl border border-[var(--border-color)] shadow-sm hover:shadow-xl transition-all duration-300 group">
+                <m.div variants={staggerItem} key={review.id} className="bg-[var(--bg-card)] p-5 sm:p-8 rounded-2xl sm:rounded-3xl border border-[var(--border-color)] shadow-sm hover:shadow-xl transition-all duration-300 group">
                   <div className="flex items-center justify-between mb-6">
                     <div className="flex items-center space-x-4">
                       <img 
@@ -218,9 +239,9 @@ const Reviews = () => {
                     </span>
                     <span className="text-caption text-[var(--text-muted)] font-medium">{review.date}</span>
                   </div>
-                </div>
+                </m.div>
               ))}
-            </div>
+            </m.div>
           ) : (
             <div className="text-center py-20">
               <div className="inline-flex items-center justify-center h-20 w-20 rounded-full bg-[var(--bg-secondary)] mb-6">
@@ -236,25 +257,35 @@ const Reviews = () => {
       {/* Call to Action */}
       <section className="py-20 bg-[var(--bg-inverted)] light-surface overflow-hidden relative text-[var(--text-on-light)]">
         <div className="absolute top-0 right-0 w-64 h-64 bg-[var(--bg-body)]/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
-        <div className="container-custom text-center relative z-10">
+        <m.div 
+          ref={ctaRef}
+          variants={fadeUp}
+          initial="hidden"
+          animate={ctaVisible ? 'visible' : 'hidden'}
+          className="container-custom text-center relative z-10"
+        >
           <h2 className="heading-lg font-bold text-[var(--text-on-light)] mb-8">
             Ready to be our next success story?
           </h2>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button 
+            <m.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               onClick={() => openModal()}
               className="btn-primary px-10 py-4 text-body-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--accent-primary)]"
             >
               Enroll Now
-            </button>
-            <button 
+            </m.button>
+            <m.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               onClick={() => openModal()}
               className="btn-secondary px-10 py-4 text-body-lg text-[var(--text-on-light)] border-[var(--bg-body)]/20 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--accent-primary)]"
             >
               Free Career Counseling
-            </button>
+            </m.button>
           </div>
-        </div>
+        </m.div>
       </section>
     </Layout>
   );

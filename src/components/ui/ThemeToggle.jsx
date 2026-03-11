@@ -7,7 +7,9 @@ const ThemeToggle = ({ className = '' }) => {
   const { theme, toggleTheme } = useTheme();
 
   return (
-    <button
+    <motion.button
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: 0.9 }}
       onClick={toggleTheme}
       className={`relative inline-flex items-center justify-center p-2 rounded-xl border border-transparent hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors focus:outline-none ${className}`}
       aria-label="Toggle Theme"
@@ -37,7 +39,7 @@ const ThemeToggle = ({ className = '' }) => {
           <Moon className="w-5 h-5 text-indigo-400 fill-indigo-400" />
         </motion.div>
       </div>
-    </button>
+    </motion.button>
   );
 };
 

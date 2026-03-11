@@ -1,16 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Clock, TrendingUp, BookOpen, ArrowRight } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { tierMeta } from '../../data/courses';
 
 const CourseCardComponent = ({ course, index = 0 }) => {
   const tier = tierMeta[course.tier] || tierMeta.Beginner;
 
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
+      whileHover={{ y: -8, scale: 1.02 }}
+      whileTap={{ scale: 0.98 }}
       viewport={{ once: true, margin: '-50px' }}
       transition={{
         duration: 0.6,
@@ -21,7 +23,7 @@ const CourseCardComponent = ({ course, index = 0 }) => {
     >
       <Link
         to={`/courses/${course.slug}`}
-        className="block h-full relative rounded-[20px] overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-2 hover:shadow-2xl hover:shadow-gray-900/8 dark:hover:shadow-black/40 no-underline"
+        className="block h-full relative rounded-[20px] overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:shadow-2xl hover:shadow-gray-900/8 dark:hover:shadow-black/40 no-underline"
         style={{
           backgroundColor: 'var(--bg-card)',
           borderWidth: '1px',
@@ -114,7 +116,7 @@ const CourseCardComponent = ({ course, index = 0 }) => {
           </div>
         </div>
       </Link>
-    </motion.div>
+    </m.div>
   );
 };
 

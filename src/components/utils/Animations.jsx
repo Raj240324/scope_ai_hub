@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { motion, useInView, animate, useScroll, useTransform, useSpring } from 'framer-motion';
+import { m, useInView, animate, useScroll, useTransform, useSpring } from 'framer-motion';
 
 export const FadeIn = ({ 
   children, 
@@ -19,7 +19,7 @@ export const FadeIn = ({
   };
 
   return (
-    <motion.div
+    <m.div
       initial={{ 
         opacity: 0, 
         scale: 0.95,
@@ -43,7 +43,7 @@ export const FadeIn = ({
       style={{ width: fullWidth ? '100%' : 'auto' }}
     >
       {children}
-    </motion.div>
+    </m.div>
   );
 };
 
@@ -54,7 +54,7 @@ export const StaggerContainer = ({
   staggerChildren = 0.15
 }) => {
   return (
-    <motion.div
+    <m.div
       initial="hidden"
       whileInView="show"
       viewport={{ once: true, margin:"-50px" }}
@@ -70,13 +70,13 @@ export const StaggerContainer = ({
       className={className}
     >
       {children}
-    </motion.div>
+    </m.div>
   );
 };
 
 export const StaggerItem = ({ children, className ="" }) => {
   return (
-    <motion.div
+    <m.div
       variants={{
         hidden: { opacity: 0, y: 30, scale: 0.95 },
         show: { 
@@ -89,20 +89,20 @@ export const StaggerItem = ({ children, className ="" }) => {
       className={className}
     >
       {children}
-    </motion.div>
+    </m.div>
   );
 };
 
 export const ScaleOnHover = ({ children, className ="", scale = 1.05 }) => {
   return (
-    <motion.div
+    <m.div
       whileHover={{ scale }}
       whileTap={{ scale: 0.95 }}
       transition={{ type:"spring", stiffness: 400, damping: 17 }}
       className={className}
     >
       {children}
-    </motion.div>
+    </m.div>
   );
 };
 
@@ -121,9 +121,9 @@ export const Parallax = ({ children, offset = 50, className ="" }) => {
 
   return (
     <div ref={ref} className={className} style={{ overflow: 'visible' }}>
-      <motion.div style={{ y }}>
+      <m.div style={{ y }}>
         {children}
-      </motion.div>
+      </m.div>
     </div>
   );
 };
@@ -202,7 +202,7 @@ export const ScrollCountUp = ({ end, duration = 2.5, suffix ="", prefix ="", cla
 export const Marquee = ({ children, speed = 20, className ="" }) => {
   return (
     <div className={`overflow-hidden flex ${className}`}>
-      <motion.div
+      <m.div
         initial={{ x: 0 }}
         animate={{ x:"-50%" }}
         transition={{ 
@@ -214,7 +214,7 @@ export const Marquee = ({ children, speed = 20, className ="" }) => {
       >
         {children}
         {children}
-      </motion.div>
+      </m.div>
     </div>
   );
 };

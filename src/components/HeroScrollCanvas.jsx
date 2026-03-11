@@ -247,6 +247,7 @@ const HeroScrollCanvas = ({ badge, title, subtitle, children }) => {
       `}</style>
 
       <section
+        id="hero-section"
         ref={sectionRef}
         aria-label="Hero animation section"
         style={{
@@ -259,7 +260,7 @@ const HeroScrollCanvas = ({ badge, title, subtitle, children }) => {
       >
         <div style={{
           position:"sticky", top:0, left:0, right:0,
-          height:"100vh", width:"100%",
+          height:"100dvh", width:"100%",
           overflow:"hidden",
           display:"flex", flexDirection:"column",
         }}>

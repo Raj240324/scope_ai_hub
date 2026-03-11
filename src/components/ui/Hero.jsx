@@ -32,7 +32,7 @@ const Hero = ({
   if (isVideo) {
     return (
       <section 
-        className={`relative overflow-hidden min-h-[100vh] flex items-center justify-center ${className}`}
+        className={`relative overflow-hidden min-h-[100dvh] flex items-center justify-center ${className}`}
         aria-label="Homepage hero"
       >
         {/* Video Background */}
@@ -45,6 +45,7 @@ const Hero = ({
               aria-hidden="true"
               className="absolute inset-0 w-full h-full object-cover"
               loading="eager"
+              fetchpriority="high"
             />
           )}
 
@@ -176,6 +177,7 @@ const Hero = ({
                       alt="Hero Image" 
                       className="w-full h-full object-cover"
                       loading="eager"
+                      fetchpriority="high"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-navy/60 to-transparent" />
                   </div>

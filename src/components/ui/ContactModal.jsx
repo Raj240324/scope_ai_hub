@@ -1,6 +1,6 @@
 import React from 'react';
 import { X } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from 'framer-motion';
 import ContactForm from './ContactForm';
 import TrainerForm from './TrainerForm';
 import { useModal } from '../../context/ModalContext';
@@ -29,7 +29,7 @@ const ContactModal = () => {
       {isModalOpen && (
         <div className="fixed inset-0 z-[1000] flex items-center justify-center p-4">
           {/* Backdrop */}
-          <motion.div 
+          <m.div 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -38,7 +38,7 @@ const ContactModal = () => {
           />
 
           {/* Modal Content */}
-          <motion.div 
+          <m.div 
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
@@ -46,12 +46,14 @@ const ContactModal = () => {
             className="relative w-full max-w-2xl bg-[var(--bg-card)] rounded-[2rem] shadow-2xl z-10 flex flex-col max-h-[90vh] overflow-hidden"
           >
             {/* Close Button */}
-            <button 
+            <m.button 
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
               onClick={closeModal}
               className="absolute top-4 right-4 md:top-6 md:right-6 p-2 text-[var(--text-muted)] hover:text-[var(--text-heading)] hover:bg-[var(--bg-secondary)] rounded-xl transition-all z-20"
             >
               <X className="h-5 w-5 md:h-6 md:w-6" />
-            </button>
+            </m.button>
 
             <div className="p-6 md:p-8 overflow-y-auto no-scrollbar">
               <div className="mb-4 md:mb-6">
@@ -98,7 +100,7 @@ const ContactModal = () => {
                 <ContactForm initialCourse={modalCourse} />
               )}
             </div>
-          </motion.div>
+          </m.div>
         </div>
       )}
     </AnimatePresence>

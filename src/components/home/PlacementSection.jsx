@@ -1,25 +1,43 @@
 import React from 'react';
 import { Code2, Users, Building2, CheckCircle2, Briefcase } from 'lucide-react';
 import { ScaleOnHover } from '../utils/Animations';
+import { m } from 'framer-motion';
+import { useScrollReveal } from '../../hooks/useScrollReveal';
+import { fadeUp, staggerContainer, staggerItem } from '../../utils/motionVariants';
 
-const PlacementSection = ({ openModal }) => (
+const PlacementSection = ({ openModal }) => {
+  const { ref: headerRef, isVisible: headerVisible } = useScrollReveal();
+  const { ref: statsRef, isVisible: statsVisible } = useScrollReveal();
+
+  return (
   <section className="py-20 bg-[var(--bg-body)] relative overflow-hidden border-b border-[var(--border-color)]">
     <div className="absolute top-0 right-0 w-80 h-80 bg-primary/5 rounded-full blur-3xl blur-layer" />
     <div className="container-custom relative z-10">
-      <div className="text-center max-w-3xl mx-auto mb-16">
-        <div className="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-caption font-bold uppercase tracking-wider mb-6 border border-primary/20">
+      <m.div 
+        ref={headerRef}
+        variants={staggerContainer}
+        initial="hidden"
+        animate={headerVisible ? 'visible' : 'hidden'}
+        className="text-center max-w-3xl mx-auto mb-16"
+      >
+        <m.div variants={fadeUp} className="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-caption font-bold uppercase tracking-wider mb-6 border border-primary/20">
           <Briefcase className="h-3 w-3" />
           <span>100% Placement Support</span>
-        </div>
-        <h2 className="heading-lg font-semibold text-[var(--text-heading)] mb-6 leading-tight">
+        </m.div>
+        <m.h2 variants={fadeUp} className="heading-lg font-semibold text-[var(--text-heading)] mb-6 leading-tight">
           Your Success is <span className="text-primary">Our Commitment</span>
-        </h2>
-        <p className="text-body-lg">
+        </m.h2>
+        <m.p variants={fadeUp} className="text-body-lg">
           We don't just train you—we prepare you for the real world. Our comprehensive placement support ensures you're completely job-ready when you complete your course.
-        </p>
-      </div>
+        </m.p>
+      </m.div>
 
-      <div className="grid md:grid-cols-3 gap-12 mb-16">
+      <m.div 
+        variants={staggerContainer}
+        initial="hidden"
+        animate={headerVisible ? 'visible' : 'hidden'}
+        className="grid md:grid-cols-3 gap-12 mb-16"
+      >
         {[
           { phase:"Phase 1", title:"Technical Grooming", icon: <Code2 className="h-6 w-6" />, items: ["Advanced DSA & problem-solving sessions","System design fundamentals","Live coding practice with real-time feedback","Code review and optimization techniques","Portfolio project development"], color:"from-blue-500 to-cyan-600" },
           { phase:"Phase 2", title:"Interview Preparation", icon: <Users className="h-6 w-6" />, items: ["Mock interviews (Technical + HR rounds)","Resume building & LinkedIn profile optimization","Communication & soft skills training","Salary negotiation strategies","Company-specific interview patterns"], color:"from-purple-500 to-pink-600" },
@@ -43,9 +61,15 @@ const PlacementSection = ({ openModal }) => (
             </div>
           </ScaleOnHover>
         ))}
-      </div>
+      </m.div>
 
-      <div className="bg-[var(--bg-inverted)] light-surface text-[var(--text-on-light)] rounded-2xl sm:rounded-3xl p-5 sm:p-8 md:p-12">
+      <m.div 
+        ref={statsRef}
+        variants={fadeUp}
+        initial="hidden"
+        animate={statsVisible ? 'visible' : 'hidden'}
+        className="bg-[var(--bg-inverted)] light-surface text-[var(--text-on-light)] rounded-2xl sm:rounded-3xl p-5 sm:p-8 md:p-12"
+      >
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div>
             <h3 className="heading-md font-semibold text-[var(--text-on-light)] mb-6">
@@ -86,16 +110,19 @@ const PlacementSection = ({ openModal }) => (
           <p className="text-[var(--text-on-light)]/75 text-small mb-6">
             <span className="text-primary font-bold">Important Note:</span> While we provide comprehensive placement assistance, final selection depends on your performance in interviews and company requirements. We prepare you thoroughly to maximize your success rate.
           </p>
-          <button
+          <m.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             onClick={() => openModal('Placement Inquiry')}
             className="btn-primary text-small px-6 sm:px-10 py-3 sm:py-4 shadow-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--accent-primary)]"
           >
             Learn More About Placement Support
-          </button>
+          </m.button>
         </div>
-      </div>
+      </m.div>
     </div>
   </section>
-);
+  );
+};
 
 export default PlacementSection;

@@ -9,7 +9,9 @@ import {
   Award
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
+import { useScrollReveal } from '../hooks/useScrollReveal';
+import { fadeUp, staggerContainer, staggerItem } from '../utils/motionVariants';
 import { useModal } from '../context/ModalContext';
 import SEO from '../components/utils/SEO';
 import Hero from '../components/ui/Hero';
@@ -46,6 +48,9 @@ const Admissions = () => {
   // ── Batch data ────────────────────────────────────────────────────────────
   // Moved to src/data/batches.js and used in BatchScheduleSection
 
+  const { ref: ctaRef, isVisible: ctaVisible } = useScrollReveal();
+  const { ref: advantagesRef, isVisible: advantagesVisible } = useScrollReveal();
+
   const container = {
     hidden: { opacity: 0 },
     show: { opacity: 1, transition: { staggerChildren: 0.15 } }
@@ -79,7 +84,7 @@ const Admissions = () => {
               Follow these 4 easy steps to get started.
             </p>
           </div>
-          <motion.div
+          <m.div
             variants={container}
             initial="hidden"
             whileInView="show"
@@ -89,7 +94,7 @@ const Admissions = () => {
             {steps.map((step, index) => {
               const titleColors = ['#67e8f9', '#fbbf24', '#6ee7b7', '#f9a8d4'];
               return (
-                <motion.div key={index} variants={item} className="flip-card">
+                <m.div key={index} variants={item} className="flip-card">
                   <div className="flip-card-inner">
                     <div className="flip-card-front">
                       <span className="step-badge">STEP 0{index + 1}</span>
@@ -103,10 +108,10 @@ const Admissions = () => {
                       <p className="step-desc">{step.description}</p>
                     </div>
                   </div>
-                </motion.div>
+                </m.div>
               );
             })}
-          </motion.div>
+          </m.div>
         </div>
 
         {/* ── Eligibility ──────────────────────────────────────────────── */}
@@ -178,35 +183,47 @@ const Admissions = () => {
 
         {/* ── Programs Overview ─────────────────────────────────────────── */}
         <div className="mt-16 sm:mt-24 p-5 sm:p-8 md:p-12 dark-section text-[var(--text-on-inverted)] rounded-2xl sm:rounded-3xl text-center dark-surface">
-          <h2 className="heading-lg font-bold text-[var(--text-on-inverted)] mb-8 relative z-10">Programs Designed For You</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10 text-left">
-            <div className="glass-card p-6 text-left">
-              <h3 className="heading-sm font-semibold mb-2 text-primary-light">Upskill Courses</h3>
-              <p className="text-small text-[var(--text-muted)] mb-2">Targeted training to master specific technologies or tools quickly.</p>
-              <p className="text-caption text-[var(--text-muted)] font-bold uppercase tracking-wider">Duration: 1-2 Months</p>
+          <m.div
+            ref={ctaRef}
+            variants={fadeUp}
+            initial="hidden"
+            animate={ctaVisible ? 'visible' : 'hidden'}
+          >
+            <h2 className="heading-lg font-bold text-[var(--text-on-inverted)] mb-8 relative z-10">Programs Designed For You</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10 text-left">
+              <div className="glass-card p-6 text-left">
+                <h3 className="heading-sm font-semibold mb-2 text-primary-light">Upskill Courses</h3>
+                <p className="text-small text-[var(--text-muted)] mb-2">Targeted training to master specific technologies or tools quickly.</p>
+                <p className="text-caption text-[var(--text-muted)] font-bold uppercase tracking-wider">Duration: 1-2 Months</p>
+              </div>
+              <div className="glass-card p-6 text-left">
+                <h3 className="heading-sm font-semibold mb-2 text-primary-light">Career Tracks</h3>
+                <p className="text-small text-[var(--text-muted)] mb-2">Comprehensive pathways to transform you into a job-ready professional.</p>
+                <p className="text-caption text-[var(--text-muted)] font-bold uppercase tracking-wider">Duration: 4-6 Months</p>
+              </div>
+              <div className="glass-card p-6 text-left">
+                <h3 className="heading-sm font-semibold mb-2 text-primary-light">Master Programs</h3>
+                <p className="text-small text-[var(--text-muted)] mb-2">Deep-dive intensive programs with extensive projects and mentorship.</p>
+                <p className="text-caption text-[var(--text-muted)] font-bold uppercase tracking-wider">Duration: 8-12 Months</p>
+              </div>
             </div>
-            <div className="glass-card p-6 text-left">
-              <h3 className="heading-sm font-semibold mb-2 text-primary-light">Career Tracks</h3>
-              <p className="text-small text-[var(--text-muted)] mb-2">Comprehensive pathways to transform you into a job-ready professional.</p>
-              <p className="text-caption text-[var(--text-muted)] font-bold uppercase tracking-wider">Duration: 4-6 Months</p>
+            <p className="text-[var(--text-muted)] max-w-2xl mx-auto mb-10 relative z-10 font-medium">
+              To maintain high training quality, class sizes are strictly limited. Contact our admission desk for detailed fee structures and availability.
+            </p>
+            <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6 relative z-10">
+              <m.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => openModal()}
+                className="btn-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--accent-primary)]"
+              >
+                Enquire About Admissions
+              </m.button>
+              <Link to="/courses" className="btn-secondary text-[var(--text-on-inverted)] font-bold px-8 py-4 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--accent-primary)]">
+                Explore Courses
+              </Link>
             </div>
-            <div className="glass-card p-6 text-left">
-              <h3 className="heading-sm font-semibold mb-2 text-primary-light">Master Programs</h3>
-              <p className="text-small text-[var(--text-muted)] mb-2">Deep-dive intensive programs with extensive projects and mentorship.</p>
-              <p className="text-caption text-[var(--text-muted)] font-bold uppercase tracking-wider">Duration: 8-12 Months</p>
-            </div>
-          </div>
-          <p className="text-[var(--text-muted)] max-w-2xl mx-auto mb-10 relative z-10 font-medium">
-            To maintain high training quality, class sizes are strictly limited. Contact our admission desk for detailed fee structures and availability.
-          </p>
-          <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6 relative z-10">
-            <button onClick={() => openModal()} className="btn-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--accent-primary)]">
-              Enquire About Admissions
-            </button>
-            <Link to="/courses" className="btn-secondary text-[var(--text-on-inverted)] font-bold px-8 py-4 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--accent-primary)]">
-              Explore Courses
-            </Link>
-          </div>
+          </m.div>
         </div>
 
         {/* ── Career Advantages ─────────────────────────────────────────── */}
@@ -223,9 +240,15 @@ const Admissions = () => {
               From resume building to job referrals — we're invested in your success.
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <m.div
+            ref={advantagesRef}
+            variants={staggerContainer}
+            initial="hidden"
+            animate={advantagesVisible ? 'visible' : 'hidden'}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"
+          >
             {addons.slice(0, 6).map((addon, index) => (
-              <div key={index} className="flex items-start gap-4 p-5 bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl hover:shadow-md transition-all duration-300">
+              <m.div variants={staggerItem} key={index} className="flex items-start gap-4 p-5 bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl hover:shadow-md transition-all duration-300">
                 <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-primary/10 heading-md shrink-0">
                   {addon.icon}
                 </div>
@@ -233,9 +256,9 @@ const Admissions = () => {
                   <h3 className="font-bold text-small mb-1 leading-tight text-[var(--text-heading)]">{addon.title}</h3>
                   <p className="text-caption leading-relaxed line-clamp-2 text-[var(--text-body)]">{addon.description}</p>
                 </div>
-              </div>
+              </m.div>
             ))}
-          </div>
+          </m.div>
           <div className="text-center mt-8">
             <Link to="/courses" className="inline-flex items-center gap-2 text-primary font-bold hover:underline">
               View all 12 career benefits

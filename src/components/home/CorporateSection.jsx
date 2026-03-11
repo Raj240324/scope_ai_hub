@@ -1,5 +1,6 @@
 import React from 'react';
 import { CheckCircle2 } from 'lucide-react';
+import { m } from 'framer-motion';
 
 const CorporateSection = ({ openModal }) => (
   <section className="py-20 dark-section text-[var(--text-on-inverted)] dark-surface">
@@ -35,12 +36,14 @@ const CorporateSection = ({ openModal }) => (
               </div>
             ))}
           </div>
-          <button
+          <m.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             onClick={() => openModal('Corporate Training')}
             className="btn-primary px-10 py-4 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--accent-primary)]"
           >
             Inquire for Corporate Training
-          </button>
+          </m.button>
         </div>
         <div className="hidden lg:block">
           <div className="grid grid-cols-2 gap-4">

@@ -35,7 +35,7 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
   scroll-padding-top: 110px;
   overflow-x: clip;
   -webkit-text-size-adjust: 100%;
@@ -46,11 +46,14 @@ body {
   overflow-x: clip;
   position: relative;
   width: 100%;
+  overscroll-behavior-y: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
-::-webkit-scrollbar        { width: 4px; }
-::-webkit-scrollbar-track  { background: var(--bg-body); }
-::-webkit-scrollbar-thumb  { background: #d64fd9; border-radius: 2px; }
+::-webkit-scrollbar { width: 0px; background: transparent; }
+* { scrollbar-width: none; }
 
 section {
   position: relative;
@@ -182,7 +185,7 @@ section {
 
 @layer base {
   html {
-    scroll-behavior: smooth;
+    scroll-behavior: auto;
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
     overflow-x: clip;
@@ -193,7 +196,18 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
   overflow-x: clip;
+  overscroll-behavior-y: none;
 }
+
+  /* Accessible Links & Motion */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
 
   /* Surface Utility Classes (Phase 2) */
   .dark-surface {
@@ -338,6 +352,10 @@ body {
     @apply py-16 md:py-24;
   }
 
+  /* iOS Safari 100vh fix */
+  .h-screen-safe { height: 100dvh; }
+  .min-h-screen-safe { min-height: 100dvh; }
+
   /* ===== TYPOGRAPHY SYSTEM ===== */
   .heading-hero {
     @apply text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight;
@@ -460,12 +478,13 @@ body {
     transform: translateX(0);
   }
   100% {
-    transform: translateX(-33.33%);
+    transform: translateX(-50%);
   }
 }
 
 .animate-marquee {
   animation: marquee 30s linear infinite;
+  will-change: transform;
 }
 
 .animate-marquee:hover {

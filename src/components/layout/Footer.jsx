@@ -6,6 +6,7 @@ import { BRANDING } from '../../data/branding';
 import { useTheme } from '../../context/ThemeContext';
 import { MicroExpander } from '../ui/MicroExpander';
 import { courses } from '../../data/courses';
+import { m } from 'framer-motion';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -23,6 +24,7 @@ const Footer = () => {
                 src={theme === 'dark' ? BRANDING.logoLight : BRANDING.logoDark} 
                 alt={BRANDING.fullName} 
                 className="h-16 md:h-20 w-auto object-contain" 
+                loading="lazy"
               />
             </Link>
             <p className="text-small leading-relaxed text-[var(--text-muted)]">
@@ -168,13 +170,15 @@ const Footer = () => {
                 <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse mr-2"></span>
                 Next Batch Starting Soon
               </span>
-              <button 
+              <m.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
                 onClick={() => openModal()}
                 className="btn-primary px-5 py-2 text-small focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--accent-primary)]"
                 aria-label="Enroll Today"
               >
                 Enroll Today
-              </button>
+              </m.button>
             </div>
         </div>
       </div>

@@ -64,7 +64,9 @@ const MicroExpander = React.forwardRef(
     };
 
     return (
-      <button
+      <motion.button
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
         ref={ref}
         className={cn(
           'relative flex h-12 items-center rounded-full transition-all duration-300', // Use standard CSS transition for background/border
@@ -126,7 +128,7 @@ const MicroExpander = React.forwardRef(
             {text}
           </div>
         </motion.div>
-      </button>
+      </motion.button>
     );
   }
 );

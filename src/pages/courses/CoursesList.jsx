@@ -7,7 +7,9 @@ import { courses, TIERS, tierMeta } from '../../data/courses';
 import { addons } from '../../data/addons';
 import { Search, X, Sparkles, GraduationCap, Award } from 'lucide-react';
 import SEO from '../../components/utils/SEO';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from 'framer-motion';
+import { useScrollReveal } from '../../hooks/useScrollReveal';
+import { fadeUp, staggerContainer } from '../../utils/motionVariants';
 
 const CoursesList = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -69,7 +71,7 @@ const CoursesList = () => {
         </div>
 
         <div className="container-custom relative z-10 text-center">
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
@@ -77,9 +79,9 @@ const CoursesList = () => {
           >
             <Sparkles className="h-3.5 w-3.5" />
             10 Industry-Aligned Programs
-          </motion.div>
+          </m.div>
 
-          <motion.h1
+          <m.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
@@ -92,9 +94,9 @@ const CoursesList = () => {
                 <path d="M2 7C30 2 130 -3 198 7" stroke="currentColor" strokeWidth="3" strokeLinecap="round"/>
               </svg>
             </span>
-          </motion.h1>
+          </m.h1>
 
-          <motion.p
+          <m.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
@@ -102,20 +104,20 @@ const CoursesList = () => {
           >
             From your first prompt to production-grade ML pipelines — programs engineered 
             for every stage of your AI career.
-          </motion.p>
+          </m.p>
         </div>
       </section>
 
       {/* Mobile Filter Bottom Sheet */}
       <AnimatePresence>
         {showMobileFilters && (
-          <motion.div
+          <m.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 bg-black/40 z-50 flex items-end lg:hidden"
           >
-            <motion.div
+            <m.div
               initial={{ y: 400 }}
               animate={{ y: 0 }}
               exit={{ y: 400 }}
@@ -124,20 +126,24 @@ const CoursesList = () => {
             >
               <div className="flex justify-between items-center mb-6">
                 <h3 className="heading-sm">Filters</h3>
-                <button
+                <m.button
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
                   onClick={() => setShowMobileFilters(false)}
                   className="p-2 rounded-full hover:bg-[var(--bg-secondary)]"
                   aria-label="Close filters"
                 >
                   <X className="w-5 h-5" />
-                </button>
+                </m.button>
               </div>
 
               {/* Level Filter */}
               <div className="space-y-3">
                 {tierTabs.map((tier) => (
-                  <button
+                  <m.button
                     key={tier}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
                     onClick={() => setSelectedTier(tier)}
                     className={`w-full text-left px-4 py-3 rounded-lg border text-small font-semibold ${
                       selectedTier === tier
@@ -146,11 +152,11 @@ const CoursesList = () => {
                     }`}
                   >
                     {tier}
-                  </button>
+                  </m.button>
                 ))}
               </div>
-            </motion.div>
-          </motion.div>
+            </m.div>
+          </m.div>
         )}
       </AnimatePresence>
 
@@ -204,8 +210,10 @@ const CoursesList = () => {
                       const count = tier === 'All' ? courses.length : courses.filter(c => c.tier === tier).length;
 
                       return (
-                        <button
+                        <m.button
                           key={tier}
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
                           onClick={() => setSelectedTier(tier)}
                           className={`w-full flex items-center justify-between px-4 py-3 rounded-lg text-small font-semibold transition-all duration-200 border cursor-pointer ${
                             isActive
@@ -235,7 +243,7 @@ const CoursesList = () => {
                           <span className={`text-caption font-bold px-2 py-0.5 rounded-full transition-opacity duration-200 ${isActive ? 'opacity-100' : 'opacity-50'}`}>
                             {count}
                           </span>
-                        </button>
+                        </m.button>
                       );
                     })}
                   </div>
@@ -255,13 +263,15 @@ const CoursesList = () => {
 
                 {/* Clear Filters */}
                 {(searchTerm || selectedTier !== 'All') && (
-                  <button
+                  <m.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
                     onClick={clearFilters}
                     className="w-full mt-4 flex items-center justify-center gap-2 px-4 py-2.5 text-red-500 hover:text-red-600 transition-colors text-caption font-bold uppercase tracking-wider rounded-lg border border-red-500/20 hover:bg-red-500/5"
                   >
                     <X className="h-3.5 w-3.5" />
                     Clear All Filters
-                  </button>
+                  </m.button>
                 )}
 
                 {/* Enrollment Status */}
@@ -295,8 +305,10 @@ const CoursesList = () => {
                 {/* Tier Chips */}
                 <div className="flex gap-2 overflow-x-auto pb-1 no-scrollbar">
                   {tierTabs.map((tier) => (
-                    <button
+                    <m.button
                       key={tier}
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
                       onClick={() => setSelectedTier(tier)}
                       className={`px-4 py-2 rounded-full text-small font-semibold whitespace-nowrap border transition-colors ${
                         selectedTier === tier
@@ -305,18 +317,20 @@ const CoursesList = () => {
                       }`}
                     >
                       {tier}
-                    </button>
+                    </m.button>
                   ))}
                 </div>
 
                 {/* Filter Button */}
                 <div className="flex justify-between items-center">
-                  <button
+                  <m.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                     onClick={() => setShowMobileFilters(true)}
                     className="px-4 py-2 rounded-lg border border-[var(--border-color)] text-small font-semibold bg-[var(--bg-card)]"
                   >
                     Filters
-                  </button>
+                  </m.button>
 
                   <span className="text-small text-[var(--text-muted)]">
                     {filteredCourses.length} program{filteredCourses.length !== 1 ? 's' : ''}
@@ -327,7 +341,7 @@ const CoursesList = () => {
 
             <AnimatePresence mode="wait">
               {filteredCourses.length > 0 ? (
-                <motion.div
+                <m.div
                   key={selectedTier + searchTerm}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
@@ -342,9 +356,9 @@ const CoursesList = () => {
                       index={index}
                     />
                   ))}
-                </motion.div>
+                </m.div>
               ) : (
-                <motion.div
+                <m.div
                   initial={{ opacity: 0, scale: 0.98 }}
                   animate={{ opacity: 1, scale: 1 }}
                   className="text-center py-24 bg-[var(--bg-secondary)] rounded-2xl border border-dashed border-[var(--border-color)]"
@@ -354,10 +368,15 @@ const CoursesList = () => {
                   </div>
                   <h3 className="heading-sm font-semibold text-[var(--text-heading)] mb-2">No programs found</h3>
                   <p className="text-[var(--text-muted)] mb-8 text-small">Try adjusting your search or filters.</p>
-                  <button onClick={clearFilters} className="btn-primary text-small px-8 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--accent-primary)]">
+                  <m.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={clearFilters}
+                    className="btn-primary text-small px-8 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--accent-primary)]"
+                  >
                     Reset Filters
-                  </button>
-                </motion.div>
+                  </m.button>
+                </m.div>
               )}
             </AnimatePresence>
           </main>
@@ -372,48 +391,53 @@ const CoursesList = () => {
       {/* Career Advantages Section */}
       <Suspense fallback={null}>
         <section id="career-benefits" className="bg-[var(--bg-secondary)] border-t border-[var(--border-color)] py-20 md:py-28">
-          <div className="container-custom">
-            {/* Header */}
-            <div className="text-center max-w-3xl mx-auto mb-16">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                className="inline-flex items-center gap-2 px-4 py-2 mb-6 rounded-full bg-primary/5 border border-primary/10 text-primary text-caption font-bold uppercase tracking-[0.2em]"
-              >
-                <Award className="h-3.5 w-3.5" />
-                Included with Every Program
-              </motion.div>
-
-              <motion.h2
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-                className="heading-lg font-bold tracking-tight text-[var(--text-heading)]"
-              >
-                12 Career Advantages{' '}
-                <span className="font-extrabold text-primary">Included</span>
-              </motion.h2>
-
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-                className="text-body sm:text-lg leading-relaxed font-medium text-[var(--text-muted)]"
-              >
-                Every program comes with comprehensive career support — from resume preparation to job referrals. We're invested in your success.
-              </motion.p>
-            </div>
-
-            {/* Add-ons Grid */}
-            <AddonsGrid addons={addons} variant="full" showBadge={true} />
-          </div>
+          <CareerAdvantages />
         </section>
       </Suspense>
     </Layout>
+  );
+};
+
+const CareerAdvantages = () => {
+  const { ref, isVisible } = useScrollReveal();
+
+  return (
+    <div className="container-custom">
+      {/* Header */}
+      <m.div 
+        ref={ref}
+        variants={staggerContainer}
+        initial="hidden"
+        animate={isVisible ? 'visible' : 'hidden'}
+        className="text-center max-w-3xl mx-auto mb-16"
+      >
+        <m.div
+          variants={fadeUp}
+          className="inline-flex items-center gap-2 px-4 py-2 mb-6 rounded-full bg-primary/5 border border-primary/10 text-primary text-caption font-bold uppercase tracking-[0.2em]"
+        >
+          <Award className="h-3.5 w-3.5" />
+          Included with Every Program
+        </m.div>
+
+        <m.h2
+          variants={fadeUp}
+          className="heading-lg font-bold tracking-tight text-[var(--text-heading)]"
+        >
+          12 Career Advantages{' '}
+          <span className="font-extrabold text-primary">Included</span>
+        </m.h2>
+
+        <m.p
+          variants={fadeUp}
+          className="text-body sm:text-lg leading-relaxed font-medium text-[var(--text-muted)]"
+        >
+          Every program comes with comprehensive career support — from resume preparation to job referrals. We're invested in your success.
+        </m.p>
+      </m.div>
+
+      {/* Add-ons Grid */}
+      <AddonsGrid addons={addons} variant="full" showBadge={true} />
+    </div>
   );
 };
 

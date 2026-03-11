@@ -21,7 +21,9 @@ import {
   Sparkles,
   Check,
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from 'framer-motion';
+import { useScrollReveal } from '../../hooks/useScrollReveal';
+import { fadeUp, staggerContainer, staggerItem } from '../../utils/motionVariants';
 import CourseCard from '../../components/ui/CourseCard';
 import BatchScheduleSection from '../../components/sections/BatchScheduleSection';
 
@@ -72,7 +74,7 @@ const CourseDetail = () => {
         <div className="container-custom relative z-10">
           <div className="max-w-4xl">
             {/* Badges */}
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
@@ -95,49 +97,53 @@ const CourseDetail = () => {
                 <span className="h-1.5 w-1.5 rounded-full bg-green-500 animate-pulse" />
                 Open for Enrollment
               </span>
-            </motion.div>
+            </m.div>
 
             {/* Title */}
-            <motion.h1
+            <m.h1
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
               className="heading-hero font-extrabold text-[var(--text-heading)] mb-5 tracking-tight leading-[1.08]"
             >
               {course.title}
-            </motion.h1>
+            </m.h1>
 
             {/* Tagline */}
-            <motion.p
+            <m.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.16, ease: [0.22, 1, 0.36, 1] }}
               className="text-body sm:text-lg text-[var(--text-muted)] mb-10 leading-relaxed max-w-2xl font-medium"
             >
               {course.tagline}
-            </motion.p>
+            </m.p>
 
             {/* CTAs */}
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.24, ease: [0.22, 1, 0.36, 1] }}
               className="flex flex-wrap gap-4"
             >
-              <button
+              <m.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
                 onClick={() => openModal(course.title)}
                 className="group inline-flex items-center gap-2 px-7 py-3.5 btn-primary text-small font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--accent-primary)]"
               >
                 <Sparkles className="h-4 w-4 opacity-70 group-hover:opacity-100 transition-opacity" />
                 Enroll Now
-              </button>
-              <button
+              </m.button>
+              <m.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
                 onClick={() => document.getElementById('syllabus')?.scrollIntoView({ behavior: 'smooth' })}
                 className="px-7 py-3.5 btn-secondary text-small font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--accent-primary)]"
               >
                 View Syllabus
-              </button>
-            </motion.div>
+              </m.button>
+            </m.div>
           </div>
         </div>
       </section>
@@ -189,7 +195,7 @@ const CourseDetail = () => {
                   {course.modules.map((mod, index) => {
                     const isOpen = activeModule === index;
                     return (
-                      <motion.div
+                      <m.div
                         key={mod.code}
                         initial={false}
                         className="rounded-xl overflow-hidden border transition-colors duration-300"
@@ -198,7 +204,9 @@ const CourseDetail = () => {
                           background: isOpen ? `${tier.color}04` : 'var(--bg-card)',
                         }}
                       >
-                        <button
+                        <m.button
+                          whileHover={{ scale: 1.01 }}
+                          whileTap={{ scale: 0.99 }}
                           onClick={() => setActiveModule(isOpen ? -1 : index)}
                           className="w-full flex items-center justify-between p-4 cursor-pointer sm:p-5 text-left group"
                         >
@@ -224,8 +232,8 @@ const CourseDetail = () => {
                               color: isOpen ? tier.color : undefined,
                             }}
                           />
-                        </button>
-                      </motion.div>
+                        </m.button>
+                      </m.div>
                     );
                   })}
                 </div>
@@ -309,19 +317,23 @@ const CourseDetail = () => {
                   </div>
 
                   <div className="space-y-3 mb-6">
-                    <button
+                    <m.button
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
                       onClick={() => openModal(course.title)}
                       className="w-full btn-primary py-4 text-small font-bold flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--accent-primary)]"
                     >
                       <Sparkles className="h-4 w-4" />
                       Enroll Now
-                    </button>
-                    <button
+                    </m.button>
+                    <m.button
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
                       onClick={() => openModal(course.title)}
                       className="w-full py-4 btn-secondary text-small font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--accent-primary)]"
                     >
                       Talk to Counselor
-                    </button>
+                    </m.button>
                   </div>
 
                   <div className="space-y-4 pt-5 border-t border-[var(--border-color)]/60">
@@ -380,7 +392,7 @@ const CourseDetail = () => {
       <section className="py-20 sm:py-28 bg-[var(--bg-secondary)] border-t border-[var(--border-color)]">
         <div className="container-custom">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -389,9 +401,9 @@ const CourseDetail = () => {
             >
               <Check className="h-3.5 w-3.5" />
               Included Career Benefits
-            </motion.div>
+            </m.div>
 
-            <motion.h2
+            <m.h2
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -399,9 +411,9 @@ const CourseDetail = () => {
               className="heading-lg font-bold tracking-tight text-[var(--text-heading))]"
             >
               Everything You Need to Get Hired
-            </motion.h2>
+            </m.h2>
 
-            <motion.p
+            <m.p
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -409,13 +421,13 @@ const CourseDetail = () => {
               className="text-body leading-relaxed font-medium text-[var(--text-muted))]"
             >
               From resume building to job referrals — comprehensive career support included with this program.
-            </motion.p>
+            </m.p>
           </div>
 
           {/* Compact Add-ons Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {addons.map((addon, index) => (
-              <motion.div
+              <m.div
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -441,7 +453,7 @@ const CourseDetail = () => {
                     {addon.description}
                   </p>
                 </div>
-              </motion.div>
+              </m.div>
             ))}
           </div>
         </div>

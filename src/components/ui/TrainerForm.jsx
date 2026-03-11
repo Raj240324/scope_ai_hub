@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { CheckCircle, ArrowRight, ArrowLeft, Send, Loader2, AlertCircle, Check, Globe } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from 'framer-motion';
 import { useModal } from '../../context/ModalContext';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { handleApiError, normalizeError } from '../../utils/apiErrorHandler';
@@ -170,12 +170,14 @@ const TrainerForm = () => {
           <h2 className="heading-sm font-bold text-[var(--text-heading)]">Application Received!</h2>
           <p className="text-small text-[var(--text-muted)]">Our academic team will review your profile and contact you for a technical discussion.</p>
         </div>
-        <button
+        <m.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
           onClick={closeModal}
           className="btn-secondary text-small px-8 py-3 focus:outline-none focus:ring-2 focus:ring-[var(--accent-primary)]"
         >
           Close
-        </button>
+        </m.button>
       </div>
     );
   }
@@ -236,7 +238,7 @@ const TrainerForm = () => {
 
       {/* Active step */}
       <AnimatePresence mode="wait">
-        <motion.div
+        <m.div
           key={step.id}
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
@@ -261,11 +263,13 @@ const TrainerForm = () => {
               {EXPERTISE_OPTIONS.map((opt, i) => {
                 const isSelected = value === opt.value;
                 return (
-                  <motion.button
+                  <m.button
                     key={opt.value}
                     type="button"
                     initial={{ opacity: 0, y: 8 }}
                     animate={{ opacity: 1, y: 0 }}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
                     transition={{ duration: 0.25, delay: i * 0.04 }}
                     onClick={() => handleChange(step.field, opt.value)}
                     className={`group relative w-full px-4 py-3 rounded-xl text-small font-medium text-left transition-all duration-300 flex items-center justify-between border ${
@@ -282,7 +286,7 @@ const TrainerForm = () => {
                     }`}>
                       <Check className="h-3 w-3" strokeWidth={3} />
                     </span>
-                  </motion.button>
+                  </m.button>
                 );
               })}
             </div>
@@ -324,14 +328,14 @@ const TrainerForm = () => {
           {/* Error message */}
           <AnimatePresence>
             {fieldError && (
-              <motion.p
+              <m.p
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: 'auto' }}
                 exit={{ opacity: 0, height: 0 }}
                 className="text-caption text-red-500 font-bold flex items-center gap-1"
               >
                 <AlertCircle className="h-3 w-3 shrink-0" /> {fieldError}
-              </motion.p>
+              </m.p>
             )}
           </AnimatePresence>
 
@@ -342,7 +346,7 @@ const TrainerForm = () => {
               <p className="text-caption font-bold">{errorMessage}</p>
             </div>
           )}
-        </motion.div>
+        </m.div>
       </AnimatePresence>
 
       {/* Buttons */}
@@ -359,7 +363,9 @@ const TrainerForm = () => {
             />
           </div>
         )}
-        <button
+        <m.button
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
           onClick={handleNext}
           disabled={status === 'sending'}
           className="w-full btn-primary py-3.5 flex items-center justify-center gap-2 group disabled:opacity-70 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-[var(--accent-primary)]"
@@ -380,15 +386,17 @@ const TrainerForm = () => {
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
             </>
           )}
-        </button>
+        </m.button>
 
         {currentStep > 0 && (
-          <button
+          <m.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
             onClick={handleBack}
             className="w-full text-center text-small text-[var(--text-muted)] hover:text-[var(--text-heading)] transition-colors flex items-center justify-center gap-1"
           >
             <ArrowLeft className="h-3.5 w-3.5" /> Go back
-          </button>
+          </m.button>
         )}
       </div>
 

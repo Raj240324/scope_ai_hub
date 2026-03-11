@@ -153,7 +153,7 @@ const DominoScroll = ({
         style={{
           position:       'sticky',
           top:            0,
-          height:         '100vh',
+          height:         '100dvh',
           display:        'flex',
           alignItems:     'center',
           justifyContent: 'center',

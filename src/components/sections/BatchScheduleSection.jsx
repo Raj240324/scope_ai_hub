@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { m, motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { useModal } from '../../context/ModalContext';
 import DominoScroll from '../ui/DominoScroll';
@@ -125,13 +125,15 @@ const BatchScheduleSection = ({ showHybridCallout = true }) => {
                 <p className="text-caption text-[var(--text-muted)]">
                   Batch {i + 1} of {batches.length} — keep scrolling ↓
                 </p>
-                <button
+                <m.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                   onClick={() => openModal()}
                   className="group/btn inline-flex items-center gap-2 px-6 py-3 btn-primary text-small font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--accent-primary)]"
                 >
                   Reserve Seat
                   <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover/btn:translate-x-1" />
-                </button>
+                </m.button>
               </div>
             </div>
           </div>
@@ -140,13 +142,15 @@ const BatchScheduleSection = ({ showHybridCallout = true }) => {
 
       {/* CTA below the domino sequence */}
       <div className="text-center -mt-6">
-        <button
+        <m.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
           onClick={() => openModal()}
           className="group inline-flex items-center gap-2 px-8 py-4 btn-primary text-body-lg text-[var(--text-on-inverted)] font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--accent-primary)]"
         >
           Book Your Free Counseling Session
           <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-        </button>
+        </m.button>
       </div>
     </div>
   );

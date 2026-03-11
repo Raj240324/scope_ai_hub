@@ -5,6 +5,9 @@ import ContactForm from '../components/ui/ContactForm';
 import { Mail, Phone, MapPin, Clock, Facebook, Twitter, Linkedin, Instagram } from 'lucide-react';
 import { useModal } from '../context/ModalContext';
 
+import { m } from 'framer-motion';
+import { useScrollReveal } from '../hooks/useScrollReveal';
+import { fadeUp, staggerContainer, staggerItem } from '../utils/motionVariants';
 import SEO from '../components/utils/SEO';
 import Hero from '../components/ui/Hero';
 
@@ -12,6 +15,8 @@ import { BRANDING } from '../data/branding';
 
 const Contact = () => {
   const { openModal } = useModal();
+  const { ref: leftRef, isVisible: leftVisible } = useScrollReveal();
+  const { ref: rightRef, isVisible: rightVisible } = useScrollReveal();
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const initialCourse = queryParams.get('course') ||"General Inquiry";
@@ -33,8 +38,14 @@ const Contact = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24">
           
           {/* Left Column: Information */}
-          <div className="space-y-12">
-             <div>
+          <m.div 
+            ref={leftRef}
+            variants={staggerContainer}
+            initial="hidden"
+            animate={leftVisible ? 'visible' : 'hidden'}
+            className="space-y-12"
+          >
+             <m.div variants={staggerItem}>
                 <h2 className="heading-lg font-bold text-[var(--text-heading)] mb-6">Contact Information</h2>
                 <p className="text-[var(--text-muted)] text-body-lg mb-8 leading-relaxed">
                    We'd love to hear from you. Whether you have a question about courses, pricing, or just want to say hello, our team is ready to answer all your questions.
@@ -73,10 +84,10 @@ const Contact = () => {
                       </div>
                    </div>
                 </div>
-             </div>
+             </m.div>
 
              {/* Office Hours Box */}
-             <div className="p-5 sm:p-8 bg-[var(--bg-secondary)] rounded-2xl sm:rounded-3xl border border-[var(--border-color)]">
+             <m.div variants={staggerItem} className="p-5 sm:p-8 bg-[var(--bg-secondary)] rounded-2xl sm:rounded-3xl border border-[var(--border-color)]">
                 <div className="flex items-center gap-3 mb-6">
                    <Clock className="h-6 w-6 text-primary" />
                    <h3 className="heading-sm font-semibold text-[var(--text-heading)]">Office Hours</h3>
@@ -95,10 +106,10 @@ const Contact = () => {
                       <span className="font-bold text-[var(--text-heading)]">9:00 AM – 5:00 PM</span>
                    </div>
                 </div>
-             </div>
+             </m.div>
 
              {/* Socials */}
-             <div>
+             <m.div variants={staggerItem}>
                 <h3 className="heading-sm font-semibold text-[var(--text-heading)] mb-6">Follow Us</h3>
                 <div className="flex gap-4">
                   {[
@@ -121,22 +132,28 @@ const Contact = () => {
                     </a>
                   ))}
                 </div>
-             </div>
-          </div>
+             </m.div>
+          </m.div>
 
           {/* Right Column: Contact Form */}
-          <div className="space-y-8">
-            <div className="bg-[var(--bg-card)] rounded-2xl sm:rounded-[2rem] shadow-2xl shadow-primary/5 border border-[var(--border-color)] p-5 sm:p-8 md:p-12 relative overflow-hidden">
+          <m.div 
+            ref={rightRef}
+            variants={staggerContainer}
+            initial="hidden"
+            animate={rightVisible ? 'visible' : 'hidden'}
+            className="space-y-8"
+          >
+            <m.div variants={staggerItem} className="bg-[var(--bg-card)] rounded-2xl sm:rounded-[2rem] shadow-2xl shadow-primary/5 border border-[var(--border-color)] p-5 sm:p-8 md:p-12 relative overflow-hidden">
               <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-bl-[100px] pointer-events-none" />
               <div className="relative z-10">
                  <h3 className="heading-lg font-bold text-[var(--text-heading)] mb-2">Send us a message</h3>
                  <p className="text-[var(--text-muted)] mb-8">Fill out the form below and we'll get back to you shortly.</p>
                  <ContactForm initialCourse={initialCourse} />
               </div>
-            </div>
+            </m.div>
 
             {/* Quick FAQs */}
-            <div className="bg-[var(--bg-secondary)] rounded-2xl sm:rounded-[2rem] border border-[var(--border-color)] p-5 sm:p-8">
+            <m.div variants={staggerItem} className="bg-[var(--bg-secondary)] rounded-2xl sm:rounded-[2rem] border border-[var(--border-color)] p-5 sm:p-8">
                <h3 className="heading-sm font-semibold text-[var(--text-heading)] mb-4">Quick Answers</h3>
                <div className="space-y-4">
                   <div>
@@ -148,8 +165,8 @@ const Contact = () => {
                     <p className="text-[var(--text-muted)] text-small">We provide extensive placement assistance, portfolio building, and mock interviews to ensure you are job-ready.</p>
                   </div>
                </div>
-            </div>
-          </div>
+            </m.div>
+          </m.div>
 
         </div>
       </div>

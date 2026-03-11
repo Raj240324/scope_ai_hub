@@ -1,7 +1,10 @@
 import React from 'react';
+import { m } from 'framer-motion';
+import { useScrollReveal } from '../../hooks/useScrollReveal';
+import { fadeUp, fadeLeft, fadeRight, staggerContainer } from '../../utils/motionVariants';
 import { Cpu, Code2, Users, GraduationCap } from 'lucide-react';
-import { StaggerItem, Parallax } from '../utils/Animations';
 import { StackingCards } from '../utils/StackingCards';
+import { Parallax } from '../utils/Animations';
 import { BRANDING } from '../../data/branding';
 
 const methodology = [
@@ -11,7 +14,10 @@ const methodology = [
   { step:"04", title:"Accelerate Your Career", desc:"End-to-end career support including mentorship, portfolio building, and placement guidance.", icon: <GraduationCap className="h-6 w-6" />, color:"bg-green-500" },
 ];
 
-const MethodologySection = ({ openModal }) => (
+const MethodologySection = ({ openModal }) => {
+  const { ref, isVisible } = useScrollReveal();
+
+  return (
   <section className="py-24 bg-[var(--bg-secondary)] relative overflow-hidden border-b border-[var(--border-color)]">
     <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
       <Parallax offset={20} className="absolute top-0 right-0 w-1/2 h-full z-0">
@@ -23,22 +29,33 @@ const MethodologySection = ({ openModal }) => (
     </div>
 
     <div className="container-custom relative z-10">
-      <div className="max-w-3xl mb-16">
-        <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-caption font-bold uppercase tracking-wider mb-6 border border-primary/20">
+      <m.div 
+        ref={ref}
+        variants={staggerContainer}
+        initial="hidden"
+        animate={isVisible ? 'visible' : 'hidden'}
+        className="max-w-3xl mb-16"
+      >
+        <m.div variants={fadeUp} className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-caption font-bold uppercase tracking-wider mb-6 border border-primary/20">
           The {BRANDING.fullName} Advantage
-        </div>
-        <h2 className="heading-lg font-bold text-[var(--text-heading)] mb-6 leading-tight">
+        </m.div>
+        <m.h2 variants={fadeUp} className="heading-lg font-bold text-[var(--text-heading)] mb-6 leading-tight">
           Why We're the <span className="font-extrabold text-primary">Best Choice</span> for Your IT Career.
-        </h2>
-        <p className="text-body-lg text-body">
+        </m.h2>
+        <m.p variants={fadeUp} className="text-body-lg text-body">
           Our unique learning ecosystem is designed to provide you with the edge you need. From dedicated lab support to real-time industrial training, we ensure you're ready for the global tech stage.
-        </p>
-      </div>
+        </m.p>
+      </m.div>
 
-      <StackingCards className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-        {methodology.map((item, index) => (
-          <StaggerItem key={index} className="h-full">
-            <div className="bg-[var(--bg-card)] border border-[var(--border-color)] p-5 sm:p-8 rounded-2xl sm:rounded-[2.5rem] relative z-10 hover:shadow-xl transition-all duration-500 hover:-translate-y-2 h-full flex flex-col group">
+      <m.div
+        variants={staggerContainer}
+        initial="hidden"
+        animate={isVisible ? 'visible' : 'hidden'}
+      >
+        <StackingCards className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {methodology.map((item, index) => (
+            <m.div key={index} variants={index % 2 === 0 ? fadeLeft : fadeRight} className="h-full">
+              <div className="bg-[var(--bg-card)] border border-[var(--border-color)] p-5 sm:p-8 rounded-2xl sm:rounded-[2.5rem] relative z-10 hover:shadow-xl transition-all duration-500 hover:-translate-y-2 h-full flex flex-col group">
               <div className="flex justify-between items-start mb-6 sm:mb-8">
                 <div className={`w-12 h-12 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl ${item.color} flex items-center justify-center text-[var(--text-on-inverted)] shadow-lg shadow-black/20`}>
                   {item.icon}
@@ -54,9 +71,10 @@ const MethodologySection = ({ openModal }) => (
                 {item.desc}
               </p>
             </div>
-          </StaggerItem>
-        ))}
-      </StackingCards>
+            </m.div>
+          ))}
+        </StackingCards>
+      </m.div>
 
       <div className="mt-16 pt-16 border-t border-[var(--border-color)] flex flex-col md:flex-row items-center justify-between gap-8">
         <div className="flex items-center space-x-6">
@@ -72,15 +90,18 @@ const MethodologySection = ({ openModal }) => (
             <p className="text-[var(--text-muted)] text-small">Personal guidance from industry experts</p>
           </div>
         </div>
-        <button
+        <m.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
           onClick={() => openModal()}
           className="btn-primary px-10 py-4 shadow-xl shadow-primary/20 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--accent-primary)]"
         >
           Start Your Transformation
-        </button>
+        </m.button>
       </div>
     </div>
   </section>
-);
+  );
+};
 
 export default MethodologySection;
