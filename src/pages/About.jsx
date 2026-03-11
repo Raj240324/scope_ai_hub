@@ -10,6 +10,7 @@ import Hero from '../components/ui/Hero';
 import KineticTeamHybrid from '../components/ui/KineticTeamHybrid';
 import HiringPartners from '../components/home/HiringPartners';
 import LottieAnimation from '../components/ui/LottieAnimation';
+import NeuralCareerGraph from '../components/ui/NeuralCareerGraph';
 
 import visionAnimation from '../assets/animations/Vision Eye.json';
 import missionAnimation from '../assets/animations/Mission.json';
@@ -22,16 +23,6 @@ import { fadeUp } from '../utils/motionVariants';
 const About = () => {
   const { openModal } = useModal();
   const { ref: ctaRef, isVisible: ctaVisible } = useScrollReveal();
-  const stats = [
-    { label: 'Year Founded', value: 2019, suffix: '' },
-    { label: 'Students Trained', value: 1200, suffix: '+' },
-    { label: 'Real Projects Built', value: 157, suffix: '+' },
-    { label: 'Hiring Partners', value: 75, suffix: '+' },
-    { label: 'Avg Trainer Experience', value: 8, suffix: '+ Years' },
-    { label: 'Max Batch Size', value: 20, suffix: '' },
-    { label: 'Chennai Campuses', value: 3, suffix: '' },
-    { label: 'Placement Rate', value: 90, suffix: '%+' },
-  ];
 
   const locations = [
     { 
@@ -201,36 +192,14 @@ const About = () => {
                   </div>
                 </div>
               </div>
-              <div className="grid grid-cols-2 gap-4">
-                <div className="p-6 bg-[var(--bg-card)] rounded-2xl border border-[var(--border-color)] text-center">
-                  <div className="heading-hero text-primary mb-1">2019</div>
-                  <div className="text-caption font-bold uppercase tracking-widest text-[var(--text-muted)]">Year Founded</div>
-                </div>
-                <div className="p-6 bg-[var(--bg-card)] rounded-2xl border border-[var(--border-color)] text-center">
-                  <div className="heading-hero text-primary mb-1">1,200+</div>
-                  <div className="text-caption font-bold uppercase tracking-widest text-[var(--text-muted)]">Students Trained</div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="py-12 bg-[var(--bg-card)] border-y border-[var(--border-color)]">
-        <div className="container-custom">
-          <StaggerContainer className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
-            {stats.map((stat, index) => (
-              <StaggerItem key={index} className="text-center">
-                <div className="heading-md md:heading-hero text-primary mb-1">
-                  <ScrollCountUp end={stat.value} />{stat.suffix}
-                </div>
-                <div className="text-small text-[var(--text-muted)] font-medium uppercase tracking-wider">{stat.label}</div>
-              </StaggerItem>
-            ))}
-          </StaggerContainer>
-        </div>
-      </section>
+      {/* Neural Career Graph Pipeline */}
+      <NeuralCareerGraph />
+
 
       {/* Why We're Different */}
       <section className="py-20 bg-[var(--bg-secondary)]">

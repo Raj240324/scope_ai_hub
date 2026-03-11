@@ -332,7 +332,7 @@ const HeroScrollCanvas = ({ badge, title, subtitle, children }) => {
             }}>
               <span>⭐ 4.9 Student Rating</span>
               <span style={{opacity:0.4}}>•</span>
-              <span>1000+ Students Trained</span>
+              <span>1200+ Students Trained</span>
               <span style={{opacity:0.4}}>•</span>
               <span>Hiring Partners: TCS, Infosys</span>
             </div>
