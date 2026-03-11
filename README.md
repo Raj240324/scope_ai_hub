@@ -11,7 +11,7 @@ A production-grade, security-hardened React platform for SCOPE AI HUB — Chenna
 ### Frontend & UX
 - ⚡ **High-Performance SPA** — Vite 7 + React 18 with lazy-loaded pages and ES2020 build targets for ultra-low bundle sizes.
 - 🎨 **Premium Aesthetic** — Unified CSS variable design system, light/dark theme persistence, and accessible high-contrast UI combinations.
-- 🎥 **Cinematic Animations** — 192-frame blended canvas HeroScroll sequence (GSAP), viewport-triggered Framer Motion components, and dynamic Lottie vector art.
+- 🎥 **Cinematic Animations** — Video-driven canvas HeroScroll sequence (GSAP), viewport-triggered Framer Motion components, and dynamic Lottie vector art.
 - 🔍 **Enterprise SEO** — Dynamic meta tags, Open Graph, Twitter Cards, JSON-LD schemas (Organization, Course, FAQ, Breadcrumb), and auto-generated XML sitemaps.
 - 🎓 **10 AI/ML Courses** — Tiered catalog (Beginner → Advanced) with detailed syllabi, career roles, and prerequisites.
 
@@ -83,7 +83,7 @@ For detailed architecture and internal guidelines, consult the following project
 ├── scripts/
 │   ├── generate-sitemap.js     # Build-time static sitemap.xml generator
 │   └── generate-csp-hashes.js  # Build-time Content Security Policy hash generator
-├── public/                     # Canvas visual frames, WebP assets, robots.txt
+├── public/                     # Canvas video assets, WebP images, robots.txt
 ├── .github/ workflows/         # CI/CD action runners (Heartbeat monitor)
 ├── .gitignore                  # Source-control filter configuration
 ├── vercel.json                 # Core Vercel configurations and Security Headers

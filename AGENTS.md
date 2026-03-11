@@ -91,7 +91,7 @@ scope_ai_hub/
 │   ├── send-enquiry.js     # Student enquiry handler
 │   └── send-trainer.js     # Trainer application handler
 ├── public/                 # Static assets (copied to dist as-is)
-│   ├── frames/             # Canvas animation frame sequences
+│   ├── robot_arm_hero.mp4  # Canvas animation source video
 │   ├── robots.txt          # Search engine directives
 │   └── sitemap.xml         # Auto-generated XML sitemap
 ├── scripts/                # Build pipeline scripts
@@ -141,7 +141,7 @@ scope_ai_hub/
 - The `cn()` helper function in `src/lib/utils.js` (clsx + twMerge) MUST be used for conditional class merging.
 - **Lottie JSON** animation files go in `src/assets/animations/`.
 - **Static images** (.webp) for public access go in `public/`.
-- Canvas frame sequences go in `public/frames/`.
+- Canvas animations are driven by optimized video files (e.g., `.mp4`) in `public/`.
 
 ---
 
@@ -517,7 +517,7 @@ ALWAYS use the pre-built animation wrappers in `src/components/utils/Animations.
 1. **ALL images MUST be WebP format** — no PNG/JPG in production.
 2. Static images go in `public/` (referenced by absolute path `/image.webp`).
 3. Bundled assets go in `src/assets/` (imported via JS for hashing).
-4. Canvas frame sequences go in `public/frames/` with sequential naming.
+4. Canvas animations use optimized `.mp4` video files to reduce network requests.
 5. Image rendering uses `-webkit-optimize-contrast` globally.
 
 ### Build Pipeline
@@ -666,7 +666,7 @@ All routes are defined in `src/App.jsx` in a flat `<Routes>` block:
 | ---------------- | ---------------------- | ------- | -------------------------- |
 | `public/`        | Static public images   | `.webp` | Absolute path `/name.webp` |
 | `src/assets/`    | Bundled assets         | Any     | `import img from '...'`    |
-| `public/frames/` | Canvas frame sequences | `.webp` | Sequential file paths      |
+| `public/*.mp4`   | Canvas animation video | `.mp4`  | Single video file reference|
 
 ### Icons
 
