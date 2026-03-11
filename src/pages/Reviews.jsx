@@ -264,8 +264,8 @@ const Reviews = () => {
           animate={ctaVisible ? 'visible' : 'hidden'}
           className="container-custom text-center relative z-10"
         >
-          <h2 className="heading-lg font-bold text-[var(--text-on-light)] mb-8">
-            Ready to be our next success story?
+         <h2 className="heading-lg font-bold text-[var(--text-on-light)] mb-8">
+            Ready to be our next <span style={{ color: "#d64fd9" }}>success story?</span>
           </h2>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <m.button

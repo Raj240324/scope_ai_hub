@@ -191,7 +191,7 @@ const Admissions = () => {
             initial="hidden"
             animate={ctaVisible ? 'visible' : 'hidden'}
           >
-            <h2 className="heading-lg font-bold text-primary mb-8 relative z-10">Programs Designed For You</h2>
+            <h2 className="heading-lg font-bold mb-8 relative z-10 text-white">Programs Designed <span style={{ color: "#d64fd9" }}>For You</span></h2>            
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10 text-left">
               <div className={theme === 'dark' ? 'glass-card p-6 text-left' : 'bg-white/10 border border-white/20 rounded-2xl shadow-lg p-6 text-left'}>
                 <h3 className="heading-sm font-semibold mb-2 text-primary">Upskill Courses</h3>

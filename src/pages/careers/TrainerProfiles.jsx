@@ -92,13 +92,29 @@ const TrainerProfiles = () => {
               <div className={`bg-[var(--bg-card)] rounded-2xl sm:rounded-3xl border border-[var(--border-color)] shadow-sm hover:shadow-xl transition-all overflow-hidden ${index % 2 === 0 ? '' : 'lg:flex-row-reverse'} flex flex-col lg:flex-row`}>
                 {/* Image Section */}
                 <div className="lg:w-1/3 relative bg-gradient-to-br from-primary/10 to-blue-100 p-6 sm:p-12 flex flex-col items-center justify-center">
-                  <div className="relative mb-6">
-                    <div className="absolute inset-0 bg-primary/20 rounded-full blur-3xl blur-layer"></div>
-                    <img 
-                      src={trainer.image} 
-                      alt={trainer.name}
-                      className="relative h-32 w-32 sm:h-48 sm:w-48 rounded-full object-cover ring-8 ring-[var(--bg-card)] shadow-2xl"
-                    />
+                  <div 
+                    className="relative mb-6 w-48 h-48 sm:w-64 sm:h-64 rounded-[2.5rem] flex flex-col items-center justify-center text-center transition-all duration-500 ease-out z-10 mx-auto"
+                    style={{
+                      background: 'rgba(214,79,217,0.06)',
+                      backdropFilter: 'blur(16px)',
+                      WebkitBackdropFilter: 'blur(16px)',
+                      border: '1px solid rgba(214,79,217,0.2)',
+                      boxShadow: '0 8px 32px rgba(214,79,217,0.1), inset 0 1px 0 rgba(255,255,255,0.06)'
+                    }}
+                  >
+                    <span 
+                      className="text-6xl sm:text-7xl font-black tracking-tighter"
+                      style={{
+                        fontFamily: '"Bebas Neue", sans-serif',
+                        background: 'linear-gradient(135deg, #d24bd5 0%, #b833bb 100%)',
+                        WebkitBackgroundClip: 'text',
+                        WebkitTextFillColor: 'transparent',
+                        backgroundClip: 'text',
+                        color: 'transparent'
+                      }}
+                    >
+                      {trainer.name.split(' ').map(n => n[0]).join('').substring(0,2).toUpperCase()}
+                    </span>
                   </div>
                   <h3 className="heading-sm font-semibold text-[var(--text-heading)] text-center mb-2">{trainer.name}</h3>
                   <p className="text-primary font-bold text-center mb-6">{trainer.role}</p>
@@ -175,7 +191,7 @@ const TrainerProfiles = () => {
 
         {/* CTA Section */}
         <div className="mt-12 sm:mt-20 text-center p-6 sm:p-12 bg-[var(--bg-inverted)] light-surface text-[var(--text-on-light)] rounded-2xl sm:rounded-3xl">
-          <h2 className="heading-lg font-bold text-[var(--text-on-light)]">Want to Learn from These Experts?</h2>
+          <h2 className="heading-lg font-bold text-[var(--text-on-light)]">Want to Learn from These <span style={{ color: "#d64fd9" }}>Experts?</span></h2>          
           <p className="text-body-lg text-[var(--text-on-light)]/60 mb-10 max-w-2xl mx-auto">
             Join our next batch and get personalized mentorship from industry veterans who are passionate about teaching.
           </p>

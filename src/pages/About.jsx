@@ -291,7 +291,7 @@ const About = () => {
         <div className="container-custom">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="space-y-6">
-              <h2 className="heading-lg font-bold">How We Teach</h2>
+              <h2 className="heading-lg font-bold">How We <span style={{ color: "#d64fd9" }}>Teach</span></h2>
               <p className="text-[var(--text-muted)] text-body-lg leading-relaxed">
                 Every class at Scope AI Hub is a collaborative engineering session.
               </p>
@@ -396,21 +396,68 @@ const About = () => {
             <FadeIn>
               <div className="flex flex-col lg:flex-row gap-16 lg:gap-24 items-center">
                 
-                {/* Left: Minimalist Avatar/Graphic */}
+                {/* Left: Glassmorphism Identity Card */}
                 <div className="w-full lg:w-5/12 flex justify-center lg:justify-end shrink-0">
-                  <div className="relative group w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96">
-                    {/* Decorative geometric background elements */}
-                    <div className="absolute inset-0 bg-primary/5 rounded-[3rem] -rotate-6 scale-105 transition-transform duration-700 ease-out group-hover:-rotate-3" />
-                    <div className="absolute inset-0 bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-[3rem] rotate-3 scale-100 transition-transform duration-700 ease-out group-hover:rotate-1 shadow-sm" />
+                  <div 
+                    className="relative group w-full max-w-sm rounded-3xl p-8 flex flex-col items-center justify-center text-center transition-all duration-500 ease-out"
+                    style={{
+                      background: 'rgba(214,79,217,0.06)',
+                      backdropFilter: 'blur(16px)',
+                      WebkitBackdropFilter: 'blur(16px)',
+                      border: '1px solid rgba(214,79,217,0.2)',
+                      boxShadow: '0 8px 32px rgba(214,79,217,0.1), inset 0 1px 0 rgba(255,255,255,0.06)'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.borderColor = 'rgba(214,79,217,0.45)';
+                      e.currentTarget.style.transform = 'scale(1.02)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.borderColor = 'rgba(214,79,217,0.2)';
+                      e.currentTarget.style.transform = 'scale(1)';
+                    }}
+                  >
+                    {/* Large Stylized Initials */}
+                    <div className="mb-6">
+                      <span 
+                        className="text-6xl font-black tracking-tighter"
+                        style={{
+                          fontFamily: '"Bebas Neue", sans-serif',
+                          background: 'linear-gradient(135deg, #d24bd5 0%, #b833bb 100%)',
+                          WebkitBackgroundClip: 'text',
+                          WebkitTextFillColor: 'transparent',
+                          backgroundClip: 'text',
+                          color: 'transparent'
+                        }}
+                      >
+                        PR
+                      </span>
+                    </div>
+
+                    {/* Name */}
+                    <h3 className="text-2xl font-bold text-[var(--text-heading)] mb-1">
+                      {BRANDING.ceo.name}
+                    </h3>
                     
-                    {/* Main Avatar Container */}
-                    <div className="absolute inset-0 bg-[var(--bg-inverted)] rounded-[2.5rem] flex flex-col items-center justify-center shadow-2xl overflow-hidden border border-[var(--border-color)] z-10 transition-transform duration-700 ease-out group-hover:scale-105">
-                       <span className="text-8xl sm:text-9xl font-black text-[var(--text-on-inverted)] tracking-tighter opacity-90 transition-transform duration-700 group-hover:scale-110">
-                         PR
-                       </span>
-                       {/* Subtle inner gradient */}
-                       <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
-                       <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-white/10 to-transparent pointer-events-none" />
+                    {/* Role */}
+                    <p className="text-sm uppercase tracking-widest font-mono mb-6" style={{ color: '#d24bd5' }}>
+                      Founder & CEO
+                    </p>
+
+                    {/* Expertise Tags */}
+                    <div className="flex flex-wrap justify-center gap-2">
+                      {['AI Strategy', 'Leadership', 'EdTech'].map((tag, i) => (
+                        <span 
+                          key={i} 
+                          className="text-xs px-3 py-1 rounded-full font-medium"
+                          style={{
+                            border: '1px solid rgba(214,79,217,0.3)',
+                            color: 'rgba(214,79,217,0.8)',
+                            background: 'rgba(214,79,217,0.05)'
+                          }}
+                        >
+                          {tag}
+                        </span>
+                      ))}
                     </div>
                   </div>
                 </div>

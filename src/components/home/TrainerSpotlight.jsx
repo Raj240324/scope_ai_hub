@@ -48,8 +48,13 @@ const TrainerSpotlight = ({ openModal }) => (
         >
           <div className="flex -space-x-4 mb-4">
             {[1, 2, 3, 4].map((i) => (
-              <div key={i} className="w-12 h-12 rounded-full border-4 border-[var(--bg-body)] overflow-hidden shadow-lg">
-                <img src={`https://randomuser.me/api/portraits/${i % 2 === 0 ? 'men' : 'women'}/${i + 60}.jpg`} alt="Trainer" width={48} height={48} />
+              <div 
+                key={i} 
+                className="w-12 h-12 rounded-full border-2 border-[rgba(214,79,217,0.4)] bg-[rgba(214,79,217,0.1)] backdrop-blur-md flex items-center justify-center overflow-hidden shadow-lg z-10"
+              >
+                <span className="text-sm font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-[#d24bd5] to-[#b833bb]" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
+                  {['SM', 'RA', 'SA', 'JS'][i-1]}
+                </span>
               </div>
             ))}
             <div className="w-12 h-12 rounded-full border-4 border-[var(--bg-body)] bg-[var(--bg-inverted)] flex items-center justify-center shadow-lg">
@@ -66,11 +71,40 @@ const TrainerSpotlight = ({ openModal }) => (
         {mentors.map((mentor, index) => (
           <ScaleOnHover key={index}>
             <div className="bg-[var(--bg-card)] p-5 sm:p-8 rounded-2xl sm:rounded-[2.5rem] border border-[var(--border-color)] shadow-sm hover:shadow-xl transition-all h-full flex flex-col">
-              <div className="flex items-center space-x-4 mb-5 sm:mb-6">
-                <img src={mentor.image} alt={mentor.name} width={64} height={64} loading="lazy" className="h-14 w-14 sm:h-16 sm:w-16 rounded-xl sm:rounded-2xl object-cover shadow-md" />
-                <div>
-                  <h3 className="text-body-lg sm:text-xl font-bold text-[var(--text-heading)] leading-tight">{mentor.name}</h3>
-                  <p className="text-primary font-bold text-caption uppercase tracking-wider mt-1">{mentor.role}</p>
+              <div 
+                className="w-full flex justify-center mb-6"
+              >
+                <div 
+                  className="relative w-full rounded-2xl sm:rounded-3xl p-6 sm:p-8 flex flex-col items-center justify-center text-center transition-all duration-500 ease-out"
+                  style={{
+                    background: 'rgba(214,79,217,0.06)',
+                    backdropFilter: 'blur(16px)',
+                    WebkitBackdropFilter: 'blur(16px)',
+                    border: '1px solid rgba(214,79,217,0.2)',
+                    boxShadow: '0 8px 32px rgba(214,79,217,0.1), inset 0 1px 0 rgba(255,255,255,0.06)'
+                  }}
+                >
+                  <div className="mb-4">
+                    <span 
+                      className="text-5xl font-black tracking-tighter"
+                      style={{
+                        fontFamily: '"Bebas Neue", sans-serif',
+                        background: 'linear-gradient(135deg, #d24bd5 0%, #b833bb 100%)',
+                        WebkitBackgroundClip: 'text',
+                        WebkitTextFillColor: 'transparent',
+                        backgroundClip: 'text',
+                        color: 'transparent'
+                      }}
+                    >
+                      {mentor.name.split(' ').map(n => n[0]).join('').substring(0,2).toUpperCase()}
+                    </span>
+                  </div>
+                  <h3 className="text-xl sm:text-2xl font-bold text-[var(--text-heading)] mb-1">
+                    {mentor.name}
+                  </h3>
+                  <p className="text-[10px] sm:text-xs uppercase tracking-widest font-mono" style={{ color: '#d24bd5' }}>
+                    {mentor.role}
+                  </p>
                 </div>
               </div>
               <div className="flex-1">

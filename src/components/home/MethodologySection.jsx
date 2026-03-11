@@ -80,8 +80,13 @@ const MethodologySection = ({ openModal }) => {
         <div className="flex items-center space-x-6">
           <div className="flex -space-x-4">
             {[1, 2, 3].map((i) => (
-              <div key={i} className="w-12 h-12 rounded-full border-4 border-[var(--bg-card)] overflow-hidden">
-                <img src={`https://randomuser.me/api/portraits/men/${i + 50}.jpg`} alt="Mentor" width={48} height={48} className="w-full h-full object-cover" />
+              <div 
+                key={i} 
+                className="w-12 h-12 mx-auto rounded-full border border-[rgba(214,79,217,0.4)] bg-[rgba(214,79,217,0.1)] backdrop-blur-md flex items-center justify-center overflow-hidden shadow-sm"
+              >
+                <span className="text-sm font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-[#d24bd5] to-[#b833bb]" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
+                  {['SM', 'RA', 'SA'][i-1]}
+                </span>
               </div>
             ))}
           </div>

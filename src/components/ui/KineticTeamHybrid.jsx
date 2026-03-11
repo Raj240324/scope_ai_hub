@@ -117,23 +117,59 @@ export default function KineticTeamHybrid() {
                 animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
                 exit={{ opacity: 0, scale: 0.5, filter: 'blur(10px)' }}
                 transition={{ type: 'spring', stiffness: 300, damping: 25 }}
-                className="relative h-64 w-80 overflow-hidden rounded-xl border border-primary/20 bg-[var(--bg-card)] shadow-2xl"
+                className="relative h-64 w-80 rounded-3xl p-6 flex flex-col items-center justify-center text-center shadow-2xl"
+                style={{
+                  background: 'rgba(214,79,217,0.06)',
+                  backdropFilter: 'blur(16px)',
+                  WebkitBackdropFilter: 'blur(16px)',
+                  border: '1px solid rgba(214,79,217,0.2)',
+                  boxShadow: '0 8px 32px rgba(214,79,217,0.1), inset 0 1px 0 rgba(255,255,255,0.06)'
+                }}
               >
-                <img
-                  src={TEAM.find((t) => t.id === activeId)?.image}
-                  alt="Preview"
-                  className="h-full w-full object-cover"
-                />
-
-                {/* Overlay Metadata */}
-                <div className="absolute bottom-0 w-full bg-gradient-to-t from-black/80 to-transparent p-4">
-                  <div className="flex items-center gap-2">
-                    <div className="h-1.5 w-1.5 rounded-full bg-green-500 animate-pulse" />
-                    <span className="text-caption uppercase tracking-widest text-[var(--text-muted)]">
-                      {TEAM.find((t) => t.id === activeId)?.role}
-                    </span>
-                  </div>
-                </div>
+                {(() => {
+                  const activeData = TEAM.find((t) => t.id === activeId);
+                  if (!activeData) return null;
+                  return (
+                    <>
+                      <div className="mb-4">
+                        <span 
+                          className="text-6xl font-black tracking-tighter"
+                          style={{
+                            fontFamily: '"Bebas Neue", sans-serif',
+                            background: 'linear-gradient(135deg, #d24bd5 0%, #b833bb 100%)',
+                            WebkitBackgroundClip: 'text',
+                            WebkitTextFillColor: 'transparent',
+                            backgroundClip: 'text',
+                            color: 'transparent'
+                          }}
+                        >
+                          {activeData.name.split(' ').map(n => n[0]).join('').substring(0,2).toUpperCase()}
+                        </span>
+                      </div>
+                      <h3 className="text-xl font-bold text-[var(--text-heading)] mb-1">
+                        {activeData.name}
+                      </h3>
+                      <p className="text-xs uppercase tracking-widest font-mono mb-4" style={{ color: '#d24bd5' }}>
+                        {activeData.role}
+                      </p>
+                      <div className="flex flex-wrap justify-center gap-2 mt-auto">
+                        {activeData.expertise.slice(0, 2).map((tag, i) => (
+                          <span 
+                            key={i} 
+                            className="text-[10px] px-2 py-1 rounded-full font-medium whitespace-nowrap"
+                            style={{
+                              border: '1px solid rgba(214,79,217,0.3)',
+                              color: 'rgba(214,79,217,0.8)',
+                              background: 'rgba(214,79,217,0.05)'
+                            }}
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    </>
+                  );
+                })()}
               </motion.div>
             )}
           </AnimatePresence>
@@ -212,15 +248,55 @@ function TeamRow({ data, index, isActive, setActiveId, isMobile, isAnyActive }) 
             className="overflow-hidden"
           >
             <div className="p-4 pb-8">
-              <div className="flex gap-4 items-start">
-                <div className="relative shrink-0 w-20 h-20 rounded-xl overflow-hidden">
-                  <img
-                    src={data.image}
-                    alt={data.name}
-                    className="h-full w-full object-cover"
-                  />
+              <div className="flex flex-col gap-4 items-center">
+                <div 
+                  className="relative w-full rounded-2xl p-6 flex flex-col items-center justify-center text-center shadow-lg"
+                  style={{
+                    background: 'rgba(214,79,217,0.06)',
+                    backdropFilter: 'blur(8px)',
+                    WebkitBackdropFilter: 'blur(8px)',
+                    border: '1px solid rgba(214,79,217,0.2)',
+                    boxShadow: '0 8px 32px rgba(214,79,217,0.1), inset 0 1px 0 rgba(255,255,255,0.06)'
+                  }}
+                >
+                  <div className="mb-2">
+                    <span 
+                      className="text-5xl font-black tracking-tighter"
+                      style={{
+                        fontFamily: '"Bebas Neue", sans-serif',
+                        background: 'linear-gradient(135deg, #d24bd5 0%, #b833bb 100%)',
+                        WebkitBackgroundClip: 'text',
+                        WebkitTextFillColor: 'transparent',
+                        backgroundClip: 'text',
+                        color: 'transparent'
+                      }}
+                    >
+                      {data.name.split(' ').map(n => n[0]).join('').substring(0,2).toUpperCase()}
+                    </span>
+                  </div>
+                  <h3 className="text-lg font-bold text-[var(--text-heading)] mb-1">
+                    {data.name}
+                  </h3>
+                  <p className="text-[10px] uppercase tracking-widest font-mono mb-3" style={{ color: '#d24bd5' }}>
+                    {data.role}
+                  </p>
+                  <div className="flex flex-wrap justify-center gap-1.5">
+                    {data.expertise.slice(0, 2).map((tag, i) => (
+                      <span 
+                        key={i} 
+                        className="text-[9px] px-2 py-0.5 rounded-full font-medium whitespace-nowrap"
+                        style={{
+                          border: '1px solid rgba(214,79,217,0.3)',
+                          color: 'rgba(214,79,217,0.8)',
+                          background: 'rgba(214,79,217,0.05)'
+                        }}
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-                <div className="flex-1">
+                <div className="flex-1 w-full text-center">
                   <p className="text-small text-body mb-3">
                     {data.bio}
                   </p>

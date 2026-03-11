@@ -178,25 +178,19 @@ const headerStyle = {
   display:    "flex",
   alignItems: "center",
   transition: "background 0.4s ease, border-color 0.4s ease, backdrop-filter 0.4s ease, box-shadow 0.4s ease",
-  background: isTransparent
-    ? "transparent"
-    : theme === 'dark'
-      ? "rgba(6, 4, 14, 0.75)"
-      : "rgba(248, 244, 255, 0.78)",
-  backdropFilter: isTransparent ? "none" : "blur(28px) saturate(180%) brightness(0.95)",
-  WebkitBackdropFilter: isTransparent ? "none" : "blur(28px) saturate(180%) brightness(0.95)",
+  background: (isTransparent || theme === 'dark')
+    ? "rgba(6, 4, 14, 0.75)"
+    : "rgba(248, 244, 255, 0.78)",
+  backdropFilter: "blur(28px) saturate(180%) brightness(0.95)",
+  WebkitBackdropFilter: "blur(28px) saturate(180%) brightness(0.95)",
   borderBottom: `1px solid ${
-    isTransparent
-      ? "transparent"
-      : theme === 'dark'
-        ? "rgba(214,79,217,0.22)"
-        : "rgba(180,60,200,0.15)"
+    (isTransparent || theme === 'dark')
+      ? "rgba(214,79,217,0.22)"
+      : "rgba(180,60,200,0.15)"
   }`,
-  boxShadow: isTransparent
-    ? "none"
-    : theme === 'dark'
-      ? "0 4px 24px rgba(4,2,10,0.6), 0 1px 0 rgba(214,79,217,0.12), inset 0 1px 0 rgba(214,79,217,0.06)"
-      : "0 4px 24px rgba(160,80,200,0.08), 0 1px 0 rgba(180,60,200,0.1), inset 0 1px 0 rgba(255,255,255,0.9)",
+  boxShadow: (isTransparent || theme === 'dark')
+    ? "0 4px 24px rgba(4,2,10,0.6), 0 1px 0 rgba(214,79,217,0.12), inset 0 1px 0 rgba(214,79,217,0.06)"
+    : "0 4px 24px rgba(160,80,200,0.08), 0 1px 0 rgba(180,60,200,0.1), inset 0 1px 0 rgba(255,255,255,0.9)",
 };
 
   return (
@@ -217,10 +211,10 @@ const headerStyle = {
           }
         }
 
-        @media (min-width: 1024px) {
+        @media (min-width: 1280px) {
           .header-mobile-nav { display: none !important; }
         }
-        @media (max-width: 1023px) {
+        @media (max-width: 1279px) {
           .header-desktop-nav { display: none !important; }
         }
 

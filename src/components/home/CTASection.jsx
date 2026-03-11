@@ -43,8 +43,13 @@ const CTASection = ({ openModal }) => {
             <div className="text-left hidden sm:flex items-center space-x-4 bg-primary/10 px-6 py-3 rounded-xl border border-primary/20 backdrop-blur-sm">
               <div className="flex -space-x-3">
                 {[1, 2, 3].map((i) => (
-                  <div key={i} className="w-8 h-8 rounded-full border-2 border-[var(--bg-body)]/50 overflow-hidden">
-                    <img src={`https://randomuser.me/api/portraits/${i % 2 === 0 ? 'women' : 'men'}/${i + 70}.jpg`} alt="Counselor" width={32} height={32} />
+                  <div 
+                    key={i} 
+                    className="w-8 h-8 mx-auto rounded-full border border-[rgba(214,79,217,0.4)] bg-[rgba(214,79,217,0.1)] backdrop-blur-md flex items-center justify-center overflow-hidden shadow-sm"
+                  >
+                    <span className="text-[10px] font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-[#d24bd5] to-[#b833bb]" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
+                      {['SM', 'RA', 'SA'][i-1]}
+                    </span>
                   </div>
                 ))}
               </div>

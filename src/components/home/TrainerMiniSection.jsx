@@ -67,16 +67,63 @@ const TrainerMiniSection = () => {
               variants={fadeUp}
               className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all"
             >
-              <div className="flex items-center gap-4 mb-4">
-                <img
-                  src={trainer.image || `https://ui-avatars.com/api/?name=${encodeURIComponent(trainer.name)}`}
-                  alt={trainer.name}
-                  className="w-16 h-16 rounded-full object-cover border-2 border-primary/20"
-                  loading="lazy"
-                />
-                <div>
-                  <h3 className="font-bold text-[var(--text-heading)] text-lg mb-0.5">{trainer.name}</h3>
-                  <p className="text-caption font-semibold text-primary">{trainer.role}</p>
+              <div 
+                className="w-full flex justify-center mb-6"
+              >
+                <div 
+                  className="relative group w-full rounded-2xl p-6 flex flex-col items-center justify-center text-center transition-all duration-500 ease-out"
+                  style={{
+                    background: 'rgba(214,79,217,0.06)',
+                    backdropFilter: 'blur(16px)',
+                    WebkitBackdropFilter: 'blur(16px)',
+                    border: '1px solid rgba(214,79,217,0.2)',
+                    boxShadow: '0 8px 32px rgba(214,79,217,0.1), inset 0 1px 0 rgba(255,255,255,0.06)'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.borderColor = 'rgba(214,79,217,0.45)';
+                    e.currentTarget.style.transform = 'scale(1.02)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.borderColor = 'rgba(214,79,217,0.2)';
+                    e.currentTarget.style.transform = 'scale(1)';
+                  }}
+                >
+                  <div className="mb-4">
+                    <span 
+                      className="text-5xl font-black tracking-tighter"
+                      style={{
+                        fontFamily: '"Bebas Neue", sans-serif',
+                        background: 'linear-gradient(135deg, #d24bd5 0%, #b833bb 100%)',
+                        WebkitBackgroundClip: 'text',
+                        WebkitTextFillColor: 'transparent',
+                        backgroundClip: 'text',
+                        color: 'transparent'
+                      }}
+                    >
+                      {trainer.name.split(' ').map(n => n[0]).join('').substring(0,2).toUpperCase()}
+                    </span>
+                  </div>
+                  <h3 className="text-xl font-bold text-[var(--text-heading)] mb-1">
+                    {trainer.name}
+                  </h3>
+                  <p className="text-[10px] uppercase tracking-widest font-mono mb-4" style={{ color: '#d24bd5' }}>
+                    {trainer.role}
+                  </p>
+                  <div className="flex flex-wrap justify-center gap-2 mt-auto">
+                    {['AI Expert', 'Mentor'].map((tag, i) => (
+                      <span 
+                        key={i} 
+                        className="text-[10px] px-2 py-1 rounded-full font-medium whitespace-nowrap"
+                        style={{
+                          border: '1px solid rgba(214,79,217,0.3)',
+                          color: 'rgba(214,79,217,0.8)',
+                          background: 'rgba(214,79,217,0.05)'
+                        }}
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
               <p className="text-small text-[var(--text-muted)] mb-4 line-clamp-3">
