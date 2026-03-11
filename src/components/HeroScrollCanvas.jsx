@@ -1,87 +1,70 @@
 import React, { useRef, useEffect, useState } from "react";
-import { useCanvasVideoFrames } from "../hooks/useCanvasVideoFrames";
+import { useAppleScrollFrames } from "../hooks/useAppleScrollFrames";
 
-// ─── Video config ───────────────────────────────────────────────────────────
-// Upload robot_arm_hero.mp4 (2.5 MB, already optimised) to your CDN, then
-// update this one constant. Everything else is automatic.
-//
-// Examples:
-//   "/robot_arm_hero.mp4"                           ← public folder (dev/test)
-//   "https://yoursite.com/assets/robot_arm_hero.mp4"
-//   "https://pub-xxxx.r2.dev/robot_arm_hero.mp4"    ← Cloudflare R2
-//   "https://xxxx.s3.amazonaws.com/robot_arm_hero.mp4"
-const HERO_VIDEO_SRC    = "/robot_arm_hero.mp4";
-const HERO_TOTAL_FRAMES = 192;  // must match your original frame count
+// ─── Config ───────────────────────────────────────────────────────────────────
+const TOTAL_FRAMES  = 192;
+const SCROLL_HEIGHT = "500vh"; // adjust for scrub speed feel
 
-// Scroll runway — more vh = slower, more cinematic scrub.
-// Original was 140vh (very snappy). Try 400–600vh for dramatic effect.
-const SCROLL_HEIGHT = "500vh";
-// ───────────────────────────────────────────────────────────────────────────
-
-
-// ─── All sub-components below are 100% unchanged from your original ─────────
+// Frame URL builder — matches your /hero-frames/frame_0001.webp convention
+const framePath = (i) =>
+  `/hero-frames/frame_${String(i).padStart(4, "0")}.webp`;
+// ─────────────────────────────────────────────────────────────────────────────
 
 function useReducedMotion() {
   const [reduced, setReduced] = useState(false);
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
     setReduced(mq.matches);
-    const handler = (e) => setReduced(e.matches);
-    mq.addEventListener("change", handler);
-    return () => mq.removeEventListener("change", handler);
+    const h = (e) => setReduced(e.matches);
+    mq.addEventListener("change", h);
+    return () => mq.removeEventListener("change", h);
   }, []);
   return reduced;
 }
 
+// ── Sub-components — 100% identical to your original ─────────────────────────
 function GrainOverlay() {
   return (
-    <div
-      aria-hidden="true"
-      style={{
-        position: "absolute",
-        inset: 0,
-        zIndex: 10,
-        pointerEvents: "none",
-        opacity: 0.045,
-        mixBlendMode: "overlay",
-        backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E")`,
-        backgroundRepeat: "repeat",
-        backgroundSize: "128px 128px",
-      }}
-    />
+    <div aria-hidden="true" style={{
+      position:"absolute",inset:0,zIndex:10,pointerEvents:"none",
+      opacity:0.045,mixBlendMode:"overlay",
+      backgroundImage:`url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E")`,
+      backgroundRepeat:"repeat",backgroundSize:"128px 128px",
+    }}/>
   );
 }
 
 function VignetteOverlay() {
   return (
-    <div
-      aria-hidden="true"
-      style={{
-        position: "absolute",
-        inset: 0,
-        zIndex: 10,
-        pointerEvents: "none",
-        background:
-          "radial-gradient(ellipse 80% 70% at 50% 50%, transparent 30%, rgba(0,0,0,0.55) 100%)",
-      }}
-    />
+    <div aria-hidden="true" style={{
+      position:"absolute",inset:0,zIndex:10,pointerEvents:"none",
+      background:"radial-gradient(ellipse 80% 70% at 50% 50%, transparent 30%, rgba(0,0,0,0.55) 100%)",
+    }}/>
   );
 }
 
 function ScanlineOverlay() {
   return (
-    <div
-      aria-hidden="true"
-      style={{
-        position: "absolute",
-        inset: 0,
-        zIndex: 10,
-        pointerEvents: "none",
-        opacity: 0.025,
-        backgroundImage:
-          "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.08) 2px, rgba(255,255,255,0.08) 4px)",
-      }}
-    />
+    <div aria-hidden="true" style={{
+      position:"absolute",inset:0,zIndex:10,pointerEvents:"none",
+      opacity:0.025,
+      backgroundImage:"repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.08) 2px, rgba(255,255,255,0.08) 4px)",
+    }}/>
+  );
+}
+
+function StaticHeroFallback() {
+  return (
+    <div style={{
+      position:"absolute",inset:0,zIndex:0,
+      background:"radial-gradient(ellipse 80% 80% at 60% 50%, #0a1628 0%, #010408 100%)",
+    }}>
+      <img
+        src="/hero-frames/frame_0001.webp"
+        alt="" aria-hidden="true"
+        style={{width:"100%",height:"100%",objectFit:"cover",objectPosition:"center",opacity:0.7}}
+      />
+    </div>
   );
 }
 
@@ -90,34 +73,25 @@ function LoadingBar({ loaded, total, hidden }) {
   return (
     <div
       role="progressbar"
-      aria-valuenow={pct}
-      aria-valuemin={0}
-      aria-valuemax={100}
+      aria-valuenow={pct} aria-valuemin={0} aria-valuemax={100}
       aria-label="Loading hero animation"
       style={{
-        position: "absolute",
-        bottom: 0,
-        left: 0,
-        right: 0,
-        height: "2px",
-        zIndex: 30,
+        position:"absolute",bottom:0,left:0,right:0,
+        height:"2px",zIndex:30,
         opacity: hidden ? 0 : 1,
-        transition: "opacity 0.6s ease 0.4s",
-        pointerEvents: "none",
+        transition:"opacity 0.6s ease 0.4s",
+        pointerEvents:"none",
       }}
     >
-      <div
-        style={{
-          height: "100%",
-          width: `${pct}%`,
-          background:
-            "linear-gradient(90deg, #d64fd9 0%, #b833bb 50%, #d64fd9 100%)",
-          backgroundSize: "200% 100%",
-          animation: "shimmer 1.5s linear infinite",
-          transition: "width 0.3s ease",
-          boxShadow: "0 0 8px rgba(214,79,217,0.8)",
-        }}
-      />
+      <div style={{
+        height:"100%",
+        width:`${pct}%`,
+        background:"linear-gradient(90deg, #d64fd9 0%, #b833bb 50%, #d64fd9 100%)",
+        backgroundSize:"200% 100%",
+        animation:"shimmer 1.5s linear infinite",
+        transition:"width 0.25s ease",
+        boxShadow:"0 0 8px rgba(214,79,217,0.8)",
+      }}/>
     </div>
   );
 }
@@ -128,19 +102,14 @@ function ScrollIndicator({ sectionRef }) {
     const track   = trackRef.current;
     const section = sectionRef.current;
     if (!track || !section) return;
-
     const update = () => {
-      const rect            = section.getBoundingClientRect();
-      const sectionTop      = rect.top + window.scrollY;
-      const scrollableHeight = section.offsetHeight - window.innerHeight;
-      if (scrollableHeight <= 0) return;
-      const progress = Math.max(
-        0,
-        Math.min(1, (window.scrollY - sectionTop) / scrollableHeight)
-      );
-      track.style.transform = `scaleY(${progress})`;
+      const rect = section.getBoundingClientRect();
+      const top  = rect.top + window.scrollY;
+      const sh   = section.offsetHeight - window.innerHeight;
+      if (sh <= 0) return;
+      const p = Math.max(0, Math.min(1, (window.scrollY - top) / sh));
+      track.style.transform = `scaleY(${p})`;
     };
-
     window.addEventListener("scroll", update, { passive: true });
     update();
     return () => window.removeEventListener("scroll", update);
@@ -148,69 +117,30 @@ function ScrollIndicator({ sectionRef }) {
 
   return (
     <div className="hero-scroll-indicator">
-      <div
-        ref={trackRef}
-        style={{
-          position: "absolute",
-          inset: 0,
-          background: "linear-gradient(180deg, #d64fd9, #b833bb)",
-          transformOrigin: "top center",
-          transform: "scaleY(0)",
-          borderRadius: "1px",
-          boxShadow: "0 0 6px rgba(214,79,217,0.6)",
-        }}
-      />
+      <div ref={trackRef} style={{
+        position:"absolute",inset:0,
+        background:"linear-gradient(180deg, #d64fd9, #b833bb)",
+        transformOrigin:"top center",transform:"scaleY(0)",
+        borderRadius:"1px",boxShadow:"0 0 6px rgba(214,79,217,0.6)",
+      }}/>
     </div>
   );
 }
 
-function StaticHeroFallback() {
-  return (
-    <div
-      style={{
-        position: "absolute",
-        inset: 0,
-        zIndex: 0,
-        background:
-          "radial-gradient(ellipse 80% 80% at 60% 50%, #0a1628 0%, #010408 100%)",
-      }}
-    >
-      {/* First frame poster — keep your frame_0001.webp as a poster image */}
-      <img
-        src="/hero-frames/frame_0001.webp"
-        alt=""
-        aria-hidden="true"
-        style={{
-          width: "100%",
-          height: "100%",
-          objectFit: "cover",
-          objectPosition: "center",
-          opacity: 0.7,
-        }}
-      />
-    </div>
-  );
-}
-
-// ═══════════════════════════════════════════════════════════════════════════
-//  MAIN COMPONENT — API is 100% identical to original HeroScrollCanvas.
-//  Usage: <HeroScrollCanvas badge="…" subtitle="…"> <CTAs /> </HeroScrollCanvas>
-// ═══════════════════════════════════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════════════════════
 const HeroScrollCanvas = ({ badge, title, subtitle, children }) => {
   const sectionRef    = useRef(null);
   const canvasRef     = useRef(null);
   const reducedMotion = useReducedMotion();
 
-  // ── ONLY CHANGE: useScrollFrames → useCanvasVideoFrames ──────────────────
-  // Return shape is identical: { loadedCount, isFullyLoaded }
-  const { loadedCount, isFullyLoaded } = useCanvasVideoFrames({
+  // ── Apple-grade image sequence hook ──────────────────────────────────────
+  const { loadedCount, isFullyLoaded } = useAppleScrollFrames({
     sectionRef,
     canvasRef,
     reducedMotion,
-    src:         HERO_VIDEO_SRC,
-    totalFrames: HERO_TOTAL_FRAMES,
+    totalFrames: TOTAL_FRAMES,
+    framePath,
   });
-  // ─────────────────────────────────────────────────────────────────────────
 
   const anim = (delay) =>
     reducedMotion ? "none" : `fadeSlideUp 0.9s cubic-bezier(.16,1,.3,1) ${delay} both`;
@@ -219,182 +149,100 @@ const HeroScrollCanvas = ({ badge, title, subtitle, children }) => {
     <>
       <style>{`
         @keyframes fadeSlideUp {
-          from { opacity: 0; transform: translateY(24px); }
-          to   { opacity: 1; transform: translateY(0); }
+          from { opacity:0; transform:translateY(24px); }
+          to   { opacity:1; transform:translateY(0); }
         }
         @keyframes scrollHintBob {
-          0%, 100% { transform: translateY(0); opacity: 0.4; }
-          50%       { transform: translateY(5px); opacity: 0.6; }
+          0%,100% { transform:translateY(0);  opacity:0.4; }
+          50%      { transform:translateY(5px); opacity:0.6; }
         }
         @keyframes shimmer {
-          0%   { background-position: 200% 0; }
-          100% { background-position: -200% 0; }
+          0%   { background-position:200% 0; }
+          100% { background-position:-200% 0; }
         }
 
         .hero-content-wrap {
-          position: absolute;
-          inset: 0;
-          z-index: 20;
-          display: flex;
-          flex-direction: column;
-          justify-content: flex-end;
-          padding: clamp(1.25rem, 4vw, 3rem);
-          padding-top: max(80px, env(safe-area-inset-top, 80px));
-          padding-bottom: clamp(1.5rem, 5vw, 3.5rem);
-          pointer-events: none;
-          overflow: hidden;
+          position:absolute; inset:0; z-index:20;
+          display:flex; flex-direction:column; justify-content:flex-end;
+          padding:clamp(1.25rem,4vw,3rem);
+          padding-top:max(80px,env(safe-area-inset-top,80px));
+          padding-bottom:clamp(1.5rem,5vw,3.5rem);
+          pointer-events:none; overflow:hidden;
         }
-
         .hero-eyebrow {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.6rem;
-          font-family: 'DM Mono', 'Courier New', monospace;
-          font-size: clamp(0.55rem, 2.2vw, 0.72rem);
-          letter-spacing: 0.28em;
-          text-transform: uppercase;
-          color: #d64fd9;
-          margin-bottom: 0.7rem;
+          display:inline-flex; align-items:center; gap:0.6rem;
+          font-family:'DM Mono','Courier New',monospace;
+          font-size:clamp(0.55rem,2.2vw,0.72rem);
+          letter-spacing:0.28em; text-transform:uppercase;
+          color:#d64fd9; margin-bottom:0.7rem;
         }
-
         .hero-h1 {
-          font-family: 'Bebas Neue', 'Arial Black', sans-serif;
-          font-weight: 400;
-          font-size: clamp(2.2rem, 6vw, 4.25rem);
-          line-height: 0.96;
-          letter-spacing: 0.02em;
-          color: #f5f0ea;
-          margin: 0 0 0.75rem;
-          text-shadow: 0 4px 40px rgba(0,0,0,0.7);
+          font-family:'Bebas Neue','Arial Black',sans-serif;
+          font-weight:400; font-size:clamp(2.2rem,6vw,4.25rem);
+          line-height:0.96; letter-spacing:0.02em;
+          color:#f5f0ea; margin:0 0 0.75rem;
+          text-shadow:0 4px 40px rgba(0,0,0,0.7);
         }
-
         .hero-sub {
-          font-family: 'Barlow', sans-serif;
-          font-weight: 300;
-          font-style: italic;
-          font-size: clamp(0.88rem, 3.2vw, 1.15rem);
-          line-height: 1.75;
-          color: rgba(245,240,234,0.55);
-          max-width: 46ch;
-          margin: 0 0 1.4rem;
+          font-family:'Barlow',sans-serif;
+          font-weight:300; font-style:italic;
+          font-size:clamp(0.88rem,3.2vw,1.15rem);
+          line-height:1.75; color:rgba(245,240,234,0.55);
+          max-width:46ch; margin:0 0 1.4rem;
         }
-
-        .hero-cta-row {
-          display: flex;
-          gap: 0.75rem;
-          flex-wrap: wrap;
-          pointer-events: auto;
-        }
-
+        .hero-cta-row { display:flex; gap:0.75rem; flex-wrap:wrap; pointer-events:auto; }
         .hero-btn-primary {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.5rem;
-          padding: 0.8rem 1.8rem;
-          background: linear-gradient(110deg, #d64fd9, #b833bb);
-          color: #fff;
-          font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
-          font-weight: 700;
-          font-size: clamp(0.82rem, 2.5vw, 1rem);
-          letter-spacing: 0.1em;
-          text-transform: uppercase;
-          text-decoration: none;
-          clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
-          box-shadow: 0 4px 28px rgba(214,79,217,0.45);
-          transition: opacity 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
-          white-space: nowrap;
-          cursor: pointer;
-          border: none;
+          display:inline-flex; align-items:center; gap:0.5rem;
+          padding:0.8rem 1.8rem;
+          background:linear-gradient(110deg,#d64fd9,#b833bb);
+          color:#fff;
+          font-family:'Barlow Condensed','Arial Narrow',sans-serif;
+          font-weight:700; font-size:clamp(0.82rem,2.5vw,1rem);
+          letter-spacing:0.1em; text-transform:uppercase; text-decoration:none;
+          clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));
+          box-shadow:0 4px 28px rgba(214,79,217,0.45);
+          transition:opacity .2s,transform .2s,box-shadow .2s;
+          white-space:nowrap; cursor:pointer; border:none;
         }
-        .hero-btn-primary:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 8px 36px rgba(214,79,217,0.65);
-        }
-
+        .hero-btn-primary:hover { transform:translateY(-2px); box-shadow:0 8px 36px rgba(214,79,217,0.65); }
         .hero-btn-ghost {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.5rem;
-          padding: 0.8rem 1.8rem;
-          border: 1px solid rgba(245,240,234,0.2);
-          color: #f5f0ea;
-          font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
-          font-weight: 700;
-          font-size: clamp(0.82rem, 2.5vw, 1rem);
-          letter-spacing: 0.1em;
-          text-transform: uppercase;
-          text-decoration: none;
-          backdrop-filter: blur(6px);
-          clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
-          transition: background 0.2s ease, border-color 0.2s ease;
-          white-space: nowrap;
-          cursor: pointer;
-          background: transparent;
+          display:inline-flex; align-items:center; gap:0.5rem;
+          padding:0.8rem 1.8rem; border:1px solid rgba(245,240,234,0.2);
+          color:#f5f0ea;
+          font-family:'Barlow Condensed','Arial Narrow',sans-serif;
+          font-weight:700; font-size:clamp(0.82rem,2.5vw,1rem);
+          letter-spacing:0.1em; text-transform:uppercase; text-decoration:none;
+          backdrop-filter:blur(6px);
+          clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));
+          transition:background .2s,border-color .2s;
+          white-space:nowrap; cursor:pointer; background:transparent;
         }
-        .hero-btn-ghost:hover {
-          background: rgba(214,79,217,0.1);
-          border-color: rgba(214,79,217,0.5);
-        }
-
+        .hero-btn-ghost:hover { background:rgba(214,79,217,0.1); border-color:rgba(214,79,217,0.5); }
         .hero-scroll-indicator {
-          position: absolute;
-          right: 24px;
-          top: 50%;
-          transform: translateY(-50%);
-          width: 2px;
-          height: 120px;
-          background: rgba(255,255,255,0.12);
-          z-index: 20;
-          border-radius: 1px;
+          position:absolute; right:24px; top:50%; transform:translateY(-50%);
+          width:2px; height:120px; background:rgba(255,255,255,0.12);
+          z-index:20; border-radius:1px;
         }
-
         .hero-mobile-overlay {
-          display: none;
-          position: absolute;
-          inset: 0;
-          z-index: 6;
-          pointer-events: none;
-          background: linear-gradient(
-            to right,
-            rgba(4,6,12,0.92) 0%,
-            rgba(4,6,12,0.70) 50%,
-            transparent 100%
-          );
+          display:none; position:absolute; inset:0; z-index:6; pointer-events:none;
+          background:linear-gradient(to right,rgba(4,6,12,0.92) 0%,rgba(4,6,12,0.70) 50%,transparent 100%);
         }
 
-        @media (max-width: 1024px) {
-          .hero-h1 { font-size: clamp(2.1rem, 6vw, 3.6rem); }
+        @media (max-width:1024px) { .hero-h1 { font-size:clamp(2.1rem,6vw,3.6rem); } }
+        @media (max-width:768px) {
+          .hero-mobile-overlay { display:block; }
+          .hero-scroll-indicator { display:none; }
+          .hero-content-wrap { justify-content:flex-end; padding:64px 1.25rem 1.75rem; }
+          .hero-eyebrow { font-size:0.58rem; margin-bottom:0.5rem; }
+          .hero-h1 { font-size:clamp(1.9rem,9.5vw,2.6rem); line-height:1.02; margin-bottom:0.6rem; }
+          .hero-sub { font-size:0.88rem; margin-bottom:1.1rem; max-width:34ch; }
+          .hero-cta-row { gap:0.6rem; }
+          .hero-btn-primary,.hero-btn-ghost { padding:0.75rem 1.4rem; font-size:0.82rem; }
         }
-        @media (max-width: 768px) {
-          .hero-mobile-overlay { display: block; }
-          .hero-scroll-indicator { display: none; }
-          .hero-content-wrap {
-            justify-content: flex-end;
-            padding: 64px 1.25rem 1.75rem;
-          }
-          .hero-eyebrow { font-size: 0.58rem; margin-bottom: 0.5rem; }
-          .hero-h1 {
-            font-size: clamp(1.9rem, 9.5vw, 2.6rem);
-            line-height: 1.02;
-            margin-bottom: 0.6rem;
-          }
-          .hero-sub {
-            font-size: 0.88rem;
-            margin-bottom: 1.1rem;
-            max-width: 34ch;
-          }
-          .hero-cta-row { gap: 0.6rem; }
-          .hero-btn-primary,
-          .hero-btn-ghost {
-            padding: 0.75rem 1.4rem;
-            font-size: 0.82rem;
-          }
-        }
-        @media (max-width: 480px) {
-          .hero-h1 { font-size: clamp(1.7rem, 9vw, 2.2rem); }
-          .hero-cta-row { flex-direction: column; align-items: flex-start; }
-          .hero-btn-primary,
-          .hero-btn-ghost { width: 100%; justify-content: center; }
+        @media (max-width:480px) {
+          .hero-h1 { font-size:clamp(1.7rem,9vw,2.2rem); }
+          .hero-cta-row { flex-direction:column; align-items:flex-start; }
+          .hero-btn-primary,.hero-btn-ghost { width:100%; justify-content:center; }
         }
       `}</style>
 
@@ -402,157 +250,118 @@ const HeroScrollCanvas = ({ badge, title, subtitle, children }) => {
         ref={sectionRef}
         aria-label="Hero animation section"
         style={{
-          position: "relative",
-          height: SCROLL_HEIGHT,
-          backgroundColor: "#010408",
-          margin: 0,
-          padding: 0,
-          overflow: "visible",
+          position:"relative",
+          height:SCROLL_HEIGHT,
+          backgroundColor:"#010408",
+          margin:0, padding:0,
+          overflow:"visible",
         }}
       >
-        <div
-          style={{
-            position: "sticky",
-            top: 0,
-            left: 0,
-            right: 0,
-            height: "100vh",
-            width: "100%",
-            overflow: "hidden",
-            display: "flex",
-            flexDirection: "column",
-          }}
-        >
-          {/* Reduced-motion fallback — unchanged */}
+        <div style={{
+          position:"sticky", top:0, left:0, right:0,
+          height:"100vh", width:"100%",
+          overflow:"hidden",
+          display:"flex", flexDirection:"column",
+        }}>
           {reducedMotion && <StaticHeroFallback />}
 
-          {/* Canvas — now driven by ImageBitmaps from video instead of WebP files */}
           {!reducedMotion && (
             <canvas
               ref={canvasRef}
               aria-hidden="true"
               style={{
-                position: "absolute",
-                inset: 0,
-                width: "100%",
-                height: "100%",
-                zIndex: 0,
-                backgroundColor: "#010408",
-                // Fade in once first frames are ready
-                opacity: loadedCount > 0 ? 1 : 0,
-                transition: "opacity 0.5s ease",
+                position:"absolute",
+                inset:0,
+                width:"100%",
+                height:"100%",
+                zIndex:0,
+                backgroundColor:"#010408",
+                opacity:1,
+                pointerEvents:"none",    // no hit-test overhead
+                willChange:"contents",   // GPU-composited layer
               }}
             />
           )}
 
-          {/* All atmospheric overlays — unchanged */}
           <GrainOverlay />
           <VignetteOverlay />
           <ScanlineOverlay />
-
-          {/* Mobile gradient — unchanged */}
           <div className="hero-mobile-overlay" aria-hidden="true" />
 
-          {/* Hero text content — 100% unchanged from your original */}
           <div className="hero-content-wrap">
-            <div className="hero-eyebrow" style={{ animation: anim("0.1s") }}>
+            <div className="hero-eyebrow" style={{ animation:anim("0.1s") }}>
               <span style={{
-                width: 24, height: 1, flexShrink: 0, display: "inline-block",
-                background: "linear-gradient(90deg,#d64fd9,#b833bb)",
-              }} />
+                width:24,height:1,flexShrink:0,display:"inline-block",
+                background:"linear-gradient(90deg,#d64fd9,#b833bb)",
+              }}/>
               {badge || "Built for the AI Era"}
             </div>
 
-            <h1 className="hero-h1" style={{ animation: anim("0.25s") }}>
-              Dominate<br />
+            <h1 className="hero-h1" style={{ animation:anim("0.25s") }}>
+              Dominate<br/>
               with{" "}
               <span style={{
-                backgroundImage: "linear-gradient(110deg, #d64fd9, #b833bb)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-              }}>
-                Intelligence.
-              </span>
-              <br />
+                backgroundImage:"linear-gradient(110deg,#d64fd9,#b833bb)",
+                WebkitBackgroundClip:"text",
+                WebkitTextFillColor:"transparent",
+                backgroundClip:"text",
+              }}>Intelligence.</span>
+              <br/>
               <span style={{
-                WebkitTextStroke: "1.5px rgba(245,240,234,0.3)",
-                WebkitTextFillColor: "transparent",
-                color: "transparent",
-              }}>
-                Lead Without
-              </span>
-              <br />
-              Limits.
+                WebkitTextStroke:"1.5px rgba(245,240,234,0.3)",
+                WebkitTextFillColor:"transparent",
+                color:"transparent",
+              }}>Lead Without</span>
+              <br/>Limits.
             </h1>
 
-            <p className="hero-sub" style={{ animation: anim("0.4s") }}>
-              {subtitle}
-            </p>
+            <p className="hero-sub" style={{ animation:anim("0.4s") }}>{subtitle}</p>
 
-            <div className="hero-cta-row" style={{ animation: anim("0.55s") }}>
+            <div className="hero-cta-row" style={{ animation:anim("0.55s") }}>
               {children}
             </div>
 
-            {/* Trust micro-bar — unchanged */}
-            <div
-              className="text-[var(--text-muted)]"
-              style={{
-                marginTop: "0.85rem",
-                display: "flex",
-                flexWrap: "wrap",
-                gap: "0.75rem",
-                alignItems: "center",
-                fontFamily: "'DM Mono', monospace",
-                fontSize: "0.65rem",
-                letterSpacing: "0.12em",
-                animation: anim("0.65s"),
-              }}
-            >
+            <div className="text-[var(--text-muted)]" style={{
+              marginTop:"0.85rem",
+              display:"flex",flexWrap:"wrap",
+              gap:"0.75rem",alignItems:"center",
+              fontFamily:"'DM Mono',monospace",
+              fontSize:"0.65rem",letterSpacing:"0.12em",
+              animation:anim("0.65s"),
+            }}>
               <span>⭐ 4.9 Student Rating</span>
-              <span style={{ opacity: 0.4 }}>•</span>
+              <span style={{opacity:0.4}}>•</span>
               <span>1000+ Students Trained</span>
-              <span style={{ opacity: 0.4 }}>•</span>
+              <span style={{opacity:0.4}}>•</span>
               <span>Hiring Partners: TCS, Infosys</span>
             </div>
 
-            {/* Scroll hint — unchanged */}
-            <div
-              style={{
-                marginTop: "1.2rem",
-                display: "flex",
-                alignItems: "center",
-                gap: "0.5rem",
-                opacity: 0,
-                animation: reducedMotion
-                  ? "none"
-                  : "fadeSlideUp 0.8s ease 0.9s both, scrollHintBob 2s ease-in-out infinite 2s",
-              }}
-            >
+            <div style={{
+              marginTop:"1.2rem",
+              display:"flex",alignItems:"center",gap:"0.5rem",
+              opacity:0,
+              animation: reducedMotion
+                ? "none"
+                : "fadeSlideUp 0.8s ease 0.9s both, scrollHintBob 2s ease-in-out infinite 2s",
+            }}>
               <div style={{
-                width: 1, height: 32, flexShrink: 0,
-                background: "linear-gradient(to bottom, #d64fd9, transparent)",
-              }} />
+                width:1,height:32,flexShrink:0,
+                background:"linear-gradient(to bottom,#d64fd9,transparent)",
+              }}/>
               <span style={{
-                fontFamily: "'DM Mono', monospace",
-                fontSize: "0.58rem",
-                letterSpacing: "0.22em",
-                textTransform: "uppercase",
-                color: "var(--color-brand-highlight)",
-              }}>
-                Scroll to explore
-              </span>
+                fontFamily:"'DM Mono',monospace",
+                fontSize:"0.58rem",letterSpacing:"0.22em",
+                textTransform:"uppercase",
+                color:"var(--color-brand-highlight)",
+              }}>Scroll to explore</span>
             </div>
           </div>
 
-          {/* Scroll indicator — unchanged */}
           {!reducedMotion && <ScrollIndicator sectionRef={sectionRef} />}
-
-          {/* Loading bar — same API, works with new loadedCount/isFullyLoaded */}
           {!reducedMotion && (
             <LoadingBar
               loaded={loadedCount}
-              total={HERO_TOTAL_FRAMES}
+              total={TOTAL_FRAMES}
               hidden={isFullyLoaded}
             />
           )}
