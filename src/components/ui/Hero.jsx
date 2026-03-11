@@ -32,7 +32,7 @@ const Hero = ({
   if (isVideo) {
     return (
       <section 
-        className={`relative overflow-hidden min-h-[100dvh] flex items-center justify-center ${className}`}
+        className={`relative overflow-hidden min-h-[100dvh] flex items-center justify-center pt-[72px] ${className}`}
         aria-label="Homepage hero"
       >
         {/* Video Background */}
@@ -120,14 +120,14 @@ const Hero = ({
 
   // Original hero variants (home & simple)
   return (
-    <section 
-      className={`relative overflow-hidden ${
-        isHome
-          ? 'bg-[var(--bg-body)] pt-24 pb-10 md:pt-32 md:pb-20 border-b border-[var(--border-color)]'
-          : 'bg-[var(--bg-body)] pt-28 pb-10 md:pt-32 md:pb-18 border-b border-[var(--border-color)]'
-      } ${className}`}
-      aria-label={isHome ? 'Homepage hero' : undefined}
-    >
+  <section 
+  className={`relative overflow-hidden ${
+    isHome
+      ? 'bg-[var(--bg-body)] pt-32 pb-10 md:pt-40 md:pb-20 border-b border-[var(--border-color)]'
+      : 'bg-[var(--bg-body)] pt-32 pb-10 md:pt-40 md:pb-18 border-b border-[var(--border-color)]'
+  } ${className}`}
+  aria-label={isHome ? 'Homepage hero' : undefined}
+>
       {/* Background Elements - Premium Mesh Effect */}
       <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none" aria-hidden="true">
         <div className={`absolute top-[-5%] right-[-5%] w-[40%] h-[40%] rounded-full blur-3xl blur-layer ${isHome ? 'bg-primary/20' : 'bg-primary/5'}`} />

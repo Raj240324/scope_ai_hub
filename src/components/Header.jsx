@@ -114,27 +114,15 @@ const Header = () => {
   const isTransparent = isHomePage && !scrolled;
 
   // ── Scroll detection ────────────────────────────────────────────────────────
-  useEffect(() => {
-    const handleScroll = () => {
-      if (!isHomePage) {
-        setScrolled(window.scrollY > 20);
-        return;
-      }
-      const heroEl =
-        document.getElementById("hero-scroll") ||
-        document.querySelector('section[aria-label="Hero animation section"]');
-      if (heroEl) {
-        const spacer     = heroEl.closest(".pin-spacer");
-        const boundary   = spacer || heroEl;
-        const boundaryY  = boundary.getBoundingClientRect().bottom + window.scrollY;
-        setScrolled(window.scrollY >= boundaryY - 80);
-      } else {
-        setScrolled(window.scrollY > window.innerHeight * 0.9);
-      }
-    };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [isHomePage]);
+  // Replace the entire scroll useEffect with this:
+useEffect(() => {
+  const handleScroll = () => {
+    setScrolled(window.scrollY > 20);
+  };
+  window.addEventListener("scroll", handleScroll, { passive: true });
+  handleScroll(); // run once on mount
+  return () => window.removeEventListener("scroll", handleScroll);
+}, []);
 
   // ── Close mobile menu when resizing to desktop breakpoint ────────────────────
   useEffect(() => {
@@ -180,20 +168,36 @@ const Header = () => {
     : [];
 
   // ─── Header bar styles ─────────────────────────────────────────────────────
-  const headerStyle = {
-    position:   "fixed",
-    top:        0,
-    left:       0,
-    width:      "100%",
-    zIndex:     999,
-    height:     72,
-    display:    "flex",
-    alignItems: "center",
-    transition: "background 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease",
-    background:     isTransparent ? "transparent" : (theme === 'dark' ? 'rgba(4,6,12,0.95)' : 'rgba(255,255,255,0.97)'),
-    backdropFilter: isTransparent ? "none" : "blur(16px) saturate(180%)",
-    borderBottom:   `1px solid ${isTransparent ? "transparent" : (theme === 'dark' ? T.border : 'rgba(214,79,217,0.12)')}`,
-  };
+const headerStyle = {
+  position:   "fixed",
+  top:        0,
+  left:       0,
+  width:      "100%",
+  zIndex:     999,
+  height:     72,
+  display:    "flex",
+  alignItems: "center",
+  transition: "background 0.4s ease, border-color 0.4s ease, backdrop-filter 0.4s ease, box-shadow 0.4s ease",
+  background: isTransparent
+    ? "transparent"
+    : theme === 'dark'
+      ? "rgba(4,6,12,0.55)"
+      : "rgba(255,255,255,0.55)",
+  backdropFilter:       isTransparent ? "none" : "blur(24px) saturate(200%) brightness(1.08)",
+  WebkitBackdropFilter: isTransparent ? "none" : "blur(24px) saturate(200%) brightness(1.08)",
+  borderBottom: `1px solid ${
+    isTransparent
+      ? "transparent"
+      : theme === 'dark'
+        ? "rgba(214,79,217,0.18)"
+        : "rgba(214,79,217,0.14)"
+  }`,
+  boxShadow: isTransparent
+    ? "none"
+    : theme === 'dark'
+      ? "0 1px 0 rgba(214,79,217,0.06), 0 8px 32px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.04)"
+      : "0 1px 0 rgba(214,79,217,0.08), 0 8px 32px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.7)",
+};
 
   return (
     <>
