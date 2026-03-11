@@ -181,22 +181,22 @@ const headerStyle = {
   background: isTransparent
     ? "transparent"
     : theme === 'dark'
-      ? "rgba(4,6,12,0.55)"
-      : "rgba(255,255,255,0.55)",
-  backdropFilter:       isTransparent ? "none" : "blur(24px) saturate(200%) brightness(1.08)",
-  WebkitBackdropFilter: isTransparent ? "none" : "blur(24px) saturate(200%) brightness(1.08)",
+      ? "rgba(6, 4, 14, 0.75)"
+      : "rgba(248, 244, 255, 0.78)",
+  backdropFilter: isTransparent ? "none" : "blur(28px) saturate(180%) brightness(0.95)",
+  WebkitBackdropFilter: isTransparent ? "none" : "blur(28px) saturate(180%) brightness(0.95)",
   borderBottom: `1px solid ${
     isTransparent
       ? "transparent"
       : theme === 'dark'
-        ? "rgba(214,79,217,0.18)"
-        : "rgba(214,79,217,0.14)"
+        ? "rgba(214,79,217,0.22)"
+        : "rgba(180,60,200,0.15)"
   }`,
   boxShadow: isTransparent
     ? "none"
     : theme === 'dark'
-      ? "0 1px 0 rgba(214,79,217,0.06), 0 8px 32px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.04)"
-      : "0 1px 0 rgba(214,79,217,0.08), 0 8px 32px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.7)",
+      ? "0 4px 24px rgba(4,2,10,0.6), 0 1px 0 rgba(214,79,217,0.12), inset 0 1px 0 rgba(214,79,217,0.06)"
+      : "0 4px 24px rgba(160,80,200,0.08), 0 1px 0 rgba(180,60,200,0.1), inset 0 1px 0 rgba(255,255,255,0.9)",
 };
 
   return (

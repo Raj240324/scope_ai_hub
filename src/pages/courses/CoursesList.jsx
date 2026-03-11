@@ -240,7 +240,13 @@ const CoursesList = () => {
                             {meta && <span className="text-body">{meta.emoji}</span>}
                             <span>{tier}</span>
                           </span>
-                          <span className={`text-caption font-bold px-2 py-0.5 rounded-full transition-opacity duration-200 ${isActive ? 'opacity-100' : 'opacity-50'}`}>
+                          <span 
+                            className="text-caption font-bold px-2.5 py-0.5 rounded-md transition-all duration-200 flex items-center justify-center"
+                            style={{ 
+                              background: isActive ? 'rgba(0,0,0,0.15)' : 'var(--bg-secondary)',
+                              color: isActive && meta ? meta.color : isActive ? '#0d0214' : 'var(--text-muted)',
+                            }}
+                          >
                             {count}
                           </span>
                         </m.button>

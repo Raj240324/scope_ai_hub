@@ -16,8 +16,8 @@ const BatchScheduleSection = ({ showHybridCallout = true }) => {
           Flexible Scheduling
         </div>
         <h2 className="heading-lg font-bold text-[var(--text-heading)] mb-4">
-          Batch Schedules Built for Professionals
-        </h2>
+  Batch Schedules Built for <span style={{ color: "#d24bd5" }}>Professionals</span>
+</h2>
         <p className="text-[var(--text-muted)] text-body-lg">
           Our trainers are working IT professionals — so we schedule around real lives, not the other way around.
         </p>
@@ -64,12 +64,15 @@ const BatchScheduleSection = ({ showHybridCallout = true }) => {
         {batches.map((batch, i) => (
           <div key={i} className="w-full h-full flex items-center justify-center px-4 md:px-0">
             <div
-              className="relative w-full rounded-2xl md:rounded-3xl border border-[var(--border-color)] bg-[var(--bg-card)] p-5 md:p-10 overflow-hidden shadow-2xl"
-              style={{ boxShadow: `0 8px 60px 0 ${batch.glow}, 0 1px 0 0 rgba(255,255,255,0.04) inset` }}
+              className="relative w-full rounded-2xl md:rounded-3xl p-5 md:p-10 overflow-hidden shadow-2xl"
+style={{
+  background: 'var(--bg-secondary)',
+  border: '2px solid rgba(214,79,217,0.25)',
+  boxShadow: `0 8px 80px 0 ${batch.glow}, 0 0 0 1px rgba(214,79,217,0.15), 0 1px 0 0 rgba(255,255,255,0.08) inset`,
+}}
             >
               {/* Gradient accent wash */}
-              <div className={`absolute inset-0 bg-gradient-to-br ${batch.accent} opacity-50 pointer-events-none`} />
-
+<div className={`absolute inset-0 bg-gradient-to-br ${batch.accent} opacity-80 pointer-events-none`} />
               {/* Progress dots */}
               <div className="absolute top-4 right-5 md:top-6 md:right-8 flex items-center gap-1.5 z-10">
                 {batches.map((_, dot) => (
@@ -105,14 +108,14 @@ const BatchScheduleSection = ({ showHybridCallout = true }) => {
 
                 {/* Right — detail tiles */}
                 <div className="flex-1 grid grid-cols-2 gap-2 md:gap-4">
-                  <div className="p-2.5 md:p-4 rounded-xl md:rounded-2xl bg-[var(--bg-secondary)] border border-[var(--border-color)]">
-                    <p className="text-[10px] md:text-caption text-[var(--text-muted)] mb-0.5 md:mb-1 uppercase tracking-wider font-semibold">Time</p>
-                    <p className="text-small md:text-body font-bold text-[var(--text-heading)] leading-tight">{batch.time}</p>
-                  </div>
-                  <div className="p-2.5 md:p-4 rounded-xl md:rounded-2xl bg-[var(--bg-secondary)] border border-[var(--border-color)]">
-                    <p className="text-[10px] md:text-caption text-[var(--text-muted)] mb-0.5 md:mb-1 uppercase tracking-wider font-semibold">Mode</p>
-                    <p className="text-small md:text-body font-bold text-[var(--text-heading)] leading-tight">{batch.mode}</p>
-                  </div>
+                 <div className="p-2.5 md:p-4 rounded-xl md:rounded-2xl border" style={{ background: 'rgba(214,79,217,0.06)', borderColor: 'rgba(214,79,217,0.2)' }}>
+    <p className="text-[10px] md:text-caption text-[var(--text-muted)] mb-0.5 md:mb-1 uppercase tracking-wider font-semibold">Time</p>
+    <p className="text-small md:text-body font-bold text-[var(--text-heading)] leading-tight">{batch.time}</p>
+  </div>
+  <div className="p-2.5 md:p-4 rounded-xl md:rounded-2xl border" style={{ background: 'rgba(214,79,217,0.06)', borderColor: 'rgba(214,79,217,0.2)' }}>
+    <p className="text-[10px] md:text-caption text-[var(--text-muted)] mb-0.5 md:mb-1 uppercase tracking-wider font-semibold">Mode</p>
+    <p className="text-small md:text-body font-bold text-[var(--text-heading)] leading-tight">{batch.mode}</p>
+  </div>
                   <div className="col-span-2 p-2.5 md:p-4 rounded-xl md:rounded-2xl bg-primary/5 border border-primary/20 flex flex-row sm:flex-col justify-between items-center sm:items-start">
                     <p className="text-[10px] md:text-caption text-primary mb-0 sm:mb-1 uppercase tracking-wider font-semibold">Availability</p>
                     <p className="text-small md:text-body font-bold text-primary leading-tight">{batch.status}</p>

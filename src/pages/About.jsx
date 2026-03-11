@@ -373,9 +373,9 @@ const About = () => {
               { name: 'Data Analytics', icon: <BarChart3 className="h-7 w-7" /> },
               { name: 'Cloud AI (AWS / GCP / Azure)', icon: <Cloud className="h-7 w-7" /> },
             ].map((tech, i) => (
-              <StaggerItem key={i}>
-                <div className="flex flex-col items-center text-center p-5 sm:p-6 bg-[var(--bg-card)] rounded-2xl border border-[var(--border-color)] shadow-sm hover:shadow-lg hover:border-primary/30 transition-all group">
-                  <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-[var(--bg-inverted)] group-hover:text-[var(--text-on-light)] transition-colors text-primary">
+              <StaggerItem key={i} className="h-full">
+                <div className="flex flex-col items-center text-center p-5 sm:p-6 bg-[var(--bg-card)] rounded-2xl border border-[var(--border-color)] shadow-sm hover:shadow-lg hover:border-primary/30 transition-all group h-full">
+                  <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-[var(--bg-inverted)] group-hover:text-[var(--text-on-light)] transition-colors text-primary shrink-0">
                     {tech.icon}
                   </div>
                   <p className="text-small font-bold text-[var(--text-heading)]">{tech.name}</p>
@@ -610,7 +610,7 @@ const About = () => {
                 <div className="absolute bottom-[-25%] right-[-10%] w-[60%] h-[60%] bg-primary/10 rounded-full blur-3xl blur-layer" />
               </div>
             <div className="relative z-10 max-w-3xl mx-auto">
-              <h2 className="heading-lg font-bold mb-6">Your Next Batch Starts Soon. <span className="font-extrabold text-primary">Seats Fill Fast.</span></h2>
+              <h2 className="heading-lg font-bold mb-6 text-white">Your Next Batch Starts Soon. <span className="font-extrabold" style={{ color: "#d24bd5" }}>Seats Fill Fast.</span></h2>
               <p className="text-body md:text-lg text-[var(--text-on-inverted)]/80 mb-10">
                 Join 1,200+ graduates building AI careers across India and beyond.
               </p>
