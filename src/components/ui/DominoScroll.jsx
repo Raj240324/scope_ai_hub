@@ -70,8 +70,8 @@ const DominoScroll = ({
         let { isMobile, isTablet } = context.conditions;
 
         // Scale Y translations based on screen size
-        const yStart = isMobile ? 40 : isTablet ? 70 : 96;
-        const ySecond = isMobile ? 120 : isTablet ? 170 : 217;
+        const yStart = isMobile ? 20 : isTablet ? 70 : 96;
+        const ySecond = isMobile ? 60 : isTablet ? 170 : 217;
 
         const START  = { x: 0, y: yStart,  z: 0,   rotateX: 0  };
         const SECOND = { x: 0, y: ySecond, z: 100, rotateX: 85 };

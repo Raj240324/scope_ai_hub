@@ -58,20 +58,20 @@ const BatchScheduleSection = ({ showHybridCallout = true }) => {
       {/* DOMINO SCROLL */}
       <DominoScroll
         scrollDistance={1800}
-        containerClassName="h-[750px] sm:h-[650px] md:h-[550px] lg:h-[520px]"
+        containerClassName="h-[520px] sm:h-[600px] md:h-[550px] lg:h-[520px]"
         wrapperMaxWidth="900px"
       >
         {batches.map((batch, i) => (
           <div key={i} className="w-full h-full flex items-center justify-center px-4 md:px-0">
             <div
-              className="relative w-full rounded-3xl border border-[var(--border-color)] bg-[var(--bg-card)] p-8 md:p-10 overflow-hidden shadow-2xl"
+              className="relative w-full rounded-2xl md:rounded-3xl border border-[var(--border-color)] bg-[var(--bg-card)] p-5 md:p-10 overflow-hidden shadow-2xl"
               style={{ boxShadow: `0 8px 60px 0 ${batch.glow}, 0 1px 0 0 rgba(255,255,255,0.04) inset` }}
             >
               {/* Gradient accent wash */}
               <div className={`absolute inset-0 bg-gradient-to-br ${batch.accent} opacity-50 pointer-events-none`} />
 
               {/* Progress dots */}
-              <div className="absolute top-6 right-8 flex items-center gap-1.5 z-10">
+              <div className="absolute top-4 right-5 md:top-6 md:right-8 flex items-center gap-1.5 z-10">
                 {batches.map((_, dot) => (
                   <span
                     key={dot}
@@ -85,43 +85,43 @@ const BatchScheduleSection = ({ showHybridCallout = true }) => {
               </div>
 
               {/* Status badge */}
-              <span className={`inline-flex items-center px-3 py-1 mb-6 text-caption font-bold rounded-full relative z-10 ${batch.statusColor}`}>
+              <span className={`inline-flex items-center px-2.5 py-1 mb-3 md:mb-6 text-caption font-bold rounded-full relative z-10 ${batch.statusColor}`}>
                 🔥 {batch.status}
               </span>
 
               {/* Main layout */}
               <div className="relative z-10 flex flex-col md:flex-row md:items-center md:gap-14">
                 {/* Left — identity */}
-                <div className="flex-1 mb-8 md:mb-0">
-                  <div className="text-5xl mb-4">{batch.emoji}</div>
-                  <h3 className="heading-md font-bold text-[var(--text-heading)] mb-1">
+                <div className="flex-1 mb-4 md:mb-0">
+                  <div className="text-4xl md:text-5xl mb-2 md:mb-4">{batch.emoji}</div>
+                  <h3 className="heading-sm md:heading-md font-bold text-[var(--text-heading)] mb-0.5 md:mb-1 leading-tight">
                     {batch.title}
                   </h3>
-                  <p className="text-body text-[var(--text-muted)] font-medium mb-3">
+                  <p className="text-small md:text-body text-[var(--text-muted)] font-medium mb-1.5 md:mb-3">
                     {batch.days}
                   </p>
-                  <p className="text-caption text-[var(--text-muted)]">{batch.desc}</p>
+                  <p className="text-caption text-[var(--text-muted)] line-clamp-2">{batch.desc}</p>
                 </div>
 
                 {/* Right — detail tiles */}
-                <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div className="p-4 rounded-2xl bg-[var(--bg-secondary)] border border-[var(--border-color)]">
-                    <p className="text-caption text-[var(--text-muted)] mb-1 uppercase tracking-wider font-semibold">Time</p>
-                    <p className="font-bold text-[var(--text-heading)] leading-tight">{batch.time}</p>
+                <div className="flex-1 grid grid-cols-2 gap-2 md:gap-4">
+                  <div className="p-2.5 md:p-4 rounded-xl md:rounded-2xl bg-[var(--bg-secondary)] border border-[var(--border-color)]">
+                    <p className="text-[10px] md:text-caption text-[var(--text-muted)] mb-0.5 md:mb-1 uppercase tracking-wider font-semibold">Time</p>
+                    <p className="text-small md:text-body font-bold text-[var(--text-heading)] leading-tight">{batch.time}</p>
                   </div>
-                  <div className="p-4 rounded-2xl bg-[var(--bg-secondary)] border border-[var(--border-color)]">
-                    <p className="text-caption text-[var(--text-muted)] mb-1 uppercase tracking-wider font-semibold">Mode</p>
-                    <p className="font-bold text-[var(--text-heading)] leading-tight">{batch.mode}</p>
+                  <div className="p-2.5 md:p-4 rounded-xl md:rounded-2xl bg-[var(--bg-secondary)] border border-[var(--border-color)]">
+                    <p className="text-[10px] md:text-caption text-[var(--text-muted)] mb-0.5 md:mb-1 uppercase tracking-wider font-semibold">Mode</p>
+                    <p className="text-small md:text-body font-bold text-[var(--text-heading)] leading-tight">{batch.mode}</p>
                   </div>
-                  <div className="col-span-1 sm:col-span-2 p-4 rounded-2xl bg-primary/5 border border-primary/20">
-                    <p className="text-caption text-primary mb-1 uppercase tracking-wider font-semibold">Availability</p>
-                    <p className="font-bold text-primary leading-tight">{batch.status}</p>
+                  <div className="col-span-2 p-2.5 md:p-4 rounded-xl md:rounded-2xl bg-primary/5 border border-primary/20 flex flex-row sm:flex-col justify-between items-center sm:items-start">
+                    <p className="text-[10px] md:text-caption text-primary mb-0 sm:mb-1 uppercase tracking-wider font-semibold">Availability</p>
+                    <p className="text-small md:text-body font-bold text-primary leading-tight">{batch.status}</p>
                   </div>
                 </div>
               </div>
 
               {/* Bottom row */}
-              <div className="relative z-10 mt-8 pt-8 border-t border-[var(--border-color)] flex items-center justify-between gap-4 flex-wrap">
+              <div className="relative z-10 mt-5 md:mt-8 pt-4 md:pt-8 border-t border-[var(--border-color)] flex items-center justify-between gap-3 flex-wrap">
                 <p className="text-caption text-[var(--text-muted)]">
                   Batch {i + 1} of {batches.length} — keep scrolling ↓
                 </p>
@@ -129,7 +129,7 @@ const BatchScheduleSection = ({ showHybridCallout = true }) => {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => openModal()}
-                  className="group/btn inline-flex items-center gap-2 px-6 py-3 btn-primary text-small font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--accent-primary)]"
+                  className="group/btn inline-flex items-center gap-1.5 px-5 py-2.5 md:px-6 md:py-3 btn-primary text-small font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--accent-primary)] w-full sm:w-auto justify-center"
                 >
                   Reserve Seat
                   <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover/btn:translate-x-1" />
