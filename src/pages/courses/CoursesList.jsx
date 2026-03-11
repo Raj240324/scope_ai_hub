@@ -1,6 +1,7 @@
 import React, { useState, useMemo, useEffect, Suspense } from 'react';
 import Layout from '../../components/layout/Layout';
 import CourseCard from '../../components/ui/CourseCard';
+import BatchScheduleSection from '../../components/sections/BatchScheduleSection';
 const AddonsGrid = React.lazy(() => import('../../components/ui/AddonsGrid'));
 import { courses, TIERS, tierMeta } from '../../data/courses';
 import { addons } from '../../data/addons';
@@ -362,6 +363,11 @@ const CoursesList = () => {
           </main>
         </div>
       </div>
+
+      {/* Batch Schedule Section */}
+      <section className="py-20 bg-[var(--bg-body)] border-t border-[var(--border-color)] overflow-visible">
+        <BatchScheduleSection showHybridCallout={false} />
+      </section>
 
       {/* Career Advantages Section */}
       <Suspense fallback={null}>

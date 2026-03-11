@@ -23,6 +23,7 @@ import {
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import CourseCard from '../../components/ui/CourseCard';
+import BatchScheduleSection from '../../components/sections/BatchScheduleSection';
 
 const CourseDetail = () => {
   const { slug } = useParams();
@@ -370,8 +371,13 @@ const CourseDetail = () => {
         </div>
       </section>
 
+      {/* ── Batch Schedule Section ── */}
+      <section className="py-20 bg-[var(--bg-body)] border-t border-[var(--border-color)] overflow-visible">
+        <BatchScheduleSection showHybridCallout={false} />
+      </section>
+
       {/* ── Included Career Benefits ── */}
-      <section className="py-20 sm:py-28 bg-[var(--bg-body)]">
+      <section className="py-20 sm:py-28 bg-[var(--bg-secondary)] border-t border-[var(--border-color)]">
         <div className="container-custom">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <motion.div
