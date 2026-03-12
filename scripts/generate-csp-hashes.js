@@ -74,8 +74,8 @@ vercelConfig.headers.forEach((header) => {
         // Add Tawk.to domains required for the widget and WebSockets
         appendDirective("default-src", "wss://*.tawk.to");
         appendDirective("connect-src", "wss://*.tawk.to https://*.tawk.to");
-        appendDirective("script-src", "https://*.tawk.to");
-        appendDirective("style-src", "https://*.tawk.to");
+        appendDirective("script-src", "https://*.tawk.to https://cdn.jsdelivr.net");
+        appendDirective("style-src", "https://*.tawk.to https://cdn.jsdelivr.net");
         appendDirective("font-src", "https://*.tawk.to");
         appendDirective("frame-src", "https://*.tawk.to");
         appendDirective("img-src", "https://*.tawk.to");
