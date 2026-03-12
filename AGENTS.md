@@ -40,7 +40,7 @@ course catalog, and student acquisition platform.
 | Library       | Usage                                                           |
 | ------------- | --------------------------------------------------------------- |
 | Framer Motion | Primary animation — FadeIn, Stagger, Parallax, page transitions |
-| GSAP          | Scroll-driven canvas animations (`HeroScroll`), `ScrollTrigger` |
+| GSAP          | Scroll-driven canvas animations (`HeroScroll`), `ScrollTrigger`, `DominoScroll` |
 | Anime.js      | Available for micro-interactions                                |
 | Lottie React  | JSON-based vector animations (404, Mission, Vision)             |
 
@@ -61,7 +61,8 @@ course catalog, and student acquisition platform.
 | Brevo (Sendinblue)  | Transactional email + CRM contacts          |
 | Google reCAPTCHA v2 | Bot protection on forms                     |
 | Sentry              | Frontend error monitoring (production only) |
-| Tawk.to             | Live chat widget                            |
+| Tawk.to             | Live chat widget via `TawkChat.jsx`         |
+| WhatsApp            | Floating action button                      |
 
 ### Dev & Testing
 
@@ -153,8 +154,8 @@ scope_ai_hub/
 | ------------------ | ----------------------------- | -------------------------------------- |
 | Page components    | PascalCase                    | `About.jsx`, `FAQ.jsx`                 |
 | UI components      | PascalCase                    | `CourseCard.jsx`, `Hero.jsx`           |
-| Home sections      | PascalCase + `Section` suffix | `CTASection.jsx`                       |
-| Utility components | PascalCase                    | `ScrollToTop.jsx`, `SEO.jsx`           |
+| Home sections      | PascalCase + `Section` suffix | `BatchScheduleSection.jsx`             |
+| Utility components | PascalCase                    | `SEO.jsx`, `TawkChat.jsx`              |
 | Context files      | PascalCase + `Context` suffix | `ThemeContext.jsx`                     |
 | Data files         | camelCase                     | `courses.js`, `branding.js`            |
 | Utility modules    | camelCase                     | `rateLimiter.js`, `apiErrorHandler.js` |

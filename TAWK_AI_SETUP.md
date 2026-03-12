@@ -1,55 +1,58 @@
-# Tawk.to AI & Chatbot Setup Guide
+# Tawk.to Chat Widget Setup for SCOPE AI HUB
 
-Since we have successfully integrated the **Tawk.to Widget** into your website, you can now power it with AI to automate student queries. Tawk.to has a built-in AI called **Apollo**.
+This document contains the specific integration details and credentials for the Tawk.to live chat widget currently running on scopeaihub.com.
 
-Here is how you set it up from the [Tawk.to Dashboard](https://dashboard.tawk.to):
+## Widget Details
 
-## 1. Accessing Apollo AI
+- **Property ID:** `[YOUR_PROPERTY_ID]`
+- **Widget ID:** `[YOUR_WIDGET_ID]`
 
-1.  Log in to your **Tawk.to Dashboard**.
-2.  Click on the **"Apollo AI"** icon in the left sidebar (it looks like a robot head).
-3.  If you don't see it, go to **Add-ons** and look for Apollo AI to enable it (it usually has a free tier or trial).
+These values are securely configured through local environment variables and Vercel production variables.
 
-## 2. Training the AI (The Most Important Part)
+---
 
-The AI needs to "know" about ScopeAIHub to answer questions. You teach it by setting up a **Knowledge Base** or **Shortcuts**.
+## Environment Variable Configuration (`.env`)
 
-### Option A: Enable "AI Assist" (Automated)
+To run the widget locally during development, add the following to your `.env` file:
 
-1.  In the Apollo settings, look for **"Data Sources"** or **"Training"**.
-2.  **Website Crawl**: Enter your website URL (`https://www.scopeaihub.com` or your domain). The AI will read all your pages (Courses, Placements, FAQs) and learn them.
-3.  **Upload Documents**: If you have a PDF brochure or Syllabus, upload it here. The AI will read it.
+```env
+VITE_TAWK_PROPERTY_ID=your_property_id_here
+VITE_TAWK_WIDGET_ID=your_widget_id_here
+```
 
-### Option B: Shortcuts (Best for frequent questions)
+---
 
-Go to **Administration (Gear Icon) -> Settings -> Shortcuts**.
-Create canned responses for common questions. The AI often prioritizes these.
+## Raw Embed Code (Reference)
 
-- **Trigger**: `/fees`
-- **Message**: "Our Full Stack Development course fee is ₹25,000. We offer EMI options starting at ₹5,000/month."
+This is the original embed code provided by the Tawk.to dashboard. 
 
-## 3. Configuring the "Bot" Behavior
+*(Note: We do not use this raw script directly in `index.html`. We inject it dynamically via the `TawkChat.jsx` React component instead so we can control environmental loading).*
 
-Go to **Administration -> Widget Settings**.
+```html
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/YOUR_PROPERTY_ID/YOUR_WIDGET_ID';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+```
 
-1.  **Widget Scheduler**: Set your "Online" hours (e.g., 9 AM - 6 PM).
-2.  **Offline Behavior**: When you are offline, you can let the AI answer OR show a "Leave a Message" form.
-    - _Recommendation_: Let Apollo AI handle chats 24/7. It can take the student's name/email and answer their basic questions.
+---
 
-## 4. Setting up the "Knowledge Base" (KB)
+## Codebase Implementation
 
-Tawk.to has a free "Knowledge Base" feature (like a Help Center).
+The widget is implemented in the following path:
+`src/components/utils/TawkChat.jsx`
 
-1.  Click the **Book Icon** (Knowledge Base) in the sidebar.
-2.  Create articles like "Admission Process", "Course Syllabus", "Placement Record".
-3.  **Why do this?** Apollo AI reads these articles to give **perfect** answers. If a student asks "How is placement?", Apollo will summarize your "Placement Record" article.
+It is then injected at the global layout level inside:
+`src/components/layout/Layout.jsx`
 
-## Summary of Workflow
-
-1.  **Student asks:** "Do you have Python course?"
-2.  **Apollo AI** checks your Website/KB.
-3.  **Apollo AI answers:** "Yes! We offer a Python Full Stack course with Django/FastAPI. It's a 3-month program."
-4.  **Student asks:** "Can I speak to a human?"
-5.  **Apollo AI** transfers the chat to you or your staff.
-
-_No coding is required for any of this. The widget is fully configured via the `.env` variables (`VITE_TAWK_PROPERTY_ID` and `VITE_TAWK_WIDGET_ID`) and runs cleanly alongside the WhatsApp button on all pages._
+**Positioning:** 
+It renders globally on the bottom right of the screen. We have positioned the existing `WhatsAppButton` above and to the left of it (using `bottom-32 right-6`) to prevent visual overlap between the two chat floating actions.
