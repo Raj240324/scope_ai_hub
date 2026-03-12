@@ -2,10 +2,6 @@ import { useEffect } from 'react';
 
 const TawkChat = () => {
   useEffect(() => {
-    // Check for mobile devices (screen width < 768px)
-    if (window.innerWidth < 768) {
-      return;
-    }
 
     var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
     (function () {
