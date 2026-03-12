@@ -88,10 +88,24 @@ const HeroScrollCanvas = ({ badge, subtitle, children }) => {
 
   // Dispatch event so the App preloader can wait for video to be ready
   useEffect(() => {
-    if (videoReady) {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const handleReady = async () => {
+      try {
+        await video.play();
+      } catch (e) {}
+      
+      setVideoReady(true);
       window.dispatchEvent(new Event("heroVideoReady"));
-    }
-  }, [videoReady]);
+    };
+
+    video.addEventListener("canplaythrough", handleReady);
+
+    return () => {
+      video.removeEventListener("canplaythrough", handleReady);
+    };
+  }, []);
 
   const anim = (delay) =>
     reducedMotion ? "none" : `fadeSlideUp 0.9s cubic-bezier(.16,1,.3,1) ${delay} both`;
@@ -212,7 +226,6 @@ const HeroScrollCanvas = ({ badge, subtitle, children }) => {
             preload="auto"
             disablePictureInPicture
             poster="/hero-frames/frame_0001.webp"
-            onLoadedData={() => setVideoReady(true)}
             aria-hidden="true"
             style={{
               position:"absolute", inset:0,
