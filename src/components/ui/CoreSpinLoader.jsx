@@ -1,24 +1,50 @@
+// src/components/CoreSpinLoader.jsx
 import React, { useState, useEffect } from 'react';
+import { subscribeToHeroProgress } from "../../utils/heroFrameCache";
 
-export function CoreSpinLoader() {
+export function CoreSpinLoader({ onComplete }) {
   const [loadingText, setLoadingText] = useState('Booting Neural Core');
+  const [progress, setProgress]       = useState(0); // 0–1
 
+  // ── Hero frame loading progress ──────────────────────────────────────────
+  useEffect(() => {
+    const unsub = subscribeToHeroProgress((loaded, total) => {
+      const pct = total > 0 ? loaded / total : 0;
+      setProgress(pct);
+    });
+    return unsub;
+  }, []);
+
+  // ── Text cycling — driven by frame progress, not a timer ─────────────────
+  // Text advances with actual load state so it reflects real progress
   useEffect(() => {
     const states = [
+      'Booting Neural Core',
       'Training AI Models..',
       'Calibrating Neurons..',
       'Loading Knowledge Base..',
       'Syncing Intelligence..',
-      'AI Engine Ready.'
+      'AI Engine Ready.',
     ];
-    let i = 0;
-    const interval = setInterval(() => {
-      i = (i + 1) % states.length;
-      setLoadingText(states[i]);
-    }, 400);
 
-    return () => clearInterval(interval);
-  }, []);
+    // Map progress 0–1 to text index
+    const idx = Math.min(
+      Math.floor(progress * states.length),
+      states.length - 1
+    );
+    setLoadingText(states[idx]);
+  }, [progress]);
+
+  // ── Dismiss when hero is fully loaded ────────────────────────────────────
+  // Minimum 1.5s so the preloader doesn't flash and disappear instantly
+  // on fast connections. On slow connections it stays until frames are ready.
+  useEffect(() => {
+    if (progress < 1) return;
+    const t = setTimeout(() => { onComplete?.(); }, 300);
+    return () => clearTimeout(t);
+  }, [progress, onComplete]);
+
+  const pct = Math.round(progress * 100);
 
   return (
     <div className="flex flex-col items-center justify-center min-h-[200px] gap-6 md:gap-8">
@@ -65,7 +91,7 @@ export function CoreSpinLoader() {
       </div>
 
       {/* Text */}
-      <div className="flex flex-col items-center gap-1 h-8 justify-center">
+      <div className="flex flex-col items-center gap-2">
         <span
           key={loadingText}
           className="text-caption sm:text-sm md:text-base font-medium tracking-[0.2em] sm:tracking-[0.3em] uppercase
@@ -74,6 +100,25 @@ export function CoreSpinLoader() {
         >
           {loadingText}
         </span>
+
+        {/* Progress bar — shows real frame loading progress */}
+        <div style={{
+          width: 120,
+          height: 2,
+          background: 'rgba(214,79,217,0.15)',
+          borderRadius: 2,
+          overflow: 'hidden',
+          marginTop: 4,
+        }}>
+          <div style={{
+            height: '100%',
+            width: `${pct}%`,
+            background: 'linear-gradient(90deg, var(--color-primary), var(--color-primary-dark))',
+            borderRadius: 2,
+            transition: 'width 0.3s ease',
+            boxShadow: '0 0 6px rgba(214,79,217,0.6)',
+          }} />
+        </div>
       </div>
     </div>
   );

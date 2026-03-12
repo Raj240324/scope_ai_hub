@@ -1,21 +1,20 @@
 import { useEffect, useRef, useState } from "react";
+import FrameWorker from "../utils/frameWorker.js?worker";
 
 // ─────────────────────────────────────────────────────────────────────────────
-// WHY THIS WORKS WITH STRICT CSP
-//
-// Blob URL workers → blocked by CSP (script-src 'self' forbids blob:)
-// Main thread decode → causes scroll jitter (main thread starved)
-//
-// This solution: worker served as /public/frameWorker.js
-//   new Worker('/frameWorker.js') → served from 'self' → CSP allows it ✅
-//   Decoding runs 100% off the main thread → zero jitter ✅
-//
-// You MUST place frameWorker.js in your /public folder.
+// heroFrameCache preloads frames during the preloader window.
+// By the time this hook runs, the browser HTTP cache already has every frame.
+// Workers fetch the same URLs → instant cache hits → zero network wait.
+// No shared memory needed — browser cache handles it automatically.
 // ─────────────────────────────────────────────────────────────────────────────
 
-// ─────────────────────────────────────────────────────────────────────────────
-// DEVICE PROFILER
-// ─────────────────────────────────────────────────────────────────────────────
+function easeInOut(t) {
+  return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+}
+function clamp(v, lo, hi) {
+  return Math.min(Math.max(v, lo), hi);
+}
+
 function getDeviceProfile() {
   const ua        = navigator.userAgent || "";
   const isIOS     = /iPhone|iPad|iPod/i.test(ua);
@@ -30,41 +29,45 @@ function getDeviceProfile() {
     catch (_) { return false; }
   })();
 
-  // Worker count — mobile gets fewer to avoid RAM pressure
   let workerCount;
-  if (!isMobile)                workerCount = Math.min(navigator.hardwareConcurrency || 4, 6);
-  else if (ram <= 2 || isSlow)  workerCount = 2;
-  else                          workerCount = Math.min(navigator.hardwareConcurrency || 2, 3);
+  if (!isMobile)               workerCount = Math.min(navigator.hardwareConcurrency || 4, 6);
+  else if (ram <= 2 || isSlow) workerCount = 2;
+  else                         workerCount = Math.min(navigator.hardwareConcurrency || 2, 3);
 
-  // Frame stride
   let stride;
-  if (!isMobile)                     stride = 1;
-  else if (ram >= 4 && !isSlow)      stride = 3;
-  else if (ram >= 2)                 stride = 4;
-  else                               stride = 6;
+  if (!isMobile)                    stride = 1;
+  else if (ram >= 4 && !isSlow)     stride = 3;
+  else if (ram >= 2)                stride = 4;
+  else                              stride = 6;
 
-  // Bitmap resolution cap — THE most important memory protection
   const dpr = Math.min(window.devicePixelRatio || 1, 2);
   let maxW, maxH;
-  if (!isMobile)                     { maxW = 1920; maxH = 1080; }
-  else if (ram >= 2 && !isSlow)      { maxW = 720;  maxH = 405;  }
-  else                               { maxW = 540;  maxH = 303;  }
+  if (!isMobile)                    { maxW = 1920; maxH = 1080; }
+  else if (ram >= 2 && !isSlow)     { maxW = 720;  maxH = 405;  }
+  else                              { maxW = 540;  maxH = 303;  }
 
-  const bitmapW = Math.min(Math.round(window.innerWidth  * dpr), maxW);
-  const bitmapH = Math.min(Math.round(window.innerHeight * dpr), maxH);
-
-  return { isMobile, isIOS, isAndroid, stride, bitmapW, bitmapH, workerCount, hasOffscreen };
+  return {
+    stride, workerCount, hasOffscreen,
+    bitmapW: Math.min(Math.round(window.innerWidth  * dpr), maxW),
+    bitmapH: Math.min(Math.round(window.innerHeight * dpr), maxH),
+  };
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-// WORKER POOL
-// Uses /frameWorker.js — served from 'self', passes any CSP.
-// ─────────────────────────────────────────────────────────────────────────────
-function createWorkerPool(size) {
-  // '/frameWorker.js' is served from your /public folder
-  // CSP: script-src 'self' allows this — it is NOT a blob: URL
-  const workers = Array.from({ length: size }, () => new Worker("/frameWorker.js"));
+function buildPriorityOrder(total) {
+  const seen  = new Set();
+  const order = [];
+  const add   = (i) => {
+    const c = Math.min(Math.max(i, 0), total - 1);
+    if (!seen.has(c)) { seen.add(c); order.push(c); }
+  };
+  [0, Math.floor(total * 0.25), Math.floor(total * 0.5),
+   Math.floor(total * 0.75), total - 1].forEach(add);
+  for (let i = 0; i < total; i++) add(i);
+  return order;
+}
 
+function createWorkerPool(size) {
+  const workers = Array.from({ length: size }, () => new FrameWorker());
   const pending = new Map();
   const busy    = new Array(size).fill(false);
   const queue   = [];
@@ -89,11 +92,7 @@ function createWorkerPool(size) {
       data.ok ? p.resolve(data.bitmap) : p.reject(new Error(data.error));
       drain();
     };
-    w.onerror = (e) => {
-      busy[i] = false;
-      console.error("[frameWorker] error:", e);
-      drain();
-    };
+    w.onerror = () => { busy[i] = false; drain(); };
   });
 
   return {
@@ -104,41 +103,10 @@ function createWorkerPool(size) {
         drain();
       });
     },
-    terminate() {
-      workers.forEach((w) => w.terminate());
-    },
+    terminate() { workers.forEach((w) => w.terminate()); },
   };
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-// PRIORITY LOAD ORDER
-// Poster → 25% → 50% → 75% → 100% → fill everything in between
-// ─────────────────────────────────────────────────────────────────────────────
-function buildPriorityOrder(total) {
-  const seen  = new Set();
-  const order = [];
-  const add   = (i) => {
-    const c = Math.min(Math.max(i, 0), total - 1);
-    if (!seen.has(c)) { seen.add(c); order.push(c); }
-  };
-  [0, Math.floor(total * 0.25), Math.floor(total * 0.5), Math.floor(total * 0.75), total - 1]
-    .forEach(add);
-  for (let i = 0; i < total; i++) add(i);
-  return order;
-}
-
-// ─────────────────────────────────────────────────────────────────────────────
-// MATH
-// ─────────────────────────────────────────────────────────────────────────────
-function easeInOut(t) {
-  return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
-}
-function clamp(v, lo, hi) {
-  return Math.min(Math.max(v, lo), hi);
-}
-
-// ═════════════════════════════════════════════════════════════════════════════
-// useAppleScrollFrames
 // ═════════════════════════════════════════════════════════════════════════════
 export function useAppleScrollFrames({
   sectionRef,
@@ -158,18 +126,16 @@ export function useAppleScrollFrames({
   const rafReady = useRef(false);
   const curFrame = useRef(-1);
   const dirty    = useRef(false);
+  const velBuf   = useRef([]);
 
-  const velBuf = useRef([]); // scroll velocity ring buffer
-
-  const pageVisible = useRef(true);
-  const inView      = useRef(true);
-
+  const pageVisible  = useRef(true);
+  const inView       = useRef(true);
   const sectionTop   = useRef(0);
   const scrollHeight = useRef(0);
 
   const [isFullyLoaded, setIsFullyLoaded] = useState(false);
 
-  // ── Helpers ────────────────────────────────────────────────────────────────
+  // ── helpers ──────────────────────────────────────────────────────────────
 
   function syncGeometry() {
     const s = sectionRef.current;
@@ -186,24 +152,18 @@ export function useAppleScrollFrames({
     const pw  = Math.round(c.offsetWidth  * dpr);
     const ph  = Math.round(c.offsetHeight * dpr);
     if (c.width === pw && c.height === ph) return;
-
     c.width  = pw;
     c.height = ph;
     mainCtx.current = c.getContext("2d", { alpha: false });
-
     if (offscreen.current) {
       try {
         offscreen.current = new OffscreenCanvas(pw, ph);
         offCtx.current    = offscreen.current.getContext("2d", { alpha: false });
-      } catch (_) {
-        offscreen.current = null;
-        offCtx.current    = null;
-      }
+      } catch (_) { offscreen.current = null; offCtx.current = null; }
     }
     dirty.current = true;
   }
 
-  // ── drawFrame — double-buffered atomic blit ────────────────────────────────
   function drawFrame(idx) {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -220,15 +180,14 @@ export function useAppleScrollFrames({
     }
     if (!bm) return;
 
-    const cw = canvas.width,  ch = canvas.height;
-    const bw = bm.width,      bh = bm.height;
+    const cw    = canvas.width,  ch = canvas.height;
+    const bw    = bm.width,      bh = bm.height;
     const scale = Math.max(cw / bw, ch / bh);
-    const dw    = bw * scale, dh = bh * scale;
+    const dw    = bw * scale,    dh = bh * scale;
     const dx    = (cw - dw) / 2, dy = (ch - dh) / 2;
 
     const off = offscreen.current;
     const oc  = offCtx.current;
-
     if (off && oc && off.width === cw && off.height === ch) {
       oc.drawImage(bm, dx, dy, dw, dh);
       ctx.drawImage(off, 0, 0);
@@ -237,17 +196,15 @@ export function useAppleScrollFrames({
     }
   }
 
-  // ── rAF loop ───────────────────────────────────────────────────────────────
   function startRaf() {
     if (rafId.current) cancelAnimationFrame(rafId.current);
 
     function tick() {
       rafId.current = requestAnimationFrame(tick);
-
       if (!rafReady.current || !pageVisible.current || !inView.current) return;
       if (cacheSize.current === 0) return;
 
-      // Velocity prediction — 1 frame lookahead eliminates scroll lag
+      // velocity prediction — 1 frame lookahead
       const now = performance.now();
       const vb  = velBuf.current;
       vb.push({ y: window.scrollY, t: now });
@@ -256,35 +213,28 @@ export function useAppleScrollFrames({
       let predictedY = window.scrollY;
       if (vb.length >= 2) {
         const dt = vb[vb.length - 1].t - vb[0].t;
-        if (dt > 0) {
-          const vel  = (vb[vb.length - 1].y - vb[0].y) / dt;
-          predictedY = window.scrollY + vel * 16.667;
-        }
+        if (dt > 0)
+          predictedY = window.scrollY +
+            ((vb[vb.length - 1].y - vb[0].y) / dt) * 16.667;
       }
 
       const sh  = scrollHeight.current;
-      const raw = sh > 0 ? clamp((predictedY - sectionTop.current) / sh, 0, 1) : 0;
+      const raw = sh > 0
+        ? clamp((predictedY - sectionTop.current) / sh, 0, 1)
+        : 0;
       const idx = clamp(
         Math.round(easeInOut(raw) * (cacheSize.current - 1)),
-        0,
-        cacheSize.current - 1
+        0, cacheSize.current - 1
       );
 
-      if (idx !== curFrame.current) {
-        curFrame.current = idx;
-        dirty.current    = true;
-      }
-
-      if (dirty.current) {
-        dirty.current = false;
-        drawFrame(curFrame.current);
-      }
+      if (idx !== curFrame.current) { curFrame.current = idx; dirty.current = true; }
+      if (dirty.current) { dirty.current = false; drawFrame(curFrame.current); }
     }
 
     rafId.current = requestAnimationFrame(tick);
   }
 
-  // ── Effects ────────────────────────────────────────────────────────────────
+  // ── effects ───────────────────────────────────────────────────────────────
 
   useEffect(() => {
     if (reducedMotion) return;
@@ -316,20 +266,18 @@ export function useAppleScrollFrames({
     const s = sectionRef.current;
     if (!s) return;
     const io = new IntersectionObserver(
-      ([e]) => { inView.current = e.isIntersecting; },
-      { threshold: 0 }
+      ([e]) => { inView.current = e.isIntersecting; }, { threshold: 0 }
     );
     io.observe(s);
     return () => io.disconnect();
   }, []);
 
-  // ── Main load ──────────────────────────────────────────────────────────────
+  // ── main load ─────────────────────────────────────────────────────────────
   useEffect(() => {
     if (reducedMotion) return;
 
     const profile = getDeviceProfile();
-
-    const frames = [];
+    const frames  = [];
     for (let i = 1; i <= totalFrames; i += profile.stride) frames.push(i);
     const total = frames.length;
 
@@ -343,16 +291,17 @@ export function useAppleScrollFrames({
     offCtx.current     = null;
     mainCtx.current    = null;
 
-    // Absolute URLs — workers need them (relative paths fail in worker scope)
-    const abs = (path) => new URL(path, window.location.href).href;
-
+    // Absolute URLs required inside worker scope
+    const abs  = (path) => new URL(path, window.location.href).href;
     const pool = createWorkerPool(profile.workerCount);
     let cancelled = false;
 
     startRaf();
 
     async function load() {
-      // ── Phase 1: Poster frame — unlock animation immediately ──────────────
+      // Phase 1: poster frame → show immediately, unlock scroll
+      // heroFrameCache already fetched this URL → browser returns it
+      // from HTTP cache instantly, worker decodes it in ~5ms
       try {
         const bm = await pool.decode(
           abs(framePath(frames[0])),
@@ -371,10 +320,7 @@ export function useAppleScrollFrames({
             try {
               offscreen.current = new OffscreenCanvas(c.width, c.height);
               offCtx.current    = offscreen.current.getContext("2d", { alpha: false });
-            } catch (_) {
-              offscreen.current = null;
-              offCtx.current    = null;
-            }
+            } catch (_) { offscreen.current = null; offCtx.current = null; }
           }
         }
 
@@ -383,33 +329,29 @@ export function useAppleScrollFrames({
         curFrame.current  = 0;
         dirty.current     = true;
         drawFrame(0);
-
-        // ✅ Animation is live — user can scroll now
-        rafReady.current = true;
+        rafReady.current  = true; // ✅ scroll animation live
 
       } catch (e) {
         console.error("[hero] poster frame failed:", e);
         if (!cancelled) rafReady.current = true;
       }
 
-      // ── Phase 2: All remaining frames in priority order ───────────────────
-      // Workers decode concurrently (profile.workerCount at a time).
-      // Slots fill in as they arrive — nearest-neighbour covers gaps.
+      // Phase 2: all remaining frames — all cache hits, loads almost instantly
       const order = buildPriorityOrder(total).slice(1);
-
       await Promise.all(
         order.map((slotIdx) =>
           pool
-            .decode(abs(framePath(frames[slotIdx])), profile.bitmapW, profile.bitmapH)
+            .decode(
+              abs(framePath(frames[slotIdx])),
+              profile.bitmapW,
+              profile.bitmapH
+            )
             .then((bm) => {
               if (cancelled) { bm?.close(); return; }
               cache.current[slotIdx] = bm;
-
-              // Advance cacheSize through consecutive loaded slots
               let s = cacheSize.current;
               while (s < total && cache.current[s] != null) s++;
               cacheSize.current = s;
-
               dirty.current = true;
             })
             .catch(() => {})
