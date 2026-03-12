@@ -1,13 +1,26 @@
 import React, { useRef, useEffect } from "react";
 
 const TOTAL_FRAMES = 192;
-const padFrame = (index) => `frame_${index.toString().padStart(4, "0")}.webp`;
+const padFrame = (index) => {
+  const clamped = Math.max(1, Math.min(TOTAL_FRAMES, index));
+  return `frame_${clamped.toString().padStart(4, "0")}.webp`;
+};
 
 const DesktopHeroSequence = () => {
   const canvasRef = useRef(null);
   const contextRef = useRef(null);
   const imagesRef = useRef(new Array(TOTAL_FRAMES + 1).fill(null));
   const frameIndexRef = useRef(0);
+  const isVisibleRef = useRef(true);
+
+  // Pause Animation When Tab Hidden
+  useEffect(() => {
+    const handleVisibility = () => {
+      isVisibleRef.current = !document.hidden;
+    };
+    document.addEventListener("visibilitychange", handleVisibility);
+    return () => document.removeEventListener("visibilitychange", handleVisibility);
+  }, []);
 
   // Dispatch event so AppPreloader instantly dismisses once the first frame is ready
   useEffect(() => {
@@ -22,26 +35,48 @@ const DesktopHeroSequence = () => {
       frameIndexRef.current = 1;
       const canvas = canvasRef.current;
       if (canvas && contextRef.current) {
-        drawCover(contextRef.current, img, canvas.width, canvas.height);
+        drawCover(contextRef.current, img, window.innerWidth, window.innerHeight);
       }
       handleFirstFrame();
     };
   }, []);
 
-  // Lazily preload remaining frames (doesn't block first render)
+  // Lazily preload remaining frames in batches
   useEffect(() => {
-    const preloadFrames = () => {
-      for (let i = 2; i <= TOTAL_FRAMES; i++) {
+    let currentFrame = 2; // Frame 1 already loaded
+
+    // Rapidly load next 11 frames so early scrolling isn't blank
+    for (; currentFrame <= 12 && currentFrame <= TOTAL_FRAMES; currentFrame++) {
+      const img = new Image();
+      img.src = `/hero-frames/${padFrame(currentFrame)}`;
+      imagesRef.current[currentFrame] = img;
+    }
+
+    const loadNextBatch = (deadline) => {
+      // Load frames while we have idle time (or forced if timeout)
+      while (
+        (deadline.timeRemaining() > 0 || deadline.didTimeout) &&
+        currentFrame <= TOTAL_FRAMES
+      ) {
         const img = new Image();
-        img.src = `/hero-frames/${padFrame(i)}`;
-        imagesRef.current[i] = img;
+        img.src = `/hero-frames/${padFrame(currentFrame)}`;
+        imagesRef.current[currentFrame] = img;
+        currentFrame++;
+      }
+
+      if (currentFrame <= TOTAL_FRAMES) {
+        if (typeof requestIdleCallback !== "undefined") {
+          requestIdleCallback(loadNextBatch, { timeout: 1000 });
+        } else {
+          setTimeout(loadNextBatch, 500);
+        }
       }
     };
 
     if (typeof requestIdleCallback !== "undefined") {
-      requestIdleCallback(preloadFrames, { timeout: 1000 });
+      requestIdleCallback(loadNextBatch, { timeout: 1000 });
     } else {
-      setTimeout(preloadFrames, 500);
+      setTimeout(loadNextBatch, 500);
     }
   }, []);
 
@@ -55,13 +90,17 @@ const DesktopHeroSequence = () => {
     contextRef.current = context;
 
     const setSize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = window.innerWidth * dpr;
+      canvas.height = window.innerHeight * dpr;
+
+      // Normalize coordinate system to use css pixels
+      context.scale(dpr, dpr);
 
       // Redraw current frame on resize
       const img = imagesRef.current[frameIndexRef.current];
       if (img && img.complete) {
-        drawCover(context, img, canvas.width, canvas.height);
+        drawCover(context, img, window.innerWidth, window.innerHeight);
       }
     };
 
@@ -71,7 +110,7 @@ const DesktopHeroSequence = () => {
     let ticking = false;
 
     const onScroll = () => {
-      if (!ticking) {
+      if (!ticking && isVisibleRef.current) {
         window.requestAnimationFrame(() => {
           updateFrame();
           ticking = false;
@@ -91,14 +130,14 @@ const DesktopHeroSequence = () => {
 
       // Smooth easing maps progress [0..1] -> [1..192]
       let frameIndex = Math.floor(progress * (TOTAL_FRAMES - 1)) + 1;
-      if (frameIndex > TOTAL_FRAMES) frameIndex = TOTAL_FRAMES;
+      frameIndex = Math.max(1, Math.min(TOTAL_FRAMES, frameIndex)); // Safe precision clamp
 
       if (frameIndex !== frameIndexRef.current) {
         frameIndexRef.current = frameIndex;
 
         const img = imagesRef.current[frameIndex];
         if (img && img.complete) {
-          drawCover(context, img, canvas.width, canvas.height);
+          drawCover(context, img, window.innerWidth, window.innerHeight);
         }
       }
     };
