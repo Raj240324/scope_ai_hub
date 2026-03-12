@@ -34,31 +34,61 @@ const CareerSupport = lazy(() => import('./pages/career-support/CareerSupport'))
 const Sitemap = lazy(() => import('./pages/Sitemap'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
-// Full-screen preloader — shows for ~2 s on first visit, then fades out.
-// No longer gated on hero frame loading — video loads independently.
+// Full-screen preloader — syncs with hero video loading
 function AppPreloader({ onReady }) {
   const [visible, setVisible] = useState(() => !window.__appPreloaderShown);
   const [fadeOut, setFadeOut] = useState(false);
+  
+  const loaderDoneRef = useRef(false);
+  const videoDoneRef = useRef(false);
+
+  const checkDone = useCallback(() => {
+    if (window.__appPreloaderShown) return;
+    if (loaderDoneRef.current && videoDoneRef.current && !fadeOut) {
+      setFadeOut(true);
+      window.__appPreloaderShown = true;
+      setTimeout(() => {
+        setVisible(false);
+        onReady?.();
+      }, 500);
+    }
+  }, [fadeOut, onReady]);
+
+  // Called by CoreSpinLoader once its simulated progress reaches 100%
+  const handleLoaderComplete = useCallback(() => {
+    loaderDoneRef.current = true;
+    checkDone();
+  }, [checkDone]);
 
   useEffect(() => {
     if (window.__appPreloaderShown) {
       onReady?.();
       return;
     }
-  }, []);
 
-  // Called by CoreSpinLoader once its simulated progress reaches 100 %
-  const handleLoaderComplete = useCallback(() => {
-    if (window.__appPreloaderShown) return;
+    // If not on the home page, no need to wait for the hero video
+    if (window.location.pathname !== '/') {
+      videoDoneRef.current = true;
+    }
 
-    setFadeOut(true);
-    window.__appPreloaderShown = true;
-    // Remove from DOM after the 500 ms fade-out transition
-    setTimeout(() => {
-      setVisible(false);
-      onReady?.();
-    }, 500);
-  }, [onReady]);
+    const handleVideoReady = () => {
+      videoDoneRef.current = true;
+      checkDone();
+    };
+
+    window.addEventListener("heroVideoReady", handleVideoReady);
+
+    // Safety timeout: force dismiss after 6 seconds total if video stalls
+    const timeout = setTimeout(() => {
+      videoDoneRef.current = true;
+      checkDone();
+    }, 6000);
+
+    return () => {
+      window.removeEventListener("heroVideoReady", handleVideoReady);
+      clearTimeout(timeout);
+    };
+  }, [checkDone, onReady]);
 
   if (!visible) return null;
 

@@ -86,6 +86,13 @@ const HeroScrollCanvas = ({ badge, subtitle, children }) => {
     return () => document.removeEventListener("visibilitychange", handleVisibility);
   }, []);
 
+  // Dispatch event so the App preloader can wait for video to be ready
+  useEffect(() => {
+    if (videoReady) {
+      window.dispatchEvent(new Event("heroVideoReady"));
+    }
+  }, [videoReady]);
+
   const anim = (delay) =>
     reducedMotion ? "none" : `fadeSlideUp 0.9s cubic-bezier(.16,1,.3,1) ${delay} both`;
 
@@ -202,7 +209,7 @@ const HeroScrollCanvas = ({ badge, subtitle, children }) => {
             loop
             muted
             playsInline
-            preload="metadata"
+            preload="auto"
             disablePictureInPicture
             poster="/hero-frames/frame_0001.webp"
             onLoadedData={() => setVideoReady(true)}
