@@ -1,35 +1,60 @@
 import React, { useRef, useEffect, useState } from "react";
 import { useAppleScrollFrames } from "../hooks/useAppleScrollFrames";
 
-// ─── Config ───────────────────────────────────────────────────────────────────
 const TOTAL_FRAMES  = 192;
-const SCROLL_HEIGHT = "500vh"; // adjust for scrub speed feel
-
-// Frame URL builder — matches your /hero-frames/frame_0001.webp convention
-const framePath = (i) =>
-  `/hero-frames/frame_${String(i).padStart(4, "0")}.webp`;
-// ─────────────────────────────────────────────────────────────────────────────
+const SCROLL_HEIGHT = "500vh";
+const framePath = (i) => `/hero-frames/frame_${String(i).padStart(4, "0")}.webp`;
 
 function useReducedMotion() {
   const [reduced, setReduced] = useState(false);
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
     setReduced(mq.matches);
-    const h = (e) => setReduced(e.matches);
-    mq.addEventListener("change", h);
-    return () => mq.removeEventListener("change", h);
+    mq.addEventListener("change", (e) => setReduced(e.matches));
   }, []);
   return reduced;
 }
 
-// ── Sub-components — 100% identical to your original ─────────────────────────
+// Shown on devices that can't run the canvas animation:
+// - prefers-reduced-motion
+// - Very old browsers with no Worker / createImageBitmap support
+function StaticHeroFallback() {
+  return (
+    <div style={{
+      position:"absolute", inset:0, zIndex:0,
+      background:"radial-gradient(ellipse 80% 80% at 60% 50%, #0a1628 0%, #010408 100%)",
+    }}>
+      <img
+        src="/hero-frames/frame_0001.webp"
+        alt="" aria-hidden="true"
+        style={{ width:"100%", height:"100%", objectFit:"cover", opacity:0.7 }}
+      />
+    </div>
+  );
+}
+
+// Detect if the browser can actually run the canvas animation.
+// Requires: Worker, createImageBitmap, canvas 2d context.
+// Falls back gracefully on UC Browser, old Opera Mini, very old Android WebView.
+function canRunAnimation() {
+  try {
+    return (
+      typeof Worker !== "undefined" &&
+      typeof createImageBitmap !== "undefined" &&
+      !!document.createElement("canvas").getContext("2d")
+    );
+  } catch (_) {
+    return false;
+  }
+}
+
 function GrainOverlay() {
   return (
     <div aria-hidden="true" style={{
-      position:"absolute",inset:0,zIndex:10,pointerEvents:"none",
-      opacity:0.045,mixBlendMode:"overlay",
+      position:"absolute", inset:0, zIndex:10, pointerEvents:"none",
+      opacity:0.045, mixBlendMode:"overlay",
       backgroundImage:`url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E")`,
-      backgroundRepeat:"repeat",backgroundSize:"128px 128px",
+      backgroundRepeat:"repeat", backgroundSize:"128px 128px",
     }}/>
   );
 }
@@ -37,7 +62,7 @@ function GrainOverlay() {
 function VignetteOverlay() {
   return (
     <div aria-hidden="true" style={{
-      position:"absolute",inset:0,zIndex:10,pointerEvents:"none",
+      position:"absolute", inset:0, zIndex:10, pointerEvents:"none",
       background:"radial-gradient(ellipse 80% 70% at 50% 50%, transparent 30%, rgba(0,0,0,0.55) 100%)",
     }}/>
   );
@@ -46,53 +71,10 @@ function VignetteOverlay() {
 function ScanlineOverlay() {
   return (
     <div aria-hidden="true" style={{
-      position:"absolute",inset:0,zIndex:10,pointerEvents:"none",
+      position:"absolute", inset:0, zIndex:10, pointerEvents:"none",
       opacity:0.025,
       backgroundImage:"repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.08) 2px, rgba(255,255,255,0.08) 4px)",
     }}/>
-  );
-}
-
-function StaticHeroFallback() {
-  return (
-    <div style={{
-      position:"absolute",inset:0,zIndex:0,
-      background:"radial-gradient(ellipse 80% 80% at 60% 50%, #0a1628 0%, #010408 100%)",
-    }}>
-      <img
-        src="/hero-frames/frame_0001.webp"
-        alt="" aria-hidden="true"
-        style={{width:"100%",height:"100%",objectFit:"cover",objectPosition:"center",opacity:0.7}}
-      />
-    </div>
-  );
-}
-
-function LoadingBar({ loaded, total, hidden }) {
-  const pct = total > 0 ? Math.round((loaded / total) * 100) : 0;
-  return (
-    <div
-      role="progressbar"
-      aria-valuenow={pct} aria-valuemin={0} aria-valuemax={100}
-      aria-label="Loading hero animation"
-      style={{
-        position:"absolute",bottom:0,left:0,right:0,
-        height:"2px",zIndex:30,
-        opacity: hidden ? 0 : 1,
-        transition:"opacity 0.6s ease 0.4s",
-        pointerEvents:"none",
-      }}
-    >
-      <div style={{
-        height:"100%",
-        width:`${pct}%`,
-        background:"linear-gradient(90deg, #d64fd9 0%, #b833bb 50%, #d64fd9 100%)",
-        backgroundSize:"200% 100%",
-        animation:"shimmer 1.5s linear infinite",
-        transition:"width 0.25s ease",
-        boxShadow:"0 0 8px rgba(214,79,217,0.8)",
-      }}/>
-    </div>
   );
 }
 
@@ -104,10 +86,9 @@ function ScrollIndicator({ sectionRef }) {
     if (!track || !section) return;
     const update = () => {
       const rect = section.getBoundingClientRect();
-      const top  = rect.top + window.scrollY;
       const sh   = section.offsetHeight - window.innerHeight;
       if (sh <= 0) return;
-      const p = Math.max(0, Math.min(1, (window.scrollY - top) / sh));
+      const p = Math.max(0, Math.min(1, (window.scrollY - (rect.top + window.scrollY)) / sh));
       track.style.transform = `scaleY(${p})`;
     };
     window.addEventListener("scroll", update, { passive: true });
@@ -118,32 +99,35 @@ function ScrollIndicator({ sectionRef }) {
   return (
     <div className="hero-scroll-indicator">
       <div ref={trackRef} style={{
-        position:"absolute",inset:0,
+        position:"absolute", inset:0,
         background:"linear-gradient(180deg, #d64fd9, #b833bb)",
-        transformOrigin:"top center",transform:"scaleY(0)",
-        borderRadius:"1px",boxShadow:"0 0 6px rgba(214,79,217,0.6)",
+        transformOrigin:"top center", transform:"scaleY(0)",
+        borderRadius:"1px", boxShadow:"0 0 6px rgba(214,79,217,0.6)",
       }}/>
     </div>
   );
 }
 
-// ═══════════════════════════════════════════════════════════════════════════════
-const HeroScrollCanvas = ({ badge, title, subtitle, children }) => {
+// ═════════════════════════════════════════════════════════════════════════════
+const HeroScrollCanvas = ({ badge, subtitle, children }) => {
   const sectionRef    = useRef(null);
   const canvasRef     = useRef(null);
   const reducedMotion = useReducedMotion();
 
-  // ── Apple-grade image sequence hook ──────────────────────────────────────
-  const { loadedCount, isFullyLoaded } = useAppleScrollFrames({
+  // Check browser capability once — avoids trying to run canvas on ancient devices
+  const [canAnimate]  = useState(() => canRunAnimation());
+  const shouldAnimate = canAnimate && !reducedMotion;
+
+  const { isFullyLoaded } = useAppleScrollFrames({
     sectionRef,
     canvasRef,
-    reducedMotion,
+    reducedMotion: !shouldAnimate, // disables hook entirely if can't animate
     totalFrames: TOTAL_FRAMES,
     framePath,
   });
 
   const anim = (delay) =>
-    reducedMotion ? "none" : `fadeSlideUp 0.9s cubic-bezier(.16,1,.3,1) ${delay} both`;
+    !shouldAnimate ? "none" : `fadeSlideUp 0.9s cubic-bezier(.16,1,.3,1) ${delay} both`;
 
   return (
     <>
@@ -153,14 +137,9 @@ const HeroScrollCanvas = ({ badge, title, subtitle, children }) => {
           to   { opacity:1; transform:translateY(0); }
         }
         @keyframes scrollHintBob {
-          0%,100% { transform:translateY(0);  opacity:0.4; }
+          0%,100% { transform:translateY(0);   opacity:0.4; }
           50%      { transform:translateY(5px); opacity:0.6; }
         }
-        @keyframes shimmer {
-          0%   { background-position:200% 0; }
-          100% { background-position:-200% 0; }
-        }
-
         .hero-content-wrap {
           position:absolute; inset:0; z-index:20;
           display:flex; flex-direction:column; justify-content:flex-end;
@@ -194,8 +173,7 @@ const HeroScrollCanvas = ({ badge, title, subtitle, children }) => {
         .hero-btn-primary {
           display:inline-flex; align-items:center; gap:0.5rem;
           padding:0.8rem 1.8rem;
-          background:linear-gradient(110deg,#d64fd9,#b833bb);
-          color:#fff;
+          background:linear-gradient(110deg,#d64fd9,#b833bb); color:#fff;
           font-family:'Barlow Condensed','Arial Narrow',sans-serif;
           font-weight:700; font-size:clamp(0.82rem,2.5vw,1rem);
           letter-spacing:0.1em; text-transform:uppercase; text-decoration:none;
@@ -207,8 +185,7 @@ const HeroScrollCanvas = ({ badge, title, subtitle, children }) => {
         .hero-btn-primary:hover { transform:translateY(-2px); box-shadow:0 8px 36px rgba(214,79,217,0.65); }
         .hero-btn-ghost {
           display:inline-flex; align-items:center; gap:0.5rem;
-          padding:0.8rem 1.8rem; border:1px solid rgba(245,240,234,0.2);
-          color:#f5f0ea;
+          padding:0.8rem 1.8rem; border:1px solid rgba(245,240,234,0.2); color:#f5f0ea;
           font-family:'Barlow Condensed','Arial Narrow',sans-serif;
           font-weight:700; font-size:clamp(0.82rem,2.5vw,1rem);
           letter-spacing:0.1em; text-transform:uppercase; text-decoration:none;
@@ -227,7 +204,6 @@ const HeroScrollCanvas = ({ badge, title, subtitle, children }) => {
           display:none; position:absolute; inset:0; z-index:6; pointer-events:none;
           background:linear-gradient(to right,rgba(4,6,12,0.92) 0%,rgba(4,6,12,0.70) 50%,transparent 100%);
         }
-
         @media (max-width:1024px) { .hero-h1 { font-size:clamp(2.1rem,6vw,3.6rem); } }
         @media (max-width:768px) {
           .hero-mobile-overlay { display:block; }
@@ -251,35 +227,29 @@ const HeroScrollCanvas = ({ badge, title, subtitle, children }) => {
         ref={sectionRef}
         aria-label="Hero animation section"
         style={{
-          position:"relative",
-          height:SCROLL_HEIGHT,
-          backgroundColor:"#010408",
-          margin:0, padding:0,
-          overflow:"visible",
+          position:"relative", height:SCROLL_HEIGHT,
+          backgroundColor:"#010408", margin:0, padding:0, overflow:"visible",
         }}
       >
         <div style={{
           position:"sticky", top:0, left:0, right:0,
           height:"100dvh", width:"100%",
-          overflow:"hidden",
-          display:"flex", flexDirection:"column",
+          overflow:"hidden", display:"flex", flexDirection:"column",
         }}>
-          {reducedMotion && <StaticHeroFallback />}
+          {/* Static fallback — shown when animation can't run */}
+          {!shouldAnimate && <StaticHeroFallback />}
 
-          {!reducedMotion && (
+          {/* Canvas — shown when animation is running */}
+          {shouldAnimate && (
             <canvas
               ref={canvasRef}
               aria-hidden="true"
               style={{
-                position:"absolute",
-                inset:0,
-                width:"100%",
-                height:"100%",
-                zIndex:0,
-                backgroundColor:"#010408",
-                opacity:1,
-                pointerEvents:"none",    // no hit-test overhead
-                willChange:"contents",   // GPU-composited layer
+                position:"absolute", inset:0,
+                width:"100%", height:"100%",
+                zIndex:0, backgroundColor:"#010408",
+                pointerEvents:"none",
+                willChange:"contents",
               }}
             />
           )}
@@ -292,7 +262,7 @@ const HeroScrollCanvas = ({ badge, title, subtitle, children }) => {
           <div className="hero-content-wrap">
             <div className="hero-eyebrow" style={{ animation:anim("0.1s") }}>
               <span style={{
-                width:24,height:1,flexShrink:0,display:"inline-block",
+                width:24, height:1, flexShrink:0, display:"inline-block",
                 background:"linear-gradient(90deg,#d64fd9,#b833bb)",
               }}/>
               {badge || "Built for the AI Era"}
@@ -322,12 +292,12 @@ const HeroScrollCanvas = ({ badge, title, subtitle, children }) => {
               {children}
             </div>
 
-            <div className="text-[var(--text-muted)]" style={{
+            <div style={{
               marginTop:"0.85rem",
-              display:"flex",flexWrap:"wrap",
-              gap:"0.75rem",alignItems:"center",
+              display:"flex", flexWrap:"wrap",
+              gap:"0.75rem", alignItems:"center",
               fontFamily:"'DM Mono',monospace",
-              fontSize:"0.65rem",letterSpacing:"0.12em",
+              fontSize:"0.65rem", letterSpacing:"0.12em",
               animation:anim("0.65s"),
             }}>
               <span>⭐ 4.9 Student Rating</span>
@@ -339,33 +309,26 @@ const HeroScrollCanvas = ({ badge, title, subtitle, children }) => {
 
             <div style={{
               marginTop:"1.2rem",
-              display:"flex",alignItems:"center",gap:"0.5rem",
+              display:"flex", alignItems:"center", gap:"0.5rem",
               opacity:0,
-              animation: reducedMotion
+              animation: !shouldAnimate
                 ? "none"
                 : "fadeSlideUp 0.8s ease 0.9s both, scrollHintBob 2s ease-in-out infinite 2s",
             }}>
               <div style={{
-                width:1,height:32,flexShrink:0,
+                width:1, height:32, flexShrink:0,
                 background:"linear-gradient(to bottom,#d64fd9,transparent)",
               }}/>
               <span style={{
                 fontFamily:"'DM Mono',monospace",
-                fontSize:"0.58rem",letterSpacing:"0.22em",
+                fontSize:"0.58rem", letterSpacing:"0.22em",
                 textTransform:"uppercase",
                 color:"var(--color-brand-highlight)",
               }}>Scroll to explore</span>
             </div>
           </div>
 
-          {!reducedMotion && <ScrollIndicator sectionRef={sectionRef} />}
-          {!reducedMotion && (
-            <LoadingBar
-              loaded={loadedCount}
-              total={TOTAL_FRAMES}
-              hidden={isFullyLoaded}
-            />
-          )}
+          {shouldAnimate && <ScrollIndicator sectionRef={sectionRef} />}
         </div>
       </section>
     </>
