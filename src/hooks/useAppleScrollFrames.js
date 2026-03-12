@@ -1,99 +1,118 @@
 import { useEffect, useRef, useState } from "react";
 
 // ─────────────────────────────────────────────────────────────────────────────
-// WHY NO WORKERS
-// This site's CSP blocks blob: URL workers ("worker-src" falls back to
-// "script-src" which only allows 'self' — blob: is rejected).
-// Solution: decode frames on the main thread using img.decode() +
-// createImageBitmap, yielding back to the browser between every batch via
-// setTimeout(0). The browser paints, handles input, and runs rAF between
-// batches — the main thread is never starved, scroll stays smooth.
+// WHY THIS WORKS WITH STRICT CSP
+//
+// Blob URL workers → blocked by CSP (script-src 'self' forbids blob:)
+// Main thread decode → causes scroll jitter (main thread starved)
+//
+// This solution: worker served as /public/frameWorker.js
+//   new Worker('/frameWorker.js') → served from 'self' → CSP allows it ✅
+//   Decoding runs 100% off the main thread → zero jitter ✅
+//
+// You MUST place frameWorker.js in your /public folder.
 // ─────────────────────────────────────────────────────────────────────────────
-
-// ── Yield to browser between decode batches ──────────────────────────────────
-const yieldToMain = () => new Promise((r) => setTimeout(r, 0));
-
-// ── Decode one frame → GPU-resident ImageBitmap ──────────────────────────────
-// Strategy 1: img.decode() — works everywhere (Chrome, Safari, Firefox, all Android)
-// Strategy 2: fetch + blob fallback — for any browser that fails img.decode()
-async function decodeBitmap(url, w, h) {
-  // Strategy 1: img.decode() — universal, no fetch needed
-  try {
-    const img = new Image();
-    img.src = url;
-    await img.decode(); // fully decoded before GPU upload
-    return await createImageBitmap(img, {
-      resizeWidth:   w,
-      resizeHeight:  h,
-      resizeQuality: "medium",
-    });
-  } catch (_) {
-    // Strategy 2: fetch → blob fallback
-    const blob = await (await fetch(url)).blob();
-    return await createImageBitmap(blob, {
-      resizeWidth:   w,
-      resizeHeight:  h,
-      resizeQuality: "medium",
-    });
-  }
-}
 
 // ─────────────────────────────────────────────────────────────────────────────
 // DEVICE PROFILER
-// Runs once. Determines the correct frame count, bitmap resolution, and
-// batch size for the current device. Mobile-first — never over-allocates.
 // ─────────────────────────────────────────────────────────────────────────────
 function getDeviceProfile() {
   const ua        = navigator.userAgent || "";
   const isIOS     = /iPhone|iPad|iPod/i.test(ua);
   const isAndroid = /Android/i.test(ua);
   const isMobile  = isIOS || isAndroid || window.innerWidth < 768;
+  const ram       = navigator.deviceMemory ?? 4;
+  const connType  = navigator.connection?.effectiveType ?? "4g";
+  const isSlow    = connType === "slow-2g" || connType === "2g" || connType === "3g";
 
-  // navigator.deviceMemory: 0.25 / 0.5 / 1 / 2 / 4 / 8 GB (undefined on Safari)
-  const ram      = navigator.deviceMemory ?? 4;
-  const connType = navigator.connection?.effectiveType ?? "4g";
-  const isSlow   = connType === "slow-2g" || connType === "2g" || connType === "3g";
-
-  // OffscreenCanvas — check properly, not just typeof
   const hasOffscreen = (() => {
     try { new OffscreenCanvas(1, 1).getContext("2d"); return true; }
     catch (_) { return false; }
   })();
 
-  // Frame stride — how many source frames to skip
-  // Desktop:           1  → 192 frames (buttery, every frame)
-  // Mobile high-end:   3  → 64 frames  (smooth)
-  // Mobile mid-range:  4  → 48 frames  (good)
-  // Mobile low-end / slow net: 6 → 32 frames (safe, no OOM)
+  // Worker count — mobile gets fewer to avoid RAM pressure
+  let workerCount;
+  if (!isMobile)                workerCount = Math.min(navigator.hardwareConcurrency || 4, 6);
+  else if (ram <= 2 || isSlow)  workerCount = 2;
+  else                          workerCount = Math.min(navigator.hardwareConcurrency || 2, 3);
+
+  // Frame stride
   let stride;
-  if (!isMobile)                      stride = 1;
-  else if (ram >= 4 && !isSlow)       stride = 3;
-  else if (ram >= 2)                  stride = 4;
-  else                                stride = 6;
+  if (!isMobile)                     stride = 1;
+  else if (ram >= 4 && !isSlow)      stride = 3;
+  else if (ram >= 2)                 stride = 4;
+  else                               stride = 6;
 
   // Bitmap resolution cap — THE most important memory protection
-  // Bitmaps are baked at this size; GPU never sees full 1920×1080 on mobile
-  const dpr  = Math.min(window.devicePixelRatio || 1, 2);
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
   let maxW, maxH;
-  if (!isMobile)            { maxW = 1920; maxH = 1080; }
-  else if (ram >= 2 && !isSlow) { maxW = 720;  maxH = 405;  }
-  else                      { maxW = 540;  maxH = 303;  }
+  if (!isMobile)                     { maxW = 1920; maxH = 1080; }
+  else if (ram >= 2 && !isSlow)      { maxW = 720;  maxH = 405;  }
+  else                               { maxW = 540;  maxH = 303;  }
 
   const bitmapW = Math.min(Math.round(window.innerWidth  * dpr), maxW);
   const bitmapH = Math.min(Math.round(window.innerHeight * dpr), maxH);
 
-  // Decode batch size — how many frames to decode before yielding to the browser.
-  // Smaller = more responsive during load but slightly slower total decode.
-  // Mobile gets smaller batches to keep touch and scroll responsive.
-  const batchSize = isMobile ? 4 : 8;
+  return { isMobile, isIOS, isAndroid, stride, bitmapW, bitmapH, workerCount, hasOffscreen };
+}
 
-  return { isMobile, isIOS, isAndroid, stride, bitmapW, bitmapH, batchSize, hasOffscreen };
+// ─────────────────────────────────────────────────────────────────────────────
+// WORKER POOL
+// Uses /frameWorker.js — served from 'self', passes any CSP.
+// ─────────────────────────────────────────────────────────────────────────────
+function createWorkerPool(size) {
+  // '/frameWorker.js' is served from your /public folder
+  // CSP: script-src 'self' allows this — it is NOT a blob: URL
+  const workers = Array.from({ length: size }, () => new Worker("/frameWorker.js"));
+
+  const pending = new Map();
+  const busy    = new Array(size).fill(false);
+  const queue   = [];
+  let   seq     = 0;
+
+  function drain() {
+    if (!queue.length) return;
+    const idx = busy.findIndex((b) => !b);
+    if (idx === -1) return;
+    const { task, resolve, reject } = queue.shift();
+    busy[idx] = true;
+    pending.set(task.id, { resolve, reject });
+    workers[idx].postMessage(task);
+  }
+
+  workers.forEach((w, i) => {
+    w.onmessage = ({ data }) => {
+      busy[i] = false;
+      const p = pending.get(data.id);
+      if (!p) return;
+      pending.delete(data.id);
+      data.ok ? p.resolve(data.bitmap) : p.reject(new Error(data.error));
+      drain();
+    };
+    w.onerror = (e) => {
+      busy[i] = false;
+      console.error("[frameWorker] error:", e);
+      drain();
+    };
+  });
+
+  return {
+    decode(url, w, h) {
+      const id = seq++;
+      return new Promise((resolve, reject) => {
+        queue.push({ task: { id, url, w, h }, resolve, reject });
+        drain();
+      });
+    },
+    terminate() {
+      workers.forEach((w) => w.terminate());
+    },
+  };
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
 // PRIORITY LOAD ORDER
-// Poster (0%) → keyframes at 25/50/75/100% → fill everything else
-// Means any scrub position has a nearby frame available immediately
+// Poster → 25% → 50% → 75% → 100% → fill everything in between
 // ─────────────────────────────────────────────────────────────────────────────
 function buildPriorityOrder(total) {
   const seen  = new Set();
@@ -109,7 +128,7 @@ function buildPriorityOrder(total) {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// MATH HELPERS
+// MATH
 // ─────────────────────────────────────────────────────────────────────────────
 function easeInOut(t) {
   return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
@@ -120,7 +139,6 @@ function clamp(v, lo, hi) {
 
 // ═════════════════════════════════════════════════════════════════════════════
 // useAppleScrollFrames
-// CSP-safe (no blob workers), works on all browsers, mobile-first.
 // ═════════════════════════════════════════════════════════════════════════════
 export function useAppleScrollFrames({
   sectionRef,
@@ -129,37 +147,30 @@ export function useAppleScrollFrames({
   totalFrames = 192,
   framePath = (i) => `/hero-frames/frame_${String(i).padStart(4, "0")}.webp`,
 }) {
-  // ── Bitmap store
   const cache     = useRef([]);
-  const cacheSize = useRef(0); // highest consecutive loaded slot — rAF reads this
+  const cacheSize = useRef(0);
 
-  // ── OffscreenCanvas double-buffer (atomic frame flip, prevents tearing)
   const offscreen = useRef(null);
   const offCtx    = useRef(null);
   const mainCtx   = useRef(null);
 
-  // ── rAF
   const rafId    = useRef(null);
-  const rafReady = useRef(false); // true after poster frame is drawn
+  const rafReady = useRef(false);
   const curFrame = useRef(-1);
   const dirty    = useRef(false);
 
-  // ── Scroll velocity prediction (5-sample ring buffer)
-  const velBuf = useRef([]);
+  const velBuf = useRef([]); // scroll velocity ring buffer
 
-  // ── Visibility guards — pause rAF when not needed
   const pageVisible = useRef(true);
   const inView      = useRef(true);
 
-  // ── Scroll geometry
   const sectionTop   = useRef(0);
   const scrollHeight = useRef(0);
 
   const [isFullyLoaded, setIsFullyLoaded] = useState(false);
 
-  // ─────────────────────────────────────────────────────────────────────────
-  // Helpers
-  // ─────────────────────────────────────────────────────────────────────────
+  // ── Helpers ────────────────────────────────────────────────────────────────
+
   function syncGeometry() {
     const s = sectionRef.current;
     if (!s) return;
@@ -174,13 +185,12 @@ export function useAppleScrollFrames({
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
     const pw  = Math.round(c.offsetWidth  * dpr);
     const ph  = Math.round(c.offsetHeight * dpr);
-    if (c.width === pw && c.height === ph) return; // no change
+    if (c.width === pw && c.height === ph) return;
 
     c.width  = pw;
     c.height = ph;
     mainCtx.current = c.getContext("2d", { alpha: false });
 
-    // Rebuild offscreen buffer at new canvas size
     if (offscreen.current) {
       try {
         offscreen.current = new OffscreenCanvas(pw, ph);
@@ -193,16 +203,13 @@ export function useAppleScrollFrames({
     dirty.current = true;
   }
 
-  // ─────────────────────────────────────────────────────────────────────────
-  // drawFrame — double-buffered on supported browsers, direct on others
-  // ─────────────────────────────────────────────────────────────────────────
+  // ── drawFrame — double-buffered atomic blit ────────────────────────────────
   function drawFrame(idx) {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = mainCtx.current;
     if (!ctx) return;
 
-    // Find best available bitmap — nearest loaded neighbour if exact not ready
     const len = cache.current.length;
     let bm    = (len > 0 && idx < len) ? (cache.current[idx] ?? null) : null;
     if (!bm) {
@@ -223,18 +230,14 @@ export function useAppleScrollFrames({
     const oc  = offCtx.current;
 
     if (off && oc && off.width === cw && off.height === ch) {
-      // Double-buffer: draw offscreen first, then blit atomically
       oc.drawImage(bm, dx, dy, dw, dh);
       ctx.drawImage(off, 0, 0);
     } else {
-      // Direct draw (OffscreenCanvas unavailable — older Safari / Firefox)
       ctx.drawImage(bm, dx, dy, dw, dh);
     }
   }
 
-  // ─────────────────────────────────────────────────────────────────────────
-  // rAF loop — velocity prediction + dirty-flag draw
-  // ─────────────────────────────────────────────────────────────────────────
+  // ── rAF loop ───────────────────────────────────────────────────────────────
   function startRaf() {
     if (rafId.current) cancelAnimationFrame(rafId.current);
 
@@ -244,9 +247,7 @@ export function useAppleScrollFrames({
       if (!rafReady.current || !pageVisible.current || !inView.current) return;
       if (cacheSize.current === 0) return;
 
-      // ── Velocity prediction: 1-frame lookahead ───────────────────────────
-      // Ring-buffer last 5 scroll positions + timestamps.
-      // Extrapolate 16.67ms forward so canvas matches where the finger WILL be.
+      // Velocity prediction — 1 frame lookahead eliminates scroll lag
       const now = performance.now();
       const vb  = velBuf.current;
       vb.push({ y: window.scrollY, t: now });
@@ -261,7 +262,6 @@ export function useAppleScrollFrames({
         }
       }
 
-      // ── Map scroll position → frame index ────────────────────────────────
       const sh  = scrollHeight.current;
       const raw = sh > 0 ? clamp((predictedY - sectionTop.current) / sh, 0, 1) : 0;
       const idx = clamp(
@@ -275,7 +275,6 @@ export function useAppleScrollFrames({
         dirty.current    = true;
       }
 
-      // Only call drawImage when frame actually changes — zero GPU work at rest
       if (dirty.current) {
         dirty.current = false;
         drawFrame(curFrame.current);
@@ -285,11 +284,8 @@ export function useAppleScrollFrames({
     rafId.current = requestAnimationFrame(tick);
   }
 
-  // ─────────────────────────────────────────────────────────────────────────
-  // Effects
-  // ─────────────────────────────────────────────────────────────────────────
+  // ── Effects ────────────────────────────────────────────────────────────────
 
-  // Page visibility — pause rAF when tab is backgrounded (saves battery/GPU)
   useEffect(() => {
     if (reducedMotion) return;
     const h = () => { pageVisible.current = document.visibilityState === "visible"; };
@@ -297,7 +293,6 @@ export function useAppleScrollFrames({
     return () => document.removeEventListener("visibilitychange", h);
   }, [reducedMotion]);
 
-  // ResizeObserver — keep canvas pixel size + scroll geometry accurate
   useEffect(() => {
     if (reducedMotion) return;
     const section = sectionRef.current;
@@ -306,20 +301,17 @@ export function useAppleScrollFrames({
     const ro = new ResizeObserver(() => { syncCanvas(); syncGeometry(); });
     ro.observe(section);
     ro.observe(canvas);
-    syncCanvas();   // must run synchronously before first draw
-    syncGeometry(); // must run synchronously before first scroll tick
+    syncCanvas();
+    syncGeometry();
     return () => ro.disconnect();
   }, [reducedMotion]);
 
-  // Passive scroll listener — keeps sectionTop stale-free every tick
-  // ResizeObserver alone misses scroll-driven layout shifts
   useEffect(() => {
     if (reducedMotion) return;
     window.addEventListener("scroll", syncGeometry, { passive: true });
     return () => window.removeEventListener("scroll", syncGeometry);
   }, [reducedMotion]);
 
-  // IntersectionObserver — pause rAF when hero is off-screen
   useEffect(() => {
     const s = sectionRef.current;
     if (!s) return;
@@ -331,20 +323,16 @@ export function useAppleScrollFrames({
     return () => io.disconnect();
   }, []);
 
-  // ─────────────────────────────────────────────────────────────────────────
-  // Main load effect
-  // ─────────────────────────────────────────────────────────────────────────
+  // ── Main load ──────────────────────────────────────────────────────────────
   useEffect(() => {
     if (reducedMotion) return;
 
     const profile = getDeviceProfile();
 
-    // Build the frame list for this device
     const frames = [];
     for (let i = 1; i <= totalFrames; i += profile.stride) frames.push(i);
     const total = frames.length;
 
-    // Reset all state
     cache.current      = new Array(total).fill(null);
     cacheSize.current  = 0;
     curFrame.current   = -1;
@@ -355,31 +343,30 @@ export function useAppleScrollFrames({
     offCtx.current     = null;
     mainCtx.current    = null;
 
+    // Absolute URLs — workers need them (relative paths fail in worker scope)
+    const abs = (path) => new URL(path, window.location.href).href;
+
+    const pool = createWorkerPool(profile.workerCount);
     let cancelled = false;
 
-    startRaf(); // starts idle — activates when rafReady flips true
+    startRaf();
 
     async function load() {
-      // ── PHASE 1: Poster frame ─────────────────────────────────────────────
-      // Load frame 1, draw it immediately, then unlock scroll animation.
-      // User can interact from this point — everything else loads behind them.
+      // ── Phase 1: Poster frame — unlock animation immediately ──────────────
       try {
-        const bm = await decodeBitmap(
-          framePath(frames[0]),
+        const bm = await pool.decode(
+          abs(framePath(frames[0])),
           profile.bitmapW,
           profile.bitmapH
         );
         if (cancelled) { bm?.close(); return; }
 
-        // Canvas must be correctly sized before first draw
         syncCanvas();
         syncGeometry();
 
         const c = canvasRef.current;
         if (c) {
           mainCtx.current = c.getContext("2d", { alpha: false });
-
-          // Init offscreen buffer only if device supports it safely
           if (profile.hasOffscreen) {
             try {
               offscreen.current = new OffscreenCanvas(c.width, c.height);
@@ -395,62 +382,39 @@ export function useAppleScrollFrames({
         cacheSize.current = 1;
         curFrame.current  = 0;
         dirty.current     = true;
-        drawFrame(0); // immediate poster draw
+        drawFrame(0);
 
-        // ✅ Scroll animation is live from this exact point
+        // ✅ Animation is live — user can scroll now
         rafReady.current = true;
 
       } catch (e) {
         console.error("[hero] poster frame failed:", e);
-        if (!cancelled) rafReady.current = true; // unlock anyway
+        if (!cancelled) rafReady.current = true;
       }
 
-      // ── PHASE 2: Remaining frames in priority order ───────────────────────
-      // Decode in small batches, yielding to the browser between each batch.
-      // Nearest-neighbour fallback in drawFrame covers any gaps during loading.
-      // Priority order: keyframes at 25/50/75/100% first, then fill in between.
-      const order = buildPriorityOrder(total).slice(1); // slot 0 already done
+      // ── Phase 2: All remaining frames in priority order ───────────────────
+      // Workers decode concurrently (profile.workerCount at a time).
+      // Slots fill in as they arrive — nearest-neighbour covers gaps.
+      const order = buildPriorityOrder(total).slice(1);
 
-      for (let b = 0; b < order.length; b += profile.batchSize) {
-        if (cancelled) break;
+      await Promise.all(
+        order.map((slotIdx) =>
+          pool
+            .decode(abs(framePath(frames[slotIdx])), profile.bitmapW, profile.bitmapH)
+            .then((bm) => {
+              if (cancelled) { bm?.close(); return; }
+              cache.current[slotIdx] = bm;
 
-        const batch = order.slice(b, b + profile.batchSize);
+              // Advance cacheSize through consecutive loaded slots
+              let s = cacheSize.current;
+              while (s < total && cache.current[s] != null) s++;
+              cacheSize.current = s;
 
-        // Decode this batch in parallel
-        const results = await Promise.allSettled(
-          batch.map((slotIdx) =>
-            decodeBitmap(
-              framePath(frames[slotIdx]),
-              profile.bitmapW,
-              profile.bitmapH
-            ).then((bm) => ({ slotIdx, bm }))
-          )
-        );
-
-        if (cancelled) {
-          results.forEach((r) => r.status === "fulfilled" && r.value?.bm?.close());
-          break;
-        }
-
-        // Write successful bitmaps into the cache
-        results.forEach((r) => {
-          if (r.status === "fulfilled" && r.value?.bm) {
-            const { slotIdx, bm } = r.value;
-            cache.current[slotIdx] = bm;
-          }
-        });
-
-        // Advance cacheSize to the highest consecutive loaded slot
-        // This is what rAF reads — it must only advance forward, never jump
-        let s = cacheSize.current;
-        while (s < total && cache.current[s] != null) s++;
-        cacheSize.current = s;
-
-        dirty.current = true; // repaint on next rAF tick
-
-        // Yield to browser — allows scroll, touch, and paint between batches
-        await yieldToMain();
-      }
+              dirty.current = true;
+            })
+            .catch(() => {})
+        )
+      );
 
       if (!cancelled) {
         cacheSize.current = total;
@@ -467,7 +431,7 @@ export function useAppleScrollFrames({
       offCtx.current    = null;
       mainCtx.current   = null;
       if (rafId.current) cancelAnimationFrame(rafId.current);
-      // Free all bitmaps from GPU memory — critical on mobile
+      pool.terminate();
       cache.current.forEach((bm) => bm?.close());
       cache.current     = [];
       cacheSize.current = 0;
