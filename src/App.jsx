@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useState, useEffect } from 'react';
+import React, { lazy, Suspense, useState, useEffect, useRef, useCallback } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { LazyMotion, domAnimation } from 'framer-motion';
@@ -34,30 +34,37 @@ const CareerSupport = lazy(() => import('./pages/career-support/CareerSupport'))
 const Sitemap = lazy(() => import('./pages/Sitemap'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
-// Full-screen preloader — only shows on first load / refresh
+// Full-screen preloader — waits for hero frames to fully load before dismissing.
+// Stays visible for a minimum of 1.5 s so it doesn't flash on fast connections.
 function AppPreloader({ onReady }) {
   const [visible, setVisible] = useState(() => !window.__appPreloaderShown);
   const [fadeOut, setFadeOut] = useState(false);
+  const mountTime = useRef(Date.now());
 
   useEffect(() => {
     if (window.__appPreloaderShown) {
-      if (onReady) onReady();
+      onReady?.();
       return;
     }
+  }, []);
 
-    // Show briefly on first load, then fade out
-    const timer = setTimeout(() => {
+  // Called by CoreSpinLoader once hero frame progress reaches 100 %
+  const handleLoaderComplete = useCallback(() => {
+    if (window.__appPreloaderShown) return; // guard against double-fire
+
+    const elapsed = Date.now() - mountTime.current;
+    const remaining = Math.max(0, 1500 - elapsed); // min 1.5 s display
+
+    setTimeout(() => {
       setFadeOut(true);
       window.__appPreloaderShown = true;
-      // Remove from DOM after fade animation
+      // Remove from DOM after the 500 ms fade-out transition
       setTimeout(() => {
         setVisible(false);
-        if (onReady) onReady();
+        onReady?.();
       }, 500);
-    }, 900);
-
-    return () => clearTimeout(timer);
-  }, []);
+    }, remaining);
+  }, [onReady]);
 
   if (!visible) return null;
 
@@ -65,7 +72,7 @@ function AppPreloader({ onReady }) {
     <div
       className={`fixed inset-0 z-[9999] flex items-center justify-center bg-[var(--bg-body)] transition-opacity duration-500 ${fadeOut ? 'opacity-0' : 'opacity-100'}`}
     >
-      <CoreSpinLoader />
+      <CoreSpinLoader onComplete={handleLoaderComplete} />
     </div>
   );
 }

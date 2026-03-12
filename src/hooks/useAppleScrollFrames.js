@@ -38,12 +38,14 @@ export function useAppleScrollFrames({
   reducedMotion,
   totalFrames = 192,
   framePath = (i) => `/hero-frames/frame_${String(i).padStart(4, "0")}.webp`,
+  onFirstFrame,
 }) {
   const ctxRef = useRef(null);
   const rafId = useRef(null);
   const curFrame = useRef(-1);
   const canvasW = useRef(0);
   const canvasH = useRef(0);
+  const firedFirstFrame = useRef(false);
 
   const pageVisible = useRef(true);
   const inView = useRef(true);
@@ -192,7 +194,7 @@ export function useAppleScrollFrames({
     return () => io.disconnect();
   }, []);
 
-  // ── Main effect: start animation loop, draw poster frame ──────────────
+  // ── Main effect: start animation loop, warm pipeline, draw poster ────
   useEffect(() => {
     if (reducedMotion) return;
 
@@ -206,25 +208,40 @@ export function useAppleScrollFrames({
     }
 
     curFrame.current = -1;
+    firedFirstFrame.current = false;
     startRaf();
 
-    // Draw poster frame as soon as available
+    // Helper: draw poster and signal readiness once
     const cache = getHeroCache();
-    const checkPoster = () => {
+    const tryDrawPoster = () => {
       if (cache.bitmaps[0]) {
         drawFrame(0);
         curFrame.current = 0;
+        if (!firedFirstFrame.current) {
+          firedFirstFrame.current = true;
+          onFirstFrame?.();
+        }
+        return true;
       }
+      return false;
     };
-    checkPoster();
+
+    // ── Warm the canvas render pipeline ──
+    // Double-rAF forces the browser to allocate GPU memory and initialize
+    // the compositing / drawImage path before the user ever scrolls.
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        syncCanvas();
+        tryDrawPoster();
+      });
+    });
+
+    // Attempt immediate poster draw (may already be cached from preload)
+    tryDrawPoster();
 
     // Poll for poster frame if not immediately available
     const posterInterval = setInterval(() => {
-      if (cache.bitmaps[0]) {
-        drawFrame(0);
-        curFrame.current = 0;
-        clearInterval(posterInterval);
-      }
+      if (tryDrawPoster()) clearInterval(posterInterval);
     }, 50);
 
     // Subscribe to fully-loaded state

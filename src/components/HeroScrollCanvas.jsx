@@ -108,6 +108,7 @@ const HeroScrollCanvas = ({ badge, subtitle, children }) => {
   const sectionRef    = useRef(null);
   const canvasRef     = useRef(null);
   const reducedMotion = useReducedMotion();
+  const [heroReady, setHeroReady] = useState(false);
 
   // Check browser capability once — avoids trying to run canvas on ancient devices
   const [canAnimate]  = useState(() => canRunAnimation());
@@ -119,6 +120,7 @@ const HeroScrollCanvas = ({ badge, subtitle, children }) => {
     reducedMotion: !shouldAnimate, // disables hook entirely if can't animate
     totalFrames: TOTAL_FRAMES,
     framePath,
+    onFirstFrame: () => setHeroReady(true),
   });
 
   const anim = (delay) =>
@@ -245,6 +247,8 @@ const HeroScrollCanvas = ({ badge, subtitle, children }) => {
                 zIndex:0, backgroundColor:"#010408",
                 pointerEvents:"none",
                 willChange:"contents",
+                opacity: heroReady ? 1 : 0,
+                transition: "opacity 0.4s ease",
               }}
             />
           )}
