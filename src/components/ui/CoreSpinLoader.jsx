@@ -1,22 +1,31 @@
 // src/components/CoreSpinLoader.jsx
-import React, { useState, useEffect } from 'react';
-import { subscribeToHeroProgress } from "../../utils/heroFrameCache";
+import React, { useState, useEffect, useRef } from 'react';
 
 export function CoreSpinLoader({ onComplete }) {
   const [loadingText, setLoadingText] = useState('Booting Neural Core');
   const [progress, setProgress]       = useState(0); // 0–1
+  const startTime = useRef(Date.now());
 
-  // ── Hero frame loading progress ──────────────────────────────────────────
+  // ── Simulated progress — smooth 0→1 over ~2 s ────────────────────────────
   useEffect(() => {
-    const unsub = subscribeToHeroProgress((loaded, total) => {
-      const pct = total > 0 ? loaded / total : 0;
+    const DURATION = 2000; // ms
+    let rafId;
+
+    function tick() {
+      const elapsed = Date.now() - startTime.current;
+      const pct = Math.min(elapsed / DURATION, 1);
       setProgress(pct);
-    });
-    return unsub;
+
+      if (pct < 1) {
+        rafId = requestAnimationFrame(tick);
+      }
+    }
+
+    rafId = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(rafId);
   }, []);
 
-  // ── Text cycling — driven by frame progress, not a timer ─────────────────
-  // Text advances with actual load state so it reflects real progress
+  // ── Text cycling — driven by progress ─────────────────────────────────────
   useEffect(() => {
     const states = [
       'Booting Neural Core',
@@ -27,7 +36,6 @@ export function CoreSpinLoader({ onComplete }) {
       'AI Engine Ready.',
     ];
 
-    // Map progress 0–1 to text index
     const idx = Math.min(
       Math.floor(progress * states.length),
       states.length - 1
@@ -35,9 +43,7 @@ export function CoreSpinLoader({ onComplete }) {
     setLoadingText(states[idx]);
   }, [progress]);
 
-  // ── Dismiss when hero is fully loaded ────────────────────────────────────
-  // Minimum 1.5s so the preloader doesn't flash and disappear instantly
-  // on fast connections. On slow connections it stays until frames are ready.
+  // ── Dismiss when progress reaches 100 % ───────────────────────────────────
   useEffect(() => {
     if (progress < 1) return;
     const t = setTimeout(() => { onComplete?.(); }, 300);
@@ -101,7 +107,7 @@ export function CoreSpinLoader({ onComplete }) {
           {loadingText}
         </span>
 
-        {/* Progress bar — shows real frame loading progress */}
+        {/* Progress bar */}
         <div style={{
           width: 120,
           height: 2,

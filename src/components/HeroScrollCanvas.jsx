@@ -1,9 +1,15 @@
-import React, { useRef, useEffect, useState } from "react";
-import { useAppleScrollFrames } from "../hooks/useAppleScrollFrames";
+import React, { useState, useEffect, useRef } from "react";
 
-const TOTAL_FRAMES  = 192;
-const SCROLL_HEIGHT = "500vh";
-const framePath = (i) => `/hero-frames/frame_${String(i).padStart(4, "0")}.webp`;
+// ── Device-adaptive video source ────────────────────────────────────────────
+// Mobile (< 768px or touch device) → 640×360, ~1.6 MB
+// Desktop                          → 1280×720, ~6.3 MB
+function getHeroVideoSrc() {
+  if (typeof window === "undefined") return "/hero_desktop.mp4";
+  const ua = navigator.userAgent || "";
+  const isMobile =
+    /iPhone|iPad|iPod|Android/i.test(ua) || window.innerWidth < 768;
+  return isMobile ? "/hero_mobile.mp4" : "/hero_desktop.mp4";
+}
 
 function useReducedMotion() {
   const [reduced, setReduced] = useState(false);
@@ -15,9 +21,7 @@ function useReducedMotion() {
   return reduced;
 }
 
-// Shown on devices that can't run the canvas animation:
-// - prefers-reduced-motion
-// - Very old browsers with no Worker / createImageBitmap support
+// Shown on devices that prefer reduced motion
 function StaticHeroFallback() {
   return (
     <div style={{
@@ -31,16 +35,6 @@ function StaticHeroFallback() {
       />
     </div>
   );
-}
-
-// Detect if the browser can run the canvas animation.
-// Only requires canvas 2D context — no Workers needed.
-function canRunAnimation() {
-  try {
-    return !!document.createElement("canvas").getContext("2d");
-  } catch (_) {
-    return false;
-  }
 }
 
 function GrainOverlay() {
@@ -73,58 +67,27 @@ function ScanlineOverlay() {
   );
 }
 
-function ScrollIndicator({ sectionRef }) {
-  const trackRef = useRef(null);
-  useEffect(() => {
-    const track   = trackRef.current;
-    const section = sectionRef.current;
-    if (!track || !section) return;
-    const update = () => {
-      const rect = section.getBoundingClientRect();
-      const sh   = section.offsetHeight - window.innerHeight;
-      if (sh <= 0) return;
-      const p = Math.max(0, Math.min(1, (window.scrollY - (rect.top + window.scrollY)) / sh));
-      track.style.transform = `scaleY(${p})`;
-    };
-    window.addEventListener("scroll", update, { passive: true });
-    update();
-    return () => window.removeEventListener("scroll", update);
-  }, [sectionRef]);
-
-  return (
-    <div className="hero-scroll-indicator">
-      <div ref={trackRef} style={{
-        position:"absolute", inset:0,
-        background:"linear-gradient(180deg, #d64fd9, #b833bb)",
-        transformOrigin:"top center", transform:"scaleY(0)",
-        borderRadius:"1px", boxShadow:"0 0 6px rgba(214,79,217,0.6)",
-      }}/>
-    </div>
-  );
-}
-
 // ═════════════════════════════════════════════════════════════════════════════
 const HeroScrollCanvas = ({ badge, subtitle, children }) => {
-  const sectionRef    = useRef(null);
-  const canvasRef     = useRef(null);
   const reducedMotion = useReducedMotion();
-  const [heroReady, setHeroReady] = useState(false);
+  const [videoSrc]    = useState(() => getHeroVideoSrc());
+  const [videoReady, setVideoReady] = useState(false);
+  const videoRef      = useRef(null);
 
-  // Check browser capability once — avoids trying to run canvas on ancient devices
-  const [canAnimate]  = useState(() => canRunAnimation());
-  const shouldAnimate = canAnimate && !reducedMotion;
-
-  const { isFullyLoaded } = useAppleScrollFrames({
-    sectionRef,
-    canvasRef,
-    reducedMotion: !shouldAnimate, // disables hook entirely if can't animate
-    totalFrames: TOTAL_FRAMES,
-    framePath,
-    onFirstFrame: () => setHeroReady(true),
-  });
+  // Pause video when tab is hidden to save battery & CPU
+  useEffect(() => {
+    const handleVisibility = () => {
+      const video = videoRef.current;
+      if (!video) return;
+      if (document.hidden) video.pause();
+      else video.play().catch(() => {});
+    };
+    document.addEventListener("visibilitychange", handleVisibility);
+    return () => document.removeEventListener("visibilitychange", handleVisibility);
+  }, []);
 
   const anim = (delay) =>
-    !shouldAnimate ? "none" : `fadeSlideUp 0.9s cubic-bezier(.16,1,.3,1) ${delay} both`;
+    reducedMotion ? "none" : `fadeSlideUp 0.9s cubic-bezier(.16,1,.3,1) ${delay} both`;
 
   return (
     <>
@@ -192,11 +155,6 @@ const HeroScrollCanvas = ({ badge, subtitle, children }) => {
           white-space:nowrap; cursor:pointer; background:transparent;
         }
         .hero-btn-ghost:hover { background:rgba(214,79,217,0.1); border-color:rgba(214,79,217,0.5); }
-        .hero-scroll-indicator {
-          position:absolute; right:24px; top:50%; transform:translateY(-50%);
-          width:2px; height:120px; background:rgba(255,255,255,0.12);
-          z-index:20; border-radius:1px;
-        }
         .hero-mobile-overlay {
           display:none; position:absolute; inset:0; z-index:6; pointer-events:none;
           background:linear-gradient(to right,rgba(4,6,12,0.92) 0%,rgba(4,6,12,0.70) 50%,transparent 100%);
@@ -204,7 +162,6 @@ const HeroScrollCanvas = ({ badge, subtitle, children }) => {
         @media (max-width:1024px) { .hero-h1 { font-size:clamp(2.1rem,6vw,3.6rem); } }
         @media (max-width:768px) {
           .hero-mobile-overlay { display:block; }
-          .hero-scroll-indicator { display:none; }
           .hero-content-wrap { justify-content:flex-end; padding:64px 1.25rem 1.75rem; }
           .hero-eyebrow { font-size:0.58rem; margin-bottom:0.5rem; }
           .hero-h1 { font-size:clamp(1.9rem,9.5vw,2.6rem); line-height:1.02; margin-bottom:0.6rem; }
@@ -221,113 +178,124 @@ const HeroScrollCanvas = ({ badge, subtitle, children }) => {
 
       <section
         id="hero-section"
-        ref={sectionRef}
-        aria-label="Hero animation section"
+        aria-label="Hero section"
         style={{
-          position:"relative", height:SCROLL_HEIGHT,
-          backgroundColor:"#010408", margin:0, padding:0, overflow:"visible",
+          position: "relative",
+          height: "100dvh", 
+          minHeight: "600px",
+          backgroundColor: "#010408", 
+          margin: 0, 
+          padding: 0, 
+          overflow: "hidden",
+          display: "flex", 
+          flexDirection: "column",
         }}
       >
-        <div style={{
-          position:"sticky", top:0, left:0, right:0,
-          height:"100dvh", width:"100%",
-          overflow:"hidden", display:"flex", flexDirection:"column",
-        }}>
-          {/* Static fallback — shown when animation can't run */}
-          {!shouldAnimate && <StaticHeroFallback />}
+        {/* Static fallback — shown when user prefers reduced motion */}
+        {reducedMotion && <StaticHeroFallback />}
 
-          {/* Canvas — shown when animation is running */}
-          {shouldAnimate && (
-            <canvas
-              ref={canvasRef}
-              aria-hidden="true"
-              style={{
-                position:"absolute", inset:0,
-                width:"100%", height:"100%",
-                zIndex:0, backgroundColor:"#010408",
-                pointerEvents:"none",
-                willChange:"contents",
-                opacity: heroReady ? 1 : 0,
-                transition: "opacity 0.4s ease",
-              }}
-            />
-          )}
+        {/* Video — autoplaying background loop */}
+        {!reducedMotion && (
+          <video
+            ref={videoRef}
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="metadata"
+            disablePictureInPicture
+            poster="/hero-frames/frame_0001.webp"
+            onLoadedData={() => setVideoReady(true)}
+            aria-hidden="true"
+            style={{
+              position:"absolute", inset:0,
+              width:"100%", height:"100%",
+              objectFit:"cover",
+              zIndex:0, backgroundColor:"#010408",
+              pointerEvents:"none",
+              /* smooth GPU rendering */
+              transform: "translateZ(0)",
+              willChange: "transform",
+              opacity: videoReady ? 1 : 0,
+              transition: "opacity 0.6s ease",
+            }}
+          >
+            <source src={videoSrc} type="video/mp4" />
+          </video>
+        )}
 
-          <GrainOverlay />
-          <VignetteOverlay />
-          <ScanlineOverlay />
-          <div className="hero-mobile-overlay" aria-hidden="true" />
+        <GrainOverlay />
+        <VignetteOverlay />
+        <ScanlineOverlay />
+        <div className="hero-mobile-overlay" aria-hidden="true" />
 
-          <div className="hero-content-wrap">
-            <div className="hero-eyebrow" style={{ animation:anim("0.1s") }}>
-              <span style={{
-                width:24, height:1, flexShrink:0, display:"inline-block",
-                background:"linear-gradient(90deg,#d64fd9,#b833bb)",
-              }}/>
-              {badge || "Built for the AI Era"}
-            </div>
-
-            <h1 className="hero-h1" style={{ animation:anim("0.25s") }}>
-              Dominate<br/>
-              with{" "}
-              <span style={{
-                backgroundImage:"linear-gradient(110deg,#d64fd9,#b833bb)",
-                WebkitBackgroundClip:"text",
-                WebkitTextFillColor:"transparent",
-                backgroundClip:"text",
-              }}>Intelligence.</span>
-              <br/>
-              <span style={{
-                WebkitTextStroke:"1.5px rgba(245,240,234,0.3)",
-                WebkitTextFillColor:"transparent",
-                color:"transparent",
-              }}>Lead Without</span>
-              <br/>Limits.
-            </h1>
-
-            <p className="hero-sub" style={{ animation:anim("0.4s") }}>{subtitle}</p>
-
-            <div className="hero-cta-row" style={{ animation:anim("0.55s") }}>
-              {children}
-            </div>
-
-            <div style={{
-              marginTop:"0.85rem",
-              display:"flex", flexWrap:"wrap",
-              gap:"0.75rem", alignItems:"center",
-              fontFamily:"'DM Mono',monospace",
-              fontSize:"0.65rem", letterSpacing:"0.12em",
-              animation:anim("0.65s"),
-            }}>
-              <span>⭐ 4.9 Student Rating</span>
-              <span style={{opacity:0.4}}>•</span>
-              <span>1200+ Students Trained</span>
-              <span style={{opacity:0.4}}>•</span>
-              <span>Hiring Partners: TCS, Infosys</span>
-            </div>
-
-            <div style={{
-              marginTop:"1.2rem",
-              display:"flex", alignItems:"center", gap:"0.5rem",
-              opacity:0,
-              animation: !shouldAnimate
-                ? "none"
-                : "fadeSlideUp 0.8s ease 0.9s both, scrollHintBob 2s ease-in-out infinite 2s",
-            }}>
-              <div style={{
-                width:1, height:32, flexShrink:0,
-                background:"linear-gradient(to bottom,#d64fd9,transparent)",
-              }}/>
-              <span style={{
-                fontFamily:"'DM Mono',monospace",
-                fontSize:"0.58rem", letterSpacing:"0.22em",
-                textTransform:"uppercase",
-                color:"var(--color-brand-highlight)",
-              }}>Scroll to explore</span>
-            </div>
+        <div className="hero-content-wrap">
+          <div className="hero-eyebrow" style={{ animation:anim("0.1s") }}>
+            <span style={{
+              width:24, height:1, flexShrink:0, display:"inline-block",
+              background:"linear-gradient(90deg,#d64fd9,#b833bb)",
+            }}/>
+            {badge || "Built for the AI Era"}
           </div>
 
-          {shouldAnimate && <ScrollIndicator sectionRef={sectionRef} />}
+          <h1 className="hero-h1" style={{ animation:anim("0.25s") }}>
+            Dominate<br/>
+            with{" "}
+            <span style={{
+              backgroundImage:"linear-gradient(110deg,#d64fd9,#b833bb)",
+              WebkitBackgroundClip:"text",
+              WebkitTextFillColor:"transparent",
+              backgroundClip:"text",
+            }}>Intelligence.</span>
+            <br/>
+            <span style={{
+              WebkitTextStroke:"1.5px rgba(245,240,234,0.3)",
+              WebkitTextFillColor:"transparent",
+              color:"transparent",
+            }}>Lead Without</span>
+            <br/>Limits.
+          </h1>
+
+          <p className="hero-sub" style={{ animation:anim("0.4s") }}>{subtitle}</p>
+
+          <div className="hero-cta-row" style={{ animation:anim("0.55s") }}>
+            {children}
+          </div>
+
+          <div style={{
+            marginTop:"0.85rem",
+            display:"flex", flexWrap:"wrap",
+            gap:"0.75rem", alignItems:"center",
+            fontFamily:"'DM Mono',monospace",
+            fontSize:"0.65rem", letterSpacing:"0.12em",
+            animation:anim("0.65s"),
+          }}>
+            <span>⭐ 4.9 Student Rating</span>
+            <span style={{opacity:0.4}}>•</span>
+            <span>1200+ Students Trained</span>
+            <span style={{opacity:0.4}}>•</span>
+            <span>Hiring Partners: TCS, Infosys</span>
+          </div>
+
+          <div style={{
+            marginTop:"1.2rem",
+            display:"flex", alignItems:"center", gap:"0.5rem",
+            opacity:0,
+            animation: reducedMotion
+              ? "none"
+              : "fadeSlideUp 0.8s ease 0.9s both, scrollHintBob 2s ease-in-out infinite 2s",
+          }}>
+            <div style={{
+              width:1, height:32, flexShrink:0,
+              background:"linear-gradient(to bottom,#d64fd9,transparent)",
+            }}/>
+            <span style={{
+              fontFamily:"'DM Mono',monospace",
+              fontSize:"0.58rem", letterSpacing:"0.22em",
+              textTransform:"uppercase",
+              color:"var(--color-brand-highlight)",
+            }}>Scroll to explore</span>
+          </div>
         </div>
       </section>
     </>

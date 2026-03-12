@@ -1,6 +1,3 @@
-import { startHeroPreload } from './utils/heroFrameCache';
-startHeroPreload(); // decode frames before React boots
-
 import { StrictMode } from 'react'
 import { createRoot, hydrateRoot } from 'react-dom/client'
 import { HelmetProvider } from 'react-helmet-async';

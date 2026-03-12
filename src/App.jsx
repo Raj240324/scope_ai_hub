@@ -34,12 +34,11 @@ const CareerSupport = lazy(() => import('./pages/career-support/CareerSupport'))
 const Sitemap = lazy(() => import('./pages/Sitemap'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
-// Full-screen preloader — waits for hero frames to fully load before dismissing.
-// Stays visible for a minimum of 1.5 s so it doesn't flash on fast connections.
+// Full-screen preloader — shows for ~2 s on first visit, then fades out.
+// No longer gated on hero frame loading — video loads independently.
 function AppPreloader({ onReady }) {
   const [visible, setVisible] = useState(() => !window.__appPreloaderShown);
   const [fadeOut, setFadeOut] = useState(false);
-  const mountTime = useRef(Date.now());
 
   useEffect(() => {
     if (window.__appPreloaderShown) {
@@ -48,22 +47,17 @@ function AppPreloader({ onReady }) {
     }
   }, []);
 
-  // Called by CoreSpinLoader once hero frame progress reaches 100 %
+  // Called by CoreSpinLoader once its simulated progress reaches 100 %
   const handleLoaderComplete = useCallback(() => {
-    if (window.__appPreloaderShown) return; // guard against double-fire
+    if (window.__appPreloaderShown) return;
 
-    const elapsed = Date.now() - mountTime.current;
-    const remaining = Math.max(0, 1500 - elapsed); // min 1.5 s display
-
+    setFadeOut(true);
+    window.__appPreloaderShown = true;
+    // Remove from DOM after the 500 ms fade-out transition
     setTimeout(() => {
-      setFadeOut(true);
-      window.__appPreloaderShown = true;
-      // Remove from DOM after the 500 ms fade-out transition
-      setTimeout(() => {
-        setVisible(false);
-        onReady?.();
-      }, 500);
-    }, remaining);
+      setVisible(false);
+      onReady?.();
+    }, 500);
   }, [onReady]);
 
   if (!visible) return null;
