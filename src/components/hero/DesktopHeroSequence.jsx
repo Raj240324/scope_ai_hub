@@ -128,8 +128,11 @@ const DesktopHeroSequence = () => {
       if (progress < 0) progress = 0;
       if (progress > 1) progress = 1;
 
+      // Apple-style cinematic ease:
+      const eased = progress * progress * (3 - 2 * progress);
+
       // Smooth easing maps progress [0..1] -> [1..192]
-      let frameIndex = Math.floor(progress * (TOTAL_FRAMES - 1)) + 1;
+      let frameIndex = Math.floor(eased * (TOTAL_FRAMES - 1)) + 1;
       frameIndex = Math.max(1, Math.min(TOTAL_FRAMES, frameIndex)); // Safe precision clamp
 
       if (frameIndex !== frameIndexRef.current) {
