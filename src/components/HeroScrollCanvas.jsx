@@ -33,16 +33,11 @@ function StaticHeroFallback() {
   );
 }
 
-// Detect if the browser can actually run the canvas animation.
-// Requires: Worker, createImageBitmap, canvas 2d context.
-// Falls back gracefully on UC Browser, old Opera Mini, very old Android WebView.
+// Detect if the browser can run the canvas animation.
+// Only requires canvas 2D context — no Workers needed.
 function canRunAnimation() {
   try {
-    return (
-      typeof Worker !== "undefined" &&
-      typeof createImageBitmap !== "undefined" &&
-      !!document.createElement("canvas").getContext("2d")
-    );
+    return !!document.createElement("canvas").getContext("2d");
   } catch (_) {
     return false;
   }

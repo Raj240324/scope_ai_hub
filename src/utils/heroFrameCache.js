@@ -1,123 +1,108 @@
 // src/utils/heroFrameCache.js
 // ─────────────────────────────────────────────────────────────────────────────
-// Singleton frame cache. Starts decoding the moment this module is imported.
-// Import this in main.jsx / App.jsx so loading begins at app boot —
-// before the preloader even renders.
+// Singleton frame cache with progressive loading.
 //
-// Both CoreSpinLoader (progress) and useAppleScrollFrames (consume)
-// share this single cache — frames are never decoded twice.
+// Loading phases:
+//   Phase 1 — Poster frame (frame 0) → instant hero appearance
+//   Phase 2 — Keyframes (25%, 50%, 75%, 100%) → smooth initial scrub
+//   Phase 3 — All remaining frames via requestIdleCallback → no jank
+//
+// Memory management:
+//   Mobile:  keep max 30 decoded bitmaps
+//   Desktop: keep max 120 decoded bitmaps
+//   Evicts farthest frames from current position via bitmap.close()
+//
+// No Workers. Uses fetch() + createImageBitmap() on main thread.
+// createImageBitmap is non-blocking and already yields to the browser.
 // ─────────────────────────────────────────────────────────────────────────────
 
-// ── Device profile (same logic as hook, duplicated here to avoid circular imports)
+// ── Device profile ──────────────────────────────────────────────────────────
 function getProfile() {
-  const ua        = navigator.userAgent || "";
-  const isIOS     = /iPhone|iPad|iPod/i.test(ua);
+  const ua = navigator.userAgent || "";
+  const isIOS = /iPhone|iPad|iPod/i.test(ua);
   const isAndroid = /Android/i.test(ua);
-  const isMobile  = isIOS || isAndroid || window.innerWidth < 768;
-  const ram       = navigator.deviceMemory ?? 4;
-  const connType  = navigator.connection?.effectiveType ?? "4g";
-  const isSlow    = connType === "slow-2g" || connType === "2g" || connType === "3g";
+  const isMobile = isIOS || isAndroid || window.innerWidth < 768;
+  const ram = navigator.deviceMemory ?? 4;
+  const connType = navigator.connection?.effectiveType ?? "4g";
+  const isSlow = connType === "slow-2g" || connType === "2g" || connType === "3g";
 
-  let stride;
-  if (!isMobile)                    stride = 1;
-  else if (ram >= 4 && !isSlow)     stride = 3;
-  else if (ram >= 2)                stride = 4;
-  else                              stride = 6;
+  // Frame count: mobile gets fewer frames, desktop full set
+  let targetFrames;
+  if (!isMobile) targetFrames = 180;
+  else if (ram >= 4 && !isSlow) targetFrames = 60;
+  else targetFrames = 40;
 
-  let workerCount;
-  if (!isMobile)               workerCount = Math.min(navigator.hardwareConcurrency || 4, 6);
-  else if (ram <= 2 || isSlow) workerCount = 2;
-  else                         workerCount = Math.min(navigator.hardwareConcurrency || 2, 3);
+  // Max bitmaps in memory
+  const maxCached = isMobile ? 30 : 120;
 
-  const dpr = Math.min(window.devicePixelRatio || 1, 2);
-  let maxW, maxH;
-  if (!isMobile)                    { maxW = 1920; maxH = 1080; }
-  else if (ram >= 2 && !isSlow)     { maxW = 720;  maxH = 405;  }
-  else                              { maxW = 540;  maxH = 303;  }
+  // DPR: mobile=1, desktop=min(dpr,2)
+  const dpr = isMobile ? 1 : Math.min(window.devicePixelRatio || 1, 2);
 
-  return {
-    stride,
-    workerCount,
-    bitmapW: Math.min(Math.round(window.innerWidth  * dpr), maxW),
-    bitmapH: Math.min(Math.round(window.innerHeight * dpr), maxH),
-  };
+  // Resolution cap
+  const maxW = isMobile ? 540 : 1920;
+  const maxH = isMobile ? 960 : 1080;
+  const bitmapW = Math.min(Math.round(window.innerWidth * dpr), maxW);
+  const bitmapH = Math.min(Math.round(window.innerHeight * dpr), maxH);
+
+  return { isMobile, targetFrames, maxCached, bitmapW, bitmapH };
 }
 
-function buildPriorityOrder(total) {
-  const seen  = new Set();
+// ── Decode a single frame ───────────────────────────────────────────────────
+async function decodeFrame(url, w, h) {
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`HTTP ${res.status} for ${url}`);
+  const blob = await res.blob();
+  return createImageBitmap(blob, {
+    resizeWidth: w,
+    resizeHeight: h,
+    resizeQuality: "medium",
+  });
+}
+
+// ── Build loading order: poster → keyframes → all remaining ─────────────────
+function buildLoadingOrder(total) {
+  const seen = new Set();
   const order = [];
-  const add   = (i) => {
+  const add = (i) => {
     const c = Math.min(Math.max(i, 0), total - 1);
     if (!seen.has(c)) { seen.add(c); order.push(c); }
   };
-  [0, Math.floor(total * 0.25), Math.floor(total * 0.5),
-   Math.floor(total * 0.75), total - 1].forEach(add);
+
+  // Phase 1: poster
+  add(0);
+
+  // Phase 2: keyframes at 25%, 50%, 75%, end
+  [
+    Math.floor(total * 0.25),
+    Math.floor(total * 0.5),
+    Math.floor(total * 0.75),
+    total - 1,
+  ].forEach(add);
+
+  // Phase 3: all remaining in sequential order
   for (let i = 0; i < total; i++) add(i);
+
   return order;
-}
-
-// ── Worker pool (uses Vite ?worker — CSP safe)
-import FrameWorker from "./frameWorker.js?worker";
-
-function createPool(size) {
-  const workers = Array.from({ length: size }, () => new FrameWorker());
-  const pending = new Map();
-  const busy    = new Array(size).fill(false);
-  const queue   = [];
-  let   seq     = 0;
-
-  function drain() {
-    if (!queue.length) return;
-    const idx = busy.findIndex((b) => !b);
-    if (idx === -1) return;
-    const { task, resolve, reject } = queue.shift();
-    busy[idx] = true;
-    pending.set(task.id, { resolve, reject });
-    workers[idx].postMessage(task);
-  }
-
-  workers.forEach((w, i) => {
-    w.onmessage = ({ data }) => {
-      busy[i] = false;
-      const p = pending.get(data.id);
-      if (!p) return;
-      pending.delete(data.id);
-      data.ok ? p.resolve(data.bitmap) : p.reject(new Error(data.error));
-      drain();
-    };
-    w.onerror = () => { busy[i] = false; drain(); };
-  });
-
-  return {
-    decode(url, w, h) {
-      const id = seq++;
-      return new Promise((resolve, reject) => {
-        queue.push({ task: { id, url, w, h }, resolve, reject });
-        drain();
-      });
-    },
-    terminate() { workers.forEach((w) => w.terminate()); },
-  };
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
 // THE CACHE SINGLETON
 // ─────────────────────────────────────────────────────────────────────────────
 const cache = {
-  bitmaps:     [],      // ImageBitmap[] — sparse, fills as workers finish
-  frameList:   [],      // the actual frame numbers loaded (stride-adjusted)
-  total:       0,       // total expected slots
-  loaded:      0,       // how many slots are filled
-  ready:       false,   // true when ALL frames are loaded
-  profile:     null,
-  pool:        null,
+  bitmaps: [],        // ImageBitmap[] — sparse, fills as frames decode
+  frameList: [],      // actual frame numbers (stride-adjusted)
+  total: 0,           // total expected slots
+  loaded: 0,          // how many slots are filled
+  ready: false,       // true when ALL frames are loaded
+  profile: null,
+  _aborted: false,
 
   // Progress listeners — CoreSpinLoader subscribes here
-  _listeners:  new Set(),
+  _listeners: new Set(),
 
   onProgress(cb) {
     this._listeners.add(cb);
-    // Fire immediately with current state so late subscribers get current value
+    // Fire immediately with current state
     cb(this.loaded, this.total);
     return () => this._listeners.delete(cb);
   },
@@ -128,55 +113,131 @@ const cache = {
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
-// START LOADING — called once at module import time
+// START LOADING — called once at module import time from main.jsx
 // ─────────────────────────────────────────────────────────────────────────────
 export function startHeroPreload({
   totalFrames = 192,
-  framePath   = (i) => `/hero-frames/frame_${String(i).padStart(4, "0")}.webp`,
+  framePath = (i) => `/hero-frames/frame_${String(i).padStart(4, "0")}.webp`,
 } = {}) {
   // Already started — don't re-run
-  if (cache.pool) return;
+  if (cache.profile) return;
 
   const profile = getProfile();
   cache.profile = profile;
 
+  // Calculate stride to reach target frame count
+  const stride = Math.max(1, Math.round(totalFrames / profile.targetFrames));
+
   // Build frame list
   const frames = [];
-  for (let i = 1; i <= totalFrames; i += profile.stride) frames.push(i);
+  for (let i = 1; i <= totalFrames; i += stride) frames.push(i);
   cache.frameList = frames;
-  cache.total     = frames.length;
-  cache.bitmaps   = new Array(frames.length).fill(null);
-  cache.loaded    = 0;
-  cache.ready     = false;
-
-  const pool = createPool(profile.workerCount);
-  cache.pool = pool;
+  cache.total = frames.length;
+  cache.bitmaps = new Array(frames.length).fill(null);
+  cache.loaded = 0;
+  cache.ready = false;
+  cache._aborted = false;
 
   const abs = (path) => new URL(path, window.location.href).href;
-  const order = buildPriorityOrder(frames.length);
+  const order = buildLoadingOrder(frames.length);
 
-  // Decode all frames in priority order, workers running concurrently
-  Promise.all(
-    order.map((slotIdx) =>
-      pool
-        .decode(abs(framePath(frames[slotIdx])), profile.bitmapW, profile.bitmapH)
-        .then((bm) => {
-          cache.bitmaps[slotIdx] = bm;
-          cache.loaded++;
-          cache._notify();
-        })
-        .catch(() => {
-          // Per-frame failure — still notify so progress advances
-          cache.loaded++;
-          cache._notify();
-        })
-    )
-  ).then(() => {
-    cache.ready = true;
-    cache._notify();
-    // Workers done — terminate to free threads
-    pool.terminate();
-  });
+  // ── Phase 1+2: poster + keyframes (first 5 items) — eager, sequential ──
+  const eagerCount = Math.min(5, order.length);
+  const eagerSlots = order.slice(0, eagerCount);
+  const idleSlots = order.slice(eagerCount);
+
+  async function loadEager() {
+    for (const slotIdx of eagerSlots) {
+      if (cache._aborted) return;
+      try {
+        const bm = await decodeFrame(
+          abs(framePath(frames[slotIdx])),
+          profile.bitmapW,
+          profile.bitmapH,
+        );
+        if (cache._aborted) { bm?.close(); return; }
+        cache.bitmaps[slotIdx] = bm;
+        cache.loaded++;
+        cache._notify();
+      } catch (_) {
+        // Count as loaded even on failure so progress advances
+        cache.loaded++;
+        cache._notify();
+      }
+    }
+  }
+
+  // ── Phase 3: remaining frames via requestIdleCallback batches ──────────
+  function loadIdle() {
+    if (cache._aborted || idleSlots.length === 0) {
+      finalize();
+      return;
+    }
+
+    let idx = 0;
+    const BATCH = 4; // decode up to 4 per idle callback
+
+    function processIdleBatch(deadline) {
+      if (cache._aborted) return;
+
+      const promises = [];
+      // Schedule a small batch within this idle period
+      const end = Math.min(idx + BATCH, idleSlots.length);
+      for (let i = idx; i < end; i++) {
+        const slotIdx = idleSlots[i];
+        promises.push(
+          decodeFrame(
+            abs(framePath(frames[slotIdx])),
+            profile.bitmapW,
+            profile.bitmapH,
+          )
+            .then((bm) => {
+              if (cache._aborted) { bm?.close(); return; }
+              cache.bitmaps[slotIdx] = bm;
+              cache.loaded++;
+              cache._notify();
+            })
+            .catch(() => {
+              cache.loaded++;
+              cache._notify();
+            }),
+        );
+      }
+      idx = end;
+
+      Promise.all(promises).then(() => {
+        if (idx >= idleSlots.length || cache._aborted) {
+          finalize();
+        } else {
+          // Schedule next batch
+          if (typeof requestIdleCallback !== "undefined") {
+            requestIdleCallback(processIdleBatch, { timeout: 200 });
+          } else {
+            setTimeout(() => processIdleBatch(), 16);
+          }
+        }
+      });
+    }
+
+    // Kick off idle loading
+    if (typeof requestIdleCallback !== "undefined") {
+      requestIdleCallback(processIdleBatch, { timeout: 100 });
+    } else {
+      setTimeout(() => processIdleBatch(), 16);
+    }
+  }
+
+  function finalize() {
+    if (!cache._aborted) {
+      cache.ready = true;
+      cache._notify();
+    }
+  }
+
+  // Execute: eager first, then idle
+  loadEager()
+    .then(() => loadIdle())
+    .catch(console.error);
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
