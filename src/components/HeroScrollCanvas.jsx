@@ -1,41 +1,6 @@
-import React, { useState, useEffect, useRef } from "react";
-
-// ── Device-adaptive video source ────────────────────────────────────────────
-// Mobile (< 768px or touch device) → 640×360, ~1.6 MB
-// Desktop                          → 1280×720, ~6.3 MB
-function getHeroVideoSrc() {
-  if (typeof window === "undefined") return "/hero_desktop.mp4";
-  const ua = navigator.userAgent || "";
-  const isMobile =
-    /iPhone|iPad|iPod|Android/i.test(ua) || window.innerWidth < 768;
-  return isMobile ? "/hero_mobile.mp4" : "/hero_desktop.mp4";
-}
-
-function useReducedMotion() {
-  const [reduced, setReduced] = useState(false);
-  useEffect(() => {
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setReduced(mq.matches);
-    mq.addEventListener("change", (e) => setReduced(e.matches));
-  }, []);
-  return reduced;
-}
-
-// Shown on devices that prefer reduced motion
-function StaticHeroFallback() {
-  return (
-    <div style={{
-      position:"absolute", inset:0, zIndex:0,
-      background:"radial-gradient(ellipse 80% 80% at 60% 50%, #0a1628 0%, #010408 100%)",
-    }}>
-      <img
-        src="/hero-frames/frame_0001.webp"
-        alt="" aria-hidden="true"
-        style={{ width:"100%", height:"100%", objectFit:"cover", opacity:0.7 }}
-      />
-    </div>
-  );
-}
+import React, { useState, useEffect } from "react";
+import HeroEngine from "./hero/HeroEngine";
+import { getHeroMode } from "../utils/deviceCapability";
 
 function GrainOverlay() {
   return (
@@ -69,46 +34,19 @@ function ScanlineOverlay() {
 
 // ═════════════════════════════════════════════════════════════════════════════
 const HeroScrollCanvas = ({ badge, subtitle, children }) => {
-  const reducedMotion = useReducedMotion();
-  const [videoSrc]    = useState(() => getHeroVideoSrc());
-  const [videoReady, setVideoReady] = useState(false);
-  const videoRef      = useRef(null);
+  const [mode, setMode] = useState("static");
 
-  // Pause video when tab is hidden to save battery & CPU
   useEffect(() => {
-    const handleVisibility = () => {
-      const video = videoRef.current;
-      if (!video) return;
-      if (document.hidden) video.pause();
-      else video.play().catch(() => {});
-    };
-    document.addEventListener("visibilitychange", handleVisibility);
-    return () => document.removeEventListener("visibilitychange", handleVisibility);
-  }, []);
-
-  // Dispatch event so the App preloader can wait for video to be ready
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    const handleReady = async () => {
-      try {
-        await video.play();
-      } catch (e) {}
-      
-      setVideoReady(true);
-      window.dispatchEvent(new Event("heroVideoReady"));
-    };
-
-    video.addEventListener("canplaythrough", handleReady);
-
-    return () => {
-      video.removeEventListener("canplaythrough", handleReady);
-    };
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reducedMotion) {
+      setMode("static");
+    } else {
+      setMode(getHeroMode());
+    }
   }, []);
 
   const anim = (delay) =>
-    reducedMotion ? "none" : `fadeSlideUp 0.9s cubic-bezier(.16,1,.3,1) ${delay} both`;
+    mode === "static" ? "none" : `fadeSlideUp 0.9s cubic-bezier(.16,1,.3,1) ${delay} both`;
 
   return (
     <>
@@ -202,47 +140,21 @@ const HeroScrollCanvas = ({ badge, subtitle, children }) => {
         aria-label="Hero section"
         style={{
           position: "relative",
-          height: "100dvh", 
+          height: mode === "desktop" ? "500vh" : "100dvh", 
           minHeight: "600px",
           backgroundColor: "#010408", 
           margin: 0, 
           padding: 0, 
-          overflow: "hidden",
-          display: "flex", 
-          flexDirection: "column",
+          display: "block",
         }}
       >
-        {/* Static fallback — shown when user prefers reduced motion */}
-        {reducedMotion && <StaticHeroFallback />}
-
-        {/* Video — autoplaying background loop */}
-        {!reducedMotion && (
-          <video
-            ref={videoRef}
-            autoPlay
-            loop
-            muted
-            playsInline
-            preload="auto"
-            disablePictureInPicture
-            poster="/hero-frames/frame_0001.webp"
-            aria-hidden="true"
-            style={{
-              position:"absolute", inset:0,
-              width:"100%", height:"100%",
-              objectFit:"cover",
-              zIndex:0, backgroundColor:"#010408",
-              pointerEvents:"none",
-              /* smooth GPU rendering */
-              transform: "translateZ(0)",
-              willChange: "transform",
-              opacity: videoReady ? 1 : 0,
-              transition: "opacity 0.6s ease",
-            }}
-          >
-            <source src={videoSrc} type="video/mp4" />
-          </video>
-        )}
+        <div style={{
+          position: mode === "desktop" ? "sticky" : "relative",
+          top: 0, left: 0, right: 0,
+          height: "100dvh", width: "100%",
+          overflow: "hidden", display: "flex", flexDirection: "column",
+        }}>
+          <HeroEngine />
 
         <GrainOverlay />
         <VignetteOverlay />
@@ -301,7 +213,7 @@ const HeroScrollCanvas = ({ badge, subtitle, children }) => {
             marginTop:"1.2rem",
             display:"flex", alignItems:"center", gap:"0.5rem",
             opacity:0,
-            animation: reducedMotion
+            animation: mode === "static"
               ? "none"
               : "fadeSlideUp 0.8s ease 0.9s both, scrollHintBob 2s ease-in-out infinite 2s",
           }}>
@@ -316,6 +228,7 @@ const HeroScrollCanvas = ({ badge, subtitle, children }) => {
               color:"var(--color-brand-highlight)",
             }}>Scroll to explore</span>
           </div>
+        </div>
         </div>
       </section>
     </>
