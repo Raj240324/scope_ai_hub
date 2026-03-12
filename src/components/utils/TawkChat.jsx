@@ -13,7 +13,7 @@ const TawkChat = () => {
       s1.async = true;
       const propertyId = import.meta.env.VITE_TAWK_PROPERTY_ID;
       const widgetId = import.meta.env.VITE_TAWK_WIDGET_ID;
-      
+
       if (!propertyId || !widgetId) {
         console.warn("Tawk.to Property ID or Widget ID missing in env variables");
         return;

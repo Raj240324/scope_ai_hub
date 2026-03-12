@@ -158,6 +158,7 @@ const DominoScroll = ({
           alignItems:     'center',
           justifyContent: 'center',
           overflow:       'hidden',
+          paddingBottom:  '120px',
         }}
       >
         {/*

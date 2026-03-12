@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Header from '../Header';
 import Footer from './Footer';
 import WhatsAppButton from '../ui/WhatsAppButton';
+import TawkChat from '../utils/TawkChat';
 import DynamicScrollButton from '../ui/DynamicScrollButton';
 import { BRANDING } from '../../data/branding';
 
@@ -38,6 +39,7 @@ const Layout = ({
       </AnimatePresence>
 
       <Footer />
+      <TawkChat />
       <WhatsAppButton />
       <DynamicScrollButton />
     </div>

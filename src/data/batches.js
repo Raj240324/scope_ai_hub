@@ -10,6 +10,7 @@ export const batches = [
     statusColor:"bg-green-500/10 text-green-400",
     accent:     "from-cyan-500/20 to-primary/10",
     glow:       "rgba(103,232,249,0.12)",
+    cardBg:     "linear-gradient(135deg, #0a2e38 0%, #1a1030 50%, #0d0f1a 100%)",
   },
   {
     title:      "Weekday Evening",
@@ -22,6 +23,7 @@ export const batches = [
     statusColor:"bg-orange-500/10 text-orange-400 animate-pulse",
     accent:     "from-orange-500/20 to-primary/10",
     glow:       "rgba(251,191,36,0.12)",
+    cardBg:     "linear-gradient(135deg, #2a1a05 0%, #2a0f18 50%, #0d0f1a 100%)",
   },
   {
     title:      "Weekend Batch",
@@ -34,5 +36,6 @@ export const batches = [
     statusColor:"bg-green-500/10 text-green-400",
     accent:     "from-purple-500/20 to-primary/10",
     glow:       "rgba(168,85,247,0.12)",
+    cardBg:     "linear-gradient(135deg, #1a0a2e 0%, #150d30 50%, #0d0f1a 100%)",
   },
 ];

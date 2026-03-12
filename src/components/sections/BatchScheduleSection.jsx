@@ -66,7 +66,7 @@ const BatchScheduleSection = ({ showHybridCallout = true }) => {
             <div
               className="relative w-full rounded-2xl md:rounded-3xl p-5 md:p-10 overflow-hidden shadow-2xl"
 style={{
-  background: 'var(--bg-secondary)',
+  background: batch.cardBg,
   border: '2px solid rgba(214,79,217,0.25)',
   boxShadow: `0 8px 80px 0 ${batch.glow}, 0 0 0 1px rgba(214,79,217,0.15), 0 1px 0 0 rgba(255,255,255,0.08) inset`,
 }}
@@ -81,7 +81,7 @@ style={{
                     className={`block rounded-full transition-all ${
                       dot === i
                         ? 'w-5 h-2 bg-primary'
-                        : 'w-2 h-2 bg-[var(--border-color)]'
+                        : 'w-2 h-2 bg-white/20'
                     }`}
                   />
                 ))}
@@ -97,24 +97,24 @@ style={{
                 {/* Left — identity */}
                 <div className="flex-1 mb-4 md:mb-0">
                   <div className="text-4xl md:text-5xl mb-2 md:mb-4">{batch.emoji}</div>
-                  <h3 className="heading-sm md:heading-md font-bold text-[var(--text-heading)] mb-0.5 md:mb-1 leading-tight">
+                  <h3 className="heading-sm md:heading-md font-bold text-white mb-0.5 md:mb-1 leading-tight">
                     {batch.title}
                   </h3>
-                  <p className="text-small md:text-body text-[var(--text-muted)] font-medium mb-1.5 md:mb-3">
+                  <p className="text-small md:text-body text-white/60 font-medium mb-1.5 md:mb-3">
                     {batch.days}
                   </p>
-                  <p className="text-caption text-[var(--text-muted)] line-clamp-2">{batch.desc}</p>
+                  <p className="text-caption text-white/50 line-clamp-2">{batch.desc}</p>
                 </div>
 
                 {/* Right — detail tiles */}
                 <div className="flex-1 grid grid-cols-2 gap-2 md:gap-4">
                  <div className="p-2.5 md:p-4 rounded-xl md:rounded-2xl border" style={{ background: 'rgba(214,79,217,0.06)', borderColor: 'rgba(214,79,217,0.2)' }}>
-    <p className="text-[10px] md:text-caption text-[var(--text-muted)] mb-0.5 md:mb-1 uppercase tracking-wider font-semibold">Time</p>
-    <p className="text-small md:text-body font-bold text-[var(--text-heading)] leading-tight">{batch.time}</p>
+    <p className="text-[10px] md:text-caption text-white/50 mb-0.5 md:mb-1 uppercase tracking-wider font-semibold">Time</p>
+    <p className="text-small md:text-body font-bold text-white leading-tight">{batch.time}</p>
   </div>
   <div className="p-2.5 md:p-4 rounded-xl md:rounded-2xl border" style={{ background: 'rgba(214,79,217,0.06)', borderColor: 'rgba(214,79,217,0.2)' }}>
-    <p className="text-[10px] md:text-caption text-[var(--text-muted)] mb-0.5 md:mb-1 uppercase tracking-wider font-semibold">Mode</p>
-    <p className="text-small md:text-body font-bold text-[var(--text-heading)] leading-tight">{batch.mode}</p>
+    <p className="text-[10px] md:text-caption text-white/50 mb-0.5 md:mb-1 uppercase tracking-wider font-semibold">Mode</p>
+    <p className="text-small md:text-body font-bold text-white leading-tight">{batch.mode}</p>
   </div>
                   <div className="col-span-2 p-2.5 md:p-4 rounded-xl md:rounded-2xl bg-primary/5 border border-primary/20 flex flex-row sm:flex-col justify-between items-center sm:items-start">
                     <p className="text-[10px] md:text-caption text-primary mb-0 sm:mb-1 uppercase tracking-wider font-semibold">Availability</p>
@@ -124,8 +124,8 @@ style={{
               </div>
 
               {/* Bottom row */}
-              <div className="relative z-10 mt-5 md:mt-8 pt-4 md:pt-8 border-t border-[var(--border-color)] flex items-center justify-between gap-3 flex-wrap">
-                <p className="text-caption text-[var(--text-muted)]">
+              <div className="relative z-10 mt-5 md:mt-8 pt-4 md:pt-8 border-t border-white/10 flex items-center justify-between gap-3 flex-wrap">
+                <p className="text-caption text-white/50">
                   Batch {i + 1} of {batches.length} — keep scrolling ↓
                 </p>
                 <m.button

@@ -11,7 +11,8 @@ A production-grade, security-hardened React platform for SCOPE AI HUB — Chenna
 ### Frontend & UX
 - ⚡ **High-Performance SPA** — Vite 7 + React 18 with lazy-loaded pages and ES2020 build targets for ultra-low bundle sizes.
 - 🎨 **Premium Aesthetic** — Unified CSS variable design system, light/dark theme persistence, and accessible high-contrast UI combinations.
-- 🎥 **Cinematic Animations** — Video-driven canvas HeroScroll sequence (GSAP), viewport-triggered Framer Motion components, and dynamic Lottie vector art.
+- 🎥 **Cinematic Animations** — Video-driven canvas Apple-style scroll frames (`useAppleScrollFrames`), viewport-triggered Framer Motion components (`DominoScroll`, `NeuralCareerGraph`, etc.), and dynamic Lottie vector art.
+- 💬 **Floating Actions** — Dynamic floating action buttons offering Tawk.to live chat and WhatsApp integration overlaid without conflict.
 - 🔍 **Enterprise SEO** — Dynamic meta tags, Open Graph, Twitter Cards, JSON-LD schemas (Organization, Course, FAQ, Breadcrumb), and auto-generated XML sitemaps.
 - 🎓 **10 AI/ML Courses** — Tiered catalog (Beginner → Advanced) with detailed syllabi, career roles, and prerequisites.
 

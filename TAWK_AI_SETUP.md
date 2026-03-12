@@ -52,4 +52,4 @@ Tawk.to has a free "Knowledge Base" feature (like a Help Center).
 4.  **Student asks:** "Can I speak to a human?"
 5.  **Apollo AI** transfers the chat to you or your staff.
 
-_No coding is required for any of this. It works instantly with the widget ID we already added._
+_No coding is required for any of this. The widget is fully configured via the `.env` variables (`VITE_TAWK_PROPERTY_ID` and `VITE_TAWK_WIDGET_ID`) and runs cleanly alongside the WhatsApp button on all pages._
