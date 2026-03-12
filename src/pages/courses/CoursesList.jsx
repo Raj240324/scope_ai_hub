@@ -391,7 +391,7 @@ const CoursesList = () => {
 
       {/* Batch Schedule Section */}
       <section className="py-20 bg-[var(--bg-body)] border-t border-[var(--border-color)] overflow-visible">
-        <BatchScheduleSection showHybridCallout={false} />
+        <BatchScheduleSection showHybridCallout={true} />
       </section>
 
       {/* Career Advantages Section */}
