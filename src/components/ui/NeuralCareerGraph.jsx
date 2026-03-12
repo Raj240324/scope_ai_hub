@@ -30,24 +30,28 @@ const cb = (x1, y1, x2, y2, t = 0.45) => {
 };
 
 const WIRES = [
+  // Left side — inputs flow TOWARD engine
   { id: 'w0', d: cb(inPortX, INY[0], JLX, ECY) },
   { id: 'w1', d: cb(inPortX, INY[1], JLX, ECY) },
   { id: 'w2', d: cb(inPortX, INY[2], JLX, ECY) },
   { id: 'w3', d: `M ${JLX} ${ECY} L ${engLX} ${ECY}` },
-  { id: 'w4', d: `M ${engRX} ${ECY} L ${JRX} ${ECY}` },
-  { id: 'w5', d: cb(JRX, ECY, outPortX, OUTY[0]) },
-  { id: 'w6', d: cb(JRX, ECY, outPortX, OUTY[1]) },
+  // Right side — REVERSED so dots flow FROM outputs TOWARD engine
+  { id: 'w4', d: `M ${JRX} ${ECY} L ${engRX} ${ECY}` },
+  { id: 'w5', d: cb(outPortX, OUTY[0], JRX, ECY) },
+  { id: 'w6', d: cb(outPortX, OUTY[1], JRX, ECY) },
 ];
 
 // Two staggered dots per wire
+// Each wire gets 2 dots spaced exactly half a duration apart → seamless loop
+// [wireId, delaySeconds, durationSeconds]
 const DOTS = [
-  ['w0',0.0,2.5],['w0',1.25,2.5],
-  ['w1',0.4,2.3],['w1',1.55,2.3],
-  ['w2',0.8,2.7],['w2',2.15,2.7],
-  ['w3',0.2,1.1],['w3',1.30,1.1],
-  ['w4',0.15,1.0],['w4',1.15,1.0],
-  ['w5',0.5,2.4],['w5',1.70,2.4],
-  ['w6',0.9,2.6],['w6',2.20,2.6],
+  ['w0', 0.00, 2.2], ['w0', 1.10, 2.2],
+  ['w1', 0.30, 2.2], ['w1', 1.40, 2.2],
+  ['w2', 0.60, 2.2], ['w2', 1.70, 2.2],
+  ['w3', 0.00, 0.9], ['w3', 0.45, 0.9],
+  ['w4', 0.00, 0.9], ['w4', 0.45, 0.9],
+  ['w5', 0.10, 2.2], ['w5', 1.20, 2.2],
+  ['w6', 0.40, 2.2], ['w6', 1.50, 2.2],
 ];
 
 // ── Animated dot that travels along a wire path ──────────────────────────────
@@ -260,11 +264,6 @@ export default function NeuralCareerGraph() {
             </g>
           )}
 
-          {/* Junction dots */}
-          {[JLX, JRX].map((cx, i) => (
-            <circle key={i} cx={cx} cy={ECY} r="5.5" fill={theme === 'dark' ? "white" : "var(--accent-primary)"} opacity={theme === 'dark' ? "0.85" : "1"}
-              style={{ filter: theme === 'dark' ? 'drop-shadow(0 0 6px rgba(255,255,255,0.7))' : 'drop-shadow(0 0 6px rgba(214,79,217,0.4))' }} />
-          ))}
 
           {/* Input port circles */}
           {INY.map((y, i) => (
