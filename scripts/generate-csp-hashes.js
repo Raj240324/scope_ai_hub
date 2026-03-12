@@ -53,13 +53,32 @@ vercelConfig.headers.forEach((header) => {
           `$1 ${hashes.join(" ")}`
         );
 
+        // Helper to safely append to a directive
+        const appendDirective = (directive, value) => {
+          if (!h.value.includes(value)) {
+            const regex = new RegExp(`(${directive}\\s[^;]*)`);
+            if (regex.test(h.value)) {
+              h.value = h.value.replace(regex, `$1 ${value}`);
+            } else {
+              // If directive doesn't exist at all, add it to the end
+              h.value = h.value.trim();
+              if (!h.value.endsWith(";")) h.value += ";";
+              h.value += ` ${directive} 'self' ${value};`;
+            }
+          }
+        };
+
         // Add perplexity to font-src
-        if (!h.value.includes("https://r2cdn.perplexity.ai")) {
-          h.value = h.value.replace(
-            /(font-src\s[^;]*)/,
-            `$1 https://r2cdn.perplexity.ai`
-          );
-        }
+        appendDirective("font-src", "https://r2cdn.perplexity.ai");
+
+        // Add Tawk.to domains required for the widget and WebSockets
+        appendDirective("default-src", "wss://*.tawk.to");
+        appendDirective("connect-src", "wss://*.tawk.to https://*.tawk.to");
+        appendDirective("script-src", "https://*.tawk.to");
+        appendDirective("style-src", "https://*.tawk.to");
+        appendDirective("font-src", "https://*.tawk.to");
+        appendDirective("frame-src", "https://*.tawk.to");
+        appendDirective("img-src", "https://*.tawk.to");
 
         // Append object-src and base-uri if they don't exist
         if (!h.value.includes("object-src")) {
