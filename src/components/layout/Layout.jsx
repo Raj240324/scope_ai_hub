@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { motion, AnimatePresence } from 'framer-motion';
+
 import Header from '../Header';
 import Footer from './Footer';
 import WhatsAppButton from '../ui/WhatsAppButton';
@@ -25,18 +25,9 @@ const Layout = ({
 
       <Header />
       
-      <AnimatePresence mode="wait">
-        <motion.main 
-          className="flex-grow"
-          style={{ position: 'relative', overflow: 'visible' }}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1.0] }}
-        >
-          {children}
-        </motion.main>
-      </AnimatePresence>
+      <main className="flex-grow" style={{ position: 'relative', overflow: 'visible' }}>
+        {children}
+      </main>
 
       <Footer />
       <TawkChat />
