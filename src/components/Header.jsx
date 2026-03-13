@@ -401,7 +401,7 @@ const headerStyle = {
           <nav style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "1rem" }}>
 
             {/* ── Logo ──────────────────────────────────────────────────── */}
-            <Link to="/" style={{ textDecoration: "none", flexShrink: 0, display: "flex", alignItems: "center", height: "100%" }}>
+            <Link to="/" onClick={() => { if (pathname === '/') window.scrollTo({ top: 0, behavior: 'smooth' }); }} style={{ textDecoration: "none", flexShrink: 0, display: "flex", alignItems: "center", height: "100%" }}>
               <m.img 
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
