@@ -9,12 +9,16 @@ import { Search, X, Sparkles, GraduationCap, Award } from 'lucide-react';
 import SEO from '../../components/utils/SEO';
 import { m, AnimatePresence } from 'framer-motion';
 import { useScrollReveal } from '../../hooks/useScrollReveal';
+import { useScrollLock } from '../../hooks/useScrollLock';
 import { fadeUp, staggerContainer } from '../../utils/motionVariants';
 
 const CoursesList = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedTier, setSelectedTier] = useState('All');
   const [showMobileFilters, setShowMobileFilters] = useState(false);
+
+  // Lock scroll when mobile filters are open
+  useScrollLock(showMobileFilters);
 
   // Scroll to courses grid with header offset
   const scrollToCourses = () => {

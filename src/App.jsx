@@ -12,6 +12,7 @@ import { ThemeProvider } from './context/ThemeContext';
 import ContactModal from './components/ui/ContactModal';
 import NewUserModalTrigger from './components/utils/NewUserModalTrigger';
 import { CoreSpinLoader } from './components/ui/CoreSpinLoader';
+import { useScrollLock } from './hooks/useScrollLock';
 
 // Lazy Load Pages
 const Home = lazy(() => import('./pages/Home'));
@@ -57,6 +58,9 @@ function AppPreloader({ onReady }) {
   
   const loaderDoneRef = useRef(false);
   const videoDoneRef = useRef(false);
+
+  // Lock scroll while preloader is visible
+  useScrollLock(visible);
 
   const checkDone = useCallback(() => {
     if (window.__appPreloaderShown) return;

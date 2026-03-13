@@ -5,6 +5,7 @@ import { useModal } from '../../context/ModalContext';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { handleApiError, normalizeError } from '../../utils/apiErrorHandler';
 import { BRANDING } from '../../data/branding';
+import { staggerContainer, staggerItem } from '../../utils/motionVariants';
 
 /* ─── Step Definitions ──────────────────────────────────────────────── */
 
@@ -31,8 +32,9 @@ const EXPERTISE_OPTIONS = [
 
 /* ─── Main Component ─────────────────────────────────────────────── */
 
-const TrainerForm = () => {
+const TrainerForm = ({ autoFocus = false }) => {
   const form = useRef();
+  const inputRef = useRef(null);
   const recaptchaRef = useRef(null);
   const { closeModal } = useModal();
   const [currentStep, setCurrentStep] = useState(0);
@@ -47,6 +49,26 @@ const TrainerForm = () => {
   const step = STEPS[currentStep];
   const progress = ((currentStep + 1) / STEPS.length) * 100;
   const value = formData[step.field] || '';
+
+  // Auto-focus first input on mount and on step change
+  React.useEffect(() => {
+    // Only proceed if autoFocus is true or we are past the first step
+    if (!autoFocus && currentStep === 0) return;
+
+    // Scroll container to top on step change
+    const scrollContainer = inputRef.current?.closest('.overflow-y-auto');
+    if (scrollContainer) {
+      scrollContainer.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Small delay to coordinate with modal entrance animation
+    const timer = setTimeout(() => {
+      if (inputRef.current) {
+        inputRef.current.focus();
+      }
+    }, 400); // Matches modal spring animation timing
+    return () => clearTimeout(timer);
+  }, [currentStep, autoFocus]);
 
   /* ── Validation per step ─────────────────────────────────── */
   const validateCurrent = () => {
@@ -259,18 +281,21 @@ const TrainerForm = () => {
 
           {/* Input — select as pill chips */}
           {step.type === 'select' ? (
-            <div className="flex flex-col gap-2">
+            <m.div 
+              variants={staggerContainer}
+              initial="hidden"
+              animate="visible"
+              className="flex flex-col gap-2"
+            >
               {EXPERTISE_OPTIONS.map((opt, i) => {
                 const isSelected = value === opt.value;
                 return (
                   <m.button
                     key={opt.value}
                     type="button"
-                    initial={{ opacity: 0, y: 8 }}
-                    animate={{ opacity: 1, y: 0 }}
+                    variants={staggerItem}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    transition={{ duration: 0.25, delay: i * 0.04 }}
                     onClick={() => handleChange(step.field, opt.value)}
                     className={`group relative w-full px-4 py-3 rounded-xl text-small font-medium text-left transition-all duration-300 flex items-center justify-between border ${
                       isSelected
@@ -289,11 +314,12 @@ const TrainerForm = () => {
                   </m.button>
                 );
               })}
-            </div>
+            </m.div>
           ) : step.type === 'url' ? (
             <div className="relative">
               <Globe className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-[var(--text-muted)]" />
               <input
+                ref={inputRef}
                 type="text"
                 placeholder={step.placeholder}
                 value={value}
@@ -306,6 +332,7 @@ const TrainerForm = () => {
             </div>
           ) : (
             <input
+              ref={inputRef}
               type={step.type}
               placeholder={step.placeholder}
               value={value}

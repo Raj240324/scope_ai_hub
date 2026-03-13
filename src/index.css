@@ -52,9 +52,6 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-::-webkit-scrollbar { width: 0px; background: transparent; }
-* { scrollbar-width: none; }
-
 section {
   position: relative;
 }
@@ -238,6 +235,32 @@ body {
   ::selection {
     background-color: var(--btn-primary-bg);
     color: var(--btn-primary-text);
+  }
+
+  /* Custom Scrollbar for the entire application (re-enabling but styling) */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(var(--primary-rgb, 167, 63, 208), 0.2);
+    border-radius: 10px;
+    transition: background 0.3s ease;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(var(--primary-rgb, 167, 63, 208), 0.5);
+  }
+
+  /* Firefox support */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(var(--primary-rgb, 167, 63, 208), 0.2) transparent;
   }
 
   /* Smooth focus outlines */
