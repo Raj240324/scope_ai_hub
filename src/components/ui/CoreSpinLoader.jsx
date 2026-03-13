@@ -2,58 +2,34 @@
 import React, { useState, useEffect, useRef } from 'react';
 
 export function CoreSpinLoader({ onComplete }) {
-  const [loadingText, setLoadingText] = useState('Booting Neural Core');
-  const [progress, setProgress]       = useState(0); // 0–1
+  const [loadingText, setLoadingText] = useState('Initializing AI Core..');
   const startTime = useRef(Date.now());
+  const DURATION = 1200; // ms
 
-  // ── Simulated progress — smooth 0→1 over ~2 s ────────────────────────────
+  // ── Text cycling — only 3 states, minimal re-renders ───────────────────────
   useEffect(() => {
-    const DURATION = 2000; // ms
-    let rafId;
-
-    function tick() {
-      const elapsed = Date.now() - startTime.current;
-      const pct = Math.min(elapsed / DURATION, 1);
-      setProgress(pct);
-
-      if (pct < 1) {
-        rafId = requestAnimationFrame(tick);
-      }
-    }
-
-    rafId = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(rafId);
+    const t1 = setTimeout(() => setLoadingText('Loading Models..'), DURATION * 0.35);
+    const t2 = setTimeout(() => setLoadingText('Ready.'), DURATION * 0.8);
+    return () => { clearTimeout(t1); clearTimeout(t2); };
   }, []);
 
-  // ── Text cycling — driven by progress ─────────────────────────────────────
+  // ── Dismiss when duration ends ─────────────────────────────────────────────
   useEffect(() => {
-    const states = [
-      'Booting Neural Core',
-      'Training AI Models..',
-      'Calibrating Neurons..',
-      'Loading Knowledge Base..',
-      'Syncing Intelligence..',
-      'AI Engine Ready.',
-    ];
-
-    const idx = Math.min(
-      Math.floor(progress * states.length),
-      states.length - 1
-    );
-    setLoadingText(states[idx]);
-  }, [progress]);
-
-  // ── Dismiss when progress reaches 100 % ───────────────────────────────────
-  useEffect(() => {
-    if (progress < 1) return;
-    const t = setTimeout(() => { onComplete?.(); }, 300);
+    const t = setTimeout(() => { onComplete?.(); }, DURATION + 150);
     return () => clearTimeout(t);
-  }, [progress, onComplete]);
-
-  const pct = Math.round(progress * 100);
+  }, [onComplete]);
 
   return (
     <div className="flex flex-col items-center justify-center min-h-[200px] gap-6 md:gap-8">
+
+      {/* Inline keyframe for the progress fill — runs entirely on the GPU */}
+      <style>{`
+        @keyframes loaderFill {
+          from { width: 0%; }
+          to   { width: 100%; }
+        }
+      `}</style>
+
       <div className="relative w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 lg:w-36 lg:h-36 flex items-center justify-center transition-all duration-300">
 
         {/* Base Glow */}
@@ -107,7 +83,7 @@ export function CoreSpinLoader({ onComplete }) {
           {loadingText}
         </span>
 
-        {/* Progress bar */}
+        {/* Progress bar — pure CSS animation, zero React re-renders */}
         <div style={{
           width: 120,
           height: 2,
@@ -118,11 +94,11 @@ export function CoreSpinLoader({ onComplete }) {
         }}>
           <div style={{
             height: '100%',
-            width: `${pct}%`,
+            width: '0%',
             background: 'linear-gradient(90deg, var(--color-primary), var(--color-primary-dark))',
             borderRadius: 2,
-            transition: 'width 0.3s ease',
             boxShadow: '0 0 6px rgba(214,79,217,0.6)',
+            animation: `loaderFill ${DURATION}ms cubic-bezier(0.4, 0, 0.2, 1) forwards`,
           }} />
         </div>
       </div>

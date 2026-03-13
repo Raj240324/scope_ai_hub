@@ -63,6 +63,7 @@ const HeroScrollCanvas = ({ badge, subtitle, children }) => {
           position:absolute; inset:0; z-index:20;
           display:flex; flex-direction:column; justify-content:flex-end;
           padding:clamp(1.25rem,4vw,3rem);
+          padding-left:clamp(2rem,6vw,5rem);
           padding-top:max(80px,env(safe-area-inset-top,80px));
           padding-bottom:clamp(1.5rem,5vw,3.5rem);
           pointer-events:none; overflow:hidden;
@@ -76,7 +77,7 @@ const HeroScrollCanvas = ({ badge, subtitle, children }) => {
         }
         .hero-h1 {
           font-family:'Bebas Neue','Arial Black',sans-serif;
-          font-weight:400; font-size:clamp(2.2rem,6vw,4.25rem);
+          font-weight:400; font-size:clamp(2.4rem, 4vw + 1rem, 4.25rem);
           line-height:0.96; letter-spacing:0.02em;
           color:#f5f0ea; margin:0 0 0.75rem;
           text-shadow:0 4px 40px rgba(0,0,0,0.7);
@@ -84,7 +85,7 @@ const HeroScrollCanvas = ({ badge, subtitle, children }) => {
         .hero-sub {
           font-family:'Barlow',sans-serif;
           font-weight:300; font-style:italic;
-          font-size:clamp(0.88rem,3.2vw,1.15rem);
+          font-size:clamp(0.9rem, 1.2vw + 0.6rem, 1.15rem);
           line-height:1.75; color:rgba(245,240,234,0.55);
           max-width:46ch; margin:0 0 1.4rem;
         }
@@ -94,7 +95,7 @@ const HeroScrollCanvas = ({ badge, subtitle, children }) => {
           padding:0.8rem 1.8rem;
           background:linear-gradient(110deg,#d64fd9,#b833bb); color:#fff;
           font-family:'Barlow Condensed','Arial Narrow',sans-serif;
-          font-weight:700; font-size:clamp(0.82rem,2.5vw,1rem);
+          font-weight:700; font-size:clamp(0.85rem, 0.6vw + 0.7rem, 1rem);
           letter-spacing:0.1em; text-transform:uppercase; text-decoration:none;
           clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));
           box-shadow:0 4px 28px rgba(214,79,217,0.45);
@@ -106,7 +107,7 @@ const HeroScrollCanvas = ({ badge, subtitle, children }) => {
           display:inline-flex; align-items:center; gap:0.5rem;
           padding:0.8rem 1.8rem; border:1px solid rgba(245,240,234,0.2); color:#f5f0ea;
           font-family:'Barlow Condensed','Arial Narrow',sans-serif;
-          font-weight:700; font-size:clamp(0.82rem,2.5vw,1rem);
+          font-weight:700; font-size:clamp(0.85rem, 0.6vw + 0.7rem, 1rem);
           letter-spacing:0.1em; text-transform:uppercase; text-decoration:none;
           backdrop-filter:blur(6px);
           clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));
@@ -140,7 +141,7 @@ const HeroScrollCanvas = ({ badge, subtitle, children }) => {
         aria-label="Hero section"
         style={{
           position: "relative",
-          height: mode === "desktop" ? "500vh" : "100dvh", 
+          height: mode === "desktop" ? "380vh" : "100dvh", 
           minHeight: "600px",
           backgroundColor: "#010408", 
           margin: 0, 
@@ -200,12 +201,13 @@ const HeroScrollCanvas = ({ badge, subtitle, children }) => {
             gap:"0.75rem", alignItems:"center",
             fontFamily:"'DM Mono',monospace",
             fontSize:"0.65rem", letterSpacing:"0.12em",
+            color:"#fff",
             animation:anim("0.65s"),
           }}>
             <span>⭐ 4.9 Student Rating</span>
-            <span style={{opacity:0.4}}>•</span>
+            <span style={{opacity:0.4, color:"rgba(245,240,234,0.4)"}}>•</span>
             <span>1200+ Students Trained</span>
-            <span style={{opacity:0.4}}>•</span>
+            <span style={{opacity:0.4, color:"rgba(245,240,234,0.4)"}}>•</span>
             <span>Hiring Partners: TCS, Infosys</span>
           </div>
 

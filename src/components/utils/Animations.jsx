@@ -11,10 +11,10 @@ export const FadeIn = ({
   viewportMargin ="-50px" // Expose margin as prop for flexibility
 }) => {
   const directions = {
-    up: { y: 60 },
-    down: { y: -60 },
-    left: { x: 60 },
-    right: { x: -60 },
+    up: { y: 30 },
+    down: { y: -30 },
+    left: { x: 30 },
+    right: { x: -30 },
     none: { x: 0, y: 0 }
   };
 
@@ -22,12 +22,10 @@ export const FadeIn = ({
     <m.div
       initial={{ 
         opacity: 0, 
-        scale: 0.95,
         ...directions[direction] 
       }}
       whileInView={{ 
         opacity: 1, 
-        scale: 1,
         x: 0, 
         y: 0 
       }}
@@ -40,7 +38,7 @@ export const FadeIn = ({
         duration: duration
       }}
       className={className}
-      style={{ width: fullWidth ? '100%' : 'auto' }}
+      style={{ width: fullWidth ? '100%' : 'auto', willChange: 'transform, opacity' }}
     >
       {children}
     </m.div>
@@ -78,15 +76,15 @@ export const StaggerItem = ({ children, className ="" }) => {
   return (
     <m.div
       variants={{
-        hidden: { opacity: 0, y: 30, scale: 0.95 },
+        hidden: { opacity: 0, y: 20 },
         show: { 
           opacity: 1, 
           y: 0, 
-          scale: 1,
           transition: { type:"spring", stiffness: 80, damping: 20 } 
         }
       }}
       className={className}
+      style={{ willChange: 'transform, opacity' }}
     >
       {children}
     </m.div>
@@ -113,7 +111,7 @@ export const Parallax = ({ children, offset = 50, className ="" }) => {
     offset: ["start end","end start"]
   });
 
-  const springConfig = { stiffness: 300, damping: 30, mass: 1 };
+  const springConfig = { stiffness: 100, damping: 30, mass: 0.5, restDelta: 0.001 };
   const y = useSpring(
     useTransform(scrollYProgress, [0, 1], [offset, -offset]),
     springConfig
@@ -121,7 +119,7 @@ export const Parallax = ({ children, offset = 50, className ="" }) => {
 
   return (
     <div ref={ref} className={className} style={{ overflow: 'visible' }}>
-      <m.div style={{ y }}>
+      <m.div style={{ y, willChange: 'transform' }}>
         {children}
       </m.div>
     </div>

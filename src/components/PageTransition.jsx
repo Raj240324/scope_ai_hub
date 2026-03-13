@@ -25,9 +25,9 @@ const PageTransition = ({ children }) => {
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0 }}
         transition={{ 
-          duration: 0.35, 
+          duration: 0.25, 
           ease: EASE,
-          exit: { duration: 0.2, ease: EASE }
+          exit: { duration: 0.15, ease: EASE }
         }}
       >
         {children}

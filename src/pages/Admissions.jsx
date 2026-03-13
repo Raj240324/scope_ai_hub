@@ -119,7 +119,7 @@ const Admissions = () => {
         {/* ── Eligibility ──────────────────────────────────────────────── */}
         <div className="max-w-3xl mx-auto mb-16">
           <div className="space-y-8">
-            <h2 className="heading-lg font-bold text-center mb-0">Eligibility Criteria</h2>
+            <h2 className="heading-lg font-bold text-center mb-8">Eligibility Criteria</h2>
             <div className="space-y-4">
               {[
                 "College students (any stream) looking for industry skills.",

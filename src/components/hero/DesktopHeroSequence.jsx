@@ -120,8 +120,8 @@ const DesktopHeroSequence = () => {
     };
 
     const updateFrame = () => {
-      // 500vh container means 400vh of scrollable space
-      const scrollMax = window.innerHeight * 4;
+      // 380vh container means 280vh of scrollable space
+      const scrollMax = window.innerHeight * 2.8;
       const scrollTop = document.documentElement.scrollTop || window.scrollY;
 
       let progress = scrollTop / scrollMax;

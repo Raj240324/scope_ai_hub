@@ -34,6 +34,22 @@ const CareerSupport = lazy(() => import('./pages/career-support/CareerSupport'))
 const Sitemap = lazy(() => import('./pages/Sitemap'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
+// ── Prefetch critical routes on idle so navigation is instant ────────────────
+const prefetchRoutes = () => {
+  import('./pages/About');
+  import('./pages/courses/CoursesList');
+  import('./pages/courses/CourseDetail');
+  import('./pages/Admissions');
+  import('./pages/Contact');
+  import('./pages/FAQ');
+};
+
+if (typeof requestIdleCallback !== 'undefined') {
+  requestIdleCallback(prefetchRoutes, { timeout: 3000 });
+} else {
+  setTimeout(prefetchRoutes, 2000);
+}
+
 // Full-screen preloader — syncs with hero video loading
 function AppPreloader({ onReady }) {
   const [visible, setVisible] = useState(() => !window.__appPreloaderShown);
@@ -50,7 +66,7 @@ function AppPreloader({ onReady }) {
       setTimeout(() => {
         setVisible(false);
         onReady?.();
-      }, 500);
+      }, 300);
     }
   }, [fadeOut, onReady]);
 
@@ -78,11 +94,11 @@ function AppPreloader({ onReady }) {
 
     window.addEventListener("heroVideoReady", handleVideoReady);
 
-    // Safety timeout: force dismiss after 6 seconds total if video stalls
+    // Safety timeout: force dismiss after 3 seconds total if video stalls
     const timeout = setTimeout(() => {
       videoDoneRef.current = true;
       checkDone();
-    }, 6000);
+    }, 3000);
 
     return () => {
       window.removeEventListener("heroVideoReady", handleVideoReady);
@@ -103,7 +119,9 @@ function AppPreloader({ onReady }) {
 
 // Minimal Suspense fallback for route transitions
 const PageLoader = () => (
-  <div className="min-h-screen bg-[var(--bg-body)]" />
+  <div className="min-h-screen bg-[var(--bg-body)] flex items-center justify-center">
+    <div className="w-6 h-6 rounded-full border-2 border-transparent border-t-[var(--color-primary)] animate-spin" />
+  </div>
 );
 
 // Extracted routes component to use useLocation
