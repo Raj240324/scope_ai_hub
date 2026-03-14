@@ -42,7 +42,7 @@ const faqData = [
       },
       {
         q:"Do you offer any discounts or scholarships?",
-        a:"Yes, we offer early-bird discounts and merit-based scholarships for deserving candidates. We also have special discounts for group enrollments."
+        a:"Yes, we offer early-bird discounts and special discounts for group enrollments. Additionally, students who provide a valid student ID card are eligible for an exclusive student discount."
       }
     ]
   },
@@ -59,7 +59,7 @@ const faqData = [
       },
       {
         q: `Which companies hire from ${BRANDING.fullName}?`,
-        a:"Our students are placed in top MNCs and startups like Google, Amazon, TCS, Infosys, Wipro, and many others. Check our Home or About page for a more comprehensive list."
+        a:"Our students gain opportunities with Top MNCs, Tier-1 and Tier-2 companies, along with some of the most promising startups in the industry. The hiring ecosystem includes global technology leaders, major IT firms, product companies, and rapidly growing startups. Visit our Home or About page to see the full list of recruiters."
       },
       {
         q:"Do you provide resume preparation support?",
@@ -111,8 +111,8 @@ const faqData = [
         a:"Yes! We have dedicated programs for Machine Learning & Deep Learning, Natural Language Processing, Computer Vision, and Generative AI & Prompt Engineering. We use TensorFlow, PyTorch, Hugging Face, and OpenAI APIs."
       },
       {
-        q:"Can I switch courses after enrollment?",
-        a:"Yes, you can switch to another course within the first 2 weeks if you feel it's not the right fit. We'll adjust the fee difference accordingly. Our counselors also help you choose the right course initially to avoid this situation."
+        q: "Can I switch courses after enrollment?",
+        a: "Yes, you can switch to another course within the first week if you feel it is not the right fit. Any fee difference will be adjusted accordingly. Our counselors will also guide you in choosing the right course initially to help avoid this situation."
       }
     ]
   },
@@ -145,8 +145,8 @@ const faqData = [
         a:"You get lifetime access to course materials, ongoing doubt support via dedicated WhatsApp groups, access to alumni network, and continued placement assistance until you land a job. We also invite alumni for advanced workshops."
       },
       {
-        q:"Do I need a laptop with specific requirements?",
-        a:"For most programs, a laptop with Windows/macOS, 8GB RAM, and stable internet is sufficient. For ML/DL and Computer Vision programs, 16GB RAM is recommended. If you don't have a laptop, we provide computer lab access at our campus."
+        q: "Do I need a laptop with specific requirements?",
+        a: "For most programs, a laptop running Windows or macOS with at least 8GB RAM and a stable internet connection is sufficient. For advanced programs such as Machine Learning, Deep Learning, and Computer Vision, a system with 16GB RAM is recommended for smoother performance."
       },
       {
         q:"Will I get 1-on-1 mentorship?",

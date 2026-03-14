@@ -173,7 +173,7 @@ const headerStyle = {
   left:       0,
   width:      "100%",
   zIndex:     999,
-  height:     72,
+  height:     92,
   display:    "flex",
   alignItems: "center",
   transition: "background 0.4s ease, border-color 0.4s ease, backdrop-filter 0.4s ease, box-shadow 0.4s ease",
@@ -408,11 +408,10 @@ const headerStyle = {
                 alt={BRANDING.fullName} 
                 fetchpriority="high"
                 style={{
-                  height: 60,
+                  height: 92,
                   width: "auto",
                   display: "block",
                   transition: "opacity 0.2s",
-                  marginTop: 10,
                 }}
               />
             </Link>
