@@ -51,10 +51,10 @@ const TrainerMiniSection = () => {
           </div>
           <m.div variants={fadeUp}>
             <Link
-              to="/careers/trainers"
+              to="/careers/join-as-trainer"
               className="group flex items-center gap-2 text-small font-bold text-primary hover:text-[var(--text-heading)] transition-colors no-underline"
             >
-              Meet All Trainers
+              Become a Trainer
               <ArrowRight className="h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
             </Link>
           </m.div>

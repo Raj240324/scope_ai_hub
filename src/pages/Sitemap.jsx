@@ -83,7 +83,6 @@ const Sitemap = () => {
       color: 'from-orange-500 to-amber-500',
       links: [
         { href: '/careers/join-as-trainer', label: 'Join as Trainer', description: 'Apply to teach at ScopeAIHub' },
-        { href: '/careers/trainers', label: 'Trainer Profiles', description: 'Meet our expert instructors' },
       ],
     },
     {

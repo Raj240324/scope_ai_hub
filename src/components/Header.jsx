@@ -61,9 +61,8 @@ const navigation = [
   },
   {
     name: "Resources",
-    href: "/careers/trainers",
+    href: "/faq",
     children: [
-      { name: "Our Trainers",     href: "/careers/trainers" },
       { name: "FAQs",             href: "/faq" },
       { name: "Join as Trainer",  href: "/careers/join-as-trainer" },
     ],

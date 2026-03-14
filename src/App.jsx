@@ -30,7 +30,6 @@ const RefundPolicy = lazy(() => import('./pages/legal/RefundPolicy'));
 const Disclaimer = lazy(() => import('./pages/legal/Disclaimer'));
 const TrainerCodeOfConduct = lazy(() => import('./pages/legal/TrainerCodeOfConduct'));
 const JoinAsTrainer = lazy(() => import('./pages/careers/JoinAsTrainer'));
-const TrainerProfiles = lazy(() => import('./pages/careers/TrainerProfiles'));
 const CareerSupport = lazy(() => import('./pages/career-support/CareerSupport'));
 const Sitemap = lazy(() => import('./pages/Sitemap'));
 const NotFound = lazy(() => import('./pages/NotFound'));
@@ -144,7 +143,6 @@ const AnimatedRoutes = () => {
         <Route path="/career-support" element={<CareerSupport />} />
         <Route path="/reviews" element={<Reviews />} />
 
-        <Route path="/careers/trainers" element={<TrainerProfiles />} />
         <Route path="/careers/join-as-trainer" element={<JoinAsTrainer />} />
 
         <Route path="/faq" element={<FAQ />} />
