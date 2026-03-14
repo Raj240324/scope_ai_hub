@@ -202,8 +202,8 @@ const headerStyle = {
 
         @media (max-width: 1023px) {
           :root {
-            --header-height: 64px;
-            --logo-height: 48px;
+            --header-height: 72px;
+            --logo-height: 56px;
           }
         }
 
@@ -408,11 +408,11 @@ const headerStyle = {
           HEADER BAR
       ════════════════════════════════════════════════════════════════════ */}
       <header style={headerStyle}>
-        <div style={{ width: "100%", maxWidth: 1320, margin: "0 auto", padding: "0 1.5rem" }}>
+        <div style={{ width: "100%", maxWidth: 1320, margin: "0 auto", padding: "0 1rem" }}>
           <nav style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "1rem" }}>
 
             {/* ── Logo ──────────────────────────────────────────────────── */}
-            <Link to="/" onClick={() => { if (pathname === '/') window.scrollTo({ top: 0, behavior: 'smooth' }); }} style={{ textDecoration: "none", flexShrink: 0, display: "flex", alignItems: "center", height: "100%" }}>
+            <Link to="/" onClick={() => { if (pathname === '/') window.scrollTo({ top: 0, behavior: 'smooth' }); }} style={{ textDecoration: "none", flexShrink: 1, display: "flex", alignItems: "center", height: "100%", minWidth: 0 }}>
               <m.img 
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -422,6 +422,8 @@ const headerStyle = {
                 style={{
                   height: "var(--logo-height, 84px)",
                   width: "auto",
+                  maxWidth: "100%",
+                  objectFit: "contain",
                   display: "block",
                   transition: "opacity 0.2s, height 0.4s ease",
                 }}
