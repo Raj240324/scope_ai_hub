@@ -173,10 +173,10 @@ const headerStyle = {
   left:       0,
   width:      "100%",
   zIndex:     999,
-  height:     92,
+  height:     "var(--header-height, 80px)",
   display:    "flex",
   alignItems: "center",
-  transition: "background 0.4s ease, border-color 0.4s ease, backdrop-filter 0.4s ease, box-shadow 0.4s ease",
+  transition: "background 0.4s ease, border-color 0.4s ease, backdrop-filter 0.4s ease, box-shadow 0.4s ease, height 0.4s ease",
   background: (isTransparent || theme === 'dark')
     ? "rgba(6, 4, 14, 0.75)"
     : "rgba(248, 244, 255, 0.78)",
@@ -195,6 +195,18 @@ const headerStyle = {
   return (
     <>
       <style>{`
+        :root {
+          --header-height: 92px;
+          --logo-height: 84px;
+        }
+
+        @media (max-width: 1023px) {
+          :root {
+            --header-height: 64px;
+            --logo-height: 48px;
+          }
+        }
+
         @keyframes slideInRight { from { transform: translateX(100%); } to { transform: translateX(0); } }
         @keyframes fadeInDown   { from { opacity:0; transform:translateY(-8px); } to { opacity:1; transform:translateY(0); } }
         @keyframes pageFoldDown {
@@ -408,10 +420,10 @@ const headerStyle = {
                 alt={BRANDING.fullName} 
                 fetchpriority="high"
                 style={{
-                  height: 92,
+                  height: "var(--logo-height, 84px)",
                   width: "auto",
                   display: "block",
-                  transition: "opacity 0.2s",
+                  transition: "opacity 0.2s, height 0.4s ease",
                 }}
               />
             </Link>
