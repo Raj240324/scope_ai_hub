@@ -22,8 +22,8 @@ const CSP_BASELINE = [
   "connect-src 'self' https://api.brevo.com https://*.sentry.io https://*.tawk.to https://www.google.com https://www.gstatic.com wss://*.tawk.to",
 
   // img-src
-  "img-src 'self' data: https://*.tawk.to https://fonts.gstatic.com https://*.google.com https://*.googleapis.com",
-
+  "img-src 'self' data: https: blob:",
+  
   // style-src
   "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://*.tawk.to",
 
