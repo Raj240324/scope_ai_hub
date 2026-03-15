@@ -13,9 +13,16 @@ const HEALTH_TOKEN = process.env.HEALTH_CHECK_TOKEN;
 export default async function handler(req, res) {
 
   // ── Security: Only allow GET ──────────────────────────────────────
-  if (req.method !== "GET") {
-    return res.status(405).json({ status: "error", message: "Method not allowed" });
-  }
+ // ── Security: Allow GET and HEAD ──────────────────────────────────
+    if (req.method !== "GET" && req.method !== "HEAD") {
+      return res.status(405).json({ status: "error", message: "Method not allowed" });
+    }
+
+    // Monitoring tools use HEAD requests
+    if (req.method === "HEAD") {
+      res.setHeader("Cache-Control", "no-store");
+      return res.status(200).end();
+    }
 
   // ── Security: Bearer token gate ───────────────────────────────────
   // If HEALTH_CHECK_TOKEN is configured, require it.
