@@ -196,13 +196,13 @@ const headerStyle = {
     <>
       <style>{`
         :root {
-          --header-height: 92px;
+          --header-height: 84px;
           --logo-height: 84px;
         }
 
         @media (max-width: 1023px) {
           :root {
-            --header-height: 72px;
+            --header-height: 58px;
             --logo-height: 56px;
           }
         }
