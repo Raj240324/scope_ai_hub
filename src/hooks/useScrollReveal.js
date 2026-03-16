@@ -13,7 +13,10 @@ export function useScrollReveal({
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
-    if (reducedMotion) { setIsVisible(true); return; }
+    if (reducedMotion) { 
+      setIsVisible(true); // eslint-disable-line react-hooks/set-state-in-effect
+      return; 
+    }
     if (!enabled) return;
     const el = ref.current;
     if (!el) return;

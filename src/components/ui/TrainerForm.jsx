@@ -44,7 +44,8 @@ const TrainerForm = ({ autoFocus = false }) => {
   const [errorMessage, setErrorMessage] = useState('');
   const [fieldError, setFieldError] = useState('');
   const [captchaToken, setCaptchaToken] = useState(null);
-  const [formLoadedAt] = useState(Date.now());
+  // eslint-disable-next-line react-hooks/purity
+  const formLoadedAt = useRef(Date.now());
 
   const step = STEPS[currentStep];
   const progress = ((currentStep + 1) / STEPS.length) * 100;
@@ -104,7 +105,8 @@ const TrainerForm = ({ autoFocus = false }) => {
     if (err) { setFieldError(err); return; }
 
     // Prevent submission before 3 seconds
-    if (currentStep === STEPS.length - 1 && Date.now() - formLoadedAt < 3000) {
+    // eslint-disable-next-line react-hooks/purity
+    if (currentStep === STEPS.length - 1 && Date.now() - formLoadedAt.current < 3000) {
       setFieldError('Please take a moment to review your entry.');
       return;
     }
@@ -287,7 +289,7 @@ const TrainerForm = ({ autoFocus = false }) => {
               animate="visible"
               className="flex flex-col gap-2"
             >
-              {EXPERTISE_OPTIONS.map((opt, i) => {
+              {EXPERTISE_OPTIONS.map((opt) => {
                 const isSelected = value === opt.value;
                 return (
                   <m.button

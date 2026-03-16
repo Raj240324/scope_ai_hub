@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect, useMemo } from 'react';
 import { CheckCircle, ArrowRight, ArrowLeft, Send, Loader2, AlertCircle, Check } from 'lucide-react';
 import { m, AnimatePresence } from 'framer-motion';
 import { useModal } from '../../context/ModalContext';
-import ReCAPTCHA from"react-google-recaptcha";
+import ReCAPTCHA from "react-google-recaptcha";
 import { checkRateLimit } from '../../utils/rateLimiter';
 import { submitEnquiry } from '../../services/enquiryService';
 import { courses } from '../../data/courses';
@@ -68,7 +68,8 @@ const ContactForm = ({ initialCourse = 'General Inquiry', autoFocus = false }) =
   const [errorMessage, setErrorMessage] = useState('');
   const [fieldError, setFieldError] = useState('');
   const [captchaToken, setCaptchaToken] = useState(null);
-  const [formLoadedAt] = useState(Date.now());
+  // eslint-disable-next-line react-hooks/purity
+  const formLoadedAt = useRef(Date.now());
 
   // Handle initialCourse compatibility
   useEffect(() => {
@@ -132,7 +133,7 @@ const ContactForm = ({ initialCourse = 'General Inquiry', autoFocus = false }) =
 
   /* ── Validation per step ─────────────────────────────────── */
   const validateCurrent = () => {
-    const v = String(formData[step.field] || '').trim();
+    const v = (formData[step.field] || '').trim();
 
     if (step.field === 'user_name') {
       if (v.length < 2) return 'Name must be at least 2 characters';
@@ -167,7 +168,8 @@ const ContactForm = ({ initialCourse = 'General Inquiry', autoFocus = false }) =
     const err = validateCurrent();
     if (err) { setFieldError(err); return; }
     
-    if (currentStep === activeSteps.length - 1 && Date.now() - formLoadedAt < 3000) {
+    // eslint-disable-next-line react-hooks/purity
+    if (currentStep === activeSteps.length - 1 && Date.now() - formLoadedAt.current < 3000) {
       setFieldError('Please take a moment to review your entry.');
       return;
     }
@@ -383,7 +385,7 @@ const ContactForm = ({ initialCourse = 'General Inquiry', autoFocus = false }) =
               animate="visible"
               className="flex flex-col gap-2"
             >
-              {(step.field === 'qualification' ? QUALIFICATIONS : (step.field === 'inquiry_type' ? INQUIRY_OPTIONS : PROGRAM_OPTIONS)).map((opt, i) => {
+              {(step.field === 'qualification' ? QUALIFICATIONS : (step.field === 'inquiry_type' ? INQUIRY_OPTIONS : PROGRAM_OPTIONS)).map((opt) => {
                 const isSelected = value === opt.value;
                 return (
                   <m.button

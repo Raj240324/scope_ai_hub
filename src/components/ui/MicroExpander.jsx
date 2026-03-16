@@ -28,26 +28,6 @@ const MicroExpander = React.forwardRef(
   ) => {
     const [isHovered, setIsHovered] = React.useState(false);
 
-    const containerVariants = {
-      initial: { width: '48px' },
-      hover: { width: 'auto' },
-      loading: { width: '48px' },
-    };
-
-    const textVariants = {
-      initial: { opacity: 0, x: -10 },
-      hover: {
-        opacity: 1,
-        x: 0,
-        transition: { delay: 0.15, duration: 0.3, ease: 'easeOut' },
-      },
-      exit: {
-        opacity: 0,
-        x: -5,
-        transition: { duration: 0.1, ease: 'linear' },
-      },
-    };
-
     const variantStyles = {
       default: 'bg-primary text-primary-foreground border border-primary',
       outline:

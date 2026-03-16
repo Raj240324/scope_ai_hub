@@ -3,7 +3,7 @@ import { Code2, Users, Building2, CheckCircle2, Briefcase } from 'lucide-react';
 import { ScaleOnHover } from '../utils/Animations';
 import { m } from 'framer-motion';
 import { useScrollReveal } from '../../hooks/useScrollReveal';
-import { fadeUp, staggerContainer, staggerItem } from '../../utils/motionVariants';
+import { fadeUp, staggerContainer } from '../../utils/motionVariants';
 
 const PlacementSection = ({ openModal }) => {
   const { ref: headerRef, isVisible: headerVisible } = useScrollReveal();

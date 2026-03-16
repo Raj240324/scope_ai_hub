@@ -43,7 +43,7 @@ const DynamicScrollButton = () => {
   };
 
   useEffect(() => {
-    toggleVisibility(); // Set initial state
+    toggleVisibility(); // eslint-disable-line react-hooks/set-state-in-effect
     window.addEventListener('scroll', toggleVisibility, { passive: true });
     return () => window.removeEventListener('scroll', toggleVisibility);
   }, []);

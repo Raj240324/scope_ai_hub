@@ -2,7 +2,6 @@ import React, { useState, useMemo } from 'react';
 import Layout from '../components/layout/Layout';
 import { Star, Quote, Search, Filter, MessageSquare, ThumbsUp, CheckCircle2 } from 'lucide-react';
 import { clsx } from 'clsx';
-import { courses } from '../data/courses';
 import { useModal } from '../context/ModalContext';
 import { BRANDING } from '../data/branding';
 import SEO from '../components/utils/SEO';

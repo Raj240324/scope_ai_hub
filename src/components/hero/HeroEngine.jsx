@@ -10,7 +10,7 @@ const HeroEngine = () => {
   useEffect(() => {
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reducedMotion) {
-      setMode("static");
+      setMode("static"); // eslint-disable-line react-hooks/set-state-in-effect
       return;
     }
 

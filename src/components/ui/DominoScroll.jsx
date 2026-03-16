@@ -40,7 +40,6 @@ const DominoScroll = ({
   wrapperHeight,            // legacy fixed height
   containerClassName = '',  // responsive tailwind height classes
   wrapperMaxWidth = '900px',
-  perspectiveOriginY = '60%',  // slightly below centre = floor-level view
 }) => {
   const containerRef = useRef(null);
   const itemsRef     = useRef([]);

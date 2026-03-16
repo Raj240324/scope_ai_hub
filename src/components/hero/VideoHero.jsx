@@ -13,7 +13,9 @@ const VideoHero = () => {
       if (document.hidden) {
         video.pause();
       } else {
-        video.play().catch(() => {});
+        video.play().catch(() => {
+          // Playback might be blocked by browser policy
+        });
       }
     };
 
@@ -29,7 +31,9 @@ const VideoHero = () => {
     const handleReady = async () => {
       try {
         await video.play();
-      } catch (e) {}
+      } catch {
+        // Playback might be blocked by browser policy
+      }
       
       setVideoReady(true);
       window.dispatchEvent(new Event("heroVideoReady"));

@@ -23,7 +23,7 @@ import { useTheme } from "../context/ThemeContext";
 import ThemeToggle from './ui/ThemeToggle';
 import { courses, TIERS, coursesByTier, tierMeta } from "../data/courses";
 import { BRANDING } from "../data/branding";
-import { m } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 
 // ─── Design tokens (mirror hero palette) ─────────────────────────────────────
 
@@ -137,9 +137,9 @@ useEffect(() => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // ── Close on route change ───────────────────────────────────────────────────
+  // ─── Close on route change ────────────────────────────────────────────────
   useEffect(() => {
-    setIsOpen(false);
+    setIsOpen(false); // eslint-disable-line react-hooks/set-state-in-effect
     setActiveDropdown(null);
     setShowCourses(false);
   }, [pathname]);

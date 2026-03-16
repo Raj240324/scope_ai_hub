@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { m } from 'framer-motion';
 import { useScrollReveal } from '../../hooks/useScrollReveal';
-import { fadeUp, staggerContainer, staggerItem } from '../../utils/motionVariants';
+import { fadeUp, staggerContainer } from '../../utils/motionVariants';
 import { ArrowRight, Star } from 'lucide-react';
 
 const mentors = [

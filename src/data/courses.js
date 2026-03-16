@@ -34,14 +34,6 @@ export const tierMeta = {
   },
 };
 
-const generateSlug = (title) =>
-  title
-    .toLowerCase()
-    .replace(/[^a-z0-9\s-]/g, '')
-    .replace(/\s+/g, '-')
-    .replace(/-+/g, '-')
-    .trim();
-
 export const courses = [
   // ═══════════════════════════════════════════
   // BEGINNER TIER (Programs 01, 02, 05, 08)

@@ -22,8 +22,6 @@ import {
   Check,
 } from 'lucide-react';
 import { m, AnimatePresence } from 'framer-motion';
-import { useScrollReveal } from '../../hooks/useScrollReveal';
-import { fadeUp, staggerContainer, staggerItem } from '../../utils/motionVariants';
 import CourseCard from '../../components/ui/CourseCard';
 import BatchScheduleSection from '../../components/sections/BatchScheduleSection';
 

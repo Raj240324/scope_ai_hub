@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -19,15 +19,6 @@ const Hero = ({
   const isHome = variant === 'home';
   const isVideo = variant === 'video';
   const [videoLoaded, setVideoLoaded] = useState(false);
-
-  // Determine if we should show video (desktop only for performance)
-  const [isMobile, setIsMobile] = useState(false);
-  useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 768);
-    check();
-    window.addEventListener('resize', check);
-    return () => window.removeEventListener('resize', check);
-  }, []);
 
   if (isVideo) {
     return (

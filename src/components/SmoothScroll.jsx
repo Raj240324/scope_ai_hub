@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import React, { useEffect, createContext, useContext } from 'react';
 import Lenis from '@studio-freight/lenis';
 import { useLocation } from 'react-router-dom';
@@ -25,6 +26,7 @@ export function SmoothScroll({ children }) {
         infinite: false,
       });
 
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setLenis(localLenis);
 
       function raf(time) {

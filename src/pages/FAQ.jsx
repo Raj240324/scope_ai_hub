@@ -6,7 +6,7 @@ import Hero from '../components/ui/Hero';
 import { Helmet } from 'react-helmet-async';
 import SEO from '../components/utils/SEO';
 import { BRANDING } from '../data/branding';
-import { courses, tierMeta } from '../data/courses';
+import { courses } from '../data/courses';
 import { m } from 'framer-motion';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import { fadeUp, staggerContainer, staggerItem } from '../utils/motionVariants';
@@ -311,7 +311,7 @@ const FAQ = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {courses.map((item, i) => ({
+                      {courses.map((item) => ({
                         course: item.title,
                         duration: item.duration,
                         difficulty: item.tier,

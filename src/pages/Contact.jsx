@@ -3,18 +3,16 @@ import { useLocation } from 'react-router-dom';
 import Layout from '../components/layout/Layout';
 import ContactForm from '../components/ui/ContactForm';
 import { Mail, Phone, MapPin, Clock, Facebook, Twitter, Linkedin, Instagram } from 'lucide-react';
-import { useModal } from '../context/ModalContext';
 
 import { m } from 'framer-motion';
 import { useScrollReveal } from '../hooks/useScrollReveal';
-import { fadeUp, staggerContainer, staggerItem } from '../utils/motionVariants';
+import { staggerContainer, staggerItem } from '../utils/motionVariants';
 import SEO from '../components/utils/SEO';
 import Hero from '../components/ui/Hero';
 
 import { BRANDING } from '../data/branding';
 
 const Contact = () => {
-  const { openModal } = useModal();
   const { ref: leftRef, isVisible: leftVisible } = useScrollReveal();
   const { ref: rightRef, isVisible: rightVisible } = useScrollReveal();
   const location = useLocation();

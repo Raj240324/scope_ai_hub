@@ -1,9 +1,8 @@
 // src/components/CoreSpinLoader.jsx
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 
 export function CoreSpinLoader({ onComplete }) {
   const [loadingText, setLoadingText] = useState('Initializing AI Core..');
-  const startTime = useRef(Date.now());
   const DURATION = 1200; // ms
 
   // ── Text cycling — only 3 states, minimal re-renders ───────────────────────
