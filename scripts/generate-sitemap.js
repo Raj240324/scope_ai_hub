@@ -28,7 +28,6 @@ const staticRoutes = [
   '/disclaimer',
   '/legal/trainer-conduct',
   '/careers/join-as-trainer',
-  '/careers/trainers',
   '/sitemap',
 ];
 

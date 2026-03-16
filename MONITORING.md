@@ -10,7 +10,7 @@ Add these 3 monitors:
 |---|---|---|
 | scopeaihub — Main Site | https://scopeaihub.com | 5 min |
 | scopeaihub — Health API | https://scopeaihub.com/api/health | 5 min |
-| scopeaihub — Heartbeat | https://scopeaihub.com/api/heartbeat | 30 min |
+| scopeaihub — Heartbeat | https://scopeaihub.com/api/health | 30 min |
 
 Alert contact: [your email]
 
@@ -31,7 +31,7 @@ Alert contact: [your email]
 - Workflow: .github/workflows/supabase-heartbeat.yml
 - Schedule: every 30 minutes
 - Purpose: prevents Supabase free tier from pausing
-- Endpoint: /api/heartbeat
+- Endpoint: /api/health
 
 ---
 
