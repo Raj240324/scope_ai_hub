@@ -172,7 +172,7 @@ const Reviews = () => {
                     whileTap={{ scale: 0.95 }}
                     key={courseName}
                     onClick={() => setSelectedCourse(courseName)}
-                    className={clsx("px-4 py-2 rounded-lg text-small font-medium whitespace-nowrap transition-all",
+                    className={clsx("px-4 py-2 rounded-lg text-small font-medium whitespace-nowrap transition-all cursor-pointer",
                       selectedCourse === courseName
                         ?"bg-primary text-[var(--text-on-inverted)] shadow-md shadow-primary/20"
                         :"bg-[var(--bg-card)] text-[var(--text-muted)] hover:bg-[var(--bg-secondary)] border border-[var(--border-color)]"
