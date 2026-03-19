@@ -8,7 +8,7 @@ export const FadeIn = ({
   duration = 0.5, 
   className ="",
   fullWidth = false,
-  viewportMargin ="-50px" // Expose margin as prop for flexibility
+  viewportMargin ="-100px" // Expose margin as prop for flexibility
 }) => {
   const directions = {
     up: { y: 30 },
@@ -55,7 +55,7 @@ export const StaggerContainer = ({
     <m.div
       initial="hidden"
       whileInView="show"
-      viewport={{ once: true, margin:"-50px" }}
+      viewport={{ once: true, margin:"-100px" }}
       variants={{
         hidden: {},
         show: {
@@ -119,7 +119,7 @@ export const Parallax = ({ children, offset = 50, className ="" }) => {
 
   return (
     <div ref={ref} className={className} style={{ overflow: 'visible' }}>
-      <m.div style={{ y, willChange: 'transform' }}>
+      <m.div style={{ y, willChange: 'transform', transform: 'translateZ(0)', backfaceVisibility: 'hidden' }}>
         {children}
       </m.div>
     </div>

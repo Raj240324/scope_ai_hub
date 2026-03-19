@@ -490,6 +490,14 @@ body {
   .modal-scroll {
     scroll-behavior: smooth;
   }
+
+  .contain-layout {
+    contain: layout;
+  }
+  
+  .contain-paint {
+    contain: paint;
+  }
 }
 
 @keyframes slideInRight {

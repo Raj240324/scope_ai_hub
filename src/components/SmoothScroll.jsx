@@ -19,9 +19,10 @@ export function SmoothScroll({ children }) {
     let localLenis;
     try {
       localLenis = new Lenis({
-        duration: 1.2,
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        duration: 1.1,
+        easing: (t) => 1 - Math.pow(1 - t, 3), // smoother + lighter
         smoothTouch: false,
+        wheelMultiplier: 0.9, // 🔥 reduce aggressiveness
         touchMultiplier: 2,
         infinite: false,
       });

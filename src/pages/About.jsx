@@ -256,7 +256,7 @@ const About = () => {
       </section>
 
       {/* Philosophy */}
-      <section className="section-padding bg-[var(--bg-card)]">
+      <section className="section-padding bg-[var(--bg-card)] contain-layout contain-paint">
         <div className="container-custom">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="space-y-6">
@@ -283,14 +283,14 @@ const About = () => {
                 ))}
               </div>
             </div>
-            <div className="grid grid-cols-2 gap-3 sm:gap-4">
+            <div className="grid grid-cols-2 gap-3 sm:gap-4 transform-gpu will-change-transform">
               <div className="space-y-4">
-                <Parallax offset={20}>
+                <Parallax offset={20} lerp={0.08}>
                   <div className="aspect-[4/5] bg-[var(--bg-secondary)] rounded-3xl overflow-hidden shadow-inner">
-                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80" alt="Students collaborating" loading="lazy" className="h-full w-full object-cover" />
+                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80" alt="Students collaborating" loading="lazy" decoding="async" className="h-full w-full object-cover" style={{ aspectRatio: "4/5" }} />
                   </div>
                 </Parallax>
-                <Parallax offset={-20}>
+                <Parallax offset={-20} lerp={0.08}>
                   <div className="aspect-square bg-primary rounded-3xl p-8 flex flex-col justify-end text-[var(--text-on-inverted)] shadow-xl shadow-primary/20">
                     <Lightbulb className="h-10 w-10 mb-4" />
                     <p className="font-bold text-body-lg leading-tight text-[var(--text-on-inverted)]">Innovation in every lesson.</p>
@@ -298,7 +298,7 @@ const About = () => {
                 </Parallax>
               </div>
               <div className="space-y-4 pt-12">
-                <Parallax offset={20}>
+                <Parallax offset={20} lerp={0.08}>
                   <div className="aspect-square bg-[var(--bg-inverted)] light-surface rounded-3xl p-8 flex flex-col justify-end text-[var(--text-on-light)] shadow-xl">
                     <Target className="h-10 w-10 mb-4 text-primary-light" />
                     <p className="font-bold text-body-lg leading-tight text-[var(--text-on-light)]">
@@ -306,9 +306,9 @@ const About = () => {
                     </p>
                   </div>
                 </Parallax>
-                <Parallax offset={-20}>
+                <Parallax offset={-20} lerp={0.08}>
                   <div className="aspect-[4/5] bg-[var(--bg-secondary)] rounded-3xl overflow-hidden shadow-inner">
-                    <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80" alt="Classroom" loading="lazy" className="h-full w-full object-cover" />
+                    <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80" alt="Classroom" loading="lazy" decoding="async" className="h-full w-full object-cover" style={{ aspectRatio: "4/5" }} />
                   </div>
                 </Parallax>
               </div>
