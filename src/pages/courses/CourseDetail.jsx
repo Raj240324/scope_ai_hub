@@ -176,67 +176,6 @@ const CourseDetail = () => {
             {/* LEFT COLUMN */}
             <div className="lg:col-span-2 space-y-20">
 
-              {/* Syllabus Accordion */}
-              <div id="syllabus" className="scroll-mt-28">
-                <div className="flex items-end justify-between mb-10">
-                  <div>
-                    <h2 className="heading-lg font-bold text-[var(--text-heading)] tracking-tight">
-                      Syllabus
-                    </h2>
-                    <p className="text-small text-[var(--text-muted)] mt-1">
-                      {course.modules.length} modules · Structured progression
-                    </p>
-                  </div>
-                </div>
-
-                <div className="space-y-3">
-                  {course.modules.map((mod, index) => {
-                    const isOpen = activeModule === index;
-                    return (
-                      <m.div
-                        key={mod.code}
-                        initial={false}
-                        className="rounded-xl overflow-hidden border transition-colors duration-300"
-                        style={{
-                          borderColor: isOpen ? `${tier.color}40` : 'var(--border-color)',
-                          background: isOpen ? `${tier.color}04` : 'var(--bg-card)',
-                        }}
-                      >
-                        <m.button
-                          whileHover={{ scale: 1.01 }}
-                          whileTap={{ scale: 0.99 }}
-                          onClick={() => setActiveModule(isOpen ? -1 : index)}
-                          className="w-full flex items-center justify-between p-4 cursor-pointer sm:p-5 text-left group"
-                        >
-                          <div className="flex gap-4 items-center">
-                            <span
-                              className="h-9 w-9 shrink-0 rounded-lg flex items-center justify-center text-caption font-black transition-all duration-300"
-                              style={
-                                isOpen
-                                  ? { background: tier.color, color: '#fff', boxShadow: `0 4px 12px ${tier.color}30` }
-                                  : { background: 'var(--bg-secondary)', color: 'var(--text-muted)' }
-                              }
-                            >
-                              {mod.code}
-                            </span>
-                            <h4 className="text-small sm:text-body font-bold text-[var(--text-heading)] group-hover:text-primary transition-colors duration-300">
-                              {mod.title}
-                            </h4>
-                          </div>
-                          <ChevronDown
-                            className="h-4 w-4 text-[var(--text-muted)] shrink-0 ml-4 transition-transform duration-400"
-                            style={{
-                              transform: isOpen ? 'rotate(180deg)' : 'none',
-                              color: isOpen ? tier.color : undefined,
-                            }}
-                          />
-                        </m.button>
-                      </m.div>
-                    );
-                  })}
-                </div>
-              </div>
-
               {/* Who Can Learn */}
               <div id="who-can-learn" className="scroll-mt-28">
                 <h2 className="heading-lg font-bold text-[var(--text-heading)] tracking-tight mb-2">
@@ -287,6 +226,40 @@ const CourseDetail = () => {
                     >
                       <span className="text-body-lg group-hover:scale-110 transition-transform duration-300">{role.icon}</span>
                       {role.title}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Syllabus Accordion */}
+              <div id="syllabus" className="scroll-mt-28">
+                <div className="flex items-end justify-between mb-10">
+                  <div>
+                    <h2 className="heading-lg font-bold text-[var(--text-heading)] tracking-tight">
+                      Syllabus
+                    </h2>
+                    <p className="text-small text-[var(--text-muted)] mt-1">
+                      {course.modules.length} modules · Structured progression
+                    </p>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
+                  {course.modules.map((mod) => (
+                    <div
+                      key={mod.code}
+                      className="rounded-xl overflow-hidden border border-[var(--border-color)] bg-[var(--bg-card)] transition-colors duration-300"
+                    >
+                      <div className="w-full flex items-center justify-between p-4 sm:p-5 text-left group">
+                        <div className="flex gap-4 items-center">
+                          <span className="h-9 w-9 shrink-0 rounded-lg flex items-center justify-center text-caption font-black transition-all duration-300 bg-[var(--bg-secondary)] text-[var(--text-muted)] group-hover:bg-[var(--bg-secondary)]">
+                            {mod.code}
+                          </span>
+                          <h4 className="text-small sm:text-body font-bold text-[var(--text-heading)] transition-colors duration-300">
+                            {mod.title}
+                          </h4>
+                        </div>
+                      </div>
                     </div>
                   ))}
                 </div>
