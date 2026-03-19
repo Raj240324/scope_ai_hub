@@ -23,7 +23,7 @@ const ContactModal = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={closeModal}
-            className="fixed inset-0 bg-[var(--text-heading)]/60 backdrop-blur-sm touch-none"
+            className="fixed inset-0 bg-[var(--text-heading)]/60 backdrop-blur-sm"
           />
 
           {/* Modal Content */}
@@ -34,8 +34,8 @@ const ContactModal = () => {
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
-            transition={{ type: "spring", duration: 0.5, bounce: 0.3 }}
-            className="relative w-full max-w-2xl bg-[var(--bg-card)] rounded-[2rem] shadow-2xl z-10 flex flex-col max-h-[92vh] md:max-h-[85vh] overflow-hidden"
+            transition={{ duration: 0.3, ease: "easeOut" }}
+            className="relative w-full max-w-2xl bg-[var(--bg-card)] rounded-[2rem] shadow-2xl z-10 flex flex-col max-h-[92vh] md:max-h-[85vh] overflow-hidden transform-gpu will-change-transform"
           >
             {/* Close Button */}
             <m.button 
@@ -51,7 +51,9 @@ const ContactModal = () => {
             {/* Scrollable Content Area */}
             <div 
               ref={scrollContainerRef}
-              className="flex-1 min-h-0 overflow-y-auto overscroll-contain px-6 pt-6 pb-12 md:px-8 md:pt-8 md:pb-16 custom-scrollbar"
+              onWheel={(e) => e.stopPropagation()}
+              onTouchMove={(e) => e.stopPropagation()}
+              className="modal-scroll flex-1 min-h-0 overflow-y-auto overscroll-contain px-6 pt-6 pb-12 md:px-8 md:pt-8 md:pb-16 custom-scrollbar"
               tabIndex="0"
               style={{ WebkitOverflowScrolling: 'touch' }}
             >

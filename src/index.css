@@ -46,7 +46,7 @@ body {
   overflow-x: clip;
   position: relative;
   width: 100%;
-  overscroll-behavior-y: none;
+  overscroll-behavior-y: auto;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
@@ -193,7 +193,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
   overflow-x: clip;
-  overscroll-behavior-y: none;
+  overscroll-behavior-y: auto;
 }
 
   /* Accessible Links & Motion */
@@ -484,6 +484,11 @@ body {
     will-change: transform;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
+  }
+
+  /* Modal Smooth Scroll Fixes */
+  .modal-scroll {
+    scroll-behavior: smooth;
   }
 }
 
