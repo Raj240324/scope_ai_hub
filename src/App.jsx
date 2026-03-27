@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useState, useEffect, useRef, useCallback } from 'react';
+import React, { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { LazyMotion, domAnimation } from 'framer-motion';
@@ -11,8 +11,6 @@ import { ModalProvider } from './context/ModalContext';
 import { ThemeProvider } from './context/ThemeContext';
 import ContactModal from './components/ui/ContactModal';
 import NewUserModalTrigger from './components/utils/NewUserModalTrigger';
-import { CoreSpinLoader } from './components/ui/CoreSpinLoader';
-import { useScrollLock } from './hooks/useScrollLock';
 
 // Lazy Load Pages
 const Home = lazy(() => import('./pages/Home'));
@@ -48,76 +46,6 @@ if (typeof requestIdleCallback !== 'undefined') {
   requestIdleCallback(prefetchRoutes, { timeout: 3000 });
 } else {
   setTimeout(prefetchRoutes, 2000);
-}
-
-// Full-screen preloader — syncs with hero video loading
-function AppPreloader({ onReady }) {
-  const [visible, setVisible] = useState(() => !window.__appPreloaderShown);
-  const [fadeOut, setFadeOut] = useState(false);
-  
-  const loaderDoneRef = useRef(false);
-  const videoDoneRef = useRef(false);
-
-  // Lock scroll while preloader is visible
-  useScrollLock(visible);
-
-  const checkDone = useCallback(() => {
-    if (window.__appPreloaderShown) return;
-    if (loaderDoneRef.current && videoDoneRef.current && !fadeOut) {
-      setFadeOut(true);
-      window.__appPreloaderShown = true;
-      setTimeout(() => {
-        setVisible(false);
-        onReady?.();
-      }, 300);
-    }
-  }, [fadeOut, onReady]);
-
-  // Called by CoreSpinLoader once its simulated progress reaches 100%
-  const handleLoaderComplete = useCallback(() => {
-    loaderDoneRef.current = true;
-    checkDone();
-  }, [checkDone]);
-
-  useEffect(() => {
-    if (window.__appPreloaderShown) {
-      onReady?.();
-      return;
-    }
-
-    // If not on the home page, no need to wait for the hero video
-    if (window.location.pathname !== '/') {
-      videoDoneRef.current = true;
-    }
-
-    const handleVideoReady = () => {
-      videoDoneRef.current = true;
-      checkDone();
-    };
-
-    window.addEventListener("heroVideoReady", handleVideoReady);
-
-    // Safety timeout: force dismiss after 3 seconds total if video stalls
-    const timeout = setTimeout(() => {
-      videoDoneRef.current = true;
-      checkDone();
-    }, 3000);
-
-    return () => {
-      window.removeEventListener("heroVideoReady", handleVideoReady);
-      clearTimeout(timeout);
-    };
-  }, [checkDone, onReady]);
-
-  if (!visible) return null;
-
-  return (
-    <div
-      className={`fixed inset-0 z-[9999] flex items-center justify-center bg-[var(--bg-body)] transition-opacity duration-500 ${fadeOut ? 'opacity-0' : 'opacity-100'}`}
-    >
-      <CoreSpinLoader onComplete={handleLoaderComplete} />
-    </div>
-  );
 }
 
 // Minimal Suspense fallback for route transitions
@@ -166,12 +94,8 @@ const AnimatedRoutes = () => {
 };
 
 function App() {
-  const [isAppReady, setIsAppReady] = useState(() => window.__appPreloaderShown || false);
-
   return (
     <ErrorBoundary>
-      <AppPreloader onReady={() => setIsAppReady(true)} />
-
       <Router>
         <SmoothScroll>
           <LazyMotion features={domAnimation}>
@@ -181,7 +105,7 @@ function App() {
                   <Suspense fallback={<PageLoader />}>
                     <AnimatedRoutes />
                   </Suspense>
-                  <NewUserModalTrigger isAppReady={isAppReady} />
+                  <NewUserModalTrigger isAppReady />
                   <ContactModal />
                 </ThemeProvider>
               </ModalProvider>
@@ -194,3 +118,4 @@ function App() {
 }
 
 export default App;
+
