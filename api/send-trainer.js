@@ -34,7 +34,7 @@ const ALLOWED_HOSTNAME = process.env.ALLOWED_HOSTNAME || 'scope-ai-hub.vercel.ap
 const TRAINER_NOTIFY_TEMPLATE_ID = 3;
 const TRAINER_AUTO_REPLY_TEMPLATE_ID = 4;
 const CRM_LIST_ID = 4;
-const OWNER_EMAIL = 'nagarajan.webdev@gmail.com';
+const OWNER_EMAIL = 'infoscopeaihub@gmail.com';
 const OWNER_NAME = 'SCOPE AI HUB';
 
 const MAX_BODY_BYTES = 10 * 1024; // 10 KB

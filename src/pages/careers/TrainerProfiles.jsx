@@ -21,7 +21,7 @@ const TrainerProfiles = () => {
       ],
       linkedin:"https://linkedin.com",
       github:"https://github.com",
-      email:"academics@scopeaihub.com"
+      email: BRANDING.email
     },
     {
       name:"Raghavi",
@@ -36,7 +36,7 @@ const TrainerProfiles = () => {
       ],
       linkedin:"https://linkedin.com",
       github:"https://github.com",
-      email:"placements@scopeaihub.com"
+      email: BRANDING.email
     },
     {
       name:"Suresh M",
@@ -51,7 +51,7 @@ const TrainerProfiles = () => {
       ],
       linkedin:"https://linkedin.com",
       github:"https://github.com",
-      email:"training@scopeaihub.com"
+      email: BRANDING.email
     }
   ];
 
