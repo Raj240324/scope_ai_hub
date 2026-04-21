@@ -12,6 +12,9 @@ const PageTransition = ({ children }) => {
     <AnimatePresence 
       mode="wait"
       onExitComplete={() => {
+        // Skip scroll-to-top when navigating to a hash target
+        if (window.location.hash) return;
+
         if (lenis) {
           lenis.scrollTo(0, { immediate: true });
         } else {

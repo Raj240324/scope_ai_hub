@@ -399,11 +399,11 @@ const CoursesList = () => {
       </section>
 
       {/* Career Advantages Section */}
-      <Suspense fallback={null}>
-        <section id="career-benefits" className="bg-[var(--bg-secondary)] border-t border-[var(--border-color)] py-20 md:py-28">
+      <section id="career-benefits" className="bg-[var(--bg-secondary)] border-t border-[var(--border-color)] py-20 md:py-28">
+        <Suspense fallback={<div className="min-h-[500px]" />}>
           <CareerAdvantages />
-        </section>
-      </Suspense>
+        </Suspense>
+      </section>
     </Layout>
   );
 };

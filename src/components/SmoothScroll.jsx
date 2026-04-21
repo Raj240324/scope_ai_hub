@@ -44,12 +44,35 @@ export function SmoothScroll({ children }) {
     };
   }, []);
 
-  // Handle route changes
+  // Handle route changes — respect hash fragments for section navigation
   useEffect(() => {
-    if (lenis) {
-      lenis.scrollTo(0, { immediate: true });
+    if (!lenis) return;
+
+    if (location.hash) {
+      // First attempt triggers early for visual feedback
+      const timer1 = setTimeout(() => {
+        const element = document.querySelector(location.hash);
+        if (element) {
+          lenis.scrollTo(element, { offset: -100, immediate: false });
+        }
+      }, 100);
+
+      // Second attempt ensures accurate final position after lazy-loaded content resolves
+      const timer2 = setTimeout(() => {
+        const element = document.querySelector(location.hash);
+        if (element) {
+          lenis.scrollTo(element, { offset: -100, immediate: false });
+        }
+      }, 700);
+
+      return () => {
+        clearTimeout(timer1);
+        clearTimeout(timer2);
+      };
     }
-  }, [location.pathname, lenis]);
+
+    lenis.scrollTo(0, { immediate: true });
+  }, [location.pathname, location.hash, lenis]);
 
   // Hero Conflict Resolution
   useEffect(() => {
