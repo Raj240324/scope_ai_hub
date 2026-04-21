@@ -132,19 +132,9 @@ export default function KineticTeamHybrid() {
                   return (
                     <>
                       <div className="mb-4">
-                        <span 
-                          className="text-6xl font-black tracking-tighter"
-                          style={{
-                            fontFamily: '"Bebas Neue", sans-serif',
-                            background: 'linear-gradient(135deg, #d24bd5 0%, #b833bb 100%)',
-                            WebkitBackgroundClip: 'text',
-                            WebkitTextFillColor: 'transparent',
-                            backgroundClip: 'text',
-                            color: 'transparent'
-                          }}
-                        >
-                          {activeData.name.split(' ').map(n => n[0]).join('').substring(0,2).toUpperCase()}
-                        </span>
+                        <div className="w-28 h-28 rounded-2xl overflow-hidden border border-[rgba(214,79,217,0.2)]">
+                          <img src={activeData.image} alt={activeData.name} className="w-full h-full object-cover" />
+                        </div>
                       </div>
                       <h3 className="text-xl font-bold text-[var(--text-heading)] mb-1">
                         {activeData.name}
@@ -260,19 +250,9 @@ function TeamRow({ data, index, isActive, setActiveId, isMobile, isAnyActive }) 
                   }}
                 >
                   <div className="mb-2">
-                    <span 
-                      className="text-5xl font-black tracking-tighter"
-                      style={{
-                        fontFamily: '"Bebas Neue", sans-serif',
-                        background: 'linear-gradient(135deg, #d24bd5 0%, #b833bb 100%)',
-                        WebkitBackgroundClip: 'text',
-                        WebkitTextFillColor: 'transparent',
-                        backgroundClip: 'text',
-                        color: 'transparent'
-                      }}
-                    >
-                      {data.name.split(' ').map(n => n[0]).join('').substring(0,2).toUpperCase()}
-                    </span>
+                    <div className="w-24 h-24 rounded-2xl overflow-hidden border border-[rgba(214,79,217,0.2)]">
+                      <img src={data.image} alt={data.name} className="w-full h-full object-cover" loading="lazy" />
+                    </div>
                   </div>
                   <h3 className="text-lg font-bold text-[var(--text-heading)] mb-1">
                     {data.name}

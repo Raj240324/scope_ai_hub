@@ -89,19 +89,9 @@ const TrainerMiniSection = () => {
                   }}
                 >
                   <div className="mb-4">
-                    <span 
-                      className="text-5xl font-black tracking-tighter"
-                      style={{
-                        fontFamily: '"Bebas Neue", sans-serif',
-                        background: 'linear-gradient(135deg, #d24bd5 0%, #b833bb 100%)',
-                        WebkitBackgroundClip: 'text',
-                        WebkitTextFillColor: 'transparent',
-                        backgroundClip: 'text',
-                        color: 'transparent'
-                      }}
-                    >
-                      {trainer.name.split(' ').map(n => n[0]).join('').substring(0,2).toUpperCase()}
-                    </span>
+                    <div className="w-24 h-24 rounded-2xl overflow-hidden border border-[rgba(214,79,217,0.2)]">
+                      <img src={trainer.image} alt={trainer.name} className="w-full h-full object-cover" loading="lazy" />
+                    </div>
                   </div>
                   <h3 className="text-xl font-bold text-[var(--text-heading)] mb-1">
                     {trainer.name}

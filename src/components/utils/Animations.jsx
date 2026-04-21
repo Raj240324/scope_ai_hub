@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { m, useInView, animate, useScroll, useTransform, useSpring } from 'framer-motion';
+import { m, useInView, animate } from 'framer-motion';
 
 export const FadeIn = ({ 
   children, 
@@ -104,24 +104,59 @@ export const ScaleOnHover = ({ children, className ="", scale = 1.05 }) => {
   );
 };
 
-export const Parallax = ({ children, offset = 50, className ="" }) => {
+export const Parallax = ({ children, offset = 50, className = "" }) => {
   const ref = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end","end start"]
-  });
+  const innerRef = useRef(null);
+  const rafId = useRef(null);
+  const currentY = useRef(0);
 
-  const springConfig = { stiffness: 100, damping: 30, mass: 0.5, restDelta: 0.001 };
-  const y = useSpring(
-    useTransform(scrollYProgress, [0, 1], [offset, -offset]),
-    springConfig
-  );
+  React.useEffect(() => {
+    const el = ref.current;
+    const inner = innerRef.current;
+    if (!el || !inner) return;
+
+    const update = () => {
+      const rect = el.getBoundingClientRect();
+      const windowH = window.innerHeight;
+      // progress: 0 when element bottom is at viewport top, 1 when element top is at viewport bottom
+      const progress = Math.min(Math.max(
+        (rect.top + rect.height) / (windowH + rect.height), 0
+      ), 1);
+      // Map progress [0,1] → [offset, -offset] (inverted so 0=top=offset, 1=bottom=-offset)
+      const targetY = offset - (progress * offset * 2);
+      currentY.current = targetY;
+      inner.style.transform = `translate3d(0, ${targetY}px, 0)`;
+    };
+
+    const onScroll = () => {
+      if (rafId.current) cancelAnimationFrame(rafId.current);
+      rafId.current = requestAnimationFrame(update);
+    };
+
+    // Initial position
+    update();
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+      if (rafId.current) cancelAnimationFrame(rafId.current);
+    };
+  }, [offset]);
 
   return (
-    <div ref={ref} className={className} style={{ overflow: 'visible' }}>
-      <m.div style={{ y, willChange: 'transform', transform: 'translateZ(0)', backfaceVisibility: 'hidden' }}>
+    <div ref={ref} className={className} style={{ position: 'relative', overflow: 'visible' }}>
+      <div
+        ref={innerRef}
+        style={{
+          willChange: 'transform',
+          backfaceVisibility: 'hidden',
+        }}
+      >
         {children}
-      </m.div>
+      </div>
     </div>
   );
 };

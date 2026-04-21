@@ -93,28 +93,18 @@ const TrainerProfiles = () => {
                 {/* Image Section */}
                 <div className="lg:w-1/3 relative bg-gradient-to-br from-primary/10 to-blue-100 p-6 sm:p-12 flex flex-col items-center justify-center">
                   <div 
-                    className="relative mb-6 w-48 h-48 sm:w-64 sm:h-64 rounded-[2.5rem] flex flex-col items-center justify-center text-center transition-all duration-500 ease-out z-10 mx-auto"
+                    className="relative mb-6 w-48 h-48 sm:w-64 sm:h-64 rounded-[2.5rem] overflow-hidden transition-all duration-500 ease-out z-10 mx-auto"
                     style={{
-                      background: 'rgba(214,79,217,0.06)',
-                      backdropFilter: 'blur(16px)',
-                      WebkitBackdropFilter: 'blur(16px)',
                       border: '1px solid rgba(214,79,217,0.2)',
                       boxShadow: '0 8px 32px rgba(214,79,217,0.1), inset 0 1px 0 rgba(255,255,255,0.06)'
                     }}
                   >
-                    <span 
-                      className="text-6xl sm:text-7xl font-black tracking-tighter"
-                      style={{
-                        fontFamily: '"Bebas Neue", sans-serif',
-                        background: 'linear-gradient(135deg, #d24bd5 0%, #b833bb 100%)',
-                        WebkitBackgroundClip: 'text',
-                        WebkitTextFillColor: 'transparent',
-                        backgroundClip: 'text',
-                        color: 'transparent'
-                      }}
-                    >
-                      {trainer.name.split(' ').map(n => n[0]).join('').substring(0,2).toUpperCase()}
-                    </span>
+                    <img 
+                      src={trainer.image} 
+                      alt={trainer.name} 
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                    />
                   </div>
                   <h3 className="heading-sm font-semibold text-[var(--text-heading)] text-center mb-2">{trainer.name}</h3>
                   <p className="text-primary font-bold text-center mb-6">{trainer.role}</p>

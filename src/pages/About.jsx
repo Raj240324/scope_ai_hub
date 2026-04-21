@@ -15,8 +15,8 @@ import NeuralCareerGraph from '../components/ui/NeuralCareerGraph';
 import visionAnimation from '../assets/animations/Vision Eye.json';
 import missionAnimation from '../assets/animations/Mission.json';
 
-import { FadeIn, StaggerContainer, StaggerItem, ScaleOnHover, ScrollCountUp, Parallax } from '../components/utils/Animations';
-import { m } from 'framer-motion';
+import { FadeIn, StaggerContainer, StaggerItem, ScaleOnHover, ScrollCountUp } from '../components/utils/Animations';
+import { m, useScroll, useTransform } from 'framer-motion';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import { fadeUp } from '../utils/motionVariants';
 
@@ -24,25 +24,29 @@ const About = () => {
   const { openModal } = useModal();
   const { ref: ctaRef, isVisible: ctaVisible } = useScrollReveal();
 
+  const { scrollYProgress } = useScroll();
+  const y1 = useTransform(scrollYProgress, [0, 1], [0, 30]);
+  const y2 = useTransform(scrollYProgress, [0, 1], [0, -30]);
+
   const locations = [
     { 
       name:"Nungambakkam Campus", 
-      address:"No. 12, Wallace Garden, 2nd Street, Nungambakkam, Chennai — 600006",
-      map:"https://maps.google.com/?q=Scope+AI+Hub+Nungambakkam+Chennai",
+      address:"Address to be updated",
+      map:"#",
       phone: BRANDING.phone,
       type:"Flagship Campus"
     },
     { 
       name:"Velachery Campus", 
-      address:"No. 45, Velachery Main Road, Near Phoenix Mall, Velachery, Chennai — 600042",
-      map:"https://maps.google.com/?q=Scope+AI+Hub+Velachery+Chennai",
+      address:"Address to be updated",
+      map:"#",
       phone: BRANDING.phone,
       type:"South Chennai Hub"
     },
     { 
       name:"OMR Campus", 
-      address:"3rd Floor, Tech Park, Rajiv Gandhi Salai (OMR), Sholinganallur, Chennai — 600119",
-      map:"https://maps.google.com/?q=Scope+AI+Hub+OMR+Sholinganallur+Chennai",
+      address:"Address to be updated",
+      map:"#",
       phone: BRANDING.phone,
       type:"IT Corridor Center"
     },
@@ -256,7 +260,7 @@ const About = () => {
       </section>
 
       {/* Philosophy */}
-      <section className="section-padding bg-[var(--bg-card)] contain-layout contain-paint">
+      <section className="section-padding bg-[var(--bg-card)] overflow-hidden">
         <div className="container-custom">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="space-y-6">
@@ -283,34 +287,30 @@ const About = () => {
                 ))}
               </div>
             </div>
-            <div className="grid grid-cols-2 gap-3 sm:gap-4 transform-gpu will-change-transform">
+            <div className="grid grid-cols-2 gap-3 sm:gap-4">
               <div className="space-y-4">
-                <Parallax offset={20} lerp={0.08}>
+                <m.div className="parallax-item" style={{ y: y1 }} layout="position">
                   <div className="aspect-[4/5] bg-[var(--bg-secondary)] rounded-3xl overflow-hidden shadow-inner">
                     <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80" alt="Students collaborating" loading="lazy" decoding="async" className="h-full w-full object-cover" style={{ aspectRatio: "4/5" }} />
                   </div>
-                </Parallax>
-                <Parallax offset={-20} lerp={0.08}>
-                  <div className="aspect-square bg-primary rounded-3xl p-8 flex flex-col justify-end text-[var(--text-on-inverted)] shadow-xl shadow-primary/20">
-                    <Lightbulb className="h-10 w-10 mb-4" />
-                    <p className="font-bold text-body-lg leading-tight text-[var(--text-on-inverted)]">Innovation in every lesson.</p>
-                  </div>
-                </Parallax>
+                </m.div>
+                <div className="aspect-square bg-primary rounded-3xl p-8 flex flex-col justify-end text-[var(--text-on-inverted)] shadow-xl shadow-primary/20">
+                  <Lightbulb className="h-10 w-10 mb-4" />
+                  <p className="font-bold text-body-lg leading-tight text-[var(--text-on-inverted)]">Innovation in every lesson.</p>
+                </div>
               </div>
               <div className="space-y-4 pt-12">
-                <Parallax offset={20} lerp={0.08}>
+                <m.div className="parallax-item" style={{ y: y2 }} layout="position">
                   <div className="aspect-square bg-[var(--bg-inverted)] light-surface rounded-3xl p-8 flex flex-col justify-end text-[var(--text-on-light)] shadow-xl">
                     <Target className="h-10 w-10 mb-4 text-primary-light" />
                     <p className="font-bold text-body-lg leading-tight text-[var(--text-on-light)]">
                       Goal-oriented training.
                     </p>
                   </div>
-                </Parallax>
-                <Parallax offset={-20} lerp={0.08}>
-                  <div className="aspect-[4/5] bg-[var(--bg-secondary)] rounded-3xl overflow-hidden shadow-inner">
-                    <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80" alt="Classroom" loading="lazy" decoding="async" className="h-full w-full object-cover" style={{ aspectRatio: "4/5" }} />
-                  </div>
-                </Parallax>
+                </m.div>
+                <div className="aspect-[4/5] bg-[var(--bg-secondary)] rounded-3xl overflow-hidden shadow-inner">
+                  <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80" alt="Classroom" loading="lazy" decoding="async" className="h-full w-full object-cover" style={{ aspectRatio: "4/5" }} />
+                </div>
               </div>
             </div>
           </div>
@@ -493,7 +493,6 @@ const About = () => {
                 beforeRole: 'Mechanical Graduate',
                 afterRole: 'ML Engineer',
                 company: 'Zoho',
-                logo: 'https://logo.clearbit.com/zoho.com',
                 quote: 'SCOPE AI HUB transformed my career. The hands-on projects gave me the confidence to crack my interview at Zoho.',
               },
               {
@@ -501,7 +500,6 @@ const About = () => {
                 beforeRole: 'IT Support Analyst',
                 afterRole: 'Data Scientist',
                 company: 'Freshworks',
-                logo: 'https://logo.clearbit.com/freshworks.com',
                 quote:"The mentors at SCOPE AI HUB don't just teach — they build with you. That changed everything for me.",
               },
               {
@@ -509,7 +507,6 @@ const About = () => {
                 beforeRole: 'BCA Graduate',
                 afterRole: 'AI Developer',
                 company: 'Infosys',
-                logo: 'https://logo.clearbit.com/infosys.com',
                 quote: 'From zero coding experience to deploying AI models in production. The curriculum is intense and industry-ready.',
               },
             ].map((student, i) => (
@@ -531,7 +528,9 @@ const About = () => {
                   <p className="text-body italic flex-1">"{student.quote}"</p>
                   <div className="mt-6 pt-4 border-t border-[var(--border-color)]">
                     <div className="flex items-center space-x-3">
-                      <img src={student.logo} alt={student.company} className="h-6 w-6 object-contain rounded-sm" />
+                      <div className="h-6 w-6 rounded-full bg-primary/10 flex items-center justify-center">
+                        <Briefcase className="h-3.5 w-3.5 text-primary" />
+                      </div>
                       <span className="text-small font-bold text-[var(--text-heading)]">{student.company}</span>
                     </div>
                   </div>

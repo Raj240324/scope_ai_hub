@@ -46,17 +46,15 @@ const TrainerSpotlight = ({ openModal }) => (
           onClick={() => openModal('Trainer Application', 'trainer')}
           className="group flex flex-col items-center lg:items-end text-center lg:text-right cursor-pointer"
         >
-          <div className="flex -space-x-4 mb-4">
-            {[1, 2, 3, 4].map((i) => (
-              <div 
-                key={i} 
-                className="w-12 h-12 rounded-full border-2 border-[rgba(214,79,217,0.4)] bg-[rgba(214,79,217,0.1)] backdrop-blur-md flex items-center justify-center overflow-hidden shadow-lg z-10"
-              >
-                <span className="text-sm font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-[#d24bd5] to-[#b833bb]" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
-                  {['SM', 'RA', 'SA', 'JS'][i-1]}
-                </span>
-              </div>
-            ))}
+            <div className="flex -space-x-4 mb-4">
+              {mentors.map((m, i) => (
+                <div 
+                  key={i} 
+                  className="w-12 h-12 rounded-full border-2 border-[rgba(214,79,217,0.4)] overflow-hidden shadow-lg z-10"
+                >
+                  <img src={m.image} alt={m.name} className="w-full h-full object-cover" loading="lazy" />
+                </div>
+              ))}
             <div className="w-12 h-12 rounded-full border-4 border-[var(--bg-body)] bg-[var(--bg-inverted)] flex items-center justify-center shadow-lg">
               <span className="text-caption font-bold text-[var(--text-on-light)]">+10</span>
             </div>
@@ -85,19 +83,9 @@ const TrainerSpotlight = ({ openModal }) => (
                   }}
                 >
                   <div className="mb-4">
-                    <span 
-                      className="text-5xl font-black tracking-tighter"
-                      style={{
-                        fontFamily: '"Bebas Neue", sans-serif',
-                        background: 'linear-gradient(135deg, #d24bd5 0%, #b833bb 100%)',
-                        WebkitBackgroundClip: 'text',
-                        WebkitTextFillColor: 'transparent',
-                        backgroundClip: 'text',
-                        color: 'transparent'
-                      }}
-                    >
-                      {mentor.name.split(' ').map(n => n[0]).join('').substring(0,2).toUpperCase()}
-                    </span>
+                    <div className="w-24 h-24 rounded-2xl overflow-hidden border border-[rgba(214,79,217,0.2)]">
+                      <img src={mentor.image} alt={mentor.name} className="w-full h-full object-cover" loading="lazy" />
+                    </div>
                   </div>
                   <h3 className="text-xl sm:text-2xl font-bold text-[var(--text-heading)] mb-1">
                     {mentor.name}

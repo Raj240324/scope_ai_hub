@@ -2,7 +2,7 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 import Layout from '../components/layout/Layout';
 import ContactForm from '../components/ui/ContactForm';
-import { Mail, Phone, MapPin, Clock, Facebook, Twitter, Linkedin, Instagram } from 'lucide-react';
+import { Mail, Phone, MapPin, Clock, Linkedin, Instagram } from 'lucide-react';
 
 import { m } from 'framer-motion';
 import { useScrollReveal } from '../hooks/useScrollReveal';
@@ -111,8 +111,6 @@ const Contact = () => {
                 <h3 className="heading-sm font-semibold text-[var(--text-heading)] mb-6">Follow Us</h3>
                 <div className="flex gap-4">
                   {[
-                    { icon: <Facebook className="h-5 w-5" />, link: BRANDING.socials.facebook, color: '#1877F2' },
-                    { icon: <Twitter className="h-5 w-5" />, link: BRANDING.socials.twitter, color: '#1DA1F2' },
                     { icon: <Linkedin className="h-5 w-5" />, link: BRANDING.socials.linkedin, color: '#0A66C2' },
                     { icon: <Instagram className="h-5 w-5" />, link: BRANDING.socials.instagram, color: '#E4405F' }
                   ].map((social, i) => (
@@ -169,20 +167,6 @@ const Contact = () => {
         </div>
       </div>
 
-      {/* Full Width Map */}
-      <section className="h-[450px] w-full bg-[var(--bg-secondary)] relative overflow-hidden border-t border-[var(--border-color)]">
-        <iframe 
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3889.8765432101!2d80.2250!3d12.9010!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a525d5d5d5d5d5d%3A0x5d5d5d5d5d5d5d5d!2sSholinganallur%2C+Chennai%2C+Tamil+Nadu!5e0!3m2!1sen!2sin!4v1710000000000!5m2!1sen!2sin&maptype=satellite" 
-          width="100%" 
-          height="100%" 
-          style={{ border: 0 }} 
-          allowFullScreen="" 
-          loading="lazy" 
-          referrerPolicy="no-referrer-when-downgrade"
-          className="absolute inset-0 w-full h-full grayscale-[0.5] hover:grayscale-0 transition-all duration-700"
-          title={`${BRANDING.fullName} Location`}
-        ></iframe>
-      </section>
     </Layout>
   );
 };

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { GraduationCap, Mail, Phone, MapPin, Facebook, Twitter, Linkedin, Instagram, ArrowRight } from 'lucide-react';
+import { GraduationCap, Mail, Phone, MapPin, Linkedin, Instagram, ArrowRight } from 'lucide-react';
 import { useModal } from '../../context/ModalContext';
 import { BRANDING } from '../../data/branding';
 import { useTheme } from '../../context/ThemeContext';
@@ -30,26 +30,7 @@ const Footer = () => {
             <p className="text-small leading-relaxed text-[var(--text-muted)]">
               {BRANDING.description}
             </p>
-            <div className="flex flex-col gap-3">
-              <div className="flex gap-3">
-                <MicroExpander 
-                  text="Facebook" 
-                  icon={<Facebook className="h-5 w-5" />} 
-                  className="bg-primary/5 border-none text-primary hover:bg-[#1877F2] hover:text-[var(--text-on-inverted)]"
-                  href={BRANDING.socials.facebook}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                />
-                <MicroExpander 
-                  text="Twitter" 
-                  icon={<Twitter className="h-5 w-5" />} 
-                  className="bg-primary/5 border-none text-primary hover:bg-[#1DA1F2] hover:text-[var(--text-on-inverted)]"
-                  href={BRANDING.socials.twitter}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                />
-              </div>
-              <div className="flex gap-3">
+            <div className="flex gap-3">
                 <MicroExpander 
                   text="LinkedIn" 
                   icon={<Linkedin className="h-5 w-5" />} 
@@ -66,7 +47,6 @@ const Footer = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                 />
-              </div>
             </div>
           </div>
 
