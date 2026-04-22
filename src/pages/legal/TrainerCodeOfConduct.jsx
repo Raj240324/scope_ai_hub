@@ -26,7 +26,7 @@ const TrainerCodeOfConduct = () => {
               1. Pedagogical Excellence
             </h2>
             <p className="text-[var(--text-muted)] mb-4">
-              Trainers at {BRANDING.fullName} are committed to delivering the highest quality of technical education. This includes staying updated with 2026 industry standards and ensuring that all project-based learning is relevant to current market demands.
+              Trainers at {BRANDING.fullName} are committed to delivering the highest quality of technical education. This includes staying updated with latest industry standards and ensuring that all project-based learning is relevant to current market demands.
             </p>
           </section>
 
