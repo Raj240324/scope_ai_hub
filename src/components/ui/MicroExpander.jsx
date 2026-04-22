@@ -38,13 +38,19 @@ const MicroExpander = React.forwardRef(
         'bg-destructive text-destructive-foreground border border-destructive hover:bg-destructive/90',
     };
 
+    const isLink = !!props.href;
+    const Component = isLink ? motion.a : motion.button;
+
     const handleClick = (e) => {
-      if (isLoading) return;
+      if (isLoading) {
+        e.preventDefault();
+        return;
+      }
       onClick?.(e);
     };
 
     return (
-      <motion.button
+      <Component
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         ref={ref}
@@ -60,7 +66,7 @@ const MicroExpander = React.forwardRef(
         onFocus={() => setIsHovered(true)}
         onBlur={() => setIsHovered(false)}
         onClick={handleClick}
-        disabled={isLoading}
+        {...(isLink ? {} : { disabled: isLoading })}
         {...props}
         aria-label={text}
       >
@@ -108,7 +114,7 @@ const MicroExpander = React.forwardRef(
             {text}
           </div>
         </motion.div>
-      </motion.button>
+      </Component>
     );
   }
 );

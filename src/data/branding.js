@@ -30,7 +30,7 @@ export const BRANDING = {
     bio: "Pramod Reddy is the Chief Executive Officer of Scope AI Hub, where he drives organizational vision, strategic growth, and academic excellence. With extensive experience in leadership and a deep understanding of the AI and tech landscape, he ensures that the institute remains aligned with evolving industry needs and global standards.",
   },
   socials: {
-    instagram: "#",
+    instagram: "https://www.instagram.com/scope_ai_hub?igsh=c3ppZ2E2b2g3bTd5",
     linkedin: "#",
   },
 };
