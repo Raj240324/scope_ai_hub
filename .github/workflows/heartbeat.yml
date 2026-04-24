@@ -17,7 +17,7 @@ jobs:
         run: |
           echo "Checking system health..."
 
-          RESPONSE=$(curl -s --max-time 15 "${{ secrets.SITE_URL }}/api/health" || echo '{"status":"down","services":{"note":"site unreachable"}}')
+          RESPONSE=$(curl -s --max-time 15 -H "Authorization: Bearer ${{ secrets.HEALTH_CHECK_TOKEN }}" "${{ secrets.SITE_URL }}/api/health" || echo '{"status":"down","services":{"note":"site unreachable"}}')
 
           echo "Response: $RESPONSE"
 
@@ -41,7 +41,7 @@ jobs:
           -d "{
             \"sender\": {
               \"name\": \"Scope AI Hub Monitor\",
-              \"email\": \"nagarajan.webdev@gmail.com\"
+              \"email\": \"infoscopeaihub@gmail.com\"
             },
             \"to\": [{
               \"email\": \"${{ secrets.ALERT_EMAIL }}\"

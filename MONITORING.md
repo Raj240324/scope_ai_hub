@@ -6,11 +6,11 @@
 
 Add these 3 monitors:
 
-| Monitor Name | URL | Interval |
-|---|---|---|
-| scopeaihub — Main Site | https://scopeaihub.com | 5 min |
-| scopeaihub — Health API | https://scopeaihub.com/api/health | 5 min |
-| scopeaihub — Heartbeat | https://scopeaihub.com/api/health | 30 min |
+| Monitor Name | URL | HTTP Method | Interval |
+|---|---|---|---|
+| scopeaihub — Main Site | https://scopeaihub.com | GET | 5 min |
+| scopeaihub — API Heartbeat | https://scopeaihub.com/api/health | HEAD | 5 min |
+| scopeaihub — Deep Health Check | https://scopeaihub.com/api/health | GET + Bearer Token | 10 min |
 
 Alert contact: [your email]
 
@@ -28,10 +28,10 @@ Alert contact: [your email]
 
 ## Database Keep-Alive — GitHub Actions
 
-- Workflow: .github/workflows/supabase-heartbeat.yml
+- Workflow: .github/workflows/heartbeat.yml
 - Schedule: every 30 minutes
 - Purpose: prevents Supabase free tier from pausing
-- Endpoint: /api/health
+- Endpoint: GET /api/health (with HEALTH_CHECK_TOKEN)
 
 ---
 
