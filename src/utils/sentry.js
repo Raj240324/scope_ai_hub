@@ -54,7 +54,7 @@ export function initSentry() {
       }
 
       // 3. Scrub breadcrumb messages
-      if (event.breadcrumbs?.values) {
+      if (event.breadcrumbs?.values && Array.isArray(event.breadcrumbs.values)) {
         event.breadcrumbs.values = event.breadcrumbs.values.map((crumb) => ({
           ...crumb,
           message: crumb.message ? scrub(crumb.message) : crumb.message,
@@ -62,7 +62,7 @@ export function initSentry() {
       }
 
       // 4. Scrub exception values (error messages can leak form data)
-      if (event.exception?.values) {
+      if (event.exception?.values && Array.isArray(event.exception.values)) {
         event.exception.values = event.exception.values.map((exception) => ({
           ...exception,
           value: exception.value ? scrub(exception.value) : exception.value,

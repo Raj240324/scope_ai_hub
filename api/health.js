@@ -25,18 +25,16 @@ export default async function handler(req, res) {
     }
 
   // ── Security: Bearer token gate ───────────────────────────────────
-  // If HEALTH_CHECK_TOKEN is configured, require it.
-  // This prevents unauthenticated reconnaissance.
-  if (HEALTH_TOKEN) {
-    const authHeader = req.headers.authorization || "";
-    const token = authHeader.startsWith("Bearer ")
-      ? authHeader.slice(7).trim()
-      : "";
+  // Require HEALTH_CHECK_TOKEN to be both configured on the server and provided by the client.
+  // This prevents unauthenticated reconnaissance and accidental exposure.
+  const authHeader = req.headers.authorization || "";
+  const token = authHeader.startsWith("Bearer ")
+    ? authHeader.slice(7).trim()
+    : "";
 
-    if (token !== HEALTH_TOKEN) {
-      // Return a minimal "alive" response without service details
-      return res.status(200).json({ status: "ok" });
-    }
+  if (!HEALTH_TOKEN || token !== HEALTH_TOKEN) {
+    // Return a minimal "alive" response without service details
+    return res.status(200).json({ status: "ok" });
   }
 
   // ── Authenticated health check (full details) ─────────────────────
