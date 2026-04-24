@@ -14,11 +14,19 @@ jobs:
   heartbeat:
     runs-on: ubuntu-latest
     steps:
-      - name: Ping Supabase via Heartbeat API
+      - name: Ping Supabase via Health API (Authenticated)
         run: |
-          STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://scopeaihub.com/api/health)
-          echo "Heartbeat status: $STATUS"
+          echo "🔄 Sending keep-alive request..."
+
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
+          -H "Authorization: Bearer ${{ secrets.HEALTH_CHECK_TOKEN }}" \
+          https://scope-ai-hub.vercel.app/api/health)
+
+          echo "📡 Response status: $STATUS"
+
           if [ "$STATUS" != "200" ]; then
-            echo "Heartbeat failed with status $STATUS"
+            echo "❌ Heartbeat failed — Supabase may go idle"
             exit 1
           fi
+
+          echo "✅ Heartbeat successful — Supabase is active"
