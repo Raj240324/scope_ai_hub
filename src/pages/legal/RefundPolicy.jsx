@@ -12,10 +12,14 @@ const RefundPolicy = () => {
         title={`Refund & Cancellation Policy | ${BRANDING.fullName}`} 
         description="Clear guidelines on fee cancellations and our strictly adhered refund procedures." 
         canonical="/refund-policy"
+        breadcrumbs={[
+          { name: 'Home', path: '/' },
+          { name: 'Refund Policy', path: '/refund-policy' },
+        ]}
       />
       <Hero 
         title={<>Refund <span className="text-primary">Policy</span></>}
-        subtitle={`Fee Cancellation & Refund Standards | Last Updated: ${new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}`}
+        subtitle="Fee Cancellation & Refund Standards | Last Updated: April 26, 2026"
       />
 
       <div className="container-custom section-padding">
@@ -88,6 +92,19 @@ const RefundPolicy = () => {
               <li>Detailed reason for the refund request</li>
             </ul>
             <p className="text-[var(--text-muted)] mt-4">Approved refunds will be processed within 15-20 working days via the original payment method.</p>
+          </section>
+
+          <section className="mb-12">
+            <h2 className="heading-md mb-4">5. Batch Transfer Option</h2>
+            <p className="text-[var(--text-muted)] mb-4">
+              As an alternative to a refund, students may request a one-time transfer to a future batch of the same course, subject to the following conditions:
+            </p>
+            <ul className="list-disc pl-6 text-[var(--text-muted)] space-y-2">
+              <li>The transfer request must be submitted in writing to <span className="text-primary font-bold">{BRANDING.email}</span> before the original batch commencement date.</li>
+              <li>Batch transfers are permitted only once per enrollment and are subject to seat availability in the requested batch.</li>
+              <li>No additional fee is charged for the first batch transfer. Subsequent transfer requests (if approved at the institute's discretion) may incur an administrative fee.</li>
+              <li>Batch transfers do not extend to different courses — only to a future batch of the same enrolled course.</li>
+            </ul>
           </section>
 
           <section className="p-8 bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-3xl">

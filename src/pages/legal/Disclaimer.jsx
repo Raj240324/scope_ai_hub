@@ -1,7 +1,7 @@
 import React from 'react';
 import Layout from '../../components/layout/Layout';
 import Hero from '../../components/ui/Hero';
-import { Info, HelpCircle, AlertTriangle, Building2 } from 'lucide-react';
+import { Info, HelpCircle, AlertTriangle, Building2, Globe, MessageSquare, Cpu, FileWarning } from 'lucide-react';
 import SEO from '../../components/utils/SEO';
 import { BRANDING } from '../../data/branding';
 
@@ -12,10 +12,14 @@ const Disclaimer = () => {
         title={`Legal Disclaimer | ${BRANDING.fullName}`} 
         description="Important disclosures regarding educational content, career outcomes, and placement assistance." 
         canonical="/disclaimer"
+        breadcrumbs={[
+          { name: 'Home', path: '/' },
+          { name: 'Disclaimer', path: '/disclaimer' },
+        ]}
       />
       <Hero 
         title={<>Legal <span className="text-primary">Disclaimer</span></>}
-        subtitle={`Important Disclosures & Representation Standards | Last Updated: ${new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}`}
+        subtitle="Important Disclosures & Representation Standards | Last Updated: April 26, 2026"
       />
 
       <div className="container-custom section-padding">
@@ -36,7 +40,7 @@ const Disclaimer = () => {
               2. Career & Salary Outcomes
             </h2>
             <p className="text-[var(--text-muted)] mb-4">
-              Any mentions of"Placement Guidance" or"Career Success" are illustrative and reflect our commitment to supporting our students. However:
+              Any mentions of "Placement Guidance" or "Career Success" are illustrative and reflect our commitment to supporting our students. However:
             </p>
             <ul className="list-disc pl-6 text-[var(--text-muted)] space-y-2">
               <li>Individual career results depend on various factors including personal aptitude, interview performance, and market conditions.</li>
@@ -66,6 +70,60 @@ const Disclaimer = () => {
             </h2>
             <p className="text-[var(--text-muted)] mb-4">
               Our website may contain links to external sites (e.g., Google Maps, WhatsApp, Social Media). We have no control over the nature, content, and availability of those sites. The inclusion of any links does not necessarily imply a recommendation or endorse the views expressed within them.
+            </p>
+          </section>
+
+          <section className="mb-12">
+            <h2 className="heading-md mb-4 flex items-center">
+              <Globe className="h-6 w-6 text-primary mr-3" />
+              5. Website Availability
+            </h2>
+            <p className="text-[var(--text-muted)] mb-4">
+              {BRANDING.fullName} does not guarantee that the website will be available at all times or that access will be uninterrupted or error-free. We may temporarily suspend access to the website for maintenance, updates, or unforeseen technical issues without prior notice.
+            </p>
+            <p className="text-[var(--text-muted)] mb-4">
+              We shall not be liable for any loss or damage arising from the unavailability of the website, including but not limited to missed application deadlines or inability to access course information.
+            </p>
+          </section>
+
+          <section className="mb-12">
+            <h2 className="heading-md mb-4 flex items-center">
+              <MessageSquare className="h-6 w-6 text-primary mr-3" />
+              6. Testimonials & Reviews
+            </h2>
+            <p className="text-[var(--text-muted)] mb-4">
+              Testimonials and reviews displayed on our website reflect the individual experiences and opinions of specific students. These experiences are personal and may not be representative of every student's outcome. Results vary based on individual effort, aptitude, prior experience, and market conditions.
+            </p>
+            <p className="text-[var(--text-muted)] mb-4">
+              {BRANDING.fullName} does not guarantee that any student will achieve similar results as described in testimonials.
+            </p>
+          </section>
+
+          <section className="mb-12">
+            <h2 className="heading-md mb-4 flex items-center">
+              <Cpu className="h-6 w-6 text-primary mr-3" />
+              7. AI & Technology Content
+            </h2>
+            <p className="text-[var(--text-muted)] mb-4">
+              The field of Artificial Intelligence, Machine Learning, and related technologies evolves rapidly. While {BRANDING.fullName} makes every effort to ensure our course content reflects the latest industry practices and tools, we cannot guarantee that all information on this website or in our curriculum will remain current at all times.
+            </p>
+            <ul className="list-disc pl-6 text-[var(--text-muted)] space-y-2">
+              <li>Technology frameworks, libraries, and best practices referenced in our courses may change or become deprecated after the course material was developed.</li>
+              <li>Students are encouraged to supplement their learning with the latest industry documentation and community resources.</li>
+              <li>Course curricula may be updated periodically to reflect industry changes, which may result in differences from the syllabus originally displayed at the time of enrollment.</li>
+            </ul>
+          </section>
+
+          <section className="mb-12">
+            <h2 className="heading-md mb-4 flex items-center">
+              <FileWarning className="h-6 w-6 text-primary mr-3" />
+              8. Errors & Omissions
+            </h2>
+            <p className="text-[var(--text-muted)] mb-4">
+              While we take reasonable care to ensure the accuracy of the information on this website, {BRANDING.fullName} does not warrant that the content is free of errors, omissions, or inaccuracies. We reserve the right to make corrections, modifications, or updates to any information — including course details, pricing, batch schedules, and program descriptions — at any time without prior notice.
+            </p>
+            <p className="text-[var(--text-muted)] mb-4">
+              In the event of a pricing error or discrepancy, {BRANDING.fullName} reserves the right to cancel any affected enrollment and offer a full refund at its sole discretion.
             </p>
           </section>
 

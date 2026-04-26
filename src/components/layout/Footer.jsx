@@ -139,10 +139,11 @@ const Footer = () => {
             <div className="flex flex-wrap justify-center md:justify-end items-center gap-x-6 gap-y-2">
               <Link to="/privacy-policy" className="text-[var(--text-muted)] hover:text-primary transition-colors">Privacy</Link>
               <Link to="/terms-conditions" className="text-[var(--text-muted)] hover:text-primary transition-colors">Terms</Link>
-              <Link to="/nda-policy" className="text-[var(--text-muted)] hover:text-primary transition-colors">NDA</Link>
+              <Link to="/cookie-policy" className="text-[var(--text-muted)] hover:text-primary transition-colors">Cookies</Link>
               <Link to="/refund-policy" className="text-[var(--text-muted)] hover:text-primary transition-colors">Refunds</Link>
-              <Link to="/legal/trainer-conduct" className="text-[var(--text-muted)] hover:text-primary transition-colors">Trainer Conduct</Link>
               <Link to="/disclaimer" className="text-[var(--text-muted)] hover:text-primary transition-colors">Disclaimer</Link>
+              <Link to="/nda-policy" className="text-[var(--text-muted)] hover:text-primary transition-colors">NDA</Link>
+              <Link to="/legal/trainer-conduct" className="text-[var(--text-muted)] hover:text-primary transition-colors">Trainer Conduct</Link>
             </div>
             <div className="flex flex-col items-center md:items-end space-y-2">
               <span className="text-caption font-bold text-primary tracking-widest uppercase flex items-center bg-primary/10 px-3 py-1 rounded-full">

@@ -26,6 +26,7 @@ const staticRoutes = [
   '/nda-policy',
   '/refund-policy',
   '/disclaimer',
+  '/cookie-policy',
   '/legal/trainer-conduct',
   '/careers/join-as-trainer',
   '/sitemap',

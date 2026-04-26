@@ -12,10 +12,14 @@ const NDAPolicy = () => {
         title={`NDA Policy & Confidentiality | ${BRANDING.fullName}`} 
         description="Our Non-Disclosure Agreement standards for protecting student data and curriculum intellectual property." 
         canonical="/nda-policy"
+        breadcrumbs={[
+          { name: 'Home', path: '/' },
+          { name: 'NDA Policy', path: '/nda-policy' },
+        ]}
       />
       <Hero 
         title={<>NDA <span className="text-primary">Policy</span></>}
-        subtitle={`Non-Disclosure Agreement & Confidentiality Standards | Last Updated: ${new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}`}
+        subtitle="Non-Disclosure Agreement & Confidentiality Standards | Last Updated: April 26, 2026"
       />
 
       <div className="container-custom section-padding">
@@ -69,7 +73,20 @@ const NDAPolicy = () => {
           </section>
 
           <section className="mb-12">
-            <h2 className="heading-md mb-4">5. Enforcement</h2>
+            <h2 className="heading-md mb-4">5. Student Obligations</h2>
+            <p className="text-[var(--text-muted)] mb-4">
+              Students enrolled at {BRANDING.fullName} also handle confidential information during the course of their training. By enrolling, students agree to the following:
+            </p>
+            <ul className="list-disc pl-6 text-[var(--text-muted)] space-y-2">
+              <li>Students shall not share, reproduce, or distribute proprietary course materials, code repositories, or assessment content outside the institute.</li>
+              <li>Students shall not disclose peer performance data, project ideas shared in confidence, or any internal placement-related information to third parties.</li>
+              <li>Students shall respect the intellectual property of fellow students and shall not copy, replicate, or claim ownership of projects created by others.</li>
+              <li>These obligations remain in effect during enrollment and for a period of one (1) year following course completion or withdrawal.</li>
+            </ul>
+          </section>
+
+          <section className="mb-12">
+            <h2 className="heading-md mb-4">6. Enforcement</h2>
             <p className="text-[var(--text-muted)]">
               Any violation of this NDA policy by staff or students will result in immediate termination of the association and may incur legal penalties under the jurisdiction of the courts in Chennai.
             </p>

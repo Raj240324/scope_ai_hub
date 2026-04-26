@@ -535,7 +535,7 @@ const ContactForm = ({ initialCourse = 'General Inquiry', autoFocus = false }) =
       </div>
 
       <p className="text-center text-caption text-[var(--text-muted)] font-medium mt-4">
-        By submitting, you agree to our <a href="/privacy-policy" className="text-primary hover:underline">Privacy Policy</a>.
+        By submitting, you agree to our <a href="/privacy-policy" className="text-primary hover:underline">Privacy Policy</a> and <a href="/terms-conditions" className="text-primary hover:underline">Terms & Conditions</a>. This site is protected by reCAPTCHA and the Google <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Privacy Policy</a> and <a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Terms of Service</a> apply.
       </p>
     </div>
   );

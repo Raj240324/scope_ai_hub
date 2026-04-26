@@ -26,6 +26,7 @@ const TermsConditions = lazy(() => import('./pages/legal/TermsConditions'));
 const NDAPolicy = lazy(() => import('./pages/legal/NDAPolicy'));
 const RefundPolicy = lazy(() => import('./pages/legal/RefundPolicy'));
 const Disclaimer = lazy(() => import('./pages/legal/Disclaimer'));
+const CookiePolicy = lazy(() => import('./pages/legal/CookiePolicy'));
 const TrainerCodeOfConduct = lazy(() => import('./pages/legal/TrainerCodeOfConduct'));
 const JoinAsTrainer = lazy(() => import('./pages/careers/JoinAsTrainer'));
 const CareerSupport = lazy(() => import('./pages/career-support/CareerSupport'));
@@ -81,6 +82,7 @@ const AnimatedRoutes = () => {
         <Route path="/terms-conditions" element={<TermsConditions />} />
         <Route path="/nda-policy" element={<NDAPolicy />} />
         <Route path="/disclaimer" element={<Disclaimer />} />
+        <Route path="/cookie-policy" element={<CookiePolicy />} />
         <Route path="/refund-policy" element={<RefundPolicy />} />
         <Route path="/legal/trainer-conduct" element={<TrainerCodeOfConduct />} />
 
