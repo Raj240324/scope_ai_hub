@@ -32,6 +32,7 @@ const JoinAsTrainer = lazy(() => import('./pages/careers/JoinAsTrainer'));
 const CareerSupport = lazy(() => import('./pages/career-support/CareerSupport'));
 const Sitemap = lazy(() => import('./pages/Sitemap'));
 const NotFound = lazy(() => import('./pages/NotFound'));
+const AdminLayout = lazy(() => import('./admin/AdminLayout'));
 
 // ── Prefetch critical routes on idle so navigation is instant ────────────────
 const prefetchRoutes = () => {
@@ -89,6 +90,7 @@ const AnimatedRoutes = () => {
         <Route path="/sitemap" element={<Sitemap />} />
 
         {/* 404 Route */}
+        <Route path="/admin/*" element={<AdminLayout />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </PageTransition>
