@@ -47,6 +47,7 @@ export default async function handler(req, res) {
   try {
     const id = req.body?.id;
     const status = req.body?.status;
+    const type = req.body?.type || "enquiries";
 
     if (!id || (typeof id !== "number" && typeof id !== "string")) {
       return res
@@ -62,9 +63,10 @@ export default async function handler(req, res) {
     }
 
     const supabase = getSupabase();
+    const tableName = type === "trainers" ? "trainer_applications" : "enquiries";
 
     const { error } = await supabase
-      .from("enquiries")
+      .from(tableName)
       .update({ status: status.toLowerCase() })
       .eq("id", id);
 

@@ -105,7 +105,7 @@ const StatusBadge = ({ status, onStatusChange, enquiryId, isUpdating }) => {
   );
 };
 
-const ExpandedRow = ({ enquiry }) => (
+const ExpandedRow = ({ enquiry, isTrainerView }) => (
   <tr>
     <td
       colSpan={8}
@@ -123,18 +123,18 @@ const ExpandedRow = ({ enquiry }) => (
         <div className="space-y-2">
           <div>
             <p className="text-caption font-semibold text-[var(--text-muted)]">
-              Phone
+              {isTrainerView ? "Experience" : "Phone"}
             </p>
             <p className="text-small text-[var(--text-body)]">
-              {enquiry.phone || "Not provided"}
+              {isTrainerView ? `${enquiry.experience} years` : (enquiry.phone || "Not provided")}
             </p>
           </div>
           <div>
             <p className="text-caption font-semibold text-[var(--text-muted)]">
-              IP Address
+              {isTrainerView ? "LinkedIn" : "IP Address"}
             </p>
-            <p className="text-small text-[var(--text-body)] font-mono">
-              {enquiry.ip_address || "Unknown"}
+            <p className="text-small text-[var(--text-body)] font-mono truncate">
+              {isTrainerView ? (enquiry.linkedin_url || "Not provided") : (enquiry.ip_address || "Unknown")}
             </p>
           </div>
           <div>
@@ -155,13 +155,13 @@ const ExpandedRow = ({ enquiry }) => (
   </tr>
 );
 
-// ─── Mobile Card Layout ─────────────────────────────────────────
 const MobileCard = ({
   enquiry,
   expanded,
   onToggle,
   onStatusChange,
   updatingId,
+  isTrainerView,
 }) => (
   <div className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-2xl p-4 space-y-3">
     <div className="flex items-start justify-between gap-2">
@@ -182,7 +182,7 @@ const MobileCard = ({
     </div>
     <div className="flex items-center justify-between">
       <span className="text-caption text-primary font-medium truncate max-w-[180px]">
-        {enquiry.course}
+        {isTrainerView ? enquiry.expertise : enquiry.course}
       </span>
       <div className="flex items-center gap-1.5">
         {enquiry.brevo_synced ? (
@@ -222,18 +222,18 @@ const MobileCard = ({
         <div className="grid grid-cols-2 gap-2">
           <div>
             <p className="text-caption font-semibold text-[var(--text-muted)]">
-              Phone
+              {isTrainerView ? "Experience" : "Phone"}
             </p>
             <p className="text-caption text-[var(--text-body)]">
-              {enquiry.phone || "N/A"}
+              {isTrainerView ? `${enquiry.experience} yrs` : (enquiry.phone || "N/A")}
             </p>
           </div>
-          <div>
+          <div className="min-w-0">
             <p className="text-caption font-semibold text-[var(--text-muted)]">
-              IP
+              {isTrainerView ? "LinkedIn" : "IP"}
             </p>
-            <p className="text-caption text-[var(--text-body)] font-mono">
-              {enquiry.ip_address || "N/A"}
+            <p className="text-caption text-[var(--text-body)] font-mono truncate">
+              {isTrainerView ? (enquiry.linkedin_url || "N/A") : (enquiry.ip_address || "N/A")}
             </p>
           </div>
         </div>
@@ -243,7 +243,7 @@ const MobileCard = ({
 );
 
 // ─── Main Component ─────────────────────────────────────────────
-const EnquiryTable = ({ fetchEnquiries, updateStatus }) => {
+const EnquiryTable = ({ fetchEnquiries, updateStatus, isTrainerView = false }) => {
   const [data, setData] = useState([]);
   const [pagination, setPagination] = useState({
     page: 1,
@@ -274,6 +274,7 @@ const EnquiryTable = ({ fetchEnquiries, updateStatus }) => {
           page: params.page || pagination.page,
           limit: params.limit || pagination.limit,
           sort: "desc",
+          type: isTrainerView ? "trainers" : "enquiries",
           ...(search && { search }),
           ...(course && { course }),
           ...(status && { status }),
@@ -286,18 +287,18 @@ const EnquiryTable = ({ fetchEnquiries, updateStatus }) => {
           setData(res.data);
           setPagination(res.pagination);
 
-          // Build a robust list of all possible courses: actual courses + common inquiry types + any unique ones in current page
+          // Build a robust list of all possible courses/expertise:
           if (courseOptions.length === 0) {
             import("../data/courses").then(({ courses }) => {
-              const standardCourses = courses.map((c) => c.title);
-              const otherInquiries = [
+              const standardCourses = isTrainerView ? [] : courses.map((c) => c.title);
+              const otherInquiries = isTrainerView ? [] : [
                 "Free Career Counseling",
                 "Corporate AI Training",
                 "Placement Assistance",
                 "Download Brochure",
                 "General Inquiry"
               ];
-              const dbCourses = res.data.map((d) => d.course).filter(Boolean);
+              const dbCourses = res.data.map((d) => isTrainerView ? d.expertise : d.course).filter(Boolean);
               
               const uniqueCourses = [
                 ...new Set([...standardCourses, ...otherInquiries, ...dbCourses]),
@@ -354,7 +355,7 @@ const EnquiryTable = ({ fetchEnquiries, updateStatus }) => {
   const handleStatusChange = async (id, newStatus) => {
     setUpdatingId(id);
     try {
-      const res = await updateStatus(id, newStatus);
+      const res = await updateStatus(id, newStatus, isTrainerView ? 'trainers' : 'enquiries');
       if (res.success) {
         setData((prev) =>
           prev.map((item) =>
@@ -442,13 +443,13 @@ const EnquiryTable = ({ fetchEnquiries, updateStatus }) => {
           <Inbox className="w-12 h-12 text-[var(--text-muted)] mx-auto mb-4 opacity-50" />
           <p className="heading-sm text-[var(--text-heading)]">
             {search || course || status
-              ? "No matching enquiries"
-              : "No enquiries yet"}
+              ? "No matching records"
+              : `No ${isTrainerView ? "trainer applications" : "enquiries"} yet`}
           </p>
           <p className="text-small text-[var(--text-muted)] mt-2 max-w-sm mx-auto">
             {search || course || status
               ? "Try adjusting your search or filters to find what you're looking for."
-              : "Your leads will appear here once students submit enquiries through the website."}
+              : `Your leads will appear here once ${isTrainerView ? "trainers" : "students"} submit forms through the website.`}
           </p>
           {(search || course || status) && (
             <button
@@ -479,7 +480,7 @@ const EnquiryTable = ({ fetchEnquiries, updateStatus }) => {
                       Email
                     </th>
                     <th className="px-5 py-3 text-caption font-bold text-[var(--text-muted)] uppercase tracking-wide">
-                      Course
+                      {isTrainerView ? "Expertise" : "Course"}
                     </th>
                     <th className="px-5 py-3 text-caption font-bold text-[var(--text-muted)] uppercase tracking-wide">
                       Date
@@ -515,7 +516,7 @@ const EnquiryTable = ({ fetchEnquiries, updateStatus }) => {
                           {row.email}
                         </td>
                         <td className="px-5 py-3 text-caption text-primary font-medium max-w-[180px] truncate">
-                          {row.course}
+                          {isTrainerView ? row.expertise : row.course}
                         </td>
                         <td className="px-5 py-3 text-caption text-[var(--text-muted)] whitespace-nowrap">
                           {new Date(row.created_at).toLocaleDateString(
@@ -560,7 +561,7 @@ const EnquiryTable = ({ fetchEnquiries, updateStatus }) => {
                           )}
                         </td>
                       </tr>
-                      {expandedId === row.id && <ExpandedRow enquiry={row} />}
+                      {expandedId === row.id && <ExpandedRow enquiry={row} isTrainerView={isTrainerView} />}
                     </React.Fragment>
                   ))}
                 </tbody>
@@ -580,6 +581,7 @@ const EnquiryTable = ({ fetchEnquiries, updateStatus }) => {
                 }
                 onStatusChange={handleStatusChange}
                 updatingId={updatingId}
+                isTrainerView={isTrainerView}
               />
             ))}
           </div>

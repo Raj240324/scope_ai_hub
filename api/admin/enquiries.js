@@ -59,16 +59,19 @@ export default async function handler(req, res) {
       page = '1',
       limit = '25',
       sort = 'desc',
+      type = 'enquiries',
     } = req.query || {};
 
     const pageNum = Math.max(1, parseInt(page, 10) || 1);
     const limitNum = Math.min(MAX_LIMIT, Math.max(1, parseInt(limit, 10) || 25));
     const offset = (pageNum - 1) * limitNum;
     const sortOrder = sort === 'asc' ? true : false;
+    
+    const tableName = type === 'trainers' ? 'trainer_applications' : 'enquiries';
 
     // Build query
     let query = supabase
-      .from('enquiries')
+      .from(tableName)
       .select('*', { count: 'exact' })
       .order('created_at', { ascending: sortOrder })
       .range(offset, offset + limitNum - 1);
@@ -79,9 +82,13 @@ export default async function handler(req, res) {
       query = query.or(`name.ilike.${term},email.ilike.${term}`);
     }
 
-    // Course filter
+    // Course / Expertise filter
     if (course.trim()) {
-      query = query.eq('course', course.trim());
+      if (type === 'trainers') {
+        query = query.eq('expertise', course.trim());
+      } else {
+        query = query.eq('course', course.trim());
+      }
     }
 
     // Status filter

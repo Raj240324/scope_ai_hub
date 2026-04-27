@@ -101,10 +101,10 @@ export function useAdmin() {
     return adminFetch('/api/admin/stats', {}, token);
   }, [token]);
 
-  const updateStatus = useCallback(async (id, status) => {
+  const updateStatus = useCallback(async (id, status, type = 'enquiries') => {
     return adminFetch('/api/admin/update-status', {
       method: 'PATCH',
-      body: JSON.stringify({ id, status }),
+      body: JSON.stringify({ id, status, type }),
     }, token);
   }, [token]);
 
