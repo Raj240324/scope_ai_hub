@@ -32,6 +32,9 @@ const RefundPolicy = () => {
             <p className="text-[var(--text-muted)] mb-4">
               At {BRANDING.fullName}, we strive to provide high-quality technical education. Our refund policy is designed to be fair to both the students and the institute, ensuring that administrative costs are covered while providing flexibility where possible.
             </p>
+            <p className="text-[var(--text-muted)] mb-4">
+              After successful payment of the course fee, classes will commence within 24 to 48 hours. This timeframe allows us to coordinate schedules with our trainers, who are working professionals, and ensure a smooth start.
+            </p>
           </section>
 
           <section className="mb-12">
@@ -97,13 +100,13 @@ const RefundPolicy = () => {
           <section className="mb-12">
             <h2 className="heading-md mb-4">5. Batch Transfer Option</h2>
             <p className="text-[var(--text-muted)] mb-4">
-              As an alternative to a refund, students may request a one-time transfer to a future batch of the same course, subject to the following conditions:
+              As an alternative to a refund, students may request a one-time transfer to a future batch, subject to the following conditions:
             </p>
             <ul className="list-disc pl-6 text-[var(--text-muted)] space-y-2">
               <li>The transfer request must be submitted in writing to <span className="text-primary font-bold">{BRANDING.email}</span> before the original batch commencement date.</li>
               <li>Batch transfers are permitted only once per enrollment and are subject to seat availability in the requested batch.</li>
               <li>No additional fee is charged for the first batch transfer. Subsequent transfer requests (if approved at the institute's discretion) may incur an administrative fee.</li>
-              <li>Batch transfers do not extend to different courses — only to a future batch of the same enrolled course.</li>
+              <li>Transfers are generally applicable only to a future batch of the same enrolled course. However, requests to transfer to a different course may be considered on a case-by-case basis, depending on course availability, scheduling, and technical feasibility. Any difference in course fees will be charged accordingly.</li>
             </ul>
           </section>
 

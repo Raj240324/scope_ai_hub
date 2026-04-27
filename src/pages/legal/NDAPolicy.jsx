@@ -75,14 +75,17 @@ const NDAPolicy = () => {
           <section className="mb-12">
             <h2 className="heading-md mb-4">5. Student Obligations</h2>
             <p className="text-[var(--text-muted)] mb-4">
-              Students enrolled at {BRANDING.fullName} also handle confidential information during the course of their training. By enrolling, students agree to the following:
+              Students enrolled at {BRANDING.fullName} may have access to confidential and proprietary information during the course of their training. By enrolling, students agree to the following:
             </p>
             <ul className="list-disc pl-6 text-[var(--text-muted)] space-y-2">
               <li>Students shall not share, reproduce, or distribute proprietary course materials, code repositories, or assessment content outside the institute.</li>
               <li>Students shall not disclose peer performance data, project ideas shared in confidence, or any internal placement-related information to third parties.</li>
               <li>Students shall respect the intellectual property of fellow students and shall not copy, replicate, or claim ownership of projects created by others.</li>
-              <li>These obligations remain in effect during enrollment and for a period of one (1) year following course completion or withdrawal.</li>
+              <li>Any violation of the above obligations may result in appropriate disciplinary action, including suspension or termination of access to the course, without any refund of fees.</li>
             </ul>
+            <p className="text-[var(--text-muted)] mt-4">
+              These obligations remain in effect during enrollment and for a period of one (1) year following course completion or withdrawal.
+            </p>
           </section>
 
           <section className="mb-12">

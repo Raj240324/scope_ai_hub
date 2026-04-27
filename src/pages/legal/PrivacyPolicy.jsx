@@ -107,7 +107,7 @@ const PrivacyPolicy = () => {
               <li><strong>Supabase:</strong> Our database provider, which stores enquiry and application data on cloud infrastructure.</li>
             </ul>
             <p className="text-[var(--text-muted)] mt-4">
-              We select service providers who maintain appropriate data protection standards. By using our website and submitting your information, you acknowledge that your data may be transferred to and processed in countries other than India.
+              We select service providers who maintain appropriate data protection standards. Some of our trusted service providers operate secure systems in regions such as Europe and the United States. As part of providing our services, your information may be securely processed through these systems.
             </p>
           </section>
 

@@ -69,7 +69,10 @@ const Disclaimer = () => {
               4. External Links Disclaimer
             </h2>
             <p className="text-[var(--text-muted)] mb-4">
-              Our website may contain links to external sites (e.g., Google Maps, WhatsApp, Social Media). We have no control over the nature, content, and availability of those sites. The inclusion of any links does not necessarily imply a recommendation or endorse the views expressed within them.
+              Our website may include links to third-party platforms such as Google Maps, WhatsApp, and social media channels for your convenience and ease of access. While we strive to provide only relevant and reliable links, these platforms are operated independently and may have their own terms and policies.
+            </p>
+            <p className="text-[var(--text-muted)] mb-4">
+              We encourage users to review the privacy policies and terms of use of any external websites they visit through our links.
             </p>
           </section>
 
