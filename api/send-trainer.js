@@ -189,6 +189,7 @@ export default async function handler(req, res) {
             linkedin_url: linkedinUrl || null,
             ip_address: clientIp,
             user_agent: userAgent.slice(0, 500),
+            brevo_synced: false,
           },
         ])
         .select('id')
@@ -236,10 +237,12 @@ export default async function handler(req, res) {
       log.error('CRM upsert failed', { error: err.message });
     }
 
-    // 12. Send owner notification (non-critical for persistence)
+    // 12. Send owner notification (critical for sync tracking)
+    let brevoSuccess = false;
     try {
       await sendBrevoEmail(TRAINER_NOTIFY_TEMPLATE_ID, OWNER_EMAIL, OWNER_NAME, templateParams);
       log.info('Owner notification sent');
+      brevoSuccess = true;
     } catch (err) {
       log.error('Owner email failed', { error: err.message, trainerId });
       // Database insert has already been attempted; do not block the submission
@@ -253,8 +256,22 @@ export default async function handler(req, res) {
       log.error('Trainer auto-reply failed', { error: err.message });
     }
 
-    // 14. Success
-    log.info('Trainer application completed successfully', { trainerId });
+    // 14. Update Supabase brevo_synced flag
+    if (trainerId && brevoSuccess) {
+      try {
+        const supabase = getSupabase();
+        await supabase
+          .from('trainer_applications')
+          .update({ brevo_synced: true })
+          .eq('id', trainerId);
+        log.info('Supabase brevo_synced updated', { trainerId });
+      } catch (err) {
+        log.error('Supabase sync flag update failed', { error: err.message });
+      }
+    }
+
+    // 15. Success
+    log.info('Trainer application completed successfully', { trainerId, brevoSuccess });
     return res.status(200).json({ success: true, message: 'Application submitted successfully.' });
   } catch (err) {
     log.error('Unexpected error', { error: err.message });
