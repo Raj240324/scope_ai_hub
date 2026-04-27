@@ -286,12 +286,24 @@ const EnquiryTable = ({ fetchEnquiries, updateStatus }) => {
           setData(res.data);
           setPagination(res.pagination);
 
-          // Extract unique courses for filter dropdown
-          if (courseOptions.length === 0 && res.data.length > 0) {
-            const uniqueCourses = [
-              ...new Set(res.data.map((d) => d.course).filter(Boolean)),
-            ];
-            setCourseOptions(uniqueCourses);
+          // Build a robust list of all possible courses: actual courses + common inquiry types + any unique ones in current page
+          if (courseOptions.length === 0) {
+            import("../data/courses").then(({ courses }) => {
+              const standardCourses = courses.map((c) => c.title);
+              const otherInquiries = [
+                "Free Career Counseling",
+                "Corporate AI Training",
+                "Placement Assistance",
+                "Download Brochure",
+                "General Inquiry"
+              ];
+              const dbCourses = res.data.map((d) => d.course).filter(Boolean);
+              
+              const uniqueCourses = [
+                ...new Set([...standardCourses, ...otherInquiries, ...dbCourses]),
+              ];
+              setCourseOptions(uniqueCourses);
+            });
           }
         } else {
           setError(res.message || "Failed to load data");
