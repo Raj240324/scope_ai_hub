@@ -291,7 +291,7 @@ const About = () => {
               <div className="space-y-4">
                 <m.div className="parallax-item" style={{ y: y1 }} layout="position">
                   <div className="aspect-[4/5] bg-[var(--bg-secondary)] rounded-3xl overflow-hidden shadow-inner">
-                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80" alt="Students collaborating" loading="lazy" decoding="async" className="h-full w-full object-cover" style={{ aspectRatio: "4/5" }} />
+                    <img src="/indian_students_collaborating_1777431453094.webp" alt="Students collaborating" loading="lazy" decoding="async" className="h-full w-full object-cover" style={{ aspectRatio: "4/5" }} />
                   </div>
                 </m.div>
                 <div className="aspect-square bg-primary rounded-3xl p-8 flex flex-col justify-end text-[var(--text-on-inverted)] shadow-xl shadow-primary/20">
@@ -309,7 +309,7 @@ const About = () => {
                   </div>
                 </m.div>
                 <div className="aspect-[4/5] bg-[var(--bg-secondary)] rounded-3xl overflow-hidden shadow-inner">
-                  <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80" alt="Classroom" loading="lazy" decoding="async" className="h-full w-full object-cover" style={{ aspectRatio: "4/5" }} />
+                  <img src="/indian_classroom_1777431469591.webp" alt="Classroom" loading="lazy" decoding="async" className="h-full w-full object-cover" style={{ aspectRatio: "4/5" }} />
                 </div>
               </div>
             </div>

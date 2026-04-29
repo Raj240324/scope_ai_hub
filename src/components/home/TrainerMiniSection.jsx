@@ -10,19 +10,19 @@ const mentors = [
     name:"Sanjula",
     role:"Head of Academics",
     company:"8+ Years in AI & Data Science",
-    image:"https://randomuser.me/api/portraits/women/75.jpg"
+    image:"/sanjula_portrait_1777431268737.webp"
   },
   {
     name:"Raghavi",
     role:"Head – Placements & Corporate Relations",
     company:"Former Enterprise HR Professional",
-    image:"https://randomuser.me/api/portraits/women/68.jpg"
+    image:"/raghavi_portrait_1777431285644.webp"
   },
   {
     name:"Suresh M",
     role:"Principal AI Consultant",
     company:"Enterprise AI Practitioner",
-    image:"https://randomuser.me/api/portraits/men/36.jpg"
+    image:"/suresh_portrait_1777431303877.webp"
   }
 ];
 

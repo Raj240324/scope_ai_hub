@@ -11,7 +11,7 @@ const TrainerProfiles = () => {
     {
       name:"Sanjula",
       role:"Head of Academics",
-      image:"https://randomuser.me/api/portraits/women/75.jpg",
+      image:"/sanjula_portrait_1777431268737.webp",
       expertise: ["AI & Data Science","Curriculum Design","Academic Leadership","Machine Learning"],
       experience:"8+ years",
       companies: ["Industry","Academia"],
@@ -26,7 +26,7 @@ const TrainerProfiles = () => {
     {
       name:"Raghavi",
       role:"Head – Placements & Corporate Relations",
-      image:"https://randomuser.me/api/portraits/women/68.jpg",
+      image:"/raghavi_portrait_1777431285644.webp",
       expertise: ["Corporate Relations","Placements","Enterprise HR","Career Coaching"],
       experience:"Industry Expert",
       companies: ["Enterprise Organizations","Tech Industry"],
@@ -41,7 +41,7 @@ const TrainerProfiles = () => {
     {
       name:"Suresh M",
       role:"Principal AI Consultant & Lead Trainer",
-      image:"https://randomuser.me/api/portraits/men/36.jpg",
+      image:"/suresh_portrait_1777431303877.webp",
       expertise: ["AI Consulting","Machine Learning","Deep Learning","Applied AI"],
       experience:"Enterprise AI Practitioner",
       companies: ["Enterprise Clients","Tech Industry"],

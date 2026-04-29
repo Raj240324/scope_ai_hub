@@ -16,7 +16,7 @@ const TEAM = [
     role: 'Head of Academics',
     bio: '8+ years of AI & Data Science industry experience, leading curriculum design aligned with global tech standards.',
     expertise: ['Curriculum Design', 'AI & Data Science', 'Academic Leadership'],
-    image: 'https://randomuser.me/api/portraits/women/75.jpg',
+    image: '/sanjula_portrait_1777431268737.webp',
   },
   {
     id: '02',
@@ -24,7 +24,7 @@ const TEAM = [
     role: 'Head – Placements & Corporate Relations',
     bio: 'Former HR professional with experience in enterprise hiring, building strong industry partnerships for student career acceleration.',
     expertise: ['Placements', 'Corporate Relations', 'Enterprise HR'],
-    image: 'https://randomuser.me/api/portraits/women/68.jpg',
+    image: '/raghavi_portrait_1777431285644.webp',
   },
   {
     id: '03',
@@ -32,7 +32,7 @@ const TEAM = [
     role: 'Principal AI Consultant & Lead Trainer',
     bio: 'Enterprise AI practitioner transforming complex technologies into practical, career-ready skillsets.',
     expertise: ['AI Consulting', 'Machine Learning', 'Applied Training'],
-    image: 'https://randomuser.me/api/portraits/men/36.jpg',
+    image: '/suresh_portrait_1777431303877.webp',
   },
 ];
 

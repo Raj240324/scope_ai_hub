@@ -18,7 +18,7 @@ const reviews = [
     course:"Generative AI & Prompt Engineering",
     rating: 5,
     content: `The Prompt Engineering course at ${BRANDING.fullName} was a game-changer. I learned to work with ChatGPT, Claude, and Midjourney like a professional. The hands-on AI workflow projects were exceptional.`,
-    image:"https://randomuser.me/api/portraits/men/32.jpg",
+    image:"/senthil_portrait_1777431329505.webp",
     date:"2 weeks ago",
     verified: true
   },
@@ -29,7 +29,7 @@ const reviews = [
     course:"Data Analytics & AI",
     rating: 5,
     content:"I switched from a non-tech background to data analytics. The Power BI and AI-driven analytics modules were incredible. Landed a data analyst role within a month of completion!",
-    image:"https://randomuser.me/api/portraits/women/44.jpg",
+    image:"/priya_portrait_1777431344994.webp",
     date:"1 month ago",
     verified: true
   },
@@ -40,7 +40,7 @@ const reviews = [
     course:"Machine Learning & Deep Learning",
     rating: 4,
     content:"The ML & Deep Learning course helped me transition from a Python developer to a full ML engineer. The TensorFlow and PyTorch labs were intense and production-grade.",
-    image:"https://randomuser.me/api/portraits/men/45.jpg",
+    image:"/arun_portrait_1777431362215.webp",
     date:"2 months ago",
     verified: true
   },
@@ -51,7 +51,7 @@ const reviews = [
     course:"Natural Language Processing (NLP)",
     rating: 5,
     content:"The NLP program was outstanding! From transformers to building real chatbots with RAG, every module was practical and industry-relevant. The Hugging Face ecosystem training was a highlight.",
-    image:"https://randomuser.me/api/portraits/women/65.jpg",
+    image:"/kavitha_portrait_1777431387589.webp",
     date:"3 months ago",
     verified: true
   },
@@ -62,7 +62,7 @@ const reviews = [
     course:"Python for AI & Machine Learning",
     rating: 5,
     content:"As a complete beginner, Python for AI was the perfect starting point. I went from zero to building sentiment analyzers and price predictors in 8 weeks. Truly transformative.",
-    image:"https://randomuser.me/api/portraits/men/22.jpg",
+    image:"/rahul_portrait_1777431406630.webp",
     date:"4 months ago",
     verified: true
   },
@@ -73,7 +73,7 @@ const reviews = [
     course:"Computer Vision & Image AI",
     rating: 5,
     content:"The Computer Vision program is top-notch. From YOLO object detection to medical imaging AI, the modules were incredibly practical. The capstone project gave me a real-world edge.",
-    image:"https://randomuser.me/api/portraits/women/28.jpg",
+    image:"/deepika_portrait_1777431423443.webp",
     date:"5 months ago",
     verified: true
   }
