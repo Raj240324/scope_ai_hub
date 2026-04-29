@@ -5,6 +5,7 @@ import { useModal } from '../../context/ModalContext';
 import ReCAPTCHA from "react-google-recaptcha";
 import { checkRateLimit } from '../../utils/rateLimiter';
 import { submitEnquiry } from '../../services/enquiryService';
+import { trackEvent } from '../../utils/analytics';
 import { courses } from '../../data/courses';
 import { staggerContainer, staggerItem } from '../../utils/motionVariants';
 
@@ -226,6 +227,14 @@ const ContactForm = ({ initialCourse = 'General Inquiry', autoFocus = false }) =
 
       if (result.success) {
         setStatus('success');
+        
+        // Track Lead Generation in GA4
+        trackEvent('generate_lead', {
+          event_category: 'Enquiry',
+          event_label: formData.inquiry_type,
+          course_name: formData.program_interest || 'General'
+        });
+        
       } else {
         setStatus('error');
         setErrorMessage(result.message);

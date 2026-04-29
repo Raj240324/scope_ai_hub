@@ -11,6 +11,7 @@ import { ModalProvider } from './context/ModalContext';
 import { ThemeProvider } from './context/ThemeContext';
 import ContactModal from './components/ui/ContactModal';
 import NewUserModalTrigger from './components/utils/NewUserModalTrigger';
+import AnalyticsTracker from './components/utils/AnalyticsTracker';
 
 // Lazy Load Pages
 const Home = lazy(() => import('./pages/Home'));
@@ -62,6 +63,7 @@ const AnimatedRoutes = () => {
   const location = useLocation();
   return (
     <PageTransition>
+      <AnalyticsTracker />
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />

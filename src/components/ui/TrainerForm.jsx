@@ -4,6 +4,7 @@ import { m, AnimatePresence } from 'framer-motion';
 import { useModal } from '../../context/ModalContext';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { handleApiError, normalizeError } from '../../utils/apiErrorHandler';
+import { trackEvent } from '../../utils/analytics';
 import { BRANDING } from '../../data/branding';
 import { staggerContainer, staggerItem } from '../../utils/motionVariants';
 
@@ -175,6 +176,13 @@ const TrainerForm = ({ autoFocus = false }) => {
       }
 
       setStatus('success');
+      
+      // Track Trainer Application in GA4
+      trackEvent('generate_lead', {
+        event_category: 'Trainer Application',
+        event_label: formData.expertise
+      });
+      
     } catch (e) {
       setStatus('error');
       setErrorMessage(normalizeError(e));
