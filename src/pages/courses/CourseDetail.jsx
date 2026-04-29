@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import Layout from '../../components/layout/Layout';
 import { courses, tierMeta } from '../../data/courses';
@@ -29,7 +29,6 @@ const CourseDetail = () => {
   const { slug } = useParams();
   const course = courses.find((c) => c.slug === slug);
   const { openModal } = useModal();
-  const [activeModule, setActiveModule] = useState(-1);
 
   if (!course) {
     return <Navigate to="/courses" replace />;

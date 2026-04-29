@@ -327,13 +327,14 @@ const EnquiryTable = ({ fetchEnquiries, updateStatus, isTrainerView = false }) =
       pagination.page,
       pagination.limit,
       courseOptions.length,
+      isTrainerView,
     ],
   );
 
   // Initial load
   useEffect(() => {
     loadData({ page: 1 });
-  }, []);
+  }, [loadData]);
 
   // Reload on filter change (debounced for search)
   useEffect(() => {
@@ -342,7 +343,7 @@ const EnquiryTable = ({ fetchEnquiries, updateStatus, isTrainerView = false }) =
       loadData({ page: 1 });
     }, 300);
     return () => clearTimeout(debounceRef.current);
-  }, [search, course, status]);
+  }, [search, course, status, loadData]);
 
   const handlePageChange = (newPage) => {
     loadData({ page: newPage });

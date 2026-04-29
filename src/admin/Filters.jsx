@@ -1,7 +1,5 @@
 import React from 'react';
 import { Search, SlidersHorizontal, X } from 'lucide-react';
-import { cn } from '../lib/utils';
-
 const statusOptions = [
   { value: '', label: 'All Status' },
   { value: 'new', label: 'New' },

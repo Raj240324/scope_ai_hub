@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { Inbox, CalendarClock, UserCheck, Users, Mail, ArrowRight, TrendingUp, RefreshCw } from 'lucide-react';
 import { cn } from '../lib/utils';
@@ -41,7 +41,7 @@ const Dashboard = ({ fetchStats, fetchEnquiries }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
-  const loadData = async () => {
+  const loadData = useCallback(async () => {
     try {
       setLoading(true);
       setError('');
@@ -72,11 +72,11 @@ const Dashboard = ({ fetchStats, fetchEnquiries }) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [fetchStats, fetchEnquiries]);
 
   useEffect(() => {
     loadData();
-  }, [fetchStats, fetchEnquiries]);
+  }, [loadData]);
 
   if (loading) {
     return (
